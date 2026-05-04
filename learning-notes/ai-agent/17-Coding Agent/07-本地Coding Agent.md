@@ -123,9 +123,41 @@ CI/CD 集成 → 按需选择
   - 私有仓库 → 本地 Agent 或自托管模型
 ```
 
+## 6. DeepClaude：云端 Agent 的"换脑不换壳"降本方案
+
+> 🔄 更新于 2026-05-04
+
+<!-- version-check: DeepClaude, checked 2026-05-04 -->
+
+DeepClaude 代表了一种新的降本思路：保留 Claude Code 的完整工具链（文件编辑、bash 执行、子 Agent 生成、Git 操作），但将 API 调用重定向到更便宜的模型后端。
+
+```
+┌─────────── DeepClaude 架构 ───────────┐
+│                                        │
+│  你的终端                               │
+│  └── Claude Code CLI（工具循环不变）    │
+│       └── API 调用 → DeepSeek V4 Pro   │
+│           （$0.87/M vs Anthropic $15/M）│
+│                                        │
+│  支持后端：                             │
+│  ├─ DeepSeek（默认，$0.44/$0.87/M）    │
+│  ├─ OpenRouter（最便宜，$0.44/$0.87/M）│
+│  ├─ Fireworks AI（最快，$1.74/$3.48/M）│
+│  └─ Anthropic（原版，$3/$15/M）        │
+│                                        │
+│  降本效果：                             │
+│  ├─ 轻度使用：90% 节省（$200→$20/月）  │
+│  ├─ 重度使用：75% 节省（$200→$50/月）  │
+│  └─ DeepSeek 上下文缓存：$0.004/M      │
+└────────────────────────────────────────┘
+```
+
+与纯本地方案的区别：DeepClaude 仍然使用云端 API，代码会发送到 DeepSeek 服务器。如果有严格隐私要求，仍需使用 OpenCode/Junco 等纯本地方案。
+
+- **来源**：[GitHub](https://github.com/aattaran/deepclaude)
+
 ## 🔗 相关文档
 
 - [Claude Code 与终端 Agent](./01-Claude%20Code与终端Agent.md)
 - [Cursor-Kiro-Windsurf IDE Agent](./03-Cursor-Kiro-Windsurf%20IDE%20Agent.md)
 - [Devin 与自主开发 Agent](./04-Devin与自主开发Agent.md)
-- 每日简报 [2026-04-21](../briefings/2026-04-21.md)

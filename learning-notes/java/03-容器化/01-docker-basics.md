@@ -83,7 +83,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 ## Docker 版本演进（2025-2026）
 
-<!-- version-check: Docker Engine 29.x (March 2026), checked 2026-04-27 -->
+<!-- version-check: Docker Engine 29.x, Docker Desktop 4.50+ Sandboxes (April 2026), checked 2026-05-04 -->
 
 > 🔄 更新于 2026-04-27
 
@@ -125,11 +125,23 @@ sudo iptables -L DOCKER-USER -n 2>/dev/null | head -20
 
 ### Docker 2026 年新方向
 
-- **Docker Sandboxes**（2026-04）：基于 MicroVM 的 Agent 隔离环境，让 AI Agent 安全地自主执行代码
-- **Docker AI Agent**：集成 MCP（Model Context Protocol），AI Agent 可直接操作 Docker 环境
+- **Docker Sandboxes**（2026-04，Docker Desktop 4.50+）：基于 MicroVM 的 Agent 隔离环境，让 AI Agent 安全地自主执行代码。超过 25% 的生产代码已由 AI 编写，使用 Agent 的开发者合并 PR 数量增加约 60%
+- **Docker AI Agent（Gordon）**：Docker Desktop 4.61+ 内置 AI Agent，具备 Shell 访问、Docker CLI 访问、文件系统访问和 Docker 最佳实践知识
+- **Docker MCP Gateway**：300+ 预构建容器化 MCP Server，一键部署，支持 Claude Code 等 Coding Agent 集成
+- **Docker Offload GA**（2026-01）：将 Docker Engine 运行在云端，本地 Docker Desktop 命令透明代理到远程引擎
 - **Docker Hardened Images**：安全加固的官方镜像，减少 CVE 攻击面
 
-> 来源：[Docker Sandboxes](https://www.docker.com/blog/docker-engine-version-29/)、[Top 5 Docker Desktop Features 2026](https://dasroot.net/posts/2026/01/top-5-docker-desktop-features-2026/)
+> 🔄 更新于 2026-05-04
+
+```bash
+# Docker Sandboxes：在隔离 MicroVM 中运行 AI Agent
+docker sandbox run --image node:22 -- npx claude-code
+
+# Docker MCP Gateway：一键启动 MCP Server
+# 在 Docker Desktop 设置中启用 MCP Toolkit（Beta）
+```
+
+> 来源：[Docker Sandboxes](https://www.docker.com/blog/docker-desktop-4-50/) | [Gordon AI Agent](https://www.docker.com/blog/gordon-dockers-ai-agent-just-got-an-update/) | [Docker Offload GA](https://www.docker.com/blog/docker-offload-now-generally-available-the-full-power-of-docker-for-every-developer-everywhere/) | [Docker MCP](https://www.docker.com/blog/run-claude-code-with-docker/)
 
 ### 版本选择建议（2026）
 

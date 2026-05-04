@@ -77,7 +77,7 @@ kubectl exec -it <pod-name> -- /bin/bash
 
 ## Kubernetes 版本演进（2025-2026）
 
-<!-- version-check: Kubernetes 1.34 (August 2025), 1.33.6 patch (March 2026), checked 2026-04-27 -->
+<!-- version-check: Kubernetes 1.36 Haru (April 2026), checked 2026-05-04 -->
 
 > 🔄 更新于 2026-04-27
 
@@ -153,3 +153,62 @@ spec:
 | 新集群 | 1.33+ | 享受 Sidecar Containers 和 In-place Scaling |
 
 > 注意：K8s 1.35 已在开发中，预计 2025-12 发布。
+
+### K8s 1.35 "Ironclad"（2025-12-10）
+
+**毕业为稳定（Stable）的关键特性**：
+- **In-place Pod Vertical Scaling**：运行中调整 Pod 的 CPU/内存，无需重启（从 1.33 beta 毕业）
+- **nftables kube-proxy**：nftables 后端正式稳定，替代 iptables
+
+**Beta 特性**：
+- **Pod-level Resources**：Pod 级别资源配额进入 beta
+- **OCI Image Volumes**：将容器镜像直接挂载为 Volume 进入 beta
+
+> 来源：[Kubernetes 1.35 Preview](https://jacar.es/en/kubernetes-1-35-preview/)
+
+### K8s 1.36 "ハル (Haru)"（2026-04-22）
+
+> 🔄 更新于 2026-05-04
+
+2026 年首个 K8s 版本，包含 70 个增强特性（18 个 Stable、25 个 Beta、25 个 Alpha）。主题名 "ハル" 在日语中意为"春天"、"晴朗"和"遥远"。
+
+**毕业为稳定（GA）的关键特性**：
+- **User Namespaces**：Pod 内用户命名空间隔离正式 GA，增强容器安全性
+- **Fine-grained Kubelet API Authorization**：细粒度 kubelet API 授权，替代过于宽泛的 `nodes/proxy` 权限
+- **Mutating Admission Policies**：变更准入策略 GA
+- **DRA 相关 4 个增强**：Dynamic Resource Allocation 全面 GA，GPU/TPU/NIC 等硬件资源标准化分配
+
+**Beta 特性**：
+- **Resource Health Status**：报告已分配设备的健康状态（GPU 故障检测）
+- **Mutable Pod Resources for Suspended Jobs**：暂停的 Job 可修改资源请求
+- **Tiered Memory Protection with Memory QoS**：分层内存保护
+
+**Alpha 特性**：
+- **AI Gateway Working Group**：Kubernetes 正式成立 AI Gateway 工作组
+- **Agent Sandbox**：在 K8s 上运行 AI Agent 的沙箱环境
+
+```yaml
+# K8s 1.36：User Namespaces 示例（GA）
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-pod
+spec:
+  hostUsers: false  # 启用用户命名空间隔离
+  containers:
+    - name: app
+      image: myapp:latest
+      securityContext:
+        runAsNonRoot: true
+```
+
+> 来源：[Kubernetes v1.36: ハル (Haru)](https://kubernetes.io/blog/2026/04/22/kubernetes-v1-36-release) | [K8s 1.36 Features](https://cloudraft.io/blog/kubernetes-v1-36-haru-features-upgrade-guide)
+
+### 版本选择建议（2026 更新）
+
+| 环境 | 推荐版本 | 说明 |
+|------|---------|------|
+| 生产环境 | 1.34.x / 1.35.x | 稳定，云厂商已全面支持 |
+| 测试/预发布 | 1.36.x | 评估 User Namespaces GA、DRA GA |
+| AI/ML 工作负载 | 1.36.x | DRA GA + AI Gateway + Agent Sandbox |
+| 新集群 | 1.35+ | 享受 In-place Scaling GA 和 nftables |

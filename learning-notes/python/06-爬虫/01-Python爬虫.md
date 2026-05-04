@@ -488,3 +488,85 @@ Python爬虫工具链：
 
 选择合适的工具可以高效地完成爬虫任务。
 
+## 11. 2026 年 AI 爬虫新工具
+
+<!-- version-check: Crawl4AI 0.8.x, Crawlee-Python 0.6.x, Scrapy 2.15.1, checked 2026-05-04 -->
+
+> 🔄 更新于 2026-05-04
+
+2026 年爬虫生态最大的变化是 **AI Agent 驱动的爬虫工具**兴起，传统的 HTML 解析正在被 LLM 结构化提取补充。
+
+### 11.1 Crawl4AI — LLM 友好的异步爬虫
+
+Crawl4AI 是专为 AI/LLM 工作流设计的开源爬虫框架，基于 Playwright，将网页转换为干净的 Markdown、HTML 或结构化 JSON。
+
+```python
+from crawl4ai import AsyncWebCrawler
+
+async def main():
+    async with AsyncWebCrawler() as crawler:
+        # 基础爬取：自动转换为 Markdown
+        result = await crawler.arun(url="https://example.com")
+        print(result.markdown)  # 干净的 Markdown 输出
+
+        # CSS 结构化提取（无需 LLM）
+        from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+        import json
+
+        schema = {
+            "name": "产品列表",
+            "baseSelector": "div.product",
+            "fields": [
+                {"name": "title", "selector": "h2", "type": "text"},
+                {"name": "price", "selector": ".price", "type": "text"},
+                {"name": "link", "selector": "a", "type": "attribute", "attribute": "href"},
+            ]
+        }
+        strategy = JsonCssExtractionStrategy(schema)
+        result = await crawler.arun(
+            url="https://example.com/products",
+            extraction_strategy=strategy
+        )
+        products = json.loads(result.extracted_content)
+```
+
+**核心优势**：
+- 自动将网页转为 LLM 友好的 Markdown（适合 RAG 管道）
+- CSS 结构化提取（无需 LLM，零成本）
+- 支持 LLM 提取（OpenAI / DeepSeek / 本地模型）
+- 会话管理、JS 执行、截图
+- MCP Server 模式（供 AI Agent 调用）
+
+来源：[Crawl4AI 文档](https://docs.crawl4ai.com/)
+
+### 11.2 Crawlee-Python — Apify 的生产级爬虫库
+
+```python
+from crawlee.playwright_crawler import PlaywrightCrawler, PlaywrightCrawlingContext
+
+crawler = PlaywrightCrawler()
+
+@crawler.router.default_handler
+async def handler(context: PlaywrightCrawlingContext):
+    title = await context.page.title()
+    await context.push_data({"title": title, "url": context.request.url})
+    await context.enqueue_links()
+
+await crawler.run(["https://example.com"])
+```
+
+**核心优势**：自动代理轮换、请求队列持久化、错误重试、headful/headless 切换。
+
+来源：[Crawlee-Python GitHub](https://github.com/apify/crawlee-python)
+
+### 11.3 2026 年 Python 爬虫工具选型表
+
+| 工具 | 适用场景 | JS 渲染 | AI 集成 | 学习曲线 |
+| ---- | -------- | ------- | ------- | -------- |
+| **requests + BS4** | 简单静态页面 | ❌ | ❌ | 低 |
+| **Scrapy 2.15** | 大规模结构化爬取 | ❌ | ❌ | 中 |
+| **Playwright** | JS 渲染页面 | ✅ | ❌ | 中 |
+| **Crawl4AI** | AI/RAG 数据管道 | ✅ | ✅ | 低 |
+| **Crawlee** | 生产级可靠爬取 | ✅ | ❌ | 中 |
+| **Selenium** | 遗留项目维护 | ✅ | ❌ | 中 |
+

@@ -5123,7 +5123,457 @@
       "source": "Hacker News 开发者",
       "topic": "global-tech",
       "date": "2026-05-03"
+    },
+    "d17182547cc5": {
+      "title": "DeepClaude – Claude Code agent loop with DeepSeek V4 Pro, 17x cheaper",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-04"
+    },
+    "25285fab60b3": {
+      "title": "How Kepler built verifiable AI for financial services with Claude",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-04"
+    },
+    "e723fb2a6830": {
+      "title": "Show HN: Ableton Live MCP",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-04"
+    },
+    "000a97cbd86b": {
+      "title": "The Oscars just banned AI from winning acting and writing awards",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-04"
+    },
+    "30cbcf2887be": {
+      "title": "Musk's AI told me people were coming to kill me (BBC)",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-04"
+    },
+    "6dce65869e71": {
+      "title": "Specsmaxxing – On overcoming AI psychosis, and why I write specs in YAML",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-04"
+    },
+    "9af250cfc74c": {
+      "title": "AI, Intimacy, and the Data You Never Meant to Share",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-04"
+    },
+    "fd5a07fb0c24": {
+      "title": "恒生科技指数涨近4%，小米集团涨逾10%",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "eb42be295bb6": {
+      "title": "现代起亚4月份美国销量同比下降2.1%，混动车销量创新高",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "16a5648e50cf": {
+      "title": "国开行一季度发放专项转贷款285.4亿元支持外贸小微企业发展",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "17e19fafdb60": {
+      "title": "潍柴动力港股涨近14%，股价再创历史新高",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "f858f99ec46d": {
+      "title": "高盛据悉将向与Anthropico合资的企业注资约1.5亿美元",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "3ad85cd198e5": {
+      "title": "新加坡航空明年起将在部分飞机上部署星链Wi-Fi",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "cdc317d99b3e": {
+      "title": "今天全国铁路预计发送旅客2030万人次",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "80972b561f7c": {
+      "title": "恒生科技指数涨3%，升破5000点关口",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "98d7309bb691": {
+      "title": "恒生科技指数高开高走，涨幅扩大至2%",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "a3ffe81deae2": {
+      "title": "三星电子任命新的视觉显示业务负责人",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "a5d5b0da8f8c": {
+      "title": "恒指开盘涨1.4%，恒生科技指数涨1.58%",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "3dc89178e6f4": {
+      "title": "东阳光药甘精胰岛素获FDA批准",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "2c02cc637216": {
+      "title": "游戏驿站提出近560亿美元收购eBay",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "851e5e480784": {
+      "title": "韩国市值超万亿韩元企业破400家创新高",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "db6c2bbf5eb0": {
+      "title": "越南1-4月咖啡出口量同比增长16%，至81万吨",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "e2bd8dc45357": {
+      "title": "三星继承人已付清12万亿韩元遗产税",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "84eb0cfb3b2d": {
+      "title": "韩国政府将向AI初创公司Upstage投资5600亿韩元",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "1b4ff9a4a6f6": {
+      "title": "余额宝收益率跌破1%，资金依旧看好",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "69045fa10930": {
+      "title": "中东局势扰动全球市场 欧佩克+原则上同意6月增产",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "95f07f4fb698": {
+      "title": "第四届链博会哥斯达黎加推介会成功举办",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "c86276144288": {
+      "title": "大公司也这样？改完系统：先上线，再看哪儿炸",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "a96943de4b9d": {
+      "title": "Cloudflare推出Code Mode MCP服务器以优化AI智能体的Token使用",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "8427fe1a4763": {
+      "title": "直播出问题，AI 不一定救得了：Netflix 的新解法",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "c30db8efc9e4": {
+      "title": "微软警告称，AI 正在掏空初级开发者的培养渠道",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "32613783fb58": {
+      "title": "Sauce Labs 推出 AI 智能体，实现测试创建自动化",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "5b9740cd5d76": {
+      "title": "使用AWS Lambda Extensions在响应后执行遥测刷写",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "97e9eb8e7210": {
+      "title": "构建分层的Agentic RAG系统：具备自主纠错的多模态推理",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "0b4325351fbf": {
+      "title": ".NET 11 Preview 3：JIT 再优化，HTTP/3 更快，Blazor 不一样了",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "b7e0953f5be6": {
+      "title": "AWS Interconnect 正式发布，提供托管的多云与“最后一公里”连接能力",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "c345517396a1": {
+      "title": "传小米新 SU7 锁单突破 7 万；微信输入法测「隔空发图」功能；豆包二代 AI 手机上半年发布",
+      "source": "极客公园",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "1d43b720a45e": {
+      "title": "不好！1930年的AI都来抢程序员饭碗了",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "583d63660289": {
+      "title": "假期出门太折磨？我的 23 条经验帮你规划惬意旅行",
+      "source": "少数派",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "9f0055eb8607": {
+      "title": "ASU Using AI Tool to Create Courses from Professors' Work Without Their",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "da9d8191bb57": {
+      "title": "AI deleted my most tests, and said \"All Tests Pass\"",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "68f7b73ecc63": {
+      "title": "Shares in Japanese toilet maker Toto soar on AI-related pivot",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "b0138a6c2fa8": {
+      "title": "Big Tech will spend nearly $700B on AI in 2026. No one knows where buildout ends",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "f0e89b8cfadb": {
+      "title": "China Pressure Canceled Largest Digital Human Rights Conference",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-04"
+    },
+    "bfb0447ac46f": {
+      "title": "The text mode lie: why modern TUIs are a nightmare for accessibility",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "5fa39ace6415": {
+      "title": "Let's Buy Spirit Air",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "89d8667ebcda": {
+      "title": "The 'Hidden' Costs of Great Abstractions",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "2645f23ecf37": {
+      "title": "Agentic Coding Is a Trap",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "e6786259c493": {
+      "title": "Introduction to Atom",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "f659966e8d61": {
+      "title": "Make your own microforest (2025)",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "64d04623f74c": {
+      "title": "New statue in London, attributed to Banksy, of a suited man, blinded by a flag",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "33d649e2c8c3": {
+      "title": "Why TUIs are back",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "7eea96c5c90d": {
+      "title": "BYOMesh – New LoRa mesh radio offers 100x the bandwidth",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "db81c346be1f": {
+      "title": "LLMs Are Not a Higher Level of Abstraction",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "bb69a241f370": {
+      "title": "I recreated the Apple Lisa computer inside an FPGA [video]",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "4855f35c2b2a": {
+      "title": "Southwest Headquarters Tour",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "2c3f5fd07c0c": {
+      "title": "Metal Gear Solid 2's source code has been leaked on 4chan",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "668da3cdcd9f": {
+      "title": "Bad Connection: Global telecom exploitation by covert surveillance actors",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "f2cd1468301a": {
+      "title": "A desktop made for one",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "51e36abcbe1c": {
+      "title": "Security through obscurity is not bad",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "daedd44d9c8f": {
+      "title": "Mercedes-Benz commits to bringing back physical buttons",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "eea461969dcf": {
+      "title": "Show HN: Apple's SHARP running in the browser via ONNX runtime web",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "0219dc984d29": {
+      "title": "OpenAI's o1 correctly diagnosed 67% of ER patients vs. 50-55% by triage doctors",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "b3922a318a38": {
+      "title": "We’ll take it: a TikToker rallies pledges to buy Spirit Airlines after its abrupt weekend collapse",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "01b7165cd4b6": {
+      "title": "‘This is fine’ creator says AI startup stole his art",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "452d5889b4ba": {
+      "title": "In Harvard study, AI offered more accurate emergency room diagnoses than two human doctors",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "721c24560eb9": {
+      "title": "TechCrunch Mobility: How do you issue a ticket to a robotaxi?",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "de0dc9f051be": {
+      "title": "This tiny, magnetic e-reader could stop you from doomscrolling",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "3b97bc138b8e": {
+      "title": "Reggie Fils-Aimé says Amazon once asked Nintendo to break the law",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "d8766b54bf3f": {
+      "title": "Shokz’s bassy OpenRun Pro 2 are $40 off thanks to a new Mother’s Day promo",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "4ebcf4ac1d4b": {
+      "title": "These reusable digital Polaroids are a clever way to cover a fridge in memories",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "2d552d61c9ed": {
+      "title": "How the internet’s favorite squirrel dad made the hottest camera app of 2026",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "3800b60792a2": {
+      "title": "AI music is flooding streaming services — but who wants it?",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "f975315c056e": {
+      "title": "Investors pile into clean energy as Iran war drives push for energy security",
+      "source": "Hacker News 开发者",
+      "topic": "global-tech",
+      "date": "2026-05-04"
+    },
+    "d79532305a57": {
+      "title": "Show HN: Rust library for Undo/Redo using deltas, snapshots or commands",
+      "source": "Hacker News 开发者",
+      "topic": "global-tech",
+      "date": "2026-05-04"
     }
   },
-  "updated": "2026-05-03 12:43"
+  "updated": "2026-05-04 11:29"
 }

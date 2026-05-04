@@ -346,12 +346,65 @@ Vibe Coding 适合：                    Vibe Coding 不适合：
 └─ 或者直接用 Kiro Specs 从需求开始规范化开发
 ```
 
-## 9. 趋势展望
+## 9. 从 Vibe Coding 到 Spec 驱动开发：ACAI 方法论
+
+> 🔄 更新于 2026-05-04
+
+2026 年 5 月，开发者社区出现了对 Vibe Coding 的深度反思。两篇文章同日在 HN 爆火：
+
+- **Specsmaxxing**（HN 262 分）：提出 ACAI（Acceptance Criteria for AI）方法论
+- **Agentic Coding Is a Trap**（HN 234 分）：分析 Agentic Coding 的陷阱
+
+### ACAI 方法论核心
+
+作者认为我们已经过了"Peak Slop"（AI 生成垃圾代码的高峰），正在进入"后 Slop 时代"。上下文窗口是真正的瓶颈，而非模型能力。
+
+ACAI 的核心做法：用结构化 YAML 编写验收标准，Agent 在代码中直接引用需求编号：
+
+```yaml
+# requirements.yaml
+AUTH-1: 接受 Authorization: Bearer <token> 头
+AUTH-2: Token 是用户级别的，提供对用户所有资源的访问
+AUTH-3: 无效 Token 返回 401 Unauthorized
+```
+
+```python
+# 代码中引用需求编号
+# AUTH-1
+auth_header = req.headers["authorization"]
+# AUTH-2
+is_authorized = verify_bearer_token(auth_header)
+# AUTH-3
+if not is_authorized:
+    raise HTTPException(status_code=401)
+```
+
+### Agentic Coding 的陷阱
+
+"Agentic 疲劳"现象：AI 工具消除了代码生产的摩擦，但人类吸收、验证和维护代码的判断力跟不上生产速度。速度 ≠ 生产力，AI 生成的代码在 6 个月后可能变成维护噩梦。
+
+### 解决路径
+
+```
+Vibe Coding（快速原型）
+  ↓ 验证成功
+Spec 驱动开发（ACAI / Kiro Specs）
+  ↓ 结构化需求 + 验收标准
+Harness Engineering（约束 + 反馈循环）
+  ↓ CI 强制执行
+生产级代码
+```
+
+- **来源**：[Specsmaxxing](https://acai.sh/blog/specsmaxxing) / [Agentic Coding Is a Trap](https://larsfaye.com/articles/agentic-coding-is-a-trap)
+
+## 10. 趋势展望
 
 ```
 2024：Vibe Coding 概念提出，早期工具涌现
 2025：工具成熟，Replit/Bolt/Lovable 用户量爆发
-2026：预测趋势
+2026：
+  ├─ "Peak Slop" 已过，行业从狂热走向理性反思
+  ├─ Spec 驱动开发成为共识（ACAI / Kiro Specs / Open Agent Spec）
   ├─ Vibe Coding 与 IDE Agent 融合
   │   （非开发者入门 → 逐步过渡到专业工具）
   ├─ AI 生成代码质量持续提升

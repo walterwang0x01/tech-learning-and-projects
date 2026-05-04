@@ -443,3 +443,62 @@ Python提供了丰富的网络编程工具：
 
 选择合适的工具可以高效地实现网络通信功能。
 
+
+## 11. 2026 年 Python HTTP 客户端选型
+
+<!-- version-check: httpx 0.28.1, aiohttp 3.11.x, requests 2.32.3, checked 2026-05-04 -->
+
+> 🔄 更新于 2026-05-04
+
+### 11.1 httpx：现代 Python HTTP 客户端
+
+httpx 是 requests 的现代替代品，同时支持同步和异步 API，内置 HTTP/2 支持。当前稳定版 **0.28.1**（2024-12-06），1.0 开发版已在 PyPI 上发布（`1.0.dev1`），正式版预计 2026 年内发布。
+
+来源：[httpx 官方文档](https://www.python-httpx.org/)、[httpx GitHub](https://github.com/encode/httpx)
+
+```bash
+# 安装
+uv add httpx
+# HTTP/2 支持
+uv add "httpx[http2]"
+```
+
+```python
+import httpx
+
+# 同步用法（替代 requests）
+response = httpx.get("https://httpbin.org/get", params={"key": "value"})
+print(response.json())
+
+# 异步用法（替代 aiohttp）
+async with httpx.AsyncClient() as client:
+    response = await client.get("https://httpbin.org/get")
+    print(response.json())
+
+# HTTP/2 支持
+async with httpx.AsyncClient(http2=True) as client:
+    response = await client.get("https://www.example.com")
+    print(response.http_version)  # "HTTP/2"
+
+# 超时和重试配置
+client = httpx.Client(
+    timeout=httpx.Timeout(10.0, connect=5.0),
+    follow_redirects=True,
+    limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+)
+```
+
+### 11.2 2026 年 Python HTTP 客户端选型表
+
+| 库 | 版本 | 同步 | 异步 | HTTP/2 | 适用场景 |
+|----|------|------|------|--------|---------|
+| **httpx** | 0.28.1 | ✅ | ✅ | ✅ | **新项目推荐**，统一同步/异步 API |
+| requests | 2.32.3 | ✅ | ❌ | ❌ | 简单同步请求，生态最丰富 |
+| aiohttp | 3.11.x | ❌ | ✅ | ❌ | 纯异步场景，WebSocket 支持好 |
+| urllib3 | 2.3.x | ✅ | ❌ | ❌ | 底层库，requests 的依赖 |
+
+**选型建议**：
+- **新项目**：优先选择 httpx，一个库覆盖同步和异步场景
+- **已有 requests 项目**：httpx API 与 requests 高度兼容，迁移成本低
+- **纯异步高并发**：aiohttp 仍然是成熟选择，WebSocket 支持更完善
+- **AI Agent / LLM 调用**：httpx 是 OpenAI、Anthropic 等 SDK 的底层 HTTP 客户端

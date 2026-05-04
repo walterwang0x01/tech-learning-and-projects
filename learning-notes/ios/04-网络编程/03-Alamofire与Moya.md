@@ -159,3 +159,37 @@ func fetchUser(id: Int) async throws -> User {
     }
 }
 ```
+
+## 6. 2026 年版本状态与选型建议
+
+<!-- version-check: Alamofire 5.11.x, Moya 15.0.x, checked 2026-05-04 -->
+
+> 🔄 更新于 2026-05-04
+
+### 当前版本
+
+| 库 | 最新版本 | Swift 要求 | 说明 |
+|---|---------|-----------|------|
+| Alamofire | 5.11.x | Swift 5.9+ | 稳定维护，async/await 完善 |
+| Moya | 15.0.x | Swift 5.9+ | 基于 Alamofire 的网络抽象层 |
+
+### 2026 年 iOS 网络库选型
+
+```
+选型决策树：
+├── 简单项目（<10 个 API）
+│   └── URLSession + async/await（零依赖，Apple 原生）
+├── 中型项目（10-50 个 API）
+│   ├── 需要拦截器/重试/认证刷新 → Alamofire
+│   └── 需要类型安全的 API 定义 → Moya
+├── 大型项目（50+ API）
+│   └── Moya + 自定义 Plugin（统一日志、Mock、认证）
+└── Swift 6.2 新项目
+    └── 优先 URLSession（@concurrent + @Observable 已足够强大）
+```
+
+### Swift 6.2 对网络库的影响
+
+Swift 6.2 的 Approachable Concurrency（默认 MainActor 隔离）让原生 URLSession 的使用体验大幅提升。对于新项目，建议优先评估 URLSession 是否满足需求，再考虑引入第三方库。
+
+> 来源：[Alamofire GitHub](https://github.com/Alamofire/Alamofire) | [Moya GitHub](https://github.com/Moya/Moya)

@@ -391,6 +391,66 @@ Agent 可观测性            Hooks（agentStop → 运行测试验证）
    Debug → 设计反馈循环
    Code Review → 维护 Harness
 ```
+## 8. LangChain Harness Profile：按模型定制 Harness
+
+> 🔄 更新于 2026-05-04
+
+<!-- version-check: LangChain Deep Agents Harness Profile, checked 2026-05-04 -->
+
+LangChain 于 2026 年 4 月 29 日为 Deep Agents 引入 **Harness Profile** 机制，核心发现：**同一模型在不同 Harness 中表现差异巨大**。
+
+### 性能数据（tau2-bench 子集）
+
+| 模型 | 默认 Harness | 定制 Profile | 提升 |
+|------|-------------|-------------|------|
+| GPT 5.3 Codex | 33% | 53% | +20 分 |
+| Claude Opus 4.7 | 43% | 53% | +10 分 |
+
+### Profile 定制内容
+
+- **OpenAI Codex**：工具替换（`file_edit` → `apply_patch`）、工具命名（`execute` → `shell_command`）、批量并行调用提示
+- **Claude Opus**：工具结果反思提示、主动调查而非凭记忆推理
+
+### 使用方式
+
+```python
+from deepagents import create_deep_agent
+
+# Profile 自动按模型应用
+agent = create_deep_agent(
+    model="google_genai:gemini-3.1-pro-preview",
+    tools=[internet_search],
+    system_prompt=research_instructions,
+)
+```
+
+自定义 Profile（YAML）：
+
+```yaml
+# openai.yaml
+base_system_prompt: You are helpful.
+system_prompt_suffix: Respond briefly.
+excluded_tools:
+  - execute
+  - grep
+excluded_middleware:
+  - SummarizationMiddleware
+```
+
+### 关键启示
+
+```
+Agent 产出质量 = f(模型能力 × Harness 质量)
+
+Harness Profile 证明了：
+├─ 提示词差异可以带来 10-20 分的性能提升
+├─ 工具命名和配置对模型表现有显著影响
+├─ 同一模型在不同 Harness 中排名可以从垫底到前列
+└─ Harness 工程是 Agent 性能优化的新维度
+```
+
+- **来源**：[LangChain Blog](https://www.langchain.com/blog/tuning-deep-agents-different-models)
+
 ## 🎬 推荐视频资源
 
 - [DeepLearning.AI - Agentic AI with Andrew Ng](https://www.deeplearning.ai/courses/agentic-ai/) — 包含Harness Engineering理念（免费）

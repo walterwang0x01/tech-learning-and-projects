@@ -139,7 +139,7 @@ class PinnedSessionDelegate: NSObject, URLSessionDelegate {
 
 ## 7. iOS 26 / Swift 6.2 网络编程更新
 
-<!-- version-check: URLSession iOS 26 (Swift 6.2), checked 2026-04-23 -->
+<!-- version-check: URLSession iOS 26 (Swift 6.2), HTTP/3 auto, checked 2026-05-04 -->
 
 > 🔄 更新于 2026-04-23
 

@@ -286,3 +286,31 @@ asyncio.run(handle_incident())
 ### 🌐 YouTube
 - [AWS - AI-Powered Operations](https://www.youtube.com/watch?v=F8NKVhkZZWI) — AI驱动的运维自动化
 - [freeCodeCamp - DevOps with AI](https://www.youtube.com/watch?v=GWB9ApTPTv4) — AI+DevOps实战
+
+## 7. 2026 年 AIOps Agent 趋势
+
+> 🔄 更新于 2026-05-04
+
+<!-- version-check: AIOps Agent 2026, K8s 1.34, Prometheus, checked 2026-05-04 -->
+
+2026 年运维 Agent 从告警响应工具演进为自主运维平台：
+
+**核心变化**：
+1. **MCP 标准化运维工具**：Prometheus、Grafana、K8s 等通过 MCP Server 暴露给 Agent，统一工具接口
+2. **K8s 1.34 + Agent 协同**：Pod-level Resources、DRA 等新特性让 Agent 可以更精细地管理资源
+3. **多 Agent 运维编排**：告警分类 → 诊断 → 修复的多 Agent 流水线成为标准模式
+4. **Runbook 自动化升级**：从静态 Runbook 到 Agent 动态生成修复方案
+5. **可观测性 + Agent**：OpenTelemetry 数据直接作为 Agent 上下文，LangSmith Fleet 管理运维 Agent 舰队
+
+**2026 年运维 Agent 工具链**：
+
+| 层级 | 工具 | Agent 集成方式 |
+|------|------|---------------|
+| 监控 | Prometheus + Grafana | MCP Server / API 工具 |
+| 日志 | Elasticsearch 9.x / Loki | ES|QL 查询工具 |
+| 追踪 | OpenTelemetry + Jaeger | OTel 数据作为上下文 |
+| 编排 | K8s 1.34 | kubectl MCP Server |
+| 通知 | Slack / PagerDuty | Webhook 工具 |
+| Agent 管理 | LangSmith Fleet | Agent 身份 + 审计 |
+
+来源：[MIT Sloan Review - AI Trends 2026](https://sloanreview.mit.edu/article/five-trends-in-ai-and-data-science-for-2026/)

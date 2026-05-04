@@ -113,7 +113,7 @@ struct FilteredView: View {
 
 ## 5. SwiftData iOS 26 新特性：继承与 Schema 迁移
 
-<!-- version-check: SwiftData iOS 26 (Xcode 26.4), checked 2026-04-22 -->
+<!-- version-check: SwiftData iOS 26 (Xcode 26.4), Unique Constraints, checked 2026-05-04 -->
 
 > 🔄 更新于 2026-04-22
 
@@ -213,7 +213,48 @@ enum VehicleMigrationPlan: SchemaMigrationPlan {
 }
 ```
 
-### 5.5 继承 vs 组合选择
+### 5.5 Unique Constraints（唯一约束）
+
+> 🔄 更新于 2026-05-04
+
+iOS 26 新增 `#Unique` 宏，可以为 SwiftData 模型添加唯一约束，防止重复数据并提升查询性能。来源：[What's new about SwiftData (WWDC25)](https://askwwdc.com/q/whats-new-about-swiftdata)
+
+```swift
+import SwiftData
+
+@Model
+class Contact {
+    #Unique<Contact>([\.email])  // email 字段唯一
+
+    var name: String
+    var email: String
+    var phone: String?
+
+    init(name: String, email: String, phone: String? = nil) {
+        self.name = name
+        self.email = email
+        self.phone = phone
+    }
+}
+
+// 复合唯一约束
+@Model
+class OrderItem {
+    #Unique<OrderItem>([\.orderId, \.productId])  // 订单+商品组合唯一
+
+    var orderId: String
+    var productId: String
+    var quantity: Int
+
+    init(orderId: String, productId: String, quantity: Int) {
+        self.orderId = orderId
+        self.productId = productId
+        self.quantity = quantity
+    }
+}
+```
+
+### 5.6 继承 vs 组合选择
 
 ```
 场景                    推荐方式        原因

@@ -180,18 +180,29 @@ fun MainScreen(navController: NavController) {
 
 ## 7. Compose 2026 版本演进
 
-<!-- version-check: Compose BOM 2026.03.00, Compose 1.10.x, checked 2026-04-21 -->
+<!-- version-check: Compose BOM 2026.04.01, Compose 1.11.0, checked 2026-05-04 -->
 
-> 🔄 更新于 2026-04-21
+> 🔄 更新于 2026-05-04
 
 ### 当前版本
 
 | 组件 | 版本 | 说明 |
 |------|------|------|
-| Compose BOM | **2026.03.00** | 统一管理所有 Compose 库版本 |
-| Compose UI | **1.10.x** | 核心 UI 库 |
+| Compose BOM | **2026.04.01** | 统一管理所有 Compose 库版本 |
+| Compose UI | **1.11.0** | 核心 UI 库（2026-04 稳定） |
 | Material3 | **1.4.x** | Material Design 3 组件 |
 | Compose Compiler | 与 Kotlin 对齐 | Kotlin 2.0+ 内置，无需单独指定版本 |
+| Navigation3 | **1.1.1** | Compose-first 导航库（稳定） |
+
+### Compose 1.11 新特性（2026-04）
+
+**测试 API v2 成为默认**：`StandardTestDispatcher` 替代 `UnconfinedTestDispatcher`，协程在测试中排队执行而非立即执行，更接近生产行为，减少 flaky 测试。
+
+**共享元素调试工具**：`LookaheadAnimationVisualDebugging` 可视化共享元素过渡的目标边界、动画轨迹和匹配状态。
+
+**触控板事件改进**：触控板事件现在被识别为 `PointerType.Mouse`（之前是 `PointerType.Touch`），支持双指滑动和捏合手势。
+
+来源：[Jetpack Compose April '26 Release](https://android-developers.googleblog.com/2026/04/jetpack-compose-april-2026-updates.html)
 
 ### Compose Compiler 变化（Kotlin 2.0+）
 

@@ -162,9 +162,9 @@ fun MainScreen() {
 
 ## 6. Navigation 2026 更新与 Navigation 3
 
-<!-- version-check: Navigation Compose 2.9.7, Navigation 3 alpha, checked 2026-04-21 -->
+<!-- version-check: Navigation Compose 2.9.8, Navigation 3 1.1.1 stable, checked 2026-05-04 -->
 
-> 🔄 更新于 2026-04-21
+> 🔄 更新于 2026-05-04
 
 ### Navigation Compose 2.8+ 类型安全路由
 
@@ -199,23 +199,57 @@ fun AppNavigation() {
 }
 ```
 
-### Navigation 3（预览版）
+### Navigation 3（1.1.1 稳定版）
 
-Navigation 3 是全新的 Compose-first 导航库，提供完全的 back stack 控制：
+Navigation 3 是全新的 Compose-first 导航库，已于 2025-11 发布 1.0 稳定版，当前最新稳定版为 **1.1.1**（2026-04-22）。
 
 ```kotlin
-// Navigation 3 核心概念：开发者拥有 back stack
-// 依赖: androidx.navigation3:navigation3-compose (alpha)
-val backStack = rememberMutableStateListOf<Any>(Home)
+// Navigation 3 核心概念：开发者完全拥有 back stack
+// 依赖: implementation("androidx.navigation3:navigation3-runtime:1.1.1")
+//       implementation("androidx.navigation3:navigation3-ui:1.1.1")
+
+@Serializable object Home : NavKey
+@Serializable data class Detail(val itemId: String) : NavKey
+
+val backStack = rememberNavBackStack(Home)
 
 NavDisplay(
     backStack = backStack,
-    onBack = { backStack.removeLastOrNull() },
     entryProvider = entryProvider {
-        entry<Home> { HomeScreen(onNavigate = { backStack.add(it) }) }
-        entry<Detail> { detail -> DetailScreen(detail.itemId) }
+        entry<Home> {
+            HomeScreen(onNavigate = { backStack.add(Detail(it)) })
+        }
+        entry<Detail> { detail ->
+            DetailScreen(detail.itemId)
+        }
     }
 )
 ```
 
-> 来源：[Navigation Compose](https://developer.android.com/jetpack/androidx/releases/navigation)、[Navigation 3](https://developer.android.com/jetpack/androidx/releases/navigation3)
+### Navigation 3 v1.1 新特性
+
+| 特性 | 说明 |
+|------|------|
+| **共享元素过渡** | 通过 `SharedTransitionScope` 传递给 `NavDisplay`，场景间平滑过渡 |
+| **SceneDecoratorStrategy** | 使用通用 UI 组件装饰场景或跨场景共享状态 |
+| **NavMetadata DSL** | 类型安全的元数据 DSL，使用 `MetadataKey` 定义键值类型 |
+| **OverlayScene 动画** | `onRemoved` 挂起回调，退出动画完成后才移除叠加场景 |
+| **ResultEventBus** | NavEntry 之间传递结果的新 API |
+
+```kotlin
+// Navigation 3 v1.1：共享元素过渡
+SharedTransitionLayout {
+    NavDisplay(
+        backStack = backStack,
+        sharedTransitionScope = this,  // 启用共享元素
+        entryProvider = entryProvider {
+            entry<Home> { /* ... */ }
+            entry<Detail> { /* ... */ }
+        }
+    )
+}
+```
+
+> Navigation 3 v1.2 alpha 已在开发中，新增 `NavigationBackHandler` 简化返回手势处理。
+
+来源：[Navigation 3 Releases](https://developer.android.com/jetpack/androidx/releases/navigation3) | [Navigation 3 Guide](https://developer.android.com/guide/navigation/navigation-3)

@@ -133,3 +133,83 @@ LazyColumn {
     }
 }
 ```
+
+## 6. 2026 版本演进
+
+<!-- version-check: RecyclerView 1.4.0, Paging 3.5.0-rc01, checked 2026-05-04 -->
+
+> 🔄 更新于 2026-05-04
+
+### 6.1 RecyclerView 1.4.0（2025-01-15）
+
+RecyclerView 最新稳定版为 **1.4.0**，主要新增自适应刷新率支持：
+
+来源：[AndroidX RecyclerView Releases](https://developer.android.com/jetpack/androidx/releases/recyclerview)
+
+- **自适应刷新率**：滚动时自动调用 `setFrameContentVelocity`，在支持可变刷新率的设备上提供更流畅的滚动体验
+- **`isLayoutReversed` API**：新增 `LayoutManager#isLayoutReversed()` 方法
+- **Trace 改进**：bind/create trace 中包含 item view type，prefetch 标记是否为下一帧所需
+
+```kotlin
+// 推荐依赖版本（2026）
+dependencies {
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
+    implementation("androidx.recyclerview:recyclerview-selection:1.2.0")
+}
+```
+
+> ⚠️ RecyclerView 1.4.0 要求 compileSdk 35+（API 35）。
+
+### 6.2 Paging 3.5.0（即将发布）
+
+Paging 3.5.0 目前处于 **rc01** 阶段（2026-04-22），引入了两个重要新 API：
+
+来源：[AndroidX Paging Releases](https://developer.android.com/jetpack/androidx/releases/paging)
+
+**`asState` Flow 操作符**：将 `Flow<PagingData>` 转换为 `Flow<ItemSnapshotList>`，解锁多种新能力：
+
+```kotlin
+// ViewModel 中
+val pager = Pager(pagingConfig, pagingSourceFactory)
+val pagerFlow = pager.flow.asState()
+
+// Compose UI 中
+val snapshotFlow = viewModel.pagerFlow.collectAsStateWithLifecycle(initialList)
+val snapshot = snapshotFlow.value
+
+LazyColumn {
+    items(items = snapshot.items) { item ->
+        UserCard(item)
+    }
+}
+```
+
+**`Pager.append` / `Pager.prepend`**：手动触发加载，不依赖滚动：
+
+```kotlin
+// 手动加载更多数据
+LazyColumn {
+    item {
+        // 滚动到顶部时加载更多
+        LaunchedEffect(viewModel) { viewModel.prepend() }
+    }
+    items(snapshot.items) { item -> Text("Item: $item") }
+    item {
+        // 滚动到底部时加载更多
+        LaunchedEffect(viewModel) { viewModel.append() }
+    }
+}
+```
+
+### 6.3 Compose 迁移趋势
+
+Google 官方提供了 RecyclerView → LazyList 迁移指南。2026 年新项目推荐直接使用 Compose `LazyColumn`/`LazyRow`，但 RecyclerView 在以下场景仍有优势：
+
+| 场景 | 推荐方案 |
+|------|---------|
+| 新项目 | Compose LazyColumn + Paging 3.5 |
+| 已有 View 项目 | RecyclerView 1.4.0 + ListAdapter |
+| 复杂 ItemDecoration | RecyclerView（Compose 暂无等价 API） |
+| 嵌套滚动复杂场景 | RecyclerView（更成熟的嵌套滚动支持） |
+
+来源：[Migrate RecyclerView to Lazy list](https://developer.android.com/develop/ui/compose/migrate/migration-scenarios/recycler-view)

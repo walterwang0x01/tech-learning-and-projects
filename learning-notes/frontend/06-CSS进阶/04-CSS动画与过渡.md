@@ -108,3 +108,83 @@ animation.reverse();
 animation.cancel();
 animation.finished.then(() => console.log('动画完成'));
 ```
+
+## 6. 2026 年 CSS 动画新特性
+
+<!-- version-check: @starting-style Baseline 2024-11, View Transitions API Baseline 2026, checked 2026-05-04 -->
+
+> 🔄 更新于 2026-05-04
+
+### 6.1 @starting-style 入场动画
+
+纯 CSS 实现元素从 `display: none` 到可见的入场动画，不再需要 JavaScript：
+
+```css
+/* 对话框入场动画 */
+dialog {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s, transform 0.3s, display 0.3s allow-discrete;
+
+  /* 定义初始状态（从 display:none 切换时的起始值） */
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Popover 入场动画 */
+[popover]:popover-open {
+  opacity: 1;
+  scale: 1;
+  transition: opacity 0.25s, scale 0.25s, display 0.25s allow-discrete;
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.9;
+  }
+}
+```
+
+**关键点**：`allow-discrete` 让 `display` 属性也能参与过渡，浏览器会在动画开始前应用 `@starting-style` 中的值。
+
+来源：[MDN @starting-style](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@starting-style)
+
+### 6.2 View Transitions API
+
+页面间或状态间的平滑过渡动画，2026 年跨文档 View Transitions 已全浏览器支持（Interop 2026）：
+
+```css
+/* 同文档 View Transition */
+::view-transition-old(root) {
+  animation: fade-out 0.3s ease-out;
+}
+::view-transition-new(root) {
+  animation: fade-in 0.3s ease-in;
+}
+
+/* 为特定元素命名过渡 */
+.card {
+  view-transition-name: card-hero;
+}
+```
+
+```javascript
+// 触发同文档 View Transition
+document.startViewTransition(() => {
+  // 更新 DOM
+  updateContent();
+});
+```
+
+```html
+<!-- 跨文档 View Transition（MPA，无需 JS） -->
+<head>
+  <meta name="view-transition" content="same-origin" />
+  <style>
+    @view-transition { navigation: auto; }
+  </style>
+</head>
+```
+
+来源：[Interop 2026 View Transitions](https://webkit.org/blog/17818/announcing-interop-2026/)

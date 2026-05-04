@@ -262,6 +262,33 @@ OpenAI 于 4 月 17 日经历三位高管同日离职（前 CPO Kevin Weil、Sor
 这意味着 OpenAI 的 Agents SDK、Codex Desktop、ChatGPT Agent 将获得更多资源投入，自主开发 Agent 赛道的竞争将进一步加剧。
 
 来源：[TechCrunch](https://techcrunch.com/2026/04/17/kevin-weil-and-bill-peebles-exit-openai-as-company-continues-to-shed-side-quests/) / [The Next Web](https://thenextweb.com/news/openai-departures-kevin-weil-sora-peebles-enterprise-pivot)
+
+### OpenAI Symphony 编排框架（2026-04-28）
+
+> 🔄 更新于 2026-05-03
+
+<!-- version-check: OpenAI Symphony, GPT-5.5, Codex orchestration, checked 2026-05-03 -->
+
+OpenAI 开源了 **Symphony**，一个将项目管理看板（当前支持 Linear）转化为 Coding Agent 控制平面的编排规范。每个 Issue 自动分配一个 Agent，Agent 在隔离工作区中持续运行，直到提交 PR。来源：[OpenAI Symphony](https://openai.com/index/open-source-codex-orchestration-symphony/)
+
+**核心架构：**
+- 基于 Elixir/OTP 构建，天然支持并发和容错
+- 每个 Issue → 独立 Agent 工作区 → 自主执行 → PR
+- 支持多模型运行时（不限于 Codex）
+- 内部使用后 landed PRs 增加 500%
+
+```
+Symphony 工作流：
+Linear Issue Board
+  ├─ Issue #1 → Agent A（隔离沙箱）→ PR #1
+  ├─ Issue #2 → Agent B（隔离沙箱）→ PR #2
+  ├─ Issue #3 → Agent C（隔离沙箱）→ PR #3
+  └─ ...（并行执行，人工审查 PR）
+```
+
+**与 GPT-5.5 的关系**：GPT-5.5（2026-04-23）定位为 Agent 运行时而非传统聊天模型，Symphony 是其在软件工程领域的编排层。两者共同标志着 OpenAI 从"模型提供商"向"Agent 平台"的战略转型。
+
+来源：[OpenAI Symphony GitHub](https://github.com/openai/symphony)、[TechCrunch GPT-5.5](https://techcrunch.com/2026/04/23/openai-chatgpt-gpt-5-5-ai-model-superapp/)（Content was rephrased for compliance with licensing restrictions）
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

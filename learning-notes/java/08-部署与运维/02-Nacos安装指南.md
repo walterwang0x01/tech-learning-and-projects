@@ -222,6 +222,53 @@ sh startup.sh -m standalone
 
 ```
 
+## 4. Nacos 3.x 版本演进（2025-2026）
+
+<!-- version-check: Nacos 3.2.1 (April 2026), checked 2026-05-04 -->
+
+> 🔄 更新于 2026-05-04
+
+Nacos 3.x 是重大版本升级，**要求 Java 17+**（Nacos 2.x 仅需 Java 8）。当前最新稳定版为 **3.2.1**。
+
+### 版本发布时间线
+
+| 版本 | 发布日期 | 要求 Java 版本 | 说明 |
+|------|---------|---------------|------|
+| 3.0.0 | 2025-06-20 | Java 17 | 首个 3.x 版本 |
+| 3.1.0 | 2025-09-24 | Java 17 | 功能增强 |
+| 3.1.2 | 2026-03-26 | Java 17 | 安全修复 |
+| 3.2.0 | 2026-03-27 | Java 17 | 新特性版本 |
+| 3.2.1 | 2026-04-23 | Java 17 | 当前最新稳定版 |
+
+### 一键安装（推荐）
+
+```bash
+# macOS / Linux：使用 nacos-setup 自动化部署
+# 自动下载、配置认证和环境验证
+curl -fsSL https://nacos.io/nacos-installer.sh | bash
+```
+
+### 从 Nacos 2.x 迁移到 3.x 注意事项
+
+```
+迁移检查清单：
+├── JDK 版本 → 升级到 Java 17+（必须）
+├── Spring Cloud Alibaba → 升级到兼容 Nacos 3.x 的版本
+├── 客户端依赖 → 更新 nacos-client 到 3.x
+├── 配置文件 → 检查 application.yml 中的 Nacos 配置
+└── 数据迁移 → Nacos 3.x 兼容 2.x 数据格式（向下兼容到 1.0.0）
+```
+
+### 版本选择建议（2026）
+
+| 场景 | 推荐版本 | 说明 |
+|------|---------|------|
+| 新项目 | Nacos 3.2.1 | 最新稳定版，Java 17+ |
+| 现有 Spring Cloud 项目 | Nacos 2.5.2 | 如果无法升级 JDK |
+| 学习/开发 | Nacos 3.2.1 | 使用一键安装脚本 |
+
+> 来源：[Nacos Release History](https://nacos.io/en/download/release-history/) | [Nacos 官网](https://nacos.io/en/)
+
 
 
 

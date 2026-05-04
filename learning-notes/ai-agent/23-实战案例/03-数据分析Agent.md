@@ -224,3 +224,32 @@ print(result["report"])
 ### 🌐 YouTube
 - [DeepLearning.AI - LangChain Chat with Your Data](https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/) — 数据对话Agent（免费）
 - [freeCodeCamp - Data Analysis with AI](https://www.youtube.com/watch?v=T-D1OfcDW1M) — AI数据分析教程
+
+## 7. 2026 年 Agentic Analytics 趋势
+
+> 🔄 更新于 2026-05-04
+
+<!-- version-check: Agentic Analytics 2026, Snowflake Cortex, Databricks Genie, checked 2026-05-04 -->
+
+2026 年数据分析 Agent 从实验性项目进入规模化部署阶段，核心变化：
+
+**市场格局**：
+- AI Agent 全球市场预计 2033 年达 $139B，44% CAGR
+- 企业报告分析时间缩短 50-70%
+- 从"人问数据答"转向"Agent 自主调查"
+
+**三大平台类型**：
+
+| 类型 | 代表产品 | 特点 |
+|------|---------|------|
+| 个人分析助手 | Julius.ai、ChatGPT | 上传数据即分析，零代码 |
+| 数据团队协作 | Snowflake Cortex、Databricks Genie、Hex | NL-to-SQL + 治理 + 协作 |
+| 企业 Agentic 平台 | Tellius | 自主根因调查 + 24/7 KPI 监控 |
+
+**关键趋势**：
+1. **Agentic Analytics**：Agent 不再等待提问，主动发现异常、调查根因、生成报告
+2. **多步自主调查**：Agent 可以规划分析路径、跨数据源查询、解释结果并继续深入
+3. **治理内置**：企业级平台将数据权限、审计追踪、SQL 审查内置到 Agent 工作流
+4. **MCP 标准化**：数据源通过 MCP Server 暴露给 Agent，统一工具接口
+
+来源：[Best AI Data Analysis Agents 2026](https://s16353.pcdn.co/resources/blog/best-ai-data-analysis-agents-in-2026-12-platforms-compared-for-nl-to-sql-autonomous-investigation-and-governance)、[MindStudio](https://www.mindstudio.ai/blog/ai-agents-data-analysis-ways)
