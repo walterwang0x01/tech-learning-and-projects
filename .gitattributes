@@ -1,4 +1,8 @@
 # git-crypt 加密配置：以下文件在 GitHub 上显示为乱码，本地正常读写
+# Agent 支付入门（支付基础、术语、区块链知识）
+learning-notes/ai-agent/20-Agent支付/01-入门/** filter=git-crypt diff=git-crypt
+# Agent 支付行业知识（协议、全景图、竞品、案例、风控）
+learning-notes/ai-agent/20-Agent支付/02-行业知识/** filter=git-crypt diff=git-crypt
 # 工程实现（公司工程方案、产品设计、安全架构）
 learning-notes/ai-agent/20-Agent支付/03-工程实现/** filter=git-crypt diff=git-crypt
 # 项目需求（公司内部需求方案）
