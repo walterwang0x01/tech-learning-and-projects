@@ -4,9 +4,9 @@
 
 ## 1. 框架全景
 
-<!-- version-check: Agent 框架全景, checked 2026-04-18 -->
+<!-- version-check: Agent 框架全景, checked 2026-05-05 -->
 
-> 🔄 更新于 2026-04-18
+> 🔄 更新于 2026-05-05
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -59,30 +59,30 @@
 |---------------|---------|---------|---------|---------|-----|---------|-------|
 | LangGraph     | Python  | ★★★    | ★★★★★ | ✅      | ✅  | 无      | 最大  |
 | CrewAI        | Python  | ★★     | ★★★★  | ✅ 核心 | ✅  | 无      | 大    |
-| OpenAI SDK    | Python  | ★      | ★★★   | ✅      | ❌  | OpenAI  | 大    |
+| OpenAI SDK    | Python  | ★      | ★★★★  | ✅      | ❌  | OpenAI  | 大    |
 | Google ADK    | Python  | ★★     | ★★★★  | ✅      | ✅  | 无*     | 中    |
 | AWS Strands   | Python  | ★★     | ★★★★  | ❌      | ✅  | 无      | 中    |
 | MS Agent FW   | .NET    | ★★★    | ★★★★  | ✅      | ✅  | 无      | 中    |
 | LlamaIndex    | Python  | ★★     | ★★★★  | ✅      | ✅  | 无      | 大    |
-| PydanticAI    | Python  | ★★     | ★★★   | ❌      | ✅  | 无      | 中    |
+| PydanticAI    | Python  | ★★     | ★★★★  | ✅      | ✅  | 无      | 大    |
 | Agno          | Python  | ★      | ★★★   | ✅      | ✅  | 无      | 小    |
 | smolagents    | Python  | ★      | ★★    | ✅      | ✅  | 无      | 中    |
 | Spring AI     | Java    | ★★     | ★★★★  | ❌      | ✅  | 无      | 大    |
 | Vercel AI SDK | TS      | ★★     | ★★★★  | ❌      | ✅  | 无      | 大    |
-| Dapr Agents   | 多语言  | ★★★    | ★★★   | ✅      | ❌  | 无      | 小    |
+| Dapr Agents   | 多语言  | ★★★    | ★★★★  | ✅      | ❌  | 无      | 小    |
 
 ## 4. 场景化推荐
 
 ### 快速原型
 
 ```python
-# OpenAI Agents SDK — 最简单的 Agent
+# OpenAI Agents SDK — 最简单的 Agent（v0.8+ Sandbox 架构）
 from agents import Agent, Runner
 
 agent = Agent(
     name="assistant",
     instructions="你是有用的助手",
-    model="gpt-4o",
+    model="gpt-5.5",
 )
 result = Runner.run_sync(agent, "你好")
 print(result.final_output)
@@ -230,10 +230,24 @@ Google ADK   → "Google 云生态 + 多 Agent"
 AWS Strands  → "AWS 生态 + 简洁 API"
 Spring AI    → "Java 团队的首选"
 Vercel SDK   → "TypeScript 全栈开发"
-PydanticAI   → "类型安全的 Python Agent"
+PydanticAI   → "类型安全的 Python Agent + Deep Agent 能力"
 LlamaIndex   → "RAG 和数据处理优先"
 smolagents   → "最少代码，HuggingFace 生态"
 ```
+
+> 🔄 更新于 2026-05-05
+
+### 2026-05 重要变化
+
+| 变化 | 说明 |
+| ---- | ---- |
+| **GPT-5.5 发布**（2026-04-23） | $5/M 输入、$30/M 输出，1M 上下文，Responses API 支持 |
+| **OpenAI Agents SDK v0.8+** | Sandbox + Harness 架构，支持文件操作、命令执行、代码编辑 |
+| **PydanticAI 生态扩展** | pydantic-deep 框架发布：规划、沙箱执行、任务委派、人机协作 |
+| **LlamaIndex 0.14.21** | 从 0.12.x 跃升至 0.14.x，核心稳定性修复 |
+| **Dapr Agents v1.0 GA** | CNCF 托管，生产就绪度从 ★★★ 升至 ★★★★ |
+
+> 来源：[OpenAI Agents SDK](https://openai.com/index/the-next-evolution-of-the-agents-sdk/)、[GPT-5.5 API](https://openrouter.ai/openai/gpt-5.5)、[pydantic-deep](https://pydantic.dev/articles/pydantic-deep-agents)
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

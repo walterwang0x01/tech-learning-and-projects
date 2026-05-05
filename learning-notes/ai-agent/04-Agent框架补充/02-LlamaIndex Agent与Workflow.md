@@ -4,19 +4,27 @@
 
 ## 1. 概述
 
-<!-- version-check: LlamaIndex 0.12.x, checked 2026-04-18 -->
+<!-- version-check: LlamaIndex 0.14.21, checked 2026-05-05 -->
 
-> 🔄 更新于 2026-04-18
+> 🔄 更新于 2026-05-05
 
-LlamaIndex 提供事件驱动的 Workflow 引擎和多种 Agent 类型，专注于 RAG 和数据处理场景的 Agent 开发。截至 2026 年 4 月，LlamaIndex 已拥有 29K+ GitHub Stars、1500万+ PyPI 年下载量，被 40% 的 Fortune 500 公司采用。
+LlamaIndex 提供事件驱动的 Workflow 引擎和多种 Agent 类型，专注于 RAG 和数据处理场景的 Agent 开发。截至 2026 年 5 月，LlamaIndex 已拥有 48K+ GitHub Stars、1500万+ PyPI 年下载量，被 40% 的 Fortune 500 公司采用。
+
+**版本跃升**：`llama-index-core` 从 0.12.x 升级至 **0.14.21**（2026-04-21），主要变化：
+- 持久化层全面使用 UTF-8 编码
+- DocumentSummaryIndex 节点删除修复
+- 结构化输出失败的 ValueError/TypeError 处理改进
+- Message Block Buffer 解析修复
 
 最新动态：
 - **MCP 集成**：支持将 LlamaIndex Workflows 和 Tools 转换为 MCP Server，也支持使用 MCP Tools
 - **AG-UI 动态工具**：支持 Agent-UI 协议的动态工具注册
-- **多模型支持**：集成 Anthropic 结构化输出、Bedrock Converse 改进
+- **NVIDIA 嵌入 HTTP 客户端**：新增 NVIDIA embeddings HTTP client 支持
+- **Bedrock Converse**：新增 Google Gemma 模型支持
+- **Databricks 改进**：向量存储和 LLM 解析增强
 - **LlamaParse 增强**：企业级 OCR、解析、提取和索引
 
-> 来源：[LlamaIndex PyPI](https://pypi.org/project/llama-index/)、[releasebot.io](https://releasebot.io/updates/run-llama/llamaindex)
+> 来源：[LlamaIndex PyPI](https://pypi.org/project/llama-index/)、[releasebot.io](https://releasebot.io/updates/run-llama)
 
 ```
 ┌─────────────────────────────────────────────────┐

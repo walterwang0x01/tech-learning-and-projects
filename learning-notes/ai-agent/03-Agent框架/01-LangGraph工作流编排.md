@@ -4,8 +4,14 @@
 
 ## 1. 概述
 
-<!-- version-check: LangGraph 1.1.6 stable (1.1.7a1 alpha), 126K+ Stars, checked 2026-04-23 -->
-LangGraph 是 LangChain 团队推出的 Agent 工作流编排框架，基于图结构定义 Agent 的执行流程。2025 年 10 月发布 1.0 GA，目前最新版本为 1.1.6 稳定版（1.1.7a1 alpha 新增 graph lifecycle callback handlers），126K+ GitHub Stars，90M+ 月下载量，是目前生产级 Agent 开发的行业标准。Uber、JP Morgan、BlackRock、Cisco、LinkedIn、Klarna、Replit、Elastic 等企业已在生产环境部署。来源：[LangChain Blog](https://blog.langchain.com/langchain-langgraph-1dot0/)、[Releasebot](https://releasebot.io/updates/langchain-ai)
+<!-- version-check: LangGraph 1.1.9 stable, 126K+ Stars, checked 2026-05-05 -->
+LangGraph 是 LangChain 团队推出的 Agent 工作流编排框架，基于图结构定义 Agent 的执行流程。2025 年 10 月发布 1.0 GA，目前最新版本为 1.1.9 稳定版，126K+ GitHub Stars，90M+ 月下载量，是目前生产级 Agent 开发的行业标准。Uber、JP Morgan、BlackRock、Cisco、LinkedIn、Klarna、Replit、Elastic 等企业已在生产环境部署。来源：[LangChain Blog](https://blog.langchain.com/langchain-langgraph-1dot0/)、[Releasebot](https://releasebot.io/updates/langchain-ai)
+
+> 🔄 更新于 2026-05-05
+
+**Interrupt 2026 大会**（2026-05-13/14，旧金山）：LangChain 年度 Agent 大会，超过 1000 名开发者参加。演讲嘉宾包括 Andrew Ng、Harrison Chase、Coinbase、Apple 等企业。主题聚焦"Agents at Enterprise Scale"——企业级 Agent 部署的实战经验。来源：[LangChain Blog](https://www.langchain.com/blog/previewing-interrupt-2026-agents-at-enterprise-scale)
+
+**LangGraph v1 稳定性承诺**：v1 是稳定性聚焦的版本，核心图 API 和执行模型保持不变，重点改进类型安全、文档和开发者体验。langgraph-prebuilt 1.0.11 的 ToolNode 增强让工具可以返回 `list[Command | ToolMessage]`，直接控制图的执行流程。来源：[LangGraph v1 Docs](https://docs.langchain.com/oss/python/releases/langgraph-v1)
 
 核心优势：图结构控制流、模型无关、内置检查点、人机交互支持。
 

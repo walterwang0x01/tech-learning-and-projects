@@ -75,9 +75,14 @@ with client.messages.stream(
 >
 > **OpenAI Assistants API 废弃**：2026-08-26 正式关闭，迁移至 Responses API + Conversations API。Responses API 支持内置工具（deep research、MCP、computer use），单次调用可运行多步工作流。
 > 来源：[OpenAI 社区公告](https://community.openai.com/t/assistants-api-beta-deprecation-august-26-2026-sunset/1354666)
+>
+> 🔄 更新于 2026-05-05
+>
+> **GPT-5.5**（2026-04-23）：OpenAI 最新旗舰模型（代号 Spud），$5/M 输入、$30/M 输出（GPT-5.5 Pro：$30/$180）。1M+ 上下文窗口（922K 输入 + 128K 输出），支持文本和图像输入。API 于 4/24 开放，支持 Responses API 和 Chat Completions。知识截止日期 2025-12-01。相比 GPT-5.4 价格翻倍但推理能力显著提升。
+> 来源：[OpenAI API](https://openai.com/api)、[OpenRouter](https://openrouter.ai/openai/gpt-5.5)
 
 <!-- version-check: Claude Opus 4.7 claude-opus-4-7, checked 2026-04-20 -->
-<!-- version-check: GPT-5.4-Cyber, checked 2026-04-20 -->
+<!-- version-check: GPT-5.5, checked 2026-05-05 -->
 
 > 🔄 更新于 2026-04-21
 >

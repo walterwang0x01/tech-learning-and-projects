@@ -766,8 +766,10 @@ def extract_briefing_summary(topic: str) -> tuple[str, str, str] | None:
     if not headlines:
         headlines = re.findall(r"^### (.+)$", content, re.MULTILINE)
 
-    # 提取收录数
+    # 提取收录数（兼容多种格式）
     count_match = re.search(r"最终收录：(\d+) 条", content)
+    if not count_match:
+        count_match = re.search(r"评分筛选后收录\s*\|\s*(\d+)\s*条", content)
     count = count_match.group(1) if count_match else "?"
 
     # 提取来源数
@@ -830,6 +832,8 @@ def cmd_notify(args):
                 if filepath.exists():
                     content = filepath.read_text(encoding="utf-8")
                     m = re.search(r"最终收录：(\d+) 条", content)
+                    if not m:
+                        m = re.search(r"评分筛选后收录\s*\|\s*(\d+)\s*条", content)
                     c = int(m.group(1)) if m else 0
                     total_count += c
                 all_lines.append(f"{icon} {name}")
