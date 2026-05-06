@@ -742,6 +742,55 @@ def push_bark(bark_url: str, title: str, body: str, group: str = "AI简报", ope
         return False
 
 
+def count_briefing_items(content: str) -> int:
+    """按简报正文内容统计收录条目数（适配 TLDR 风格简报）
+
+    规则：
+    - 统计头条下的 `### ` 标题（排除形如 "### 📌 头条" 这类分组标题）
+    - 统计快讯/安全/融资等板块的 `- **` 一级列表条目
+    - 统计项目/论文/大模型动态等板块的表格数据行（排除表头与分隔行）
+    - 遇到「📈 趋势」或「📊 本期统计」则停止，避免把趋势条目算进去
+    """
+    lines = content.splitlines()
+    count = 0
+    in_table = False
+
+    for line in lines:
+        stripped = line.strip()
+
+        # 遇到趋势或统计板块即停止
+        if re.match(r"^#{1,3}\s*📈", stripped) or re.match(r"^#{1,3}\s*📊", stripped):
+            break
+
+        # 其它标题重置表格状态
+        if stripped.startswith("#"):
+            in_table = False
+            # 头条下的 ### 条目计 1，但要排除 emoji 分组标题（如 "### 📌 头条"）
+            if re.match(r"^###\s+", stripped):
+                title_body = stripped[3:].strip()
+                if not re.match(r"^[📌⚡📦🤖🛠🔒💰📜💬🚀🆕🔺🔻]", title_body):
+                    count += 1
+            continue
+
+        # 表格：表头进入表格态后跳过表头与分隔行，其余行计数
+        if stripped.startswith("|") and stripped.endswith("|"):
+            if not in_table:
+                in_table = True
+                continue  # 表头
+            if set(stripped.replace("|", "").strip()) <= set("-: "):
+                continue  # 分隔行
+            count += 1
+            continue
+        else:
+            in_table = False
+
+        # 一级列表条目（快讯、安全动态等）
+        if re.match(r"^-\s+\*\*", stripped):
+            count += 1
+
+    return count
+
+
 def extract_briefing_summary(topic: str) -> tuple[str, str, str] | None:
     """从当天简报文件提取推送摘要，返回 (title, body, github_url) 或 None
 
@@ -766,11 +815,14 @@ def extract_briefing_summary(topic: str) -> tuple[str, str, str] | None:
     if not headlines:
         headlines = re.findall(r"^### (.+)$", content, re.MULTILINE)
 
-    # 提取收录数（兼容多种格式）
+    # 提取收录数：优先读显式写明的数字（旧格式），否则按实际条目统计（新 TLDR 格式）
     count_match = re.search(r"最终收录：(\d+) 条", content)
     if not count_match:
         count_match = re.search(r"评分筛选后收录\s*\|\s*(\d+)\s*条", content)
-    count = count_match.group(1) if count_match else "?"
+    if count_match:
+        count = count_match.group(1)
+    else:
+        count = str(count_briefing_items(content))
 
     # 提取来源数
     source_match = re.search(r"采集源：(\d+) 个", content)

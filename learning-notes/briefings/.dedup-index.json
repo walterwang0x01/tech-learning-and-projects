@@ -7571,7 +7571,4249 @@
       "source": "AWS Blog",
       "topic": "global-tech",
       "date": "2026-05-05"
+    },
+    "8c94bd56b744": {
+      "title": "Agents for financial services",
+      "source": "Anthropic News",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5f907f4d68cc": {
+      "title": "Google is partnering with XPRIZE and Range Media Partners on the $3.5 million Future Vision film competition.",
+      "source": "Google AI Blog",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "42f477a366a0": {
+      "title": "‘I Actually Thought He Was Going to Hit Me,’ OpenAI’s Greg Brockman Says of Elon Musk",
+      "source": "Wired AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "02dab7d5670a": {
+      "title": "Google DeepMind Workers Vote to Unionize Over Military AI Deals",
+      "source": "Wired AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "eee991ea52c2": {
+      "title": "He Couldn’t Land a Job Interview. Was AI to Blame?",
+      "source": "Wired AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5ee51e27705a": {
+      "title": "Xbox CEO ends Copilot AI development and overhauls leadership",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a2f9ebaac2b3": {
+      "title": "Our AI started a cafe in Stockholm",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9e4a3d4b16dd": {
+      "title": "Three Inverse Laws of AI",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "114cb62a8fbd": {
+      "title": "SubQ: a sub-quadratic LLM with 12M-token context",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "47be93869dec": {
+      "title": "AI didn't delete your database, you did",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c94b2c44d132": {
+      "title": "Google, Microsoft and xAI agree to share early AI models with U.S.",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "00f5548b55e3": {
+      "title": "AI Product Graveyard",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9f8b436f5322": {
+      "title": "When everyone has AI and the company still learns nothing",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c5eab5ba0df8": {
+      "title": "Google Chrome silently installs a 4 GB AI model on your device without consent",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a6724c9da8f2": {
+      "title": "AI startup JuliaHub raises $65M to rival Simulink",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7f9d775551a5": {
+      "title": "Show HN: Airbyte Agents – context for agents across multiple data sources",
+      "source": "Hacker News AI 关键词",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1ee5482c7218": {
+      "title": "Richard Dawkins and the Claude Delusion",
+      "source": "Hacker News AI 关键词",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "57990a18e08b": {
+      "title": "2026 Roadmap on Artificial Intelligence and Machine Learning for Smart Manufacturing",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "47899a2cda06": {
+      "title": "AI Agents for Sustainable SMEs: A Green ESG Assessment Framework",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e754ceeebb94": {
+      "title": "Understanding Emergent Misalignment via Feature Superposition Geometry",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fe9b20b9b49d": {
+      "title": "ClinicBot: A Guideline-Grounded Clinical Chatbot with Prioritized Evidence RAG and Verifiable Citations",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5cd65767ab8f": {
+      "title": "Accelerating battery research with an AI interface between FINALES and Kadi4Mat",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "61525f41f179": {
+      "title": "Effect-Transparent Governance for AI Workflow Architectures: Semantic Preservation, Expressive Minimality, and Decidability Boundaries",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c91e7167a175": {
+      "title": "Algebraic Semantics of Governed Execution: Monoidal Categories, Effect Algebras, and Coterminous Boundaries",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "70a317675653": {
+      "title": "A Knowledge-Driven LLM-Based Decision-Support System for Explainable Defect Analysis and Mitigation Guidance in Laser Powder Bed Fusion",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "664bd16c7438": {
+      "title": "Virtual Speech Therapist: A Clinician-in-the-Loop AI Speech Therapy Agent for Personalized and Supervised Therapy",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "38cb191bbd92": {
+      "title": "Towards Multi-Agent Autonomous Reasoning in Hydrodynamics",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "02d6d43a403c": {
+      "title": "New Bounds for Zarankiewicz Numbers via Reinforced LLM Evolutionary Search",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2964a89e339f": {
+      "title": "PERSA: Reinforcement Learning for Professor-Style Personalized Feedback with LLMs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "088a150651f6": {
+      "title": "Iterative Finetuning is Mostly Idempotent",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7baed5954fff": {
+      "title": "To Use AI as Dice of Possibilities with Timing Computation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "58e588e0462c": {
+      "title": "A Low-Latency Fraud Detection Layer for Detecting Adversarial Interaction Patterns in LLM-Powered Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a50b19938d11": {
+      "title": "Position: Safety and Fairness in Agentic AI Depend on Interaction Topology, Not on Model Scale or Alignment",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c76258193d39": {
+      "title": "Arithmetic in the Wild: Llama uses Base-10 Addition to Reason About Cyclic Concepts",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d5d05a7f168a": {
+      "title": "LLMs Should Not Yet Be Credited with Decision Explanation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "926f66facd58": {
+      "title": "NEURON: A Neuro-symbolic System for Grounded Clinical Explainability",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f8fcc2a6d9a5": {
+      "title": "GR-Ben: A General Reasoning Benchmark for Evaluating Process Reward Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c22bb148ea3b": {
+      "title": "Faithful Mobile GUI Agents with Guided Advantage Estimator",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b956e190900c": {
+      "title": "Agentic AI Systems Should Be Designed as Marginal Token Allocators",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bd658c087f98": {
+      "title": "Zero-Shot Signal Temporal Logic Planning with Disjunctive Branch Selection in Dynamic Semantic Maps",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1f88edd716a3": {
+      "title": "EO-Gym: A Multimodal, Interactive Environment for Earth Observation Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "da235ff5c55d": {
+      "title": "Uncertainty-Aware Trip Purpose Inference from GPS Trajectories via POI Semantic Zones and Pareto Calibration",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "918db9542d2a": {
+      "title": "Valley3: Scaling Omni Foundation Models for E-commerce",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0cd656e0bbfd": {
+      "title": "Lifting Traces to Logic: Programmatic Skill Induction with Neuro-Symbolic Learning for Long-Horizon Agentic Tasks",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0a0871c483af": {
+      "title": "Segment-Aligned Policy Optimization for Multi-Modal Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b0ab91bb8f04": {
+      "title": "Truth or Tribe: How In-group Favoritism Prioritize Facts in Persona Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "df477c479bfc": {
+      "title": "DiagramNet: An End-to-End Recognition Framework and Dataset for Non-Standard System-Level Diagrams",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bf9cba1d0196": {
+      "title": "Structural Ranking of the Cognitive Plausibility of Computational Models of Analogy and Metaphors with the Minimal Cognitive Grid",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "819fb6180602": {
+      "title": "A Cellular Doctrine of Morality: Intrinsic Active Precision and the Mind-Reality Overload Dilemma",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b2e019e209f1": {
+      "title": "AI Safety as Control of Irreversibility: A Systems Framework for Decision-Energy and Sovereignty Boundaries",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2967b36ab910": {
+      "title": "TimeTok: Granularity-Controllable Time-Series Generation via Hierarchical Tokenization",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "40f6614926d9": {
+      "title": "Artificial Jagged Intelligence as Uneven Optimization Energy Allocation Capability Concentration, Redistribution, and Optimization Governance",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "629115cda213": {
+      "title": "SCALE-LoRA: Auditing Post-Retrieval LoRA Composition with Residual Merging and View Reliability",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ab6f78779f7d": {
+      "title": "Rethinking Explanations: Formalizing Contrast in Description Logics",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "19466601de76": {
+      "title": "CoFlow: Coordinated Few-Step Flow for Offline Multi-Agent Decision Making",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "86aa08a7cc33": {
+      "title": "Grounding Multi-Hop Reasoning in Structural Causal Models via Group Relative Policy Optimization",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "272544eba7e6": {
+      "title": "MAP-Law: Coverage-Driven Retrieval Control for Multi-Turn Legal Consultation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d91209978025": {
+      "title": "SciResearcher: Scaling Deep Research Agents for Frontier Scientific Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a7c7f9d7c6b0": {
+      "title": "MILD: Mediator Agent System with Bidirectional Perception and Multi-Layered Alignment for Human-Vehicle Collaboration",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e47390c25e4b": {
+      "title": "Multi-Agent Reasoning Improves Compute Efficiency: Pareto-Optimal Test-Time Scaling",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "92f70af5176a": {
+      "title": "Evaluating Agentic AI in the Wild: Failure Modes, Drift Patterns, and a Production Evaluation Framework",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6a71cdf8879c": {
+      "title": "CP-SynC: Multi-Agent Zero-Shot Constraint Modeling in MiniZinc with Synthesized Checkers",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f0fa806012eb": {
+      "title": "Latent State Design for World Models under Sufficiency Constraints",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7d38caba5d7e": {
+      "title": "Model Routing as a Trust Problem: Route Receipts for Adaptive AI Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d7b7a78e6a2a": {
+      "title": "Are LLMs More Skeptical of Entertainment News?",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b138323703b1": {
+      "title": "NH-CROP: Robust Pricing for Governed Language Data Assets under Cost Uncertainty",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0c5d749b647b": {
+      "title": "Catching the Infection Before It Spreads: Foresight-Guided Defense in Multi-Agent Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a720520d825a": {
+      "title": "Runtime Evaluation of Procedural Content Generation in an Endless Runner Game Using Autonomous Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "be3b13ab5e53": {
+      "title": "DataEvolver: Let Your Data Build and Improve Itself via Goal-Driven Loop Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "daaf6f2db246": {
+      "title": "Neural Decision-Propagation for Answer Set Programming",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9a29d3e5e9ae": {
+      "title": "NeuroState-Bench: A Human-Calibrated Benchmark for Commitment Integrity in LLM Agent Profiles",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4b3c1b938fe3": {
+      "title": "Sheaf-Theoretic Planning: A Categorical Foundation for Resilient Multi-Agent Autonomous Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c6e7daf2f3b9": {
+      "title": "CyberAId: AI-Driven Cybersecurity for Financial Service Providers",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c729bf38b1a7": {
+      "title": "Disentangling Intent from Role: Adversarial Self-Play for Persona-Invariant Safety Alignment",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "113496353206": {
+      "title": "A Language for Describing Agentic LLM Contexts",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "623c3980a70e": {
+      "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3287bcc3ec7c": {
+      "title": "12 Angry AI Agents: Evaluating Multi-Agent LLM Decision-Making Through Cinematic Jury Deliberation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "44cbe88d08b6": {
+      "title": "TumorXAI: Self-Supervised Deep Learning Framework for Explainable Brain MRI Tumor Classification",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bf3ec7071da7": {
+      "title": "Personalized Digital Health Modeling with Adaptive Support Users",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "926b95bba4cb": {
+      "title": "Reliable AI Needs to Externalize Implicit Knowledge: A Human-AI Collaboration Perspective",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "30c313dd5475": {
+      "title": "Tenability and Weak Semantics: Modeling Non-uniform Defense -- Extended Version",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1fd270dee1ef": {
+      "title": "Model Spec Midtraining: Improving How Alignment Training Generalizes",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2706ac155da8": {
+      "title": "NORA: A Harness-Engineered Autonomous Research Agent for End-to-End Spatial Data Science",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "547439124d1a": {
+      "title": "The Dynamic Gist-Based Memory Model (DGMM): A Memory-Centric Architecture for Artificial Intelligence",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f57128ed7e4e": {
+      "title": "Reinforcement Learning Trained Observer Control for Bearings-Only Tracking",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f19d13879aa0": {
+      "title": "Planner Matters! An Efficient and Unbalanced Multi-agent Collaboration Framework for Long-horizon Planning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "09160231ae1c": {
+      "title": "Retrieval and Multi-Hop Reasoning in 1M-Token Context Windows: Evaluating LLMs on Classical Chinese Text",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3e3297174a6a": {
+      "title": "Intervention Complexity as a Canonical Reward and a Measure of Intelligence",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b5bc77ed13f4": {
+      "title": "T$^2$PO: Uncertainty-Guided Exploration Control for Stable Multi-Turn Agentic Reinforcement Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "aee50947e409": {
+      "title": "MEMAUDIT: An Exact Package-Oracle Evaluation Protocol for Budgeted Long-Term LLM Memory Writing",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5d4af1176d02": {
+      "title": "CBV: Clean-label Backdoor Attacks on Vision Language Models via Diffusion Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "597c2483b199": {
+      "title": "Submodular Benchmark Selection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e8fec19b7055": {
+      "title": "CoVSpec: Efficient Device-Edge Co-Inference for Vision-Language Models via Speculative Decoding",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "636f92d3bfff": {
+      "title": "Bucketing the Good Apples: A Method for Diagnosing and Improving Causal Abstraction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "18dc5016a2c6": {
+      "title": "Perturbation Dose Responses in Recursive LLM Loops: Raw Switching, Stochastic Floors, and Persistent Escape under Append, Replace, and Dialog Updates",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "dd3d85428d46": {
+      "title": "PhysicianBench: Evaluating LLM Agents in Real-World EHR Environments",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "56fa0f5c038b": {
+      "title": "Zero-Shot Confidence Estimation for Small LLMs: When Supervised Baselines Aren't Worth Training",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "686eea7cc9dc": {
+      "title": "A Study of Belief Revision Postulates in Multi-Agent Systems (Extended Version)",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5c9d3aa909fc": {
+      "title": "Towards Understanding Specification Gaming in Reasoning Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6849a02aaadc": {
+      "title": "Complexity Horizons of Compressed Models in Analog Circuit Analysis",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1248da1bd789": {
+      "title": "EngiAgent: Fully Connected Coordination of LLM Agents for Solving Open-ended Engineering Problems with Feasible Solutions",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7d537b82c69c": {
+      "title": "Distilling Long-CoT Reasoning through Collaborative Step-wise Multi-Teacher Decoding",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b4656874352d": {
+      "title": "Anon: Extrapolating Optimizer Adaptivity Across the Real Spectrum",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5cb44d614fa9": {
+      "title": "Can Causal Discovery Algorithms Help in Generating Legal Arguments?",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2a00900c26d5": {
+      "title": "ANO: A Principled Approach to Robust Policy Optimization",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c3b73eafc1b1": {
+      "title": "A Compound AI Agent for Conversational Grant Discovery",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f8fef14718d5": {
+      "title": "Controllable and Verifiable Process Data Synthesis for Process Reward Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e9e02926a58a": {
+      "title": "HeavySkill: Heavy Thinking as the Inner Skill in Agentic Harness",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fa6fc92c8f99": {
+      "title": "The Compliance Trap: How Structural Constraints Degrade Frontier AI Metacognition Under Adversarial Pressure",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0591ebdd3dc0": {
+      "title": "FitText: Evolving Agent Tool Ecologies via Memetic Retrieval",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b09c43270625": {
+      "title": "The Model Knows, the Decoder Finds: Future Value Guided Particle Power Sampling",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bbfbbdc0ad97": {
+      "title": "Measuring AI Reasoning: A Guide for Researchers",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b1c3fae2e41b": {
+      "title": "Position: How can Graphs Help Large Language Models?",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "28e3523593b0": {
+      "title": "Shadow-Loom: Causal Reasoning over Graphical World Model of Narratives",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "66011b67056f": {
+      "title": "Efficient Temporal Datalog Materialisation for Composite Event Recognition",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b605334a7989": {
+      "title": "GRAIL: A Deep-Granularity Hybrid Resonance Framework for Real-Time Agent Discovery via SLM-Enhanced Indexing",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "16273f6c6c71": {
+      "title": "DataClaw: A Process-Oriented Agent Benchmark for Exploratory Real-World Data Analysis",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0b9f23f80d3d": {
+      "title": "Improving Model Safety by Targeted Error Correction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ff229336f152": {
+      "title": "Strategy-Aware Optimization Modeling with Reasoning LLMs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b9f0102b3afc": {
+      "title": "Double Rectified Linear Unit-based Modular Semantics for Quantitative Bipolar Argumentation Framework",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "412cc80f7ec8": {
+      "title": "On Training Large Language Models for Long-Horizon Tasks: An Empirical Study of Horizon Length",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d58f586ce478": {
+      "title": "Universal Smoothness via Bernstein Polynomials: A Constructive Approximation Approach for Activation Functions",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a6b8b89501e9": {
+      "title": "Foundation-Model-Based Agents in Industrial Automation: Purposes, Capabilities, and Open Challenges",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "afbb2019283c": {
+      "title": "Counterfactual Reasoning in Automated Planning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "92f7c27e511b": {
+      "title": "SCGNN: Semantic Consistency enhanced Graph Neural Network Guided by Granular-ball Computing",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f5eaf74c917b": {
+      "title": "Trustworthy AI Suffers from Invariance Conflicts and Causality is The Solution",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c6fa5b75c20e": {
+      "title": "Deciphering Shortcut Learning from an Evolutionary Game Theory Perspective",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "913a878dca78": {
+      "title": "AcademiClaw: When Students Set Challenges for AI Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2a6e729027ad": {
+      "title": "An explainable hypothesis-driven approach to Drug-Induced Liver Injury with HADES",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ed019b975e5f": {
+      "title": "The 2026 ACII Dyadic Conversations (DaiKon) Workshop & Challenge",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "30ce096fc9e3": {
+      "title": "Hybrid Inspection and Task-Based Access Control in Zero-Trust Agentic AI",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "29dec2959f15": {
+      "title": "An Empirical Study of Agent Skills for Healthcare: Practice, Gaps, and Governance",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f313d3fd173b": {
+      "title": "ORPilot: A Production-Oriented Agentic LLM-for-OR Tool for Optimization Modeling",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2ffc9bdc8d15": {
+      "title": "Coherent Hierarchical Multi-Label Learning to Defer for Medical Imaging",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "46c044452675": {
+      "title": "AI and Open-data Driven Scalable Solar Power Profiling",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "09d8ed86ddf0": {
+      "title": "Foundation Models to Unlock Real-World Evidence from Nationwide Medical Claims",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a9d351541471": {
+      "title": "Triple Spectral Fusion for Sensor-based Human Activity Recognition",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "30cf74f8f0e0": {
+      "title": "Mitigating Misalignment Contagion by Steering with Implicit Traits",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "61ae3eb22b1b": {
+      "title": "U-Define: Designing User Workflows for Hard and Soft Constraints in LLM-Based Planning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5e4323bf8cdf": {
+      "title": "Fine-Grained Graph Generation through Latent Mixture Scheduling",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "aef9c95dc0c7": {
+      "title": "When Audio-Language Models Fail to Leverage Multimodal Context for Dysarthric Speech Recognition",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "42cf2ca107ea": {
+      "title": "AIs and Humans with Agency",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6df8667ca97f": {
+      "title": "SCPRM: A Schema-aware Cumulative Process Reward Model for Knowledge Graph Question Answering",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "394f12817a56": {
+      "title": "First-Order Efficiency for Probabilistic Value Estimation via A Statistical Viewpoint",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fb5a2ebae188": {
+      "title": "Compress Then Adapt? No, Do It Together via Task-aware Union of Subspaces",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d8675432adc8": {
+      "title": "HAAS: A Policy-Aware Framework for Adaptive Task Allocation Between Humans and Artificial Intelligence Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2b530294de19": {
+      "title": "Standing on the Shoulders of Giants: Stabilized Knowledge Distillation for Cross--Language Code Clone Detection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9df13a789c61": {
+      "title": "Separating Intelligence from Execution: A Workflow Engine for the Model Context Protocol",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a8be580d7890": {
+      "title": "GhostServe: A Lightweight Checkpointing System in the Shadow for Fault-Tolerant LLM Serving",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0dcebbf7d590": {
+      "title": "Agentopic: A Generative AI Agent Workflow for Explainable Topic Modeling",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fbe30861b097": {
+      "title": "Generative-AI and the transformation of workforce. A job postings-driven analysis",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "97d9cba9a918": {
+      "title": "The Oracle's Fingerprint: Correlated AI Forecasting Errors and the Limits of Bias Transmission",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8314129d4773": {
+      "title": "Graph Query Generation with Constraint-guided Large Language Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "036f3fd9edfc": {
+      "title": "H-Probes: Extracting Hierarchical Structures From Latent Representations of Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2432f16b80b5": {
+      "title": "Earth System Foundation Model (ESFM): A unified framework for heterogeneous data integration and forecasting",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "537ef4ef55ce": {
+      "title": "1BT: One-Block Transformer for EEG-Based Cognitive Workload Assessment",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e44c55af5b1e": {
+      "title": "Foundation Model Guided Dual-Branch Co-Adaptation for Source-Free EEG Decoding",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "dc7f30be4b62": {
+      "title": "Voice Mapping of Text-to-Speech Systems: A Metric-Based Approach for Voice Quality Assessment",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2f7f877758db": {
+      "title": "An Algorithm for On-Sensor Agnostic Detection of Changes in Human Activity for Ultra-Low-Power Applications",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d6776eb28712": {
+      "title": "NAKUL-Med: Spectral-Graph State Space Models with Dynamics Kernels for Medical Signals",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "99f76ede6c03": {
+      "title": "Multi-View Hierarchical Representation Learning of Fetal Hemodynamics for Maternal Hypertension Detection at the Edge",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c7c6d1b5a42f": {
+      "title": "BRITE: A Benchmark for Reliable and Interpretable T2V Evaluation on Implausible Scenarios",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0ea3da09c1e0": {
+      "title": "Latent Space Probing for Adult Content Detection in Video Generative Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a6b87a0577f7": {
+      "title": "Visual Chart Representations for Cryptocurrency Regime Prediction: A Systematic Deep Learning Study",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2f8476649697": {
+      "title": "OceanPile: A Large-Scale Multimodal Ocean Corpus for Foundation Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6d34b1eb0639": {
+      "title": "Adversarial Flow Matching for Imperceptible Attacks on End-to-End Autonomous Driving",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a08fa00398f5": {
+      "title": "Towards High Fidelity Face Swapping: A Comprehensive Survey and New Benchmark",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "911bce228072": {
+      "title": "Selective Correlation Based Knowledge Distillation for Ground Reaction Force Estimation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "cd61eef4028a": {
+      "title": "Skeleton-Based Posture Classification to Promote Safer Walker-Assisted Gait in Older Adults",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ec45b78f29b0": {
+      "title": "X2SAM: Any Segmentation in Images and Videos",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "12075aa87cee": {
+      "title": "Retrieval-Guided Generation for Safer Histopathology Image Captioning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "23c49db425c3": {
+      "title": "Transfer Learning for Tonal Noise Prediction in VRF Units Using Thermodynamic and Vibration Signals",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "97986fedc84a": {
+      "title": "When Less Is More: Simplicity Beats Complexity for Physics-Constrained InSAR Phase Unwrapping",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e5a08531c4cf": {
+      "title": "RA-CMF: Region-Adaptive Conditional MeanFlow for CT Image Reconstruction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8474ae395d7b": {
+      "title": "DIAGRAMS: A Review Framework for Reasoning-Level Attribution in Diagram QA",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bb6eaab99504": {
+      "title": "Generalized Category Discovery under Domain Shifts: From Vision to Vision-Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7ba04fa6a649": {
+      "title": "TRIP-Evaluate: An Open Multimodal Benchmark for Evaluating Large Models in Transportation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "65ec850a507a": {
+      "title": "Leveraging Imperfect Medical Data: A Manifold-Consistent Spatio-Temporal Network for Sensor-based Human Activity Recognition",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "26094abe773b": {
+      "title": "The Cost of Consensus: Isolated Self-Correction Prevails Over Unguided Homogeneous Multi-Agent Debate",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5426d38247c2": {
+      "title": "Rethink MAE with Linear Time-Invariant Dynamics",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f0ee0820f07b": {
+      "title": "To Vibe Research or Not to Vibe Research? Generative AI in Qualitative Research",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "228e253abe55": {
+      "title": "StyleShield: Exposing the Fragility of AIGC Detectors through Continuous Controllable Style Transfer",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ffcf18f73bbc": {
+      "title": "PhaseNet++: Phase-Aware Frequency-Domain Anomaly Detection for Industrial Control Systems via Phase Coherence Graphs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1302435222a6": {
+      "title": "CellxPert: Inference-Time MCMC Steering of a Multi-Omics Single-Cell Foundation Model for In-Silico Perturbation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "cf7de4acce06": {
+      "title": "Code World Model Preparedness Report",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "862bd1825a01": {
+      "title": "CGM-JEPA: Learning Consistent Continuous Glucose Monitor Representations via Predictive Self-Supervised Pretraining",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "32f15948ed1a": {
+      "title": "EventADL: Open-Box Anomaly Detection and Localization Framework for Events in Cloud-Based Service Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f421c28fe772": {
+      "title": "Fusing Urban Structure and Semantics: A Conditional Diffusion Model for Cross-City OD Matrix Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d0829d90986c": {
+      "title": "From Flat Facts to Sharp Hallucinations: Detecting Stubborn Errors via Gradient Sensitivity",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1f0b8b6e2c2d": {
+      "title": "Interpretable experiential learning based on state history and global feedback",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8bccd9ac5cf0": {
+      "title": "SCARV: Structure-Constrained Aggregation for Stable Sample Ranking in Redundant NLP Datasets",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e4157c57a694": {
+      "title": "Co-Generative De Novo Functional Protein Design",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "12cbde0d182c": {
+      "title": "E-MIA: Exam-Style Black-Box Membership Inference Attacks against RAG Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a48ec278b187": {
+      "title": "\"I Don't Know\" -- Towards Appropriate Trust with Certainty-Aware Retrieval Augmented Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d5679b9b3d9a": {
+      "title": "Ablation Study of Multimodal Perception, Language Grounding, and Control for Human-Robot Interaction in an Object Detection and Grasping Task",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b2d1cc15796c": {
+      "title": "Seeking Information with RAG-Assistants: Does Model Size Matter in Human-AI Collaborations?",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1a2cd08cbb84": {
+      "title": "Adaptive 3D-RoPE: Physics-Aligned Rotary Positional Encoding for Wireless Foundation Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0bcf12a658b4": {
+      "title": "MedMosaic: A Challenging Large Scale Benchmark of Diverse Medical Audio",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "12143bddee3d": {
+      "title": "Toward a Scientific Discovery Engine for Weather and Climate Data: A Visual Analytics Workbench for Embedding-Based Exploration",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9d68bb2fab1a": {
+      "title": "Physiology-Aware Masked Cross-Modal Reconstruction for Biosignal Representation Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d7f87733c3ca": {
+      "title": "Democratizing the medieval English legal tradition",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "35169c607455": {
+      "title": "Model Organisms Are Leaky: Perplexity Differencing Often Reveals Finetuning Objectives",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ac618b6f171a": {
+      "title": "CLEAR: Revealing How Noise and Ambiguity Degrade Reliability in LLMs for Medicine",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c54f1cb0940b": {
+      "title": "EmoMM: Benchmarking and Steering MLLM for Multimodal Emotion Recognition under Conflict and Missingness",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0c19eb416480": {
+      "title": "Certified Purity for Cognitive Workflow Executors: From Static Analysis to Cryptographic Attestation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2211872011eb": {
+      "title": "Separation Assurance between Heterogeneous Fleets of Small Unmanned Aerial Systems via Multi-Agent Reinforcement Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1f1883db9aaf": {
+      "title": "LLM Ghostbusters: Surgical Hallucination Suppression via Adaptive Unlearning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b4ce71ea93af": {
+      "title": "Value Functions for Temporal Logic: Optimal Policies and Safety Filters",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "89225e2e7508": {
+      "title": "SCION: Size-aware Policy Orchestration for Nonstationary Object Caches (Long Paper Version)",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c157872d028e": {
+      "title": "LEAP: Layer-wise Exit-Aware Pretraining for Efficient Transformer Inference",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "01042bb0d85b": {
+      "title": "A Sentence Relation-Based Approach to Sanitizing Malicious Instructions",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f20b8373aff6": {
+      "title": "Governing What the EU AI Act Excludes: Accountability for Autonomous AI Agents in Smart City Critical Infrastructure",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "cb2558fb0461": {
+      "title": "Interpretable Difficulty-Aware Knowledge Tracing in Tutor-Student Dialogues",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f69696674e35": {
+      "title": "Component-Aware Self-Speculative Decoding in Hybrid Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1c9495aa69f2": {
+      "title": "When Less is Enough: Efficient Inference via Collaborative Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e02c3fc18275": {
+      "title": "Forager: a lightweight testbed for continual learning with partial observability in RL",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b173a6c21e73": {
+      "title": "Semantic Context-aware mOdality fUsion Transformer (SCOUT): A Context-Aware Multimodal Transformer for Concept-Grounded Pathology Report Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "afa25aa81dd2": {
+      "title": "Multi-Perspective Transformers in ARC-AGI-2 Challenge",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4bbb55fad767": {
+      "title": "The Productivity-Reliability Paradox: Specification-Driven Governance for AI-Augmented Software Development",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2fcdc269c7e6": {
+      "title": "Minimizing Collateral Damage in Activation Steering",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f9d371365e38": {
+      "title": "MindMelody: A Closed-Loop EEG-Driven System for Personalized Music Intervention",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "caa8f99feefc": {
+      "title": "Rhamba: Region-Aware Hybrid Attention-Mamba Framework for Self-Supervised Learning in Resting-State fMRI",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5f4707c5bf47": {
+      "title": "The Garden of Forking Paths: Narrative Arc-Conditioned Gameplay Planning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b2ae6e8c3048": {
+      "title": "CNN-based Multi-In-Multi-Out Model for Efficient Spatiotemporal Prediction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b687765bda4a": {
+      "title": "Position: LLM Serving Needs Mathematical Optimization and Algorithmic Foundations, Not Just Heuristics",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "809fe06b30ad": {
+      "title": "A Target-Free Harmonization Method for MRI",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "83eb8e0f770c": {
+      "title": "Developing a Strong Pre-Trained Base Model for Plant Leaf Disease Classification",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d4495e17badb": {
+      "title": "Chain of Evidence: Pixel-Level Visual Attribution for Iterative Retrieval-Augmented Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "10da095d46a2": {
+      "title": "Autonomous Drift Learning in Data Streams: A Unified Perspective",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6a6675e856df": {
+      "title": "Are we Doomed to an AI Race? Why Self-Interest Could Drive Countries Towards a Moratorium on Superintelligence",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6e77aea29813": {
+      "title": "Spectral- and Energy-efficient Multi-BS Multi-RIS Pinching-antenna Systems: A GNN-based Approach",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2c0ba52b69c6": {
+      "title": "GraphSculptor: Sculpting Pre-training Coreset for Graph Self-supervised Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "24832eb3c4ad": {
+      "title": "Creating and Evaluating Figurative Language Dataset for Sindhi",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b40add798470": {
+      "title": "ABox Abduction for Inconsistent Knowledge Bases under Repair Semantics",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0021e6d25fb0": {
+      "title": "Active Reasoning Vision-Language Models via Sequential Experimental Design",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "67192d9026e0": {
+      "title": "MAD-OPD: Breaking the Ceiling in On-Policy Distillation via Multi-Agent Debate",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "726fe9688150": {
+      "title": "VUDA: Breaking CUDA-Vulkan Isolation for Spatial Sharing of Compute and Graphics on the Same GPU",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "71ceb4120716": {
+      "title": "AgriKD: Cross-Architecture Knowledge Distillation for Efficient Leaf Disease Classification",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "420a45d7f9b0": {
+      "title": "Model-Based Proactive Cost Generation for Learning Safe Policies Offline with Limited Violation Data",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a79c2f89a6d9": {
+      "title": "MU-SHOT-Fi: Self-Supervised Multi-User Wi-Fi Sensing with Source-free Unsupervised Domain Adaptation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3e20d133ada2": {
+      "title": "Focus on the Core: Empowering Diffusion Large Language Models by Self-Contrast",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "084587244a7f": {
+      "title": "Sparse Representation Learning for Vessels",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "00a740f4fb94": {
+      "title": "Using LLMs in Software Design: An Empirical Study of GitHub and A Practitioner Survey",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4c5b924a841c": {
+      "title": "LiveFMBench: Unveiling the Power and Limits of Agentic Workflows in Specification Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "651923802cfc": {
+      "title": "Verbal-R3: Verbal Reranker as the Missing Bridge between Retrieval and Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "11b2898ea83b": {
+      "title": "Investigating the Effects of Different Levels of User Control in an Interactive Educational Recommender System",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d6b354bce307": {
+      "title": "AI Expert Twin: Capturing Expert Cognition for Human-Centred, Practice-Based Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9a5131719ff6": {
+      "title": "AMSnet-q: Unsupervised Circuit Identification and Performance Labeling for AMS Circuits",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "795d8403429f": {
+      "title": "Medmarks: A Comprehensive Open-Source LLM Benchmark Suite for Medical Tasks",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "61ec283927d0": {
+      "title": "HepScript: A Dual-Use DSL for Human-AI Collaborative Data Analysis Workflows in High-Energy Physics",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "cec3a8bedeb6": {
+      "title": "Quantifying Multimodal Capabilities: Formal Generalization Guarantees in Pairwise Metric Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5e4106b80560": {
+      "title": "VisInject: Disruption != Injection -- A Dual-Dimension Evaluation of Universal Adversarial Attacks on Vision-Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "efa69cae1c34": {
+      "title": "SRGAN-CKAN: Expressive Super-Resolution with Nonlinear Functional Operators under Minimal Resources",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f64125a19d63": {
+      "title": "Decision Boundary-aware Generation for Long-tailed Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5f2756a8a600": {
+      "title": "Practical Limits of Autonomous Test Repair: A Multi-Agent Case Study with LLM-Driven Discovery and Self-Correction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4f2496950981": {
+      "title": "LIE: LiDAR-only HD Map Construction with Intensity Enhancement via Online Knowledge Distillation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fb929f543bb9": {
+      "title": "Research on Vision-Language Question Answering Models for Industrial Robots",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9915eb2024c2": {
+      "title": "CGFformer: Cluster-Guidance Frequency Transformer for Pansharpening",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "35bdabf50627": {
+      "title": "FT-RAG: A Fine-grained Retrieval-Augmented Generation Framework for Complex Table Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8f7bca12716b": {
+      "title": "Protein-Conditioned Multi-Objective Reinforcement Learning for Full-Length mRNA Design",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "102676118053": {
+      "title": "Mesh Based Simulations with Spatial and Temporal awareness",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b33dbbb53346": {
+      "title": "6G Needs Agents: Toward Agentic AI-Native Networks for Autonomous Intelligence",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "70570fdf6eee": {
+      "title": "Automated Interpretability and Feature Discovery in Language Models with Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8b0a59198579": {
+      "title": "Neuro-Symbolic Agents for Hallucination-Free Requirements Reuse",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ea0693dff47b": {
+      "title": "Model Merging: Foundations and Algorithms",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "048654bcf1d0": {
+      "title": "KG-First, LLM-Fallback: A Hybrid Microservice for Grounded Skill Search and Explanation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "de76a421eac5": {
+      "title": "Where Do Prompt Perturbations Break Generation? A Segment-Level View of Robustness in LoRA-Tuned Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "efea336fa41a": {
+      "title": "Concepts Whisper While Syntax Shouts: Spectral Anti-Concentration and the Dual Geometry of Transformer Representations",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "91c9aed2f730": {
+      "title": "Less Interaction But More Explanation: A Communication Perspective on Agentic AI Interfaces",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d8f64b2f3eaa": {
+      "title": "The Case for ESM3 as a General-Purpose AI Model with Systemic Risk Under the EU AI Act",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "566d65e26030": {
+      "title": "From Packets to Patterns: Interpreting Encrypted Network Traffic as Longitudinal Behavioral Signals",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0f5642022c17": {
+      "title": "Prosa: Rubric-Based Evaluation of LLMs on Real User Chats in Brazilian Portuguese",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c349e99b4894": {
+      "title": "AI Alignment via Incentives and Correction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "cdacd8ece0a6": {
+      "title": "From Cortical Synchronous Rhythm to Brain Inspired Learning Mechanism: An Oscillatory Spiking Neural Network with Time-Delayed Coordination",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7e594402f52f": {
+      "title": "TRIMMER: A New Paradigm for Video Summarization through Self-Supervised Reinforcement Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bfc8d9451a52": {
+      "title": "IMPACT-HOI: Supervisory Control for Onset-Anchored Partial HOI Event Construction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0ae9f460c128": {
+      "title": "IMPACT-Scribe: Interactive Temporal Action Segmentation with Boundary Scribbles and Query Planning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b6951b5ad604": {
+      "title": "Missingness-aware Data Imputation via AI-powered Bayesian Generative Modeling",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3b569b1a1918": {
+      "title": "Class-Aware Adaptive Differential Privacy in Deep Learning for Sensor-Based Fall Detection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7d18fc2f7795": {
+      "title": "GRAVITY: Architecture-Agnostic Structured Anchoring for Long-Horizon Conversational Memory",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "03c47335df23": {
+      "title": "BIM Information Extraction Through LLM-based Adaptive Exploration",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "996cf5d8eb09": {
+      "title": "Probe-Geometry Alignment: Erasing the Cross-Sequence Memorization Signature Below Chance",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fa2bb8336306": {
+      "title": "SplitZip: Ultra Fast Lossless KV Compression for Disaggregated LLM Serving",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "45ed115f237c": {
+      "title": "TCDA: Thread-Constrained Discourse-Aware Modeling for Conversational Sentiment Quadruple Analysis",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "340351694155": {
+      "title": "SignVerse-2M: A Two-Million-Clip Pose-Native Universe of 25+ Sign Languages",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "badcf9fa0901": {
+      "title": "Motion-Aware Caching for Efficient Autoregressive Video Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4b7203f48664": {
+      "title": "FEDIN: Frequency-Enhanced Deep Interest Network for Click-Through Rate Prediction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1eed8fcac4a8": {
+      "title": "GEASS: Training-Free Caption Steering for Hallucination Mitigation in Vision-Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b48756e0ec45": {
+      "title": "Architectural Obsolescence of Unhardened Agentic-AI Runtimes",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "00235135a11a": {
+      "title": "Talk is Cheap, Communication is Hard: Dynamic Grounding Failures and Repair in Multi-Agent Negotiation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3dba5cbee2da": {
+      "title": "The Compliance Gap: Why AI Systems Promise to Follow Process Instructions but Don't",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c471d1e3c0b2": {
+      "title": "Data driven approach for Outdoor Channel Prediction in 5G and Beyond",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8ba9fde804d3": {
+      "title": "Khala: Scaling Acoustic Token Language Models Toward High-Fidelity Music Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "25f0fba7a3c5": {
+      "title": "Discover Fast Power Allocation Solution for Multi-Target Tracking via AlphaEvolve Evolution",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "185e90ba9f7c": {
+      "title": "TMD-Bench: A Multi-Level Evaluation Paradigm for Music-Dance Co-Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8d226f9e6e60": {
+      "title": "Federated Semi-Supervised Graph Neural Networks with Prototype-Guided Pseudo-Labeling for Privacy-Preserving Gestational Diabetes Mellitus Prediction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9dc6b467f2a5": {
+      "title": "Selector-Guided Autonomous Curriculum for One-Shot Reinforcement Learning from Verifiable Rewards",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "da59b25e444f": {
+      "title": "GeoSAE: Geometric Prior-Guided Layer-Wise Sparse Autoencoder Annotation of Brain MRI Foundation Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8239808ee39c": {
+      "title": "RMGAP: Benchmarking the Generalization of Reward Models across Diverse Preferences",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4ee21514e3ae": {
+      "title": "Remote Action Generation: Remote Control with Minimal Communication",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6b530149ec72": {
+      "title": "Repurposing and Evaluating the (In)Feasibility of Dataset Poisoning enabled Watermarking for Contrastive Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e4f937623443": {
+      "title": "Disentangled Anatomy-Disease Diffusion (DADD) for Controllable Ulcerative Colitis Progression Synthesis",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7ae51127b0b5": {
+      "title": "Spatiotemporal Hidden-State Dynamics as a Signature of Internal Reasoning in Large Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "68f9c8cea557": {
+      "title": "Quality-Aware Exploration Budget Allocation for Cooperative Multi-Agent Reinforcement Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a0a04052d9d7": {
+      "title": "ShiftLIF: Efficient Multi-Level Spiking Neurons with Power-of-Two Quantization",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "713836ed11e8": {
+      "title": "Leveraging Data Symmetries to Select an Optimal Subset of Training Data under Label Noise",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "aeb8c9d598d8": {
+      "title": "BadmintonGRF: A Multimodal Dataset and Benchmark for Markerless Ground Reaction Force Estimation in Badminton",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3f4ee5100f4f": {
+      "title": "Chart-FR1: Visual Focus-Driven Fine-Grained Reasoning on Dense Charts",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "004bb39181e6": {
+      "title": "AFFormer: Adaptive Feature Fusion Transformer for V2X Cooperative Perception under Channel Impairments",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5514cd075183": {
+      "title": "Behavior-Grounded Lane Representation Learning for Multi-Task Traffic Digital Twins",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "44bd72e25e88": {
+      "title": "Stochastic Sparse Attention for Memory-Bound Inference",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8dc18818e023": {
+      "title": "RefusalGuard: Geometry-Preserving Fine-Tuning for Safety in LLMs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "af21973382d2": {
+      "title": "PepSpecBench: A Unified Evaluation Benchmark for Peptide Tandem Mass Spectrometry Prediction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0ab6f5d5d949": {
+      "title": "Phone2Act: A Low-Cost, Hardware-Agnostic Teleoperation System for Scalable VLA Data Collection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "745639253364": {
+      "title": "TRAP: Tail-aware Ranking Attack for World-Model Planning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0b8ccfd452e9": {
+      "title": "Trojan Hippo: Weaponizing Agent Memory for Data Exfiltration",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b8ed7853643c": {
+      "title": "RamanBench: A Large-Scale Benchmark for Machine Learning on Raman Spectroscopy",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fec290b1e95f": {
+      "title": "Enhancing Judgment Document Generation via Agentic Legal Information Collection and Rubric-Guided Optimization",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bf2f59c81365": {
+      "title": "Conventional Commit Classification using Large Language Models and Prompt Engineering",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3af25ea2a00a": {
+      "title": "A Multimodal Dataset for Visually Grounded Ambiguity in Machine Translation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "01e819a0e689": {
+      "title": "VILAS: A VLA-Integrated Low-cost Architecture with Soft Grasping for Robotic Manipulation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ddbadcbc54fe": {
+      "title": "What Single-Prompt Accuracy Misses: A Multi-Variant Reliability Audit of Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7c41929e6d48": {
+      "title": "Optimization of CV-QKD Under Practical Constraints",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "73a4d4c39d8c": {
+      "title": "Principles and Guidelines for Randomized Controlled Trials in AI Evaluation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "199aa0e70afe": {
+      "title": "Coopetition-Gym v1: A Formally Grounded Platform for Mixed-Motive Multi-Agent Reinforcement Learning under Strategic Coopetition",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a14c03134755": {
+      "title": "Pair2Score: Pairwise-to-Absolute Transfer for LLM-Based Essay Scoring",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5fdd4688f367": {
+      "title": "Cripping AI: Reimagining AI Through Lived Disability Experiences",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "90ac84ca4f2b": {
+      "title": "EditPropBench: Measuring Factual Edit Propagation in Scientific Manuscripts",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a7f11a305617": {
+      "title": "GETA-3DGS: Automatic Joint Structured Pruning and Quantization for 3D Gaussian Splatting",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6f62ad5a197a": {
+      "title": "STABLEVAL: Disagreement-Aware and Stable Evaluation of AI Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "933c58add1db": {
+      "title": "Context-Aware Wireless Token Communication via Joint Token Masking and Detection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "eb9b1741a57d": {
+      "title": "Boundary Mass and the Soft-to-Hard Limit in Mixture-of-Experts",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "dbce63a65002": {
+      "title": "FLoRA: Fusion-Latent for Optical Reconstruction and Flood Area Segmentation via Cross-Modal Multi-Task Distillation Network",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "66d5c5b17304": {
+      "title": "On the Optimal Sample Complexity of Offline Multi-Armed Bandits with KL Regularization",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "31025959c587": {
+      "title": "Cross-Polarization Fusion of VV AND VH SAR Observations for Improved Flood Mapping",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "29a71ae14ff6": {
+      "title": "Combining Trained Models in Reinforcement Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e8cd11b13bac": {
+      "title": "DocSync: Agentic Documentation Maintenance via Critic-Guided Reflexion",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "94839afa951f": {
+      "title": "Manifold-Aligned Guided Integrated Gradients for Reliable Feature Attribution",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "15ce992a04d2": {
+      "title": "The Causal Description Gap: Information-Theoretic Separations Across Pearl's Hierarchy",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c43944ddd194": {
+      "title": "RAFNet: Region-Aware Fusion Network for Pansharpening",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d54756c9c925": {
+      "title": "When Alignment Isn't Enough: Response-Path Attacks on LLM Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "40ea49c781c5": {
+      "title": "Trees and Graphs with Non Log-concave Dominating Set Sequence via AI Tools",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "af7e46f83a67": {
+      "title": "MultiSense-Pneumo: A Multimodal Learning Framework for Pneumonia Screening in Resource-Constrained Settings",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "362e7e3ec0ec": {
+      "title": "The Conversations Beneath the Code: Triadic Data for Long-Horizon Software Engineering Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "356c44e8c66d": {
+      "title": "On the Privacy of LLMs: An Ablation Study",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "53d7ebb5b30c": {
+      "title": "Reliability-Oriented Multilingual Orthopedic Diagnosis: A Domain-Adaptive Modeling and a Conceptual Validation Framework",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2f791b4f42c1": {
+      "title": "EdgeLPR: On the Deep Neural Network trade-off between Precision and Performance in LiDAR Place Recognition",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "14c1158c94e9": {
+      "title": "HELIX: Hybrid Encoding with Learnable Identity and Cross-dimensional Synthesis for Time Series Imputation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d3d933a8753e": {
+      "title": "Rethinking Electro-Optical Vision Foundation Models for Remote Sensing Retrieval: A Controlled Comparison with Generalist VFM",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "871973b3f8c6": {
+      "title": "When Attention Collapses: Residual Evidence Modeling for Compositional Inference",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5526c6bb6924": {
+      "title": "LLM-enabled Social Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "557f69bc335a": {
+      "title": "APIOT: Autonomous Vulnerability Management Across Bare-Metal Industrial OT Networks",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7b89c91adaca": {
+      "title": "When Correct Isn't Usable: Improving Structured Output Reliability in Small Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "40b0da24349a": {
+      "title": "Privacy Preserving Machine Learning Workflow: from Anonymization to Personalized Differential Privacy Budgets in Federated Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "afb97d707a0c": {
+      "title": "Enhancing Multimodal In-Context Learning via Inductive-Deductive Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0c5248fe8c5f": {
+      "title": "Entanglement is Half the Story: Post-Selection vs. Partial Traces",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6575fac4c031": {
+      "title": "Is It Novel and Why? Fine-Grained Patent Novelty Prediction Based on Passage Retrieval",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5952fed0ea27": {
+      "title": "FEAT: Fashion Editing and Try-On from Any Design",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4eabd85f3f0a": {
+      "title": "Automatic Reflection Level Classification in Hungarian Student Essays",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "aae415120dec": {
+      "title": "PC-MNet: Dual-Level Congruity Modeling for Multimodal Sarcasm Detection via Polarity-Modulated Attention",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0e51d8fb8850": {
+      "title": "Causal Software Engineering: A Vision and Roadmap",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6e760ea051cd": {
+      "title": "LLM-Assisted Repository-Level Generation with Structured Spec-Driven Engineering",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "abda3af36e7a": {
+      "title": "When Stress Becomes Signal: Detecting Antifragility-Compatible Regimes in Multi-Agent LLM Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b35f77029190": {
+      "title": "Reference-Sampled Boltzmann Projection for KL-Regularized RLVR: Target-Matched Weighted SFT, Finite One-Shot Gaps, and Policy Mirror Descent",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6ff1a95467a5": {
+      "title": "From Experimental Limits to Physical Insight: A Retrieval-Augmented Multi-Agent Framework for Interpreting Searches Beyond the Standard Model",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1e14284f6319": {
+      "title": "Efficient Preference Poisoning Attack on Offline RLHF",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6c6ee48f066e": {
+      "title": "Pretraining on Sleep Data Improves non-Sleep Biosignal Tasks",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6d17654fc307": {
+      "title": "A Novel Preprocessing-Driven Approach to Remaining Useful Life (RUL) Prediction Using Temporal Convolutional Networks (TCN)",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1de47737cacd": {
+      "title": "Benchmarking Retrieval Strategies for Biomedical Retrieval-Augmented Generation: A Controlled Empirical Study",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "25114261c9d4": {
+      "title": "A Semantic Autonomy Framework for VLM-Integrated Indoor Mobile Robots: Hybrid Deterministic Reasoning and Cross-Robot Adaptive Memory",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0883529e15f1": {
+      "title": "Set-Based Training of Neural Barrier Certificates for Safety Verification of Dynamical Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "db14e590dced": {
+      "title": "Orchestrating Spatial Semantics via a Zone-Graph Paradigm for Intricate Indoor Scene Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1b1414dfc4e3": {
+      "title": "Recurrent Deep Reinforcement Learning for Chemotherapy Control under Partial Observability",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "63c33e133c8a": {
+      "title": "Hyp2Former: Hierarchy-Aware Hyperbolic Embeddings for Open-Set Panoptic Segmentation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "852b20996183": {
+      "title": "Beyond State Machines: Executing Network Procedures with Agentic Tool-Calling Sequences",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ff381f804a08": {
+      "title": "CoRAL: Contact-Rich Adaptive LLM-based Control for Robotic Manipulation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c5cb8aa9c3b7": {
+      "title": "Dependency Parsing Across the Resource Spectrum: Evaluating Architectures on High and Low-Resource Languages",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bfbe579aa077": {
+      "title": "Validation of an AI-based end-to-end model for prostate pathology using long-term archived routine samples",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a22c72bad075": {
+      "title": "ViewSAM: Learning View-aware Cross-modal Semantics for Weakly Supervised Cross-view Referring Multi-Object Tracking",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4bb9d01c9972": {
+      "title": "Fuzzy Fingerprinting Encoder Pre-trained Language Models for Emotion Recognition in Conversations: Human Assessment and Validity Study",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1a21da1352af": {
+      "title": "The Design and Composition of Structural Causal Decision Processes",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fea9fd3a535a": {
+      "title": "Caliper-in-the-Loop: Black-Box Optimization for Hyperledger Fabric Performance Tuning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a7a0e5e74e0a": {
+      "title": "mdok-style at SemEval-2026 Task 9: Finetuning LLMs for Multilingual Polarization Detection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "dde9da137a9a": {
+      "title": "Learning Equivariant Neural-Augmented Object Dynamics From Few Interactions",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b77ea9685395": {
+      "title": "ProPACT: A Proactive AI-Driven Adaptive Collaborative Tutor for Pair Programming",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bc890268126d": {
+      "title": "SAIL: Structure-Aware Interpretable Learning for Anatomy-Aligned Post-hoc Explanations in OCT",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "08674bba77b8": {
+      "title": "OphMAE: Bridging Volumetric and Planar Imaging with a Foundation Model for Adaptive Ophthalmological Diagnosis",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e2eab0f4898b": {
+      "title": "Perceptual Flow Network for Visually Grounded Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ec1623b95c8d": {
+      "title": "AI-Generated Smells: An Analysis of Code and Architecture in LLM and Agent-Driven Development",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9cfc6ef80bb0": {
+      "title": "Bolek: A Multimodal Language Model for Molecular Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "063e35f9fb2f": {
+      "title": "Virtual Scanning for NSCLC Histology: Investigating the Discriminatory Power of Synthetic PET",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "94dfd9521d0e": {
+      "title": "TOC-SR: Task-Optimal Compact diffusion for Image Super Resolution",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d259127b49fb": {
+      "title": "Decoupled Guidance Diffusion for Adaptive Offline Safe Reinforcement Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4977366aa778": {
+      "title": "Static Analysis of Recursive SHACL",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "468f4bd4c211": {
+      "title": "IConFace: Identity-Structure Asymmetric Conditioning for Unified Reference-Aware Face Restoration",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0bc9d1f5edc9": {
+      "title": "A second-order method landing on the Stiefel manifold via Newton$\\unicode{x2013}$Schulz iteration",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "559995293e4b": {
+      "title": "(POSTER) From Sensors to Insight: Rapid, Edge-to-Core Application Development for Sensor-Driven Applications",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "95f3ac9ce264": {
+      "title": "Enhancing RL Generalizability in Robotics through SHAP Analysis of Algorithms and Hyperparameters",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6154a55863ce": {
+      "title": "SpecKV: Adaptive Speculative Decoding with Compression-Aware Gamma Selection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9362343998f0": {
+      "title": "Logic-Constrained Shortest Paths for Flight Planning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "292fbc61d719": {
+      "title": "LLM-Powered AI Agent Systems and Their Applications in Industry",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c0e463b57cf7": {
+      "title": "MSEarth: A Multimodal Benchmark for Earth Science Phenomenon Discovery with MLLMs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "12c252438bbf": {
+      "title": "Machine Learning as Iterated Belief Change a la Darwiche and Pearl",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "63917e68b22b": {
+      "title": "NaviGNN: Multi-Agent Reinforcement Learning and Graph Neural Network for Sustainable Mobility in Futuristic Smart Cities",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "76e63a89c27b": {
+      "title": "SMoE: An Algorithm-System Co-Design for Pushing MoE to the Edge via Expert Substitution",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6d8154e3a97e": {
+      "title": "Reasoning Models Can be Accurately Pruned Via Chain-of-Thought Reconstruction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "82e70732f48a": {
+      "title": "EngiBench: A Benchmark for Evaluating Large Language Models on Engineering Problem Solving",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9bbe2c84c5a1": {
+      "title": "oMeBench: Towards Robust Benchmarking of LLMs in Organic Mechanism Elucidation and Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4597a21cbf89": {
+      "title": "$How^{2}$: How to learn from procedural How-to questions",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6ab01acb711f": {
+      "title": "Empowering LLM Agents with Geospatial Awareness: Toward Grounded Reasoning for Wildfire Response",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3121ee787a91": {
+      "title": "GOAT: A Training Framework for Goal-Oriented Agent with Tools",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9466cf9513bd": {
+      "title": "Epistemic Reject Option Prediction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "96b83979878b": {
+      "title": "Agentic Learner with Grow-and-Refine Multimodal Semantic Memory",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "567385d188d7": {
+      "title": "Beyond Isolated Investor: Predicting Startup Success via Roleplay-Based Collective Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b8eeb61dfc85": {
+      "title": "Can Semantic Methods Enhance Team Sports Tactics? A Methodology for Football with Broader Applications",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "38a6696e9d1e": {
+      "title": "SCALER:Synthetic Scalable Adaptive Learning Environment for Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "02380db438e1": {
+      "title": "The Homogenization Problem in LLMs: Towards Meaningful Diversity in AI Safety",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3938aae44837": {
+      "title": "Beyond Sentiment: A Multi-Agent Pipeline for Actionable Business Advice from Reviews",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "901a7276849b": {
+      "title": "MemeLens: Multilingual Multitask VLMs for Memes",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9c78b43dffaa": {
+      "title": "Learning Decentralized LLM Collaboration with Multi-Agent Actor Critic",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2053df0b55b0": {
+      "title": "Resource-Efficient Reinforcement for Reasoning Large Language Models via Dynamic One-Shot Policy Refinement",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "93168b3c3efc": {
+      "title": "MINT: Minimal Information Neuro-Symbolic Tree for Objective-Driven Knowledge-Gap Reasoning and Active Elicitation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "111a23ad709a": {
+      "title": "AgentXRay: White-Boxing Agentic Systems via Workflow Reconstruction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5c5168b93b65": {
+      "title": "Is there \"Secret Sauce'' in Large Language Model Development?",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "778fe08832be": {
+      "title": "ABD: Default Exception Abduction in Finite First Order Worlds",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2bcd2b5367f4": {
+      "title": "VeRO: An Evaluation Harness for Agents to Optimize Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "722aa0e6bd9c": {
+      "title": "Agentic Multi-Source Grounding for Enhanced Query Intent Understanding: A DoorDash Case Study",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b9e7b9c31770": {
+      "title": "Beyond Scalars: Evaluating and Understanding LLM Reasoning via Geometric Progress and Stability",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "75f07a738f00": {
+      "title": "The Norm-Separation Delay Law of Grokking: A First-Principles Theory of Delayed Generalization",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1c7b60c04e38": {
+      "title": "Argumentation for Explainable and Globally Contestable Decision Support with LLMs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8722110342c7": {
+      "title": "Towards Safer Large Reasoning Models by Promoting Safety Decision-Making before Chain-of-Thought Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "812c1d9c2279": {
+      "title": "SpecTM: Spectral Targeted Masking for Trustworthy Foundation Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "39815bbd02c8": {
+      "title": "WMF-AM: Probing LLM Working Memory via Depth-Parameterized Cumulative State Tracking",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "20cdb76b08c1": {
+      "title": "Working Paper: Towards a Category-theoretic Comparative Framework for Artificial General Intelligence",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "52beb86ef855": {
+      "title": "A Rational Account of Categorization Based on Information Theory",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9ca6b6b28133": {
+      "title": "ScoringBench: A Benchmark for Evaluating Tabular Foundation Models with Proper Scoring Rules",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "beb27383fecc": {
+      "title": "Ontology-Constrained Neural Reasoning in Enterprise Agentic Systems: A Neurosymbolic Architecture for Domain-Grounded AI Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "27a333f0b547": {
+      "title": "InsTraj: Instructing Diffusion Models with Travel Intentions to Generate Real-world Trajectories",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "df081cce490c": {
+      "title": "MedGemma 1.5 Technical Report",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "89148996505d": {
+      "title": "Claw-Eval: Towards Trustworthy Evaluation of Autonomous Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "81591e35f461": {
+      "title": "U-CECE: A Universal Multi-Resolution Framework for Conceptual Counterfactual Explanations",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2ad65b9f5911": {
+      "title": "Intersectional Sycophancy: How Perceived User Demographics Shape False Validation in Large Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "56058998771e": {
+      "title": "GFT: From Imitation to Reward Fine-Tuning with Unbiased Group Advantages and Dynamic Coefficient Rectification",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "82aae8b9c3bb": {
+      "title": "GDPR Auto-Formalization with AI Agents and Human Verification",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8ca369925ada": {
+      "title": "From Reactive to Proactive: Assessing the Proactivity of Voice Agents via ProVoice-Bench",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5cf287f2dd32": {
+      "title": "Harness as an Asset: Enforcing Determinism via the Convergent AI Agent Framework (CAAF)",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "553329cc8639": {
+      "title": "Poly-EPO: Training Exploratory Reasoning Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "76760d3d2378": {
+      "title": "Using large language models for embodied planning introduces systematic safety risks",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2a3fa22bd31a": {
+      "title": "Agentic Forecasting using Sequential Bayesian Updating of Linguistic Beliefs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3d577d6b1209": {
+      "title": "The Last Harness You'll Ever Build",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "af362a60bb79": {
+      "title": "AI-Gram: When Visual Agents Interact in a Social Network",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fa35c701c6cb": {
+      "title": "ZenBrain: A Neuroscience-Inspired 7-Layer Memory Architecture for Autonomous AI Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b78b3575d728": {
+      "title": "ValueBlindBench: Agreement-Gated Stress Testing of LLM-Judged Investment Rationales Before Returns Are Observable",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "21eadacdd14b": {
+      "title": "From Context to Skills: Can Language Models Learn from Context Skillfully?",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "99ee0dc9c788": {
+      "title": "Self-Supervised Learning for Multimodal Non-Rigid 3D Shape Matching",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a30b39f33cc7": {
+      "title": "Unsupervised Learning of Robust Spectral Shape Matching",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "49441ead8ca5": {
+      "title": "Pruning Federated Models through Loss Landscape Analysis and Client Agreement Scoring",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0e3412c78f59": {
+      "title": "Towards Agentic Runtime Healing",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "087cf8558bca": {
+      "title": "Partial-differential-algebraic equations of nonlinear dynamics by Physics-Informed Neural-Network: (I) Operator splitting and framework assessment",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "48f283ae01d5": {
+      "title": "GraphLand: Evaluating Graph Machine Learning Models on Diverse Industrial Data",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d54dab6ddf41": {
+      "title": "Edge Case Detection in Automated Driving: Methods, Challenges and Future Directions",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2a39bd4b7dc0": {
+      "title": "Low-Latency Video Anonymization for Crowd Anomaly Detection: Privacy Versus Performance",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "adff3c220ef1": {
+      "title": "The Pragmatic Frames of Spurious Correlations in Machine Learning: Interpreting How and Why They Matter",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "43c9252ebf3f": {
+      "title": "IPS: In-Prompt Process Supervision for Short Video Content Moderation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "22c43ef35f83": {
+      "title": "Multiple Choice Questions: Reasoning Makes Large Language Models (LLMs) More Self-Confident, Especially When They are Wrong",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "080890afdbaa": {
+      "title": "YOLOv8 to YOLO11: A Comprehensive Architecture In-depth Comparative Review",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2cc1f03468c6": {
+      "title": "Efficient Reasoning with Hidden Thinking",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d82fff557dcd": {
+      "title": "Large Language Models for Multi-Robot Systems: A Survey",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bcc01d858cf1": {
+      "title": "MusicInfuser: Making Video Diffusion Listen and Dance",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0240ccbd44e5": {
+      "title": "DIPLI: Deep Image Prior Lucky Imaging for Blind Astronomical Image Restoration",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1b46d1344b84": {
+      "title": "Breaking the Silence: A Dataset and Benchmark for Bangla Text-to-Gloss Translation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "328326ac8daf": {
+      "title": "Hallucination Detection in LLMs with Topological Divergence on Attention Graphs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5e55b204d9f1": {
+      "title": "StereoMamba: Real-time and Robust Intraoperative Stereo Disparity Estimation via Long-range Spatial Dependencies",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8ffe4efdde03": {
+      "title": "MINT: Multi-Vector Search Index Tuning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2665a6e384d4": {
+      "title": "TF1-EN-3M: Three Million Synthetic Moral Fables for Training Small, Open Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d8aba6d532af": {
+      "title": "Environment-Aware Indoor LoRaWAN Ranging Using Path Loss Model Inversion and Adaptive RSSI Filtering",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7240e582d3b0": {
+      "title": "Adaptive GoGI-Skip: Coupling Goal-Gradient Importance with Dynamic Uncertainty for Efficient Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "75ee51d12402": {
+      "title": "Contrastive Residual Energy Test-time Adaptation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "50d00623a4e9": {
+      "title": "Latent Trajectory Dynamics in Large Language Models: A Manifold Evolution Framework with Empirical Validation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "837780b07a66": {
+      "title": "Music Interpretation and Emotion Perception: A Computational and Neurophysiological Investigation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ba7fc0013029": {
+      "title": "MOGO: Residual Quantized Hierarchical Causal Transformer for High-Quality and Real-Time 3D Human Motion Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3babcb3b4cfe": {
+      "title": "Hey, That's My Data! Token-Only Dataset Inference in Large Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7ddb373ee6b4": {
+      "title": "AVA-Bench: Atomic Visual Ability Benchmark for Vision Foundation Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5fabd2ad0bfd": {
+      "title": "Attribution-Guided Pruning for Insight and Control: Circuit Discovery and Targeted Correction in Small-scale LLMs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7d1f726aa474": {
+      "title": "A Category-Theoretic Analysis of Conformal Prediction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "32f99b5b3c9b": {
+      "title": "Time-series forecasting through the lens of dynamics",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d4340915b211": {
+      "title": "Page image classification for content-specific data processing",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "611c0cc0dd51": {
+      "title": "Green Energy Management for Sustainable Data Centers Using Deep Reinforcement Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "402b888e0c0b": {
+      "title": "Multi-modal Relational Item Representation Learning for Inferring Substitutable and Complementary Items",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f8d94065a6bb": {
+      "title": "Causal2Vec: Improving Decoder-only LLMs as Embedding Models through a Contextual Token",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ef21120e6abc": {
+      "title": "Multi-Objective Instruction-Aware Representation Learning in Procedural Content Generation RL",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bf0a9e60e96b": {
+      "title": "Decentralized Rank Scheduling for Energy-Constrained Multi-Task Federated Fine-Tuning in Edge-Assisted IoV Networks",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c14aef2466c4": {
+      "title": "CorrSteer: Generation-Time LLM Steering via Correlated Sparse Autoencoder Features",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1bedfbea75d4": {
+      "title": "SurGE: A Benchmark and Evaluation Framework for Scientific Survey Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "25683cb05280": {
+      "title": "Generative Interfaces for Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a19eeb3b29e2": {
+      "title": "Confident, Calibrated, or Complicit: Safety Alignment and Ideological Bias in LLM Hate Speech Detection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5eaf553545e8": {
+      "title": "Improving Factuality in LLMs via Inference-Time Knowledge Graph Construction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b398c74b4ae7": {
+      "title": "COCORELI: Enforcing Execution Preconditions for Reliable Collaborative Instruction Following",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "79551e1edcda": {
+      "title": "ALIGNS: Unlocking nomological networks in psychological measurement through a large language model",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "eeb26eff201f": {
+      "title": "Learning Decomposed Contextual Token Representations from Pretrained and Collaborative Signals for Generative Recommendation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3fbd90e68a51": {
+      "title": "The Coding Limits of Robust Watermarking for Generative Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "36823e75ce26": {
+      "title": "Less Precise Can Be More Reliable: A Systematic Evaluation of Quantization's Impact on VLMs Beyond Accuracy",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e9e5601ff6ae": {
+      "title": "CoSpaDi: Compressing LLMs via Calibration-Guided Sparse Dictionary Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4016f8a79bbf": {
+      "title": "Short window attention enables long-term memorization",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "30bcd9404492": {
+      "title": "The Good, the Bad, and the Sampled: a No-Regret Approach to Safe Online Classification",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "119e3600d837": {
+      "title": "Ergodic Risk Measures: Towards a Risk-Aware Foundation for Continual Reinforcement Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c8b6f0c4b7d0": {
+      "title": "Turning Drift into Constraint: Robust Reasoning Alignment in Non-Stationary Environments",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9f413f79ffeb": {
+      "title": "TokenChain: A Discrete Speech Chain via Semantic Token Modeling",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e441e6469a56": {
+      "title": "BaldWhisper: Faster Whisper with Head Shearing and Layer Merging",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bb3076b8b43c": {
+      "title": "CleverCatch: A Knowledge-Guided Weak Supervision Model for Fraud Detection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "31798c7e974d": {
+      "title": "Scaling Vision Transformers for Functional MRI with Flat Maps",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fb99b9c5e4d5": {
+      "title": "TokenTiming: A Dynamic Alignment Method for Universal Speculative Decoding Model Pairs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1f2364467c90": {
+      "title": "Reinforcement Learning from Compiler and Language Server Feedback",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "7cfa5a95780a": {
+      "title": "Noise is All You Need: Solving Linear Inverse Problems by Noise Combination Sampling with Diffusion Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8a2d85f22ff8": {
+      "title": "Implicature in Interaction: Understanding Implicature Improves Alignment in Human-LLM Interaction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3b1a6380f28a": {
+      "title": "TetraJet-v2: Accurate NVFP4 Training for Large Language Models with Oscillation Suppression and Outlier Control",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0f6e62329427": {
+      "title": "HiFiNet: Hierarchical Fault Identification in Wireless Sensor Networks via Edge-Based Classification and Graph Aggregation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8684184106b3": {
+      "title": "Re-Key-Free, Risky-Free: Adaptable Model Usage Control",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9f685d4dd098": {
+      "title": "Pistachio: Towards Synthetic, Balanced, and Long-Form Video Anomaly Benchmarks",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e0b602457ea2": {
+      "title": "Intelligent Agents with Emotional Intelligence: Current Trends, Challenges, and Future Prospects",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9cb0fb834d3f": {
+      "title": "Aligning LLMs with Biomedical Knowledge using Balanced Fine-Tuning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "148e86d95286": {
+      "title": "Probabilistic Modeling of Multi-rater Medical Image Segmentation for Diversity and Personalization",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e9e6544804f8": {
+      "title": "2D-ThermAl: Physics-Informed Framework for Thermal Analysis of Circuits using Generative AI",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "dccd92ba5745": {
+      "title": "jina-vlm: Small Multilingual Vision Language Model",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a44007c14a2a": {
+      "title": "InfiniteDiffusion: Bridging Learned Fidelity and Procedural Utility for Open-World Terrain Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "616206dd6351": {
+      "title": "Consist-Retinex: One-Step Noise-Emphasized Consistency Training Accelerates High-Quality Retinex Enhancement",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d43c4c1284e0": {
+      "title": "A Neuro-Symbolic Framework for Accountability in Public-Sector AI",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9135d54a7295": {
+      "title": "How Prompts Move Language Model Behavior: Frames, Salience, and Construal as Semantic Control",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "25e235e17294": {
+      "title": "Disentangling Fact from Sentiment: A Dynamic Conflict-Consensus Framework for Multimodal Fake News Detection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f4edf319dbf3": {
+      "title": "InstructMoLE: Instruction-Guided Mixture of Low-rank Experts for Multi-Conditional Image Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6ee83922bd73": {
+      "title": "LVLM-Aided Alignment of Task-Specific Vision Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0e1bab4c414a": {
+      "title": "The Multi-View Paradigm Shift in MRI Radiomics: Predicting MGMT Methylation in Glioblastoma",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "65c05d053929": {
+      "title": "LinMU: Multimodal Understanding Made Linear",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6cacfbe3ccf9": {
+      "title": "OpenAI GPT-5 System Card",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "41d3cbd7ba19": {
+      "title": "From Laboratory to Real-World Applications: Benchmarking Agentic Code Reasoning at the Repository Level",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bbf2ad94360f": {
+      "title": "False Friends in the Shell: Unveiling the Emoticon Semantic Confusion in Large Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "726cad3e0d83": {
+      "title": "STAGE: A Full-Screenplay Benchmark for Reasoning over Evolving Storie",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4faf1a0e2ba1": {
+      "title": "Can LLMs Compress (and Decompress)? Evaluating Code Understanding and Execution via Invertibility",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "79d8b80c521a": {
+      "title": "DuFal: Dual-Frequency-Aware Learning for High-Fidelity Extremely Sparse-view CBCT Reconstruction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5c7de310050c": {
+      "title": "Can professional translators identify machine-generated text?",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1fbc455d080b": {
+      "title": "MV-S2V: Multi-View Subject-Consistent Video Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "18ec5681447d": {
+      "title": "Attention-Based Neural-Augmented Kalman Filter for Legged Robot State Estimation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "91fb66a2ec43": {
+      "title": "LLM-VA: Resolving the Jailbreak-Overrefusal Trade-off via Vector Alignment",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "95f2a8d5687e": {
+      "title": "When Iterative RAG Beats Ideal Evidence: A Diagnostic Study in Scientific Multi-hop Question Answering",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "39274d631be9": {
+      "title": "Cross-Session Decoding of Neural Spiking Data via Task-Conditioned Latent Alignment",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "3c920c53edf5": {
+      "title": "VERGE: Formal Refinement and Guidance Engine for Verifiable LLM Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4c4e3b045e6b": {
+      "title": "CoFrGeNet: Continued Fraction Architectures for Language Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "31bfe0c29fb5": {
+      "title": "Gated Relational Alignment via Confidence-based Distillation for Efficient VLMs",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "34470dfb0da1": {
+      "title": "VideoGPA: Distilling Geometry Priors for 3D-Consistent Video Generation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6d585e6d007a": {
+      "title": "MCP-Atlas: A Large-Scale Benchmark for Tool-Use Competency with Real MCP Servers",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c01a39086eaf": {
+      "title": "aerial-autonomy-stack -- a Faster-than-real-time, Autopilot-agnostic, ROS2 Framework to Simulate and Deploy Perception-based Drones",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1962175093fd": {
+      "title": "STEP: Warm-Started Visuomotor Policies with Spatiotemporal Consistency Prediction",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d6c972050e6c": {
+      "title": "Capture Timing-Attention of Events in Clinical Time Series",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "123a986c754c": {
+      "title": "Control Reinforcement Learning: Interpretable Token-Level Steering of LLMs via Sparse Autoencoder Features",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e55a02998fd2": {
+      "title": "From SFT to RL: Demystifying the Post-Training Pipeline for LLM-based Vulnerability Detection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a5b0ad92fdfa": {
+      "title": "CrispEdit: Low-Curvature Projections for Scalable Non-Destructive LLM Editing",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "d1d167495ea0": {
+      "title": "HistCAD: A Constraint-Aware Parametric History-Based CAD Representation, Dataset, and Benchmark with Industrial Complexity",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9842fba1dcc8": {
+      "title": "VAUQ: Vision-Aware Uncertainty Quantification for LVLM Self-Evaluation",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ff9446bb1c1b": {
+      "title": "LittleBit-2: Maximizing the Spectral Energy Gain in Sub-1-Bit LLMs via Latent Geometry Alignment",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "bb8959f2c0e1": {
+      "title": "ContextCov: Deriving and Enforcing Executable Constraints from Agent Instruction Files",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "21c4ad94755b": {
+      "title": "Recurrent Graph Neural Networks and Arithmetic Circuits",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e99f196ac7ab": {
+      "title": "The Geometric Inductive Bias of Grokking: Bypassing Phase Transitions via Architectural Topology",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "dfb04a1a3e15": {
+      "title": "Grounding Synthetic Data Generation With Vision and Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b3821e0e2050": {
+      "title": "FastDSAC: Unlocking the Potential of Maximum Entropy RL in High-Dimensional Humanoid Control",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c8bea3fe0ceb": {
+      "title": "Visualizing Critic Match Loss Landscapes for Interpretation of Online Reinforcement Learning Control Algorithms",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "435c4673b7e0": {
+      "title": "DeepStage: Learning Autonomous Defense Policies Against Multi-Stage APT Campaigns",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "605899ce70d5": {
+      "title": "A Synthesizable RTL Implementation of Predictive Coding Networks",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "ee4964f73029": {
+      "title": "Retrieval-Augmented LLMs for Security Incident Analysis",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c70e88c578b1": {
+      "title": "Design-OS: A Specification-Driven Framework for Engineering System Design with a Control-Systems Design Case",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "296e2e782bca": {
+      "title": "PiCSRL: Physics-Informed Contextual Spectral Reinforcement Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "41753e9667b1": {
+      "title": "GISclaw: A Comprehensive Open-Source LLM Agent System for Realistic Multi-Step Geospatial Analysis",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f3798b6d1350": {
+      "title": "Omni-NegCLIP: Enhancing CLIP with Front-Layer Contrastive Fine-Tuning for Comprehensive Negation Understanding",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2aaaa721ab4d": {
+      "title": "Explainable AI for Blind and Low-Vision Users: Navigating Trust, Modality, and Interpretability in the Agentic Era",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "910b5fa3b761": {
+      "title": "Gradient Boosting within a Single Attention Layer",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "115affec3cab": {
+      "title": "Can LLMs Reason About Attention? Towards Zero-Shot Analysis of Multimodal Classroom Behavior",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "57393bf5adde": {
+      "title": "Delayed homomorphic reinforcement learning for environments with delayed feedback",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "f3b537254492": {
+      "title": "How Reasoning Evolves from Post-Training Data: An Empirical Study Using Chess",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4906eee10fe3": {
+      "title": "Social Dynamics as Critical Vulnerabilities that Undermine Objective Decision-Making in LLM Collectives",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6b01a7370816": {
+      "title": "The Master Key Hypothesis: Unlocking Cross-Model Capability Transfer via Linear Subspace Alignment",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a9c2a98f0ff7": {
+      "title": "Adaptive Differential Privacy for Federated Medical Image Segmentation Across Diverse Modalities",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0fc2f5a2eb36": {
+      "title": "URMF: Uncertainty-aware Robust Multimodal Fusion for Multimodal Sarcasm Detection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "2ebf75b9090e": {
+      "title": "PS-TTS: Phonetic Synchronization in Text-to-Speech for Achieving Natural Automated Dubbing",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "4f077d1d2a3c": {
+      "title": "COREY: Entropy-Guided Runtime Chunk Scheduling for Selective Scan Kernels",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "de4a8c49df15": {
+      "title": "Schema-Adaptive Tabular Representation Learning with LLMs for Generalizable Multimodal Clinical Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "9a24fc83ce7e": {
+      "title": "Beyond Static Sandboxing: Learned Capability Governance for Autonomous AI Agents",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "c611cef1d8d8": {
+      "title": "Alignment midtraining for animals",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "5a99f5469789": {
+      "title": "Explainable Fall Detection for Elderly Monitoring via Temporally Stable SHAP in Skeleton-Based Human Activity Recognition",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "317b5db79583": {
+      "title": "ASTER: Latent Pseudo-Anomaly Generation for Unsupervised Time-Series Anomaly Detection",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "829062baa2c8": {
+      "title": "Magnitude Is All You Need? Rethinking Phase in Quantum Encoding of Complex SAR Data",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b5f37ba92dec": {
+      "title": "MambaSL: Exploring Single-Layer Mamba for Time Series Classification",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "590f1439aff3": {
+      "title": "VoodooNet: Achieving Analytic Ground States via High-Dimensional Random Projections",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "81506cb5d8c1": {
+      "title": "Improving LLM Code Reasoning via Semantic Equivalence Self-Play with Formal Verification",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "1a9981162359": {
+      "title": "NeuroAI and Beyond: Bridging Between Advances in Neuroscience and ArtificialIntelligence",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "778de98ddfd1": {
+      "title": "IndiaFinBench: An Evaluation Benchmark for Large Language Model Performance on Indian Financial Regulatory Text",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "636bd828c868": {
+      "title": "Lyapunov-Certified Direct Switching Theory for Q-Learning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "df2d22c4eef5": {
+      "title": "Can LLMs Infer Conversational Agent Users' Personality Traits from Chat History?",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "b17d6060aee7": {
+      "title": "Using ASP(Q) to Handle Inconsistent Prioritized Data",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "690cff703d38": {
+      "title": "Universal Transformers Need Memory: Depth-State Trade-offs in Adaptive Recursive Reasoning",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "40d0947e2ea2": {
+      "title": "MetaErr: Towards Predicting Error Patterns in Deep Neural Networks",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6a4e74cda4c1": {
+      "title": "Partition-of-Unity Gaussian Kolmogorov-Arnold Networks",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "a41462a77c37": {
+      "title": "Constraint-Guided Multi-Agent Decompilation for Executable Binary Recovery",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "6dfdf29c99ba": {
+      "title": "From Skill Text to Skill Structure: The Scheduling-Structural-Logical Representation for Agent Skills",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0ca552120e7c": {
+      "title": "G-Loss: Graph-Guided Fine-Tuning of Language Models",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "e7e5a1464cda": {
+      "title": "Structural Generalization on SLOG without Hand-Written Rules",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "60735053b8a7": {
+      "title": "What Suppresses Nash Equilibrium Play in Large Language Models? Mechanistic Evidence and Causal Control",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "8048b67e95f1": {
+      "title": "From Prompt to Physical Actuation: Holistic Threat Modeling of LLM-Enabled Robotic Systems",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "18c43bab0027": {
+      "title": "Why Self-Supervised Encoders Want to Be Normal",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "42d3cb3952a8": {
+      "title": "CastFlow: Learning Role-Specialized Agentic Workflows for Time Series Forecasting",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "fcf82da38159": {
+      "title": "Can AI Be a Good Peer Reviewer? A Survey of Peer Review Process, Evaluation, and the Future",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "223d7ec3d8b0": {
+      "title": "Attractor FCM",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "0594a39d0653": {
+      "title": "Beyond SFT-to-RL: Pre-alignment via Black-Box On-Policy Distillation for Multimodal RL",
+      "source": "arXiv AI",
+      "topic": "ai-agent",
+      "date": "2026-05-06"
+    },
+    "94072338cf55": {
+      "title": "一家AI原生健康硬件公司完成近亿元融资，韶音、甘洁出手，高秉强投过｜硬氪首发",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "881da759af04": {
+      "title": "8点1氪丨豆包新增付费订阅；抖音集团副总裁回应红果短剧付费；苹果因Siri人工智能功能推迟发布，以2.5亿美元和解诉讼",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "acedb461ef58": {
+      "title": "小米成立科技新公司，含电池制造业务",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "9570ba19cc1b": {
+      "title": "沪深两市成交额超1万亿元",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "6a15249202e0": {
+      "title": "五一档票房7.58亿元",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "f69d5f9faedb": {
+      "title": "Yusheng Holdings Limited向港交所提交上市申请书",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "4bc1bbcea08d": {
+      "title": "科创50指数涨超7%",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "ec7193de7126": {
+      "title": "中国4月RatingDog服务业PMI 52.6",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "1882694f9021": {
+      "title": "海光信息涨超18%续创历史新高，总市值突破8000亿",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "1dc012f880d0": {
+      "title": "“北赛泓升”完成A+轮融资",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "fc7fbc9be243": {
+      "title": "A股三大指数集体高开，五粮液跌超6%",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "fe7a752749e3": {
+      "title": "恒指开盘涨0.51%，恒生科技指数涨0.85%",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "9d8f48f57e9c": {
+      "title": "5月6日人民币对美元中间价调升66个基点",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "7fc286a23115": {
+      "title": "小米汽车：新一代SU7上市仅48天，锁单已超过80000台",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "00a07332edb7": {
+      "title": "Rivian称投入数亿美元自研芯片",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "18fec47a2ddb": {
+      "title": "现货白银日内涨幅扩大至2%",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "1ac5dead639f": {
+      "title": "港股通标的证券名单调入可孚医疗、经纬天地（新）",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "88f32396e1d5": {
+      "title": "两市融资余额减少167.42亿元",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "6d79bffbe1c4": {
+      "title": "中信证券：一季度电子行业基金配置略有回落，超配比例仍处历史高位",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "4bf2995d98f8": {
+      "title": "韩元兑美元升值突破1460关口，创4月17日以来最强水平",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "8727e944fe13": {
+      "title": "4月调研超过5000次，私募进攻瞄准绩优科技股",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "1edadc5d79a6": {
+      "title": "KKR称私募市场困境被夸大",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "ced030e51f93": {
+      "title": "从唤醒到陪伴：多模态 Agent 如何重构手机交互范式｜AICon上海",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "ee681e197d4f": {
+      "title": "豆包也要「付费订阅」了，最高500元/月；宇树机器人在美买票坐飞机，电池被没收；「AI 面试」火爆，但 40% 求职者放弃面试｜极客早知道",
+      "source": "极客公园",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "8dfae29bb082": {
+      "title": "刚刚，ChatGPT免费模型升级了：幻觉砍半/记忆更强/回答更简洁",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "2e579d63d85d": {
+      "title": "派早报：一加、realme 合并，M4 Mac mini 256GB 版本下架等",
+      "source": "少数派",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "7e3058ed3ae2": {
+      "title": "Let's not fool ourselves about AI taking jobs. It's humans, laying humans off",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "02f8c18c276b": {
+      "title": "Ask HN: Is there a term for feeling sad about forced AI adoption?",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "f2d098f50077": {
+      "title": "Richard Dawkins concludes AI is conscious, even if it doesn't know it",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "1d582725790a": {
+      "title": "Trump's AI Oversight Plan Is Everything VCs Claimed to Hate About Biden's Plan",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "c81bbbf24096": {
+      "title": "China Opens Rocket Launches to International Satellites",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "c90bfa6262f9": {
+      "title": "Fiddler sues Google after AI Overview wrongly claimed he was a sex offender",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "7c7a9cfff7ef": {
+      "title": "Why AI Agents Need Proof Chains, Not Just Logs",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "f6bb3094d7c6": {
+      "title": "What do we lose when AI does our work?",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-06"
+    },
+    "6d6fa37b55d2": {
+      "title": "NPR finds \"no sign\" of Polymarket at its Panama HQ address",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "571538eebfae": {
+      "title": "Write some software, give it away for free",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "3e5f0a504cca": {
+      "title": "Why most product tours get skipped",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "8bef14aaa380": {
+      "title": ".de TLD offline due to DNSSEC?",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "e308e3304976": {
+      "title": "California farmers to destroy 420k peach trees following Del Monte bankruptcy",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "18f2de7ebbeb": {
+      "title": "Show HN: Explore color palettes inspired by 3000 master painter artworks",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "dacf70831898": {
+      "title": "Zuckerberg 'Personally Authorized and Encouraged' Meta's Copyright Infringement",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "83ad0ad3e1b0": {
+      "title": "GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "9c6beb57d41e": {
+      "title": "IBM didn't want Microsoft to use the Tab key to move between dialog fields",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "bf6f053bb470": {
+      "title": "Proliferate (YC S25) Is Hiring- 200k for junior engineers",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "b2e0d6576ecf": {
+      "title": "Computer Use is 45x more expensive than structured APIs",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "d5ba33cbb98e": {
+      "title": "Accelerating Gemma 4: faster inference with multi-token prediction drafters",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "69becd8d6ba7": {
+      "title": "I'm scared about biological computing",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "59f8bce6bb79": {
+      "title": "EEVblog: The 555 Timer is 55 years old [video]",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "7fc0b4b6edaa": {
+      "title": "iOS 27 is adding a 'Create a Pass' button to Apple Wallet",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "649cf82cebd1": {
+      "title": "Today I've made the difficult decision to reduce the size of Coinbase by ~14%",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "73197b3defee": {
+      "title": "Nuro receives driverless testing permit ahead of Uber robotaxi service launch",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "412ad8a3329d": {
+      "title": "SAP bets $1.16B on 18-month-old German AI lab and says yes to NemoClaw",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "ccad34eff718": {
+      "title": "Bumble’s paying users are slipping as it bets on an overhaul later this year",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "adb40e368632": {
+      "title": "Altara secures $7M to bridge the data gap that’s slowing down physical sciences",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "3b8afce191b6": {
+      "title": "Lucid Motors doesn’t know how many EVs it will build this year",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "637586fd4c54": {
+      "title": "As crypto cools, a16z crypto raises a $2.2B fund",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "d9d36c1ef849": {
+      "title": "Apple plans to make iOS 27 a Choose Your Own Adventure of AI models",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "d15cde9337a4": {
+      "title": "ASML CEO Christophe Fouquet on his company’s monopoly: no one is coming for us",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "0cae9f7cfece": {
+      "title": "Volkswagen becomes Rivian’s top shareholder, displacing Amazon",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "ee79fd973e04": {
+      "title": "Threads finally brings messaging to the web",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "be5c1b2d92a1": {
+      "title": "Airbnb co-founder taps Peter Arnell as first US chief brand architect",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "7e9641e74763": {
+      "title": "Pennsylvania sues Character.AI after a chatbot allegedly posed as a doctor",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "f2ffd9ae2c29": {
+      "title": "OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "8c525cdd8fbf": {
+      "title": "PayPal says it’s ‘becoming a technology company again’ — that means AI",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "50fa2a67f866": {
+      "title": "Etsy launches its app within ChatGPT as it continues its AI push",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "6551e2023f2f": {
+      "title": "Kaspersky suspects Chinese hackers planted a backdoor into Daemon Tools in ‘widespread’ attack",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "ffdf12d5b094": {
+      "title": "Hackers steal students’ data during breach at education tech giant Instructure",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "600ab37c0af8": {
+      "title": "Meta will use AI to analyze height and bone structure to identify if users are underage",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "1dd904ae7ba5": {
+      "title": "ElevenLabs lists BlackRock, Jamie Foxx, and Eva Longoria as new investors",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "74750394a637": {
+      "title": "CopilotKit raises $27M to help devs deploy app-native AI agents",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "2c86cbbc5016": {
+      "title": "Google Home&#8217;s Gemini AI can handle more complicated requests",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "6b299ce73670": {
+      "title": "Apple agrees to pay iPhone owners $250 million for not delivering AI Siri",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "8738ef1c33b5": {
+      "title": "Microsoft gives up on Xbox Copilot AI",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "9f3a2c3aa6fa": {
+      "title": "Apple could let you pick a favorite AI model in iOS 27",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "42a5e8791279": {
+      "title": "Threads is finally getting DMs on the web",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "c7793318ff27": {
+      "title": "OpenAI claims ChatGPT’s new default model hallucinates way less",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "114c4e61cd5a": {
+      "title": "Book publishers sue Meta over AI&#8217;s &#8216;word-for-word&#8217; copying",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "4d016a05f7b9": {
+      "title": "Microsoft’s new Xbox shake-up is all about platform changes",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "e89243201d09": {
+      "title": "From Alan Shepard to Artemis, celebrating 65 years of Americans in space",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "e54a6e4f733e": {
+      "title": "OpenAI president forced to read his personal diary entries to jury",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "0b35f38ccc2b": {
+      "title": "Silicon Valley bets $200M on AI data centers floating in the ocean",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "fde22b2b7d15": {
+      "title": "Character.AI sued over chatbot that claims to be a real doctor with a license",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "b9dc4e2fd76e": {
+      "title": "Widely used Daemon Tools disk app backdoored in monthlong supply-chain attack",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "57cb0d6db0c6": {
+      "title": "RFK Jr. plans to curb antidepressants, which he falsely compares to heroin",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "06d0831dd179": {
+      "title": "Google Home gets upgraded Gemini voice assistant and new camera controls",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "0b281c5e11b5": {
+      "title": "Trump SEC lets Musk settle $150 million Twitter lawsuit for $1.5 million",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "01d38a9acea3": {
+      "title": "How do you design a $30,000 electric pickup? Inside Ford's skunkworks.",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "82e3376d67c4": {
+      "title": "Charlize Theron is a bewitching Circe in Odyssey trailer",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "49cf8fe16d9e": {
+      "title": "Musk's Europe gamble: Will others follow the Dutch and approve FSD?",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "345d2f18e296": {
+      "title": "DHS abuses 1930s customs law in attempt to get data on Canadian from Google",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "93c12d76db8c": {
+      "title": "Why Reddit blocked my daily visit to its mobile website",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "a9c00aa21eea": {
+      "title": "Welcome to Maintainer Month: Celebrating the people behind the code",
+      "source": "GitHub Blog",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "c506cb4c8f4f": {
+      "title": "Dina",
+      "source": "Product Hunt",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "72d6e4fbfc8e": {
+      "title": "Modernize your workflows: Amazon WorkSpaces now gives AI agents their own desktop (preview)",
+      "source": "AWS Blog",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "8a7f8c066e7d": {
+      "title": "Show HN: Orch8 – Durable workflow engine in Rust, one binary, Postgres or SQLite",
+      "source": "Hacker News 开发者",
+      "topic": "global-tech",
+      "date": "2026-05-06"
+    },
+    "0b5d8f0df47d": {
+      "title": "Async Rust never left the MVP state",
+      "source": "Hacker News 开发者",
+      "topic": "global-tech",
+      "date": "2026-05-06"
     }
   },
-  "updated": "2026-05-05 15:06"
+  "updated": "2026-05-06 10:14"
 }

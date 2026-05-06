@@ -191,14 +191,26 @@ Xcode 26 新增两个硬件辅助性能分析工具：
 
 > 来源：[What's new in Xcode 26](https://developer.apple.com/xcode/whats-new/)
 
-### 7.3 2026 年 iOS 性能分析工具选型
+### 7.3 Run Comparison（Xcode 26.4 新增）
+
+> 🔄 更新于 2026-05-06
+
+Xcode 26.4 给 Instruments 添加了 Run Comparison 功能，可以直接对比两次 profiling 的调用树，找出哪些函数变快了、哪些变慢了。优化前后的性能对比不再需要手动记笔记。
+
+操作路径：View → Detail Area → Compare With… 或 jump bar 上的 ⇆ 按钮，选择要对比的 run，结果会以差值标注展示每个函数耗时的变化。
+
+> 来源：[Xcode 26.4 Release Notes](https://mjtsai.com/blog/2026/03/25/xcode-26-4/)
+
+### 7.4 2026 年 iOS 性能分析工具选型
 
 | 场景 | 推荐工具 | 说明 |
-|------|---------|------|
+| ---- | ------ | ---- |
 | CPU 热点分析 | Time Profiler | 通用 CPU 分析，首选工具 |
 | 指令级追踪 | Processor Trace（Xcode 26） | Apple Silicon 硬件辅助，更精细 |
+| SwiftUI 卡顿定位 | SwiftUI Instrument（Xcode 26） | view body 耗时、重建原因、Cause & Effect Graph |
 | 内存分配追踪 | Allocations | 追踪对象创建和持久化 |
 | 内存泄漏检测 | Leaks | 自动检测循环引用 |
 | AI 模型性能 | Foundation Models（Xcode 26） | 设备端模型响应时间和 Token 分析 |
 | 能耗分析 | Energy Log | GPS、网络、CPU 能耗 |
+| 优化前后对比 | Run Comparison（Xcode 26.4） | 两次 profiling 的调用树差值对比 |
 | 自定义埋点 | os_signpost | 精确测量特定代码段 |
