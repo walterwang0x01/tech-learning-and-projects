@@ -1,10 +1,15 @@
 ---
-inclusion: manual
+inclusion: fileMatch
+fileMatchPattern: 'learning-notes/briefings/**'
 ---
 
 # 📰 简报通用规则
 
-本文件定义三个简报 hook（AI Agent / 国内科技 / 国际科技）共享的流程和规范。各 hook 的 prompt 通过引用本文件来避免重复。
+本文件定义三个简报 hook（AI Agent / 国内科技 / 国际科技）共享的流程和规范。
+
+**自动加载机制**：本规则通过 `fileMatch` 自动绑定 `learning-notes/briefings/**` 下的所有文件，hook prompt 不再需要显式 `#[[file:...]]` 引用——只要 agent 的上下文里出现简报路径，这份规则就会自动注入。
+
+如果需要在未命中 fileMatch 的场景使用（例如仅调用 `briefing-tools.py` 而未涉及简报目录），请运行 `python3 scripts/briefing-tools.py show-rules` 显式拉取。
 
 ## 通用流程
 

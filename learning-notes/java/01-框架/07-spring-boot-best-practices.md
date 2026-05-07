@@ -386,3 +386,46 @@ Spring Boot 4.0.4 修复了两个 Actuator 相关的认证绕过漏洞：
 - `javax.*` → `jakarta.*`（如果从 2.x 直接升级）
 - RestTemplate → RestClient（推荐）
 - OpenFeign → HTTP Interface Client（Spring Cloud 2025.1）
+
+## 9. Spring Boot 4.0.x 补丁版本（持续更新）
+
+> 🔄 更新于 2026-05-07
+
+<!-- version-check: Spring Boot 4.0.6, 4.1.0-RC1, checked 2026-05-07 -->
+
+### 9.1 最新版本时间线
+
+| 版本 | 发布日期 | 重点 |
+|------|---------|------|
+| 4.0.4 | 2026-03-19 | **安全修复**（CVE-2026-22731、CVE-2026-22733） |
+| 4.0.5 | 2026-03-26 | 17 个 Bug 修复和依赖升级 |
+| 4.0.6 | 2026-04-23 | 65 个 Bug 修复、文档改进、依赖升级 |
+| 4.1.0-RC1 | 2026-04-23 | 113 项增强、文档改进、依赖升级、Bug 修复 |
+
+来源：[Spring Boot 4.0.5 发布](https://spring.io/blog/2026/03/26/spring-boot-4-0-5-available-now) | [Spring Boot 4.0.6 发布](https://spring.io/blog/2026/04/23/spring-boot-4-0-6-available-now) | [Spring Boot 4.1.0-RC1 发布](https://spring.io/blog/2026/04/23/spring-boot-4-1-0-RC1-available-now/)
+
+### 9.2 Spring 4 月生态同步迭代
+
+2026 年 4 月第三周，Spring 生态多个子项目同步发布首个 RC，为 Spring Boot 4.1 GA 做准备：
+
+```
+Spring 4 月 RC 浪潮（2026-04-20 当周）：
+├─ Spring Boot 4.1.0-RC1
+├─ Spring Security 首个 RC
+├─ Spring Integration 首个 RC
+├─ Spring Modulith 首个 RC
+├─ Spring AMQP 首个 RC
+├─ Spring for Apache Kafka 首个 RC
+└─ Spring Vault 首个 RC
+```
+
+> 这波 RC 意味着 Spring Boot 4.1 GA 预计在 2026 年 5-6 月发布。
+
+来源：[InfoQ: Spring News Roundup Apr 20, 2026](https://www.infoq.com/news/2026/04/spring-news-roundup-apr20-2026/)
+
+### 9.3 生产环境升级建议
+
+- **立即升级**：还在 4.0.3 及以下的 Actuator 应用（CVE-2026-22731/22733）
+- **推荐升级到 4.0.6**：合并了 65 个 Bug 修复，是 4.0.x 系列的稳定收敛版
+- **评估 4.1.0 RC**：新特性较多，生产环境建议等 GA
+- **Java 版本**：4.0.x 要求 Java 17+，4.1.x 可能进一步提升基线（建议 Java 21 或 25）

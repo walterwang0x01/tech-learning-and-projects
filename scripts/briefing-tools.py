@@ -909,6 +909,21 @@ def cmd_notify(args):
             print(f"⚠️ 今天没有 {args.topic} 简报文件，跳过推送")
 
 
+def cmd_show_rules(args):
+    """显式输出 briefing-rules.md 的内容，适用于未命中 fileMatch 自动加载的场景。
+
+    脚本用 __file__ 定位仓库根，对多 workspace 场景是最可靠的路径解析方式。
+    """
+    rules_path = (
+        Path(__file__).resolve().parent.parent
+        / ".kiro" / "steering" / "briefing-rules.md"
+    )
+    if not rules_path.exists():
+        print(f"❌ 未找到规则文件: {rules_path}", file=sys.stderr)
+        sys.exit(1)
+    print(rules_path.read_text(encoding="utf-8"))
+
+
 def main():
     parser = argparse.ArgumentParser(description="简报工具集")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -936,6 +951,9 @@ def main():
     p = sub.add_parser("notify", help="推送简报摘要到 Bark")
     p.add_argument("--topic", default="all", choices=["ai-agent", "china-tech", "global-tech", "all"])
     p.set_defaults(func=cmd_notify)
+
+    p = sub.add_parser("show-rules", help="输出 briefing-rules.md（兜底，不依赖 workspace 相对路径）")
+    p.set_defaults(func=cmd_show_rules)
 
     args = parser.parse_args()
     args.func(args)
