@@ -566,3 +566,237 @@ print(obj.value)
 
 设计模式提供了解决常见问题的模板，但在Python中实现通常更加简洁。理解模式的核心思想比记住具体实现更重要。
 
+
+## 8. Python 3.14 / 3.15 设计模式新范式
+
+> 🔄 更新于 2026-05-09
+>
+> <!-- version-check: Python 3.14.4 / 3.15 alpha 8, checked 2026-05-09 -->
+
+Python 3.14 和 3.15 带来了多项新特性，让若干经典设计模式拥有了更 Pythonic 的现代实现。本节聚焦这些模式的 "2026 写法"。
+
+### 8.1 Protocol + dataclass：结构化鸭子类型（替代抽象基类）
+
+传统 Python 的策略模式、命令模式依赖 `abc.ABC + @abstractmethod`。Python 3.8 引入的 `typing.Protocol` 让 "按形状匹配" 成为一等公民，3.14 的 `runtime_checkable` 与 `@dataclass` 组合是更现代的写法。
+
+```python
+# 2026 年推荐：Protocol 替代 ABC 定义策略接口
+from typing import Protocol, runtime_checkable
+from dataclasses import dataclass
+
+@runtime_checkable
+class PaymentStrategy(Protocol):
+    """支付策略协议（结构化接口，无需继承）"""
+    def pay(self, amount: float) -> bool: ...
+
+
+@dataclass(slots=True, frozen=True)
+class AlipayStrategy:
+    account: str
+
+    def pay(self, amount: float) -> bool:
+        # 不需要 extends/implements，只要方法签名匹配即可
+        print(f"支付宝 {self.account} 支付 {amount}")
+        return True
+
+
+@dataclass(slots=True, frozen=True)
+class WeChatStrategy:
+    openid: str
+
+    def pay(self, amount: float) -> bool:
+        print(f"微信 {self.openid} 支付 {amount}")
+        return True
+
+
+def checkout(strategy: PaymentStrategy, amount: float) -> bool:
+    # isinstance 检查 Protocol（runtime_checkable 支持）
+    assert isinstance(strategy, PaymentStrategy)
+    return strategy.pay(amount)
+
+
+checkout(AlipayStrategy("user@example.com"), 100.0)
+checkout(WeChatStrategy("ox_123"), 50.0)
+```
+
+**优势**：
+
+- `slots=True` 减少内存占用（~40%）
+- `frozen=True` 天然实现值对象的不可变性
+- `Protocol` 无侵入：第三方类只要结构匹配就能注入，无需修改源码继承
+
+来源：[TheLinuxCode - Dataclass vs Namedtuple vs Object 2026 Guidance](https://thelinuxcode.com/dataclass-vs-namedtuple-vs-object-in-python-practical-differences-trade-offs-and-2026-guidance/)
+
+### 8.2 异步上下文管理器：现代资源管理模式
+
+单例、资源池等需要生命周期管理的模式，在 asyncio 场景下应优先使用 `async with` + `@asynccontextmanager`：
+
+```python
+# 2026 年推荐：asynccontextmanager 替代自写 __aenter__ / __aexit__
+from contextlib import asynccontextmanager
+import httpx
+
+
+@asynccontextmanager
+async def http_client_pool(base_url: str):
+    """可复用的异步 HTTP 客户端池（资源池模式）"""
+    client = httpx.AsyncClient(base_url=base_url, timeout=10.0)
+    try:
+        yield client
+    finally:
+        # 异步资源清理，保证在取消/异常/超时下也会执行
+        await client.aclose()
+
+
+async def fetch_user(user_id: str):
+    async with http_client_pool("https://api.example.com") as client:
+        resp = await client.get(f"/users/{user_id}")
+        return resp.json()
+```
+
+**关键洞察**：`async with` 在协程被取消时仍保证 `finally` 执行，而自写的 `try/finally` 在 `await` 处被取消时可能跳过 finally（具体取决于 asyncio 版本）。
+
+来源：[Async context management for Python AI services](https://www.learnwithparam.com/blog/async-context-management-python-ai-services)
+
+### 8.3 TaskGroup：结构化并发替代手动 gather（Python 3.11+）
+
+传统的"主从模式（Master-Worker）"在 Python 中常用 `asyncio.gather` 实现，但异常处理和资源清理不直观。`asyncio.TaskGroup`（Python 3.11+）是结构化并发的标准写法：
+
+```python
+# 2026 年推荐：TaskGroup 替代 gather 的主从模式
+import asyncio
+
+
+async def fetch(url: str) -> dict:
+    await asyncio.sleep(0.1)  # 模拟网络请求
+    return {"url": url, "data": "..."}
+
+
+async def aggregate_master(urls: list[str]) -> list[dict]:
+    """结构化并发的主节点：所有子任务共享一个 TaskGroup 作用域"""
+    results: list[dict] = []
+
+    # TaskGroup 保证：任一子任务抛异常 → 所有兄弟任务自动取消
+    async with asyncio.TaskGroup() as tg:
+        tasks = [tg.create_task(fetch(url)) for url in urls]
+
+    # 退出上下文后所有任务已完成，直接取 .result()
+    results = [t.result() for t in tasks]
+    return results
+
+
+# Python 3.15 新增：TaskGroup.cancel() 支持外部取消整个组
+async def aggregate_with_timeout(urls: list[str], timeout: float):
+    async with asyncio.timeout(timeout):
+        return await aggregate_master(urls)
+```
+
+**对比 gather**：
+
+| 维度 | `asyncio.gather` | `TaskGroup` |
+| ---- | ---------------- | ----------- |
+| 异常传播 | 首个异常之后的结果被丢弃，其余任务不一定被取消 | 自动取消兄弟任务 + `ExceptionGroup` 聚合 |
+| 作用域清晰性 | 需手动 try/except | `async with` 天然划定边界 |
+| Python 版本 | 3.0+ | 3.11+（3.15 新增 `.cancel()`） |
+
+来源：[Python asyncio Patterns 2026](https://techbytes.app/posts/python-asyncio-patterns-2026-complete-reference/)
+
+### 8.4 frozendict + sentinel：替代"魔数默认值"模式
+
+Python 3.15 alpha 引入了内置 `frozendict`（PEP 814）和 `sentinel` 类型（PEP 661），让单例模式、空对象模式、备忘录模式有更优写法：
+
+```python
+# Python 3.15：frozendict 作为配置的不可变默认值
+from frozendict import frozendict  # Python 3.15 内置；3.14 使用 pip install frozendict
+
+DEFAULT_CONFIG = frozendict(
+    timeout=30,
+    retries=3,
+    backoff=1.5,
+)
+
+
+def call_api(url: str, config: frozendict = DEFAULT_CONFIG):
+    # 默认值可以直接是 frozendict，无需 copy.deepcopy 防污染
+    effective = frozendict({**config, "url": url})
+    return effective
+
+
+# Python 3.15：sentinel 用于区分 "未提供" 和 "None"
+from sentinel import Sentinel  # Python 3.15 内置
+
+_MISSING = Sentinel("_MISSING")
+
+
+def get_value(key: str, default=_MISSING):
+    value = lookup(key)
+    if value is None:
+        if default is _MISSING:
+            raise KeyError(key)  # "未提供默认值" → 抛异常
+        return default            # "显式提供了 None 或其他值" → 返回之
+    return value
+```
+
+**模式定位**：这两个特性解决了 "Python 历史上用 `object()` 做哨兵 + 只读字典不存在" 的问题，让空对象模式、默认值模式代码更简洁。
+
+来源：[Python 3.15 What's New](https://docs.python.org/3.15/whatsnew/3.15.html)
+
+### 8.5 Free-threaded Python 下的模式变化
+
+Python 3.14 的 Free-threaded 构建让 "生产者-消费者"、"主从模式" 等并发模式可以使用真正的多线程实现。但需要注意：
+
+- **单例模式要加锁**：Free-threaded 下 `__new__` 不再天然线程安全，必须显式 `threading.Lock`
+- **观察者模式注意竞态**：listener 列表修改必须用锁保护或使用 `queue.Queue` 中转
+- **工厂模式更安全**：无共享状态的工厂方法天然线程安全，是 Free-threaded 首选
+
+```python
+# Free-threaded 安全的单例模式
+import threading
+import sys
+
+
+class Singleton:
+    _instance = None
+    _lock = threading.Lock()
+
+    def __new__(cls, *args, **kwargs):
+        # 双检锁（Double-checked locking）
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = super().__new__(cls)
+        return cls._instance
+
+
+# 检测是否运行在 Free-threaded 模式
+if hasattr(sys, "_is_gil_enabled"):
+    print(f"GIL enabled: {sys._is_gil_enabled()}")
+    # False → Free-threaded build (python3.14t)
+```
+
+来源：[Python Free-Threading Guide](https://py-free-threading.github.io/)
+
+### 8.6 2026 年 Python 设计模式工具箱
+
+| 经典模式 | 2026 推荐实现 | 替代原因 |
+| -------- | ------------ | -------- |
+| 策略模式 | `Protocol` + `@dataclass(slots=True)` | 无侵入 + 内存友好 |
+| 命令模式 | `dataclass` + dispatcher 函数 / `match` 语句 | 比类继承更轻量 |
+| 观察者模式 | `asyncio.Queue` / `dispatcher` 库 | 天然处理异步与并发 |
+| 单例模式 | 模块级变量 + `functools.cache` | 模块天然单例，无需特殊实现 |
+| 空对象模式 | `Sentinel` 类型（3.15+）或 `typing.Never` | 类型安全 |
+| 资源池 / 工厂 | `@asynccontextmanager` + Protocol 工厂 | 统一异步资源生命周期 |
+| 主从模式 | `asyncio.TaskGroup`（3.11+） | 结构化并发 + 自动异常处理 |
+| 备忘录模式 | `frozendict`（3.15+）+ `functools.cache` | 不可变键天然可哈希 |
+
+---
+
+**参考链接**：
+
+- [Python 3.14.4 Documentation - dataclasses](https://docs.python.org/3/library/dataclasses.html)
+- [Python 3.15 What's New](https://docs.python.org/3.15/whatsnew/3.15.html)
+- [contextlib — Utilities for with-statement contexts](https://docs.python.org/3/library/contextlib.html)
+- [Python Free-Threading Guide](https://py-free-threading.github.io/)
+- [TheLinuxCode - Dataclass 2026 Guidance](https://thelinuxcode.com/dataclass-vs-namedtuple-vs-object-in-python-practical-differences-trade-offs-and-2026-guidance/)
+
+> 内容经改写总结，不直接逐字摘录官方文档与博客。

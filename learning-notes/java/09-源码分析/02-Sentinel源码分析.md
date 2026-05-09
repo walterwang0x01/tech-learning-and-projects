@@ -1642,3 +1642,115 @@ private void handleStateChangeWhenThresholdExceeded(Throwable error) {
 
 
 
+
+
+---
+
+# 附录 A：Sentinel 1.8.x 版本演进与生态现状（2026）
+
+> 🔄 更新于 2026-05-09
+>
+> <!-- version-check: Sentinel 1.8.8, checked 2026-05-09 -->
+
+本文主体源码分析基于 Sentinel 1.8.x 骨架。本附录梳理 1.8.x 分支的增量能力，以及 2026 年 Sentinel 在 Spring Boot 3 + JDK 17/21 场景下的适配情况。
+
+## A.1 Sentinel 1.8.8 关键增强
+
+Sentinel 1.8.8 是当前的最新稳定版，距离本文档源码分析基线 1.8.1/1.8.2 有若干重要增强：
+
+| 版本 | 核心变化 |
+| ---- | -------- |
+| 1.8.3 | Envoy RLS 集群限流、Reactive 限流优化 |
+| 1.8.4 | Spring Cloud Gateway 支持 Spring Boot 2.6+ |
+| 1.8.6 | 修复 dashboard 前端安全漏洞、Apollo 配置中心适配 |
+| 1.8.7 | 适配 Spring Boot 3 / Jakarta EE 9+ |
+| **1.8.8** | **JDK 17/21 运行支持 + `webmvc-6x-adapter` 模块（Spring Boot 3 原生适配）** |
+
+来源：[Sentinel Releases](https://github.com/alibaba/sentinel/releases)
+
+## A.2 与本文 ProcessorSlotChain 骨架的兼容性
+
+本文 1.1 节分析的 `ProcessorSlotChain` 责任链结构（StatisticSlot / FlowSlot / DegradeSlot 等）在 1.8.x 分支**没有 Breaking Change**。这意味着本文档源码阅读结论对 1.8.8 依然适用，但需留意以下细节：
+
+### A.2.1 热点参数限流增强
+
+`ParamFlowSlot` 在 1.8.x 中新增了集群热点参数限流（Cluster Param Flow），底层基于 Token Server，源码集中在 `sentinel-cluster-server-default` 模块。本文档未覆盖该路径，阅读时建议从 `ParamFlowChecker#passCheck` 入手。
+
+### A.2.2 熔断策略细化
+
+`DegradeSlot` 在 1.8 中已分化为三类断路器实现：
+
+```java
+// 源码路径：com.alibaba.csp.sentinel.slots.block.degrade.circuitbreaker
+CircuitBreaker                                  // 抽象父类
+├── ExceptionCircuitBreaker    // 异常比例/异常数熔断
+└── ResponseTimeCircuitBreaker // 慢调用比例熔断
+```
+
+本文档基于旧版 `DegradeRule` 的单实现分析结构，1.8.x 读者需关注上述分化。
+
+## A.3 Spring Boot 3 适配（1.8.7+）
+
+Sentinel 1.8.7+ 提供了对 Jakarta EE 9+ 的适配：
+
+| 组件 | Spring Boot 2.x | Spring Boot 3.x |
+| ---- | --------------- | --------------- |
+| Web MVC 适配 | `sentinel-spring-webmvc-adapter` | **`sentinel-spring-webmvc6-adapter`**（1.8.8 新增） |
+| WebFlux 适配 | `sentinel-spring-webflux-adapter` | 使用 6.x 适配器 |
+| Spring Cloud Gateway | `sentinel-spring-cloud-gateway-adapter` | 同模块，要求 Spring Cloud 2023.x+ |
+
+**依赖示例**（Spring Boot 3 + JDK 21）：
+
+```xml
+<!-- Spring Boot 3 原生适配（1.8.8 新增） -->
+<dependency>
+    <groupId>com.alibaba.csp</groupId>
+    <artifactId>sentinel-spring-webmvc6-adapter</artifactId>
+    <version>1.8.8</version>
+</dependency>
+
+<!-- 或通过 Spring Cloud Alibaba 2023.x+ 自动管理版本 -->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+</dependency>
+```
+
+## A.4 Sentinel 生态现状（2026）
+
+| 方面 | 状态 |
+| ---- | ---- |
+| GitHub Stars | 23K+ |
+| 主分支迭代 | **进入维护期**：1.8.8 距今已超过一年，Alibaba 的微服务防护重心转向云原生产品（MSE）与 [Higress](https://github.com/alibaba/higress) |
+| Sentinel Go | `alibaba/sentinel-golang` 独立维护，API 风格与 Java 版对齐 |
+| Sentinel C++ | `alibaba/sentinel-cpp` 仍在早期阶段 |
+| Sentinel 2.0 | **暂未发布**，社区有讨论但尚未启动 |
+
+**实务建议**：
+
+- 存量系统继续使用 1.8.8 完全可行，API 稳定无迁移成本
+- 新项目若在云上，可评估 Alibaba MSE / Higress 网关的托管防护能力
+- 如果追求 "可观测 + 限流 + 熔断" 一体化，也可对比 [Resilience4j](https://resilience4j.readme.io/) 或 Istio Sidecar 方案
+
+来源：[Sentinel GitHub 主页](https://github.com/alibaba/Sentinel) ｜ [Sentinel 官网](https://sentinelguard.io/)
+
+## A.5 阅读 1.8.8 源码的额外切入点
+
+如果读者在本文档基础上继续阅读 1.8.8 源码，建议补充以下切入点：
+
+| 主题 | 起点文件 |
+| ---- | -------- |
+| 集群限流 Token Server | `sentinel-cluster-server-default` 模块的 `DefaultEmbeddedTokenServer` |
+| 网关限流（SCG） | `SentinelGatewayFilter` 及其 `ApiDefinition` 机制 |
+| Dashboard 规则推送 | `sentinel-dashboard` 的 `RuleApiController` + `DynamicRulePublisher` SPI |
+| 指标采集导出 | `sentinel-transport-simple-http` 模块 |
+
+---
+
+**参考链接**：
+
+- [Sentinel GitHub Releases](https://github.com/alibaba/sentinel/releases)
+- [Sentinel Wiki - Release Notes](https://github.com/alibaba/Sentinel/wiki/Release-Notes)
+- [Sentinel 官网](https://sentinelguard.io/)
+
+> 内容经改写总结，不直接逐字摘录官方发布说明。

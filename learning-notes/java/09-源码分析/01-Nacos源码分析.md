@@ -2373,3 +2373,175 @@ Nacos的服务发现分为两种模式：
 
 
 
+
+
+---
+
+# 附录 A：Nacos 3.x 架构演进与 AI Native Registry
+
+> 🔄 更新于 2026-05-09
+>
+> <!-- version-check: Nacos 3.2.1, checked 2026-05-09 -->
+
+本文主体基于 Nacos 1.4.2 源码进行解读。1.4.2 之后，Nacos 经历了从 "传统服务/配置注册中心" 到 "AI Native Registry" 的重大架构转型。本附录从源码结构的视角梳理关键演进点，方便读者在阅读新版本源码时快速建立坐标。
+
+## A.1 版本时间线
+
+| 版本 | 发布时间 | 关键变化 |
+| ---- | -------- | -------- |
+| **1.4.2** | 2021-04 | 基于 HTTP + Distro 协议；本文源码分析基准 |
+| **2.0.0** | 2021-06 | 引入 gRPC 长连接模型，替代轮询心跳；新增 9848/9849 端口 |
+| **2.3.x** | 2024 | 鉴权能力强化、命名空间资源校验 |
+| **2.5.x** | 2025-2026 | 向后兼容 Nacos 1.x 数据格式的最终分支 |
+| **3.0.0** | 2025-04 | Java 17 最低要求；控制台独立模块；新增内核重构 |
+| **3.1.2** | 2026-03-26 | Bug 修复 + MCP Server Registry 稳定化 |
+| **3.2.0** | 2026-03-27 | **AI Registry GA**：MCP Server Registry、A2A AgentCard、Skills Registry |
+| **3.2.1** | 2026-04-23 | 3.2.0 补丁版本：A2A AgentCard v1、Prompt 生命周期、数据库兼容性 |
+
+来源：[Nacos Release History](https://nacos.io/en/download/release-history/)
+
+## A.2 从 HTTP 轮询到 gRPC 长连接（1.x → 2.x）
+
+### A.2.1 核心变化
+
+本文 2.2.5 节分析的服务注册流程（`/nacos/v1/ns/instance` POST 接口 + 5 秒心跳轮询）在 Nacos 2.x 中已经被 **gRPC 长连接 + 事件推送** 模型取代，原 HTTP 接口仅作兼容性保留。
+
+```
+Nacos 1.x：客户端每 5s HTTP 心跳 → 服务端 15s 判定失活
+         |
+         ↓（2.0 重构）
+Nacos 2.x+：客户端 gRPC 长连接 → 服务端连接断开即判失活 + 主动推送变更
+```
+
+### A.2.2 新增核心模块
+
+Nacos 2.x 源码中新增了以下模块，阅读新版本源码时需重点关注：
+
+| 模块 | 作用 | 对应 1.x 组件 |
+| ---- | ---- | ----------- |
+| `nacos-common` 的 `remote` 包 | gRPC 请求/响应抽象层 | — |
+| `ConnectionManager` | 管理客户端 gRPC 长连接 | `ClientBeatCheckTask` 心跳检查 |
+| `ClientManager` | 连接到客户端身份（Client）的映射 | ServiceManager 内部 Map |
+| `Client` 接口 + `IpPortBasedClient` | 客户端抽象（每个客户端持有自己注册的实例集合） | 注册表外层 Map |
+| `ClientServiceIndexesManager` | 客户端 → 服务的索引管理 | — |
+
+### A.2.3 注册表结构调整
+
+1.x 的注册表是三层嵌套 Map：
+
+```
+Map<namespaceId, Map<groupedServiceName, Service>>
+                                          ↓
+                                Map<clusterName, Cluster>
+                                                  ↓
+                                          Set<Instance>
+```
+
+2.x 后转为 **"Client 持有实例 + 索引查询"** 模型：
+
+```
+Client（一个客户端连接）
+  └── Map<Service, InstancePublishInfo>   // 该客户端注册的所有实例
+
+ClientServiceIndexesManager
+  ├── publisherIndexes：Service → Set<ClientId>  // 服务的发布者索引
+  └── subscriberIndexes：Service → Set<ClientId> // 服务的订阅者索引
+```
+
+这种设计让服务端可以精确定位某个客户端断连后需要下线的实例集合，不再依赖心跳超时扫描。
+
+## A.3 Nacos 3.x AI Registry 新增领域（3.2+）
+
+Nacos 3.2 的核心差异化能力是 **AI Registry**，在传统服务/配置之外，新增三类注册对象：
+
+### A.3.1 MCP Server Registry
+
+Nacos 作为 MCP Server 的注册与发现中心，AI Agent 可以像发现 "微服务" 一样发现 MCP Server。
+
+源码位置：`nacos-ai` 模块（3.0+ 新增）
+
+```java
+// 示意：MCP Server 元数据结构
+public class McpServerInfo {
+    private String name;
+    private String version;
+    private String transport;        // stdio / sse / streamable-http
+    private String endpoint;
+    private List<McpTool> tools;     // 工具列表（支持运行时热更新）
+    private Map<String, Object> metadata;
+}
+```
+
+**关键能力**：
+
+- **运行时热更新描述**：修改工具描述 / 参数定义无需重启 Server
+- **Spring AI Alibaba 集成**：`nacos-mcp-wrapper`（Python）和 Spring AI Alibaba Nacos MCP 框架支持自动注册
+- **与 Higress 网关打通**：实现"Agent ↔ MCP Router ↔ MCP Server"全链路
+
+来源：[Nacos MCP Server Auto Register](https://nacos.io/en/docs/latest/manual/user/ai/mcp-auto-register/)
+
+### A.3.2 A2A Agent Registry
+
+注册 Agent-to-Agent 协议的 AgentCard（v1 于 3.2.1 稳定）：
+
+```java
+// 示意：A2A AgentCard 注册对象
+public class AgentCard {
+    private String name;
+    private String description;
+    private String version;
+    private List<AgentSkill> skills;    // Agent 能力声明
+    private AuthScheme auth;            // 认证方式
+    private String endpoint;            // A2A 端点
+}
+```
+
+这让多 Agent 系统可以在企业内网构建"Agent 通讯录"，不再依赖公网 Agent 市场。
+
+### A.3.3 Skills Registry（OpenClaw 治理）
+
+Nacos 3.2 的 Skills Registry 允许企业对 OpenClaw Skills 做安全审计与版本管理，解决"恶意 Skills 执行任意代码"的风险。
+
+来源：[OpenClaw 不踩坑恶意 Skills，企业需 Skills Registry：Nacos 3.2 发布](https://www.alibabacloud.com/blog/602946)（内容经改写以符合引用规范）
+
+## A.4 Consistency 模块的演进
+
+本文 2.3.4 节分析的 `DistroConsistencyServiceImpl`（临时实例的 AP 一致性）在 2.x+ 的改造：
+
+- **Distro 协议升级**：从基于 HTTP 的数据同步升级为基于 gRPC 的异步流式同步，吞吐量与时延均有提升
+- **JRaft 集成**（持久化实例的 CP 一致性）：2.x 起使用 SOFAJRaft 作为 Raft 实现，替代 1.x 的自研 Raft
+- **Consistency Protocol 插件化**：3.x 支持通过 SPI 扩展自定义一致性协议，例如企业私有协议
+
+## A.5 阅读新版本源码的切入点建议
+
+如果读者对比 1.4.2 阅读 2.x/3.x 源码，建议按以下顺序切入：
+
+| 关注点 | 1.4.2 入口 | 2.x+ 入口 |
+| ------ | ---------- | --------- |
+| 服务注册 | `InstanceController#register` | `InstanceRequestHandler`（gRPC） |
+| 心跳检查 | `ClientBeatCheckTask` | `ConnectionManager#unregister` 监听断连事件 |
+| 实例变更推送 | `PushService#serviceChanged` | `NamingSubscriberServiceV2Impl` + `ClientServiceIndexesManager` |
+| 集群一致性 | `DistroConsistencyServiceImpl#put` | `DistroProtocol`（gRPC 版本）+ `JRaftProtocol` |
+| MCP 注册（3.2+） | — | `nacos-ai` 模块的 `McpServerManager` |
+
+## A.6 版本选择建议
+
+| 使用场景 | 推荐版本 | 理由 |
+| -------- | -------- | ---- |
+| 生产环境（传统微服务） | **2.5.x** | 向下兼容 1.x 数据格式，稳定成熟 |
+| 新项目 + Java 17+ | **3.2.1** | AI Registry 能力、长期支持主线 |
+| 研究源码 / 教学 | **1.4.2** | 结构简单清晰，本文档基础 |
+| 仅 AI/Agent 场景 | **3.2.1** | MCP/A2A/Skills Registry 原生支持 |
+
+> ⚠️ 注意：Nacos 3.x 要求 **Java 17+**，从 2.x 升级需同步升级 JDK。Nacos 3.2.1 向下兼容到 1.0.0 的客户端数据格式。
+
+---
+
+**参考链接**：
+
+- [Nacos Release History](https://nacos.io/en/download/release-history/)
+- [Nacos Server Download](https://www.nacos.io/en/download/nacos-server/)
+- [MCP Server Auto Register Manual](https://nacos.io/en/docs/latest/manual/user/ai/mcp-auto-register/)
+- [A2A Registry](https://nacos.io/en/docs/latest/manual/user/ai/agent-registry/)
+
+> 内容经改写总结，不直接逐字摘录官方文档。
