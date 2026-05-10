@@ -18413,7 +18413,793 @@
       "source": "Hacker News 开发者",
       "topic": "global-tech",
       "date": "2026-05-09"
+    },
+    "4a66ef6ae6a1": {
+      "title": "\"OncoAgent: A Dual-Tier Multi-Agent Framework for Privacy-Preserving Oncology Clinical Decision Support\"",
+      "source": "Hugging Face Blog",
+      "topic": "ai-agent",
+      "date": "2026-05-10"
+    },
+    "d8d45d408538": {
+      "title": "Hackable Robot Lawn Mower Unlocks a New Nightmare",
+      "source": "Wired AI",
+      "topic": "ai-agent",
+      "date": "2026-05-10"
+    },
+    "de0c9a4df94e": {
+      "title": "Meta's embrace of AI is making its employees miserable",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-10"
+    },
+    "05e2bb91bda8": {
+      "title": "All my clients wanted a carousel, now it's an AI chatbot",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-10"
+    },
+    "a4befaf44e71": {
+      "title": "I Will Never Use AI to Code",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-10"
+    },
+    "0418b324e16d": {
+      "title": "People Hate AI Art",
+      "source": "Hacker News AI",
+      "topic": "ai-agent",
+      "date": "2026-05-10"
+    },
+    "40afdc590c8a": {
+      "title": "The context window has been shattered: Subquadratic debuts a 12M token window",
+      "source": "Hacker News AI 关键词",
+      "topic": "ai-agent",
+      "date": "2026-05-10"
+    },
+    "bbc05a345a94": {
+      "title": "Killswitch: Per-function short-circuit mitigation primitive",
+      "source": "Hacker News AI 关键词",
+      "topic": "ai-agent",
+      "date": "2026-05-10"
+    },
+    "772fa466a396": {
+      "title": "Using Claude Code: The unreasonable effectiveness of HTML",
+      "source": "Hacker News AI 关键词",
+      "topic": "ai-agent",
+      "date": "2026-05-10"
+    },
+    "b54d50c429ab": {
+      "title": "Production engineering when trading billions of dollars a day [video]",
+      "source": "Hacker News AI 关键词",
+      "topic": "ai-agent",
+      "date": "2026-05-10"
+    },
+    "99bf9f142a76": {
+      "title": "Ozon大中华区总裁Simon Huang：中国卖家，正在涌向俄罗斯｜专访",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "00c345ac2215": {
+      "title": "融资超亿元、割草机器人公司拿下数亿订单，瞄准庭院具身终端｜硬氪首发",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "12b465936998": {
+      "title": "AI开始接管年轻人的「精神自留地」",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "71c72d0655cf": {
+      "title": "36氪首发 | 航空航天电气系统互联组件方案商获数千万融资，细分赛道市占率第一",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "1c36151edee2": {
+      "title": "获高秉强、蓝驰领投数千万融资，浙大00后创业者从远景观测切入AI智能影像｜硬氪首发",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "fb866b3cadf7": {
+      "title": "报道：马来西亚总理将公布马来西亚石油供应稳定保障计划",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "70fab4b925a6": {
+      "title": "“海洋地质二十六号”完成海洋钻探关键装备海试 多项技术指标优于预期",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "fbfc6505ded5": {
+      "title": "中国医生在尼日尔首次引入免取骨颈椎手术",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "9858402a185d": {
+      "title": "韩国产业部长与美方官员洽谈投资协议",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "ea6f6e79a4d0": {
+      "title": "世卫官员：建议对涉疫邮轮人员监测42天 公众风险仍然低",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "187a84c3c051": {
+      "title": "我国中华白海豚种群数量总体保持稳定",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "5dc57fd08b9c": {
+      "title": "伊朗为参加美加墨世界杯提多项要求",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "6a75575105f2": {
+      "title": "我国经济增长动能澎湃",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "4fa8790d343b": {
+      "title": "报道：美国汽车贷款规模创下1.68万亿美元历史新高",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "b122d80b10cf": {
+      "title": "一季度全国结婚登记169.7万对",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "5c1f6b0722e1": {
+      "title": "老白干酒董事长主动“放弃连任”：任期已超10年，半个月前才宣布为董事候选人",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "d95b20dc09fe": {
+      "title": "哈啰员工聚会把青桔和美团单车踩在脚下？官方回应：已展开内部调查，始终尊重行业伙伴",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "857482b5a1b3": {
+      "title": "特斯拉：最后一辆Model S和Model X已在弗里蒙特工厂下线",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "5a10962ee15a": {
+      "title": "新修订《婚姻登记条例》施行一年 全国建成户外颁证点1330个",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "d6c4ab0fb24f": {
+      "title": "英伟达全面布局AI生态 股权投资今年已超400亿美元",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "9a1c94ccead4": {
+      "title": "中国汽车工业协会：网传“新能源车企因锁电问题被约谈、立案”为不实信息",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "c695c911fc52": {
+      "title": "港交所：前四个月IPO集资金额为1514亿港元 同比上升604%",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "8274fc52fccf": {
+      "title": "保时捷宣布精简三家子公司，重新聚焦核心业务",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "60e6a2c82d63": {
+      "title": "员工人均奖金达610万人民币？SK海力士回应",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "e6b90b3e0e67": {
+      "title": "美银：美股和黄金今年或将连续第四年录得两位数涨幅",
+      "source": "36氪",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "39fe34e1df97": {
+      "title": "迈向高保真与工业化：混元 3D 生成大模型从理论到实践的 SOTA 之路｜AICon上海",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "5aa034f60c2e": {
+      "title": "借助全新的安全概览仪表板，Cloudflare每日处理超过1000万条洞察数据",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "5634b810f108": {
+      "title": "“40%的智能体项目，将走向终止”！紫光股份董事长、新华三集团总裁兼CEO于英涛最新演讲全文",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "f01039e7c9e6": {
+      "title": "DeepSeek 被曝融资500亿，梁文锋自己掏了 200亿！阿里或无缘参投",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "801a457d7027": {
+      "title": "颠覆认知：运维 Agent 靠知识，Coding Agent 靠约束！",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "93227c82052c": {
+      "title": "开源项目的信任危机，也许是那群“以为自己会写代码”的资本大佬造成的",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "ac477fcc53a0": {
+      "title": "拓扑变更时担心丢数据？其实有个优雅解法",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "b8059e38680a": {
+      "title": "不止技术！Valkey 火爆背后藏着开源社区的核心密码",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "5f05a40eb384": {
+      "title": "AI 把编程这件事接管之后，作为程序员的我该何去何从？",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "8328c3ff4517": {
+      "title": "停止编码的那天，就是失去架构判断力的开始：一位 30 年架构师的 AI 生存指南",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "5499a95c89db": {
+      "title": "Chrome 开了一个危险的头：偷偷给数亿电脑塞 4GB Gemini 模型，占硬盘、耗算力、删了自动重下",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "1cbc7c95219b": {
+      "title": "Cloudflare构建了面向LLM的高性能基础设施",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "279f269886a2": {
+      "title": "技术·艺术· 算术：京东零售 AIGC 百亿素材供给实践",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "76350eef4824": {
+      "title": "Meta部署统一的AI智能体，实现超大规模环境的自动化性能优化",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "797cad6f3c58": {
+      "title": "生成式推荐引擎升级，快手在线参数服务器性能与时延深度优化实践｜AICon上海",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "92a73aad8116": {
+      "title": "DuckLake 1.0：具有SQL目录元数据的数据湖格式",
+      "source": "InfoQ CN",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "f6e40e7bb79a": {
+      "title": "Altman 或官宣 OpenAI 硬件；李想谈 L9 4 年才换代：汽车非手机，AI 帮助有限；多家车企否认「被约谈」",
+      "source": "极客公园",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "571146e77deb": {
+      "title": "被 AI 重新激活的「无屏手环」，成了大厂争抢的运动健康新赛道",
+      "source": "极客公园",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "dc1c1e5a966b": {
+      "title": "Genesis AI 发布新模型：机器人开始挑战西红柿炒鸡蛋",
+      "source": "极客公园",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "ae8aedb3b8d6": {
+      "title": "苹果和英特尔，分手六年后，又「在一起」了",
+      "source": "极客公园",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "360ede10d30f": {
+      "title": "太初元碁携龙虾一体机亮相北京科博会",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "cb5bfe4afefa": {
+      "title": "阶跃最新语音模型位列 Artificial Analysis 评测榜中国第一",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "d0ac78beb93b": {
+      "title": "两项AI政策发布，范式智能战略布局与产业方向高度契合",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "d81ab1e0c1a9": {
+      "title": "空间智能的“具身化”跃迁，高德ABot体系模型夺冠AGIBot全球挑战赛",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "3ca1c9c32a01": {
+      "title": "美图RoboNeo全新升级：首创影像创作Agent Teams",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "cff2a28fc4c5": {
+      "title": "不更新参数就能强化学习！OpenAI翁家翌提出新范式：决策只需AI手搓一个.py 文件",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "4c2830f528ab": {
+      "title": "谷歌「AI联合数学家」来了！刷新最难数学AI基准SOTA，牛津教授用它解开群论悬案",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "68b00e95dbc3": {
+      "title": "VLA死了，遥操也死了！英伟达机器人一号位说的",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "8def51b9b8b6": {
+      "title": "行业首创空间3D显示，还能主动提醒和帮忙叫车，千问AI眼镜这操作真把我看愣了",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "366a927dae4d": {
+      "title": "百度发布文心 5.1：搜索能力登顶国内，预训练成本仅为业界 6%",
+      "source": "量子位",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "2bf00deb5388": {
+      "title": "GeekAI v4.2.7 已经发布，AI 助手全套开源解决方案",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "cd4d0fbb526a": {
+      "title": "Win32 三十年不倒：微软承认 Windows 仍依赖 1990 年代技术根基",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "6b95025ff4fc": {
+      "title": "RWKV 社区四月动态：RWKV-7 G1f 模型发布，11 篇论文",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "6960640314e8": {
+      "title": "Mojo 编程语言发布 1.0.0b1：像 Python 一样写，像 C++ 一样跑",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "90f896c5667a": {
+      "title": "Mesa 26.1.0 发布",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "cd357476d6d7": {
+      "title": "Linux 基金会年度预算曝光：仅 2.95% 用于 Linux，超 97% 流向别处",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "2e58a07d66be": {
+      "title": "ChatGPT 5.5 Pro 一小时攻克博士级数学难题，AI 数学能力再获重大突破",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "d5aa7226ec23": {
+      "title": "MirageOS 4.11.0 发布",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "e92b0c4fc63f": {
+      "title": "EasyPostman v5.5.9 已经发布，开源接口调试与压测工具",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "8d29b4bc45b7": {
+      "title": "DeepSeek 大范围开放识图模式：不是 OCR，是真看图说话",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "a06bb759af5a": {
+      "title": "AgentRun CLI v0.1.0 正式开源：一行命令运行你的托管 Agent",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "69e132dc2724": {
+      "title": "Chrome 被曝静默安装 4GB Gemini Nano 端侧 AI 模型",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "b51b05c54de2": {
+      "title": "阶跃星辰推出 StepAudio 2.5 Realtime",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "27824467a674": {
+      "title": "✨License Manager 软件授权管理系统 v1.1.2 发布",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "de8c7d261cac": {
+      "title": "FileZilla Client 3.70.5 发布",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "53c29901f006": {
+      "title": "执业律师被错认“判刑三年”，百度因 AI 幻觉构成侵权",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "179644716fab": {
+      "title": "终端 AI 编程助手 Reasonix 开源：把 DeepSeek 缓存压榨到极致，长会话成本暴降 80%",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "035564d3eb92": {
+      "title": "蚂蚁百灵发布万亿级思考模型 Ring-2.6-1T",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "38432521fad7": {
+      "title": "Gradle 8.14.5 发布",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "7e036a1bb8bb": {
+      "title": "从可观测到可理解：用 UModel 构建 Agent 原生的代码知识图谱",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "607c5c161969": {
+      "title": "DeepSeek 计划 6 月推出 V4.1 更新，并将加快模型发布节奏",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "e7322e7c3171": {
+      "title": "Spring AI 1.0.7、1.1.6、2.0.0-M6 发布",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "89adfeebc797": {
+      "title": "数据同步工具 CloudCanal v6.0.0.0 发布，支持 Hologres、CloudBerry",
+      "source": "开源中国",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "894f53578b15": {
+      "title": "具透 Plus：Brave 推出官方「纯净版」；Photoshop 翻车的新界面",
+      "source": "少数派",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "bcbdfcfa8889": {
+      "title": "当实用主义遇见温情：少数派们的 10+ 个母亲节礼物灵感",
+      "source": "少数派",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "a3918e562baf": {
+      "title": "Go Players Disempower Themselves to AI",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "51c035f1ba35": {
+      "title": "AI's Circular Psychosis",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "5f75384287f8": {
+      "title": "Pentagon will 'never again' rely on a single AI provider, official says",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "5c6965c6d2d2": {
+      "title": "We Spent 10 Days Touring Chinese AI Labs. Here's What We Saw",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "6e9707874726": {
+      "title": "Sandboxing AIOps and Agentic AI Security",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "eddb0233ddff": {
+      "title": "Show HN: NanoCorp – Create autonomous companies run by AI",
+      "source": "Hacker News 中国科技",
+      "topic": "china-tech",
+      "date": "2026-05-10"
+    },
+    "24d8d2f0d673": {
+      "title": "Gemini API File Search is now multimodal",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "0f942c551592": {
+      "title": "Show HN: Building a web server in assembly to give my life (a lack of) meaning",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "e4bad010d3b8": {
+      "title": "Sparse Cholesky Elimination Tree",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "937483e44ad6": {
+      "title": "France moves to break encrypted messaging",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "290864bea4ed": {
+      "title": "Show HN: Rust but Lisp",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "b487b0728bb6": {
+      "title": "Local privilege escalation via execve()",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "cbf8f1252181": {
+      "title": "I caught the car",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "ad35437664d4": {
+      "title": "Surfel-based global illumination on the web",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "2aef9bf8ac03": {
+      "title": "Show HN: I made a Clojure-like language in Go, boots in 7ms",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "9612e2ac6e6e": {
+      "title": "Zed Editor Theme-Builder",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "86b87cdcd02a": {
+      "title": "CPanel's Black Week: 3 New Vulnerabilities Patched After Attack on 44k Servers",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "19ecd877067f": {
+      "title": "I’ve banned query strings",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "a0325af83b11": {
+      "title": "Distributing Mac software is increasing my cortisol levels",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "a57674e0e61f": {
+      "title": "The hypocrisy of cyberlibertarianism",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "79683e444d49": {
+      "title": "Internet Archive Switzerland",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "edf29cf444b8": {
+      "title": "Bun's experimental Rust rewrite hits 99.8% test compatibility on Linux x64 glibc",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "dfc4a7c06394": {
+      "title": "LLMs corrupt your documents when you delegate",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "fbc85d142269": {
+      "title": "EU Parliamentary Research Service calls VPNs \"a loophole that needs closing\"",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "287a3727d489": {
+      "title": "A recent experience with ChatGPT 5.5 Pro",
+      "source": "Hacker News Top",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "78ff151ea44f": {
+      "title": "Voice AI in India is hard. Wispr Flow is betting on it anyway.",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "f09c2bde499d": {
+      "title": "So you’ve heard these AI terms and nodded along; let’s fix that",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "26212259b588": {
+      "title": "Fintech startup Parker files for bankruptcy",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "0c5bcb1e6f53": {
+      "title": "GM agrees to pay $12.75M in California driver privacy settlement",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "bae46858c0b9": {
+      "title": "The Instax Wide 400 builds on instant photography’s simplicity and stretches it, literally",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "4b6db41ff386": {
+      "title": "Nvidia has already committed $40B to equity AI deals this year",
+      "source": "TechCrunch",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "a4563272a76a": {
+      "title": "Dyson’s powerful 360 Vis Nav robovac is down to $279.99 for a limited time",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "bd89273b7e0a": {
+      "title": "These great digital gifts will arrive just in time for Mother’s Day",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "6e02a5e9b3d8": {
+      "title": "Let it snow",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "dd30ff1eabaf": {
+      "title": "The game that makes me actually want to exercise",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "4ec1c29a9633": {
+      "title": "Quantum dot TVs beat RGB LED TVs, says the company that makes QDs for TVs",
+      "source": "The Verge",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "4d22e21fca84": {
+      "title": "Manufacturing qubits that can move",
+      "source": "Ars Technica",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "99a63a59b2d5": {
+      "title": "Staff.rip",
+      "source": "Product Hunt",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "851203cdad75": {
+      "title": "nocal 4",
+      "source": "Product Hunt",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "0f5b78007021": {
+      "title": "Zappy by ZapDigits",
+      "source": "Product Hunt",
+      "topic": "global-tech",
+      "date": "2026-05-10"
+    },
+    "594073b6f2d5": {
+      "title": "Kubernetes v1.36: Moving Volume Group Snapshots to GA",
+      "source": "Kubernetes Blog",
+      "topic": "global-tech",
+      "date": "2026-05-10"
     }
   },
-  "updated": "2026-05-09 09:18"
+  "updated": "2026-05-10 12:44"
 }
