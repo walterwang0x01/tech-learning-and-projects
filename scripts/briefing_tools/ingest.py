@@ -1,0 +1,85 @@
+"""Ingest：一次采集全部源"""
+
+from __future__ import annotations
+
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+from .config import Config
+from .health import is_source_tripped, record_source_result
+from .http import filter_by_freshness, http_get, parse_rss
+
+
+def _fetch_one(src: dict) -> tuple[dict, list[dict], float, bool]:
+    timeout = src.get("timeout", 15)
+    t0 = time.time()
+    xml_text = http_get(src["url"], timeout=timeout)
+    elapsed = time.time() - t0
+    if xml_text:
+        items = parse_rss(xml_text, src["name"])
+        hints = src.get("topic_hints", [])
+        for it in items:
+            it["source_topic_hints"] = hints
+        return src, items, elapsed, True
+    return src, [], elapsed, False
+
+
+def run_ingest(cfg: Config) -> tuple[list[dict], list[dict], list[str]]:
+    """
+    返回 (items, per_source_metrics, tripped_source_names)
+    - 熔断的源会被跳过
+    - 每次抓取结果记入 health
+    """
+    sources = cfg.rss_sources
+    skip_tripped = cfg.circuit_breaker.skip_when_tripped
+    threshold = cfg.circuit_breaker.fail_threshold_days
+
+    active: list[dict] = []
+    tripped: list[str] = []
+    for src in sources:
+        if skip_tripped and is_source_tripped(src["name"], threshold):
+            tripped.append(src["name"])
+            continue
+        active.append(src)
+
+    if tripped:
+        print(f"  🚨 熔断跳过 {len(tripped)} 个源: {', '.join(tripped)}")
+
+    metrics: list[dict] = []
+    all_items: list[dict] = []
+    t_start = time.time()
+
+    if active:
+        with ThreadPoolExecutor(max_workers=min(len(active), 8)) as pool:
+            futures = {pool.submit(_fetch_one, src): src for src in active}
+            for future in as_completed(futures):
+                src, items, elapsed, ok = future.result()
+                record_source_result(src["name"], ok)
+                metrics.append({
+                    "name": src["name"],
+                    "url": src["url"],
+                    "count": len(items),
+                    "elapsed_sec": round(elapsed, 2),
+                    "ok": ok,
+                })
+                if ok:
+                    all_items.extend(items)
+
+    # 本 run 内按 URL/title 去重
+    seen = set()
+    deduped: list[dict] = []
+    for it in all_items:
+        key = it["url"] or (it["title"], it.get("source", ""))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(it)
+
+    before = len(deduped)
+    deduped = filter_by_freshness(deduped, cfg.freshness_hours)
+    filtered = before - len(deduped)
+    print(
+        f"  ⏱  采集完成: {len(deduped)} 条（去重后），"
+        f"过滤 {filtered} 条超时效，总耗时 {time.time() - t_start:.1f}s"
+    )
+    return deduped, metrics, tripped

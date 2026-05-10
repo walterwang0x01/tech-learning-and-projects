@@ -3,89 +3,181 @@ inclusion: fileMatch
 fileMatchPattern: 'learning-notes/briefings/**'
 ---
 
-# 📰 简报通用规则
+# 📰 简报通用规则（v3 流水线架构）
 
 本文件定义三个简报 hook（AI Agent / 国内科技 / 国际科技）共享的流程和规范。
 
-**自动加载机制**：本规则通过 `fileMatch` 自动绑定 `learning-notes/briefings/**` 下的所有文件，hook prompt 不再需要显式 `#[[file:...]]` 引用——只要 agent 的上下文里出现简报路径，这份规则就会自动注入。
+**自动加载**：通过 `fileMatch` 自动绑定 `learning-notes/briefings/**` 下的所有文件。
+**未命中 fileMatch 时**：运行 `python3 scripts/briefing-tools.py show-rules` 显式拉取。
 
-如果需要在未命中 fileMatch 的场景使用（例如仅调用 `briefing-tools.py` 而未涉及简报目录），请运行 `python3 scripts/briefing-tools.py show-rules` 显式拉取。
+---
+
+## 架构（v3）
+
+```
+┌───────────────────────────────────────────────────────────────┐
+│ 1. ingest       一次抓全部 RSS 源 → pool.jsonl                  │
+│                 （自动跳过熔断源：连续 N 天失败的自动不抓）      │
+│ 2. classify     规则打标 + 评分 + main_topic → classified.jsonl │
+│                 （可选 LLM 批量分类；失败自动退回规则）           │
+│ 3. candidates   按主题分流 → candidates.{topic}.jsonl            │
+│    └─ 过滤：已发布 / 其他主题已写 md / 低分 / 可选语义去重       │
+│    └─ 可选 require-main-topic 排除多主题歧义                    │
+│ 4. [agent]      subagent 读候选 + web search → 写 md            │
+│ 5. validate     校验 md 完整性（缺 H1/H3/链接即 fail）           │
+│ 6. register     通过校验后登记 URL 到 published-index            │
+│ 7. cleanup      （可选）删除早于 N 天的 run 目录                 │
+└───────────────────────────────────────────────────────────────┘
+```
+
+**配置外置**：所有源、关键词、阈值都在 `.kiro/briefings/config.json`。改源不用动代码。
+
+**topic 是 tag 不是 bucket**：一条可同时带 `ai-agent + global-tech`。main_topic 根据 priority 决定（默认 ai-agent > china-tech > global-tech），curate 阶段可选 `--require-main-topic` 排除多主题歧义。
+
+---
 
 ## 通用流程
 
-### Phase 0: 幂等性检查
+### Phase 0：幂等性检查
 
-1. 确认今天日期，动态计算年（YYYY）和月（MM）
-2. 检查目标路径 `learning-notes/briefings/{主题}/YYYY/MM/YYYY-MM-DD.md` 是否已存在：
-   - **已存在** → 「追加模式」：读取现有内容，提取已收录的标题和链接，本次只采集新内容
-   - **不存在** → 「新建模式」：执行完整流程
-3. 读取最近 3 天的简报文件（如果有），提取已收录的标题和链接用于跨天去重
-4. **跨简报去重**：同时读取其他两个简报当天的文件（如果有），避免三个简报之间内容重叠
+1. 确认今天日期
+2. 检查 `learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`：
+   - **已存在** → 告知用户"今日已完成"并结束
+   - **不存在** → 继续
 
-### 追加模式规则
+### Phase 1：确定性流水线
 
-- 不修改已有内容的任何部分
-- 在文件末尾追加 `## 🔄 补充采集` 板块（不要编造具体时刻，你无法获取当前精确时间）
-- 如果没有发现新内容，告知用户「今日已采集完毕，暂无新增内容」，不做任何文件修改
+```bash
+python3 scripts/briefing-tools.py run-all
+```
 
-### Phase 2: 去重与评分
+串行跑 ingest → classify → candidates → cleanup。产出：
+- `.kiro_tmp/briefings/runs/YYYY-MM-DD/pool.jsonl`
+- `.kiro_tmp/briefings/runs/YYYY-MM-DD/classified.jsonl`
+- `.kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.{topic}.jsonl` × 3
+- `.kiro_tmp/briefings/runs/YYYY-MM-DD/metrics.json`
+- `.kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.{topic}.stats.json` × 3
 
-#### 去重规则
+**流水线幂等**：重复跑 `run-all` 不会污染简报文件，只覆盖 run 目录。
 
-1. 与最近 3 天简报中已收录内容的标题或链接重复 → 直接排除
-2. 与其他两个简报当天已收录的内容重复 → 排除（避免跨简报重复）
-3. 同一事件的不同报道 → 只保留最权威/最详细的一条
-4. 纯营销/广告/SEO/PR 稿 → 排除
-5. 主题级去重：连续多天的同一话题归入「📈 趋势追踪」板块
+### Phase 2：Web Search 补充
 
-#### 评分维度（1-5 分，满分 20）
+候选集来自 RSS + HN API。Web search 补充长尾官博、论文、安全动态。关键词见 `.kiro/briefings/prompts/curate.{topic}.md`。
 
-- **时效性**：48 小时内 5 分，一周内 3 分，更早 1 分
-- **一手性**：官方博客/论文原文 5 分，深度分析 3 分，转载/综述 1 分
-- **相关性**：与开发者直接相关 5 分，间接相关 3 分
-- **实用性**：可直接用于项目 5 分，了解即可 3 分，纯资讯 1 分
+**搜索规则**：禁止硬编码年月，用当前日期动态生成。
 
-总分 < 12 的不收录。
+### Phase 3：精选
 
-### Phase 4: 写入文件
+**优先**：candidates.{topic}.jsonl 中 score.total ≥ 15 的条目（已打分）
+**其次**：web search 结果按人工判断
+**评分维度（脚本自动）**：
+- 时效性：48h 内 5 / 一周内 3 / 更早 1
+- 一手性：官博/研究 5 / 垂媒 4 / 转载 3（可被 `score_overrides` per-topic 覆盖）
+- 相关性：命中 Walter 偏好栈（LangGraph/MCP/CrewAI/RAG 等）+2
+- 实用性：明确 release/发布/开源动作 +1
 
-1. 将简报写入 `learning-notes/briefings/{主题}/YYYY/MM/YYYY-MM-DD.md`（如目录不存在则创建）
-2. 如果目录下没有 `README.md`，创建索引文件
-3. 更新 `README.md` 索引表格
+### Phase 4：生成简报
 
-### Phase 5: 输出摘要
+使用各自 `.kiro/briefings/prompts/curate.{topic}.md` 中的写作模板。**评分明细 / 标签 / 采集统计不写入正文**。
 
-向用户输出 3-5 行精简摘要：今日最值得关注的 1-2 条、采集/收录统计、趋势变化。
+### Phase 5：写入 + 校验 + 登记 + 分发
 
-## 搜索关键词规则
+```bash
+# 1. fs_write 到 learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
 
-- **禁止硬编码年月**：不要在搜索词中写死 `2026` 或 `April`，而是根据当前日期动态生成
-- 示例：如果今天是 2026-05-15，搜索词应包含 `2026 May` 或 `2026`，而不是固定的 `2026 April`
-- 对于 `pushed:>` 等 GitHub 语法，使用当月 1 号作为起始日期
+# 2. 事务性校验（缺头、无正文、无链接都会 fail exit 1）
+python3 scripts/briefing-tools.py validate \
+    learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
 
-## 通用规则
+# 3. 通过后登记
+python3 scripts/briefing-tools.py register --topic {topic}
+python3 scripts/briefing-tools.py index --topic {topic}
+python3 scripts/briefing-tools.py notify --topic {topic}
+```
 
-- 所有内容使用中文，技术术语可用英文
-- 每条内容必须有来源链接，优先链接到原始出处
-- 摘要要有自己的分析判断，不是简单搬运
-- 关注 Walter 的技术栈偏好：LangGraph、MCP、CrewAI、Python、TypeScript
-- 如果某天确实没有高质量内容，诚实说明，不要凑数
-- 对于重大事件可以用 webFetch 获取原文详情
+**顺序重要**：validate → register。register 内部也会校验，但前置校验让失败时立刻停手、不污染索引。
 
+---
+
+## 配置文件
+
+`.kiro/briefings/config.json` — 所有可调配置：
+
+| 字段 | 含义 |
+|------|------|
+| `freshness_hours` | 采集时效过滤窗口 |
+| `rss_sources[]` | RSS 源（name / url / topic_hints / 可选 timeout） |
+| `classify_rules{}` | per-topic 关键词字典 |
+| `noise_keywords[]` | 低质关键词（噪声惩罚） |
+| `score_overrides{}` | per-topic source 权重覆盖 |
+| `main_topic_rules.priority` | 多 tag 冲突时的优先级 |
+| `source_circuit_breaker.fail_threshold_days` | 熔断阈值（默认 3） |
+| `run_retention_days` | run 目录保留天数 |
+| `published_index_retention_days` | 已发布索引保留天数 |
+| `llm_classify.enabled` | 开启 LLM 批量分类（需 ANTHROPIC_API_KEY） |
+| `semantic_dedup.enabled` | 开启 shingle-based 语义去重 |
+
+---
+
+## 索引与事实来源
+
+| 文件 | 含义 | 维护者 |
+|------|------|--------|
+| `.published-index.json` | 已写入简报 md 的 URL，跨天去重真值 | `register` + `rebuild-index` |
+| `.kiro_tmp/briefings/source-health.json` | 源健康记录（连续失败天数等） | `ingest` 自动 |
+| `.kiro_tmp/briefings/runs/YYYY-MM-DD/` | 当日流水线产物 | `ingest` / `classify` / `candidates` |
+| `.dedup-index.json`（旧 v1） | 已废弃，保留备份可删除 | — |
+
+### 从零重建
+
+```bash
+python3 scripts/briefing-tools.py rebuild-index [--days 60]
+```
+
+### 源健康查看 / 重置
+
+```bash
+python3 scripts/briefing-tools.py health
+python3 scripts/briefing-tools.py health-reset "源名称"
+```
+
+---
+
+## 写作原则
+
+- 所有内容用中文，技术术语可用英文
+- 每条必须有来源链接，优先一手
+- 摘要带分析判断，不搬运
+- 关注 Walter 的偏好栈：LangGraph / MCP / CrewAI / Python / TypeScript
+- 无高质量内容时诚实说明，不凑数
+- 重大事件可用 web_fetch 拉取原文
+- **评分 / 标签 / 采集统计不暴露给读者**
+
+---
 
 ## 异常处理
 
-当采集过程中遇到以下情况时：
-- web search 返回空结果或报错
-- webFetch 无法获取页面内容
-- 文件写入失败
+- web search / web_fetch / 文件写入失败 → 追加到 `learning-notes/briefings/.errors.log`
+- RSS 源失败 → 自动记录到 `source-health.json`，连续 N 天失败自动熔断
+- validate 失败 → 不要执行 register，通知用户修复
 
-执行以下操作：
-1. 在 `learning-notes/briefings/.errors.log` 中追加一行错误记录，格式：`[YYYY-MM-DD HH:MM] {主题} | {错误类型} | {详情}`
-2. 继续执行剩余采集源，不要因为单个源失败就中断整个流程
-3. 在最终输出的统计中标注哪些源采集失败
+---
 
-## 工作流联动
+## 测试
 
-- 简报采集完成后，如果「🔗 与知识库的关联」板块有建议更新的内容，在输出摘要末尾提示：「💡 本期有 X 条知识库更新建议，可触发 🔧 追踪知识库更新 执行」
-- 如果连续 3 天某个采集源返回空结果，在输出中标注该源可能需要更换搜索词
+```bash
+python3 -m unittest discover scripts/tests -v
+```
+
+67+ 单元测试覆盖：分类、评分、去重、候选集过滤、源健康熔断、原子写入、md 校验、retention、end-to-end 集成。
+
+---
+
+## Prompt 文件定位
+
+- `.kiro/briefings/prompts/_shared.md` — 共享 Phase 框架
+- `.kiro/briefings/prompts/curate.{topic}.md` — 各主题差异化
+- 修改模板 / 风格 / 搜索词 → 改 prompt md，不改 hook json
+- 修改源 / 规则 / 阈值 → 改 `.kiro/briefings/config.json`
+- 修改代码逻辑 → 改 `scripts/briefing_tools/*.py`，跑测试
+- hook json 保持极薄（10 行），只负责"读 prompt + 触发 subagent"

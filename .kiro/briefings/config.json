@@ -1,0 +1,111 @@
+{
+  "_comment": "简报采集配置。改这个文件不用改脚本代码。每次 ingest/classify 都会读一遍。",
+  "freshness_hours": 48,
+  "published_index_retention_days": 60,
+  "run_retention_days": 30,
+  "source_circuit_breaker": {
+    "fail_threshold_days": 3,
+    "skip_when_tripped": true
+  },
+  "main_topic_rules": {
+    "_comment": "一条内容同时命中多个 tag 时，决定它的 primary topic。curate 阶段优先给 main topic 收录。",
+    "priority": ["ai-agent", "china-tech", "global-tech"]
+  },
+  "rss_sources": [
+    {"name": "LangChain Blog", "url": "https://blog.langchain.com/rss.xml", "topic_hints": ["ai-agent"]},
+    {"name": "Anthropic Research", "url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_research.xml", "topic_hints": ["ai-agent"], "timeout": 30},
+    {"name": "Anthropic News", "url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_news.xml", "topic_hints": ["ai-agent"], "timeout": 30},
+    {"name": "OpenAI Blog", "url": "https://openai.com/blog/rss.xml", "topic_hints": ["ai-agent"]},
+    {"name": "Google AI Blog", "url": "https://blog.google/technology/ai/rss/", "topic_hints": ["ai-agent"]},
+    {"name": "Hugging Face Blog", "url": "https://huggingface.co/blog/feed.xml", "topic_hints": ["ai-agent"]},
+    {"name": "Wired AI", "url": "https://www.wired.com/feed/tag/ai/latest/rss", "topic_hints": ["ai-agent"]},
+    {"name": "arXiv AI", "url": "https://rss.arxiv.org/rss/cs.AI", "topic_hints": ["ai-agent"]},
+    {"name": "HN AI 关键词 A", "url": "https://hnrss.org/newest?q=AI+agent+OR+MCP+OR+LLM&points=30", "topic_hints": ["ai-agent"]},
+    {"name": "HN AI 关键词 B", "url": "https://hnrss.org/newest?q=LangGraph+OR+CrewAI+OR+Claude+OR+RAG+OR+function+calling+OR+context+engineering&points=20", "topic_hints": ["ai-agent"]},
+
+    {"name": "36氪", "url": "https://36kr.com/feed", "topic_hints": ["china-tech"]},
+    {"name": "InfoQ CN", "url": "https://www.infoq.cn/feed", "topic_hints": ["china-tech"]},
+    {"name": "极客公园", "url": "https://www.geekpark.net/rss", "topic_hints": ["china-tech"]},
+    {"name": "量子位", "url": "https://www.qbitai.com/feed", "topic_hints": ["china-tech"]},
+    {"name": "开源中国", "url": "https://www.oschina.net/news/rss", "topic_hints": ["china-tech"]},
+    {"name": "少数派", "url": "https://sspai.com/feed", "topic_hints": ["china-tech"]},
+    {"name": "HN 中国科技", "url": "https://hnrss.org/newest?q=DeepSeek+OR+Qwen+OR+Baidu+AI+OR+China+AI&points=10", "topic_hints": ["china-tech"]},
+
+    {"name": "HN Top", "url": "https://hnrss.org/frontpage?count=30", "topic_hints": ["global-tech"]},
+    {"name": "TechCrunch", "url": "https://techcrunch.com/feed/", "topic_hints": ["global-tech"]},
+    {"name": "The Verge", "url": "https://www.theverge.com/rss/index.xml", "topic_hints": ["global-tech"]},
+    {"name": "Ars Technica", "url": "https://feeds.arstechnica.com/arstechnica/index", "topic_hints": ["global-tech"]},
+    {"name": "GitHub Blog", "url": "https://github.blog/feed/", "topic_hints": ["global-tech"]},
+    {"name": "Product Hunt", "url": "https://www.producthunt.com/feed", "topic_hints": ["global-tech"]},
+    {"name": "AWS Blog", "url": "https://aws.amazon.com/blogs/aws/feed/", "topic_hints": ["global-tech"]},
+    {"name": "Cloudflare Blog", "url": "https://blog.cloudflare.com/rss/", "topic_hints": ["global-tech"]},
+    {"name": "Kubernetes Blog", "url": "https://kubernetes.io/feed.xml", "topic_hints": ["global-tech"]},
+    {"name": "HN 开发者", "url": "https://hnrss.org/newest?q=Rust+OR+TypeScript+OR+Kubernetes+OR+AWS+OR+security+vulnerability&points=20", "topic_hints": ["global-tech"]}
+  ],
+  "classify_rules": {
+    "ai-agent": {
+      "keywords": [
+        "ai agent", "llm", "gpt", "claude", "gemini", "openai", "anthropic",
+        "langchain", "langgraph", "crewai", "autogen", "llamaindex",
+        "mcp", "model context protocol", "rag", "retrieval augmented",
+        "fine-tuning", "fine tuning", "prompt engineering", "context engineering",
+        "function calling", "tool use", "tool calling", "agentic",
+        "deepseek", "qwen", "通义", "文心", "豆包", "kimi", "智谱", "glm",
+        "huggingface", "hugging face", "transformers",
+        "arxiv", "benchmark", "eval",
+        "inference", "vllm", "ollama"
+      ]
+    },
+    "china-tech": {
+      "keywords": [
+        "阿里", "腾讯", "字节", "百度", "美团", "京东", "华为", "小米",
+        "蚂蚁", "网易", "快手", "拼多多", "滴滴", "理想", "小鹏", "蔚来",
+        "deepseek", "qwen", "baidu", "alibaba", "tencent", "bytedance",
+        "36氪", "量子位", "极客公园", "开源中国", "少数派", "infoq cn",
+        "中国", "国内", "国产", "大陆",
+        "工信部", "网信办", "发改委", "监管", "合规"
+      ]
+    },
+    "global-tech": {
+      "keywords": [
+        "apple", "google", "microsoft", "meta", "amazon", "netflix", "nvidia",
+        "github", "gitlab", "atlassian",
+        "rust", "golang", " go ", "typescript", "javascript", "python",
+        "react", "vue", "svelte", "node.js", "nodejs", "deno", "bun",
+        "aws", "gcp", "azure", "cloudflare", "vercel", "netlify",
+        "kubernetes", "docker", "terraform",
+        "cve", "vulnerability", "zero day", "0-day", "exploit", "ransomware",
+        "data breach", "supply chain attack",
+        "product hunt", "release", "launches", "ipo"
+      ]
+    }
+  },
+  "noise_keywords": [
+    "sponsored", "advertorial", "press release",
+    "showcase", "promo"
+  ],
+  "score_overrides": {
+    "_comment": "per-topic primacy 权重覆盖。key 是 topic，value 是 source 子串→权重的映射。默认全部按 global 规则。",
+    "china-tech": {
+      "primacy_sources": {
+        "开源中国": 5,
+        "infoq": 5,
+        "36氪": 3,
+        "量子位": 4,
+        "极客公园": 4,
+        "少数派": 3
+      }
+    }
+  },
+  "llm_classify": {
+    "enabled": false,
+    "provider": "anthropic",
+    "model": "claude-3-5-haiku-20241022",
+    "_comment": "启用后，classify 阶段会优先用 LLM 打标。无 key 或调用失败时自动退回规则。"
+  },
+  "semantic_dedup": {
+    "enabled": false,
+    "threshold": 0.85,
+    "_comment": "启用后使用 title+description 的 shingle Jaccard 做近义去重。"
+  }
+}

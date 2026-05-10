@@ -73,3 +73,6 @@ application-dev.yml
 Thumbs.db
 .DS_Store
 
+
+# 本地备份文件
+*.bak-*

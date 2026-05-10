@@ -1,0 +1,682 @@
+"""CLI 入口"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+import time
+from datetime import datetime, timedelta
+from pathlib import Path
+
+from .candidates import build_candidates
+from .classify import run_classify
+from .config import (
+    BASE_DIR,
+    LEGACY_INDEX,
+    PUBLISHED_INDEX,
+    REPO_ROOT,
+    SOURCE_HEALTH_FILE,
+    TOPIC_ICONS,
+    TOPIC_NAMES,
+    TOPICS,
+    load_config,
+)
+from .health import is_source_tripped, load_health, reset_source, tripped_sources
+from .http import http_get
+from .ingest import run_ingest
+from .notify import (
+    briefing_github_url,
+    count_briefing_items,
+    extract_briefing_summary,
+    get_bark_url,
+    push_bark,
+)
+from .retention import cleanup_runs
+from .schemas import validate_classified_item, validate_pool_item
+from .storage import (
+    atomic_write,
+    atomic_write_json,
+    atomic_write_jsonl,
+    briefing_file,
+    load_published_index,
+    now_str,
+    read_jsonl,
+    rebuild_published_index,
+    register_published,
+    run_dir,
+    today_str,
+    validate_briefing_md,
+)
+
+
+# ============================================
+# v2 主命令
+# ============================================
+
+def cmd_ingest(args):
+    cfg = load_config()
+    print(f"📡 开始一次性采集 {len(cfg.rss_sources)} 个源")
+    items, metrics, tripped = run_ingest(cfg)
+
+    rd = run_dir()
+    rd.mkdir(parents=True, exist_ok=True)
+    atomic_write_jsonl(rd / "pool.jsonl", items)
+
+    metrics_data = {
+        "stage": "ingest",
+        "at": now_str(),
+        "sources": metrics,
+        "total_items": len(items),
+        "tripped_sources": tripped,
+    }
+    atomic_write_json(rd / "metrics.json", metrics_data)
+    print(f"💾 pool 写入: {rd / 'pool.jsonl'} ({len(items)} 条)")
+    print(f"📊 metrics: {rd / 'metrics.json'}")
+
+    failed = [m["name"] for m in metrics if not m["ok"]]
+    if failed:
+        print(f"⚠️  本次失败源 ({len(failed)}): {', '.join(failed)}")
+
+
+def cmd_classify(args):
+    cfg = load_config()
+    rd = run_dir()
+    pool_path = rd / "pool.jsonl"
+    if not pool_path.exists():
+        print(f"❌ pool 不存在: {pool_path}", file=sys.stderr)
+        print("   请先运行: python3 scripts/briefing-tools.py ingest", file=sys.stderr)
+        sys.exit(1)
+
+    # Validate input
+    items = []
+    skipped = 0
+    for raw in read_jsonl(pool_path):
+        try:
+            pi = validate_pool_item(raw)
+            items.append(pi.to_dict())
+        except Exception as e:
+            skipped += 1
+            print(f"  ⚠️  跳过损坏条目: {e}", file=sys.stderr)
+    if skipped:
+        print(f"  🛡  schema 校验跳过 {skipped} 条损坏数据")
+
+    if cfg.llm_classify.enabled:
+        print(f"  🤖 LLM 分类已启用: {cfg.llm_classify.provider}/{cfg.llm_classify.model}")
+
+    classified = run_classify(items, cfg)
+    atomic_write_jsonl(rd / "classified.jsonl", classified)
+
+    # tag 分布统计
+    counts = {t: 0 for t in TOPICS}
+    counts["(none)"] = 0
+    main_counts = {t: 0 for t in TOPICS}
+    main_counts["(none)"] = 0
+    for it in classified:
+        if not it["tags"]:
+            counts["(none)"] += 1
+        for t in it["tags"]:
+            counts[t] = counts.get(t, 0) + 1
+        mt = it.get("main_topic") or "(none)"
+        main_counts[mt] = main_counts.get(mt, 0) + 1
+
+    print(f"💾 classified 写入: {rd / 'classified.jsonl'} ({len(classified)} 条)")
+    print("📊 tag 分布（多标签）:")
+    for t, c in counts.items():
+        print(f"   {t}: {c}")
+    print("📊 main_topic 分布:")
+    for t, c in main_counts.items():
+        print(f"   {t}: {c}")
+
+
+def cmd_candidates(args):
+    cfg = load_config()
+    rd = run_dir()
+    classified_path = rd / "classified.jsonl"
+    if not classified_path.exists():
+        print(f"❌ classified 不存在: {classified_path}", file=sys.stderr)
+        sys.exit(1)
+
+    classified = []
+    for raw in read_jsonl(classified_path):
+        try:
+            ci = validate_classified_item(raw)
+            classified.append(ci.to_dict())
+        except Exception as e:
+            print(f"  ⚠️  跳过损坏条目: {e}", file=sys.stderr)
+
+    topics = [args.topic] if args.topic != "all" else TOPICS
+    for t in topics:
+        result = build_candidates(
+            classified, t, today_str(), cfg,
+            min_score=args.min_score,
+            require_main_topic=args.require_main_topic,
+        )
+        out_path = rd / f"candidates.{t}.jsonl"
+        atomic_write_jsonl(out_path, result["items"])
+        atomic_write_json(rd / f"candidates.{t}.stats.json", {"stats": result["stats"]})
+        print(f"📦 {t}: 保留 {result['stats']['kept']}/{result['stats']['input']} 条")
+        print(f"   过滤明细: {result['stats']['filtered']}")
+        print(f"   候选集: {out_path}")
+
+
+def cmd_register(args):
+    cfg = load_config()
+    topics = [args.topic] if args.topic != "all" else TOPICS
+    for t in topics:
+        result = register_published(t, args.date, retention_days=cfg.published_index_retention_days)
+        if "error" in result:
+            print(f"⚠️  {t} ({result['date']}): {result['error']}")
+        else:
+            print(f"📋 {t} ({result['date']}): 新增 {result['registered']}/{result['total_urls']} URLs")
+
+
+def cmd_rebuild_index(args):
+    print(f"🔄 扫描最近 {args.days} 天的简报文件…")
+    result = rebuild_published_index(days=args.days)
+    print(f"✅ 扫描 {result['files_scanned']} 个 md 文件，登记 {result['urls_registered']} 个 URL")
+
+
+def cmd_validate(args):
+    """校验一个简报 md 是否符合"已完成"的格式要求"""
+    path = Path(args.path)
+    ok, reason = validate_briefing_md(path)
+    if ok:
+        print(f"✅ {path}: valid")
+        sys.exit(0)
+    else:
+        print(f"❌ {path}: {reason}", file=sys.stderr)
+        sys.exit(1)
+
+
+def cmd_cleanup(args):
+    cfg = load_config()
+    days = args.days if args.days is not None else cfg.run_retention_days
+    result = cleanup_runs(days)
+    print(f"🧹 run 目录清理: removed={result['removed']} kept={result['kept']} cutoff={result.get('cutoff', '?')}")
+
+
+def cmd_run_all(args):
+    cfg = load_config()
+    print("=" * 60)
+    print("Stage 1: ingest")
+    print("=" * 60)
+    cmd_ingest(args)
+    print()
+    print("=" * 60)
+    print("Stage 2: classify")
+    print("=" * 60)
+    cmd_classify(args)
+    print()
+    print("=" * 60)
+    print("Stage 3: candidates (all topics)")
+    print("=" * 60)
+    args.topic = "all"
+    args.min_score = getattr(args, "min_score", 12)
+    args.require_main_topic = getattr(args, "require_main_topic", False)
+    cmd_candidates(args)
+    print()
+    print("=" * 60)
+    print("Stage 4: cleanup old runs")
+    print("=" * 60)
+    args.days = cfg.run_retention_days
+    cmd_cleanup(args)
+    print()
+    print("✅ 流水线完成")
+
+
+def cmd_health(args):
+    """查看源健康状态"""
+    cfg = load_config()
+    threshold = cfg.circuit_breaker.fail_threshold_days
+    data = load_health()
+    sources = data.get("sources", {})
+
+    tripped = tripped_sources(threshold)
+    if tripped:
+        print(f"## 🚨 熔断源（连续失败 ≥ {threshold} 天）")
+        for s in tripped:
+            print(f"  - {s['name']}: {s['consecutive_failures']} 天连续失败（最后失败于 {s.get('last_fail_date', '?')}）")
+    else:
+        print(f"## ✅ 暂无熔断源（阈值: {threshold} 天）")
+
+    print("\n## 📡 全部源状态")
+    print("| 源 | 最近成功 | 最近失败 | 连续失败 | 总运行次数 |")
+    print("|----|----------|----------|----------|-----------|")
+    for name in sorted(sources.keys()):
+        s = sources[name]
+        print(f"| {name} | {s.get('last_ok_date', '—')} | {s.get('last_fail_date', '—')} | "
+              f"{s.get('consecutive_failures', 0)} | {s.get('total_runs', 0)} |")
+
+
+def cmd_health_reset(args):
+    reset_source(args.name)
+    print(f"✅ 已重置源健康状态: {args.name}")
+
+
+# ============================================
+# Status 面板
+# ============================================
+
+def _collect_status() -> dict:
+    today = datetime.now()
+    report = {"date": today_str(), "topics": {}}
+    for topic in TOPICS:
+        topic_base = BASE_DIR / topic
+        if not topic_base.exists():
+            report["topics"][topic] = {
+                "status": "🆕", "latest": None,
+                "total": 0, "this_week": 0, "this_month": 0,
+            }
+            continue
+        md_files = sorted(
+            [f for f in topic_base.rglob("*.md") if f.name != "README.md"],
+            reverse=True,
+        )
+        dates = []
+        for f in md_files:
+            m = re.match(r"(\d{4}-\d{2}-\d{2})", f.stem)
+            if m:
+                dates.append(m.group(1))
+        latest = dates[0] if dates else None
+        days_ago = None
+        status = "🆕"
+        if latest:
+            try:
+                days_ago = (today - datetime.strptime(latest, "%Y-%m-%d")).days
+                status = "✅" if days_ago == 0 else ("⚠️" if days_ago == 1 else "❌")
+            except ValueError:
+                pass
+        week_start = (today - timedelta(days=today.weekday())).strftime("%Y-%m-%d")
+        month_start = today.strftime("%Y-%m-01")
+        report["topics"][topic] = {
+            "status": status,
+            "latest": latest,
+            "days_ago": days_ago,
+            "total": len(dates),
+            "this_week": sum(1 for d in dates if d >= week_start),
+            "this_month": sum(1 for d in dates if d >= month_start),
+        }
+
+    if PUBLISHED_INDEX.exists():
+        idx = load_published_index()
+        report["index_size"] = len(idx.get("items", {}))
+        report["index_updated"] = idx.get("updated", "")
+    else:
+        report["index_size"] = 0
+        report["index_updated"] = "未创建"
+
+    # 今日 run 状态
+    rd = run_dir()
+    report["run"] = {
+        "exists": rd.exists(),
+        "dir": str(rd) if rd.exists() else None,
+        "stages": [],
+    }
+    if rd.exists():
+        for name in ["pool.jsonl", "classified.jsonl"]:
+            p = rd / name
+            if p.exists():
+                try:
+                    lines = sum(1 for _ in p.open())
+                except Exception:
+                    lines = 0
+                report["run"]["stages"].append({"file": name, "items": lines})
+        for topic in TOPICS:
+            p = rd / f"candidates.{topic}.jsonl"
+            if p.exists():
+                try:
+                    lines = sum(1 for _ in p.open())
+                except Exception:
+                    lines = 0
+                report["run"]["stages"].append({"file": p.name, "items": lines})
+
+    # 熔断源
+    cfg = load_config()
+    report["tripped_sources"] = [s["name"] for s in tripped_sources(cfg.circuit_breaker.fail_threshold_days)]
+    return report
+
+
+def _format_status(report: dict) -> str:
+    lines = [f"## 📊 简报采集状态 — {report['date']}\n"]
+    lines.append("| 主题 | 最近采集 | 距今 | 状态 | 本周/本月/总计 |")
+    lines.append("|------|----------|------|------|---------------|")
+    for topic, info in report["topics"].items():
+        n = TOPIC_NAMES.get(topic, topic)
+        latest = info["latest"] or "从未采集"
+        days = f"{info['days_ago']} 天" if info["days_ago"] is not None else "-"
+        counts = f"{info['this_week']}/{info['this_month']}/{info['total']}"
+        lines.append(f"| {n} | {latest} | {days} | {info['status']} | {counts} |")
+    lines.append(f"\n已发布索引: {report['index_size']} 条 (更新于 {report['index_updated']})")
+
+    if report.get("tripped_sources"):
+        lines.append(f"\n🚨 熔断源: {', '.join(report['tripped_sources'])}")
+
+    if report.get("run", {}).get("exists"):
+        lines.append(f"\n### 🏃 今日运行状态 ({report['run']['dir']})")
+        for stage in report["run"]["stages"]:
+            lines.append(f"- {stage['file']}: {stage['items']} 条")
+
+    lines.append("\n### 💡 建议")
+    for topic, info in report["topics"].items():
+        n = TOPIC_NAMES.get(topic, topic)
+        if info["status"] in ("❌", "🆕"):
+            lines.append(f"- 🔴 **{n}** 需要采集")
+        elif info["status"] == "⚠️":
+            lines.append(f"- 🟡 **{n}** 建议今天更新")
+    return "\n".join(lines)
+
+
+def cmd_status(args):
+    report = _collect_status()
+    if args.json:
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+    else:
+        print(_format_status(report))
+
+    if args.check_sources:
+        cfg = load_config()
+        print("\n## 🔗 采集源健康检查\n")
+        print("| 源名称 | topic_hints | 状态 | 耗时 |")
+        print("|--------|-------------|------|------|")
+        for src in cfg.rss_sources:
+            t0 = time.time()
+            result = http_get(src["url"], timeout=10)
+            elapsed = time.time() - t0
+            status = "✅ 可用" if result else "❌ 不可达"
+            hints = ",".join(src.get("topic_hints", []))
+            print(f"| {src['name']} | {hints} | {status} | {elapsed:.1f}s |")
+
+
+# ============================================
+# index / notify / show-rules
+# ============================================
+
+def cmd_index(args):
+    topics = [args.topic] if args.topic != "all" else TOPICS
+    for t in topics:
+        print(f"📋 同步索引: {t}")
+        _sync_readme(t)
+    lines = ["# 📰 简报中心", "", "| 主题 | 目录 |", "|------|------|"]
+    for t in TOPICS:
+        lines.append(f"| {TOPIC_NAMES[t]}简报 | [{t}/]({t}/) |")
+    atomic_write(BASE_DIR / "README.md", "\n".join(lines) + "\n")
+    print("  ✅ 已更新顶层 README")
+
+
+def _sync_readme(topic: str):
+    topic_base = BASE_DIR / topic
+    readme = topic_base / "README.md"
+    if not topic_base.exists():
+        print(f"  目录不存在: {topic_base}")
+        return
+    entries = []
+    for year_dir in sorted(topic_base.iterdir(), reverse=True):
+        if not year_dir.is_dir() or year_dir.name.startswith("."):
+            continue
+        for month_dir in sorted(year_dir.iterdir(), reverse=True):
+            if not month_dir.is_dir():
+                continue
+            for md_file in sorted(month_dir.iterdir(), reverse=True):
+                if md_file.suffix == ".md" and md_file.name != "README.md":
+                    rel = md_file.relative_to(topic_base)
+                    entries.append({
+                        "date": md_file.stem,
+                        "path": str(rel),
+                        "is_weekly": "weekly" in md_file.stem.lower(),
+                    })
+    lines = [
+        f"# 📰 {TOPIC_NAMES.get(topic, topic)}简报",
+        "",
+        f"> 共 {len(entries)} 篇 | 最近更新: {entries[0]['date'] if entries else '无'}",
+        "",
+        "| 日期 | 类型 | 链接 |",
+        "|------|------|------|",
+    ]
+    for e in entries:
+        t = "📅 周报" if e["is_weekly"] else "📰 日报"
+        lines.append(f"| {e['date']} | {t} | [{e['date']}]({e['path']}) |")
+    atomic_write(readme, "\n".join(lines) + "\n")
+    print(f"  ✅ 已更新 {readme} ({len(entries)} 条)")
+
+
+def cmd_notify(args):
+    bark_url = get_bark_url()
+    if not bark_url:
+        print("❌ 未配置 BARK_URL，跳过推送")
+        return
+
+    topics = [args.topic] if args.topic != "all" else TOPICS
+    if args.topic == "all":
+        all_lines = []
+        total_count = 0
+        first_url = ""
+        for t in topics:
+            summary = extract_briefing_summary(t)
+            if summary:
+                _, body, gh_url = summary
+                if not first_url:
+                    first_url = gh_url
+                icon = TOPIC_ICONS.get(t, "📰")
+                name = TOPIC_NAMES.get(t, t)
+                fp = briefing_file(t)
+                if fp.exists():
+                    content = fp.read_text(encoding="utf-8")
+                    m = re.search(r"最终收录：(\d+) 条", content)
+                    if not m:
+                        m = re.search(r"评分筛选后收录\s*\|\s*(\d+)\s*条", content)
+                    c = int(m.group(1)) if m else count_briefing_items(content)
+                    total_count += c
+                all_lines.append(f"{icon} {name}")
+                all_lines.append(body)
+                all_lines.append("")
+        if all_lines:
+            today = datetime.now().strftime("%m-%d")
+            title = f"📰 今日简报 {today}｜共 {total_count} 条"
+            body = "\n".join(all_lines).strip()
+            push_bark(bark_url, title, body, open_url=first_url)
+        else:
+            print("⚠️ 今天没有简报文件，跳过推送")
+    else:
+        summary = extract_briefing_summary(args.topic)
+        if summary:
+            title, body, gh_url = summary
+            push_bark(bark_url, title, body, open_url=gh_url)
+        else:
+            print(f"⚠️ 今天没有 {args.topic} 简报文件，跳过推送")
+
+
+def cmd_show_rules(args):
+    rules_path = REPO_ROOT / ".kiro" / "steering" / "briefing-rules.md"
+    if not rules_path.exists():
+        print(f"❌ 未找到规则文件: {rules_path}", file=sys.stderr)
+        sys.exit(1)
+    print(rules_path.read_text(encoding="utf-8"))
+
+
+# ============================================
+# v1 兼容
+# ============================================
+
+def cmd_collect(args):
+    """[v1 兼容] 单主题采集"""
+    cfg = load_config()
+    print(f"📡 [v1] 单主题采集: {args.topic}")
+    sources = [s for s in cfg.rss_sources if args.topic in s.get("topic_hints", [])]
+
+    # 临时把 config 的 rss_sources 替换为子集，复用 run_ingest
+    original = cfg.rss_sources
+    try:
+        cfg.rss_sources = sources
+        items, _, _ = run_ingest(cfg)
+    finally:
+        cfg.rss_sources = original
+
+    for it in items:
+        it.pop("source_topic_hints", None)
+    output = {
+        "topic": args.topic,
+        "collected_at": now_str(),
+        "total": len(items),
+        "items": items,
+    }
+    if args.output:
+        Path(args.output).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.output).write_text(
+            json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+        print(f"💾 已保存到: {args.output}")
+    else:
+        print(json.dumps(output, ensure_ascii=False, indent=2))
+
+
+def cmd_dedup(args):
+    """[v1 兼容] 旧 dedup 接口"""
+    from .dedup import title_in
+    from .storage import extract_titles_from_md, extract_urls_from_md, url_hash
+
+    if args.input:
+        data = json.loads(Path(args.input).read_text(encoding="utf-8"))
+    else:
+        data = json.load(sys.stdin)
+    items = data.get("items", [])
+    print(f"🔍 [v1 兼容] 去重: {len(items)} 条输入 (主题: {args.topic})")
+
+    published = load_published_index()["items"]
+    other_titles = []
+    other_urls = set()
+    for ot in TOPICS:
+        if ot == args.topic:
+            continue
+        f = briefing_file(ot)
+        other_titles.extend(extract_titles_from_md(f))
+        other_urls |= extract_urls_from_md(f)
+
+    kept, removed, seen_titles = [], [], []
+    for item in items:
+        uh = url_hash(item.get("url", ""))
+        reason = None
+        if uh in published:
+            reason = f"已在 {published[uh].get('date', '?')} 简报中发布"
+        elif item.get("url") in other_urls:
+            reason = "今日其他主题已收录（URL）"
+        elif title_in(item.get("title", ""), other_titles, 0.5):
+            reason = "今日其他主题已收录（标题相似）"
+        elif title_in(item.get("title", ""), seen_titles, 0.6):
+            reason = "批次内标题相似"
+        if reason:
+            item["dedup_reason"] = reason
+            removed.append(item)
+        else:
+            kept.append(item)
+            seen_titles.append(item.get("title", ""))
+
+    print(f"  ✅ 保留: {len(kept)} 条")
+    print(f"  ❌ 去重: {len(removed)} 条")
+    output = {
+        "topic": args.topic,
+        "deduped_at": now_str(),
+        "kept": len(kept),
+        "removed": len(removed),
+        "items": kept,
+        "removed_items": removed,
+    }
+    if args.output:
+        Path(args.output).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.output).write_text(
+            json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+        print(f"💾 已保存到: {args.output}")
+    else:
+        print(json.dumps(output, ensure_ascii=False, indent=2))
+
+
+# ============================================
+# Main
+# ============================================
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="简报工具集 v3 — 管道式采集（含测试/熔断/事务性）")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    p = sub.add_parser("ingest", help="一次采集全部源")
+    p.set_defaults(func=cmd_ingest)
+
+    p = sub.add_parser("classify", help="规则打标 + 评分（可选 LLM）")
+    p.set_defaults(func=cmd_classify)
+
+    p = sub.add_parser("candidates", help="按主题分流候选集")
+    p.add_argument("--topic", default="all", choices=TOPICS + ["all"])
+    p.add_argument("--min-score", type=int, default=12)
+    p.add_argument("--require-main-topic", action="store_true",
+                   help="只保留 main_topic 等于本主题的条目")
+    p.set_defaults(func=cmd_candidates)
+
+    p = sub.add_parser("register", help="把已写入简报的 URL 登记到 published-index")
+    p.add_argument("--topic", default="all", choices=TOPICS + ["all"])
+    p.add_argument("--date", help="YYYY-MM-DD，默认今天")
+    p.set_defaults(func=cmd_register)
+
+    p = sub.add_parser("rebuild-index", help="从历史 md 文件重建 published-index")
+    p.add_argument("--days", type=int, default=60)
+    p.set_defaults(func=cmd_rebuild_index)
+
+    p = sub.add_parser("validate", help="校验简报 md 是否是有效完成状态")
+    p.add_argument("path", help="简报 md 路径")
+    p.set_defaults(func=cmd_validate)
+
+    p = sub.add_parser("cleanup", help="清理旧 run 目录")
+    p.add_argument("--days", type=int, default=None, help="默认读 config.run_retention_days")
+    p.set_defaults(func=cmd_cleanup)
+
+    p = sub.add_parser("run-all", help="一键跑 ingest → classify → candidates → cleanup")
+    p.set_defaults(func=cmd_run_all)
+
+    p = sub.add_parser("health", help="查看源健康状态 / 熔断情况")
+    p.set_defaults(func=cmd_health)
+
+    p = sub.add_parser("health-reset", help="重置某个源的健康计数")
+    p.add_argument("name", help="源名称")
+    p.set_defaults(func=cmd_health_reset)
+
+    # v1 兼容
+    p = sub.add_parser("collect", help="[v1] 单主题采集")
+    p.add_argument("--topic", required=True, choices=TOPICS)
+    p.add_argument("--output", "-o")
+    p.set_defaults(func=cmd_collect)
+
+    p = sub.add_parser("dedup", help="[v1 兼容] 对采集结果去重")
+    p.add_argument("--topic", required=True, choices=TOPICS)
+    p.add_argument("--input", "-i")
+    p.add_argument("--output", "-o")
+    p.set_defaults(func=cmd_dedup)
+
+    # 通用
+    p = sub.add_parser("status", help="简报采集状态面板")
+    p.add_argument("--json", action="store_true")
+    p.add_argument("--check-sources", action="store_true")
+    p.set_defaults(func=cmd_status)
+
+    p = sub.add_parser("index", help="同步 README 索引")
+    p.add_argument("--topic", default="all", choices=TOPICS + ["all"])
+    p.set_defaults(func=cmd_index)
+
+    p = sub.add_parser("notify", help="推送简报摘要到 Bark")
+    p.add_argument("--topic", default="all", choices=TOPICS + ["all"])
+    p.set_defaults(func=cmd_notify)
+
+    p = sub.add_parser("show-rules", help="输出 briefing-rules.md")
+    p.set_defaults(func=cmd_show_rules)
+
+    return parser
+
+
+def main(argv: list[str] | None = None) -> None:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    args.func(args)
+
+
+if __name__ == "__main__":
+    main()
