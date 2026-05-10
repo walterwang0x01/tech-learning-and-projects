@@ -1,0 +1,407 @@
+# GitOps 实践
+
+> Author: Walter Wang
+
+<!-- version-check: Argo CD 2.14, Flux 2.5, Argo Rollouts 1.8, checked 2026-05-10 -->
+
+## 1. 什么是 GitOps
+
+Weaveworks 2017 年提出，四大原则：
+
+```
+1. 声明式：整个系统的期望状态用代码表达
+2. 版本化：代码在 Git，任何变更都有审计
+3. 自动部署：Git 是源头，Operator 拉取并同步集群
+4. 持续协调：集群状态漂移时自动恢复
+```
+
+```
+传统 CI/CD：
+  push code → CI → deploy → 集群
+  （推模型，CI 系统有集群凭证）
+
+GitOps：
+  push code → CI（构建镜像）→ 更新 Git
+  Argo CD 拉取 Git → 同步到集群
+  （拉模型，集群无需暴露给 CI）
+```
+
+## 2. 为什么 GitOps 赢了
+
+```
+├─ 审计性：所有变更有 Commit 历史
+├─ 可回滚：git revert 就能回滚基础设施
+├─ 可重建：灾难恢复时从 Git 重建集群
+├─ 安全性：CI 不需要集群 admin 权限
+├─ 多集群：同一个仓库部署到多个环境
+└─ 团队协作：Pull Request 走审批流程
+```
+
+## 3. Argo CD vs Flux
+
+2026 年主流二选一：
+
+```
+Argo CD                     Flux v2
+├─ UI 体验强（Dashboard）      ├─ 纯 CLI / Kubectl 风格
+├─ App of Apps 模式            ├─ Kustomize + Helm 原生
+├─ ApplicationSet 多集群        ├─ OCI Artifacts 支持好
+├─ Argo Rollouts 配合           ├─ Flagger 配合
+├─ 功能最全                     ├─ 更轻量、K8s native
+└─ CNCF Graduated               └─ CNCF Graduated
+
+选型：
+├─ 要 GUI、功能丰富 → Argo CD
+├─ 纯 GitOps 极简主义 → Flux
+├─ 多集群、跨 Region → Argo CD（ApplicationSet 强）
+```
+
+## 4. Argo CD 基础
+
+### 4.1 安装
+
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# 初始密码
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+### 4.2 Application 定义
+
+```yaml
+# apps/my-service.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-service
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/myorg/infra.git
+    targetRevision: main
+    path: apps/my-service/overlays/production
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+
+  syncPolicy:
+    automated:
+      prune: true           # 资源在 Git 里删了就从集群删
+      selfHeal: true        # 集群被手动改了就恢复
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+```
+
+### 4.3 App of Apps 模式
+
+一个"主 App"管理多个子 App：
+
+```yaml
+# apps/root.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/myorg/infra.git
+    targetRevision: main
+    path: apps/    # 包含所有子 Application 定义
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated: {prune: true, selfHeal: true}
+```
+
+## 5. 标准仓库结构
+
+**推荐：应用代码仓库 和 基础设施仓库分离**。
+
+```
+应用代码仓库（app-repo）
+├── src/
+├── Dockerfile
+└── .github/workflows/build.yml   # 构建镜像，推送到 Registry，更新 infra-repo 的镜像 tag
+
+基础设施仓库（infra-repo）
+├── apps/
+│   ├── my-service/
+│   │   ├── base/                 # 基础 Kustomize
+│   │   │   ├── deployment.yaml
+│   │   │   ├── service.yaml
+│   │   │   └── kustomization.yaml
+│   │   └── overlays/
+│   │       ├── dev/
+│   │       ├── staging/
+│   │       └── production/
+│   └── another-service/
+├── argocd/
+│   └── apps/                      # Argo CD Application 定义
+└── clusters/
+    ├── dev/
+    ├── staging/
+    └── production/
+```
+
+## 6. Kustomize 实战
+
+```yaml
+# apps/my-service/base/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deployment.yaml
+  - service.yaml
+
+commonLabels:
+  app: my-service
+
+images:
+  - name: myapp
+    newName: ghcr.io/myorg/my-service
+    newTag: placeholder   # CI 会更新这个 tag
+```
+
+```yaml
+# apps/my-service/overlays/production/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+
+namespace: production
+
+replicas:
+  - name: my-service
+    count: 5
+
+patches:
+  - path: resources-patch.yaml
+    target:
+      kind: Deployment
+      name: my-service
+```
+
+## 7. Helm 与 GitOps 协同
+
+GitOps 推荐 **Helm 渲染后提交**（而不是 Argo CD 运行时渲染）：
+
+```bash
+# CI 中
+helm template my-service charts/my-service \
+    -f values-production.yaml \
+    --output-dir rendered/
+
+# 提交 rendered/ 到 infra repo
+# Argo CD 只需要管纯 K8s YAML
+```
+
+好处：
+- 更可审计（Git diff 看到实际 YAML）
+- Argo CD 不用管 Helm 版本
+- 多集群部署行为一致
+
+## 8. Image Updater：自动化镜像发布
+
+Argo CD Image Updater 监视镜像 Registry，自动更新 Git：
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-service
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: myapp=ghcr.io/myorg/my-service
+    argocd-image-updater.argoproj.io/myapp.update-strategy: semver
+    argocd-image-updater.argoproj.io/myapp.allow-tags: "regexp:^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/git-branch: main
+spec: { ... }
+```
+
+CI 只需推镜像，后面 Image Updater 自动写 Git。
+
+## 9. Progressive Delivery（渐进式发布）
+
+### 9.1 Argo Rollouts
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-service
+spec:
+  replicas: 10
+  strategy:
+    canary:
+      steps:
+        - setWeight: 10          # 10% 流量
+        - pause: {duration: 5m}
+        - setWeight: 30
+        - pause: {duration: 10m}
+        - setWeight: 50
+        - pause: {duration: 10m}
+        - setWeight: 100
+      analysis:
+        templates:
+          - templateName: error-rate
+        args:
+          - name: service-name
+            value: my-service
+        startingStep: 2
+        interval: 30s
+        failureLimit: 3
+  selector:
+    matchLabels: {app: my-service}
+  template: { ... }
+
+---
+# AnalysisTemplate：定义成功指标
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: error-rate
+spec:
+  args:
+    - name: service-name
+  metrics:
+    - name: error-rate
+      interval: 1m
+      successCondition: result[0] < 0.01   # 错误率 < 1%
+      failureLimit: 3
+      provider:
+        prometheus:
+          address: http://prometheus:9090
+          query: |
+            sum(rate(http_requests_total{service="{{args.service-name}}",status=~"5.."}[5m]))
+            /
+            sum(rate(http_requests_total{service="{{args.service-name}}"}[5m]))
+```
+
+发布自动在每一步后查 Prometheus，指标不达标自动回滚。
+
+### 9.2 Flagger（配合 Flux）
+
+类似功能，但基于 Service Mesh（Istio / Linkerd / Envoy）。
+
+## 10. 密钥管理
+
+GitOps 仓库里**不能**放明文密钥：
+
+```
+方案：
+├─ SOPS（Mozilla）+ Argo CD Plugin
+│   └─ 用 GPG/KMS 加密文件后提交 Git
+│
+├─ External Secrets Operator
+│   └─ K8s 中的 ExternalSecret 资源拉取 Vault/AWS SM/GCP SM
+│
+├─ Sealed Secrets（Bitnami）
+│   └─ K8s 集群私钥解密，其他环境解密不了
+│
+└─ Vault Agent Injector
+    └─ Pod 启动时自动注入 Vault Token
+```
+
+2026 年推荐 **External Secrets Operator**（功能最全）。
+
+## 11. 多环境 + 多集群
+
+```
+单仓库 + 多 Overlay（推荐）：
+infra-repo/
+├── base/
+├── overlays/
+│   ├── dev/
+│   ├── staging/
+│   └── production/
+└── argocd/
+    └── apps-{dev,staging,production}.yaml  # 每环境一个 App 集合
+
+Argo CD ApplicationSet：一份配置生成 N 个 App
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: my-service
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: dev
+            url: https://dev.k8s.local
+          - cluster: prod
+            url: https://prod.k8s.local
+  template:
+    metadata:
+      name: '{{cluster}}-my-service'
+    spec:
+      source:
+        path: apps/my-service/overlays/{{cluster}}
+      destination:
+        server: '{{url}}'
+        namespace: production
+```
+
+## 12. 生产检查清单
+
+```
+☐ 应用代码和基础设施仓库分离
+☐ 所有环境用 Overlay（不要直接改 base）
+☐ Argo CD Self-Heal + Prune 开启（生产慎用 prune）
+☐ 密钥用 SOPS / External Secrets，不提交明文
+☐ Image Updater 自动化镜像发布
+☐ Progressive Delivery（Argo Rollouts / Flagger）
+☐ Analysis Template 基于 Prometheus SLO 指标
+☐ Argo CD 自身也用 GitOps 管理（self-hosting）
+☐ RBAC：Argo CD 按团队 / 项目隔离权限
+☐ 备份 Argo CD 配置（它管理的状态）
+☐ 监控 Argo CD 同步延迟和失败率
+☐ DR：从 Git 重建集群的剧本
+```
+
+## 13. 反模式
+
+```
+❌ 手动 kubectl apply
+   → 和 GitOps 原则违背，会被 Argo 覆盖
+
+❌ 代码仓库里直接 commit yaml
+   → 分两个仓库，avoid cross-concerns
+
+❌ 明文密钥进 Git
+   → 即使 private repo 也是事故隐患
+
+❌ 一个 Application 管所有东西
+   → 变更爆炸半径大，出错全挂
+
+❌ 生产环境开 auto-sync
+   → 小改动直接生产，建议 manual approve
+
+❌ 不用 Rollouts，直接 Deployment
+   → 新版本有 bug，全流量中招
+```
+
+## 📖 参考资料
+
+- [Argo CD 官方文档](https://argo-cd.readthedocs.io/)
+- [Flux 文档](https://fluxcd.io/docs/)
+- [GitOps Principles](https://opengitops.dev/)
+- [Argo Rollouts](https://argoproj.github.io/argo-rollouts/)
+- [External Secrets Operator](https://external-secrets.io/)
+- [CNCF GitOps Working Group](https://github.com/open-gitops/project)

@@ -1,0 +1,308 @@
+# Internal Developer Portal（IDP）
+
+> Author: Walter Wang
+
+<!-- version-check: Backstage 1.35, Port 2024, Cortex, OpsLevel, checked 2026-05-10 -->
+
+## 1. Portal 的核心价值
+
+```
+Internal Developer Portal 回答的问题：
+├─ 我们有哪些服务？谁负责？    （Catalog）
+├─ 怎么新建一个服务？           （Scaffolder）
+├─ 这个服务的文档/接口/指标？    （Tech Docs + Plugins）
+├─ 这个服务符合我们的标准吗？    （Scorecards）
+└─ 我怎么做 X？（部署、扩容等）  （Actions）
+```
+
+## 2. 工具对比（2026）
+
+| 工具 | 定位 | 特点 |
+|------|------|------|
+| **Backstage** | 开源 | Spotify 开源，CNCF 孵化，自定义强、需要工程投入 |
+| **Port** | SaaS | 开箱即用、上手快、按需付费 |
+| **Cortex** | SaaS | 侧重 Scorecards / Ownership |
+| **OpsLevel** | SaaS | 侧重成熟度评估 |
+| **Compass**（Atlassian）| SaaS | Jira 集成好 |
+| **Humanitec** | SaaS | 侧重"应用部署"自助 |
+
+**选型建议**：
+- **有专人维护、定制需求强** → Backstage
+- **要快速上手、中小团队** → Port / Cortex
+- **Atlassian 生态** → Compass
+
+## 3. Backstage 基础
+
+### 3.1 安装
+
+```bash
+npx @backstage/create-app@latest
+cd my-backstage
+yarn install
+yarn start
+# 访问 http://localhost:3000
+```
+
+### 3.2 Catalog：服务/资源清单
+
+```yaml
+# catalog-info.yaml（放在每个服务的仓库）
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: payment-service
+  description: 支付服务
+  annotations:
+    github.com/project-slug: myorg/payment-service
+    backstage.io/techdocs-ref: dir:.
+    prometheus.io/rule: payment-service
+    pagerduty.com/service-id: PXXXXXX
+    argocd/app-name: payment-service
+  tags:
+    - go
+    - critical
+  links:
+    - url: https://grafana.company/d/payment
+      title: Grafana
+spec:
+  type: service
+  lifecycle: production
+  owner: team-payments
+  system: commerce-platform
+  providesApis:
+    - payment-api
+  dependsOn:
+    - resource:postgres-payment
+    - component:notification-service
+```
+
+### 3.3 用 Scaffolder 创建服务
+
+```yaml
+# templates/go-service/template.yaml
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: go-microservice
+  title: Create a Go Microservice
+spec:
+  owner: platform-team
+  type: service
+
+  parameters:
+    - title: Service Info
+      required: [name, owner]
+      properties:
+        name: {type: string, pattern: '^[a-z-]+$'}
+        description: {type: string}
+        owner:
+          type: string
+          ui:field: OwnerPicker
+
+  steps:
+    - id: fetch
+      name: Fetch skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+          owner: ${{ parameters.owner }}
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        repoUrl: github.com?repo=${{ parameters.name }}&owner=myorg
+        defaultBranch: main
+        gitAuthorName: Backstage
+
+    - id: register
+      name: Register in Catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+
+    - id: argo-app
+      name: Create Argo CD App
+      action: http:backstage:request
+      input:
+        method: POST
+        path: /api/argocd/app
+        body:
+          name: ${{ parameters.name }}
+          # ...
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Backstage Catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
+```
+
+这样开发者点"Create Go Microservice"填表单，几分钟内就有：
+- GitHub 仓库（代码骨架、CI、Dockerfile）
+- Argo CD App
+- Backstage Catalog 注册
+- Grafana Dashboard 模板
+- PagerDuty 服务
+
+### 3.4 TechDocs
+
+把每个服务的 Markdown 文档自动构建成在线文档：
+
+```yaml
+# catalog-info.yaml
+metadata:
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+```
+
+```
+repo/
+├── catalog-info.yaml
+├── mkdocs.yml
+└── docs/
+    ├── index.md
+    ├── getting-started.md
+    └── api/
+        └── endpoints.md
+```
+
+Backstage 自动渲染，搜索全局可用。
+
+## 4. Scorecards：服务成熟度评估
+
+自动检查每个服务是否达标：
+
+```yaml
+# scorecard.yaml
+metadata:
+  name: production-readiness
+spec:
+  rules:
+    - title: Has an Owner
+      expression: has_annotation("owner")
+
+    - title: Has OpenAPI spec
+      expression: has_annotation("openapi.spec-url")
+
+    - title: Has Dashboard
+      expression: has_annotation("grafana.com/dashboard")
+
+    - title: PagerDuty integration
+      expression: has_annotation("pagerduty.com/service-id")
+
+    - title: Has Runbook
+      expression: has_link(title="Runbook")
+
+    - title: Has SLO defined
+      expression: has_annotation("slo.defined")
+
+    - title: Test coverage > 70%
+      expression: metric("coverage") > 70
+```
+
+仪表盘显示全公司服务的"合规率"，Owner 能一眼看到自己需要补哪些。
+
+## 5. 关键插件
+
+```
+Backstage Plugin 生态：
+├─ GitHub Pull Requests
+├─ Kubernetes（查每个服务的 Pod/Service）
+├─ Argo CD（部署状态）
+├─ Prometheus / Grafana（指标）
+├─ PagerDuty（On-call 状态）
+├─ Sentry（错误聚合）
+├─ SonarQube（代码质量）
+├─ OpenCost / Kubecost（成本）
+└─ AI Assistant（2026 年流行，自然语言查 Catalog）
+```
+
+## 6. Portal as Product（作为产品运营）
+
+Platform Team 要把 Portal 当产品做：
+
+```
+├─ 用户调研（开发者痛点）
+├─ 衡量指标（DAU、创建数、Scorecard 合规率）
+├─ 迭代节奏（每两周发布）
+├─ 文档和培训
+├─ Office Hour（让开发者来问）
+└─ NPS / 满意度调查
+```
+
+**反模式**：
+- 平台团队关起门来造东西
+- 三个月大版本发布
+- 没人用就硬推
+- 不听用户反馈
+
+## 7. 成功指标
+
+```
+短期（0-6 个月）：
+├─ Catalog 覆盖 50%+ 服务
+├─ 1-2 个 Scaffolder 模板上线
+└─ 第一批 pilot 团队满意
+
+中期（6-12 个月）：
+├─ Catalog 覆盖 90%+
+├─ 90% 新服务走 Scaffolder
+├─ Scorecard 合规率监控
+└─ 至少 5 个高价值自助 Action
+
+长期：
+├─ 新开发者 onboarding 时间减半
+├─ MTTR 下降
+├─ 事故响应自动化
+└─ AI Agent 可以通过 Portal 自助操作
+```
+
+## 8. AI 与 IDP 的融合（2026 趋势）
+
+```
+├─ 自然语言查询 Catalog
+│   "哪些服务在用 Python 3.10 以下？"
+│
+├─ AI 生成 Scorecard 修复建议
+│   "为什么我的服务 6 项没达标？"
+│
+├─ AI 辅助 Scaffolder 填表
+│   自动根据业务描述生成 spec
+│
+└─ AI Agent 作为 Catalog 消费者
+   Agent 读 Catalog 了解服务依赖，做 incident response
+```
+
+## 9. 常见坑
+
+```
+❌ Portal 当文档站
+   → 看完就没后续动作，价值低
+
+❌ 只做查询，不做 Action
+   → 还是得去 N 个地方点按钮
+
+❌ Catalog 和实际不一致
+   → 服务改了没同步，信息过时
+   → 用 git 作为 source of truth，自动同步
+
+❌ 大而全 vs 小而精
+   → 新 Portal 先从 5-10 个高频场景开始，不要一上来全上
+
+❌ 没人 onboard
+   → 再好的工具没人用也没价值
+```
+
+## 📖 参考资料
+
+- [Backstage 官网](https://backstage.io/)
+- [Backstage Plugin Marketplace](https://backstage.io/plugins)
+- [Port Documentation](https://docs.getport.io/)
+- [CNCF IDP Working Group](https://tag-app-delivery.cncf.io/)
+- [Humanitec Platform Engineering](https://humanitec.com/platform-engineering)

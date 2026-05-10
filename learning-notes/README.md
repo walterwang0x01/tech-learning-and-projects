@@ -123,12 +123,60 @@ learning-notes/
 │   ├── 14-算法与数据结构/         # 经典算法、高级数据结构
 │   └── 15-消息队列/               # RabbitMQ、Kafka、Celery
 │
-└── architecture/                  # 架构设计
-    ├── 01-事件驱动架构.md
-    ├── 02-微服务架构模式.md
-    ├── 03-DDD领域驱动设计.md
-    ├── 04-CQRS与事件溯源.md
-    └── 05-系统设计核心概念.md
+├── architecture/                  # 架构设计
+│   ├── 01-事件驱动架构.md
+│   ├── 02-微服务架构模式.md
+│   ├── 03-DDD领域驱动设计.md
+│   ├── 04-CQRS与事件溯源.md
+│   └── 05-系统设计核心概念.md
+│
+├── observability-sre/             # 可观测性与 SRE
+│   ├── 01-可观测性基础.md
+│   ├── 02-OpenTelemetry完全指南.md
+│   ├── 03-Prometheus与Grafana.md
+│   ├── 04-日志聚合Loki-ELK.md
+│   ├── 05-SLO-SLI实践.md
+│   ├── 06-分布式追踪实战.md
+│   ├── 07-AI-Agent可观测性.md
+│   └── 08-事件响应与Postmortem.md
+│
+├── go/                            # Go 语言（云原生主力）
+│   ├── 00-Go基础/
+│   ├── 01-并发编程/
+│   ├── 02-Web开发/
+│   ├── 03-云原生/                 # Kubernetes client-go、Operator
+│   └── 04-工程化/
+│
+├── rust/                          # Rust（工具链/性能扩展）
+│   ├── 01-语法与所有权.md
+│   ├── 03-异步编程.md              # Tokio、Axum
+│   └── 05-高性能工具开发.md        # PyO3、napi-rs、Wasm
+│
+├── databases/                     # 数据库（PG 为核心）
+│   ├── 02-PostgreSQL高级特性.md   # PG 18 async I/O、UUIDv7、JSONB
+│   ├── 03-PostgreSQL性能优化.md
+│   ├── 04-pgvector与向量搜索.md   # AI 时代的向量基础设施
+│   ├── 06-ClickHouse分析数据库.md
+│   ├── 07-数据库选型指南.md
+│   └── 08-SQL进阶.md               # 窗口函数、递归、LATERAL
+│
+├── data-engineering/              # 数据工程
+│   ├── 01-现代数据栈概览.md       # Lakehouse、ELT、Data Mesh
+│   ├── 03-dbt数据建模.md
+│   ├── 04-Iceberg-Delta-Hudi对比.md
+│   └── 05-CDC与Debezium.md
+│
+├── security/                      # 安全与合规
+│   ├── 02-认证与授权体系.md       # OAuth 2.1、OIDC、Passkey
+│   ├── 04-零信任架构.md            # SPIFFE、mTLS、Service Mesh
+│   ├── 05-供应链安全.md            # SLSA、Sigstore、SBOM
+│   └── 06-LLM与Agent安全.md
+│
+└── platform-engineering/          # 平台工程
+    ├── 01-平台工程概览.md         # Team Topologies、IDP、Golden Path
+    ├── 03-GitOps实践.md            # Argo CD、Flux、Rollouts
+    ├── 04-IaC基础设施即代码.md
+    └── 06-FinOps成本治理.md
 ```
 
 ## 🎯 内容分类

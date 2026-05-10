@@ -564,6 +564,113 @@ uv pip install pandas==3.0.* pyarrow
 | str 替代 object | 检查 `dtype == 'object'` 的代码 | 改为检查 `pd.api.types.is_string_dtype()` |
 | CoW 默认启用 | 链式赋值失效 | 使用 `.loc` 一步完成修改 |
 | 微秒精度 | 纳秒精度代码可能受影响 | 显式指定 `unit='ns'` 如需纳秒 |
+
+## 17. 2026 年 DataFrame 生态：Pandas / Polars / DuckDB 选型
+
+> 🔄 更新于 2026-05-10
+
+<!-- version-check: Pandas 3.0.x, Polars 1.39+, DuckDB 1.5.x, checked 2026-05-10 -->
+
+### 17.1 为什么要重新选型
+
+Pandas 3.0 大幅跟上 PyArrow 时代，但"单机 + 急切执行"的模型天花板仍然清晰。2026 年实测场景中：
+
+- **Polars** 在大数据集（>1GB 或千万行+）的 GroupBy、JOIN、ETL 中通常比 Pandas 快 3-15x，内存占用低数倍
+- **Pandas 3.0 + PyArrow backend** 在中等规模（百万行级）下已经缩小了差距，仍然是可视化、教学、探索性分析的首选
+- **DuckDB** 对嵌入式 SQL 分析、Parquet/Iceberg 直查场景优势明显，已与 Polars 深度互通
+
+来源：[Polars vs Pandas 2026](https://tech-insider.org/polars-vs-pandas-2026/)、[Which DataFrame Library Should You Use in 2026?](https://docs.kanaries.net/articles/polars-vs-pandas)（内容已重写以符合许可）
+
+### 17.2 能力对比表
+
+| 维度 | Pandas 3.0 | Polars 1.39+ | DuckDB 1.5+ |
+|------|-----------|--------------|--------------|
+| 执行模型 | 急切（Eager） | 急切 + 惰性（Lazy） | 向量化 SQL |
+| 底层 | NumPy + PyArrow | Arrow + Rust | 列式向量化引擎 |
+| 并行 | 有限（GIL） | 原生多核 | 原生多核 |
+| 流式/超出内存 | ❌ | ✅ Streaming Engine（所有常见格式） | ✅ Out-of-core |
+| SQL | 第三方（duckdb/pandasql） | 原生 `pl.sql_context` | 一等公民 |
+| Lakehouse I/O | Parquet、CSV、JSON | Parquet、CSV、JSON、NDJSON、**Delta（sink_delta）** | Parquet、Iceberg、Delta |
+| 学习曲线 | 最低 | 中 | 熟悉 SQL 即可 |
+| 生态 | 最大（scikit-learn、Matplotlib 等） | 中等，增速最快 | 中等 |
+
+### 17.3 Polars 2026 关键进展
+
+Polars 1.37-1.39（2026-03/04）带来三项重要能力：
+
+1. **流式扫描全面覆盖** — 1.37 起 NDJSON、CSV、IPC 的 `sink_*` 走新流式引擎，`scan_ndjson()` 和 `scan_lines()` 支持直接从云对象存储流式读取
+2. **Delta Lake 写入（sink_delta）** — Lazy 查询可以直接回写 Delta Lake，不必先把结果完全物化到内存
+3. **Cloud Profiling** — 原生的云上查询剖析，对超大数据集排障更友好
+
+来源：[Polars in Aggregate – April 2026](https://pola.rs/posts/polars-in-aggregate-apr26/)（内容已重写以符合许可）
+
+### 17.4 从 Pandas 迁移到 Polars 的最短示例
+
+```python
+# pip install polars pyarrow
+import polars as pl
+
+# 读取（惰性模式，不立即加载全部数据）
+lf = pl.scan_csv("orders_*.csv")
+
+# 过滤 + 分组 + 聚合，一次优化后再执行
+result = (
+    lf.filter(pl.col("status") == "paid")
+      .group_by("user_id")
+      .agg([
+          pl.col("amount").sum().alias("total"),
+          pl.col("order_id").count().alias("orders"),
+      ])
+      .sort("total", descending=True)
+      .head(20)
+      .collect(streaming=True)  # 2026 起流式执行成为常规选项
+)
+
+print(result)
+```
+
+关键差异：
+
+- `scan_*` 返回 LazyFrame，整个链路组成查询计划后再执行
+- `group_by().agg([...])` 表达式列表是 Polars 的惯用写法
+- `collect(streaming=True)` 让超内存数据集也能跑
+- 没有隐式索引（Polars 不存在 Pandas 那种行标签索引）
+
+### 17.5 选型建议（2026 版）
+
+```
+选型决策树：
+├─ 数据量 < 100 万行且只在 Jupyter 里探索性分析
+│   → Pandas 3.0（生态最全，教学资料最多）
+├─ 数据量 100 万～数亿行，ETL/特征工程
+│   → Polars（首选），或 DuckDB（如果 SQL 更顺手）
+├─ 跨团队共享、Lakehouse 背景、偏向 SQL
+│   → DuckDB + Polars 组合
+└─ 需要分布式（数 TB 以上）
+    → 不在本系三者范围内，考虑 Spark / Ray / Dask
+```
+
+### 17.6 实用技巧：让 Pandas 3.0 尽可能接近 Polars 性能
+
+```python
+import pandas as pd
+
+# 1. 启用 PyArrow backend（3.0 推荐）
+df = pd.read_csv("orders.csv", dtype_backend="pyarrow")
+
+# 2. 避免 apply，用向量化 + Arrow 字符串方法
+df["email_domain"] = df["email"].str.split("@").str[-1]  # 向量化
+
+# 3. 大型 groupby 指定 observed=True、sort=False 节省时间
+top = (df.groupby("user_id", observed=True, sort=False)
+         ["amount"].sum()
+         .nlargest(20))
+
+# 4. 需要更极端性能时，通过 PyArrow 无拷贝转到 Polars
+import polars as pl
+pldf = pl.from_pandas(df)  # 零拷贝
+```
+
 ## 🎬 推荐视频资源
 
 - [freeCodeCamp - Pandas Full Course](https://www.youtube.com/watch?v=gtjxAH8uaP0) — Pandas完整教程

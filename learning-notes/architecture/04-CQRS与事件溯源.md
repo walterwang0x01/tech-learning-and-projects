@@ -301,3 +301,69 @@ CQRS/ES 涉及的知识点：
 - [Martin Fowler - CQRS](https://martinfowler.com/bliki/CQRS.html)
 - [Greg Young - CQRS and Event Sourcing](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)
 - [Microsoft - CQRS Pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)
+
+## 8. 2026 年再审视：CQRS 与 Event Sourcing 的边界
+
+> 🔄 更新于 2026-05-10
+
+<!-- version-check: CQRS + Event Sourcing patterns, checked 2026-05-10 -->
+
+### 8.1 2026 年的共识：别把两者等同起来
+
+社区在 2025-2026 年有一个明确的回潮讨论：**CQRS 和 Event Sourcing 解决的是不同问题，能组合、但绝不是一回事。** 过去把两者捆绑推广，让不少团队付出了复杂度代价却没拿到对应收益。
+
+| 问题 | 合适的方案 |
+|------|-----------|
+| 读模型和写模型差异巨大，读性能是瓶颈 | CQRS（不需要 ES） |
+| 需要完整的业务历史和可重放审计 | Event Sourcing（不需要 CQRS） |
+| 复杂领域 + 严格审计 + 读写差异大 | CQRS + ES 组合 |
+| 普通 CRUD + 少量报表需求 | 以上都不要 |
+
+来源：[Event Sourcing, CQRS, And CQRS Plus Event Sourcing](https://emmanuelvalverderamos.substack.com/p/event-sourcing-cqrs-and-cqrs-plus)（内容已重写以符合许可）
+
+### 8.2 实践中最常被忽略的三个细节
+
+1. **最终一致性窗口** — 读模型滞后是 CQRS 的"默认特性"。UI 层需要显式提示用户"操作已提交，读结果稍后更新"，否则会出现"我下了单，刷新看不到"的经典投诉。
+2. **事件 Schema 演进** — Event Sourcing 的事件是永久存储的，Schema 改动需要配套"Upcaster"把旧事件转换为新形状，否则旧数据无法回放。
+3. **投影重建成本** — CQRS + ES 的读模型通常由事件投影出来，第一次重建全量投影的耗时往往被低估。大型聚合建议配合快照（Snapshot）。
+
+### 8.3 与 DDD、EDA 的整合位置
+
+```
+┌──────────── 三者协同 ────────────┐
+│                                   │
+│  DDD（战略 + 战术）                │
+│  ├─ 定义限界上下文                  │
+│  └─ 定义聚合根和领域事件            │
+│         │                         │
+│         ▼                         │
+│  CQRS（读写分离 + 架构划分）        │
+│  ├─ Command 改写聚合               │
+│  └─ Query 读取派生视图             │
+│         │                         │
+│         ▼                         │
+│  Event Sourcing（存储方式）        │
+│  └─ 把"事件"作为唯一真相来源        │
+│         │                         │
+│         ▼                         │
+│  EDA（跨上下文通信）               │
+│  └─ 领域事件通过事件总线跨服务传播   │
+└───────────────────────────────────┘
+```
+
+建议阅读路径：先掌握本目录中的 [01-事件驱动架构.md](./01-事件驱动架构.md) 与 [03-DDD领域驱动设计.md](./03-DDD领域驱动设计.md)，再决定是否引入 CQRS/ES。
+
+### 8.4 Serverless 场景下的模式回归
+
+```
+Serverless 事件驱动常用模式：
+├─ 事件通知（Event Notification）
+├─ 事件携带状态转移（Event-Carried State Transfer）
+├─ 事件溯源（Event Sourcing）
+├─ CQRS
+├─ Saga（编排 vs 协调）
+├─ Fan-out / Fan-in
+└─ Choreography vs Orchestration
+```
+
+AWS 的典型实现是 EventBridge + Lambda + DynamoDB Streams，Serverless 天生降低了事件驱动的运维门槛，但在成本和冷启动上需要仔细评估。来源：[Event-Driven Serverless Architecture Patterns](https://kindatechnical.com/serverless-architecture/event-driven-serverless-architecture-patterns.html)（内容已重写以符合许可）
