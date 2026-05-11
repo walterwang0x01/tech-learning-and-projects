@@ -24,10 +24,13 @@ class PoolItem:
     description: str = ""
     source: str = ""
     source_topic_hints: list[str] = field(default_factory=list)
+    # 新鲜度覆盖：None=走全局窗口；<=0 不过滤。用于 podcasts (336h) 等非日更源
+    freshness_override_hours: int | None = None
 
     @classmethod
     def from_dict(cls, d: dict) -> "PoolItem":
         _require(d, ["title", "url"], "PoolItem")
+        fo = d.get("freshness_override_hours")
         return cls(
             title=str(d["title"]),
             url=str(d["url"]),
@@ -35,10 +38,15 @@ class PoolItem:
             description=str(d.get("description", ""))[:2000],
             source=str(d.get("source", "")),
             source_topic_hints=list(d.get("source_topic_hints", []) or []),
+            freshness_override_hours=int(fo) if fo is not None else None,
         )
 
     def to_dict(self) -> dict:
-        return asdict(self)
+        d = asdict(self)
+        # 保持 JSONL 干净：None 字段不落盘
+        if d.get("freshness_override_hours") is None:
+            d.pop("freshness_override_hours", None)
+        return d
 
 
 # ========== ScoreBreakdown ==========

@@ -187,11 +187,22 @@ def hours_since_published(date_str: str, now: datetime | None = None) -> float |
 
 
 def filter_by_freshness(items: list[dict], hours: int, now: datetime | None = None) -> list[dict]:
+    """按新鲜度过滤。
+
+    单条 item 若带 `freshness_override_hours`，用它覆盖全局 hours。
+    这样不同上游（RSS 48h / X 36h / podcasts 336h）能各走各的窗口。
+    全局 hours<=0 表示关闭过滤，per-item override 同样逻辑。
+    """
     if hours <= 0:
         return items
     kept = []
     for item in items:
+        limit = item.get("freshness_override_hours")
+        limit = int(limit) if limit is not None else hours
+        if limit <= 0:
+            kept.append(item)
+            continue
         hrs = hours_since_published(item.get("published", ""), now)
-        if hrs is None or hrs <= hours:
+        if hrs is None or hrs <= limit:
             kept.append(item)
     return kept

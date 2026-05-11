@@ -95,7 +95,22 @@
         "极客公园": 4,
         "少数派": 3
       }
+    },
+    "ai-agent": {
+      "primacy_sources": {
+        "follow-builders": 4
+      }
     }
+  },
+  "follow_builders": {
+    "_comment": "头部 AI builder 的 X 推文 + 播客转录，来自 zarazhangrui/follow-builders 中心化 feed（无 key）。blogs 不启用（与现有 Anthropic RSS 重复）。",
+    "enabled": true,
+    "feed_base_url": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main",
+    "feeds": ["x", "podcasts"],
+    "timeout": 20,
+    "x_min_likes": 50,
+    "x_max_per_author": 2,
+    "podcast_description_chars": 300
   },
   "llm_classify": {
     "enabled": false,

@@ -6,6 +6,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from .config import Config
+from .follow_builders import fetch_follow_builders
 from .health import is_source_tripped, record_source_result
 from .http import filter_by_freshness, http_get, parse_rss
 
@@ -64,6 +65,23 @@ def run_ingest(cfg: Config) -> tuple[list[dict], list[dict], list[str]]:
                 })
                 if ok:
                     all_items.extend(items)
+
+    # follow-builders 中心化 feed（X 推文 + 播客 transcript）
+    # 与 RSS 同池，下游 dedup / freshness / classify 不用区分类型
+    if cfg.follow_builders.enabled:
+        fb_t0 = time.time()
+        fb_items, fb_metrics = fetch_follow_builders(cfg.follow_builders)
+        for m in fb_metrics:
+            record_source_result(m["name"], m["ok"])
+        metrics.extend(fb_metrics)
+        all_items.extend(fb_items)
+        feed_breakdown = ", ".join(
+            f"{m['name'].split('/')[-1]}={m['count']}" for m in fb_metrics
+        )
+        print(
+            f"  🔗 follow-builders: {len(fb_items)} 条 ({feed_breakdown})，"
+            f"耗时 {time.time() - fb_t0:.1f}s"
+        )
 
     # 本 run 内按 URL/title 去重
     seen = set()

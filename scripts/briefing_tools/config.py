@@ -42,6 +42,18 @@ class SemanticDedupCfg:
 
 
 @dataclass
+class FollowBuildersCfg:
+    """zarazhangrui/follow-builders 中心化 feed 配置"""
+    enabled: bool = False
+    feed_base_url: str = "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main"
+    feeds: list[str] = field(default_factory=lambda: ["x", "podcasts"])
+    timeout: int = 20
+    x_min_likes: int = 50
+    x_max_per_author: int = 2
+    podcast_description_chars: int = 300
+
+
+@dataclass
 class Config:
     freshness_hours: int
     published_index_retention_days: int
@@ -54,7 +66,8 @@ class Config:
     score_overrides: dict  # topic -> {"primacy_sources": {sub: weight}}
     llm_classify: LLMClassifyCfg
     semantic_dedup: SemanticDedupCfg
-    raw: dict = field(repr=False)
+    follow_builders: FollowBuildersCfg = field(default_factory=FollowBuildersCfg)
+    raw: dict = field(default_factory=dict, repr=False)
 
 
 _cached: Config | None = None
@@ -74,6 +87,7 @@ def load_config(path: Path | None = None, force_reload: bool = False) -> Config:
     cb = raw.get("source_circuit_breaker", {})
     llm = raw.get("llm_classify", {})
     sem = raw.get("semantic_dedup", {})
+    fb = raw.get("follow_builders", {})
 
     cfg = Config(
         freshness_hours=int(raw.get("freshness_hours", 48)),
@@ -96,6 +110,18 @@ def load_config(path: Path | None = None, force_reload: bool = False) -> Config:
         semantic_dedup=SemanticDedupCfg(
             enabled=bool(sem.get("enabled", False)),
             threshold=float(sem.get("threshold", 0.85)),
+        ),
+        follow_builders=FollowBuildersCfg(
+            enabled=bool(fb.get("enabled", False)),
+            feed_base_url=str(fb.get(
+                "feed_base_url",
+                "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main",
+            )),
+            feeds=list(fb.get("feeds", ["x", "podcasts"])),
+            timeout=int(fb.get("timeout", 20)),
+            x_min_likes=int(fb.get("x_min_likes", 20)),
+            x_max_per_author=int(fb.get("x_max_per_author", 3)),
+            podcast_description_chars=int(fb.get("podcast_description_chars", 800)),
         ),
         raw=raw,
     )

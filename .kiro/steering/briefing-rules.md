@@ -18,6 +18,9 @@ fileMatchPattern: 'learning-notes/briefings/**'
 ┌───────────────────────────────────────────────────────────────┐
 │ 1. ingest       一次抓全部 RSS 源 → pool.jsonl                  │
 │                 （自动跳过熔断源：连续 N 天失败的自动不抓）      │
+│                 （可选拉取 follow-builders 中心化 feed：         │
+│                  25 个 AI builder 的 X 推文 + 头部 AI 播客       │
+│                  transcript，统一打 ai-agent tag）              │
 │ 2. classify     规则打标 + 评分 + main_topic → classified.jsonl │
 │                 （可选 LLM 批量分类；失败自动退回规则）           │
 │ 3. candidates   按主题分流 → candidates.{topic}.jsonl            │
