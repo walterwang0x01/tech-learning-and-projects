@@ -145,3 +145,108 @@ fun shareImage(context: Context, file: File) {
     context.startActivity(Intent.createChooser(intent, "分享图片"))
 }
 ```
+
+## 5. Android 17 Contact Picker 与通讯录权限新政策
+
+> 🔄 更新于 2026-05-11
+
+<!-- version-check: Android 17 Contact Picker API 37, READ_CONTACTS policy, checked 2026-05-11 -->
+
+Android 17（API 37）引入**系统级 Contact Picker**，并配合 Google Play 2026-04-15 生效的 Contacts Permissions 政策，从根本上改变了应用访问通讯录的方式。面向 targetSdk 37+ 的应用受影响最大。来源：[Android 17 Contact Picker](https://developer.android.com/about/versions/17/features/contact-picker)、[Google Play Policy Announcement](https://support.google.com/googleplay/android-developer/answer/16926792)
+
+### 5.1 政策核心变化
+
+| 维度 | Android 16 及之前 | Android 17+ 新政策 |
+| ---- | ----------------- | ------------------ |
+| 默认方式 | `READ_CONTACTS` 全量读取 | Contact Picker 按需选择 |
+| 授权粒度 | 全部通讯录 or 拒绝 | 用户选择具体联系人 + 字段（手机/邮箱） |
+| 政策要求 | 无强制限制 | 不需要完整通讯录的应用必须改用 Picker |
+| `READ_CONTACTS` 使用 | 自由申请 | 仅核心功能无法通过 Picker 实现时才允许 |
+| 触发时机 | 2026-04-15 政策生效 | targetSdk 37+ 的应用 |
+
+### 5.2 Contact Picker 调用示例（推荐新方式）
+
+```kotlin
+// 使用 Android 17 系统 Contact Picker（无需 READ_CONTACTS 权限）
+class InviteActivity : ComponentActivity() {
+
+    // 注册 Contact Picker 结果回调
+    private val pickContact = registerForActivityResult(
+        ActivityResultContracts.PickContact()
+    ) { contactUri: Uri? ->
+        contactUri?.let { uri ->
+            // 仅能访问用户明确选择的联系人
+            contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+                if (cursor.moveToFirst()) {
+                    val nameIndex = cursor.getColumnIndex(
+                        ContactsContract.Contacts.DISPLAY_NAME
+                    )
+                    val name = cursor.getString(nameIndex)
+                    // 处理单个联系人
+                }
+            }
+        }
+    }
+
+    fun onInviteClick() {
+        // 无需权限检查，系统 UI 由用户控制数据共享范围
+        pickContact.launch(null)
+    }
+}
+```
+
+### 5.3 从 READ_CONTACTS 迁移到 Contact Picker
+
+需要迁移的场景：分享邀请、一次性联系人查找、单次选择。
+
+仍可保留 READ_CONTACTS 的场景：通讯录管理应用、系统级同步、备份恢复等核心功能无法通过 Picker 实现的用例。
+
+```kotlin
+// 旧做法：申请全量通讯录权限（Android 17+ 面临政策风险）
+private val requestPermission = registerForActivityResult(
+    ActivityResultContracts.RequestPermission()
+) { granted ->
+    if (granted) {
+        loadAllContacts()  // 全量读取
+    }
+}
+
+// 新做法：改用 Contact Picker，用户按需授权
+private val pickContact = registerForActivityResult(
+    ActivityResultContracts.PickContact()
+) { uri ->
+    uri?.let { handleSelectedContact(it) }
+}
+
+// 在 AndroidManifest.xml 中移除（targetSdk 37+）
+// <uses-permission android:name="android.permission.READ_CONTACTS" />
+```
+
+### 5.4 Play Console 预审检查（2026-10-27 生效）
+
+Play Console 将引入提交前预审，自动检测违反 Contacts 与 Location 权限政策的应用。应用必须在提交前修复才能通过审核。来源：[Help Net Security 2026-04-16](https://www.helpnetsecurity.com/2026/04/16/google-play-store-policy-updates/)
+
+### 5.5 2026 年权限最小化策略
+
+```
+Android 权限申请决策树（2026）：
+│
+├─ 是否是"一次性"操作（邀请、分享）？
+│   └─ 是 → 使用 Contact Picker / Sharesheet，不申请权限 ✓
+│
+├─ 是否需要持续访问同步？
+│   ├─ 是 → 声明 READ_CONTACTS（需通过政策审核）
+│   └─ 否 → 改用系统 Picker
+│
+└─ 是否涉及健康数据（心率、运动）？
+    └─ 使用 Android 16+ 细粒度权限（如 READ_HEART_RATE
+       替代广义 BODY_SENSORS）
+```
+
+### 5.6 与其他 2026 隐私政策联动
+
+- **Accessibility API**：禁止用于"自主发起、规划、执行操作"（2026 新政，影响 Accessibility Agent 类应用）
+- **Location 精确位置**：推荐使用"位置按钮"作为最小授权范围
+- **Account Transfer**：必须走 Play Console 官方"转移所有权"流程
+
+来源：[Google Play Updated Policies 2026-04](https://android-developers.googleblog.com/2026/04/giving-users-clearer-choice-and-everyone-a-safer-more-trusted-app-ecosystem.html)

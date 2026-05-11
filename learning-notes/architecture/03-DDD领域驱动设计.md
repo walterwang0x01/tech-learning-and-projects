@@ -3,6 +3,7 @@
 > Author: Walter Wang
 
 <!-- version-check: DDD 设计模式, checked 2026-04-21 -->
+<!-- version-check: DDD × LLM/Agent context engineering, checked 2026-05-11 -->
 
 ## 1. 概述
 
@@ -352,3 +353,110 @@ DDD 涉及的知识点：
 - [Eric Evans - Domain-Driven Design](https://www.domainlanguage.com/ddd/)
 - [Vaughn Vernon - Implementing Domain-Driven Design](https://www.informit.com/store/implementing-domain-driven-design-9780321834577)
 - [Martin Fowler - Bounded Context](https://martinfowler.com/bliki/BoundedContext.html)
+
+## 7. DDD 与 AI Agent / LLM 协作（2026 新趋势）
+
+> 🔄 更新于 2026-05-11
+
+<!-- version-check: DDD × LLM/Agent context engineering, checked 2026-05-11 -->
+
+2026 年 DDD 社区出现一个显著的新议题：**限界上下文不仅是服务边界，也是 LLM 的"上下文消费边界"**。DDD Europe 2026 专门设立了 "The Curse of Unbounded Contexts: Using Domains as LLM Consumers" 议题。来源：[DDD Europe 2026](https://2026.dddeurope.com/program/the-curse-of-unbounded-contexts-using-domains-as-llm-consumers/)
+
+### 7.1 为什么 DDD 在 LLM 时代重新变热
+
+```
+┌─────────── 问题场景 ───────────┐
+│  单体代码库 + LLM：             │
+│                                 │
+│  LLM 加载整库 → 上下文爆炸     │
+│         ↓                       │
+│  推理分散 → 生成的代码不贴合业务│
+│         ↓                       │
+│  领域专家发现：不是他们想要的    │
+└─────────────────────────────────┘
+
+         ┌─── 解决思路 ───┐
+         │  限界上下文 =  │
+         │  LLM 工作边界  │
+         └────────────────┘
+
+ Order Context    User Context    Payment Context
+   ↓ 只喂 LLM      ↓ 只喂 LLM       ↓ 只喂 LLM
+  Order/Item     User/Profile    Payment/Refund
+```
+
+LLM 在限界上下文内工作时：生成的 API、数据结构、业务规则更贴近领域语言。限界上下文内的**通用语言（Ubiquitous Language）**实际上就是 LLM 所需的"领域词汇表"。来源：[codecentric - Collaborative Modeling and LLMs](https://www.codecentric.de/en/knowledge-hub/blog/from-stories-to-code-how-domain-storytelling-and-eventstorming-give-llms-the-context-they-need)
+
+### 7.2 Event Storming × AI：DDD 建模流程的 AI 辅助
+
+Event Storming（事件风暴）是 DDD 的核心建模工作坊。2026 年社区验证了**"Event Storming 产物作为 LLM 上下文"**的高效模式：
+
+```
+Event Storming 产出物 → LLM Context 映射：
+│
+├─ Domain Events（领域事件）
+│   → LLM 理解"业务时间线"
+│
+├─ Commands（命令）
+│   → LLM 知道"可触发的操作"
+│
+├─ Aggregates（聚合）
+│   → LLM 识别"事务一致性边界"
+│
+├─ Policies（策略）
+│   → LLM 学习"业务自动化规则"
+│
+└─ Read Models（读模型）
+    → LLM 了解"查询视角与数据形态"
+```
+
+来源：[AiOps School - Event Storming 2026 Guide](https://aiopsschool.com/blog/event-storming/)
+
+### 7.3 DDD × LLM Agent：五步工作流
+
+学术界提出了将 DDD 分解为 LLM Prompting Framework 的方案，将 DDD 流程抽象为 5 个顺序步骤：
+
+```
+┌─── DDD-LLM 五步工作流 ───┐
+│                            │
+│  1. 建立 Ubiquitous Language │
+│     → LLM 提取业务术语        │
+│                            │
+│  2. 模拟 Event Storming     │
+│     → LLM 生成领域事件候选    │
+│                            │
+│  3. 识别 Bounded Contexts   │
+│     → LLM 聚类相关概念        │
+│                            │
+│  4. 设计 Aggregates        │
+│     → LLM 分析一致性边界      │
+│                            │
+│  5. 映射到技术架构           │
+│     → LLM 生成服务分解建议    │
+└────────────────────────────┘
+```
+
+来源：[arxiv - DDD with LLM Prompting Framework](https://arxiv.org/html/2603.26244v1)
+
+### 7.4 常见聚合设计错误（2026 总结）
+
+随着 DDD 与 AI Agent 的结合，聚合设计中的老问题反而更容易被放大。社区总结了几个常见陷阱：
+
+| 错误 | 表现 | 修复思路 |
+| ---- | ---- | -------- |
+| 混淆"数据关系"与"一致性需求" | 把所有相关实体塞到一个聚合 | 只保留"必须原子更新"的对象 |
+| 聚合过大 | 加载/保存性能差、并发冲突多 | 拆分为多个小聚合，通过领域事件协作 |
+| 跨聚合事务 | 分布式事务 + 锁竞争 | 使用最终一致性 + Saga |
+| 聚合内引用其他聚合实体 | 越界操作，破坏封装 | 只持有 ID，不持有引用 |
+
+来源：[Kinda Technical - Common Aggregate Design Mistakes](https://www.kindatechnical.com/domain-driven-design/lesson-44-common-aggregate-design-mistakes-and-how-to-fix-them.html)
+
+### 7.5 2026 年 DDD 实践建议
+
+1. **限界上下文优先于微服务拆分**：先画 Context Map，再决定服务边界，这比"按表分库"更贴近业务。
+2. **Event Storming 是团队对齐的最高性价比工具**：一场 2 小时的工作坊往往比一周的需求评审更有效。
+3. **通用语言要沉淀成代码词汇表**：类名、方法名、API 字段直接使用领域术语，供人和 LLM 共同消费。
+4. **防腐层（ACL）在 AI 集成中同样适用**：对接外部 LLM 服务时，用 ACL 隔离 Prompt 格式和响应结构变化。
+5. **限界上下文 = LLM 工作边界**：给 Coding Agent 提供单个上下文的代码和文档，生成质量显著高于全库投喂。
+
+来源：[Understanding Data - DDD Bounded Contexts for LLMs](https://understandingdata.com/posts/ddd-bounded-contexts-for-llms/)
