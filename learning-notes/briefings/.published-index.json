@@ -5537,7 +5537,409 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-05-10"
+    },
+    "ae8aedb3b8d6": {
+      "url": "http://www.geekpark.net/news/363920",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "4a200c6bef67": {
+      "url": "https://36kr.com/newsflashes/3804164502560517?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "9688cf07694b": {
+      "url": "https://sspai.com/post/109610",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "68b00e95dbc3": {
+      "url": "https://www.qbitai.com/2026/05/414547.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "cff2a28fc4c5": {
+      "url": "https://www.qbitai.com/2026/05/414827.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "2d1d48ae4ad0": {
+      "url": "https://www.qbitai.com/2026/05/415031.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "1bf537ed52ca": {
+      "url": "https://36kr.com/newsflashes/3804176171425544?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "2e58a07d66be": {
+      "url": "https://www.oschina.net/news/438280",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "a90f0740a786": {
+      "url": "https://www.infoq.cn/article/SH3Kw4yMJQA3ODHYfPM7",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "41c9d3c78e1f": {
+      "url": "http://www.geekpark.net/news/363937",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "019f2ee5392e": {
+      "url": "http://www.geekpark.net/news/363936",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "7daf80b2aa7e": {
+      "url": "https://36kr.com/newsflashes/3804199033069062?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "2d01fe22d4f4": {
+      "url": "https://www.qbitai.com/2026/05/415048.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "d89de2ffc3b5": {
+      "url": "https://www.infoq.cn/article/YAWWcRb4eBYRSHyVAw2Q",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "56609e8cb32e": {
+      "url": "https://www.infoq.cn/article/W3vmt9ADbhyIlGieJZ9Y",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-11"
+    },
+    "e31d6c459d33": {
+      "url": "https://news.ycombinator.com/item?id=48088151",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "760b0834b2e8": {
+      "url": "https://huggingface.co/blog/lablab-ai-amd-developer-hackathon/machinacheck",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "d8264f783cb7": {
+      "url": "https://www.ox.security/blog/the-mother-of-all-ai-supply-chains-critical-systemic-vulnerability-at-the-core-of-the-mcp",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "7b1089b22478": {
+      "url": "https://news.ycombinator.com/item?id=48089263",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "f484e208ba43": {
+      "url": "https://arxiv.org/html/2603.10062",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "69c19f39988e": {
+      "url": "https://news.ycombinator.com/item?id=48085821",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "5c82dc865b96": {
+      "url": "https://www.techradar.com/ai-platforms-assistants/chatgpt/2026-could-be-the-year-we-move-beyond-smartphones-led-by-a-sam-altman-and-jony-ive-designed-ai-device",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "9fc0a4474846": {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/maryland-citizens-slapped-with-usd2-billion-grid-upgrade-bill-for-out-of-state-ai-data-centers-state-complains-to-federal-energy-regulators-says-additional-cost-breaks-ratepayer-protection-pledge-promises",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "f5bfeb965ba1": {
+      "url": "https://www.arxiv.org/abs/2511.02303",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "2500d3afbc3c": {
+      "url": "https://www.businessinsider.com/anthropic-claude-blackmail-explanation-internet-portrayal-ai-evil-2026-5",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "24aac6a4c7cc": {
+      "url": "https://news.ycombinator.com/item?id=48083919",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "69e132dc2724": {
+      "url": "https://www.oschina.net/news/438234",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "a7f445bf9120": {
+      "url": "https://www.theverge.com/tech/924933/google-chrome-4gb-gemini-nano-ai-features",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "f6e40e7bb79a": {
+      "url": "http://www.geekpark.net/news/363934",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "61c68147c7d7": {
+      "url": "https://unix.foo/posts/local-ai-needs-to-be-norm",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "a51f489de1b4": {
+      "url": "https://techcrunch.com/2026/05/10/anthropic-says-evil-portrayals-of-ai-were-responsible-for-claudes-blackmail-attempts",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "001036ce3efa": {
+      "url": "https://kotaku.com/playstation-3-emulator-devs-politely-ask-that-people-stop-flooding-it-with-ai-code-pull-requests-2000694656",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "dc1c1e5a966b": {
+      "url": "http://www.geekpark.net/news/363905",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "ec80d71bb50f": {
+      "url": "https://github.com/Imbad0202/academic-research-skills",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "e6d1e9fe4f06": {
+      "url": "https://www.infoq.cn/article/FOy8AahY8bsPveNwwTq1",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "0e22a24c5f10": {
+      "url": "https://techcrunch.com/2026/05/10/were-feeling-cynical-about-xais-big-deal-with-anthropic",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "a131bca89c53": {
+      "url": "https://theaiinsider.tech/2026/05/07/genesis-ai-unveils-foundation-model-hand-data-collection-system-to-develop-human-level-physical-manipulation-for-robotics",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "5407f4107196": {
+      "url": "https://www.prnewswire.com/news-releases/genesis-ai-unveils-gene-26-5--the-first-ai-brain-to-enable-robots-with-human-level-physical-manipulation-capabilities-302763638.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "5f9f220ec4c0": {
+      "url": "https://techcrunch.com/2026/05/06/is-xai-a-neocloud-now",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "e7c620cfdd7d": {
+      "url": "https://arxiv.org/html/2603.10194",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "73135f8c63ab": {
+      "url": "https://g5t.de/articles/20260510-task-paralysis-and-ai/index.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "3e39877ea2b2": {
+      "url": "https://news.ycombinator.com/item?id=48081469",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "7023b74e4e9d": {
+      "url": "https://www.engadget.com/2166315/anthropic-is-doubling-claude-code-rate-limits-after-deal-with-spacex",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "85de624e1981": {
+      "url": "https://thehackernews.com/2026/04/anthropic-mcp-design-vulnerability.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-11"
+    },
+    "7e07b5b41c61": {
+      "url": "https://cyber.netsecops.io/articles/obsidian-plugin-abused-in-campaign-to-deploy-phantom-pulse-rat",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "b3b8b105b70b": {
+      "url": "https://grapheneos.social/@GrapheneOS/116550899908879585",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "c8a348e5f576": {
+      "url": "https://news.ycombinator.com/item?id=48073201",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "c2086e3cdbc9": {
+      "url": "https://news.ycombinator.com/item?id=48086190",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "cd4d0fbb526a": {
+      "url": "https://www.oschina.net/news/438369",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "dbcf46820c61": {
+      "url": "https://www.forbes.com/sites/zakdoffman/2026/05/10/has-google-secretly-changed-your-chrome-settings",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "46676187dd56": {
+      "url": "https://www.wired.com/story/you-can-disable-gemini-in-chrome-if-its-freaking-you-out",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "0b8402905496": {
+      "url": "https://www.theverge.com/tech/927294/substack-tax-ghost-beehiiv",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "8001ddbc1b1a": {
+      "url": "https://techcrunch.com/2026/05/10/uber-has-always-wanted-to-be-more-than-a-ride-now-it-has-reason-to-hurry",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "66fbfb46bdcb": {
+      "url": "https://techcrunch.com/2026/05/09/gm-agrees-to-pay-12-75m-in-california-driver-privacy-settlement",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "1541b7ba2433": {
+      "url": "https://fintechbusinessweekly.substack.com/p/another-fintech-bankruptcy-smb-banking",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "e52d030c71b8": {
+      "url": "http://fourlightyears.blogspot.com/2026/05/i-returned-to-aws-and-was-reminded-hard.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "7f87d66d92b4": {
+      "url": "https://techcrunch.com/2026/05/10/techcrunch-mobility-limes-ipo-gamble",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "f7448f72884d": {
+      "url": "https://news.ycombinator.com/item?id=48084432",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "7a162bb64523": {
+      "url": "https://www.malwarebytes.com/blog/news/2026/05/google-chromes-silent-4gb-ai-download-problem",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "e94801208f3d": {
+      "url": "https://jola.dev/posts/running-local-models-on-m4",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "83ea05097fb9": {
+      "url": "https://piunikaweb.com/2026/03/10/grapheneos-calls-on-privacy-focused-app-developers-to-boycott-european-unified-attestation",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "4d6e45a68740": {
+      "url": "https://www.wired.com/story/security-news-this-week-hackable-robot-lawnmower-unlocks-a-new-nightmare",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "a7e62d9cca29": {
+      "url": "https://www.tomshardware.com/3d-printing/louis-rossmann-tells-3d-printer-maker-bambu-lab-to-go-bleep-yourself-over-its-lawsuit-against-enthusiast-right-to-repair-advocate-offers-to-pay-the-legal-fees-for-a-threatened-orcaslicer-developer",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "8c2e1c0a5307": {
+      "url": "https://techcrunch.com/2026/05/09/fintech-startup-parker-files-for-bankruptcy",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "e7322e7c3171": {
+      "url": "https://www.oschina.net/news/438127/spring-ai-1-0-7-1-1-6-2-0-0-m6",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "87bad8d736f7": {
+      "url": "https://www.theverge.com/tech/926067/vivos-x300-ultra-has-the-best-cameras-in-any-phone",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
+    },
+    "133b3d447831": {
+      "url": "https://www.infoq.cn/article/duka4AFM1UaEmx23F2ZB",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-11"
     }
   },
-  "updated": "2026-05-10 13:08"
+  "updated": "2026-05-11 09:37"
 }
