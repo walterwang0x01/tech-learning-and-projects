@@ -2,7 +2,7 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
-<!-- version-check: OWASP Top 10 2025, pip-audit 2.9.x, Python 3.14, checked 2026-05-02 -->
+<!-- version-check: OWASP Top 10 2025, pip-audit 2.9.x, Python 3.14, checked 2026-05-12 -->
 
 ## 1. 安全编程概述
 
@@ -555,4 +555,68 @@ def get_user_balance(user_id: int) -> Decimal:
 | **safety** | 依赖漏洞扫描（Safety DB） | ⭐⭐ 补充 |
 | **Semgrep** | 自定义安全规则扫描 | ⭐⭐ 大型项目 |
 | **Sigstore** | 包签名验证 | ⭐ 前沿 |
+
+## 13. 2026 年 Python 供应链攻击事件
+
+> 🔄 更新于 2026-05-12
+
+2026 年 Q1-Q2 发生了多起严重的 Python 供应链攻击，凸显了依赖安全的紧迫性。
+
+### 13.1 PyTorch Lightning 攻击（2026-04-30）
+
+PyPI 包 `lightning`（PyTorch Lightning，31K+ GitHub Stars）被注入恶意代码，影响版本 2.6.2 和 2.6.3。攻击者在包中隐藏了 `_runtime` 目录，包含下载器和混淆的 JavaScript payload，自动执行凭证窃取。该攻击属于"Mini Shai-Hulud"跨生态系统供应链攻击的一部分，同时影响了 Python（lightning）、Node.js（intercom-client）和 PHP 生态。
+
+**影响**：窃取开发者凭证、API Key，并尝试横向传播到其他包。PyPI 已将该项目隔离。
+
+来源：[The Hacker News](https://thehackernews.com/2026/04/pytorch-lightning-compromised-in-pypi.html)、[Snyk](https://snyk.io/blog/lightning-pypi-compromise-bun-based-credential-stealer/)、[OX Security](https://www.ox.security/blog/lightning-python-package-shai-hulud-supply-chain-attack/)
+
+### 13.2 LiteLLM 攻击（2026-03-24）
+
+`litellm`——几乎所有主流 AI Agent 框架的底层依赖——被注入恶意代码，影响版本 1.82.x。由于 LiteLLM 是 LangChain、CrewAI、AutoGen 等框架的间接依赖，攻击面极广。
+
+来源：[Comet Blog](https://www.comet.com/site/blog/litellm-supply-chain-attack/)、[HeroDevs](https://www.herodevs.com/blog-posts/the-litellm-supply-chain-attack-what-happened-why-it-matters-and-what-to-do-next)
+
+### 13.3 防护建议
+
+```python
+# 2026 年 Python 供应链安全加固清单
+
+# 1. 锁定依赖哈希（最重要）
+# uv pip compile --generate-hashes requirements.in -o requirements.txt
+
+# 2. 延迟安装新版本（等待社区发现问题）
+# uv pip compile --exclude-newer "3 days" requirements.in
+
+# 3. CI 中集成多层审计
+# .github/workflows/security.yml
+# jobs:
+#   audit:
+#     steps:
+#       - run: pip-audit --strict --desc
+#       - run: uv pip audit
+#       - run: safety check --full-report
+
+# 4. 监控关键依赖的发布（特别是 AI 相关包）
+# 高风险包清单（2026 年已被攻击或尝试攻击）：
+#   - lightning (PyTorch Lightning)
+#   - litellm
+#   - langchain-*
+#   - openai
+#   - anthropic
+
+# 5. 使用 Sigstore 验证包签名（如果可用）
+# pip install --require-hashes --verify-signatures -r requirements.txt
+```
+
+### 13.4 2026 年 Python CVE 统计
+
+截至 2026-05-12，CPython 本身有 9 个 CVE，Python 生态（含第三方包）有 21 个 CVE，平均 CVSS 评分 5.8。值得关注的高危 CVE：
+
+| CVE | 影响 | CVSS | 描述 |
+|-----|------|------|------|
+| CVE-2026-5752 | Cohere Terrarium | 9.3 | 沙箱逃逸，任意代码执行 |
+| CVE-2026-41140 | Poetry | — | tar 解压路径遍历（Python 3.10.0-3.10.12） |
+| CVE-2026-21531 | Azure SDK for Python | — | 远程代码执行 |
+
+来源：[stack.watch Python CVEs 2026](https://stack.watch/product/python/)、[The Hacker News](https://thehackernews.com/search/label/Python)
 

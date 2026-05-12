@@ -327,9 +327,9 @@ resumed = app.invoke(None, config)  # 传入 None 表示恢复
 | 部署         | LangGraph Cloud  | CrewAI Enterprise| Vertex AI Agent  |
 | 适用场景     | 复杂自定义流程    | 角色协作任务      | Google 云原生    |
 
-<!-- version-check: LangGraph 1.1.9, langgraph-prebuilt 1.0.11, checked 2026-04-27 -->
+<!-- version-check: LangGraph 1.1.9, langgraph-prebuilt 1.0.11, Deep Agents deploy, checked 2026-05-12 -->
 
-> 🔄 更新于 2026-04-27
+> 🔄 更新于 2026-05-12
 
 ## 10. 2026 年工作流编排趋势
 
@@ -369,7 +369,29 @@ LangGraph JS 引入 **Deep Agents** 概念（需要 LangSmith Deployment）：
 - 用户在子 Agent 工作时可继续与主 Agent 交互
 - 适用于长时间运行的研究、数据处理等场景
 
-来源：[LangChain JS Changelog](https://docs.langchain.com/oss/javascript/releases/changelog)
+**Deep Agents Deploy**（2026-04-20）：LangChain 发布 `deepagents deploy` 命令，一键将 Deep Agents harness（模型、指令、工具、技能、沙箱）部署为生产就绪的水平扩展服务器。与 Claude Managed Agents 不同，Deep Agents 将记忆存储在开发者拥有和直接查询的标准格式中。
+
+来源：[LangChain Blog - Deep Agents](https://www.langchain.com/blog/deep-agents-deploy-an-open-alternative-to-claude-managed-agents)、[LangChain Blog - Deep Agents Runtime](https://blog.langchain.com/)
+
+### 10.3 Agent Development Lifecycle（2026-05-09）
+
+Harrison Chase 发布 **Agent Development Lifecycle** 概念框架，定义了 Agent 从原型到生产的完整工程流程：
+
+```
+Build → Evaluate → Deploy → Monitor → Feedback → Build（循环）
+```
+
+核心观点：测试应在 Agent 到达生产之前开始，而非之后。团队需要在部署前测试 Agent、以受控方式部署、监控生产行为、并将学习反馈到下一轮构建和评估周期。
+
+这标志着 Agent 工程从"如何构建"进入"如何运维"的成熟阶段。
+
+来源：[LangChain Blog - The Agent Development Lifecycle](https://www.langchain.com/blog/the-agent-development-lifecycle)
+
+### 10.4 Interrupt 2026 大会（2026-05-13/14）
+
+LangChain 年度大会主题从"Agent 能否在生产中工作？"（2025）转变为"如何让 Agent 在企业规模下工作？"。演讲者包括 Andrew Ng、Harrison Chase，以及 Clay、Rippling 等公司的 AI 团队。
+
+来源：[Interrupt 2026 Preview](https://blog.langchain.com/previewing-interrupt-2026-agents-at-enterprise-scale/)
 
 ### 10.3 工作流编排模式演进方向
 

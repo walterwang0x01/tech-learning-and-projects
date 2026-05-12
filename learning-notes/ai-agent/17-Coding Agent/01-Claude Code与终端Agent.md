@@ -148,9 +148,9 @@ echo "检查代码中的安全漏洞" | claude --pipe
 
 ## 8. 2026 版本演进
 
-> 🔄 更新于 2026-04-21
+> 🔄 更新于 2026-05-12
 
-<!-- version-check: Claude Code 2.1.101, checked 2026-04-21 -->
+<!-- version-check: Claude Code 2.1.123, checked 2026-05-12 -->
 
 Claude Code 在 2026 年 3-4 月进入了史上最密集的迭代周期，从 v2.1.69 到 v2.1.101，5 周内发布了 30+ 个版本。
 
@@ -190,8 +190,30 @@ v2.1.92-101（Week 15，4/6-10）：
 
 **Claude Managed Agents**（公开 Beta）：Anthropic 推出完全托管的 Agent 运行时，提供安全沙箱、内置工具和 SSE 流式输出。通过 API 创建 Agent、配置容器、运行会话。
 
-来源：[Claude Code Docs - What's New](https://code.claude.com/docs/en/whats-new)（Content was rephrased for compliance with licensing restrictions）
-来源：[Claude Platform Release Notes](https://docs.claude.com/en/release-notes/overview)（Content was rephrased for compliance with licensing restrictions）
+**v2.1.105-123（2026 年 4-5 月）— Plugin 生态与新命令**：
+
+```
+v2.1.105-114（4 月中旬）：
+├─ Plugin 系统正式发布：自定义 skills/agents/hooks/MCP/LSP/monitors
+│  → 单命令安装：claude plugin add <name>
+│  → 组件类型：slash commands、sub-agents、hooks、MCP servers
+├─ Plugin Marketplace：集中式目录，版本追踪，自动更新
+│  → 支持 git 仓库、本地路径等多种来源
+├─ Cowork Plugins：Claude.com 桌面端也支持 Plugin
+└─ Agent SDK：开发者可构建自己的 Agent 循环
+
+v2.1.116-123（5 月初）：
+├─ /loop 命令：定时自动执行任务（省略间隔时自动调节节奏）
+├─ /ultrareview：云端多 Agent 代码审查
+├─ /caveman：超压缩 Skill（极限上下文节省）
+├─ /focus、/recap、/release-notes：上下文管理命令
+├─ /radio：社区分享的实验性命令
+├─ MCP 安全加固：更严格的工具权限和沙箱隔离
+├─ Channels 系统：多渠道输出（终端、Web、Slack）
+└─ 性能改进：上下文窗口利用率优化
+```
+
+来源：[Claude Code Docs - Changelog](https://code.claude.com/docs/en/changelog)、[Claude Code Plugins](https://www.anthropic.com/news/claude-code-plugins)（Content was rephrased for compliance with licensing restrictions）
 
 ## 9. 终端 Agent 对比
 
