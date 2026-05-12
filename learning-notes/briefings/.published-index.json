@@ -5939,7 +5939,451 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-05-11"
+    },
+    "a5006198370e": {
+      "url": "https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "80242a5e142f": {
+      "url": "https://techcrunch.com/2026/05/11/there-arent-enough-rockets-for-space-data-centers-cowboy-space-raised-275-million-to-build-them",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "9079d5ac0705": {
+      "url": "https://www.seangoedecke.com/software-engineering-may-no-longer-be-a-lifetime-career",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "3628e997390a": {
+      "url": "https://news.ycombinator.com/item?id=48100706",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "153d9615021a": {
+      "url": "https://news.ycombinator.com/item?id=48091737",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "d8c93b4d5ef2": {
+      "url": "https://about.gitlab.com/blog/gitlab-act-2",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "89ca7948e61d": {
+      "url": "https://socket.dev/blog/tanstack-npm-packages-compromised-mini-shai-hulud-supply-chain-attack",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "0b78685fc88d": {
+      "url": "https://news.ycombinator.com/item?id=48095550",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "9fc63425c24f": {
+      "url": "https://www.forbes.com/sites/thomasbrewster/2026/05/11/cybercriminals-make-powerful-zero-day-hack-with-ai-google-warns",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "f6ec608e4c50": {
+      "url": "https://www.oschina.net/news/438926/electron-42-0-1-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "ac9e2dfcf376": {
+      "url": "https://www.businessinsider.com/gitlab-layoffs-memo-2026-5",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "84a1d466de5a": {
+      "url": "https://9to5mac.com/2026/05/11/ios-26-5-adds-end-to-end-encryption-for-rcs-messaging-rolling-out-now",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "3e98608e162c": {
+      "url": "https://tanstack.com/blog/npm-supply-chain-compromise-postmortem",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "7916221d0533": {
+      "url": "https://www.macrumors.com/2026/05/11/ios-26-5-rcs-e2ee-launch",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "8593f99f18e4": {
+      "url": "https://news.ycombinator.com/item?id=48096692",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "ad1248d9003a": {
+      "url": "https://www.oschina.net/news/438917",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "f71ddee71c55": {
+      "url": "https://nvlabs.github.io/cuda-oxide/index.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "8908e908446e": {
+      "url": "https://www.wired.com/story/cuda-proves-nvidia-is-a-software-company",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "ce8ab3267838": {
+      "url": "https://daniel.haxx.se/blog/2026/05/11/mythos-finds-a-curl-vulnerability",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "b406e65cc8cb": {
+      "url": "https://arstechnica.com/tech-policy/2026/05/data-center-used-30-million-gallons-of-water-without-initially-paying",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "92fe9b0158c9": {
+      "url": "https://www.apple.com/newsroom/2026/05/end-to-end-encrypted-rcs-messaging-begins-rolling-out-today-in-beta",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "6a90ccaf8c63": {
+      "url": "https://arstechnica.com/gadgets/2026/05/starlink-blocks-access-to-its-gps-alternative-ahead-of-spacex-ipo",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "9c2c6c912ff4": {
+      "url": "https://techcrunch.com/2026/05/11/daniel-ek-backed-defense-tech-helsing-to-raise-1-2b-at-18b-valuation",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "c36087f15f3d": {
+      "url": "https://news.ycombinator.com/item?id=48092028",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "ed266a07520c": {
+      "url": "https://thenextweb.com/news/gitlab-layoffs-agentic-era-devops-ai",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "5b6afa769aec": {
+      "url": "https://www.theverge.com/tech/928007/google-ai-zero-day-exploit-stopped",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "938300d387bb": {
+      "url": "https://cybernews.com/privacy/google-qr-code-recaptcha-requires-approved-phone",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "a231c8a09ff0": {
+      "url": "https://theregister.co.uk/security/2026/05/11/anthropics-bug-hunting-mythos-was-greatest-marketing-stunt-ever-says-curl-creator/5238111",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "abd9bac425bf": {
+      "url": "https://thehackernews.com/2026/05/hackers-used-ai-to-develop-first-known.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "53f8cf00f873": {
+      "url": "https://news.ycombinator.com/item?id=48100500",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "889800f0d3cc": {
+      "url": "https://discuss.privacyguides.net/t/google-account-registration-now-requires-sending-an-sms-via-phone-instead-of-receiving-an-sms/36082",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "d7716bfed376": {
+      "url": "https://www.oschina.net/news/438907",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "773710705a9f": {
+      "url": "https://www.infoq.cn/article/zxqxYI9HUWWttJpprFCS",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "bf75129fab58": {
+      "url": "https://www.theverge.com/tech/926487/meari-technology-hack-baby-monitor-security-camera",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "8dc49bb11a31": {
+      "url": "https://www.stepsecurity.io/blog/mini-shai-hulud-is-back-a-self-spreading-supply-chain-attack-hits-the-npm-ecosystem",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-12"
+    },
+    "8dd2069dfd7f": {
+      "url": "https://aws.amazon.com/blogs/aws/aws-weekly-roundup-amazon-bedrock-agentcore-payments-agent-toolkit-for-aws-and-more-may-11-2026",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "9e8c1a316365": {
+      "url": "https://arxiv.org/abs/2605.06717",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "1394c994a5f2": {
+      "url": "https://interrupt.langchain.com/",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "9b84cf422adf": {
+      "url": "https://arxiv.org/abs/2605.06898",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "e303d20da9b5": {
+      "url": "https://www.oschina.net/news/439110",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "1e043c6c4008": {
+      "url": "https://www.langchain.com/blog/the-agent-development-lifecycle",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "9fa9b42e77bf": {
+      "url": "https://www.businessinsider.com/experts-react-openai-deployment-company-2026-5",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "b78a5bc14881": {
+      "url": "https://www.oschina.net/news/438950",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "459bb0a1f9e3": {
+      "url": "https://github.com/microsoft/agent-framework",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "c02d3afa1d8c": {
+      "url": "https://www.reuters.com/business/openai-creates-new-unit-with-4-billion-investment-aid-corporate-ai-push-2026-05-11",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "651ca3267e63": {
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/05/aws-mcp-server",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "c86720c8c7e1": {
+      "url": "https://openai.com/index/openai-launches-the-deployment-company",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "4ad41d93b654": {
+      "url": "https://mer.vin/2026/05/gemini-api-file-search-is-now-multimodal-how-metadata-filters-and-inline-citations-improve-rag",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "66709c89f8e7": {
+      "url": "https://github.com/agno-agi/agno",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "bf8daa69039e": {
+      "url": "https://www.coindesk.com/business/2026/05/07/amazon-rolls-out-ai-agent-stablecoin-payments-platform-with-coinbase-and-stripe",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "29e01c3ef8ba": {
+      "url": "https://arxiv.org/abs/2605.07161",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "4c7a3b4563d4": {
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanded-gemini-api-file-search-multimodal-rag",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "c11c036f41c8": {
+      "url": "https://www.cnbc.com/2026/05/11/open-ai-dresser-enterprise-business.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "d90b5b74c614": {
+      "url": "https://arxiv.org/abs/2605.07112",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "ed62f2c428fd": {
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/04/amazon-bedrock-agentcore-payments-preview",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "b86cdf72ec61": {
+      "url": "https://arxiv.org/abs/2605.06812",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "8ab9530c564f": {
+      "url": "https://arxiv.org/abs/2605.07242",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "3689dfc2b94f": {
+      "url": "https://www.oschina.net/news/439136",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-12"
+    },
+    "a10fa3484bd6": {
+      "url": "http://www.aastocks.com/sc/stocks/news/aafn-con/NOW.1523543/popular-news/AAFN",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "77905e5248e9": {
+      "url": "https://www.odaily.news/en/newsflash/480501",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "c4fc72026351": {
+      "url": "https://news.aibase.com/news/27866",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "74f4c35b9ba1": {
+      "url": "https://news.aibase.com/news/27869",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "be7ca16b07bd": {
+      "url": "https://finance.yahoo.com/sectors/technology/articles/alibaba-integrate-qwen-ai-taobao-014347932.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "b1ab4e1d377d": {
+      "url": "http://www.aastocks.com/sc/stocks/news/aafn-con/NOW.1523843/latest-news/AAFN",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "b103ea5beb26": {
+      "url": "https://36kr.com/p/3804795647729411?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "77649d855bf7": {
+      "url": "https://www.infoq.cn/article/GDqP9LMP0KMrRyyjEaAF",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "0567cac039fa": {
+      "url": "https://www.infoq.cn/article/qFyHzWVe3SrEwbwzGtCq",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "0a12be4dc248": {
+      "url": "https://www.odaily.news/en/newsflash/480384",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "ce3279a27662": {
+      "url": "https://36kr.com/p/3805557782486785?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "ff7cd75709a0": {
+      "url": "https://www.oschina.net/news/439099",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "e330595601fd": {
+      "url": "https://www.oschina.net/news/439005",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "e0f064af6fe4": {
+      "url": "https://www.oschina.net/news/438905",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "48ee06dfb969": {
+      "url": "https://www.oschina.net/news/439165",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
+    },
+    "c3ba3a284d3f": {
+      "url": "https://news.aibase.com/news/27829",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-12"
     }
   },
-  "updated": "2026-05-11 09:37"
+  "updated": "2026-05-12 11:38"
 }
