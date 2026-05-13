@@ -8,7 +8,7 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+llm = ChatOpenAI(model="gpt-5.2", temperature=0)  # <!-- 修复于 2026-05-13: gpt-4o 已退役 -->
 
 # 多查询改写：将一个问题改写为多个角度
 multi_query_prompt = ChatPromptTemplate.from_template("""

@@ -64,12 +64,14 @@ nodes = splitter.get_nodes_from_documents(documents)
 
 ## 4. Embedding 模型选择
 
+<!-- version-check: Embedding 模型对比, jina-embeddings-v5 (2026-02-18), checked 2026-05-13 -->
+
 | 模型 | 维度 | 中文支持 | 特点 |
 |------|------|---------|------|
 | text-embedding-3-small | 1536 | 好 | OpenAI，性价比高 |
 | text-embedding-3-large | 3072 | 好 | OpenAI，精度最高 |
 | bge-m3 | 1024 | 优秀 | 开源，多语言多粒度 |
-| jina-embeddings-v3 | 1024 | 好 | 开源，长文本支持 |
+| jina-embeddings-v5 | 1024 | 好 | 开源，多语言，Matryoshka 维度 |
 
 ```python
 from langchain_openai import OpenAIEmbeddings
@@ -130,7 +132,7 @@ template = """基于以下上下文回答问题。如果上下文中没有相关
 回答："""
 
 prompt = ChatPromptTemplate.from_template(template)
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+llm = ChatOpenAI(model="gpt-5.2", temperature=0)  # <!-- 修复于 2026-05-13: gpt-4o 已退役 -->
 
 def format_docs(docs):
     return "\n\n".join(f"[{i+1}] {doc.page_content}" for i, doc in enumerate(docs))

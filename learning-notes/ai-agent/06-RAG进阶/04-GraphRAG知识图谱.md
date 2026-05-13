@@ -20,7 +20,7 @@ GraphRAG：文档 → 实体/关系提取 → 知识图谱 → 图检索 + 向�
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+llm = ChatOpenAI(model="gpt-5.2", temperature=0)  # <!-- 修复于 2026-05-13: gpt-4o 已退役 -->
 
 extraction_prompt = ChatPromptTemplate.from_template("""
 从以下文本中提取实体和关系，以 JSON 格式输出。
@@ -38,11 +38,11 @@ extraction_prompt = ChatPromptTemplate.from_template("""
 }}
 """)
 
-text = "OpenAI 开发了 GPT-4o 模型，该模型支持多模态输入。Anthropic 推出了 Claude 3.5，在代码生成方面表现优秀。"
+text = "OpenAI 开发了 GPT-5.2 模型，该模型支持多模态输入。Anthropic 推出了 Claude Sonnet 4.6，在代码生成方面表现优秀。"
 result = (extraction_prompt | llm).invoke({"text": text})
 print(result.content)
-# {"entities": [{"name": "OpenAI", "type": "公司", ...}, {"name": "GPT-4o", "type": "模型", ...}],
-#  "relationships": [{"source": "OpenAI", "target": "GPT-4o", "relation": "开发", ...}]}
+# {"entities": [{"name": "OpenAI", "type": "公司", ...}, {"name": "GPT-5.2", "type": "模型", ...}],
+#  "relationships": [{"source": "OpenAI", "target": "GPT-5.2", "relation": "开发", ...}]}
 ```
 
 ## 3. Neo4j 知识图谱存储
@@ -101,7 +101,7 @@ def graph_query(question: str) -> list:
 # 2. 配置 settings.yaml
 """
 llm:
-  model: gpt-4o
+  model: gpt-5.2
   api_key: ${OPENAI_API_KEY}
 
 embeddings:

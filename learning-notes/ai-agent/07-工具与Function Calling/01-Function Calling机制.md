@@ -42,7 +42,7 @@ tools = [
 
 # 第一轮：LLM 决定调用工具
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",  # <!-- 修复于 2026-05-13: gpt-4o 已退役 -->
     messages=[{"role": "user", "content": "北京今天天气怎么样？"}],
     tools=tools,
     tool_choice="auto",  # auto / required / none / {"type":"function","function":{"name":"..."}}
@@ -57,7 +57,7 @@ if message.tool_calls:
 
     # 第二轮：将结果返回 LLM
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-5.2",
         messages=[
             {"role": "user", "content": "北京今天天气怎么样？"},
             message,
@@ -91,7 +91,7 @@ tools = [
 ]
 
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",  # 或 claude-opus-4-7（最新旗舰）
+    model="claude-sonnet-4-6-20260217",  # <!-- 修复于 2026-05-13: claude-sonnet-4-20250514 过时 -->
     max_tokens=1024,
     tools=tools,
     messages=[{"role": "user", "content": "查询上月销售额最高的产品"}],
@@ -105,7 +105,7 @@ for block in response.content:
 
         # 返回结果
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-6-20260217",
             max_tokens=1024,
             tools=tools,
             messages=[
@@ -123,7 +123,7 @@ for block in response.content:
 ```python
 # OpenAI 支持一次返回多个工具调用
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "北京和上海今天天气怎么样？"}],
     tools=tools,
     parallel_tool_calls=True,  # 启用并行调用
@@ -150,7 +150,7 @@ async def execute_parallel(tool_calls):
 ```python
 # 流式响应中处理工具调用
 stream = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "查询天气"}],
     tools=tools,
     stream=True,
