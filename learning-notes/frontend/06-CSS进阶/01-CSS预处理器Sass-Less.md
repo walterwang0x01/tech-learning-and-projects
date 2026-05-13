@@ -4,6 +4,8 @@
 
 ## 1. Sass/SCSS
 
+<!-- version-check: Dart Sass (sass npm), PostCSS 8.x, checked 2026-05-13 -->
+
 ```scss
 // 变量
 $primary: #3498db;

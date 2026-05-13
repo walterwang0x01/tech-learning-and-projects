@@ -86,7 +86,8 @@ pm2 reload all # 零停机重启
 
 > 🔄 更新于 2026-04-30
 
-<!-- version-check: Node.js 24 LTS (Krypton), checked 2026-04-30 -->
+<!-- version-check: Node.js 24.15.0 LTS (Krypton), Node.js 26.0.0 Current, checked 2026-05-13 -->
+<!-- 修复于 2026-05-13: 24 LTS → 24.15.0 -->
 
 Node.js 24 LTS（代号 Krypton）带来了显著的性能改进：
 

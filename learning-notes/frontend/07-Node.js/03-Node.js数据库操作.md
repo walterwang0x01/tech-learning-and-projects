@@ -2,7 +2,8 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
-<!-- version-check: Prisma 7.7.x, Mongoose 9.6.1, ioredis deprecated → node-redis, Drizzle ORM 0.43.x, checked 2026-05-02 -->
+<!-- version-check: Prisma 7.7.x, Mongoose 9.6.1, ioredis deprecated → node-redis, Drizzle ORM 0.44.x, checked 2026-05-13 -->
+<!-- 修复于 2026-05-13: Drizzle ORM 0.43.x → 0.44.x（npm 确认） -->
 
 ## 1. Prisma ORM（推荐）
 

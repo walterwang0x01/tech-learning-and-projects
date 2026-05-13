@@ -66,7 +66,8 @@ const theme = { colors: { primary: '#3498db' }, spacing: { md: '16px' } };
 
 ## 4. 2026 年零运行时 CSS-in-JS 趋势
 
-<!-- version-check: StyleX 0.17.1, Panda CSS 0.53.x, styled-components maintenance mode, checked 2026-05-04 -->
+<!-- version-check: StyleX 0.15.x, Panda CSS 0.53.x, styled-components maintenance mode, checked 2026-05-13 -->
+<!-- 修复于 2026-05-13: StyleX 版本 0.17.1 → 0.15.x（npm 确认） -->
 
 > 🔄 更新于 2026-05-04
 

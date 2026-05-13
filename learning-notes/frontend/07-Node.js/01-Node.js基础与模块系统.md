@@ -4,11 +4,12 @@
 
 ## 1. 事件循环
 
-<!-- version-check: Node.js 24.14.1 LTS, checked 2026-04-18 -->
+<!-- version-check: Node.js 24.15.0 LTS, checked 2026-05-13 -->
+<!-- 修复于 2026-05-13: 24.14.1 → 24.15.0（2026-04-15 发布）；补充 Node.js 26 Current -->
 
-> 🔄 更新于 2026-04-18：Node.js 24（Krypton）是当前 Active LTS 版本（2025-10-28 进入 LTS，支持至 2028-04），搭载 V8 13.6、npm 11（安装速度提升 65%）、Undici 7。Node.js 22 仍在维护中。
+> 🔄 更新于 2026-05-13：Node.js 24（Krypton）是当前 Active LTS 版本（2025-10-28 进入 LTS，支持至 2028-04），搭载 V8 13.6、npm 11（安装速度提升 65%）、Undici 7。Node.js 26.0.0（Current）已于 2026-05-05 发布，搭载 V8 14.6、Undici 8、Temporal API 默认启用。
 
-来源：[Node.js 24 LTS 公告](https://nodesource.com/blog/nodejs-24-becomes-lts)、[Node.js 24.14.1 安全更新](https://nodejs.org/en/blog/release/v24.14.1)
+来源：[Node.js 24.15.0 LTS](https://nodejs.org/en/blog/release/v24.15.0)、[Node.js 26.0.0 Current](https://nodejs.org/en/blog/release/v26.0.0)
 
 ```
    ┌───────────────────────────┐

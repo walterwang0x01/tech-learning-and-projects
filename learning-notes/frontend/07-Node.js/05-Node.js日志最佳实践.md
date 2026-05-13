@@ -4,6 +4,8 @@
 
 ## 1. 日志库对比
 
+<!-- version-check: pino 9.x/10.x, winston 3.x, pino-http 10.x, checked 2026-05-13 -->
+
 | 特性 | pino | winston | Bunyan | console |
 |------|------|---------|--------|---------|
 | 性能 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |

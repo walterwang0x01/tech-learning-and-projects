@@ -55,6 +55,8 @@ app.listen(3000, () => console.log('Server running on port 3000'));
 
 ## 2. Koa
 
+> ⚠️ **注意**：Koa 3.x 已发布（2024），要求 Node.js 18+。以下代码兼容 Koa 2.x 和 3.x。
+
 ```javascript
 import Koa from 'koa';
 import Router from '@koa/router';
@@ -125,7 +127,8 @@ export class UsersService {
 
 > 🔄 更新于 2026-04-30
 
-<!-- version-check: Express 5.1.0, NestJS 11.1.19, checked 2026-04-30 -->
+<!-- version-check: Express 5.1.0, NestJS 11.1.x, Koa 3.1.x, Fastify 5.6.x, Hono 4.12.x, checked 2026-05-13 -->
+<!-- 修复于 2026-05-13: Koa 2.15.x → 3.1.x, Fastify 5.3.x → 5.6.x, Hono 4.7.x → 4.12.x, NestJS 11.1.19 → 11.1.x -->
 
 ### 4.1 Express 5.1（npm 默认版本）
 
@@ -208,10 +211,10 @@ export class AppModule {}
 | 框架 | 定位 | 适用场景 | 当前版本 |
 |------|------|---------|---------|
 | Express 5.1 | 极简、灵活 | 小型 API、微服务、快速原型 | 5.1.0 |
-| Koa | 现代中间件 | 需要精细控制的中间件场景 | 2.15.x |
-| NestJS 11 | 企业级、装饰器 | 大型项目、团队协作、微服务 | 11.1.19 |
-| Fastify | 高性能 | 高吞吐量 API、性能敏感场景 | 5.3.x |
-| Hono | 超轻量、多运行时 | Edge/Serverless、Cloudflare Workers | 4.7.x |
+| Koa | 现代中间件 | 需要精细控制的中间件场景 | 3.1.x |
+| NestJS 11 | 企业级、装饰器 | 大型项目、团队协作、微服务 | 11.1.x |
+| Fastify | 高性能 | 高吞吐量 API、性能敏感场景 | 5.6.x |
+| Hono | 超轻量、多运行时 | Edge/Serverless、Cloudflare Workers | 4.12.x |
 
 ## 🎬 推荐视频资源
 
