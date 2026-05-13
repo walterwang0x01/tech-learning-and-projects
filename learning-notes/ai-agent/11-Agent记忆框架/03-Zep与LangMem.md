@@ -4,7 +4,7 @@
 
 ## 1. Zep：时序知识图谱记忆
 
-<!-- version-check: Zep Cloud + Graphiti OSS, checked 2026-04-18 -->
+<!-- version-check: Zep Cloud V3 SDK + Graphiti v0.29.x OSS, checked 2026-05-13 -->
 
 Zep 为 AI Agent 提供基于时序知识图谱的记忆服务，自动从对话中提取事实、构建实体图谱、追踪时间变化。核心引擎 Graphiti 开源。
 
@@ -86,12 +86,14 @@ graph = zep.user.get_facts(user_id="alice")
 
 ## 3. Zep 与 LangChain 集成
 
+> ⚠️ 注意：`langchain_community.memory.ZepMemory` 已随 Zep V2 SDK 废弃（2026-02 废弃波次）。Zep V3 SDK 推荐直接使用 `zep_cloud.client.Zep` 客户端或 Graphiti MCP Server 集成。以下代码为 legacy 参考。
+
 ```python
 from langchain_community.memory import ZepMemory
 from langchain_openai import ChatOpenAI
 from langchain.chains import ConversationChain
 
-# 使用 Zep 作为 LangChain 记忆后端
+# 使用 Zep 作为 LangChain 记忆后端（legacy V2 API）
 memory = ZepMemory(
     session_id="session-001",
     url="https://api.getzep.com",
@@ -100,7 +102,7 @@ memory = ZepMemory(
 )
 
 chain = ConversationChain(
-    llm=ChatOpenAI(model="gpt-4o"),
+    llm=ChatOpenAI(model="gpt-5.2"),
     memory=memory,
 )
 
@@ -129,7 +131,7 @@ from langmem import create_memory_store_manager
 
 # 创建记忆管理器
 memory_manager = create_memory_store_manager(
-    "openai:gpt-4o",
+    "openai:gpt-5.2",
     memory_types=[
         {
             "name": "semantic",
@@ -162,7 +164,7 @@ store = InMemoryStore()
 
 # 方式1：后台自动提取记忆
 memory_manager = create_memory_store_manager(
-    "openai:gpt-4o",
+    "openai:gpt-5.2",
     namespace=("memories", "{user_id}"),
 )
 

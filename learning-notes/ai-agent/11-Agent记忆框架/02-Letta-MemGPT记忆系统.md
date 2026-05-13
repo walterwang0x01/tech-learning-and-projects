@@ -4,11 +4,13 @@
 
 ## 1. 概述
 
-<!-- version-check: Letta v0.16.7, checked 2026-04-18 -->
+<!-- version-check: Letta SDK v1.0+, checked 2026-05-13 -->
 
 Letta（前身 MemGPT）是 UC Berkeley 研究团队开发的有状态 Agent 运行时，采用操作系统启发的分层记忆架构，让 Agent 能自主管理自己的记忆。GitHub 21K+ Stars。
 
-> 🔄 更新于 2026-04-18
+> 🔄 更新于 2026-05-13
+>
+> **Letta SDK v1.0 重大更新**：客户端初始化从 `create_client()` 改为 `Letta()` 构造函数，属性全面改为 `snake_case`，列表方法返回分页对象，`archival_memory` 改为 `archives` API，`modify()` 改为 `update()`。详见 [API v1.0 Migration Guide](https://docs.letta.com/api-overview/v1-migration-guide)。
 >
 > **Letta v0.16.7**（2026-03-31）：默认上下文窗口 32K→128K，压缩（compaction）机制全面重构（21 项修复），Block 大小限制移除，GPT-5.4/Opus 4.6/Sonnet 4.6 全面支持，WebSocket 传输支持 OpenAI Responses API，安全加固（阻止 `file:///` URL 和内部 MCP 目标）。
 > 来源：[Letta Releases](https://github.com/letta-ai/letta/releases)
@@ -71,30 +73,37 @@ letta server  # 启动 Letta 服务器（含 ADE 界面）
 ```
 
 ```python
-from letta import create_client
+# <!-- 修复于 2026-05-13: Letta SDK v1.0 API 变更，create_client → Letta 构造函数 -->
+from letta import Letta
 
 # 连接 Letta 服务器
-client = create_client(base_url="http://localhost:8283")
+client = Letta(base_url="http://localhost:8283")
 
 # 创建有状态 Agent
-agent = client.create_agent(
+agent = client.agents.create(
     name="personal-assistant",
-    model="openai/gpt-4o",
+    model="openai/gpt-5.2",
     embedding="openai/text-embedding-3-small",
-    memory_blocks=[
-        {"label": "human", "value": "用户名：Alice，职业：软件工程师"},
-        {"label": "persona", "value": "你是一个友好的个人助手，记住用户的偏好。"},
-    ],
-    tools=["web_search", "run_code"],
+    block_ids=[],  # 或传入已创建的 block ID
+    include_base_tools=True,
 )
 
-# 与 Agent 对话（Agent 自动管理记忆）
-response = client.send_message(
-    agent_id=agent.id,
-    message="我最近在学 Rust，觉得所有权机制很有趣",
-    role="user",
+# 单独创建并附加记忆块
+human_block = client.blocks.create(
+    label="human", value="用户名：Alice，职业：软件工程师"
 )
-print(response.messages)
+persona_block = client.blocks.create(
+    label="persona", value="你是一个友好的个人助手，记住用户的偏好。"
+)
+client.agents.blocks.attach(human_block.id, agent_id=agent.id)
+client.agents.blocks.attach(persona_block.id, agent_id=agent.id)
+
+# 与 Agent 对话（Agent 自动管理记忆）
+response = client.agents.messages.create(
+    agent_id=agent.id,
+    input="我最近在学 Rust，觉得所有权机制很有趣",
+)
+print(response.items)
 # Agent 内部可能执行：
 # core_memory_append("human", "正在学习 Rust，对所有权机制感兴趣")
 ```
@@ -116,11 +125,12 @@ Letta 的核心特色：Agent 自主决定何时、如何更新记忆。
 4. Agent 回复："恭喜新工作！字节跳动的 AI 基础设施团队很棒..."
 """
 
-# 查看 Agent 当前核心记忆
-memory = client.get_agent_memory(agent_id=agent.id)
-print(memory.core_memory)
-# {"human": "用户名：Alice，职业：AI基础设施工程师，公司：字节跳动，正在学习Rust",
-#  "persona": "你是一个友好的个人助手..."}
+# 查看 Agent 当前核心记忆（SDK v1.0 API）
+agent_state = client.agents.retrieve(agent.id, include=["agent.blocks"])
+for block in agent_state.blocks:
+    print(f"{block.label}: {block.value}")
+# human: 用户名：Alice，职业：AI基础设施工程师，公司：字节跳动，正在学习Rust
+# persona: 你是一个友好的个人助手...
 ```
 
 ## 5. 归档记忆操作
@@ -141,13 +151,13 @@ Agent 内部：archival_memory_search("项目架构 部署")
 → 找到归档记忆，生成回复
 """
 
-# 通过 API 直接操作归档记忆
-client.insert_archival_memory(
-    agent_id=agent.id,
-    memory="公司技术文档：微服务架构指南 v2.0 ..."
+# 通过 API 直接操作归档记忆（SDK v1.0: archives API）
+client.archives.passages.create(
+    archive_id=agent.archive_id,
+    text="公司技术文档：微服务架构指南 v2.0 ...",
 )
 
-results = client.search_archival_memory(
+results = client.agents.messages.search(
     agent_id=agent.id,
     query="微服务架构",
     limit=5,
@@ -157,9 +167,9 @@ results = client.search_archival_memory(
 ## 6. 自定义工具
 
 ```python
-from letta import create_client
+from letta import Letta
 
-client = create_client()
+client = Letta()
 
 # 定义自定义工具
 def query_database(query: str) -> str:
@@ -178,18 +188,21 @@ def query_database(query: str) -> str:
     return json.dumps(results, ensure_ascii=False)
 
 # 注册工具
-tool = client.create_tool(func=query_database)
+tool = client.tools.create(func=query_database)
 
 # 创建带自定义工具的 Agent
-agent = client.create_agent(
+agent = client.agents.create(
     name="db-assistant",
-    model="openai/gpt-4o",
-    tools=[tool.name, "archival_memory_search"],
-    memory_blocks=[
-        {"label": "human", "value": "DBA，管理 PostgreSQL 集群"},
-        {"label": "persona", "value": "数据库专家助手"},
-    ],
+    model="openai/gpt-5.2",
+    tool_ids=[tool.id],
+    include_base_tools=True,
 )
+
+# 创建并附加记忆块
+human_block = client.blocks.create(label="human", value="DBA，管理 PostgreSQL 集群")
+persona_block = client.blocks.create(label="persona", value="数据库专家助手")
+client.agents.blocks.attach(human_block.id, agent_id=agent.id)
+client.agents.blocks.attach(persona_block.id, agent_id=agent.id)
 ```
 
 ## 7. Agent Development Environment (ADE)
@@ -220,26 +233,27 @@ Letta ADE 提供可视化界面：
 ## 8. 多 Agent 协作
 
 ```python
-# 创建多个专业 Agent
-researcher = client.create_agent(
+# 创建多个专业 Agent（SDK v1.0 API）
+researcher = client.agents.create(
     name="researcher",
-    model="openai/gpt-4o",
-    tools=["web_search", "archival_memory_search"],
-    memory_blocks=[
-        {"label": "persona", "value": "你是研究员，负责信息收集和分析"},
-        {"label": "shared", "value": "团队项目：AI Agent 调研报告"},
-    ],
+    model="openai/gpt-5.2",
+    include_base_tools=True,
 )
+# 附加记忆块
+r_persona = client.blocks.create(label="persona", value="你是研究员，负责信息收集和分析")
+r_shared = client.blocks.create(label="shared", value="团队项目：AI Agent 调研报告")
+client.agents.blocks.attach(r_persona.id, agent_id=researcher.id)
+client.agents.blocks.attach(r_shared.id, agent_id=researcher.id)
 
-writer = client.create_agent(
+writer = client.agents.create(
     name="writer",
-    model="openai/gpt-4o",
-    tools=["archival_memory_search"],
-    memory_blocks=[
-        {"label": "persona", "value": "你是技术作者，负责撰写报告"},
-        {"label": "shared", "value": "团队项目：AI Agent 调研报告"},
-    ],
+    model="openai/gpt-5.2",
+    include_base_tools=True,
 )
+w_persona = client.blocks.create(label="persona", value="你是技术作者，负责撰写报告")
+w_shared = client.blocks.create(label="shared", value="团队项目：AI Agent 调研报告")
+client.agents.blocks.attach(w_persona.id, agent_id=writer.id)
+client.agents.blocks.attach(w_shared.id, agent_id=writer.id)
 
 # Agent 间通过共享归档记忆协作
 # researcher 将调研结果写入归档 → writer 从归档读取并撰写
