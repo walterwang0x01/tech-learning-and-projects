@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Prometheus 3.x, Grafana 11.x, Alertmanager 0.28, checked 2026-05-10 -->
+<!-- version-check: Prometheus 3.9.x, Grafana 12.4/13.0, Alertmanager 0.28, checked 2026-05-13 -->
 
 ## 1. Prometheus 架构
 
@@ -285,3 +285,28 @@ time_intervals:
 - [Grafana Documentation](https://grafana.com/docs/)
 - [SRE Workbook - Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/)
 - [VictoriaMetrics 与 Prometheus 对比](https://docs.victoriametrics.com/)
+
+## 8. 2026 年版本演进
+
+> 🔄 更新于 2026-05-13
+
+### 8.1 Prometheus 3.9.x
+
+Prometheus 3.x 在 2025 年底发布，核心新特性是 **Native Histograms**（原生直方图）成为标准功能。使用指数桶边界，无需手动配置桶，自动适应数据分布，显著减少存储和配置复杂度。来源：[dasroot.net](https://dasroot.net/posts/2026/02/go-observability-stack-prometheus-grafana-opentelemetry/)
+
+### 8.2 Grafana 12.x / 13.0
+
+| 版本 | 发布时间 | 核心特性 |
+|------|---------|---------|
+| 12.0 | 2025-04 | Drilldown GA（Explore Metrics/Logs/Traces）、Grafana-managed alerts GA、Git Sync 预览、SQL Expressions、SCIM sync |
+| 12.2 | 2025-08 | 增强 ad hoc 过滤、重新设计的 Table 可视化 |
+| 12.4 | 2025-12 | Dynamic Dashboards、模板驱动工作流、Observability as Code 更新 |
+| 13.0 | 2026-04 | 解决"空白光标问题"——帮助团队更快上手并从数据中获取洞察 |
+
+来源：[Grafana What's New](https://grafana.com/docs/grafana/latest/whatsnew/)、[Releasebot](https://releasebot.io/updates/grafana)
+
+**Grafana 12.0 关键改进**：
+- **Drilldown GA**：无需写 PromQL/LogQL 即可探索 Prometheus 指标和 Loki 日志
+- **Git Sync 预览**：Dashboard 直接同步到 GitHub 仓库
+- **新 Terraform Provider + CLI**：Dashboard as Code 完整工具链
+- **SQL Expressions**：在 Dashboard 中直接用 SQL 转换数据

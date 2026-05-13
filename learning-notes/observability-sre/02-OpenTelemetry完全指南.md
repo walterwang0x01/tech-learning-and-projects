@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: OpenTelemetry 1.x stable, OTLP, OTel Collector, checked 2026-05-10 -->
+<!-- version-check: OpenTelemetry 1.x stable, OTLP 1.10.0, Declarative Config 1.0 stable, GenAI semconv (development), checked 2026-05-13 -->
 
 ## 1. 核心架构
 
@@ -371,3 +371,62 @@ gen_ai.*      GenAI / LLM（2026 扩展）
 - [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
 - [Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/)
 - [OTel Contrib](https://github.com/open-telemetry/opentelemetry-collector-contrib)
+
+## 10. 2026 年重大进展
+
+> 🔄 更新于 2026-05-13
+
+### 10.1 Declarative Configuration 稳定版（2026-03-05）
+
+OpenTelemetry 声明式配置规范的关键部分已标记为 stable，包括 JSON Schema 数据模型（opentelemetry-configuration 发布 stable 1.0）。这意味着可以用 YAML/JSON 文件统一配置 SDK，无需在代码中硬编码 exporter/processor/sampler。来源：[OTel Blog](https://opentelemetry.io/blog/2026/stable-declarative-config/)
+
+```yaml
+# otel-config.yaml — 声明式配置示例
+file_format: "0.4"
+sdk:
+  resource:
+    attributes:
+      service.name: my-service
+      deployment.environment: production
+  tracer_provider:
+    processors:
+      - batch:
+          exporter:
+            otlp:
+              endpoint: http://collector:4317
+              protocol: grpc
+  meter_provider:
+    readers:
+      - periodic:
+          interval: 30000
+          exporter:
+            otlp:
+              endpoint: http://collector:4317
+```
+
+### 10.2 GenAI 语义约定（Development 状态）
+
+OTel 新增了 Generative AI 系统的语义约定，定义了 `gen_ai.*` 属性命名空间，覆盖模型调用、Agent 运行和工具调用三个层级。虽然仍处于 Development 状态，但 Datadog、Honeycomb、LangSmith 等平台已原生支持。85% 的组织计划启用 LLM 可观测性，但仅 8% 完成了部署。来源：[OTel GenAI Semconv](https://opentelemetry.io/docs/specs/semconv/gen-ai/)、[Elastic 2026 调研](https://maketocreate.com/opentelemetry-genai-tracing-ai-agents-without-leaking-pii/)
+
+**Agent Spans 语义约定**：专门为 Agent 框架定义的 span 类型，覆盖推理、工具调用、检索等步骤，每个操作成为子 span，形成完整的推理链追踪。来源：[OTel GenAI Agent Spans](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/)
+
+关键属性：
+
+| 属性 | 说明 |
+|------|------|
+| `gen_ai.system` | 模型提供商（openai/anthropic/...） |
+| `gen_ai.request.model` | 请求的模型名称 |
+| `gen_ai.response.model` | 实际响应的模型名称 |
+| `gen_ai.usage.input_tokens` | 输入 Token 数 |
+| `gen_ai.usage.output_tokens` | 输出 Token 数 |
+| `gen_ai.response.finish_reasons` | 完成原因（stop/tool_calls/...） |
+
+### 10.3 其他重要变化
+
+- **Span Event API 废弃**：社区决定收敛到 Logs API 作为唯一推荐的事件发射方式
+- **Kotlin Multiplatform SDK 开发中**：将 OTel 扩展到 Android、iOS、JVM 等平台
+- **OTLP 1.10.0**：Traces/Metrics/Logs 信号稳定，Profiles 信号处于 Development 状态
+- **eBPF Instrumentation 1.0 目标**：零代码侵入的自动化遥测采集
+- **Ecosystem Explorer 项目**：帮助开发者在 240+ Java 自动 instrumentation 和数百个 Collector 组件中导航
+
+来源：[Datadog OTel News 2026-03](https://opensource.datadoghq.com/otel-news/2026/03/)、[Datadog OTel News 2026-04](https://opensource.datadoghq.com/otel-news/2026/04/)

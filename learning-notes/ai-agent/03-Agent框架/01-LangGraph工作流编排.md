@@ -4,10 +4,12 @@
 
 ## 1. 概述
 
-<!-- version-check: LangGraph 1.1.9 stable, 126K+ Stars, checked 2026-05-05 -->
+<!-- version-check: LangGraph 1.1.9 stable, 126K+ Stars, Deep Agents v0, Delta Channels, checked 2026-05-13 -->
 LangGraph 是 LangChain 团队推出的 Agent 工作流编排框架，基于图结构定义 Agent 的执行流程。2025 年 10 月发布 1.0 GA，目前最新版本为 1.1.9 稳定版，126K+ GitHub Stars，90M+ 月下载量，是目前生产级 Agent 开发的行业标准。Uber、JP Morgan、BlackRock、Cisco、LinkedIn、Klarna、Replit、Elastic 等企业已在生产环境部署。来源：[LangChain Blog](https://blog.langchain.com/langchain-langgraph-1dot0/)、[Releasebot](https://releasebot.io/updates/langchain-ai)
 
-> 🔄 更新于 2026-05-05
+> 🔄 更新于 2026-05-13
+
+**Delta Channels — 长时运行 Agent 的运行时升级**（2026-05-12）：Deep Agents 构建在 LangGraph 运行时之上，每步都做 checkpoint 以支持可观测性、人机交互和故障恢复。但对于运行数小时甚至数天的 Agent，全量 checkpoint 导致存储爆炸和恢复延迟线性增长。Delta Channels 只存储每步的增量（delta），每 K 步写一次完整快照，将恢复延迟限制在常数级别，存储成本不随会话增长而膨胀。现有 LangGraph 线程无需迁移即可透明升级，消息和文件默认走 delta-backed 存储。来源：[LangChain Blog](https://www.langchain.com/blog/delta-channels-evolving-agent-runtime)
 
 **Interrupt 2026 大会**（2026-05-13/14，旧金山）：LangChain 年度 Agent 大会，超过 1000 名开发者参加。演讲嘉宾包括 Andrew Ng、Harrison Chase、Coinbase、Apple 等企业。主题聚焦"Agents at Enterprise Scale"——企业级 Agent 部署的实战经验。来源：[LangChain Blog](https://www.langchain.com/blog/previewing-interrupt-2026-agents-at-enterprise-scale)
 

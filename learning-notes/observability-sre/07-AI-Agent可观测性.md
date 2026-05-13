@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: LangSmith Fleet, Langfuse 4.x, Phoenix 6.x, OTel GenAI semconv, checked 2026-05-10 -->
+<!-- version-check: LangSmith Fleet, Langfuse 4.x, Phoenix 6.x, OTel GenAI semconv (development), OTel Agent Spans, checked 2026-05-13 -->
 
 ## 1. 为什么 LLM 系统需要独立的可观测性
 
@@ -337,3 +337,49 @@ def record_usage(response, user_tier: str):
 - [Arize Phoenix](https://phoenix.arize.com/)
 - [LLM Observability Guide (Martin Fowler)](https://martinfowler.com/articles/llm-observability.html)
 - 关联：[ai-agent/14-可观测与评估/](../ai-agent/14-可观测与评估/)
+
+## 8. 2026 年 OTel GenAI Agent Spans 标准化
+
+> 🔄 更新于 2026-05-13
+
+### 8.1 OTel GenAI Agent Spans 语义约定
+
+OpenTelemetry 新增了专门针对 AI Agent 框架的 span 语义约定（Development 状态），定义了 Agent 运行中每个步骤的标准化追踪方式。来源：[OTel GenAI Agent Spans](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/)
+
+**Agent 追踪层级**：
+
+```
+Agent Run (root span)
+├── LLM Call (gen_ai.chat span)
+│   ├── gen_ai.system = "openai"
+│   ├── gen_ai.request.model = "gpt-5.5"
+│   ├── gen_ai.usage.input_tokens = 1234
+│   └── gen_ai.usage.output_tokens = 567
+├── Tool Call (gen_ai.tool span)
+│   ├── gen_ai.tool.name = "search_database"
+│   └── gen_ai.tool.description = "..."
+├── Retrieval (gen_ai.retrieval span)
+│   ├── gen_ai.retrieval.source = "vector_db"
+│   └── gen_ai.retrieval.documents_count = 5
+└── LLM Call (gen_ai.chat span)
+    └── gen_ai.response.finish_reasons = ["stop"]
+```
+
+### 8.2 行业采用现状
+
+- **85% 组织计划启用 LLM 可观测性**，但仅 8% 完成部署（Elastic 2026 调研）
+- Datadog、Honeycomb、Azure Application Insights 已原生支持 `gen_ai.*` 属性
+- Microsoft Application Insights 新增 Agents (Preview) 视图，展示 Agent 运行、Token 用量和工具调用
+- OpenSearch 发布 `opensearch-genai-observability-sdk-py`，自动创建带标准属性的 span
+
+来源：[Microsoft Tech Community](https://techcommunity.microsoft.com/blog/AppsonAzureBlog/monitor-ai-agents-on-app-service-with-opentelemetry-and-the-new-application-insi/4510023)、[OpenSearch Docs](https://docs.opensearch.org/latest/observing-your-data/agent-traces/agent-tracing/)
+
+### 8.3 PII 保护最佳实践
+
+GenAI 追踪面临独特的隐私挑战——Prompt 和 Response 中可能包含用户敏感数据。推荐做法：
+
+1. **默认不记录 Prompt/Response 内容**：通过 `OTEL_SEMCONV_STABILITY_OPT_IN` 环境变量控制
+2. **使用 OTel Collector Processor 脱敏**：在 Collector 层面过滤 PII
+3. **分级存储**：完整内容存短期（7 天），脱敏后的元数据存长期
+
+来源：[OTel GenAI PII Guide](https://maketocreate.com/opentelemetry-genai-tracing-ai-agents-without-leaking-pii/)
