@@ -4,6 +4,13 @@
 
 ## 1. 概述
 
+> 🔄 更新于 2026-05-13
+>
+> **AI SDK 6**（2026-06 发布）：Vercel AI SDK 当前最新大版本，20M+ 月下载量。核心变化：Server Actions 替代 API Routes（`useChat` 直连 Server Action，无需 `/api/chat` 端点）；`StreamingTextResponse` 移除，改用 `toDataStreamResponse`/`toDataStream`；统一 `LanguageModelV1` 接口；原生 Zod 4 集成；Provider 包重构为独立 tree-shakeable 包。v5 API Routes 模式仍兼容（过渡期支持）。
+> 来源：[Vercel Blog - AI SDK 6](https://vercel.com/blog/ai-sdk-6)
+
+<!-- version-check: Vercel AI SDK 6.x, @ai-sdk/openai 2.0.x, checked 2026-05-13 -->
+
 Vercel AI SDK 是 TypeScript 生态的 AI 开发工具包，提供统一的模型接口、流式响应、工具调用等能力。AI Gateway 提供集中式模型路由和管理。
 
 ```
@@ -37,7 +44,7 @@ import { anthropic } from '@ai-sdk/anthropic';
 
 // 生成文本（非流式）
 const { text } = await generateText({
-  model: openai('gpt-4o'),
+  model: openai('gpt-5.2'),
   prompt: '解释什么是 AI Agent',
 });
 
@@ -49,7 +56,7 @@ const { text: claudeText } = await generateText({
 
 // 流式输出
 const result = streamText({
-  model: openai('gpt-4o'),
+  model: openai('gpt-5.2'),
   prompt: '写一篇关于 AI Agent 的文章',
 });
 
@@ -66,7 +73,7 @@ import { openai } from '@ai-sdk/openai';
 import { z } from 'zod';
 
 const result = await generateText({
-  model: openai('gpt-4o'),
+  model: openai('gpt-5.2'),
   prompt: '北京今天天气怎么样？',
   tools: {
     getWeather: tool({
@@ -105,7 +112,7 @@ import { z } from 'zod';
 
 // maxSteps 实现 Agent 循环
 const { text, steps } = await generateText({
-  model: openai('gpt-4o'),
+  model: openai('gpt-5.2'),
   system: `你是研究助手。使用工具收集信息，然后综合回答。`,
   prompt: '对比 LangGraph 和 CrewAI 的优缺点',
   tools: {
@@ -137,7 +144,7 @@ import { z } from 'zod';
 
 // 生成结构化数据
 const { object } = await generateObject({
-  model: openai('gpt-4o'),
+  model: openai('gpt-5.2'),
   schema: z.object({
     frameworks: z.array(z.object({
       name: z.string(),
@@ -164,7 +171,7 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const result = streamText({
-    model: openai('gpt-4o'),
+    model: openai('gpt-5.2'),
     messages,
   });
 
@@ -173,7 +180,7 @@ export async function POST(req: Request) {
 
 // app/page.tsx — React 组件
 'use client';
-import { useChat } from '@ai-sdk/react';
+import { useChat } from 'ai/react';
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat();
@@ -213,7 +220,7 @@ const mcpTools = await mcpClient.tools();
 
 // 在 Agent 中使用 MCP 工具
 const result = await generateText({
-  model: openai('gpt-4o'),
+  model: openai('gpt-5.2'),
   prompt: '列出 /workspace/src 目录下的所有文件',
   tools: mcpTools,
   maxSteps: 5,
@@ -250,8 +257,8 @@ const result = await generateText({
 });
 
 // Gateway 配置（Vercel Dashboard）：
-// fast-model → gpt-4o-mini (primary) → claude-haiku (fallback)
-// smart-model → gpt-4o (primary) → claude-sonnet (fallback)
+// fast-model → gpt-5-mini (primary) → claude-haiku (fallback)
+// smart-model → gpt-5.2 (primary) → claude-sonnet (fallback)
 ```
 
 ## 9. 与 LiteLLM 对比

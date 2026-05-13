@@ -4,7 +4,14 @@
 
 ## 1. Portkey 概述
 
-Portkey 是面向生产环境的 AI 网关，提供自动重试、Fallback、负载均衡、缓存、护栏、可观测性等企业级功能。
+> 🔄 更新于 2026-05-13
+>
+> **Portkey Agent Gateway**（2026-02）：Portkey 从 AI Gateway 升级为 Agent Gateway，新增 Agent 级别的治理、可观测性和控制能力。支持 1600+ 模型（之前 200+）。同时发布 MCP Gateway（2026-01 GA），支持 MCP 协议的集中式管理。OSS Gateway 1.8.2，Enterprise Gateway 2.6.2。
+> 来源：[Portkey Blog - Agent Gateway](https://portkey.ai/blog/agent-gateway/)、[Portkey Changelog](https://portkey.ai/docs/changelog)
+
+<!-- version-check: Portkey OSS Gateway 1.8.2, Enterprise 2.6.2, checked 2026-05-13 -->
+
+Portkey 是面向生产环境的 AI 网关（现已升级为 Agent Gateway），提供自动重试、Fallback、负载均衡、缓存、护栏、可观测性等企业级功能。支持 1600+ 语言、视觉、音频和图像模型。
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -41,7 +48,7 @@ portkey = Portkey(
 
 # 调用方式与 OpenAI SDK 完全一致
 response = portkey.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "你好"}],
 )
 print(response.choices[0].message.content)
@@ -60,7 +67,7 @@ portkey = Portkey(
         "targets": [
             {
                 "virtual_key": "openai-key",
-                "override_params": {"model": "gpt-4o"},
+                "override_params": {"model": "gpt-5.2"},
                 "retry": {"attempts": 2, "on_status_codes": [429, 500, 502]},
             },
             {
@@ -76,7 +83,7 @@ portkey = Portkey(
     },
 )
 
-# 自动：GPT-4o → 重试2次 → Claude → 重试2次 → Gemini
+# 自动：GPT-5.2 → 重试2次 → Claude → 重试2次 → Gemini
 response = portkey.chat.completions.create(
     messages=[{"role": "user", "content": "你好"}],
 )
@@ -93,12 +100,12 @@ portkey = Portkey(
             {
                 "virtual_key": "openai-key-1",
                 "weight": 0.7,  # 70% 流量
-                "override_params": {"model": "gpt-4o"},
+                "override_params": {"model": "gpt-5.2"},
             },
             {
                 "virtual_key": "openai-key-2",
                 "weight": 0.3,  # 30% 流量
-                "override_params": {"model": "gpt-4o"},
+                "override_params": {"model": "gpt-5.2"},
             },
         ],
     },
@@ -126,13 +133,13 @@ portkey = Portkey(
 
 # 第一次调用：实际请求 LLM
 r1 = portkey.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "什么是机器学习？"}],
 )
 
 # 第二次调用：语义相似，命中缓存（毫秒级响应）
 r2 = portkey.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "解释一下机器学习"}],
 )
 ```
@@ -165,7 +172,7 @@ portkey = Portkey(
 # 请求自动经过护栏检查
 try:
     response = portkey.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-5.2",
         messages=[{"role": "user", "content": user_input}],
     )
 except Exception as e:
@@ -184,7 +191,7 @@ portkey = Portkey(
 )
 
 response = portkey.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "你好"}],
     metadata={
         "trace_id": "req-001",
@@ -211,7 +218,7 @@ from langchain_openai import ChatOpenAI
 from portkey_ai import createHeaders
 
 llm = ChatOpenAI(
-    model="gpt-4o",
+    model="gpt-5.2",
     base_url="https://api.portkey.ai/v1",
     default_headers=createHeaders(
         api_key="pk-xxx",
@@ -238,7 +245,7 @@ client = OpenAI(
 
 | 特性           | LiteLLM        | Vercel Gateway  | Portkey         | Helicone        |
 |---------------|----------------|-----------------|-----------------|-----------------|
-| 模型支持       | 100+           | 主流            | 200+            | 主流            |
+| 模型支持       | 100+           | 主流            | 1600+           | 主流            |
 | 部署方式       | 自托管          | 云服务          | 云服务/自托管    | 云服务          |
 | 负载均衡       | ✅             | ✅              | ✅              | ❌              |
 | Fallback      | ✅             | ✅              | ✅ 多级         | ❌              |

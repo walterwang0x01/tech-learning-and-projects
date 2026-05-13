@@ -28,13 +28,16 @@ LiteLLM 提供统一的 OpenAI 兼容接口，支持 100+ LLM 提供商（OpenAI
 pip install litellm
 ```
 
+<!-- version-check: LiteLLM 1.83.x, checked 2026-05-13 -->
+<!-- 修复于 2026-05-13: gpt-4o → gpt-5.2（gpt-4o 已从 ChatGPT 退役，推荐使用新模型） -->
+
 ```python
 import litellm
 
 # 统一接口调用不同模型 — 完全兼容 OpenAI SDK 格式
 # OpenAI
 response = litellm.completion(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "你好"}],
 )
 
@@ -81,7 +84,7 @@ import asyncio
 
 async def async_call():
     response = await litellm.acompletion(
-        model="gpt-4o",
+        model="gpt-5.2",
         messages=[{"role": "user", "content": "你好"}],
     )
     return response.choices[0].message.content
@@ -96,9 +99,9 @@ result = asyncio.run(async_call())
 ```yaml
 # litellm_config.yaml
 model_list:
-  - model_name: gpt-4o
+  - model_name: gpt-5.2
     litellm_params:
-      model: openai/gpt-4o
+      model: openai/gpt-5.2
       api_key: sk-xxx
 
   - model_name: claude-sonnet
@@ -108,7 +111,7 @@ model_list:
 
   - model_name: fast-model  # 负载均衡：多个模型轮询
     litellm_params:
-      model: openai/gpt-4o-mini
+      model: openai/gpt-5-mini
       api_key: sk-xxx
   - model_name: fast-model
     litellm_params:
@@ -152,7 +155,7 @@ model_list:
   # 主模型
   - model_name: main-model
     litellm_params:
-      model: openai/gpt-4o
+      model: openai/gpt-5.2
       api_key: sk-xxx
     model_info:
       priority: 1  # 优先级
@@ -171,7 +174,7 @@ router_settings:
   num_retries: 3
   timeout: 30
   fallbacks:
-    - main-model: ["claude-sonnet"]  # GPT-4o 失败时切换到 Claude
+    - main-model: ["claude-sonnet"]  # GPT-5.2 失败时切换到 Claude
 ```
 
 ```python
@@ -180,7 +183,7 @@ from litellm import Router
 
 router = Router(
     model_list=[
-        {"model_name": "primary", "litellm_params": {"model": "gpt-4o", "api_key": "sk-xxx"}},
+        {"model_name": "primary", "litellm_params": {"model": "gpt-5.2", "api_key": "sk-xxx"}},
         {"model_name": "fallback", "litellm_params": {"model": "claude-sonnet-4-6-20260217", "api_key": "sk-ant-xxx"}},
     ],
     fallbacks=[{"primary": ["fallback"]}],
@@ -229,7 +232,7 @@ resp = requests.post("http://localhost:4000/key/generate", json={
     "user_id": "alice",
     "team_id": "ai-team",
     "max_budget": 50.0,
-    "models": ["gpt-4o", "claude-sonnet"],  # 限制可用模型
+    "models": ["gpt-5.2", "claude-sonnet"],  # 限制可用模型
 }, headers={"Authorization": "Bearer sk-master"})
 user_key = resp.json()["key"]
 ```
@@ -264,9 +267,9 @@ client = OpenAI(base_url="http://localhost:4000", api_key="sk-user-key")
 ```yaml
 # litellm_config.yaml
 model_list:
-  - model_name: gpt-4o
+  - model_name: gpt-5.2
     litellm_params:
-      model: openai/gpt-4o
+      model: openai/gpt-5.2
       api_key: sk-xxx
       rpm: 100   # 每分钟请求数限制
       tpm: 50000 # 每分钟 Token 数限制
@@ -296,7 +299,7 @@ LiteLLM 内置管理界面：http://localhost:4000/ui
 
 | 特性         | LiteLLM          | Vercel AI Gateway | Portkey          |
 |-------------|------------------|-------------------|------------------|
-| 模型支持     | 100+             | 主流模型           | 200+             |
+| 模型支持     | 100+             | 主流模型           | 1600+            |
 | 部署方式     | 自托管            | 云服务             | 云服务/自托管     |
 | 负载均衡     | ✅               | ✅                | ✅               |
 | 预算管理     | ✅ 细粒度         | ✅ 基础           | ✅               |

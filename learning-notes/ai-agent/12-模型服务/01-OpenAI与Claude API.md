@@ -4,6 +4,9 @@
 
 ## 1. OpenAI Chat Completions API
 
+<!-- version-check: GPT-5.2 gpt-5.2, checked 2026-05-13 -->
+<!-- 修复于 2026-05-13: gpt-4o → gpt-5.2（gpt-4o 已从 ChatGPT 退役，API 仍可用但推荐使用新模型） -->
+
 ```python
 from openai import OpenAI
 
@@ -11,7 +14,7 @@ client = OpenAI()  # 自动读取 OPENAI_API_KEY
 
 # 基础调用
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[
         {"role": "system", "content": "你是一个有帮助的助手"},
         {"role": "user", "content": "解释什么是 RAG"},
@@ -24,7 +27,7 @@ print(f"Token 用量: {response.usage.prompt_tokens} + {response.usage.completio
 
 # 流式响应
 stream = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "写一首关于编程的诗"}],
     stream=True,
 )
@@ -103,7 +106,7 @@ with open("chart.png", "rb") as f:
     image_data = base64.standard_b64encode(f.read()).decode()
 
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{
         "role": "user",
         "content": [
@@ -147,7 +150,7 @@ for i, question in enumerate(questions):
         "method": "POST",
         "url": "/v1/chat/completions",
         "body": {
-            "model": "gpt-4o-mini",
+            "model": "gpt-5-mini",
             "messages": [{"role": "user", "content": question}],
             "max_tokens": 500,
         },
@@ -182,11 +185,11 @@ if status.status == "completed":
 # 策略 1：模型分级使用
 def select_model(task_complexity: str) -> str:
     models = {
-        "simple": "gpt-4o-mini",       # $0.15/1M input — 简单任务
-        "medium": "gpt-4o",            # $2.50/1M input — 常规任务
+        "simple": "gpt-5-mini",        # $0.25/1M input — 简单任务
+        "medium": "gpt-5.2",           # $1.75/1M input — 常规任务
         "complex": "claude-opus-4-6",     # $5/1M input — 复杂推理
     }
-    return models.get(task_complexity, "gpt-4o-mini")
+    return models.get(task_complexity, "gpt-5-mini")
 
 # 策略 2：Prompt 缓存（Claude）
 # 对于重复的 system prompt，Claude 自动缓存，节省 90% 输入成本
@@ -213,8 +216,8 @@ class TokenTracker:
 
     @property
     def estimated_cost(self) -> float:
-        # GPT-4o 价格
-        return (self.total_input * 2.5 + self.total_output * 10) / 1_000_000
+        # GPT-5.2 价格
+        return (self.total_input * 1.75 + self.total_output * 14) / 1_000_000
 ```
 ## 🎬 推荐视频资源
 
