@@ -2,6 +2,8 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
+<!-- version-check: LangSmith, LangFuse v4, Phoenix, checked 2026-05-13 -->
+
 ## 1. 可观测性概览
 
 ```
@@ -29,7 +31,7 @@ os.environ["LANGCHAIN_PROJECT"] = "my-agent"
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatOpenAI(model="gpt-5.2")  <!-- 修复于 2026-05-13: gpt-4o 已从 ChatGPT 退役 -->
 prompt = ChatPromptTemplate.from_template("解释 {topic}")
 chain = prompt | llm
 
@@ -65,13 +67,13 @@ def rag_pipeline(question: str) -> str:
 @observe(as_type="generation")
 def generate_answer(question: str, docs: list) -> str:
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-5.2",
         messages=[{"role": "user", "content": f"上下文：{docs}\n问题：{question}"}],
     )
     # 自动记录 token 用量和成本
     langfuse_context.update_current_observation(
         usage={"input": response.usage.prompt_tokens, "output": response.usage.completion_tokens},
-        model="gpt-4o",
+        model="gpt-5.2",
     )
     return response.choices[0].message.content
 
@@ -97,7 +99,7 @@ OpenAIInstrumentor().instrument(tracer_provider=tracer_provider)
 from openai import OpenAI
 client = OpenAI()
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "你好"}],
 )
 # 打开 http://localhost:6006 查看追踪数据
@@ -121,7 +123,7 @@ retrieval_span.end(output={"doc_count": len(docs)})
 # Generation: LLM 调用
 generation = trace.generation(
     name="answer-generation",
-    model="gpt-4o",
+    model="gpt-5.2",
     input=[{"role": "user", "content": "退货政策是什么？"}],
 )
 response = llm.invoke(...)
