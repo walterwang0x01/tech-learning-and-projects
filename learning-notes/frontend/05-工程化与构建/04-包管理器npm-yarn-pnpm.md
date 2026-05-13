@@ -56,6 +56,12 @@ npx tsc --init
 
 ## 2. pnpm（推荐）
 
+> 🔄 更新于 2026-05-13
+
+<!-- version-check: pnpm 11.x (stable), checked 2026-05-13 -->
+
+**pnpm 11**（2026-05 发布）：ESM-only 分发、SQLite 存储索引替代 JSON-per-package、全局安装隔离、更严格的供应链安全默认值。
+
 ```bash
 # 安装
 npm install -g pnpm

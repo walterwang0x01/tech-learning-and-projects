@@ -169,6 +169,8 @@ export function useMouse() {
 }
 
 // composables/useFetch.js
+import { ref, watchEffect } from 'vue';
+
 export function useFetch(url) {
   const data = ref(null);
   const error = ref(null);
@@ -196,11 +198,13 @@ const { data, loading } = useFetch('/api/users');
 
 ## 6. Vue 3.5/3.6 新特性
 
-> 🔄 更新于 2026-04-18
+> 🔄 更新于 2026-05-13
 
-<!-- version-check: Vue 3.5.28 (stable), Vue 3.6 (beta), checked 2026-04-18 -->
+<!-- version-check: Vue 3.5.33 (stable), Vue 3.6 (beta), checked 2026-05-13 -->
 
-**Vue 3.5**（当前稳定版 3.5.28）：性能优化、SSR 兼容性修复、HMR 改进。
+<!-- 修复于 2026-05-13: Vue 3.5.28 → 3.5.33，eosl.date 确认 -->
+
+**Vue 3.5**（当前稳定版 3.5.33）：性能优化、SSR 兼容性修复、HMR 改进。
 
 **Vue 3.6**（Beta）：两个革命性特性：
 

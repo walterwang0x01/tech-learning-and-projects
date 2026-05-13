@@ -50,7 +50,7 @@ monorepo/
 ```json
 // turbo.json
 {
-  "$schema": "https://turbo.build/schema.json",
+  "$schema": "https://turborepo.com/schema.json",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
