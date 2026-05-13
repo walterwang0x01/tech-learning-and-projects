@@ -55,8 +55,9 @@ tools = toolset.get_tools(actions=[
 ])
 
 # 使用 OpenAI Function Calling
+# <!-- 修复于 2026-05-13: gpt-4o → gpt-5.2 -->
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "在 my-org/my-repo 创建一个 bug issue，标题是'登录页面500错误'"}],
     tools=tools,
 )
@@ -83,7 +84,7 @@ tools = toolset.get_tools(actions=[
     Action.GMAIL_SEND_EMAIL,
 ])
 
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatOpenAI(model="gpt-5.2")
 agent = create_react_agent(llm, tools=tools)
 
 result = agent.invoke({
@@ -107,7 +108,7 @@ devops_agent = Agent(
     role="DevOps 工程师",
     goal="管理代码仓库和团队通知",
     tools=github_tools + slack_tools,
-    llm="gpt-4o",
+    llm="gpt-5.2",
 )
 
 task = Task(
@@ -222,7 +223,7 @@ def devops_agent(instruction: str) -> str:
 
     while True:
         response = client.chat.completions.create(
-            model="gpt-4o", messages=messages, tools=tools,
+            model="gpt-5.2", messages=messages, tools=tools,
         )
         msg = response.choices[0].message
 

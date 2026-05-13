@@ -41,7 +41,7 @@ th = Toolhouse(api_key="th_xxx")
 tools = th.get_tools()  # 获取所有可用工具
 
 response = client.chat.completions.create(
-    model="gpt-4o", messages=messages, tools=tools,
+    model="gpt-5.2", messages=messages, tools=tools,
 )
 result = th.run_tools(response)  # 自动执行工具调用
 ```
@@ -190,12 +190,14 @@ for r in results.results:
 
 ### Brave Search
 
+<!-- 修复于 2026-05-13: 包名从 @anthropic/mcp-server-brave-search 更正为 @modelcontextprotocol/server-brave-search -->
+
 ```json
 {
   "mcpServers": {
     "brave-search": {
       "command": "npx",
-      "args": ["-y", "@anthropic/mcp-server-brave-search"],
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
       "env": {"BRAVE_API_KEY": "BSA_xxx"}
     }
   }

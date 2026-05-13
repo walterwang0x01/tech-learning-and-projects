@@ -380,12 +380,14 @@ for result in data["web"]["results"]:
 
 ### Brave Search MCP 配置
 
+<!-- 修复于 2026-05-13: 包名从 @anthropic/brave-search-mcp 更正为 @modelcontextprotocol/server-brave-search -->
+
 ```json
 {
   "mcpServers": {
     "brave-search": {
       "command": "npx",
-      "args": ["-y", "@anthropic/brave-search-mcp"],
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
       "env": {
         "BRAVE_API_KEY": "BSA-xxx"
       }
