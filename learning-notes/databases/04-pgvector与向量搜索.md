@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: pgvector 0.8.0, PostgreSQL 18, HNSW index, checked 2026-05-10 -->
+<!-- version-check: pgvector 0.8.2, pgvectorscale 0.9.0, PostgreSQL 18.3, HNSW/DiskANN, checked 2026-05-13 -->
 
 ## 1. 为什么是 pgvector 不是专用向量库
 
@@ -329,10 +329,123 @@ SET hnsw.ef_search = 100;  -- 默认 40，越大越准
    → 数据漂移导致准确率下降，改用 HNSW
 ```
 
+## 13. pgvectorscale：DiskANN 大规模向量搜索
+
+> 🔄 更新于 2026-05-13
+
+当向量数据超过内存容量时，HNSW 索引性能急剧下降。pgvectorscale 扩展提供 **StreamingDiskANN** 索引，将热数据保留在内存、冷数据流式读取磁盘，支撑远超内存的向量规模。
+
+来源：[pgvectorscale GitHub](https://github.com/timescale/pgvectorscale)、[dbi-services 索引对比](https://www.dbi-services.com/blog/pgvector-a-guide-for-dba-part-2-indexes-update-march-2026/)
+
+### 13.1 安装
+
+```bash
+# 需要 pgvector 0.8+ 作为前置依赖
+# Docker（Timescale 官方镜像已内置）
+docker run -d timescale/timescaledb-ha:pg18
+
+# 或手动编译安装（Rust 工具链）
+cargo install --git https://github.com/timescale/pgvectorscale
+```
+
+```sql
+CREATE EXTENSION IF NOT EXISTS vectorscale CASCADE;
+-- CASCADE 会自动安装 vector 扩展
+```
+
+### 13.2 StreamingDiskANN 索引
+
+```sql
+-- 创建 DiskANN 索引（适合超大规模向量）
+CREATE INDEX ON documents
+USING diskann (embedding vector_cosine_ops);
+
+-- 带参数调优
+CREATE INDEX ON documents
+USING diskann (embedding vector_cosine_ops)
+WITH (
+    max_neighbors = 50,        -- 图中每个节点的最大邻居数（默认 50）
+    l_value_ib = 100,          -- 索引构建时的搜索宽度
+    l_value_is = 100           -- 索引搜索时的搜索宽度
+);
+
+-- 查询时调参
+SET diskann.query_search_list_size = 100;  -- 越大越准但越慢
+SET diskann.query_rescore = 100;           -- 重排数量
+```
+
+### 13.3 Statistical Binary Quantization（SBQ）
+
+pgvectorscale 的 SBQ 将 float32 向量压缩为二值表示，内存占用降低 **32x**：
+
+```sql
+-- DiskANN 默认启用 SBQ
+-- 搜索时先用压缩向量粗筛，再用原始向量精排（rescore）
+-- 这就是 query_rescore 参数的作用
+```
+
+### 13.4 三种索引选型（2026）
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                  pgvector 索引选型决策树                          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  向量数据能放进内存？                                             │
+│  ├─ YES → HNSW（最佳查询性能，pgvector 内置）                    │
+│  │         适合：< 5000 万 1536 维向量（~300 GB 内存）            │
+│  │                                                               │
+│  └─ NO  → StreamingDiskANN（pgvectorscale）                      │
+│            适合：5000 万 ~ 10 亿+ 向量                            │
+│            特点：热数据内存 + 冷数据磁盘流式读取                    │
+│                                                                  │
+│  IVFFlat：仅在数据量小 + 频繁重建索引场景使用                      │
+│           2026 年新项目不推荐                                     │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+| 特性 | HNSW (pgvector) | StreamingDiskANN (pgvectorscale) | IVFFlat (pgvector) |
+|------|----------------|--------------------------------|-------------------|
+| 查询延迟 | 最低（全内存） | 中等（部分磁盘 I/O） | 中等 |
+| 内存需求 | 高（全索引驻留） | 低（仅热数据） | 中等 |
+| 构建速度 | 慢 | 中等 | 快 |
+| 过滤支持 | 0.8+ 改进 | Label-based filtering | 有限 |
+| 适合规模 | < 5000 万 | 5000 万 ~ 10 亿+ | < 1000 万 |
+| 更新友好 | 好 | 好 | 差（需重建） |
+
+来源：[dbi-services pgvector 索引对比](https://www.dbi-services.com/blog/pgvector-a-guide-for-dba-part-2-indexes-update-march-2026/)
+
+### 13.5 pgvector 0.8.x 版本改进
+
+pgvector 0.8.0（2024-11）→ 0.8.2（2025 年底）的关键改进：
+
+- **过滤查询代价估算改进**：PostgreSQL 优化器更准确判断何时使用 ANN 索引 vs B-tree 索引，AWS 测试显示过滤查询延迟降低 **9.4x**
+- **HNSW 构建速度提升 40%**（大规模数据集）
+- **halfvec 类型**：16-bit 浮点存储，存储减半，召回率损失极小
+- **IVFFlat 召回率改进**：相同 lists 设置下召回率更高
+
+来源：[pgvector 0.8.0 Released](https://www.postgresql.org/about/news/pgvector-0.8.0-released-2952/)、[AWS Aurora pgvector 0.8.0](https://aws.amazon.com/blogs/database/supercharging-vector-search-performance-and-relevance-with-pgvector-0-8-0-on-amazon-aurora-postgresql/)
+
+## 14. 亿级向量：Amazon S3 Vectors + Aurora 联合方案
+
+> 🔄 更新于 2026-05-13
+
+当向量规模达到数十亿级别，即使 DiskANN 也面临单机存储瓶颈。AWS 推出 S3 Vectors 服务，与 Aurora PostgreSQL 联合查询：
+
+```sql
+-- Aurora PostgreSQL 通过 aws_s3_vectors 扩展查询 S3 Vectors
+-- 适合：10 亿+ 向量、低频查询、成本敏感场景
+-- 不适合：低延迟实时搜索（S3 延迟较高）
+```
+
+来源：[AWS Blog - Query billion-scale vectors with SQL](https://aws.amazon.com/blogs/database/query-billion-scale-vectors-with-sql-integrating-amazon-s3-vectors-and-aurora-postgresql/)
+
 ## 📖 参考资料
 
 - [pgvector GitHub](https://github.com/pgvector/pgvector)
+- [pgvectorscale GitHub](https://github.com/timescale/pgvectorscale)
 - [Supabase pgvector 指南](https://supabase.com/docs/guides/ai/vector-columns)
 - [Neon pgvector 实战](https://neon.tech/blog/pgvector-best-practices)
 - [Hybrid Search with pgvector](https://jkatz05.com/post/postgres/hybrid-search-postgres-pgvector/)
+- [dbi-services pgvector 索引对比（2026-03）](https://www.dbi-services.com/blog/pgvector-a-guide-for-dba-part-2-indexes-update-march-2026/)
 - 关联：[ai-agent/06-RAG进阶/02-向量数据库选型.md](../ai-agent/06-RAG进阶/02-向量数据库选型.md)

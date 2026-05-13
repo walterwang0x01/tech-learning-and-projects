@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Iceberg 1.9, Delta Lake 4.0, Hudi 1.0, checked 2026-05-10 -->
+<!-- version-check: Iceberg 1.10.1, Delta Lake 4.0, Hudi 1.0, V4 spec in design, checked 2026-05-13 -->
 
 ## 1. 为什么需要表格式
 
@@ -36,12 +36,12 @@ Parquet / ORC 只是"文件格式"，不是"表"：
 │   承诺保持 Iceberg 开放并让 Delta 和 Iceberg 兼容
 ├─ 2024+ Snowflake、BigQuery、Redshift 全部支持 Iceberg
 ├─ 2025 AWS S3 Tables（托管 Iceberg）
-└─ 2026 Iceberg 1.9+ 成熟：V3 Spec、View、Materialized View
+└─ 2026 Iceberg 1.10+ 成熟：V3 Spec、View、流式 Schema Evolution、V4 设计中
 ```
 
 ## 3. 三者对比
 
-| 维度 | Iceberg 1.9 | Delta Lake 4.0 | Hudi 1.0 |
+| 维度 | Iceberg 1.10 | Delta Lake 4.0 | Hudi 1.0 |
 |------|-------------|-----------------|----------|
 | **主导** | Apache（Netflix 起源） | Databricks 主导，开源 | Apache（Uber 起源） |
 | **引擎支持** | Spark / Flink / Trino / DuckDB / Snowflake / BQ / Redshift | Spark 最强，Trino / Flink / DuckDB | Spark / Flink / Presto |
@@ -84,7 +84,7 @@ Parquet / ORC 只是"文件格式"，不是"表"：
 from pyspark.sql import SparkSession
 
 spark = SparkSession.builder \
-    .config("spark.jars.packages", "org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.9.0") \
+    .config("spark.jars.packages", "org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.10.1") \
     .config("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions") \
     .config("spark.sql.catalog.my_catalog", "org.apache.iceberg.spark.SparkCatalog") \
     .config("spark.sql.catalog.my_catalog.type", "rest") \
@@ -266,6 +266,48 @@ ALTER TABLE orders RENAME COLUMN amount TO amount_cents;
 
 ❌ 直接读底层 Parquet
    → 绕过 metadata 会读到废弃数据
+```
+
+## 13. Iceberg 1.10.x 版本演进
+
+> 🔄 更新于 2026-05-13
+
+Iceberg 1.10.0（2026-01）→ 1.10.1（当前最新稳定版），109 PRs / 28 贡献者。
+
+### 13.1 核心新特性
+
+| 特性 | 说明 |
+|------|------|
+| **Spark 4.0 + Flink 2.0 支持** | 与最新批处理和流处理引擎对齐 |
+| **V3 Spec 成熟** | 多值字段（List/Map 分区）、默认值、行级 lineage |
+| **流式 Schema Evolution** | 输入流 schema 变更自动传播到 Iceberg 表，无需手动 ALTER |
+| **REST Catalog 增强** | 标准化 Catalog API，多引擎互操作的基础 |
+| **C++ SDK 0.2.0** | 高性能原生读取，DuckDB/Arrow 生态集成 |
+
+来源：[Iceberg 1.10 Release](https://iceberg.apache.org/releases/)、[Google Cloud Blog](https://goo.gle/apache-iceberg-1-10)、[Snowflake Blog](https://www.snowflake.com/en/engineering-blog/apache-iceberg-1-10-new-features-fixes/)
+
+### 13.2 V4 Spec 设计中
+
+Apache Data Lakehouse Weekly（2026-05）报道 Iceberg 社区正在讨论 V4 设计。V4 预计带来：
+
+- 更高效的 metadata 压缩
+- 原生 CDC 支持
+- 增强的并发写入语义
+
+来源：[Apache Data Lakehouse Weekly](https://amdatalakehouse.substack.com/p/apache-data-lakehouse-weekly-april-b6f)
+
+### 13.3 版本选择建议
+
+```
+新项目：直接用 Iceberg 1.10.1
+├─ Spark 4.0 + Flink 2.0 支持
+├─ REST Catalog 标准化
+└─ V3 Spec 完整功能
+
+已有 1.9.x 项目：
+├─ 建议升级到 1.10.1（向后兼容）
+├─ 流式 Schema Evolution 减少运维负担
+└─ 注意 Spark/Flink 版本对齐
 ```
 
 ## 📖 参考资料
