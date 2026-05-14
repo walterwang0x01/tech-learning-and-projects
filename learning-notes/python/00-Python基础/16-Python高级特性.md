@@ -602,6 +602,164 @@ for t in threads:
 ```
 
 > 来源：[Python 3.14 Release](https://iscinumpy.dev/post/python-314/)、[PEP 750 - Template Strings](https://peps.python.org/pep-0750/)、[Real Python - T-Strings](https://realpython.com/python-t-strings/)
+
+## 16. Python 3.15 新增高级特性
+
+> 🔄 更新于 2026-05-14
+
+<!-- version-check: Python 3.15.0b1 feature freeze, checked 2026-05-14 -->
+
+Python 3.15.0b1 于 2026-05-07 发布，标志着特性冻结。以下是对高级开发者最有影响的新特性。
+
+### 16.1 显式惰性导入（PEP 810）
+
+`import defer` 语法让模块在首次使用时才加载，显著加速应用启动时间：
+
+```python
+# 传统导入：应用启动时立即加载所有模块
+import pandas as pd          # 立即加载（~200ms）
+import matplotlib.pyplot as plt  # 立即加载（~150ms）
+
+# PEP 810：显式惰性导入 — 首次使用时才加载
+import defer pandas as pd
+import defer matplotlib.pyplot as plt
+
+# 此时 pandas 和 matplotlib 尚未加载
+# 只有在实际使用时才触发导入
+def analyze_data(data):
+    df = pd.DataFrame(data)  # 此处触发 pandas 导入
+    return df.describe()
+
+# 适用场景：CLI 工具、大型应用、条件性使用的重量级库
+# 效果：启动时间可减少 50-80%（取决于延迟导入的模块数量）
+```
+
+### 16.2 frozendict 内置类型（PEP 814）
+
+不可变字典成为内置类型，无需第三方库：
+
+```python
+# 创建不可变字典
+config = frozendict({"host": "localhost", "port": 8080, "debug": False})
+
+# 可以读取
+print(config["host"])  # "localhost"
+print(config.get("port"))  # 8080
+
+# 不可修改
+# config["host"] = "remote"  # TypeError: 'frozendict' object does not support item assignment
+# del config["debug"]        # TypeError
+
+# 可以作为字典的 key（因为是 hashable 的）
+cache = {config: "cached_result"}
+
+# 创建修改后的副本
+new_config = frozendict({**config, "debug": True})
+
+# 适用场景：
+# - 配置对象（防止意外修改）
+# - 字典作为 set 元素或 dict key
+# - 函数默认参数（替代 None 哨兵模式）
+# - 多线程共享数据（天然线程安全）
+```
+
+### 16.3 sentinel 内置类型（PEP 661）
+
+标准化的哨兵值，替代 `object()` 和 `None` 的滥用：
+
+```python
+from builtins import sentinel
+
+# 创建命名哨兵
+MISSING = sentinel("MISSING")
+NOT_SET = sentinel("NOT_SET")
+
+# 替代 None 作为"未提供"标记
+def get_config(key: str, default=MISSING):
+    value = _config.get(key, MISSING)
+    if value is MISSING:
+        if default is MISSING:
+            raise KeyError(f"Config key '{key}' not found")
+        return default
+    return value
+
+# 哨兵有清晰的 repr
+print(MISSING)  # <MISSING>
+print(NOT_SET)  # <NOT_SET>
+
+# 类型注解友好
+from typing import Union
+def process(value: Union[str, type[MISSING]]) -> str: ...
+```
+
+### 16.4 推导式中的解包（PEP 798）
+
+列表/集合/字典推导式中支持 `*` 和 `**` 解包：
+
+```python
+# 列表推导式中的 * 解包
+nested = [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
+flat = [*sublist for sublist in nested]
+# [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# 等价于（但更简洁）：
+# flat = [item for sublist in nested for item in sublist]
+
+# 字典推导式中的 ** 解包
+configs = [{"a": 1}, {"b": 2}, {"c": 3}]
+merged = {**d for d in configs}
+# {"a": 1, "b": 2, "c": 3}
+
+# 条件解包
+data = [[1, 2], [], [3, 4, 5], []]
+non_empty_flat = [*lst for lst in data if lst]
+# [1, 2, 3, 4, 5]
+```
+
+### 16.5 JIT 编译器升级
+
+Python 3.15 的 JIT 编译器实现了显著的性能提升：
+
+```python
+# JIT 性能提升数据（相比标准解释器）：
+# - x86-64 Linux：几何平均 8-9% 提升
+# - AArch64 macOS：12-13% 提升
+# - Windows 64-bit：使用 tail-calling interpreter
+
+# JIT 对以下场景效果最明显：
+# - 紧密循环
+# - 数值计算
+# - 频繁调用的小函数
+
+# 无需任何代码修改，升级到 3.15 即可自动获得性能提升
+# JIT 默认启用，可通过环境变量控制：
+# PYTHON_JIT=0 python3.15 script.py  # 禁用 JIT
+```
+
+### 16.6 UTF-8 默认编码（PEP 686）
+
+Python 3.15 将 UTF-8 设为默认编码，不再依赖系统 locale：
+
+```python
+# Python 3.14 及之前：默认编码取决于系统 locale
+# Windows 上可能是 cp1252、gbk 等
+# 需要显式指定 encoding="utf-8"
+
+# Python 3.15：UTF-8 成为默认
+# open() 默认使用 UTF-8，无需显式指定
+with open("data.txt") as f:  # 默认 UTF-8
+    content = f.read()
+
+# 如果需要其他编码，仍然可以显式指定
+with open("legacy.txt", encoding="gbk") as f:
+    content = f.read()
+
+# 这消除了跨平台编码不一致的问题
+# 不再需要 PYTHONUTF8=1 环境变量
+```
+
+> 来源：[Python 3.15.0 beta 1 发布公告](https://blog.python.org/2026/05/python-3150-beta-1/)、[PEP 810](https://peps.python.org/pep-0810/)、[PEP 814](https://peps.python.org/pep-0814/)
+
 ## 🎬 推荐视频资源
 
 - [Corey Schafer - Generators](https://www.youtube.com/watch?v=bD05uGo_sVI) — 生成器详解

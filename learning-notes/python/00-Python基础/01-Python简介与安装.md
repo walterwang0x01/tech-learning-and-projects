@@ -143,18 +143,29 @@ PyCharm 只是一个辅助写 Python 代码的工具，它本身并不具备运�
 
 > 🔄 更新于 2026-04-18
 
-<!-- version-check: Python 3.14.4, checked 2026-04-18 -->
+<!-- version-check: Python 3.14.5, Python 3.15.0b1, checked 2026-05-14 -->
 
 ### 3.3 Python 版本演进（3.12 → 3.15）
 
-截至 2026 年 4 月，Python 最新稳定版为 **3.14.4**（2026-04-08 发布），3.15 处于 alpha 阶段（3.15.0a8）。
+> 🔄 更新于 2026-05-14
+
+截至 2026 年 5 月，Python 最新稳定版为 **3.14.5**（2026-05-10 发布），3.15 已进入 **Beta 阶段**（3.15.0b1，2026-05-07 特性冻结）。
 
 | 版本 | 发布日期 | 支持状态 | 关键特性 |
 |------|---------|---------|---------|
 | 3.12 | 2023-10 | 安全修复（至 2028-10） | 更快的 f-string 解析、改进的错误消息、`type` 语句 |
 | 3.13 | 2024-10 | Bug 修复（至 2026-10） | 改进的交互式解释器（REPL）、实验性 JIT 编译器、实验性 free-threaded 构建 |
-| **3.14** | **2025-10** | **当前稳定版** | **Free-threaded 正式支持、t-strings 模板字符串、延迟注解求值** |
-| 3.15 | 2026-10（预计） | Alpha 开发中 | 显式惰性导入、`frozendict` 内置类型、JIT 编译器大幅升级 |
+| **3.14** | **2025-10** | **当前稳定版（3.14.5）** | **Free-threaded 正式支持、t-strings 模板字符串、延迟注解求值** |
+| 3.15 | 2026-10（预计） | **Beta 开发中（特性冻结）** | 显式惰性导入、`frozendict` 内置类型、JIT 8-9% 提升、UTF-8 默认编码 |
+
+#### Python 3.14.5 重要变化（2026-05-10）
+
+- **回退增量垃圾回收器**：生产环境出现内存压力问题，回退到经过验证的分代 GC 模型
+- **Tcl/Tk 升级到 9.0**（macOS）
+- **移除 PGP 签名**：改用 Sigstore 签名验证
+- 约 154 个 Bug 修复和文档改进
+
+> 来源：[Python 3.14.5 发布公告](https://blog.python.org/2026/05/python-3145-is-out/)
 
 #### Python 3.14 核心新特性
 
@@ -196,26 +207,60 @@ class User:
     friends: list["User"]  # 前向引用自然工作
 ```
 
-#### Python 3.15 预览特性
+#### Python 3.15 Beta 1 特性（2026-05-07 特性冻结）
 
-3.15 目前处于 alpha 阶段（beta 预计 2026-05-05），主要新特性包括：
+> 🔄 更新于 2026-05-14
 
-- **PEP 810**：显式惰性导入（`import defer`）
+3.15.0b1 已发布，进入特性冻结阶段。RC 预计 2026-08-04，正式版预计 2026-10。主要新特性：
+
+**核心语言特性：**
+- **PEP 810**：显式惰性导入（`import defer`），加速启动时间
 - **PEP 814**：`frozendict` 内置不可变字典类型
-- **PEP 799**：高频低开销统计采样分析器
+- **PEP 661**：`sentinel` 内置哨兵类型
 - **PEP 798**：推导式中的解包（`*` 和 `**`）
-- **JIT 编译器升级**：x86-64 Linux 上几何平均性能提升 6-7%，AArch64 macOS 上提升 12-13%
+- **PEP 686**：UTF-8 成为默认编码
+
+**性能改进：**
+- **JIT 编译器大幅升级**：x86-64 Linux 几何平均性能提升 8-9%，AArch64 macOS 提升 12-13%
+- **PEP 831**：Frame pointers 默认启用，改善系统级可观测性
+- Windows 64 位官方二进制使用 tail-calling interpreter
+
+**开发者工具：**
+- **PEP 799**：专用 profiling 包 + Tachyon 高频统计采样分析器
+- **PEP 829**：包启动配置文件
+
+**类型系统：**
+- **PEP 728**：`TypedDict` 支持 typed extra items
+- **PEP 747**：`TypeForm` 注解类型形式
+- **PEP 800**：类型系统中的 Disjoint bases
+
+```python
+# PEP 810: 显式惰性导入 — 模块在首次使用时才加载
+import defer pandas as pd  # 不会立即导入 pandas
+# 首次使用 pd 时才触发实际导入
+df = pd.DataFrame({"a": [1, 2, 3]})
+
+# PEP 814: frozendict — 不可变字典
+config = frozendict({"host": "localhost", "port": 8080})
+# config["host"] = "remote"  # TypeError: 'frozendict' object does not support item assignment
+
+# PEP 798: 推导式中的解包
+lists = [[1, 2], [3, 4], [5, 6]]
+flat = [*sublist for sublist in lists]  # [1, 2, 3, 4, 5, 6]
+```
+
+> 来源：[Python 3.15.0 beta 1 发布公告](https://blog.python.org/2026/05/python-3150-beta-1/)、[PEP 790 发布计划](https://peps.python.org/pep-0790/)
 
 #### 版本选择建议
 
 | 场景 | 推荐版本 |
 |------|---------|
 | 生产环境（保守） | Python 3.13.x（Bug 修复支持至 2026-10） |
-| 生产环境（推荐） | Python 3.14.x（当前稳定版，完整支持） |
+| 生产环境（推荐） | Python 3.14.5（当前稳定版，完整支持） |
 | 高性能并发场景 | Python 3.14t（free-threaded 构建） |
-| 尝鲜/开发测试 | Python 3.15 alpha |
+| 尝鲜/开发测试 | Python 3.15.0b1（特性冻结，可测试兼容性） |
 
-> 来源：[Python 官方博客](https://blog.python.org/2026/04/python-3150a8-3144-31313)、[Python 文档](https://www.python.org/doc/versions/)
+> 来源：[Python 官方博客](https://blog.python.org/)、[Python 文档](https://www.python.org/doc/versions/)
 
 ## 4. 第一个Python程序
 
