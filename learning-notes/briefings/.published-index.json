@@ -6839,7 +6839,265 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-05-13"
+    },
+    "d8e2453bbbea": {
+      "url": "https://www.oschina.net/news/440102/mateclaw-1-3-0-released",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "1325380414fb": {
+      "url": "https://www.infoq.cn/article/r63e4S6ZyxrGjfIOV96v",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "0f52ceb1bfb0": {
+      "url": "https://www.langchain.com/blog/deep-agents-0-6",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "9df5859b7cfd": {
+      "url": "https://arxiv.org/abs/2605.11053",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "49db07254ecb": {
+      "url": "https://techcrunch.com/2026/05/13/notion-just-turned-its-workspace-into-a-hub-for-ai-agents",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "27e07c384be2": {
+      "url": "https://arxiv.org/abs/2603.27910",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "8336fae57f31": {
+      "url": "https://my.oschina.net/u/3874284/blog/19666808",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "5eec485c6b57": {
+      "url": "https://github.com/statewright/statewright",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "20bb6e4cf2e1": {
+      "url": "http://www.geekpark.net/news/364044",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "88adb36d994a": {
+      "url": "https://github.com/cactus-compute/needle",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "f9dcbef66db5": {
+      "url": "https://arxiv.org/abs/2605.12863",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "7e8d14b05daf": {
+      "url": "https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-14"
+    },
+    "b1c7ae70b453": {
+      "url": "http://www.geekpark.net/news/364099",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "6859100f7d50": {
+      "url": "https://www.oschina.net/news/440079",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "d3a34baa26b4": {
+      "url": "https://www.infoq.cn/article/6a5AKza2aj5FKSYVx76D",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "178fee5edf6d": {
+      "url": "https://www.infoq.cn/article/fiAgqOKzER2JCqcLXMuW",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "ddee8c43956c": {
+      "url": "https://qwenlm.github.io/",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "f617fc93bf47": {
+      "url": "https://platform.moonshot.ai/",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "2c88c6ad27a6": {
+      "url": "https://www.oschina.net/news/440421",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "c342f8e5bc25": {
+      "url": "https://36kr.com/p/3807382930251523?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "b6f286debbd6": {
+      "url": "https://www.qbitai.com/2026/05/416864.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "c20dbdb5c2e5": {
+      "url": "https://36kr.com/newsflashes/3808616341331718?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "991963f4bbdd": {
+      "url": "https://36kr.com/p/3807540422942214?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "100eb20769b9": {
+      "url": "https://www.oschina.net/news/440458",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "ba8e19ebe6ef": {
+      "url": "https://www.oschina.net/news/440433",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-14"
+    },
+    "5d4a1757e36f": {
+      "url": "https://kubernetes.io/blog/2026/05/13/kubernetes-v1-36-advancing-workload-aware-scheduling",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "adcd0a2982e8": {
+      "url": "https://techcrunch.com/2026/05/13/anduril-raises-5b-doubles-valuation-to-61b",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "84283e020fb7": {
+      "url": "https://github.com/glouw/nibble",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "6a83e0232aea": {
+      "url": "https://www.tomshardware.com/tech-industry/cyber-security/microsoft-bitlocker-protected-drives-can-now-be-opened-with-just-some-files-on-a-usb-stick-yellowkey-zero-day-exploit-demonstrates-an-apparent-backdoor",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "cf253b071370": {
+      "url": "https://www.theregister.com/security/2026/05/13/disgruntled-researcher-releases-two-more-microsoft-zero-days/5239758",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "080548aed53b": {
+      "url": "https://www.tryardent.com/",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "d3074e59f824": {
+      "url": "https://techcrunch.com/2026/05/13/ransomware-hackers-claim-breach-at-foxconn-a-major-electronics-manufacturer-for-apple-google-and-nvidia",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "a16f0621b89e": {
+      "url": "https://www.oschina.net/news/439944",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "9f551c5c96bb": {
+      "url": "https://www.oschina.net/news/440062",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "7a3a5cb67e71": {
+      "url": "https://theregister.com/patches/2026/05/13/doozy-of-a-patch-tuesday-includes-30-critical-microsoft-cves/5239224",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "9ca55e1a52cf": {
+      "url": "https://www.oschina.net/news/439981",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "e7382e37dd0a": {
+      "url": "https://blogs.cisco.com/news/our-path-forward",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "4c85a53942f8": {
+      "url": "https://krebsonsecurity.com/2026/05/patch-tuesday-may-2026-edition",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "912c18e8572d": {
+      "url": "https://www.oschina.net/news/440466",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "9b491e1d4f8f": {
+      "url": "https://blog.cloudflare.com/browser-run-containers",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "7bb505f9cb46": {
+      "url": "https://www.theverge.com/tech/929791/meta-ai-incognito-chats",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "6e3ee57702ef": {
+      "url": "https://www.phoronix.com/news/Linux-Fragnesia",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
+    },
+    "c2c8381ac5d8": {
+      "url": "https://www.oschina.net/news/440468",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-14"
     }
   },
-  "updated": "2026-05-13 10:39"
+  "updated": "2026-05-14 12:58"
 }
