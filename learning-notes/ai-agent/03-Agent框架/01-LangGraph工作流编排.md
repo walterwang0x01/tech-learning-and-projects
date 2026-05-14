@@ -4,10 +4,44 @@
 
 ## 1. 概述
 
-<!-- version-check: LangGraph 1.1.9 stable, 126K+ Stars, Deep Agents v0, Delta Channels, checked 2026-05-13 -->
+<!-- version-check: LangGraph 1.1.9 stable, 126K+ Stars, Deep Agents v0.6, Delta Channels, Managed Deep Agents, checked 2026-05-14 -->
 LangGraph 是 LangChain 团队推出的 Agent 工作流编排框架，基于图结构定义 Agent 的执行流程。2025 年 10 月发布 1.0 GA，目前最新版本为 1.1.9 稳定版，126K+ GitHub Stars，90M+ 月下载量，是目前生产级 Agent 开发的行业标准。Uber、JP Morgan、BlackRock、Cisco、LinkedIn、Klarna、Replit、Elastic 等企业已在生产环境部署。来源：[LangChain Blog](https://blog.langchain.com/langchain-langgraph-1dot0/)、[Releasebot](https://releasebot.io/updates/langchain-ai)
 
-> 🔄 更新于 2026-05-13
+> 🔄 更新于 2026-05-14
+
+**Interrupt 2026 Day 1 发布（2026-05-13）— Deep Agents v0.6 + Managed Deep Agents**：
+
+Deep Agents v0.6 五大核心特性：
+
+1. **Code Interpreter**：轻量级代码执行运行时（QuickJS），Agent 可编写代码组合工具调用、管理中间状态、控制上下文窗口。支持 Programmatic Tool Calling（PTC）——模型写代码调用工具而非逐个 round-trip，减少 Token 消耗和模型调用次数。任何模型（包括开源）都可实现 PTC，不再局限于 Anthropic 的 API 行为。
+
+2. **Harness Profiles**：per-model 调优配置，让开源模型（Kimi K2.6、GLM 5.1、DeepSeek V4）以 20x+ 更低成本达到生产级性能。测试数据：harness 层调优让 gpt-5.2-codex 在 Terminal-Bench 2.0 上从 52.8% → 66.5%，opus-4.7 提升 10%，tau2-bench 上 prompts+middleware 可移动 10-20 分。
+
+3. **Streaming v3**：类型化事件投影（messages、tool calls、subagents、custom channels），前端框架集成（`@langchain/react`、`@langchain/vue`、`@langchain/svelte`、`@langchain/angular` v1），遵循新的 [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming)。
+
+4. **Delta Channels**：增量 checkpoint 存储，200 轮编码会话从 5.27 GB 降至 129 MB（约 40x 压缩），O(N²) → O(N) 存储增长。
+
+5. **ContextHub Backend**：Agent 文件系统后端连接 LangSmith Context Hub，技能/策略/记忆版本化存储，跨 run 持续改进。
+
+```python
+# Deep Agents v0.6 — Code Interpreter + Harness Profile
+from deepagents import create_deep_agent
+from langchain_quickjs import REPLMiddleware
+
+# 开源模型 + 代码解释器 = 低成本高性能
+agent = create_deep_agent(
+    model="baseten:zai-org/GLM-5",  # 开源模型
+    middleware=[REPLMiddleware()],    # 代码解释器中间件
+)
+
+# Managed Deep Agents — 托管运行时
+# 开发者定义 Agent，LangSmith 处理运行时：
+# threads、checkpointing、streaming、context、observability
+```
+
+**Managed Deep Agents**（2026-05-13）：开源 Deep Agents harness 的托管版本。开发者在 repo 中定义 Agent，LangSmith 处理运行时（线程、检查点、流式传输、上下文、可观测性）。长时运行 Agent 需要持久化上下文，Managed Deep Agents 提供开箱即用的持久化运行环境。来源：[LangChain Blog](https://www.langchain.com/blog/introducing-managed-deep-agents)
+
+来源：[Deep Agents v0.6](https://www.langchain.com/blog/deep-agents-0-6)（Content was rephrased for compliance with licensing restrictions）
 
 **Delta Channels — 长时运行 Agent 的运行时升级**（2026-05-12）：Deep Agents 构建在 LangGraph 运行时之上，每步都做 checkpoint 以支持可观测性、人机交互和故障恢复。但对于运行数小时甚至数天的 Agent，全量 checkpoint 导致存储爆炸和恢复延迟线性增长。Delta Channels 只存储每步的增量（delta），每 K 步写一次完整快照，将恢复延迟限制在常数级别，存储成本不随会话增长而膨胀。现有 LangGraph 线程无需迁移即可透明升级，消息和文件默认走 delta-backed 存储。来源：[LangChain Blog](https://www.langchain.com/blog/delta-channels-evolving-agent-runtime)
 

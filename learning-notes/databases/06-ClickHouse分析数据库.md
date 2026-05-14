@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: ClickHouse 25.4 LTS, checked 2026-05-10 -->
+<!-- version-check: ClickHouse 26.4 (latest), 26.3 LTS, checked 2026-05-14 -->
 
 ## 1. 为什么要了解 ClickHouse
 
@@ -322,3 +322,55 @@ CH 不替代 PG，是互补关系。
 - [ClickHouse vs Postgres](https://clickhouse.com/blog/clickhouse-vs-postgres)
 - [SigNoz 架构（开源 APM 用 CH）](https://signoz.io/)
 - [PostHog 架构（开源分析用 CH）](https://posthog.com/blog/clickhouse-at-posthog)
+
+## 12. 版本演进（2026）
+
+> 🔄 更新于 2026-05-14
+
+```
+ClickHouse 2026 版本线：
+├─ 26.1（2026-01-29）：常规迭代
+├─ 26.2（2026-02-26）：常规迭代
+├─ 26.3 LTS（2026-03-26）：长期支持版本 ⭐
+│   ├─ 27 个新特性、40 个性能优化、202 个 Bug 修复
+│   ├─ Async Inserts 默认开启
+│   ├─ JOIN 重排序扩展到 ANTI/SEMI/FULL JOIN
+│   ├─ Materialized CTEs
+│   └─ 推荐生产环境使用
+└─ 26.4（2026-04-30）：最新版本
+    ├─ 增强 SQL 兼容性（对 PG/MySQL 用户更友好）
+    └─ Bool 类型 IN 操作符语义修正
+```
+
+### 26.3 LTS 核心变化
+
+**Async Inserts 默认开启**：此前需要手动设置 `async_insert=1`，现在默认启用。对可观测性场景（数百/数千 Agent 持续发送小批量数据）尤其重要——服务端自动批处理，客户端无需关心攒批逻辑。
+
+```sql
+-- 26.3 之前：需要手动开启
+SET async_insert = 1;
+SET wait_for_async_insert = 0;
+
+-- 26.3 起：默认开启，直接写入即可
+INSERT INTO logs (timestamp, level, message)
+VALUES (now(), 'INFO', 'Agent completed task');
+-- 服务端自动批处理，减少 part 数量
+```
+
+**JOIN 重排序扩展**：优化器现在可以对 ANTI、SEMI、FULL JOIN 进行重排序，此前仅支持 INNER/LEFT JOIN。对复杂分析查询性能有显著提升。
+
+**Materialized CTEs**：CTE（WITH 子句）可以被物化，避免重复计算。对多次引用同一 CTE 的查询有明显加速。
+
+### 26.4 SQL 兼容性增强
+
+26.4 重点改善了从 PostgreSQL 和其他 SQL 数据库迁移的体验，让 ClickHouse 的 SQL 方言对传统数据库用户更友好。
+
+### 版本选择建议
+
+| 场景 | 推荐版本 |
+|------|---------|
+| 生产环境（稳定优先） | 26.3 LTS |
+| 开发/测试（新特性） | 26.4 |
+| 已有 25.x 部署 | 评估升级到 26.3 LTS |
+
+来源：[ClickHouse Release 26.3](https://clickhouse.com/blog/clickhouse-release-26-03)、[ClickHouse 26.4 SQL 兼容性](https://www.tipranks.com/news/private-companies/clickhouse-enhances-sql-compatibility-in-version-26-4)（Content was rephrased for compliance with licensing restrictions）
