@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Backstage 1.35, Port 2024, Cortex, OpsLevel, checked 2026-05-10 -->
+<!-- version-check: Backstage 1.50, Port 2024, Cortex, OpsLevel, AIContext RFC, checked 2026-05-14 -->
 
 ## 1. Portal 的核心价值
 
@@ -298,6 +298,79 @@ Platform Team 要把 Portal 当产品做：
 ❌ 没人 onboard
    → 再好的工具没人用也没价值
 ```
+
+## 10. Backstage 1.50+ 版本演进（2026）
+
+> 🔄 更新于 2026-05-14
+
+### 10.1 版本里程碑
+
+| 版本 | 日期 | 重点 |
+| ---- | ---- | ---- |
+| v1.49.0 | 2026-03-18 | New Frontend System 1.0 RC，成为新应用默认 |
+| v1.50.0 | 2026-04-14 | Identity token ownership claims 变更、废弃 API 移除 |
+| v1.50.2 | 2026-04 | TechDocs 改进 |
+| v1.51.0-next.0 | 2026-04 | 下一周期开启 |
+
+### 10.2 New Frontend System 成为默认
+
+v1.49.0 起，所有新创建的 Backstage 应用默认使用 New Frontend System。核心变化：
+
+```
+旧系统：
+├─ 插件通过 createPlugin() 注册
+├─ 路由在 App.tsx 中集中配置
+└─ 主题通过 createTheme() 全局设置
+
+新系统：
+├─ 插件通过 createFrontendPlugin() 声明式注册
+├─ 路由由插件自行声明，App 自动发现
+├─ 主题通过 createThemeExtension() 扩展
+└─ 更好的代码分割和懒加载
+```
+
+### 10.3 AIContext Catalog Kind（RFC）
+
+Backstage 社区引入了新的 `AIContext` catalog kind，用于结构化 AI Agent 集成：
+
+```yaml
+# 示例：为 AI Agent 暴露服务上下文
+apiVersion: backstage.io/v1alpha1
+kind: AIContext
+metadata:
+  name: payment-service-context
+  annotations:
+    backstage.io/ai-context-type: service-metadata
+spec:
+  owner: team-payments
+  targetComponent: payment-service
+  contextData:
+    description: "支付服务，处理订单支付和退款"
+    dependencies: [postgres-payment, notification-service]
+    onCall: team-payments
+    runbook: "https://wiki.company/payment-runbook"
+    slo: "99.9% availability, p99 < 200ms"
+```
+
+**价值**：AI Agent（如 incident response bot）可以通过 Catalog API 获取结构化的服务上下文，而不是从非结构化文档中猜测。
+
+### 10.4 Context Engineering 与 IDP 的融合
+
+2026 年 IDP 的核心趋势是成为 AI Agent 的"上下文基础设施"：
+
+```
+IDP 作为 Context Engineering 基础设施：
+├─ Service Catalog → Agent 了解服务拓扑
+├─ Ownership → Agent 知道找谁
+├─ Scorecards → Agent 评估服务健康度
+├─ TechDocs → Agent 查阅操作手册
+├─ Dependencies → Agent 分析影响范围
+└─ AIContext → Agent 获取结构化元数据
+```
+
+94% 组织已采用或计划采用平台团队（Frontiers in Computer Science 2026 研究），Gartner 预测 2026 年底 80% 大型工程组织将有专职平台团队。
+
+> 来源：[Backstage Weekly #130](https://roadie.io/backstage-weekly/130-v1-50-0-backstagecon-context-engineering/)、[Backstage Weekly #131 AIContext RFC](https://roadie.io/backstage-weekly/131-context-engineering-for-developers-and-new-releases/)、[IDP as AI Goldmine](https://roadie.io/blog/idp-ai-goldmine-context-engineering/)
 
 ## 📖 参考资料
 
