@@ -7097,7 +7097,271 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-05-14"
+    },
+    "acb43e098b15": {
+      "url": "https://36kr.com/p/3808710182034944?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "d7bebd9f95b7": {
+      "url": "https://www.oschina.net/news/440066",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "e6a22cddde2e": {
+      "url": "https://www.qbitai.com/2026/05/417748.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "75099c49b1ac": {
+      "url": "https://www.infoq.cn/article/aaLabGa4T7z5m1UBiJ2O",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "2cf0ec6a0d5b": {
+      "url": "https://www.oschina.net/news/440089",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "ce7103d91f77": {
+      "url": "https://www.qbitai.com/2026/05/417468.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "8a5f1cf7caad": {
+      "url": "https://www.oschina.net/news/440604",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "9b7f1919a16e": {
+      "url": "https://www.oschina.net/news/440612",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "80e83411c6f3": {
+      "url": "http://www.geekpark.net/news/364208",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "68fa37dd51cf": {
+      "url": "https://www.oschina.net/news/440668",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "c256cc4fc6c5": {
+      "url": "https://www.qbitai.com/2026/05/417791.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "68912b7bde36": {
+      "url": "https://www.infoq.cn/article/OpaYcpzKc45zmvxCNBlW",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-15"
+    },
+    "b174f9079715": {
+      "url": "https://www.langchain.com/blog/introducing-langchain-labs",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "49a108cb408a": {
+      "url": "https://openai.com/index/building-codex-windows-sandbox",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "b1b45d973e8f": {
+      "url": "https://www.oschina.net/news/440119",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "0782024bcee1": {
+      "url": "https://openai.com/index/chatgpt-recognize-context-in-sensitive-conversations",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "2745582b6a82": {
+      "url": "https://arxiv.org/abs/2605.12978",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "ecdcbbeb912b": {
+      "url": "https://www.anthropic.com/news/claude-for-small-business",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "c692e9916c03": {
+      "url": "https://arxiv.org/abs/2604.10547",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "86d2039de963": {
+      "url": "https://www.langchain.com/blog/the-anatomy-of-an-agent-harness",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "c2fad0632e54": {
+      "url": "https://huggingface.co/blog/continuous_async",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "09ab76a12173": {
+      "url": "https://openai.com/index/work-with-codex-from-anywhere",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "87cb80339aff": {
+      "url": "https://www.anthropic.com/news/gates-foundation-partnership",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "27a7b1f2fe04": {
+      "url": "https://arxiv.org/abs/2510.03992",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "3d30727982c4": {
+      "url": "https://huggingface.co/blog/ibm-granite/granite-embedding-multilingual-r2",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-15"
+    },
+    "342c0ecac4e6": {
+      "url": "https://techcrunch.com/2026/05/14/a-spyware-investigator-exposed-russian-government-hackers-trying-to-hijack-signal-accounts",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "9423a469d914": {
+      "url": "https://github.blog/news-insights/company-news/github-availability-report-april-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "d1ca925f1b79": {
+      "url": "https://www.oschina.net/news/440530/nginx-1-30-1-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "2cb5ea05d2f4": {
+      "url": "https://depthfirst.com/research/nginx-rift-achieving-nginx-rce-via-an-18-year-old-vulnerability",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "23c918af989a": {
+      "url": "https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "68a3f8f12938": {
+      "url": "https://proton.me/business/blog/proton-pass-audit-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "614fe909ee8d": {
+      "url": "https://news.ycombinator.com/item?id=48132488",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "f4a8dbcbddf3": {
+      "url": "https://kubernetes.io/blog/2026/05/14/kubernetes-v1-36-deprecation-and-removal-of-service-externalips",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "c5b39bf34930": {
+      "url": "https://techcrunch.com/2026/05/14/wirestock-raises-23m-to-supply-multi-modal-data-to-ai-labs",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "962e536ed8a8": {
+      "url": "https://www.infoq.cn/article/UeBJfTee771jVIJextqH",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "d1d201419471": {
+      "url": "https://www.infoq.cn/article/ktRP5kz1fMkW5rmmMFoR",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "1f6e4be5f63d": {
+      "url": "https://aws.amazon.com/blogs/aws/amazon-bedrock-introduces-new-advanced-prompt-optimization-and-migration-tool",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "cffe25192194": {
+      "url": "https://techcrunch.com/2026/05/14/khosla-ventures-is-betting-10m-on-ian-crosby-whose-last-startup-bench-imploded",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "aa2893e9efe4": {
+      "url": "https://thehackernews.com/2026/05/18-year-old-nginx-rewrite-module-flaw.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "e118be5eca97": {
+      "url": "https://blog.cloudflare.com/clickhouse-query-plan-contention",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "5d8635033c69": {
+      "url": "https://www.theregister.com/devops/2026/05/14/anthropics-bun-rust-rewrite-merged-at-speed-of-ai/5240381",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "763a96242e5c": {
+      "url": "https://www.openvehicles.com/home",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "72fe37b4281f": {
+      "url": "https://www.oschina.net/news/440475/a-history-of-ides-at-google",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
+    },
+    "354f159e81c1": {
+      "url": "https://github.com/oven-sh/bun/pull/30412",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-15"
     }
   },
-  "updated": "2026-05-14 12:58"
+  "updated": "2026-05-15 09:39"
 }
