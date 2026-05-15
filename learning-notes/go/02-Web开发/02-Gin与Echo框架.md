@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Gin 1.11, Echo 5.x, Fiber 2.53, Chi 5.x, checked 2026-05-10 -->
+<!-- version-check: Gin 1.12.0 (2026-03), Echo 5.x, Fiber 2.53, Chi 5.x, checked 2026-05-15 -->
 
 ## 1. Go Web 框架全景
 
@@ -21,6 +21,27 @@
 - 团队熟悉 Express 风格：**Gin** 或 **Echo**
 - 极致性能：**Fiber**
 - API First：**Huma**
+
+> 🔄 更新于 2026-05-15
+>
+> **JetBrains 2025 Go Developer Ecosystem 报告**给出的市场份额（2025 年底数据）：
+>
+> | 框架 | 市场份额 | GitHub Stars（2026-05） | 状态 |
+> | ---- | -------- | ----------------------- | ---- |
+> | Gin | 48% | 75K+ | 事实标准 |
+> | Gorilla | 17% | — | 项目已重启维护 |
+> | Echo | 16% | 30K+ | 企业方向 |
+> | Fiber | 11% | — | 性能优先 |
+>
+> 数据来源：[Tech Insider — Gin Golang Tutorial 2026](https://tech-insider.org/gin-golang-tutorial-rest-api-2026/)、[JetBrains Blog — Popular Go Web Frameworks](https://blog.jetbrains.com/go/2026/04/28/popular-golang-web-frameworks/)
+>
+> **Gin v1.12.0**（2026-03）：基准测试在 Go 1.25.8 下完成，httprouter 路由器仍然是性能护城河（来源：[Gin Benchmarks](https://gin-gonic.com/en/docs/benchmarks/)）。
+>
+> **2026 年新趋势**：
+>
+> - **AI Gateway / Agent 中间层**成为 Gin 的新主战场（46% Go 开发者用于 web/API 服务，相当一部分接入 LLM）
+> - **Huma / Fuego** 等 OpenAPI-first 框架在企业内部 API 场景增长，编译期生成 schema，减少手写 Swagger 注解
+> - **Chi v5** 持续被 Cloud Native 项目（如 Tempo、Loki）采用，因为最贴近 `net/http`
 
 ## 2. net/http：Go 1.22+ 已经很够用
 

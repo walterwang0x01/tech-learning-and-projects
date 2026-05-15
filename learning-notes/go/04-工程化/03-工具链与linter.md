@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: golangci-lint 1.65, goreleaser 2.5, delve 1.24, checked 2026-05-10 -->
+<!-- version-check: golangci-lint v2.12.2 (2026-05-06), goreleaser 2.5, delve 1.24, checked 2026-05-15 -->
 
 ## 1. 必装工具（2026 年推荐）
 
@@ -35,14 +35,32 @@ go install github.com/air-verse/air@latest
 
 ## 2. golangci-lint 配置
 
+> 🔄 更新于 2026-05-15
+>
+> **golangci-lint v2 已成为主线版本**（v2.0.0 于 2025-03 发布，最新 v2.12.2 于 2026-05-06 发布）。v2 是不向后兼容的重大重构，与 v1 配置文件存在多项差异：
+>
+> | 行为 | v1 | v2 |
+> | ---- | -- | -- |
+> | 配置文件根字段 | `linters:` 为 map（含 enable/disable） | `linters:` 与 `linters-settings:` 拆分更严格 |
+> | `run.timeout` | 默认 1 分钟 | **默认无超时**（旧值会被忽略） |
+> | `issues.show-stats` | 需手动开启 | 默认开启 |
+> | 链接器 `gomodguard` | v1 版本 | 推荐迁移到 `gomodguard_v2` |
+>
+> 迁移命令：`golangci-lint migrate`（自动转换 v1 配置）。
+>
+> 参考：[golangci-lint Migration Guide](https://golangci-lint.run/product/migration-guide/)、[Changelog v2.x](https://golangci-lint.run/docs/product/changelog/)
+
 ```yaml
-# .golangci.yml
+# .golangci.yml（v2 风格）
+version: "2"
+
 run:
-  timeout: 5m
   tests: true
+  # v2 中 timeout 默认无限，按需自行设置
+  # timeout: 5m
 
 linters:
-  disable-all: true
+  default: none           # v2 用 default 替代 v1 的 disable-all
   enable:
     - errcheck        # 检查未处理的错误
     - gosimple        # 建议简化代码
@@ -64,25 +82,28 @@ linters:
     - prealloc        # slice 预分配
     - wastedassign    # 浪费的赋值
 
-linters-settings:
-  gocritic:
-    enabled-tags: [diagnostic, style, performance]
-  revive:
-    rules:
-      - name: exported
-      - name: error-return
-      - name: error-strings
-      - name: var-naming
+  settings:                  # v2 把 linters-settings 内嵌到 linters.settings
+    gocritic:
+      enabled-tags: [diagnostic, style, performance]
+    revive:
+      rules:
+        - name: exported
+        - name: error-return
+        - name: error-strings
+        - name: var-naming
 
-issues:
-  exclude-rules:
-    - path: _test\.go
-      linters: [errcheck, gosec]
-    - path: examples/
-      linters: [errcheck]
+  exclusions:                # v2 把 issues.exclude-rules 改为 linters.exclusions.rules
+    rules:
+      - path: _test\.go
+        linters: [errcheck, gosec]
+      - path: examples/
+        linters: [errcheck]
 ```
 
 ```bash
+# 旧 v1 配置自动迁移
+golangci-lint migrate
+
 # 运行
 golangci-lint run
 

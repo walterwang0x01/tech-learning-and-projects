@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: client-go v0.31, Kubernetes 1.33, controller-runtime 0.20, checked 2026-05-10 -->
+<!-- version-check: client-go v0.36 (K8s 1.36), Kubernetes 1.36 (2026-04-22), controller-runtime 0.21, checked 2026-05-15 -->
 
 ## 1. 为什么要用 client-go
 
@@ -326,7 +326,84 @@ func TestReconcile(t *testing.T) {
 }
 ```
 
-## 9. 生产检查清单
+## 9. K8s 1.36 与 client-go 演进（2026-05 更新）
+
+> 🔄 更新于 2026-05-15
+>
+> Kubernetes 1.36 "ハル (Haru)" 已于 **2026-04-22** 发布（来源：[K8s 1.36 Release Blog](https://kubernetes.io/blog/2026/04/22/kubernetes-v1-36-release/)）。对应的 `client-go v0.36` 与 `controller-runtime v0.21` 在 4 月底相继 cut。
+
+### 9.1 Declarative Validation GA — Webhook 的退场
+
+K8s 1.36 让 `ValidatingAdmissionPolicy`（CEL 表达式）GA，不再需要部署 Validating Webhook 来做简单策略校验。对 Operator 开发者意味着：
+
+- 简单的 schema 校验直接写 `ValidatingAdmissionPolicy`，不写 Go 代码
+- Webhook 只用于复杂业务逻辑（依赖外部系统、复杂跨字段验证）
+- Operator Controller 数量减少，运维成本下降
+
+```yaml
+# 用 CEL 表达式替代 Webhook 做"必须有 owner 标签"校验
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: require-owner-label
+spec:
+  matchConstraints:
+    resourceRules:
+    - apiGroups:   ["apps"]
+      apiVersions: ["v1"]
+      operations:  ["CREATE","UPDATE"]
+      resources:   ["deployments"]
+  validations:
+  - expression: "has(object.metadata.labels.owner)"
+    message: "Deployment 必须有 owner 标签"
+```
+
+### 9.2 PSI Metrics GA + Workload-Aware Preemption
+
+- **PSI（Pressure Stall Information）Metrics GA**：Kubelet 暴露 CPU/内存/IO 压力指标，调度器和 HPA 可以利用更精确的资源压力数据
+- **Workload-Aware Preemption**：抢占将 PodGroup 视为整体（如 AI 训练任务），避免拆散并发训练
+
+对 Operator 的影响：写 AI 训练 Operator 时优先用 PodGroup + Volcano/Kueue 集成，让 1.36 抢占器识别整体语义。
+
+### 9.3 Fine-Grained Kubelet API Authorization GA
+
+Kubelet 的子资源（exec、log、metrics）现在可以独立授权。Operator 申请 RBAC 时可以更精确：
+
+```yaml
+# 旧：一次给 pods/exec 全开
+# 新：拆成读 log 和执行命令
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create"]
+  resourceNames: ["debug-*"]  # 只允许操作 debug-* 命名的 Pod
+```
+
+### 9.4 client-go 0.36 关键变化
+
+| 项目 | 变化 | 影响 |
+| ---- | ---- | ---- |
+| `apimachinery` | CEL `expressions` 字段稳定 | 可在 Go 代码中通过 client-go 创建 ValidatingAdmissionPolicy |
+| `tools/cache` | Informer EventHandler 增加 `OnAddWithOptions` | 支持 namespace/label 过滤的初始 sync |
+| `rest` | gRPC streaming watch 实验支持 | 大集群 watch 性能优化 |
+| Server-Side Apply | 默认推荐 fieldOwner=`<operator-name>/v<version>` | 字段冲突可追溯到具体版本 |
+
+升级建议：
+
+```bash
+# 升级 client-go 与 controller-runtime
+go get k8s.io/client-go@v0.36.0
+go get sigs.k8s.io/controller-runtime@v0.21.0
+
+# 重新生成 CRD（使用 controller-gen v0.18+）
+controller-gen crd paths=./api/... output:crd:dir=./config/crd
+```
+
+来源：[K8s 1.36 Declarative Validation GA](https://kubernetes.io/blog/2026/05/05/kubernetes-v1-36-declarative-validation-ga/)、[K8s 1.36 Release Notes](https://kubernetes.io/blog/2026/04/22/kubernetes-v1-36-release/)、[ScaleOps K8s 1.36 摘要](https://scaleops.com/blog/kubernetes-1-36/)
+
+## 10. 生产检查清单
 
 ```
 Operator 上线前：

@@ -2,9 +2,17 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Rust 1.97, Edition 2024, Tokio 1.47, Axum 0.9, checked 2026-05-10 -->
+<!-- version-check: Rust 1.97.1 (2026-03-26 with CVE-2026-33055/33056 fix), Edition 2024, Tokio 1.47, Axum 0.8.8, checked 2026-05-15 -->
 
 Rust 在 2026 年不是"可能有用的"，而是"你正在使用的工具的底层语言"：uv、ruff、Vite、Turbopack、Polars、SurrealDB、Rustls、Alacritty、zed 全部 Rust 写的。
+
+> 🔄 更新于 2026-05-15
+>
+> **Rust 1.97.1**（2026-03-26）修复了 Cargo 依赖的 tar 库的 **CVE-2026-33055 / CVE-2026-33056**，所有使用非 crates.io 来源（git、tar.gz）依赖的项目都应升级（来源：[Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)）。
+>
+> **Axum 0.8.x** 已成为生态事实稳定线（不是之前笔记里写的 0.9），最新为 0.8.8。新项目直接用 0.8 即可。
+>
+> **Tokio dial9 飞行记录器**（2026-03）：用于高并发服务定位调度延迟，详见 [03-异步编程.md](./03-异步编程.md)。
 
 这个目录是精简的"为什么 + 最小工作集"，不追求和 iOS/Android 那种全栈覆盖。
 
