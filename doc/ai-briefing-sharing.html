@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>让 AI 每天帮你读 100 篇文章</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+/* === RESET === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; overflow-x: hidden; }
+
+:root {
+  --bg: #ffffff;
+  --bg-warm: #faf8f5;
+  --text: #1d1d1f;
+  --accent: #0066cc;
+  --accent-soft: #e8f2ff;
+  --muted: #86868b;
+  --border: #e8e8ed;
+  --card: #f5f5f7;
+  --radius: 16px;
+}
+
+body { font-family: 'Outfit', -apple-system, sans-serif; color: var(--text); }
+
+/* === VIEWPORT FIT === */
+.slide {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: clamp(3rem, 8vw, 8rem);
+}
+
+/* === NAV === */
+.nav {
+  position: fixed;
+  right: clamp(1.2rem, 2.5vw, 2.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+}
+.nav a {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.3s;
+}
+.nav a.active { background: var(--accent); transform: scale(1.5); }
+
+/* === TYPOGRAPHY === */
+h1 {
+  font-size: clamp(2.8rem, 6.5vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+h2 {
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+h3 {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 600;
+}
+p, li {
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* === ANIMATIONS === */
+.r { opacity: 0; transform: translateY(24px); animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.r1 { animation-delay: 0.1s; }
+.r2 { animation-delay: 0.2s; }
+.r3 { animation-delay: 0.35s; }
+.r4 { animation-delay: 0.5s; }
+.r5 { animation-delay: 0.65s; }
+.r6 { animation-delay: 0.8s; }
+.r7 { animation-delay: 0.95s; }
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === SLIDE 1: TITLE === */
+#s1 { background: var(--bg); }
+#s1 .wrap { max-width: 750px; }
+#s1 .label {
+  display: inline-block;
+  font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  margin-bottom: clamp(1.2rem, 2.5vw, 2rem);
+}
+#s1 .sub {
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  color: var(--muted);
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 300;
+}
+#s1 .meta {
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
+  color: var(--border);
+  margin-top: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+}
+
+/* === SLIDE 2: PAIN === */
+#s2 { background: var(--bg-warm); }
+#s2 .wrap { max-width: 680px; }
+#s2 .scene {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  color: var(--text);
+  line-height: 1.8;
+  font-weight: 300;
+}
+#s2 .scene strong { font-weight: 600; color: var(--text); }
+#s2 .punchline {
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* === SLIDE 3: SOLUTION === */
+#s3 { background: var(--bg); }
+#s3 .wrap { max-width: 700px; }
+#s3 .desc {
+  margin-top: clamp(0.8rem, 1.5vw, 1.2rem);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 300;
+}
+.nums {
+  display: flex;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+.num-item { text-align: left; }
+.num-item .big {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+.num-item .lbl {
+  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+  color: var(--muted);
+  margin-top: 0.4rem;
+  font-weight: 400;
+}
+
+/* === SLIDE 4: DEMO === */
+#s4 { background: var(--bg-warm); align-items: center; text-align: center; }
+#s4 .wrap { max-width: 600px; }
+#s4 .demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  background: var(--accent-soft);
+  border-radius: 100px;
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: clamp(2rem, 3.5vw, 2.5rem);
+}
+#s4 .demo-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+#s4 .hint {
+  margin-top: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+  color: var(--muted);
+  font-weight: 300;
+}
+
+/* === SLIDE 5: HOW === */
+#s5 { background: var(--bg); }
+#s5 .wrap { max-width: 650px; }
+.flow {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(0.7rem, 1.2vw, 0.9rem) 0;
+  border-bottom: 1px solid var(--border);
+}
+.flow-step:last-child { border: none; }
+.flow-icon {
+  width: clamp(2rem, 3.5vw, 2.8rem);
+  height: clamp(2rem, 3.5vw, 2.8rem);
+  background: var(--accent-soft);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  flex-shrink: 0;
+}
+.flow-text {
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  color: var(--text);
+  font-weight: 400;
+}
+.flow-text strong { font-weight: 600; }
+#s5 .bottom-line {
+  margin-top: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  color: var(--text);
+  font-weight: 400;
+  padding: clamp(0.8rem, 1.5vw, 1.2rem);
+  background: var(--card);
+  border-radius: var(--radius);
+}
+
+/* === SLIDE 6: FOR YOU === */
+#s6 { background: var(--bg-warm); }
+#s6 .wrap { max-width: 720px; }
+#s6 .hook-demo {
+  margin-top: clamp(1.2rem, 2vw, 1.8rem);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  color: var(--text);
+  line-height: 1.8;
+  font-weight: 300;
+}
+#s6 .hook-demo .key { color: var(--accent); font-weight: 600; }
+.dept-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.6rem, 1.2vw, 1rem);
+  margin-top: clamp(1.2rem, 2.5vw, 1.8rem);
+}
+.dept-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: clamp(0.7rem, 1.2vw, 1rem);
+}
+.dept-card h3 {
+  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+  margin-bottom: 0.2rem;
+}
+.dept-card p {
+  font-size: clamp(0.7rem, 1vw, 0.8rem);
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* === SLIDE 7: END === */
+#s7 { background: var(--bg); align-items: center; text-align: center; }
+#s7 .wrap { max-width: 650px; }
+.formula {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.2rem, 2.5vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--card);
+  border-radius: var(--radius);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.6;
+}
+.formula .accent { color: var(--accent); font-weight: 700; }
+#s7 .cta {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.7;
+}
+#s7 .cta strong { color: var(--text); font-weight: 600; }
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  .slide { padding: clamp(2rem, 5vw, 3rem); }
+  .nums { flex-direction: column; gap: 1.2rem; }
+  .dept-grid { grid-template-columns: 1fr; }
+  .nav { display: none; }
+}
+
+@media (max-height: 600px) {
+  .slide { padding: clamp(1.5rem, 3vw, 2.5rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .r { opacity: 1; transform: none; animation: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#s1" class="active"></a>
+  <a href="#s2"></a>
+  <a href="#s3"></a>
+  <a href="#s4"></a>
+  <a href="#s5"></a>
+  <a href="#s6"></a>
+  <a href="#s7"></a>
+</nav>
+
+<!-- SLIDE 1: TITLE -->
+<section class="slide" id="s1">
+  <div class="wrap">
+    <div class="label r r1">AI 工作实战分享</div>
+    <h1 class="r r2">让 AI 每天帮你<br>读 100 篇文章</h1>
+    <p class="sub r r3">信息简报自动化实战</p>
+    <p class="meta r r4">Walter Wang</p>
+  </div>
+</section>
+
+<!-- SLIDE 2: PAIN -->
+<section class="slide" id="s2">
+  <div class="wrap">
+    <h2 class="r r1">每天的信息焦虑</h2>
+    <div class="scene r r2">
+      每天早上打开电脑——<br>
+      公众号 <strong>50 条</strong>未读，行业群 <strong>200 条</strong>消息，<br>
+      邮箱 <strong>3 封</strong> newsletter 堆着。<br><br>
+      花 40 分钟刷完，真正有用的可能就 <strong>3 条</strong>。
+    </div>
+    <p class="punchline r r3">问题不是信息太少，是噪音太多。</p>
+  </div>
+</section>
+
+<!-- SLIDE 3: SOLUTION -->
+<section class="slide" id="s3">
+  <div class="wrap">
+    <h2 class="r r1">我的方案</h2>
+    <p class="desc r r2">用 AI 搭了一套系统，每天自动从多个信息源里<br>抓取、分类、打分、去重，生成一份精选简报。</p>
+    <div class="nums">
+      <div class="num-item r r3"><div class="big">27</div><div class="lbl">信息源</div></div>
+      <div class="num-item r r4"><div class="big">5 min</div><div class="lbl">每日阅读</div></div>
+      <div class="num-item r r5"><div class="big">28 天</div><div class="lbl">连续运行</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: DEMO -->
+<section class="slide" id="s4">
+  <div class="wrap">
+    <h2 class="r r1">Demo Time</h2>
+    <p class="r r2" style="color:var(--muted); font-weight:300; margin-top:clamp(0.8rem,1.5vw,1.2rem);">打开今天的简报，看看 AI 筛出了什么</p>
+    <div class="demo-badge r r3">切换到浏览器演示</div>
+    <p class="hint r r4">头条 · 快讯 · 趋势追踪<br>不是 demo，是每天真在用的东西</p>
+  </div>
+</section>
+
+<!-- SLIDE 5: HOW -->
+<section class="slide" id="s5">
+  <div class="wrap">
+    <h2 class="r r1">怎么做到的</h2>
+    <div class="flow">
+      <div class="flow-step r r2"><div class="flow-icon">📡</div><div class="flow-text"><strong>抓取</strong> — 27 个源一次全拉</div></div>
+      <div class="flow-step r r3"><div class="flow-icon">🏷️</div><div class="flow-text"><strong>分类</strong> — 自动打标签（AI / 国内 / 国际）</div></div>
+      <div class="flow-step r r4"><div class="flow-icon">⚖️</div><div class="flow-text"><strong>打分</strong> — 时效 × 一手 × 相关 × 实用</div></div>
+      <div class="flow-step r r5"><div class="flow-icon">🧹</div><div class="flow-text"><strong>去重</strong> — 写过的不再推</div></div>
+      <div class="flow-step r r6"><div class="flow-icon">✨</div><div class="flow-text"><strong>AI 精选</strong> — 写带判断的摘要，不搬运</div></div>
+    </div>
+    <div class="bottom-line r r7">AI 不替代你的判断力，而是把"大海捞针"变成"从 10 条里选 5 条"。</div>
+  </div>
+</section>
+
+<!-- SLIDE 6: FOR YOU -->
+<section class="slide" id="s6">
+  <div class="wrap">
+    <h2 class="r r1">你也能用</h2>
+    <p class="r r2" style="color:var(--muted); font-weight:300;">不需要写代码。在 Kiro 里创建一个 hook，用中文告诉 AI 你关心什么：</p>
+    <div class="hook-demo r r3">
+      <span class="key">关注方向：</span>新能源汽车行业<br>
+      <span class="key">关注对象：</span>特斯拉、比亚迪、蔚来、小鹏<br>
+      <span class="key">关注维度：</span>新车发布、价格调整、技术突破<br>
+      <span class="key">输出格式：</span>重点 3 条 + 快讯 5 条
+    </div>
+    <div class="dept-grid">
+      <div class="dept-card r r4"><h3>市场部</h3><p>竞品动态、营销活动</p></div>
+      <div class="dept-card r r5"><h3>产品部</h3><p>用户反馈、功能趋势</p></div>
+      <div class="dept-card r r6"><h3>管理层</h3><p>行业政策、投融资</p></div>
+      <div class="dept-card r r7"><h3>HR</h3><p>薪资报告、雇主品牌</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: END -->
+<section class="slide" id="s7">
+  <div class="wrap">
+    <h2 class="r r1">一个公式</h2>
+    <div class="formula r r2">
+      你关心的方向 + AI 搜索筛选 + 固定格式<br>= <span class="accent">你的个人信息助手</span>
+    </div>
+    <p class="cta r r4">
+      <strong>今天就试试</strong>：在 Kiro 里创建一个 hook<br>
+      把你关心的方向写进去，点一下按钮<br><br>
+      不会操作？找我，5 分钟帮你配好。
+    </p>
+  </div>
+</section>
+
+<!-- JS: KEYBOARD NAV + DOT SYNC -->
+<script>
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.nav a');
+let cur = 0;
+
+function go(i) {
+  if (i < 0 || i >= slides.length) return;
+  cur = i;
+  slides[i].scrollIntoView({ behavior: 'smooth' });
+  dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+}
+
+document.addEventListener('keydown', e => {
+  if (['ArrowDown','ArrowRight',' '].includes(e.key)) { e.preventDefault(); go(cur + 1); }
+  if (['ArrowUp','ArrowLeft'].includes(e.key)) { e.preventDefault(); go(cur - 1); }
+});
+
+dots.forEach((d, i) => d.addEventListener('click', e => { e.preventDefault(); go(i); }));
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const i = [...slides].indexOf(entry.target);
+      cur = i;
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    }
+  });
+}, { threshold: 0.6 });
+slides.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
