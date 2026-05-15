@@ -68,6 +68,10 @@ test('mock API response', async ({ page }) => {
 
 ## 2. Cypress
 
+<!-- version-check: Cypress 15.10+, checked 2026-05-13 -->
+
+> 🔄 更新于 2026-05-13：补充 Cypress 15.10+ 环境变量 API 迁移
+
 ```javascript
 // cypress/e2e/login.cy.js
 describe('Login', () => {
@@ -91,6 +95,32 @@ describe('Login', () => {
   });
 });
 ```
+
+### 2.1 Cypress 15.10+ 环境变量 API 迁移
+
+`Cypress.env()` 在 v15.10.0 已标记废弃，将在 v16 移除。原因：旧 API 会把所有环境变量序列化到浏览器上下文，可能意外暴露敏感数据。
+
+来源：[Cypress 15.10.0 Migration Guide](https://docs.cypress.io/guides/references/migration-guide)
+
+```javascript
+// ❌ 旧用法（已废弃）
+const apiKey = Cypress.env('API_KEY');
+
+// ✅ 新用法 1：cy.env() — 用于敏感数据（按需获取，不进浏览器上下文）
+cy.env('API_KEY').then((apiKey) => {
+  cy.request({
+    url: '/api/data',
+    headers: { Authorization: `Bearer ${apiKey}` },
+  });
+});
+
+// ✅ 新用法 2：Cypress.expose() — 用于公开/非敏感配置（同步访问）
+// cypress.config.js 中预先暴露
+// e.g. Cypress.expose({ FEATURE_FLAG: true })
+const flag = Cypress.expose('FEATURE_FLAG');
+```
+
+迁移建议：敏感值（密钥/Token/密码）用 `cy.env()`，配置/特性开关用 `Cypress.expose()`。
 
 ## 3. Playwright 1.59 新特性（2026-03）
 

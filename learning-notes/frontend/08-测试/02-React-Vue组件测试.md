@@ -4,9 +4,12 @@
 
 ## 1. React Testing Library
 
+<!-- version-check: @testing-library/react 16.x, @vue/test-utils 2.4.x, checked 2026-05-13 -->
+
 ```jsx
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest'; // 或 jest（API 兼容）
 import Counter from './Counter';
 
 describe('Counter', () => {
@@ -60,6 +63,7 @@ describe('Counter', () => {
 
 ```javascript
 import { mount, shallowMount } from '@vue/test-utils';
+import { createTestingPinia } from '@pinia/testing';
 import Counter from './Counter.vue';
 
 describe('Counter', () => {

@@ -123,6 +123,8 @@ self.addEventListener('fetch', (event) => {
 
 截至 2026 年 4 月，HTTP/3 已被约 **38.8%** 的网站采用，所有主流浏览器（Chrome、Firefox、Safari、Edge）均已支持。主要 CDN（Cloudflare、Fastly、AWS CloudFront）默认启用 HTTP/3。
 
+> ⚠️ 待确认：38.8% 数据来源为单一第三方统计，建议以 [W3Techs HTTP/3 Usage](https://w3techs.com/technologies/details/ce-http3) 或 [Cloudflare Radar](https://radar.cloudflare.com) 为准定期复核。
+
 来源：[HTTP/3 SEO Performance](https://blckalpaca.at/en/knowledge-base/seo-geo/technisches-seo/http3-performance)
 
 ### 6.2 QUIC 核心优势

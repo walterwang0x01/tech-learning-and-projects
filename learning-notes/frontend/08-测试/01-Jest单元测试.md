@@ -89,6 +89,10 @@ describe('Database tests', () => {
 
 ## 5. Vitest（Vite 项目推荐）
 
+<!-- version-check: Vitest 4.1, Jest 30, checked 2026-05-13 -->
+
+> 🔄 更新于 2026-05-13：补充 Vitest 4.x 与 Jest 30 重大版本更新
+
 ```javascript
 // vitest 与 jest API 基本兼容
 import { describe, it, expect, vi } from 'vitest';
@@ -102,6 +106,66 @@ vi.spyOn(console, 'log');
 // - 原生 ESM 支持
 // - 更快的执行速度
 // - 兼容 Jest API
+```
+
+### 5.1 Vitest 4.x 新特性（2025-10 / 2026-01）
+
+来源：[Vitest 4.0 Announcement](https://voidzero.dev/posts/announcing-vitest-4)、[Vitest 4.1](https://main.vitest.dev/blog/vitest-4-1)
+
+```javascript
+// 1. Browser Mode（稳定）— 在真实浏览器中运行测试
+// vitest.config.ts
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    browser: {
+      enabled: true,
+      provider: 'playwright',  // 或 'webdriverio'
+      instances: [
+        { browser: 'chromium' },
+        { browser: 'firefox' },
+      ],
+    },
+  },
+});
+
+// 2. Visual Regression Testing（视觉回归）
+import { expect, test } from 'vitest';
+import { page } from '@vitest/browser/context';
+
+test('button looks correct', async () => {
+  await expect(page.getByRole('button')).toMatchScreenshot();
+});
+
+// 3. Test Tags（4.1 新增）— 标签过滤与分组配置
+test('login flow', { tag: ['e2e', 'critical'] }, async () => {
+  // ...
+});
+// 命令行：vitest --tag e2e
+
+// 4. AI Agent Reporter（4.1 新增）— 为 AI Coding Agent 优化的报告格式
+// 命令行：vitest --reporter=agent
+
+// 5. Playwright Trace 集成 — 失败时自动生成可回放的 trace
+```
+
+### 5.2 Jest 30 新特性（2025-06）
+
+来源：[Jest 30 Release](https://jestjs.io/blog/2025/06/04/jest-30)
+
+```javascript
+// 主要变化：
+// - 最低 Node.js 版本：18.x（移除 14/16/19/21 支持）
+// - 最低 TypeScript 版本：5.4
+// - 性能：内存占用降低、执行速度提升
+// - ESM 支持改进（更接近原生 ESM）
+// - expect API 重构
+
+// 升级建议：
+// - Vite 项目 → Vitest 4.x（更快、原生 ESM、Browser Mode）
+// - 已有 Jest 项目 → Jest 30（迁移成本低）
+// - 新项目 → 优先 Vitest
 ```
 ## 🎬 推荐视频资源
 
