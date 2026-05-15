@@ -4,7 +4,7 @@
   "published_index_retention_days": 60,
   "run_retention_days": 30,
   "source_circuit_breaker": {
-    "fail_threshold_days": 3,
+    "fail_threshold_days": 2,
     "skip_when_tripped": true
   },
   "main_topic_rules": {

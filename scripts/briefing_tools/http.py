@@ -16,18 +16,31 @@ from .config import BASE_DIR
 USER_AGENT = "BriefingTools/3.0 (Walter's Knowledge Base)"
 
 
-def http_get(url: str, timeout: int = 10, retries: int = 1) -> str | None:
-    """标准库 HTTP GET，带错误处理和自动重试"""
+def http_get(url: str, timeout: int = 10, retries: int = 2) -> str | None:
+    """标准库 HTTP GET，带错误处理和指数退避重试
+
+    - 4xx 视为永久错误，立即返回（不重试，避免浪费配额）
+    - 5xx / 超时 / SSL 握手错误：指数退避（2s, 5s, 10s, ...）
+    """
     last_err: Exception | None = None
+    backoffs = [2, 5, 10, 20]  # 第 1/2/3/... 次重试前等待秒数
     for attempt in range(1 + retries):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 return resp.read().decode("utf-8", errors="replace")
+        except urllib.error.HTTPError as e:
+            last_err = e
+            # 4xx 不重试（除 408/429）
+            if 400 <= e.code < 500 and e.code not in (408, 429):
+                break
+            if attempt < retries:
+                time.sleep(backoffs[min(attempt, len(backoffs) - 1)])
+                continue
         except (urllib.error.URLError, TimeoutError, OSError) as e:
             last_err = e
             if attempt < retries:
-                time.sleep(3)
+                time.sleep(backoffs[min(attempt, len(backoffs) - 1)])
                 continue
     _log_error(f"HTTP GET 失败: {url} — {last_err}")
     return None
