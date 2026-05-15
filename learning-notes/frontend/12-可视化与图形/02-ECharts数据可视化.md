@@ -55,19 +55,65 @@ window.addEventListener('resize', () => chart.resize());
 
 ## 3. React/Vue 集成
 
+> ⚠️ **注意**：`echarts-for-react`（hustcc/echarts-for-react）已在 npm 标记为 deprecated（最后版本 3.0.2，2025-03-05），不再维护。新项目推荐以下替代方案。
+>
+> <!-- 修复于 2026-05-15: echarts-for-react 已被 npm 标记为 deprecated，添加替代方案 -->
+
 ```jsx
-// React（使用 echarts-for-react）
-import ReactECharts from 'echarts-for-react';
+// 方案 1：直接使用 echarts（推荐，无封装层）
+import { useEffect, useRef } from 'react';
+import * as echarts from 'echarts';
 
 function Chart({ data }) {
-  const option = {
-    xAxis: { type: 'category', data: data.map(d => d.name) },
-    yAxis: { type: 'value' },
-    series: [{ type: 'bar', data: data.map(d => d.value) }],
-  };
-  return <ReactECharts option={option} style={{ height: 400 }} />;
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const chart = echarts.init(ref.current);
+    chart.setOption({
+      xAxis: { type: 'category', data: data.map(d => d.name) },
+      yAxis: { type: 'value' },
+      series: [{ type: 'bar', data: data.map(d => d.value) }],
+    });
+
+    const handleResize = () => chart.resize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      chart.dispose();
+    };
+  }, [data]);
+
+  return <div ref={ref} style={{ width: '100%', height: 400 }} />;
 }
+
+// 方案 2：使用 @hugocxl/react-echarts（活跃维护，hooks 风格 API）
+// import { ReactEChart } from '@hugocxl/react-echarts';
 ```
+
+```vue
+<!-- Vue：使用 vue-echarts（ecomfe 官方维护） -->
+<script setup>
+import VChart from 'vue-echarts';
+import { use } from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+import { BarChart } from 'echarts/charts';
+import { GridComponent, TooltipComponent } from 'echarts/components';
+
+use([CanvasRenderer, BarChart, GridComponent, TooltipComponent]);
+
+const option = {
+  xAxis: { type: 'category', data: ['A', 'B', 'C'] },
+  yAxis: { type: 'value' },
+  series: [{ type: 'bar', data: [120, 200, 150] }],
+};
+</script>
+
+<template>
+  <v-chart :option="option" autoresize style="height: 400px" />
+</template>
+```
+
+<!-- version-check: echarts 6.0.0, vue-echarts 7.x, @hugocxl/react-echarts 1.x, checked 2026-05-15 -->
 
 ## 4. 大数据量优化
 

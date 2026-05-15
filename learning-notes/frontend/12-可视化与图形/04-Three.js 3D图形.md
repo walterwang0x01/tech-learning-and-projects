@@ -114,20 +114,26 @@ loader.load('/models/scene.gltf', (gltf) => {
 
 ## 6. Three.js 2025-2026 版本演进与 WebGPU
 
-<!-- version-check: Three.js r182, checked 2026-04-23 -->
+<!-- version-check: Three.js r180/r183, checked 2026-05-15 -->
 
-> 🔄 更新于 2026-04-23
+> 🔄 更新于 2026-05-15
 
 Three.js 在 2025-2026 年跨越了重要门槛：WebGPU 在所有主流浏览器上可用，NPM 周下载量达 270 万（是 Babylon.js 的 270 倍）。来源：[Three.js 2026 What Changed](https://www.utsubo.com/blog/threejs-2026-what-changed)
 
 ### 6.1 WebGPU 生产就绪
 
+<!-- 修复于 2026-05-15: 修正 Three.js 版本表。npm 当前发布 0.180.0（cdnjs 同步），r183 已发布（论坛确认 Clock 已废弃），r184/r185 在 milestone 规划中 -->
+
 | 版本 | 时间 | 关键变化 |
 |------|------|---------|
 | r170 | 2025-08 | WebGPU 模块移至 addons，GLTFLoader 支持 |
 | r171 | 2025-09 | 零配置 WebGPU 导入，React Three Fiber 集成 |
-| r180 | 2025-09 | 纹理绑定改进，深度纹理修复 |
-| r182 | 2025-12 | 当前稳定版 |
+| r180 | 2025-11 | npm 当前最新（0.180.0），纹理绑定改进，深度纹理修复 |
+| r182 | 2025-12 | WebGPU 稳定性提升 |
+| r183 | 2026-01 | TSL 持续完善，`Clock` 废弃，推荐 `Timer` |
+| r184/r185 | 2026 上半年 | TSL 节点图统一 GLSL/WGSL 编译（规划中） |
+
+> 待确认：r183 后的版本目前在 milestone 中规划（GitHub `mrdoob/three.js/milestone/98`），实际 npm 发布以 [npm three](https://www.npmjs.com/package/three) 和 [cdnjs](https://cdnjs.com/libraries/three.js/) 为准。
 
 ```javascript
 // r171+ 零配置 WebGPU（自动回退到 WebGL 2）
