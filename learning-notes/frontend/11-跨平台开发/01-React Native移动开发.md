@@ -32,6 +32,8 @@ const styles = StyleSheet.create({
 ## 2. FlatList（高性能列表）
 
 ```jsx
+import { FlatList, Text } from 'react-native';
+
 <FlatList
   data={items}
   keyExtractor={(item) => item.id.toString()}
@@ -47,9 +49,11 @@ const styles = StyleSheet.create({
 ## 3. 导航（React Navigation）
 
 ```jsx
+// React Navigation v7（2026 最新稳定版）
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -93,9 +97,11 @@ npx expo start
 
 ## 5. React Native 0.85 与 2026 版本演进
 
-<!-- version-check: React Native 0.85.1, checked 2026-04-23 -->
+<!-- version-check: React Native 0.85, checked 2026-05-15 -->
 
-> 🔄 更新于 2026-04-23
+> 🔄 更新于 2026-05-15
+
+<!-- 修复于 2026-05-15: 补充 0.84 (Hermes V1 by Default) 演进信息 -->
 
 ### 版本演进
 
@@ -104,6 +110,7 @@ npx expo start
 | 0.76 | 2024-10 | New Architecture 成为默认 |
 | 0.82 | 2025-10 | 完全移除 Legacy Architecture，首个纯新架构版本 |
 | 0.83 | 2025-12 | React 19.2 集成，Android 包体积减少 ~3.8MB |
+| 0.84 | 2026-02 | Hermes V1 成为默认 JS 引擎 |
 | 0.85 | 2026-04 | Shared Animation Backend、Metro TLS、多 CDP 连接 |
 
 ### 0.85 核心新特性

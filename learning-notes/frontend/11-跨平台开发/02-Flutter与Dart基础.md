@@ -120,11 +120,13 @@ final counterProvider = StateNotifierProvider<CounterNotifier, int>((ref) => Cou
 
 ## 5. Flutter 3.41 与 Dart 3.11 版本演进
 
-<!-- version-check: Flutter 3.41.4, Dart 3.11, checked 2026-04-23 -->
+<!-- version-check: Flutter 3.41.5, Dart 3.11.1, checked 2026-05-15 -->
 
-> 🔄 更新于 2026-04-23
+> 🔄 更新于 2026-05-15
 
-Flutter 3.41.4 是当前稳定版（2026-03），搭配 Dart 3.11。从 Flutter 3.32（2025-05）到 3.41，经历了多次重大升级。来源：[Flutter 3.41 What Changed](https://alexanderobregon.substack.com/p/what-changed-in-flutter-341-and-why)
+<!-- 修复于 2026-05-15: 补丁版本更新到 3.41.5（2026-05-05 docs.flutter.dev 确认） -->
+
+Flutter 3.41.5 是当前稳定版（2026-05），搭配 Dart 3.11.1。从 Flutter 3.32（2025-05）到 3.41，经历了多次重大升级。来源：[Flutter 3.41 What Changed](https://alexanderobregon.substack.com/p/what-changed-in-flutter-341-and-why)
 
 ### 5.1 关键版本里程碑
 
@@ -132,8 +134,8 @@ Flutter 3.41.4 是当前稳定版（2026-03），搭配 Dart 3.11。从 Flutter 
 |------|------|---------|
 | 3.32 | 2025-05 | Web Hot Reload（实验性）、Cupertino squircle、Firebase AI 集成 |
 | 3.38+ | 2025 | iOS 26 SDK 支持 |
-| 3.41 | 2026-01 | Impeller 2.0、AI DevTools Profiler |
-| 3.41.4 | 2026-03 | 当前稳定版，Dart 3.11.1 |
+| 3.41 | 2026-02 | Impeller 2.0、AI DevTools Profiler |
+| 3.41.5 | 2026-05 | 当前稳定版，Dart 3.11.1 |
 
 ### 5.2 Impeller 2.0 渲染引擎
 
@@ -155,6 +157,6 @@ Dart 3.11（2026-03）聚焦开发体验改进，无新语言特性。来源：[
 
 | 场景 | 推荐版本 |
 |------|---------|
-| 新项目 | Flutter 3.41.x + Dart 3.11 |
+| 新项目 | Flutter 3.41.x + Dart 3.11.1 |
 | iOS 26 适配 | Flutter 3.38+ |
-| 稳定生产环境 | Flutter 3.41.4（最新 stable） |
+| 稳定生产环境 | Flutter 3.41.5（最新 stable） |
