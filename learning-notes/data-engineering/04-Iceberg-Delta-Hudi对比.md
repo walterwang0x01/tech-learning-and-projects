@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Iceberg 1.10.1, Delta Lake 4.0, Hudi 1.0, V4 spec in design, checked 2026-05-13 -->
+<!-- version-check: Iceberg 1.10.1 stable, 1.11.0 RC, V4 spec design progressing, Delta Lake 4.0, Hudi 1.0, Polaris 1.4.1, checked 2026-05-16 -->
 
 ## 1. 为什么需要表格式
 
@@ -286,15 +286,38 @@ Iceberg 1.10.0（2026-01）→ 1.10.1（当前最新稳定版），109 PRs / 28 
 
 来源：[Iceberg 1.10 Release](https://iceberg.apache.org/releases/)、[Google Cloud Blog](https://goo.gle/apache-iceberg-1-10)、[Snowflake Blog](https://www.snowflake.com/en/engineering-blog/apache-iceberg-1-10-new-features-fixes/)
 
-### 13.2 V4 Spec 设计中
+### 13.2 V4 Spec 设计中（2026 Q2 更新）
 
-Apache Data Lakehouse Weekly（2026-05）报道 Iceberg 社区正在讨论 V4 设计。V4 预计带来：
+> 🔄 更新于 2026-05-16
 
-- 更高效的 metadata 压缩
-- 原生 CDC 支持
-- 增强的并发写入语义
+Iceberg 社区在 2026 年 4-5 月的 Apache Data Lakehouse Weekly 中持续推进 V4 设计，**1.11.0 已经进入 release candidate**（基于多周的 V4 设计跟进工作）。来源：[Apache Data Lakehouse Weekly 2026-05](https://amdatalakehouse.substack.com/p/apache-data-lakehouse-weekly-may)
 
-来源：[Apache Data Lakehouse Weekly](https://amdatalakehouse.substack.com/p/apache-data-lakehouse-weekly-april-b6f)
+**V4 核心设计方向**：
+
+| 维度 | V3 现状 | V4 设计目标 |
+|------|---------|-------------|
+| metadata.json | 强制存在于根目录 | 可选——支持 catalog-managed metadata 模式 |
+| 静态表可移植性 | 隐式依赖根 JSON | 显式 opt-in 语义保留可移植性 |
+| 元数据压缩 | 单文件 | 更高效的层级压缩 |
+| CDC | 需外部工具 | 原生支持（讨论中） |
+
+**驱动 V4 的关键贡献者**：Anton Okolnychyi、Yufei Gu、Shawn Chang、Steven Wu。来源：[Apache Data Lakehouse Weekly 2026-04](https://amdatalakehouse.substack.com/p/apache-data-lakehouse-weekly-april-29b)
+
+**Polaris 1.4.1 + 1.5 路线图**：与 Iceberg V4 同步推进 catalog 端的能力，1.4.1 是 security-focused 补丁，4 个 CVE 协调披露。Polaris 已被多家 Lakehouse 厂商作为标准 Catalog。来源：[Apache Polaris Standard](https://www.dremio.com/blog/apache-polaris-the-catalog-standard-for-lakehouses-and-ai/)
+
+**对工程团队的影响**：
+
+```
+现在生产用 1.10.1：
+├─ 持续观察 V4 草案，但不要急于试用 1.11.0 RC
+├─ 把 catalog 升级到 Polaris 1.4.1（修复 CVE）
+└─ 评估 catalog-managed metadata 模式对运维的简化
+
+2026 H2 准备升级：
+├─ V4 spec 预计在 2026 下半年定稿
+├─ 主流引擎（Spark / Flink / Trino）会同步支持
+└─ 提前规划 metadata 压缩策略，迁移成本相对小
+```
 
 ### 13.3 版本选择建议
 

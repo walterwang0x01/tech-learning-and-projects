@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: OpenTelemetry 1.x stable, OTLP 1.10.0, Declarative Config 1.0 stable, GenAI semconv (development), checked 2026-05-13 -->
+<!-- version-check: OpenTelemetry 1.x stable, OTLP 1.10.0, Collector v0.150 (2026-04-13), Declarative Config 1.0 stable, GenAI semconv (development), Profiles signal alpha, checked 2026-05-16 -->
 
 ## 1. 核心架构
 
@@ -430,3 +430,48 @@ OTel 新增了 Generative AI 系统的语义约定，定义了 `gen_ai.*` 属性
 - **Ecosystem Explorer 项目**：帮助开发者在 240+ Java 自动 instrumentation 和数百个 Collector 组件中导航
 
 来源：[Datadog OTel News 2026-03](https://opensource.datadoghq.com/otel-news/2026/03/)、[Datadog OTel News 2026-04](https://opensource.datadoghq.com/otel-news/2026/04/)
+
+
+### 10.4 OpenTelemetry Collector v0.150（2026-04-13）
+
+> 🔄 更新于 2026-05-16
+
+Collector 在 4 月连续发布三个版本，节奏明显加快——v0.149 / v0.150 / v0.151 都在两周内完成。来源：[Datadog OTel News 2026-04](https://opensource.datadoghq.com/otel-news/2026/04/)、[OTel Collector v0.150](https://sourceforge.net/projects/opentelemetry-collector.mirror/files/v0.150.0/)
+
+**关键变化**：
+
+| 变化 | 影响 | 紧迫性 |
+|------|------|-------|
+| azure_auth 扩展安全修复 | CVSS 严重等级，必须升级 | 高 |
+| Profiles 信号升级到 Alpha | OTel 第四种核心信号正式可用 | 中 |
+| 组件类型 snake_case 重命名 | 配置文件需要适配新命名 | 中 |
+| 三个新组件：Log Clustering Processor 等 | 提供更强的边缘聚合能力 | 低 |
+| semconv 1.38.0 → 1.40.0 | 包含部分 GenAI 属性更新 | 低 |
+
+**Profiles 信号 Alpha**：OpenTelemetry 终于把"持续性能剖析"作为标准信号纳入——和 Traces、Metrics、Logs 同级。这意味着以后 Datadog Continuous Profiler、Pyroscope、Parca 等工具会逐步切换到 OTLP profiles 协议。
+
+**Log Clustering Processor**：在 Collector 边缘做日志去重和模式提取，传到后端的日志体积可减少 60-80%（重复模板日志合并）。对于日志量大的微服务这是显著的成本优化。
+
+**snake_case 重命名示例**：
+
+```yaml
+# 旧配置（仍兼容，但会有 deprecation 警告）
+processors:
+  batchProcessor:
+    timeout: 10s
+
+# 新配置（推荐）
+processors:
+  batch:
+    timeout: 10s
+```
+
+**升级路径**：
+
+```
+< v0.149：必须升级（azure_auth CVE）
+v0.149 → v0.150：profiles 信号 alpha 试用
+v0.150 → v0.151：包含 v0.150 所有改进 + 更多 bug 修复
+```
+
+来源：[OTel Collector CHANGELOG-API](https://github.com/open-telemetry/opentelemetry-collector/blob/main/CHANGELOG-API.md)

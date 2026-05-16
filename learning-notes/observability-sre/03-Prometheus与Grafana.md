@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Prometheus 3.9.x, Grafana 12.4/13.0, Alertmanager 0.28, checked 2026-05-13 -->
+<!-- version-check: Prometheus 3.10.0, Grafana 13.0 (GrafanaCON 2026), Alertmanager 0.28, checked 2026-05-16 -->
 
 ## 1. Prometheus 架构
 
@@ -310,3 +310,73 @@ Prometheus 3.x 在 2025 年底发布，核心新特性是 **Native Histograms**�
 - **Git Sync 预览**：Dashboard 直接同步到 GitHub 仓库
 - **新 Terraform Provider + CLI**：Dashboard as Code 完整工具链
 - **SQL Expressions**：在 Dashboard 中直接用 SQL 转换数据
+
+### 8.3 Prometheus 3.10 新特性
+
+> 🔄 更新于 2026-05-16
+
+Prometheus 3.10.0 于 2026-04 发布，**最受关注的功能是 PromQL fill() 系列函数**——长期被请求的"填充缺失序列默认值"能力终于落地。来源：[PromLabs Blog](https://promlabs.com/blog/)、[Prometheus 3.10 Announce](https://groups.google.com/g/prometheus-announce/c/oYiQWLMGICI)
+
+```promql
+# 旧问题：A and on(label) B 中如果某些标签组合在 B 里不存在，结果直接消失
+# 新方案：fill() 让缺失序列得到默认值
+
+# 例子：错误率（失败率） / 总请求率，希望没有错误的服务也能显示 0
+sum by (service) (rate(http_errors_total[5m]))
+  /
+sum by (service) (rate(http_requests_total[5m]))
+
+# 新版本可以这样保留所有 service：
+fill(
+  sum by (service) (rate(http_errors_total[5m])),
+  default=0
+)
+  /
+sum by (service) (rate(http_requests_total[5m]))
+```
+
+`fill_left()` / `fill_right()` 控制填充方向，对 `or` / `unless` / `and` 等二元运算特别有用。
+
+**其他改进**：
+- **Distroless Docker 镜像**：除默认 busybox 镜像外，新增 distroless 变体，攻击面更小、镜像更小
+- **OpenMetrics 2.0 进展**：原生直方图与 OpenMetrics 协议对齐
+- **Remote Write v2 持续完善**：减少远程写入开销
+
+### 8.4 Grafana 13 GrafanaCON 2026 重磅发布
+
+> 🔄 更新于 2026-05-16
+
+Grafana 13 于 2026-04-21 在 GrafanaCON 2026（巴塞罗那）正式发布，是社区"开源观测性"的下一代里程碑。来源：[Grafana 13 Blog](https://grafana.com/blog/grafana-13-release-all-the-latest-features/)、[GrafanaCON 2026 Announcements](https://grafana.com/blog/grafanacon-2026-announcements/)
+
+**核心改进**：
+
+| 维度 | 改进 | 数据 |
+|------|------|------|
+| Loki 架构 | Kafka 后端日志接入 | 数据扫描量减少最高 20x，查询提速最高 10x |
+| Grafana 体验 | 新版 Dashboard 编辑器、Explore Metrics 升级 | 解决"空白光标问题" |
+| OpenTelemetry 路径 | Linux/K8s 自动 OTel 采集 | 简化指标 + 日志 + 追踪上手 |
+| GCX CLI | 全新 Observability CLI | 把观测性嵌入 IDE / Coding Agent |
+
+**Kafka-backed Loki**：将日志写入路径前置到 Kafka，消除了之前 Ingester 的内存压力，对日志量大的场景（每秒 GB 级）是质变。来源：[TechMonk India](https://techmonk.economictimes.indiatimes.com/news/software-devops/grafana-13-introduces-kafka-backed-loki-and-new-observability-cli/130482002)
+
+**GCX CLI**：
+
+```bash
+# 在 IDE / Coding Agent 中查询观测性数据
+gcx query --from "now-1h" --query 'rate(http_errors_total[5m])'
+
+# 让 Claude Code / Cursor 直接读取 Grafana 数据
+gcx mcp serve  # 暴露 MCP Server
+```
+
+GCX 是 Grafana 拥抱 AI Agent 工作流的关键产品——观测性数据成为 Agent 的"长期记忆"。
+
+**升级建议**：
+
+```
+Grafana 12.x  →  Grafana 13.0
+├─ Loki 用户：评估 Kafka 后端（生产前先在 staging 验证）
+├─ K8s 用户：检查 OTel 自动采集是否覆盖现有 Prometheus 指标
+├─ AI 团队：试用 GCX CLI 把观测性接入 Coding Agent
+└─ 企业用户：等 13.x 第一个 LTS（预计 13.3）再大规模升级
+```

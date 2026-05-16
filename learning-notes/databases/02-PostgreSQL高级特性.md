@@ -2,9 +2,9 @@
 
 > Author: Walter Wang
 
-<!-- version-check: PostgreSQL 18.3 (2026-02), async I/O, UUIDv7, virtual generated columns, OAuth 2.0, checked 2026-05-10 -->
+<!-- version-check: PostgreSQL 18.4 (2026-05-14, 11 CVE security release), async I/O, UUIDv7, virtual generated columns, OAuth 2.0, checked 2026-05-16 -->
 
-## 1. PostgreSQL 18 亮点（2025-09 发布，2026-02 已到 18.3）
+## 1. PostgreSQL 18 亮点（2025-09 发布，2026-05 已到 18.4）
 
 Postgres 18 是近年最重要的版本之一，带来了一批开发者/DBA 长期呼吁的特性。
 
@@ -94,6 +94,51 @@ CREATE TABLE user_emails (
 - `ALTER TABLE ... ADD COLUMN NOT NULL` 无需全表扫描
 - `RETURNING` 支持 `OLD.` / `NEW.` 别名
 - `pg_upgrade` 升级速度大幅加快
+
+### 1.8 PostgreSQL 18.4 重大安全更新（2026-05-14）
+
+> 🔄 更新于 2026-05-16
+
+PostgreSQL 18.4、17.10、16.14、15.18、14.23 同步发布——**修复 11 个 CVE 和 60+ bug**，是近年来单次发布安全修复最多的版本。来源：[PostgreSQL News](https://www.postgresql.org/about/news/postgresql-184-1710-1614-1518-and-1423-released-3297/)、[The Build Blog](https://thebuild.com/blog/2026/05/14/eleven-cves-walk-into-a-release/)
+
+**关键漏洞类型**：
+
+| 类型 | 影响 | 严重程度 |
+|------|------|---------|
+| 内存损坏 | 远程攻击者可触发崩溃或潜在 RCE | 3 个 CVSS 8.8 |
+| SQL 注入（复制工具） | 通过 `pg_dump` / `pg_dumpall` 利用 | 高 |
+| MD5 密码时序泄漏 | 时序侧信道攻击恢复密码哈希 | 高 |
+| JSON 函数不变性回归 | 18.0-18.2 已建立的 JSON 索引可能损坏 | 中 |
+
+**18.0 → 18.2 用户必须执行的额外步骤**：
+
+```sql
+-- 18.4 升级后必须重建依赖 json_strip_nulls / jsonb_strip_nulls 的索引
+-- 因为之前版本错误地把这两个函数标为 STABLE 而非 IMMUTABLE
+REINDEX INDEX CONCURRENTLY idx_using_json_strip_nulls;
+```
+
+**升级紧迫性**：
+
+```
+生产环境运行 18.0-18.3：立即升级（11 CVE，3 个 CVSS 8.8）
+生产环境运行 17.x / 16.x / 15.x：按计划升级到对应安全版本
+开发环境：升级到最新 minor，验证 JSON 索引完整性
+```
+
+**如何验证依赖 json_strip_nulls 的索引**：
+
+```sql
+-- 找出所有使用了 json_strip_nulls / jsonb_strip_nulls 的索引
+SELECT
+    indexrelid::regclass AS index_name,
+    indrelid::regclass AS table_name
+FROM pg_index
+JOIN pg_class ON pg_class.oid = indexrelid
+WHERE pg_get_indexdef(indexrelid) ~ 'json_strip_nulls|jsonb_strip_nulls';
+```
+
+来源：[PostgreSQL Out-of-cycle Release Feb 2026](https://www.postgresql.org/about/news/out-of-cycle-release-scheduled-for-february-26-2026-3241/)、[Releasebot PostgreSQL May 2026](https://releasebot.io/updates/postgresql)
 
 ## 2. JSONB：文档+关系的最佳结合
 

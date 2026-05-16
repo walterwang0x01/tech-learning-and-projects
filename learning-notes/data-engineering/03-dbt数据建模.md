@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: dbt-core 1.10, dbt Fusion (Rust), SQLMesh 0.170, checked 2026-05-10 -->
+<!-- version-check: dbt-core 1.10, dbt Fusion 2.x GA on Snowflake, SQLMesh 0.170, checked 2026-05-16 -->
 
 ## 1. 为什么 dbt
 
@@ -378,6 +378,46 @@ dbt Labs 正在推出基于 Rust 的新引擎 **dbt Fusion**（前代号 dbt-clo
 - 兼容现有 dbt-core 项目
 
 **SQLMesh** 是强力的竞争者（同样 Rust 风格性能 + 更强的 incremental 语义）。2026 年两者并存。
+
+### 12.1 dbt Fusion GA（2026 Q2 更新）
+
+> 🔄 更新于 2026-05-16
+
+dbt Fusion 已经在 dbt platform 上对 **Snowflake 用户全面可用（GA）**，其他适配器仍处于 preview 状态。来源：[dbt Fusion Availability](https://docs.getdbt.com/docs/fusion/fusion-availability)、[Fusion Releases](https://docs.getdbt.com/docs/fusion/fusion-releases)
+
+**版本号变化**：dbt Fusion 引擎采用语义化版本，从 **2.0** 开始（区别于 dbt-core 1.x）。来源：[About dbt versions](https://docs.getdbt.com/docs/dbt-versions)
+
+**何处可用 Fusion**：
+
+| 场景 | 状态 |
+|------|------|
+| dbt Studio IDE（Snowflake） | GA |
+| VS Code / Cursor / Windsurf 扩展 | GA |
+| 本地 dbt 命令行（Snowflake） | GA |
+| 其他适配器（Postgres、BigQuery、Databricks 等） | Preview |
+| dbt Canvas 可视化建模 | GA |
+
+**Copilot 与 Developer Agent**：
+
+dbt Studio IDE 现在原生集成 Copilot 和 Developer Agent，AI 自动补全、模型生成、测试建议。Studio Commands 标签会用 🤖 图标区分 Agent 运行的命令和手动运行的命令。来源：[dbt Release Notes](https://docs.getdbt.com/docs/dbt-versions/release-notes/Jan-2024/partial-parsing)
+
+**升级路径（dbt-core 1.x → Fusion 2.x）**：
+
+```bash
+# 1. 检查项目兼容性
+dbt fusion validate
+
+# 2. 在 Studio IDE 启用 Fusion（新建项目默认启用）
+# Settings → Engine → dbt Fusion 2.x
+
+# 3. 本地切换 VS Code 扩展（推荐）
+# 安装 dbt VS Code Extension，自动使用 Fusion 引擎
+
+# 4. CI/CD 中切换
+# 从 `dbt-core` 改为 `dbt-fusion`，命令保持不变
+```
+
+非 Snowflake 用户当前仍应使用 dbt-core 1.10，等待 Fusion 在自己的适配器上 GA。Snowflake 用户可以放心切换。
 
 ## 13. 生产检查清单
 

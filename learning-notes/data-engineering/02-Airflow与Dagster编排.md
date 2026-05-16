@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Airflow 3.0, Dagster 1.10, Prefect 3.x, checked 2026-05-10 -->
+<!-- version-check: Airflow 3.2 (2026-Q2), Airflow 3.1 (HITL), Dagster 1.10, Prefect 3.x, checked 2026-05-16 -->
 
 ## 1. 为什么要编排
 
@@ -372,3 +372,86 @@ dbt_run = DbtCloudRunJobOperator(task_id="dbt_run", job_id=123)
 - [Prefect 官方](https://docs.prefect.io/)
 - [Temporal 官方](https://temporal.io/)
 - [Data Engineering Weekly](https://www.dataengineeringweekly.com/)
+
+## 11. 2026 年版本演进
+
+> 🔄 更新于 2026-05-16
+
+### 11.1 Airflow 3.1：Human-in-the-Loop（2025-09 发布）
+
+Airflow 3.1 把"人在回路（HITL）"做成内置一等公民——AI/ML 工作流不再需要拼凑 Slack/Email/外部审批工具。来源：[Astronomer Blog](https://www.astronomer.io/blog/introducing-apache-airflow-3-1/)、[Airflow Blog](https://airflow.apache.org/blog/)
+
+**核心新特性**：
+
+| 特性 | 说明 |
+|------|------|
+| HITL Tasks | DAG 里直接定义"等待人工批准"任务 |
+| 17 种语言国际化 | UI 默认支持中文、日文、韩文等 |
+| Deadline Alerts | DAG 错过 SLA 直接触发告警（不再依赖 timeout 黑魔法） |
+| React Plugin System | 插件用 React 编写，融入新 UI |
+
+**HITL 代码示例**：
+
+```python
+from airflow.decorators import dag, task
+from airflow.providers.human.operators import HumanInTheLoopOperator
+from datetime import datetime
+
+@dag(start_date=datetime(2026, 1, 1), schedule="@daily")
+def llm_data_pipeline():
+
+    @task
+    def generate_summary():
+        # LLM 生成内容
+        return {"summary": "...", "confidence": 0.65}
+
+    summary = generate_summary()
+
+    review = HumanInTheLoopOperator(
+        task_id="manual_review",
+        prompt="请审核 LLM 生成的摘要",
+        # 低置信度才进入人工审核
+        skip_if=lambda ctx: ctx["task_instance"].xcom_pull(
+            task_ids="generate_summary"
+        )["confidence"] > 0.9,
+        timeout_minutes=30,
+    )
+
+    @task
+    def publish(approved_summary):
+        # 发布到下游
+        pass
+
+    publish(review)
+
+llm_data_pipeline()
+```
+
+### 11.2 Airflow 3.2：Asset Partitioning + Multi-Team
+
+Airflow 3.2 在 3.1 之后聚焦"数据感知工作流"，将 Asset（资产）的精度提到分区级别。来源：[Airflow 3.2 Blog](https://airflow.apache.org/blog/airflow-3.2.0/)
+
+**关键能力**：
+
+- **Asset 分区编排**：DAG 可以只重跑某个分区的数据，而不是整个表
+- **Multi-team Deployment**：同一个 Airflow 集群隔离多个团队，各自的权限/资源/部署节奏
+- **同步 Deadline Alert 回调**：deadline 触发后立即调用回调，不再有延迟
+- **Task SDK 分离**：worker 不再需要完整的 Airflow 包，缩小镜像体积
+
+**版本时间线**：
+
+| 版本 | 发布 | 重点 |
+|------|------|------|
+| 3.0 | 2025-04 | DAG Versioning、Event-Driven Scheduling、Remote Execution |
+| 3.1 | 2025-09 | HITL、i18n、Deadline Alerts |
+| 3.2 | 2026 春季 | Asset Partitioning、Multi-team |
+
+**升级建议**：
+
+```
+2.x  →  必须升级！2.x EOL 于 2026 年内（详见 Apache Release Plan）
+3.0  →  3.1 / 3.2 都是平滑升级（API 兼容）
+3.1  →  3.2（已发布版本）
+```
+
+来源：[Apache Airflow Release Plan](https://cwiki.apache.org/confluence/display/AIRFLOW/Release+Plan)
