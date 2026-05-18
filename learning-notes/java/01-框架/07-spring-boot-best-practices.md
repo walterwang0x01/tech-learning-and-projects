@@ -389,9 +389,9 @@ Spring Boot 4.0.4 修复了两个 Actuator 相关的认证绕过漏洞：
 
 ## 9. Spring Boot 4.0.x 补丁版本（持续更新）
 
-> 🔄 更新于 2026-05-07
+> 🔄 更新于 2026-05-07（2026-05-18 增补 May Train 时间表调整）
 
-<!-- version-check: Spring Boot 4.0.6, 4.1.0-RC1, checked 2026-05-07 -->
+<!-- version-check: Spring Boot 4.0.6, 4.1.0-RC1, May Train shifted to June 1-5 2026, checked 2026-05-18 -->
 
 ### 9.1 最新版本时间线
 
@@ -401,8 +401,11 @@ Spring Boot 4.0.4 修复了两个 Actuator 相关的认证绕过漏洞：
 | 4.0.5 | 2026-03-26 | 17 个 Bug 修复和依赖升级 |
 | 4.0.6 | 2026-04-23 | 65 个 Bug 修复、文档改进、依赖升级 |
 | 4.1.0-RC1 | 2026-04-23 | 113 项增强、文档改进、依赖升级、Bug 修复 |
+| 4.0.7 / 4.1.0 GA（计划） | **2026-06-01 至 06-05** | May Release Train 推迟到 6 月初 |
 
-来源：[Spring Boot 4.0.5 发布](https://spring.io/blog/2026/03/26/spring-boot-4-0-5-available-now) | [Spring Boot 4.0.6 发布](https://spring.io/blog/2026/04/23/spring-boot-4-0-6-available-now) | [Spring Boot 4.1.0-RC1 发布](https://spring.io/blog/2026/04/23/spring-boot-4-1-0-RC1-available-now/)
+> 🔄 **2026-05-18 更新**：Spring 团队在 [May Release Train Date Changes](https://spring.io/blog/2026/05/11/may-train-shift) 中宣布，原计划 5 月 11-22 日的整个发布列车（含 **Spring Boot 4.1 GA**）整体推迟到 **6 月 1-5 日**，覆盖 Spring Framework / Boot / Cloud / Security / Data 全部子项目。生产排期预算需要相应顺延 2 周。
+
+来源：[Spring Boot 4.0.5 发布](https://spring.io/blog/2026/03/26/spring-boot-4-0-5-available-now) | [Spring Boot 4.0.6 发布](https://spring.io/blog/2026/04/23/spring-boot-4-0-6-available-now) | [Spring Boot 4.1.0-RC1 发布](https://spring.io/blog/2026/04/23/spring-boot-4-1-0-RC1-available-now/) | [May Train Shift](https://spring.io/blog/2026/05/11/may-train-shift)
 
 ### 9.2 Spring 4 月生态同步迭代
 
@@ -429,3 +432,88 @@ Spring 4 月 RC 浪潮（2026-04-20 当周）：
 - **推荐升级到 4.0.6**：合并了 65 个 Bug 修复，是 4.0.x 系列的稳定收敛版
 - **评估 4.1.0 RC**：新特性较多，生产环境建议等 GA
 - **Java 版本**：4.0.x 要求 Java 17+，4.1.x 可能进一步提升基线（建议 Java 21 或 25）
+
+### 9.4 Spring Boot 4.1 关键新特性预览
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: Spring Boot 4.1.0-M3 / 4.1.0-RC1, checked 2026-05-18 -->
+
+Spring Boot 4.1 在 RC1（2026-04-23）之前已经过 M1 / M2 / M3 三个里程碑迭代，核心方向是 **Spring gRPC 内置支持** 和 **可观测性 / 日志能力增强**。
+
+```yaml
+# application.yml — Spring Boot 4.1 内置 gRPC 支持
+# 不再需要第三方 grpc-spring-boot-starter
+spring:
+  grpc:
+    server:
+      port: 9090
+      reflection:
+        enabled: true   # 开发环境启用 grpcurl 反射调用
+    client:
+      channels:
+        order-service:
+          address: "static://localhost:9091"
+          negotiation-type: PLAINTEXT
+```
+
+**4.1 主要改进**：
+
+- **`spring-boot-starter-grpc`**：Spring gRPC 1.0.x 通过 starter 直接暴露，自动配置 server / client / health probe
+- **日志文件轮转**：`logging.file.name` 支持基于大小/时间的滚动配置，无需自带 `logback-spring.xml`
+- **HTTP Service Client AOT 友好化**：`@HttpExchange` 接口在原生镜像下的反射注册全部由 AOT 处理
+- **Micrometer Tracing 1.6**：默认集成 OTel 1.50+，与 Collector v0.150 的 snake_case 命名对齐
+
+来源：[Spring Boot 4.1.0-M3 Released — gRPC & 日志轮转](https://docs.bswen.com/blog/2026-03-25-spring-boot-4-1-grpc)、[Spring Boot 4.1 Release Notes Wiki](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.1-Release-Notes)
+
+### 9.5 Spring AI 2.0 GA（2026-05-28 计划）
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: Spring AI 1.0.6, 1.1.5, 2.0.0-M5 (2026-04-27), 2.0.0 GA scheduled 2026-05-28 -->
+
+Spring AI 团队已确认 **Spring AI 2.0.0 GA 计划于 2026-05-28 发布**，对齐 Spring Boot 4.0 / Spring Framework 7.0 / Jakarta EE 11 基线。来源：[HeroDevs: Spring AI 2.0 Is Coming May 28](https://www.herodevs.com/blog-posts/spring-ai-2-0-is-coming-may-28-here-is-why-that-makes-the-june-30-deadline-more-urgent-not-less)、[Spring AI 1.0.6 / 1.1.5 / 2.0.0-M5 发布说明](https://spring.io/blog/2026/04/27/spring-ai-1-0-6-1-1-5-2-0-0-M5-available-now)
+
+**2.0 重点能力**：
+
+- **JSpecify null-safety**：整个代码库迁移到 JSpecify 注解，与 Spring 6.2+ 一致
+- **MCP Boot Starters 一等公民**：`spring-ai-mcp-server-boot-starter` 与 `spring-ai-mcp-client-boot-starter` 直接配套 Spring AI 2.0
+- **A2A 协议集成**：基于 Spring AI 1.1.x 已实现的 Agent2Agent Protocol 模块，2.0 中作为标准依赖暴露
+- **自定义结构化输出 / 会话历史**：`StructuredOutputConverter` 升级，会话历史可作为 first-class bean 注入
+
+```java
+// Spring AI 2.0 风格：MCP + A2A 同时启用
+@SpringBootApplication
+public class AiApp {
+    public static void main(String[] args) {
+        SpringApplication.run(AiApp.class, args);
+    }
+}
+```
+
+```yaml
+# application.yml
+spring:
+  ai:
+    mcp:
+      client:
+        servers:
+          - id: filesystem
+            transport: stdio
+            command: "uvx mcp-server-filesystem"
+    a2a:
+      enabled: true
+      base-url: "https://my-agent.example.com"
+      capabilities:
+        - "research"
+        - "summarization"
+```
+
+**升级时机**：
+
+| 场景 | 建议 |
+|------|------|
+| 新项目（2026-Q3 上线） | 等 2.0 GA（5-28），与 Spring Boot 4.1 GA（6-1 至 6-5）配套 |
+| 已在 1.0.x | 先升级到 1.0.6（最新补丁），等 2.0 稳定 1-2 个月后再迁 |
+| 已在 1.1.x | 1.1.5 是当前推荐稳定线，可作为 2.0 之前的过渡版本 |
+| 重度依赖 MCP / A2A | 直接基于 2.0.0-M5 验证，GA 后无 Breaking 切换 |

@@ -121,9 +121,83 @@
 
 > 来源：[Spring Cloud 官方](https://spring.io/projects/spring-cloud/)
 
+## 2026 微服务架构新增维度：Agent 化能力
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: Spring AI 2.0.0 GA scheduled 2026-05-28, MCP Streamable HTTP, A2A v1.0, checked 2026-05-18 -->
+
+随着 **Spring AI 2.0 GA（2026-05-28 计划）** 和 **A2A v1.0 / MCP Streamable HTTP** 协议的成熟，微服务架构需要新增"Agent 化能力"这一层。Agent 服务不再是独立技术栈，而是和传统微服务并列的运行单元。来源：[HeroDevs: Spring AI 2.0 Coming May 28](https://www.herodevs.com/blog-posts/spring-ai-2-0-is-coming-may-28-here-is-why-that-makes-the-june-30-deadline-more-urgent-not-less)、[Spring AI A2A 集成](https://spring.io/blog/2026/01/29/spring-ai-agentic-patterns-a2a-integration)、[Spring AI MCP 总览](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-overview.html)
+
+### 增强后的架构分层
+
+```
+                    ┌────────────────────────┐
+                    │     User / Client      │
+                    └───────────┬────────────┘
+                                │
+                    ┌───────────▼────────────┐
+                    │  Spring Cloud Gateway  │  ← 同时处理 REST + A2A
+                    └───────────┬────────────┘
+                                │
+            ┌───────────────────┼───────────────────────┐
+            │                   │                       │
+   ┌────────▼────────┐  ┌──────▼─────────┐   ┌─────────▼─────────┐
+   │ 业务微服务       │  │ Agent 微服务    │   │ MCP Server 集群    │
+   │ (Spring Boot)   │  │ (Spring AI 2.0)│   │ (工具/数据源)      │
+   └────────┬────────┘  └──────┬─────────┘   └─────────┬─────────┘
+            │                   │                       │
+            └───── Nacos 服务注册 / Sentinel 治理 ────────┘
+```
+
+### 服务类型对照（2026）
+
+| 服务类型 | 协议 | 注册发现 | 容错 | 典型框架 |
+|---------|------|----------|------|----------|
+| 业务微服务 | REST / gRPC | Nacos | Sentinel | Spring Boot 4.0 + Spring Cloud 2025.1 |
+| **Agent 微服务** | **A2A v1.0** | Nacos + Agent Card | Sentinel + 工具审批 | **Spring AI 2.0** |
+| **MCP 工具服务** | **MCP Streamable HTTP** | 显式 manifest | OAuth 2.1 + Tool RBAC | **Spring AI MCP Server Boot Starter** |
+| 数据服务 | gRPC / SQL | Nacos | Resilience4j | Spring Data 2026.0 |
+
+### 引入 Agent 化能力的最小改动
+
+```yaml
+# 同一份 Spring Boot 4.1 应用同时提供 REST + MCP + A2A
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos.example.com:8848
+  ai:
+    mcp:
+      server:
+        enabled: true
+        transport: streamable-http   # 不再使用废弃的 SSE
+        port: 9000
+    a2a:
+      enabled: true
+      base-url: "https://orders-agent.example.com"
+      capabilities: ["order-query", "order-refund"]
+```
+
+### 与传统模式的关键差异
+
+1. **服务发现需要 Agent Card**：A2A v1.0 要求每个 Agent 暴露 `.well-known/agent.json`，Nacos 3.2+ 已支持把 Agent Card 作为元数据写入注册中心
+2. **熔断需要工具粒度**：MCP 工具调用的失败/超时要按工具维度统计，Sentinel 1.8.8 已经增加 `mcp.tool` 资源类型
+3. **认证需要 OAuth 2.1 + PKCE**：MCP Streamable HTTP 强制要求，传统的 API Key 仅用于内网
+4. **Agent 微服务对应 Spring AI 2.0**：5-28 GA 后，原来用 LangChain4j / langchain-java 的项目可以平滑迁移到 Spring 原生方案
+
+### 选型建议
+
+- **传统业务系统**：保持 Spring Boot 4.0 + Spring Cloud 2025.1，**不必为引入 AI 而推翻架构**
+- **新建 Agent 服务**：直接用 Spring Boot 4.1 + Spring AI 2.0，避免 1.x 的 API 摇摆
+- **遗留 RestTemplate / Feign 项目**：先迁到 RestClient + HTTP Interface Client，再考虑 Agent 化
+
 ## 参考资料
 
 - [微服务架构模式](https://microservices.io/patterns/)
 - [Spring Cloud 官方文档](https://spring.io/projects/spring-cloud)
 - [Spring Boot 4.0 Release Highlights](https://spring.io/projects/release-highlights)
+- [Spring AI MCP Overview](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-overview.html)
+- [Building Interoperable Agents with A2A — Spring Blog](https://spring.io/blog/2026/01/29/spring-ai-agentic-patterns-a2a-integration)
 

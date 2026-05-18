@@ -214,3 +214,90 @@ Android 16 大屏幕变化：
 ├─ 多窗口模式成为标准行为
 └─ 建议使用 WindowSizeClass 适配不同屏幕
 ```
+
+## 7. Android 17 (API 37) 行为变化
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: Android 17 API 37 "Cinnamon Bun", Beta 4, stable June 2026 expected, checked 2026-05-18 -->
+
+Android 17（内部代号 **Cinnamon Bun**，API 37）已于 2026-03 进入 Beta 3 平台稳定阶段，API 表面冻结；Beta 4（2026-04）增加了 app 内存限制等运行时变化，**正式稳定版预计 2026-06 发布**。来源：[The Third Beta of Android 17](https://android-developers.googleblog.com/2026/03/the-third-beta-of-android-17.html)、[Android 17 Behavior Changes](https://developer.android.com/about/versions/17/behavior-changes-17)
+
+### 7.1 lock-free MessageQueue 与 main looper 行为
+
+```kotlin
+// Android 17 中 android.os.MessageQueue 改为 lock-free 实现
+// 性能提升 + 减少丢帧，但反射访问私有字段/方法的代码会失效
+
+// ⚠️ 反模式：用反射读取 MessageQueue 私有字段
+val mq = Looper.getMainLooper().queue
+val field = MessageQueue::class.java.getDeclaredField("mMessages")  // API 37 上可能为 null 或不存在
+
+// ✅ 正确做法：使用公开 API
+Looper.getMainLooper().queue.addIdleHandler {
+    // 处理空闲队列
+    false
+}
+```
+
+> 老旧的卡顿监测库（早期 BlockCanary）依赖反射访问 `mMessages` 链表，**面向 targetSdk 37 的应用必须升级到使用公开 API 的版本**，否则在 Android 17 设备上无法启动卡顿监测。
+
+### 7.2 隐私优先的 Contact Picker
+
+```kotlin
+// Android 17 引入系统级 Contact Picker，不再需要 READ_CONTACTS 权限
+// Google Play 政策（2026-04-15 生效）要求：仅在确实需要全量通讯录时声明 READ_CONTACTS
+
+// ✅ 推荐：用 Contact Picker 让用户主动选择联系人
+val pickContact = registerForActivityResult(
+    ActivityResultContracts.PickContact()
+) { contactUri ->
+    // 用户主动选择的联系人 URI
+    contactUri ?: return@registerForActivityResult
+    // 读取选中联系人的字段
+}
+
+// 触发选择
+pickContact.launch(null)
+```
+
+来源：[Privacy-First Contact Sharing](https://android-developers.googleblog.com/2026/03/contact-picker-privacy-first-contact.html)、[Boosting User Privacy with Updated Play Policies](https://android-developers.googleblog.com/2026/04/giving-users-clearer-choice-and-everyone-a-safer-more-trusted-app-ecosystem.html)
+
+### 7.3 应用内存限制（Beta 4 引入）
+
+```kotlin
+// Android 17 Beta 4 引入运行时内存限制，超限的应用会被系统终止
+// 终止描述会写入 ApplicationExitInfo
+
+class MyApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        val activityManager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        val exitReasons = activityManager.getHistoricalProcessExitReasons(packageName, 0, 5)
+
+        for (info in exitReasons) {
+            // 检查是否被新内存限制器杀死
+            if (info.description?.contains("MemoryLimiter") == true) {
+                // 上报异常，触发降级（停止预加载、清理缓存等）
+                reportMemoryKill(info)
+            }
+        }
+    }
+}
+```
+
+来源：[Android 17 Release Notes — Beta 4](https://developer.android.com/about/versions/17/release-notes)
+
+### 7.4 加速发布周期
+
+Google 官宣 Android 17 缩短开发周期：跳过传统 "Developer Preview" 阶段，直接以公开 Beta 起步，**目标是与 H1 硬件发布对齐**。这意味着应用团队的合规节奏从过去的"Q4 适配"变成"Q2 适配"。来源：[Wikipedia: Android 17](https://en.wikipedia.org/wiki/Android_17)
+
+### 7.5 适配优先级建议（2026 H2）
+
+| 优先级 | 项目 | 风险 |
+|--------|------|------|
+| ⭐️⭐️⭐️ | targetSdk = 37 + Contact Picker 适配 | Play 政策硬要求 |
+| ⭐️⭐️⭐️ | 移除 MessageQueue 反射 / 升级卡顿监测库 | Crash 风险 |
+| ⭐️⭐️ | 内存敏感场景增加 ApplicationExitInfo 监控 | 用户感知 ANR/Kill |
+| ⭐️⭐️ | OTP 延迟保护（前台敏感字段读取行为） | UX 差异 |
+| ⭐️ | 系统级 Bubbles + Cross-device task handoff | 平板/折叠屏体验 |

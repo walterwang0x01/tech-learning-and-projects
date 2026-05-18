@@ -180,9 +180,9 @@ fun MainScreen(navController: NavController) {
 
 ## 7. Compose 2026 版本演进
 
-<!-- version-check: Compose BOM 2026.04.01, Compose 1.11.0, checked 2026-05-04 -->
+<!-- version-check: Compose BOM 2026.04.01, Compose 1.11.0, Navigation 3 1.1.1, checked 2026-05-18 -->
 
-> 🔄 更新于 2026-05-04
+> 🔄 更新于 2026-05-04（2026-05-18 增补与 CMP 1.11 对齐说明）
 
 ### 当前版本
 
@@ -193,6 +193,7 @@ fun MainScreen(navController: NavController) {
 | Material3 | **1.4.x** | Material Design 3 组件 |
 | Compose Compiler | 与 Kotlin 对齐 | Kotlin 2.0+ 内置，无需单独指定版本 |
 | Navigation3 | **1.1.1** | Compose-first 导航库（稳定） |
+| Compose Multiplatform | **1.11.0** | 与 Jetpack Compose 1.11 对齐（2026-05-15）|
 
 ### Compose 1.11 新特性（2026-04）
 
@@ -200,9 +201,25 @@ fun MainScreen(navController: NavController) {
 
 **共享元素调试工具**：`LookaheadAnimationVisualDebugging` 可视化共享元素过渡的目标边界、动画轨迹和匹配状态。
 
-**触控板事件改进**：触控板事件现在被识别为 `PointerType.Mouse`（之前是 `PointerType.Touch`），支持双指滑动和捏合手势。
+```kotlin
+// 在 Compose 1.11 中调试共享元素过渡
+SharedTransitionLayout(
+    modifier = Modifier.lookaheadAnimationVisualDebugging(
+        enabled = BuildConfig.DEBUG  // 仅 debug 包启用
+    )
+) {
+    AnimatedContent(targetState = state) { targetState ->
+        when (targetState) {
+            is State.List -> ListScreen(...)
+            is State.Detail -> DetailScreen(...)
+        }
+    }
+}
+```
 
-来源：[Jetpack Compose April '26 Release](https://android-developers.googleblog.com/2026/04/jetpack-compose-april-2026-updates.html)
+**触控板事件改进**：触控板事件现在被识别为 `PointerType.Mouse`（之前是 `PointerType.Touch`），支持双指滑动和捏合手势。这条变更同步出现在 Compose Multiplatform 1.11 中，桌面与折叠屏的多指手势行为不再依赖额外适配。
+
+来源：[Jetpack Compose April '26 Release](https://android-developers.googleblog.com/2026/04/jetpack-compose-april-2026-updates.html)、[Compose Multiplatform 1.11.0](https://blog.jetbrains.com/kotlin/2026/05/compose-multiplatform-1-11-0/)
 
 ### Compose Compiler 变化（Kotlin 2.0+）
 

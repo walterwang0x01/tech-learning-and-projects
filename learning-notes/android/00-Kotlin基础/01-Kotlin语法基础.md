@@ -231,11 +231,11 @@ val user = createUser().also {
 
 ## 8. Kotlin 2.x 新特性
 
-<!-- version-check: Kotlin 2.3.20, checked 2026-04-21 -->
+<!-- version-check: Kotlin 2.3.21 stable, 2.4.0-Beta2 EAP, checked 2026-05-18 -->
 
-> 🔄 更新于 2026-04-21
+> 🔄 更新于 2026-04-21（2026-05-18 增补 2.3.21 + 2.4 EAP）
 
-Kotlin 2.0 于 2024 年发布，引入了全新的 **K2 编译器**，当前最新稳定版为 **Kotlin 2.3.20**（2026-03-16）。
+Kotlin 2.0 于 2024 年发布，引入了全新的 **K2 编译器**，当前最新稳定版为 **Kotlin 2.3.21**（2026-04-23），下一代 **2.4.0-Beta2** 已进入 EAP 阶段。
 
 ### K2 编译器
 
@@ -290,8 +290,39 @@ val (y, x) = point  // 按名称匹配，而非位置
 
 | 场景 | 推荐版本 | 说明 |
 |------|----------|------|
-| 新项目 | Kotlin 2.3.20 | 最新稳定版，K2 编译器默认启用 |
+| 新项目 | Kotlin 2.3.21 | 最新稳定版，K2 编译器默认启用 |
 | 现有项目升级 | Kotlin 2.1.x+ | 先迁移到 2.1，再逐步升级 |
-| KMP 跨平台 | Kotlin 2.3.20 | KMP 在 2.x 中显著改进 |
+| KMP 跨平台 | Kotlin 2.3.21 | KMP 在 2.x 中显著改进 |
+| 尝鲜 / 提前适配 | Kotlin 2.4.0-Beta2 | 仅用于实验项目，正式版预计随 KotlinConf 2026 发布 |
 
 > 来源：[Kotlin 2.3.0 Released](https://blog.jetbrains.com/kotlin/2025/12/kotlin-2-3-0-released/)、[What's new in Kotlin 2.3.20](https://kotlinlang.org/docs/whatsnew2320.html)
+
+### Kotlin 2.3.21（2026-04-23 当前稳定版）
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: Kotlin 2.3.21 stable, 2.4.0-Beta2 EAP, KotlinConf 2026 May 20-22 Munich, checked 2026-05-18 -->
+
+Kotlin 2.3.21 是 2.3.x 分支的补丁版本（2026-04-23 发布），主要内容是工具链 / IDE 支持的稳定性修复，不引入语法变化。Android 项目可直接从 2.3.20 升级，无 Breaking Change。来源：[Kotlin Documentation FAQ](https://kotlinlang.org/docs/faq.html)
+
+### Kotlin 2.4.0-Beta2（2026-04 EAP）
+
+Kotlin 2.4 进入 Beta2 阶段，预计在 KotlinConf 2026（2026-05-20 至 22，慕尼黑）期间释出更多发布信号。来源：[Kodee's Kotlin Roundup — May 2026](https://blog.jetbrains.com/kotlin/2026/05/kodees-kotlin-roundup-golden-kodee-finalists-kotlin-2-4-0-beta2-and-new-learning-resources/)、[What's new in Kotlin 2.4.0-Beta2](https://kotlinlang.org/docs/whatsnew-eap.html)
+
+```kotlin
+// 2.4 EAP：上下文参数（context parameters）实验性增强
+// 用于替代 receiver lambda 中冗长的 this 链
+context(_: Logger)
+fun process(value: String) {
+    log("处理 $value")  // 自动从 context 中解析 Logger
+}
+
+// 2.4 EAP：Kotlin/Wasm GC 体积进一步减小
+// Kotlin/Native 在 iOS arm64 上的二进制体积也有持续优化
+```
+
+**升级建议**：
+
+- 生产项目：**继续使用 2.3.21**，等 2.4 GA 稳定一段时间后再上
+- 库作者：可以用 2.4.0-Beta2 提前测试 binary compatibility，但发布版仍以 2.3.x 编译
+- KMP 项目：升级 2.4 前先确认 Compose Multiplatform 的兼容版本（CMP 1.11.0 当前对齐 Kotlin 2.3.x）

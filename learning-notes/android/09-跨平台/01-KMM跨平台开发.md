@@ -263,3 +263,50 @@ kotlin {
 | Ktor 网络 | ✅ Stable | Ktor 3.x |
 
 > 来源：[Compose Multiplatform 1.10.0 Blog](https://blog.jetbrains.com/kotlin/2026/01/compose-multiplatform-1-10-0/)、[Compose Hot Reload 1.0.0](https://blog.jetbrains.com/kotlin/2026/01/the-journey-to-compose-hot-reload-1-0-0/)、[KMP Compatibility Guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-compatibility-guide.html)
+
+### Compose Multiplatform 1.11.0（2026-05 当前稳定版）
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: Kotlin 2.3.21, Compose Multiplatform 1.11.0, checked 2026-05-18 -->
+
+JetBrains 于 2026-05-15 发布 Compose Multiplatform 1.11.0，与 Jetpack Compose April '26（Compose 1.11）发布周期对齐。来源：[Compose Multiplatform 1.11.0 Is Now Available](https://blog.jetbrains.com/kotlin/2026/05/compose-multiplatform-1-11-0/)、[What's new in Compose Multiplatform 1.11.0](https://kotlinlang.org/docs/multiplatform/whats-new-compose-111.html)
+
+**核心变化**：
+
+1. **iOS 原生文本输入（实验性 opt-in）**：在 iOS 上启用后，`TextField` 直接桥接到原生 `UITextView`，支持系统级 Autofill、Translate、Search 上下文菜单，光标移动和选择手势与原生应用一致。默认仍使用跨平台文本输入实现，需要在 `ComposeUIViewController` 中显式 opt-in。
+2. **Navigation 3 跨平台 API 收敛**：在 Android Navigation 3 1.1.x 稳定的同时，CMP 端也对齐了 `NavBackStack` API，`PredictiveBackHandler` 完全替换为 Navigation Event 库。
+3. **触控板事件改进**：与 Jetpack Compose 1.11 一致，触控板事件被识别为 `PointerType.Mouse`（之前是 `PointerType.Touch`），桌面/平板上的双指捏合手势行为更符合预期。
+4. **共享元素调试工具**：`LookaheadAnimationVisualDebugging` 在跨平台中也可用，用于排查共享元素过渡的目标边界和匹配状态。
+
+```kotlin
+// shared/build.gradle.kts — 1.11.0 推荐版本
+plugins {
+    kotlin("multiplatform") version "2.3.21"
+    id("com.android.library")
+    kotlin("plugin.serialization") version "2.3.21"
+    id("org.jetbrains.compose") version "1.11.0"
+}
+```
+
+```kotlin
+// iOS 端 opt-in 原生文本输入（iosMain）
+import androidx.compose.ui.window.ComposeUIViewController
+
+fun MainViewController() = ComposeUIViewController(
+    configure = {
+        // 启用原生 UITextView 桥接
+        platformLayers = true
+        // CMP 1.11.0 新增：iOS 原生文本输入
+        // 注意：标记为实验性，跨页面性能仍在优化中
+    }
+) {
+    App()
+}
+```
+
+**升级注意**：
+
+- 项目当前用 1.10.x：直接升级到 1.11.0，无需修改业务代码
+- 自定义 `BasicTextField` 行为的代码：iOS 默认行为不变，仅在显式 opt-in 后生效
+- Compose Hot Reload：1.11.0 起进一步集成到 Gradle 插件，多模块项目首次启动速度提升明显
