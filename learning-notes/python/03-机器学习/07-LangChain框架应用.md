@@ -532,3 +532,97 @@ LangSmith 从可观测性平台升级为 **Agent 管理平台**（2026-03 更名
 - **自托管 v0.13**：企业级部署支持
 
 来源：[LangChain 1.0 发布公告](https://blog.langchain.com/langchain-langgraph-1dot0/) | [LangChain Changelog](https://changelog.langchain.com/)
+
+## 14. Interrupt 2026 与 LangChain 1.2.18
+
+> 🔄 更新于 2026-05-19
+
+<!-- version-check: LangChain 1.2.18 (2026-05-13), LangSmith Engine, LangChain Labs, Interrupt 2026 (May 13-14), checked 2026-05-19 -->
+
+LangChain 在 **Interrupt 2026 大会**（2026-05-13/14 旧金山，1000+ 开发者参加）期间发布了一系列重要更新，标志着 LangChain 从"框架"全面转向"Agent 平台"。来源：[Everything we shipped at Interrupt](https://www.langchain.com/blog/interrupt-2026-overview)
+
+### 14.1 LangChain 1.2.18（2026-05-13）
+
+```bash
+# Interrupt 2026 同步发布的版本
+uv add langchain==1.2.18
+uv add langchain-core==1.2.18
+uv add langgraph==1.1.9
+```
+
+主要内容：
+
+- **agent tag 回滚机制**：支持回滚 agent tag，方便灰度回退
+- **classic 模块废弃清理**：旧的 `langchain.chains` / `langchain.agents` 兼容层进一步收敛
+- **依赖项瘦身**：减少传递依赖，加快 `pip install` / `uv add`
+
+来源：[Releasebot — May 2026](https://releasebot.io/updates/langchain-ai)
+
+### 14.2 LangSmith Engine — 自治诊断 Agent
+
+`LangSmith Engine` 把"读 trace → 找 pattern → 写修复"的人工循环自动化：
+
+```python
+import os
+from langsmith import Client
+
+# Engine 启用后，所有 trace 自动进入诊断队列
+os.environ["LANGSMITH_ENGINE_ENABLED"] = "true"
+os.environ["LANGSMITH_PROJECT"] = "my-prod-agent"
+
+client = Client()
+
+# 工程师只需要在 PR 评审中确认 Engine 草拟的修复 / evaluator
+# 每解决一个 issue，eval 套件就被自动扩充
+```
+
+工作流变化：
+
+| 环节 | 之前 | LangSmith Engine 之后 |
+|------|------|--------------------- |
+| 故障发现 | 用户反馈 / 手动看 trace | Engine 实时聚类成命名 issue |
+| 根因定位 | 工程师比对代码 | Engine 对照 repo 自动定位 |
+| 修复 | 写代码 + 加 eval | Engine 草拟 PR + evaluator |
+| 回归保护 | 手动维护 eval 套件 | Engine 自动扩充 |
+
+来源：[Introducing LangSmith Engine](https://www.langchain.com/blog/introducing-langsmith-engine)
+
+### 14.3 LangChain Labs
+
+新成立的研究实验室，聚焦让 Agent **更好、更便宜、更易评估**：
+
+- 早期方向：cost/latency 折中、模拟与评估环境、跨模型族 prompt 优化
+- 与 LangChain 主仓维持开源协同，研究成果会回流到 LangChain / LangGraph 主线
+
+来源：[Introducing LangChain Labs](https://www.langchain.com/blog/introducing-langchain-labs)
+
+### 14.4 LangSmith 控制面收敛（Engine + Fleet + Insights）
+
+Day 2 的核心叙事是 "observability and governance ship together now"：
+
+```
+┌────────────────── LangSmith 统一控制面 ──────────────────┐
+│                                                          │
+│  ┌────────────┐   ┌────────────┐   ┌────────────┐      │
+│  │   Engine   │   │   Fleet    │   │  Insights  │      │
+│  │ (诊断/PR)  │   │ (治理/RBAC)│   │ (成本/质量)│      │
+│  └─────┬──────┘   └─────┬──────┘   └─────┬──────┘      │
+│        │                 │                 │            │
+│        └─────────────────┴─────────────────┘            │
+│                          │                              │
+│            ┌─────────────▼──────────────┐               │
+│            │  Production Trace Storage  │               │
+│            │  + 30+ Evaluator Templates │               │
+│            └────────────────────────────┘               │
+└──────────────────────────────────────────────────────────┘
+```
+
+### 14.5 选型与升级建议
+
+| 当前状态 | 建议 |
+|----------|------|
+| 还在 langchain 0.x | 直接升级到 1.2.18，参考 [migration guide](https://docs.langchain.com/oss/python/versioning) |
+| 已在 1.0 / 1.1 | `uv lock --upgrade-package langchain` 升级到 1.2.18，无 Breaking |
+| 仅用 LangSmith 做可观测性 | 启用 Engine 试跑（先在 staging 项目，避免误改生产代码） |
+| 多 Agent 治理 | 升级到 LangSmith Fleet，启用 Agent Card + Approval 工作流 |
+| 想跟踪研究方向 | 关注 [LangChain Labs](https://www.langchain.com/blog/introducing-langchain-labs) 公开仓库 |

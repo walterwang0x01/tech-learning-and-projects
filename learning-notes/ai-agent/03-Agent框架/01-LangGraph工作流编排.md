@@ -47,6 +47,41 @@ agent = create_deep_agent(
 
 **Interrupt 2026 大会**（2026-05-13/14，旧金山）：LangChain 年度 Agent 大会，超过 1000 名开发者参加。演讲嘉宾包括 Andrew Ng、Harrison Chase、Coinbase、Apple 等企业。主题聚焦"Agents at Enterprise Scale"——企业级 Agent 部署的实战经验。来源：[LangChain Blog](https://www.langchain.com/blog/previewing-interrupt-2026-agents-at-enterprise-scale)
 
+> 🔄 更新于 2026-05-19
+
+<!-- version-check: LangChain 1.2.18 (2026-05-13), LangSmith Engine, LangChain Labs, Interrupt 2026 Day 2, checked 2026-05-19 -->
+
+**Interrupt 2026 Day 2 发布（2026-05-14）— LangSmith Engine + LangChain Labs**：
+
+1. **LangSmith Engine — 自治诊断 Agent**：替代"读 trace → 找 pattern → 写修复"的手动循环。Engine 持续监控生产 trace，把失败聚类成命名 issue，对照代码定位根因，并草拟 PR 和 evaluator 等待开发者评审。每解决一个 issue 都会增强 eval 套件，形成"诊断 → 修复 → 评估 → 防回归"的自我强化闭环。来源：[Introducing LangSmith Engine](https://www.langchain.com/blog/introducing-langsmith-engine)、[Everything we shipped at Interrupt](https://www.langchain.com/blog/interrupt-2026-overview)
+2. **LangChain Labs**：新成立的研究实验室，聚焦"让 Agent 更好、更便宜、更易评估"。早期方向：cost/latency 折中、模拟与评估环境、跨模型族 prompt 优化。来源：[Introducing LangChain Labs](https://www.langchain.com/blog/introducing-langchain-labs)
+3. **LangChain 1.2.18 同步发布**（2026-05-13）：agent tag 回滚、classic 模块废弃清理、依赖项瘦身。配合 LangGraph 1.1.x 持续迭代。来源：[Releasebot — May 2026](https://releasebot.io/updates/langchain-ai)
+4. **生态协同**：Day 2 强调 "observability and governance ship together now" —— LangSmith Engine（诊断）、LangSmith Fleet（治理 + Agent Card 管理）、LangSmith Insights（成本/质量分析）三者形成统一控制面。
+
+```python
+# LangSmith Engine 接入示例（最小化 — 实际配置以官方文档为准）
+import os
+from langsmith import Client
+
+# 启用 Engine 后，trace 自动进入诊断队列
+os.environ["LANGSMITH_ENGINE_ENABLED"] = "true"
+os.environ["LANGSMITH_PROJECT"] = "production-agent"
+
+client = Client()
+
+# Engine 后台运行：聚类 issue、生成 PR / evaluator
+# 开发者只需要在 Pull Request 评审中确认是否合并 Engine 草拟的修复
+```
+
+**对工程团队的影响**：
+
+| 工作流环节 | 之前 | LangSmith Engine 之后 |
+|------------|------|--------------------- |
+| 故障发现 | 手动看 trace / 用户反馈 | Engine 实时聚类成 issue |
+| 根因定位 | 工程师手动比对代码 | Engine 自动定位代码段 |
+| 修复 | 工程师写代码 + 评估 | Engine 草拟 PR + eval，工程师评审 |
+| 回归保护 | 手动写 evaluator | Engine 自动扩 eval 套件 |
+
 **LangGraph v1 稳定性承诺**：v1 是稳定性聚焦的版本，核心图 API 和执行模型保持不变，重点改进类型安全、文档和开发者体验。langgraph-prebuilt 1.0.11 的 ToolNode 增强让工具可以返回 `list[Command | ToolMessage]`，直接控制图的执行流程。来源：[LangGraph v1 Docs](https://docs.langchain.com/oss/python/releases/langgraph-v1)
 
 核心优势：图结构控制流、模型无关、内置检查点、人机交互支持。
