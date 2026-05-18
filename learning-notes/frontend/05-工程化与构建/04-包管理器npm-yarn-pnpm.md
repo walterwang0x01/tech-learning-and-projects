@@ -112,10 +112,100 @@ yarn dlx create-react-app my-app
 
 ## 4. 对比
 
-| 特性 | npm | yarn | pnpm |
-|------|-----|------|------|
-| 磁盘空间 | 大 | 大 | 小（硬链接） |
-| 安装速度 | 中 | 快 | 最快 |
-| 幽灵依赖 | 有 | 有 | 无 |
-| Monorepo | workspaces | workspaces | workspace |
-| Lock 文件 | package-lock.json | yarn.lock | pnpm-lock.yaml |
+| 特性 | npm | yarn | pnpm | Bun（1.3+） |
+|------|-----|------|------|-------------|
+| 磁盘空间 | 大 | 大 | 小（硬链接） | 中（内容寻址） |
+| 安装速度 | 中 | 快 | 最快 | 最快级（与 pnpm 接近或更快） |
+| 幽灵依赖 | 有 | 有 | 无 | 无（isolated installs） |
+| Monorepo | workspaces | workspaces | workspace | workspace + catalogs |
+| Lock 文件 | package-lock.json | yarn.lock | pnpm-lock.yaml | bun.lock |
+| 角色范围 | 仅包管理 | 仅包管理 | 仅包管理 | 包管理 + Runtime + bundler + test |
+
+## 5. Bun 1.3：Runtime + 包管理 + 全栈工具链
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: Bun 1.3.13, built-in MySQL/Postgres/SQLite/Redis clients, Anthropic Rust rewrite ongoing, checked 2026-05-18 -->
+
+[Bun](https://bun.com/) 自 1.0（2025-09）起进入主流视野，2025-10 发布的 1.3 是把它从"快的 Node 替代"推到"全栈一体化运行时"的关键版本。**Bun 同时是 Runtime、包管理器、bundler、test runner、TypeScript 编译器和 SQL/Redis 客户端**。
+
+### 5.1 1.3 关键能力
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 内置 SQL 客户端 | `Bun.SQL` 统一 API，支持 MySQL / PostgreSQL / SQLite，无需第三方驱动 |
+| 内置 Redis 客户端 | 据 Bun 团队基准比 ioredis 快约 7.9x |
+| 零配置全栈 dev | `bun dev` 直接跑 HTML 入口，自动转译 JS / TS / CSS / React，HMR 内置 |
+| Workspace 增强 | Isolated installs、catalogs、minimumRelease，向 pnpm 看齐 |
+| `bun install` | 流式写入 tarball（17x 更省内存），5.5x 更快 gzip（zlib-ng） |
+| `bun test` | `--parallel` / `--isolate` / `--shard` / `--changed`，在文件间清理 microtask、socket、timer，干净 VM 全局对象 |
+
+来源：[Bun 1.3 Blog](https://bun.com/1.3)、[Bun 1.3.13 Release Notes](https://bun.com/blog/bun-v1.3.13)、[InfoQ: Bun 1.3 Database Clients](https://www.infoq.com/news/2026/01/bun-v3-1-release/)
+
+### 5.2 包管理常用命令
+
+```bash
+# 安装 Bun
+curl -fsSL https://bun.com/install | bash
+
+# 项目初始化
+bun init
+
+# 依赖管理（API 与 npm/pnpm 接近）
+bun install                  # 等价于 npm install
+bun add lodash               # 添加依赖
+bun add -d typescript        # devDependency
+bun add -g create-react-app  # 全局
+bun remove lodash
+
+# 运行脚本与可执行文件
+bun run dev                  # 跑 package.json scripts
+bun x create-react-app my-app  # 等价于 npx
+bun --filter @my/web run build  # 类似 pnpm --filter
+```
+
+### 5.3 内置 SQL / Redis 客户端示例
+
+```ts
+// PostgreSQL（不需要 pg 驱动）
+import { SQL } from "bun";
+
+const sql = new SQL("postgres://user:pass@localhost/app");
+const users = await sql`select * from users where id = ${userId}`;
+
+// MySQL（同一 API，只换连接串）
+const mysql = new SQL("mysql://user:pass@localhost/app");
+
+// 内置 Redis
+import { redis } from "bun";
+
+await redis.set("session:42", JSON.stringify({ uid: 42 }));
+const s = await redis.get("session:42");
+```
+
+### 5.4 与 Node.js + pnpm 的取舍
+
+| 场景 | 推荐 |
+| ---- | ---- |
+| 生产长期运行的企业应用 | Node.js 24 LTS + pnpm 11（生态最稳） |
+| 个人项目 / Side project / Edge 部署 | Bun 1.3 单工具搞定全栈 |
+| 极端 IO 密集型脚本（流式 tar、爬虫） | Bun（内存与 IO 优势明显） |
+| 严格依赖 Node 原生 API 兼容性 | Node.js（Bun 仍在补齐 Node 兼容层） |
+| Monorepo 多包工作流 | pnpm 11（catalogs 体验更成熟） |
+
+> 2026-05 The Register 报道 Anthropic 正在将 Bun 的部分 Zig 代码用 Rust 重写以提升内存安全，这是 Bun 工程化进入下一个阶段的信号。来源：[The Register, 2026-05-14](https://www.theregister.com/devops/2026/05/14/anthropics-bun-rust-rewrite-merged-at-speed-of-ai/5240381)
+
+### 5.5 在已有项目里只把 Bun 当包管理器
+
+如果暂时不想替换 Runtime，可以仅用 Bun 做安装加速：
+
+```bash
+# 在 Node 项目里仅用 Bun 安装依赖（生成 bun.lock）
+bun install
+
+# CI 中保留 npm/pnpm lock 也可以共存：用环境变量切换
+BUN_INSTALL_LOCKFILE_PATH=bun.lock bun install
+```
+
+注意：`bun.lock` 与 `package-lock.json` / `pnpm-lock.yaml` 不通用，混用会导致依赖解析不一致，团队内需统一选一个。
+

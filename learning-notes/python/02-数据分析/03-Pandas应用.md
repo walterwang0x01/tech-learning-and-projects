@@ -671,6 +671,87 @@ import polars as pl
 pldf = pl.from_pandas(df)  # 零拷贝
 ```
 
+## 18. Polars 1.40 阶段性进展
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: Polars 1.40.x, streaming engine production parity, checked 2026-05-18 -->
+
+Polars 在 1.37-1.40（2026-03 至 2026-04）持续推进 **流式引擎成为默认执行模型**，并补齐 Lakehouse I/O。1.40.0 于 2026-04-12 发布，关键进展集中在三个方向：
+
+### 18.1 流式引擎接近全面可默认（1.40）
+
+- 流式扫描已覆盖 Parquet / IPC / CSV / NDJSON 全部主流格式
+- 流式合并连接（merge join，1.38）和流式 AsOf 连接（1.39）补齐了过去依赖急切引擎的连接路径
+- 1.40 新增分组 AsOf 连接的流式实现（time-series 场景常用）
+
+启用方式（推荐写在脚本顶部）：
+
+```python
+import polars as pl
+
+# 让所有 collect() 默认走新流式引擎
+pl.Config.set_engine_affinity("streaming")
+
+# 或者按调用显式启用
+df = (
+    pl.scan_parquet("s3://bucket/big-table/*.parquet")
+      .filter(pl.col("event") == "click")
+      .group_by("user_id")
+      .agg(pl.col("amount").sum())
+      .collect(engine="streaming")  # 1.40 推荐
+)
+```
+
+> 旧的 `collect(streaming=True)` 仍然可用但已被引擎参数取代。
+
+### 18.2 Lakehouse I/O 与原生 Iceberg / Delta
+
+1.40 强化了对 Lakehouse 格式的原生支持：
+
+```python
+# Iceberg 直读（不依赖 PySpark）
+df = pl.scan_iceberg("s3://lake/warehouse/orders").collect(engine="streaming")
+
+# Delta Lake 直读 / 直写
+df = pl.scan_delta("s3://lake/delta/sales")
+df.write_delta("s3://lake/delta/sales_processed", mode="append")
+```
+
+适合"以 Lakehouse 为存储、以 Polars 为单机/小集群计算引擎"的中等规模分析工作流（典型场景：数 TB 数据，但单机内存足够、查询并发低，不想引入 Spark）。
+
+### 18.3 Cloud Profiling
+
+新增云上查询剖析能力，可以把 Polars 的执行 plan 和算子耗时上传到云服务，方便在大数据集场景上排障。本地仍然可以使用 `df.explain(streaming=True)` 查看流式 plan。
+
+```python
+# 查看流式查询计划
+plan = (
+    pl.scan_parquet("data.parquet")
+      .group_by("category")
+      .agg(pl.col("amount").sum())
+)
+print(plan.explain(streaming=True))
+```
+
+来源：[Polars in Aggregate – April 2026](https://pola.rs/posts/polars-in-aggregate-apr26/)（内容已重写以符合许可）、[Polars 1.40.0 PyPI](https://pypi.org/project/polars/1.40.0/)、[Tracking issue: streaming engine](https://github.com/pola-rs/polars/issues/20947)
+
+### 18.4 选型建议（2026-05 修订）
+
+```
+中小数据（<1M 行）+ 教学 / 快速探索 / Matplotlib 可视化
+    → Pandas 3.0（PyArrow backend，启动 import 仍最快）
+
+百万至数亿行 ETL / 特征工程 + 偶尔需要 Lakehouse 直读
+    → Polars 1.40（先把 set_engine_affinity("streaming") 写进项目模板）
+
+跨团队 SQL 协作 / 嵌入式分析 / Iceberg 仓库
+    → DuckDB 1.5+ 配合 Polars（两者已深度互通）
+
+数 TB 以上 / 真正分布式
+    → 不在本系三者范围，考虑 Spark / Ray / Dask
+```
+
 ## 🎬 推荐视频资源
 
 - [freeCodeCamp - Pandas Full Course](https://www.youtube.com/watch?v=gtjxAH8uaP0) — Pandas完整教程
