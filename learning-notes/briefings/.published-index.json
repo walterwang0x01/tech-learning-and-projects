@@ -8105,7 +8105,289 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-05-17"
+    },
+    "3e20d3c9412e": {
+      "url": "https://github.com/alternbits/awesome-cuda-books",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "4f830bf1e908": {
+      "url": "https://github.com/tech4bot/rk3562deb",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "44c8b129b0b6": {
+      "url": "https://blog.cloudflare.com/flagship",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "d4f03461c788": {
+      "url": "https://www.theverge.com/tech/932215/microsoft-teams-together-mode",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "02b78715a08a": {
+      "url": "https://blog.python.org/2026/05/python-3145-is-out",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "600f8122f40c": {
+      "url": "https://justsitandgrin.im/posts/native-all-the-way-until-you-need-text",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "1a465cf36fa6": {
+      "url": "https://techcrunch.com/2026/05/17/apples-siri-revamp-could-include-auto-deleting-chats",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "cc27a53bdbe8": {
+      "url": "https://www.theverge.com/tech/932153/snap-youtube-tiktok-lawsuit-social-media-addiction-schools",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "23be6ceb346b": {
+      "url": "https://techcrunch.com/2026/05/17/for-eclipse-the-2-5b-cerebras-win-is-just-the-start-of-realizing-its-physical-world-thesis",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "3d0c78697965": {
+      "url": "https://www.techspot.com/news/112410-security-researcher-microsoft-secretly-built-backdoor-bitlocker-releases.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "091e66906f85": {
+      "url": "https://techcrunch.com/2026/05/16/users-turn-to-jailbreaking-their-older-kindles-as-amazon-ends-support",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "54ae453a2ada": {
+      "url": "https://fabricked-attack.github.io",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "3e157985e874": {
+      "url": "https://gencad.github.io",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "a2d2de7ff0b8": {
+      "url": "https://developers.cloudflare.com/changelog/post/2026-05-07-emergency-waf-release",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "5c90a84245fe": {
+      "url": "https://www.theverge.com/tech/932207/siri-apple-intelligence-auto-deleting-chats",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "bfb49eb70ded": {
+      "url": "https://www.infoq.com/news/2026/05/kubernetes-1-36-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "c6353c20c022": {
+      "url": "https://arstechnica.com/security/2026/05/zero-day-exploit-completely-defeats-default-windows-11-bitlocker-protections",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-18"
+    },
+    "5e5964c74a49": {
+      "url": "https://huggingface.co/zai-org/GLM-5.1",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "0ba47680641d": {
+      "url": "https://36kr.com/newsflashes/3814076115033600?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "58877619b8b8": {
+      "url": "https://36kr.com/p/3814030630084354?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "f9457a7a7ca9": {
+      "url": "https://36kr.com/p/3810520138243593?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "1d2de71c79f5": {
+      "url": "https://www.techflowpost.com/newsletter/detail_121754.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "a4bede028dba": {
+      "url": "https://36kr.com/newsflashes/3814100578246405?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "6c639c21ed54": {
+      "url": "https://36kr.com/newsflashes/3814048599809798?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "42f3033afcd6": {
+      "url": "https://36kr.com/newsflashes/3814064605257225?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "0168757cc3af": {
+      "url": "http://english.scio.gov.cn/pressroom/2026-05/09/content_118484334.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "92c94c03b8df": {
+      "url": "https://36kr.com/newsflashes/3814066852109833?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "9c675ef7cb90": {
+      "url": "https://36kr.com/p/3812706162220548?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "9e37ad3110b6": {
+      "url": "https://www.forbes.com/sites/ywang/2026/05/07/chinese-ai-model-developer-kimi-raising-funds-valuing-it-at-20-billion",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "01cc2ecaa4e0": {
+      "url": "https://36kr.com/p/3812800346742274?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "300778749a2e": {
+      "url": "https://chinaunread.substack.com/p/breaking-moonshot-ai-kimi-is-closing",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-18"
+    },
+    "17910095770d": {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/931544/openai-keeps-shuffling-its-executives-in-bid-to-win-ai-agent-battle",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "49bb911b8f24": {
+      "url": "https://www.techrepublic.com/article/news-ai-agents-prompt-injection-data-security",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "bdeb88f98e20": {
+      "url": "https://mcpservers.org/id/servers/minishlab/semble",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "e61745706faf": {
+      "url": "https://www.mexc.com/news/1045677",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "ade71b8c2307": {
+      "url": "https://arxiv.org/abs/2510.21618",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "1d4d60ea6ee7": {
+      "url": "https://codelucky.com/model-context-protocol-97-million-installs-linux-foundation",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "6bc4cac2dae6": {
+      "url": "https://sspai.com/post/109870",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "ca7eba31af56": {
+      "url": "https://news.ycombinator.com/item?id=48168198",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "32f963156b31": {
+      "url": "https://github.com/MinishLab/semble",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "b7a37d163cd5": {
+      "url": "https://docs.anthropic.com/en/release-notes/api",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "b461efcb8e2e": {
+      "url": "https://www.csoonline.com/article/4168493/your-ctem-program-is-probably-ignoring-mcp-heres-how-to-fix-it.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "e7d2b4f73688": {
+      "url": "https://www.williamangel.net/blog/2026/05/17/offline-llm-energy-use.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "5abfeb217efa": {
+      "url": "https://x.com/swyx/status/2055648134819450907",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "ee945ba44776": {
+      "url": "https://www.wired.com/story/openai-reorg-greg-brockman-product",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "987c858515cf": {
+      "url": "https://arxiv.org/list/cs.AI/new",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
+    },
+    "e69d08501b76": {
+      "url": "https://thenextweb.com/news/ai-agents-hijacked-prompt-injection-bug-bounties-no-cve",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-18"
     }
   },
-  "updated": "2026-05-17 16:59"
+  "updated": "2026-05-18 09:12"
 }
