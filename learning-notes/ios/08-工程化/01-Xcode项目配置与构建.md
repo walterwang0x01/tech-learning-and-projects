@@ -179,3 +179,138 @@ IPHONEOS_DEPLOYMENT_TARGET = 18.0  // 或 26.0（新命名）
 // 严格内存安全（可选）
 // SWIFT_STRICT_MEMORY_SAFETY = YES
 ```
+
+
+## 8. iOS 26 SDK 强制要求与 iOS 27 准备
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: SDK 26 deadline 2026-04-28, iOS 27 / Xcode 27 breaking changes preparation, checked 2026-05-18 -->
+
+### 8.1 SDK 26 提交 Deadline（已生效）
+
+自 2026-04-28 起，所有上传到 App Store Connect 的 App 必须使用 iOS 26 SDK（即 Xcode 26 及以上）构建。这是 Apple 持续收紧的工具链要求节奏：
+
+```
+SDK Deadline 节奏
+├── 2026-04-28：所有 App 必须基于 SDK 26 构建（已生效）
+├── iOS 27 / Xcode 27（预计 2026-09）：UIScene lifecycle 强制
+└── iOS 27 之后：Liquid Glass 强制采用、UIKit 旧式 lifecycle 不再启动
+```
+
+来源：[The iOS Weekly Brief #46](https://vladkhambir.substack.com/p/the-ios-weekly-brief-issue-46)、[Apple Developer 升级要求](https://developer.apple.com/news/releases/)
+
+### 8.2 UIScene Lifecycle 强制迁移（iOS 27 必须完成）
+
+Apple 在 WWDC25 已声明：iOS 26 之后的下一个主版本（iOS 27）中，所有用 `latest SDK` 构建的 UIKit 应用必须采用 UIScene 生命周期，否则不会启动。Xcode 26 控制台已开始打印警告。
+
+```
+"UIScene lifecycle will soon be required.
+ Failure to adopt will result in an assert in the future."
+```
+
+来源：[Apple Developer Forum 820807](https://developer.apple.com/forums/thread/820807)、[TN3187](https://developer.apple.com/documentation/technotes/tn3187-migrating-to-the-uikit-scene-based-life-cycle)、[Flutter UIScene 迁移指南](https://docs.flutter.dev/release/breaking-changes/uiscenedelegate)
+
+#### 检查项目是否需要迁移
+
+```swift
+// 满足任一条件需要迁移：
+// 1) Info.plist 中缺失 UIApplicationSceneManifest，或没有声明 configurations
+// 2) AppDelegate 未实现 application(_:configurationForConnecting:options:)
+```
+
+#### 最小迁移示例
+
+```xml
+<!-- Info.plist -->
+<key>UIApplicationSceneManifest</key>
+<dict>
+    <key>UIApplicationSupportsMultipleScenes</key>
+    <false/>
+    <key>UISceneConfigurations</key>
+    <dict>
+        <key>UIWindowSceneSessionRoleApplication</key>
+        <array>
+            <dict>
+                <key>UISceneConfigurationName</key>
+                <string>Default Configuration</string>
+                <key>UISceneDelegateClassName</key>
+                <string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+            </dict>
+        </array>
+    </dict>
+</dict>
+```
+
+```swift
+// AppDelegate
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(
+        _ application: UIApplication,
+        configurationForConnecting connectingSceneSession: UISceneSession,
+        options: UIScene.ConnectionOptions
+    ) -> UISceneConfiguration {
+        UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+}
+
+// SceneDelegate
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    var window: UIWindow?
+
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options: UIScene.ConnectionOptions) {
+        guard let windowScene = scene as? UIWindowScene else { return }
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = RootViewController()
+        self.window = window
+        window.makeKeyAndVisible()
+    }
+
+    func sceneDidBecomeActive(_ scene: UIScene) { /* 替代 applicationDidBecomeActive */ }
+    func sceneWillResignActive(_ scene: UIScene) { /* 替代 applicationWillResignActive */ }
+}
+```
+
+> ⚠️ 待确认：第三方 SDK（推送、地图、广告）若在 `applicationDidBecomeActive` 中执行关键初始化，需要同步迁移到 `sceneDidBecomeActive`，否则可能丢失事件。常见的影响包括 APNs token 上报、Deep Link 处理、广告初始化。
+
+来源：[Courier - iOS 27 UISceneDelegate Push Notification Deadline](https://www.courier.com/blog/ios-27-uiscenedelegate-push-notification-deadline-what-breaks-and-how-to)
+
+### 8.3 Liquid Glass 自动适配
+
+用 Xcode 26 SDK 构建后，原生 UIKit 组件（NavigationBar、TabBar、Toolbar、Popover、SearchBar）会自动应用 Liquid Glass 样式，无需修改代码。来源：[Apple Newsroom - 新软件设计](https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/)、[Krishna Substack - Xcode 26 + April 28 Deadline](https://krishna806083.substack.com/p/xcode-26-liquid-glass-and-the-april)
+
+```swift
+// 自定义 UI 启用 Liquid Glass（UIKit）
+let backdrop = UIBackdropView()
+backdrop.style = .liquidGlass        // iOS 26+ 新样式
+view.insertSubview(backdrop, at: 0)
+
+// 工具栏隐式适配
+navigationItem.compactAppearance?.configureWithDefaultBackground()
+navigationItem.scrollEdgeAppearance?.configureWithTransparentBackground()
+```
+
+### 8.4 升级路径与 CI 配置
+
+```yaml
+# .github/workflows/ios-ci.yml — 切换到 Xcode 26
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '26.4'   # 或 '26.5' Beta
+      - run: xcodebuild -version  # 验证 SDK 26
+      - run: xcodebuild build -scheme MyApp -destination 'generic/platform=iOS'
+```
+
+```
+Xcode 26 / 26.3 / 26.4 / 26.5 选型
+├── 生产线打包：Xcode 26.4（最新稳定版）
+├── 体验 Agentic Coding（Claude/Codex）：Xcode 26.3+
+└── Beta 体验 + 26.5 新特性验证：保留单独的 mac runner，避免影响主线
+```
+
+来源：[Apple Newsroom - Xcode 26.3 Agentic Coding](https://www.apple.com/ca/newsroom/2026/02/xcode-26-point-3-unlocks-the-power-of-agentic-coding/)、[ClassMethod - iOS 27 / Xcode 27 准备指南](https://dev.classmethod.jp/en/articles/ios27-xcode27-migration-preparation-guide/)

@@ -138,3 +138,75 @@ let row = UIStackView(arrangedSubviews: [icon, titleLabel, Spacer()])
 row.axis = .horizontal
 row.spacing = 8
 ```
+
+
+## 8. UIKit + iOS 26 Liquid Glass 适配
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: UIKit iOS 26 Liquid Glass, SDK 26 mandatory (2026-04-28), checked 2026-05-18 -->
+
+iOS 26 引入 Liquid Glass 设计语言。用 Xcode 26 SDK 重新编译后，原生 UIKit 组件会自动获得磨砂玻璃外观；自定义 UI 需要按需适配。来源：[WWDC25 - Build a UIKit app with the new design](https://developer.apple.com/videos/play/wwdc2025/284/)、[Liquid Glass Cheatsheet](https://github.com/GonzaloFuentes28/LiquidGlassCheatsheet)
+
+### 8.1 自动适配的组件
+
+```
+重新编译即生效（无需改代码）
+├── UINavigationBar / UIToolbar
+├── UITabBar
+├── UISearchBar
+├── UIPopover / UIBarButtonItem
+└── 系统 Sheet（pageSheet / formSheet）
+```
+
+### 8.2 自定义 View 启用 Liquid Glass
+
+```swift
+// 1) 使用 UIBackdropView（iOS 26+）
+let backdrop = UIBackdropView()
+backdrop.style = .liquidGlass
+view.insertSubview(backdrop, at: 0)
+
+// 2) UIVisualEffectView 走系统效果
+let blur = UIVisualEffectView(effect: UIGlassEffect())   // iOS 26 新效果类型
+blur.frame = container.bounds
+container.insertSubview(blur, at: 0)
+
+// 3) 工具栏间距 + tint
+let spacer = UIBarButtonItem(systemItem: .flexibleSpace) // ToolbarSpacer 等价
+toolbarItems = [back, spacer, share, action]
+toolbar.tintColor = .systemBlue
+```
+
+### 8.3 Sheet / Popover 改造
+
+```swift
+// iOS 26 Sheet 边缘自带模糊和 detents 自适应
+let sheet = SettingsViewController()
+if let pc = sheet.sheetPresentationController {
+    pc.detents = [.custom { $0.maximumDetentValue * 0.4 }, .large()]
+    pc.prefersScrollingExpandsWhenScrolledToEdge = false
+    pc.preferredCornerRadius = 28           // Liquid Glass 推荐圆角
+}
+present(sheet, animated: true)
+```
+
+### 8.4 关闭 Liquid Glass（迁移期）
+
+```swift
+// 部分场景下若希望保留旧外观（例如品牌一致性），
+// 可显式将 appearance 设回 default。
+let appearance = UINavigationBarAppearance()
+appearance.configureWithDefaultBackground()      // 不使用 transparentBackground
+navigationItem.standardAppearance = appearance
+navigationItem.scrollEdgeAppearance = appearance
+```
+
+来源：[Stackademic - Disable or Opt-Out Liquid Glass](https://blog.stackademic.com/disable-or-opt-out-liquid-glass-in-swiftui-and-uikit-ios-26-5c6d55d3e8e5)、[Fatbobman - Liquid Glass Adaptation in UIKit + SwiftUI Hybrid](https://fatbobman.com/en/posts/grow-on-ios26/)
+
+### 8.5 iOS 27 重要前瞻
+
+- iOS 27（预计 2026-09 发布）将强制要求 UIScene lifecycle，详见工程化笔记 → [Xcode 项目配置与构建 §8.2](../08-工程化/01-Xcode项目配置与构建.md)
+- Liquid Glass 在 iOS 27 进入"必须采用"阶段，opt-out 路径可能逐步关闭，新组件应优先按 Liquid Glass 设计
+
+来源：[ClassMethod - iOS 27 / Xcode 27 准备指南](https://dev.classmethod.jp/en/articles/ios27-xcode27-migration-preparation-guide/)

@@ -178,3 +178,130 @@ class AppDIContainer {
     }
 }
 ```
+
+## 6. 2026 现代版 Clean Architecture
+
+> 🔄 更新于 2026-05-18
+
+<!-- version-check: Swift 6.2 strict concurrency, @Observable, TCA 1.20+, checked 2026-05-18 -->
+
+iOS 进入 Swift 6.2 + iOS 26 时代后，Clean Architecture 在保留四层结构的同时，重点变化集中在「响应式层」与「Actor 隔离」。来源：[Forasoft - Advanced iOS App Architecture 2026](https://www.forasoft.com/blog/article/advanced-ios-app-architecture-explained-on-mvvm-977)、[7span - MVVM vs Clean Architecture vs TCA](https://7span.com/blog/mvvm-vs-clean-architecture-vs-tca)
+
+### 6.1 用 @Observable 替代 ObservableObject
+
+```swift
+import Observation
+
+// 旧版本（继续可用，但 SwiftUI 项目优先迁移）
+class UserListViewModel_v1: ObservableObject {
+    @Published var users: [User] = []
+}
+
+// 2026 推荐：@Observable，支持属性级精确追踪
+@Observable
+@MainActor
+final class UserListViewModel {
+    private(set) var users: [User] = []
+    private(set) var isLoading = false
+    private(set) var errorMessage: String?
+
+    private let fetchUsersUseCase: FetchUsersUseCase
+
+    init(fetchUsersUseCase: FetchUsersUseCase) {
+        self.fetchUsersUseCase = fetchUsersUseCase
+    }
+
+    func loadUsers() async {
+        isLoading = true
+        defer { isLoading = false }
+        do {
+            let domainUsers = try await fetchUsersUseCase.execute()
+            users = domainUsers
+        } catch {
+            errorMessage = (error as? LocalizedError)?.errorDescription ?? "未知错误"
+        }
+    }
+}
+
+// View 直接使用 @State 持有
+struct UserListView: View {
+    @State private var viewModel: UserListViewModel
+
+    init(viewModel: UserListViewModel) {
+        _viewModel = State(initialValue: viewModel)
+    }
+
+    var body: some View {
+        List(viewModel.users) { user in Text(user.name) }
+            .overlay { if viewModel.isLoading { ProgressView() } }
+            .task { await viewModel.loadUsers() }
+    }
+}
+```
+
+### 6.2 Swift 6 严格并发对各层的约束
+
+Swift 6.2 的 Approachable Concurrency 默认让模块级 Actor 隔离为 `MainActor`。Clean Architecture 各层需要显式声明执行域：
+
+| 层 | 推荐隔离 | 原因 |
+| -- | -- | -- |
+| Presentation（ViewModel） | `@MainActor` | UI 更新必须在主线程 |
+| Domain（UseCase） | `nonisolated` | 纯逻辑，由调用方决定执行域 |
+| Data（Repository / DataSource） | actor 或 `nonisolated` + `Sendable` | 共享缓存/连接需序列化访问 |
+| 模型（Entity / DTO） | `Sendable` 值类型 | 跨 actor 安全传递 |
+
+```swift
+// Domain 层：纯函数式 UseCase，不绑定线程
+struct FetchUsersUseCase: Sendable {
+    let repository: any UserRepository
+
+    func callAsFunction() async throws -> [User] {
+        try await repository.getUsers()
+    }
+}
+
+// Data 层：用 actor 包装可变缓存
+actor UserCache {
+    private var cache: [Int: User] = [:]
+
+    func get(_ id: Int) -> User? { cache[id] }
+    func set(_ user: User) { cache[user.id] = user }
+}
+
+final class UserRepositoryImpl: UserRepository, Sendable {
+    private let remote: UserRemoteDataSource
+    private let cache = UserCache()
+
+    init(remote: UserRemoteDataSource) { self.remote = remote }
+
+    func getUsers() async throws -> [User] {
+        let users = try await remote.fetchUsers()
+        for u in users { await cache.set(u) }
+        return users
+    }
+}
+```
+
+> ⚠️ 待确认：将 Repository 实现声明为 `Sendable` 时，必须确保所有可变状态都封装在 actor 内或使用 `let`。否则 Swift 6 的严格检查会在编译期报错。
+
+### 6.3 与 TCA 的取舍（2026）
+
+The Composable Architecture（[swift-composable-architecture](https://github.com/pointfreeco/swift-composable-architecture)，14K+ Stars，1.20.x 已支持 Swift 6 / @Observable）适合状态高度结构化、对可测试性要求极高的项目；普通业务 App 使用 MVVM + @Observable + Clean Architecture 即可。
+
+```
+项目类型决策树（2026）
+├── 强一致状态 + 多设备同步 + 重测试覆盖 → TCA
+├── 中大型业务 App + 团队熟悉 SwiftUI → @Observable + Clean Architecture
+└── 小型 / 工具类 App → 直接 @Observable ViewModel + 单层 Repository
+```
+
+### 6.4 与历史代码并存
+
+```swift
+// 同一项目内允许：
+// - 旧模块继续使用 ObservableObject + MVC
+// - 新模块采用 @Observable + Clean Architecture
+// - 共享 Domain 层（UseCase / Entity）保持纯净，不感知 UI 框架
+```
+
+来源：[Apple Developer - Observation](https://developer.apple.com/documentation/Observation)、[@Observable Beyond SwiftUI](https://open.substack.com/pub/krishna806083/p/observable-beyond-swiftui)、[Captain SwiftUI - Objectively Better, Observably Trickier](https://captainswiftui.substack.com/p/objectively-better-observably-trickier)
