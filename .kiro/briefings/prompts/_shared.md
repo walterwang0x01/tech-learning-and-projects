@@ -88,6 +88,12 @@ cat .kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.{topic}.jsonl
 - 所有内容使用中文，技术术语可用英文
 - 关注 Walter 的技术栈偏好：LangGraph、MCP、CrewAI、Python、TypeScript
 
+**文件格式硬约束（违反会被 validate 拒绝）：**
+- ❌ **不要加 YAML frontmatter**（不要写 `---\ntitle: ...\n---`）
+- ✅ **第一行必须是** `# {标题}`，紧接着第二行 `> Author: Walter Wang`
+- 后续章节用 `## 📌 头条` / `## ⚡ 快讯` 等 H2，每个具体条目用 `### {标题}` H3
+- 每条至少包含一个外链（markdown 链接形式）
+
 ---
 
 ## Phase 5: 写入 + 登记 + 分发
