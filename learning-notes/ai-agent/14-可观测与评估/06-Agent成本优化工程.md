@@ -448,4 +448,4 @@ class CostCircuitBreaker:
 - [alex000kim - Claude Code Source Analysis](https://alex000kim.com/posts/2026-03-31-claude-code-source-leak/) — 源码分析（成本相关发现）
 - [PromptLayer - Claude Code Agent Loop](https://blog.promptlayer.com/claude-code-behind-the-scenes-of-the-master-agent-loop/) — Agent 主循环与成本控制
 - [Claude Code Camp - Agent Teams](https://www.claudecodecamp.com/p/claude-code-agent-teams-how-they-work-under-the-hood) — 多 Agent 缓存共享机制
-- [GitHub Archive](https://github.com/WalterHandsome/claude-code) — 源码存档（教育研究用途）
+- [GitHub Archive](https://github.com/walterwang0x01/claude-code) — 源码存档（教育研究用途）

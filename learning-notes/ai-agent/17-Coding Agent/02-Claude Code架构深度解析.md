@@ -876,4 +876,4 @@ return uniqBy(
 - [The Hacker News - Claude Code Leaked via npm](https://thehackernews.com/2026/04/claude-code-tleaked-via-npm-packaging.html) — 安全视角报道
 - [CTOL - 512,000-Line Agent Blueprint](https://www.ctol.digital/news/claude-code-cli-source-map-leak-anthropic-512000-line-agent-blueprint/) — 架构蓝图分析
 - [Claude Code Camp - Agent Teams Under the Hood](https://www.claudecodecamp.com/p/claude-code-agent-teams-how-they-work-under-the-hood) — 多 Agent 系统内部机制
-- [GitHub Archive](https://github.com/WalterHandsome/claude-code) — 源码存档（教育研究用途）
+- [GitHub Archive](https://github.com/walterwang0x01/claude-code) — 源码存档（教育研究用途）

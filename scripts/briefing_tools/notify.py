@@ -12,7 +12,7 @@ from pathlib import Path
 from .config import REPO_ROOT, TOPIC_ICONS, TOPIC_NAMES
 from .storage import briefing_file, today_str
 
-BLOG_SITE_URL = "https://walterhandsome.github.io/portfolio"
+BLOG_SITE_URL = "https://walterwang0x01.github.io/portfolio"
 
 
 def briefing_github_url(topic: str, date_str: str | None = None) -> str:
