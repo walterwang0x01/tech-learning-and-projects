@@ -94,28 +94,130 @@ cat .kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.{topic}.jsonl
 - 后续章节用 `## 📌 头条` / `## ⚡ 快讯` 等 H2，每个具体条目用 `### {标题}` H3
 - 每条至少包含一个外链（markdown 链接形式）
 
+### 共用结构模板（所有主题必须遵守）
+
+每个主题的简报都必须包含以下章节，**顺序固定**：
+
+```markdown
+# {主题图标} {主题名}简报 — YYYY-MM-DD
+
+> Author: Walter Wang
+> 每日精选 ... 5 分钟读完。
+
+## 📌 头条
+
+### 头条 1 标题（≤ 30 字）
+
+3-5 句自然语言：发生了什么 → 为什么重要 → 对你意味着什么。
+
+→ [原文](url) / [其他链接](url)
+
+---
+
+### 头条 2 标题
+
+3-5 句自然语言。
+
+→ [原文](url)
+
+---
+
+## ⚡ 快讯
+
+- **主体名**：一句话说清楚 → [链接](url)
+- **主体名**：一句话说清楚 → [链接](url)
+- ...（5-8 条）
+
+## {主题特有的中间章节，详见各 curate.{topic}.md}
+
+## 📈 趋势
+
+- 🆕 / 🔺 / 🔻 趋势名 — 一句话解释（3-4 条）
+```
+
+**头条规则（最常踩的雷，硬约束）：**
+- 头条数量：1-2 条，**最多 2 条**
+- **每条头条之后都必须有 `---` 分隔线**，包括最后一条与下一节之间
+- 头条 H3 标题 ≤ 30 字，禁止用「## 头条 1」「## 头条 2」这种带序号的 H2 拆分
+
+**快讯规则：**
+- 最少 3 条（少于 3 条 validate 会拒）
+- 每条用 `- **主体名**：` 开头，必须带链接
+
+**表格规则：**
+- 同一表格列数必须一致（| 数量相同）
+
 ---
 
 ## Phase 5: 写入 + 登记 + 分发
 
-```bash
-# 1. 写入 md 文件
-# 工具：fs_write 到 learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
+**两条等价路径，二选一：**
 
-# 2. 事务性校验（缺 H1 / 没有 ### 标题 / 没有外链都会 fail 并退出 1）
+### 路径 A（推荐，结构化产出）
+
+把精选结果写成 BriefingDoc JSON（schema 见 `scripts/briefing_tools/doc_schema.py`），由脚本渲染：
+
+```bash
+# 1. 写 JSON 到临时文件，例如 .kiro_tmp/briefings/runs/YYYY-MM-DD/draft.{topic}.json
+# 2. render 命令自动产出 md + 跑 validate + 跑 skeleton 对比
+python3 scripts/briefing-tools.py render --json .kiro_tmp/briefings/runs/YYYY-MM-DD/draft.{topic}.json
+```
+
+JSON 结构：
+```json
+{
+  "topic": "ai-agent",
+  "date": "2026-05-19",
+  "h1": "AI Agent 简报 — 2026-05-19",
+  "subtitle": "每日精选 ... 5 分钟读完。",
+  "headlines": [
+    {"title": "...", "body": "...", "links": [{"label": "原文", "url": "..."}]},
+    {"title": "...", "body": "...", "links": [...]}
+  ],
+  "briefs": [
+    {"subject": "...", "text": "...", "links": [...]},
+    ...（≥ 3 条）
+  ],
+  "extra_sections": [
+    {"title": "📦 项目 & 论文", "columns": ["项目","描述","链接"],
+     "rows": [{"cells":["...","..."], "link": {"label":"→","url":"..."}}]}
+  ],
+  "trends": [
+    {"icon": "🆕", "text": "..."},
+    {"icon": "🔺", "text": "..."}
+  ]
+}
+```
+
+格式由模板渲染，写错了会被 schema 在 render 阶段直接拒。**这是消除格式飘移的根本方法。**
+
+### 路径 B（手写 markdown，仅用于路径 A 不可用时）
+
+```bash
+# 1. fs_write 到 learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
+
+# 2. 严格校验（缺 H1 / 头条少 --- / 快讯不足都会 fail）
 python3 scripts/briefing-tools.py validate learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
 
-# 3. 通过校验后再登记 URL 到 published-index
+# 3. 跟金标准 fixture 对比章节骨架
+python3 scripts/briefing-tools.py compare-skeleton --topic {topic} learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
+```
+
+### 两条路径汇合处
+
+```bash
+# 4. 通过校验后再登记 URL 到 published-index（hash 漂移自动告警）
 python3 scripts/briefing-tools.py register --topic {topic}
 
-# 4. 同步 README 索引
+# 5. 同步 README 索引
 python3 scripts/briefing-tools.py index --topic {topic}
 
-# 5. 推送 Bark 通知
+# 6. 推送 Bark 通知
 python3 scripts/briefing-tools.py notify --topic {topic}
 ```
 
-**顺序重要**：validate 先于 register。register 内部会再次校验，但前置校验能让 subagent 在失败时直接停手而不是污染索引。
+**顺序重要**：validate / compare-skeleton 先于 register。前置校验让 subagent 在失败时直接停手而不是污染索引。
+**事后改 md**：register 后改 md 内容会触发 file_hash 不一致告警，提示重新跑 index。
 
 ---
 

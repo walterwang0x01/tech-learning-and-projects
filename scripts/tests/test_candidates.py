@@ -132,6 +132,24 @@ class TestBuildCandidates(unittest.TestCase):
         totals = [it["score"]["total"] for it in result["items"]]
         self.assertEqual(totals, [18, 15, 13])
 
+    def test_top_n_truncation(self):
+        items = [
+            _item(f"T{i}", f"https://t{i}", ["ai-agent"], 13 + i)
+            for i in range(10)
+        ]
+        result = build_candidates(items, "ai-agent", "2026-05-10", _make_cfg(), top_n=3)
+        self.assertEqual(len(result["items"]), 3)
+        # 截断按 score 降序：T9(22), T8(21), T7(20)
+        urls = [it["url"] for it in result["items"]]
+        self.assertEqual(urls, ["https://t9", "https://t8", "https://t7"])
+        self.assertEqual(result["stats"]["filtered"]["top_n_truncated"], 7)
+
+    def test_top_n_zero_no_truncation(self):
+        items = [_item("A", "https://a", ["ai-agent"], 15)]
+        result = build_candidates(items, "ai-agent", "2026-05-10", _make_cfg(), top_n=0)
+        self.assertEqual(len(result["items"]), 1)
+        self.assertEqual(result["stats"]["filtered"]["top_n_truncated"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

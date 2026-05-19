@@ -22,6 +22,7 @@ def build_candidates(
     cfg: Config,
     min_score: int = 12,
     require_main_topic: bool = False,
+    top_n: int | None = None,
 ) -> dict:
     """构造候选集。
 
@@ -32,6 +33,7 @@ def build_candidates(
     4. 不在 published_index 中（跨天去重）
     5. 不命中今日其他主题已写文件的标题/URL（跨主题去重）
     6. 语义去重（cfg.semantic_dedup.enabled）
+    7. 如 top_n 设置，按 score.total 降序保留前 N 条
 
     返回:
       {"topic", "date", "stats", "items"}
@@ -59,6 +61,7 @@ def build_candidates(
             "published_before": 0,
             "cross_topic_dup": 0,
             "semantic_dup": 0,
+            "top_n_truncated": 0,
         },
     }
 
@@ -89,6 +92,13 @@ def build_candidates(
         stats["filtered"]["semantic_dup"] = len(removed)
 
     kept.sort(key=lambda x: (-x["score"]["total"], x.get("published", "")))
+
+    # Top-N 截断（按 score 排序后取前 N）
+    if top_n is not None and top_n > 0 and len(kept) > top_n:
+        truncated = len(kept) - top_n
+        kept = kept[:top_n]
+        stats["filtered"]["top_n_truncated"] = truncated
+
     stats["kept"] = len(kept)
 
     return {"topic": topic, "date": date_str, "stats": stats, "items": kept}

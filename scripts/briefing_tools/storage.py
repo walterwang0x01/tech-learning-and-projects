@@ -131,26 +131,21 @@ def extract_titles_from_md(path: Path) -> list[str]:
     return titles
 
 
-def validate_briefing_md(path: Path) -> tuple[bool, str]:
-    """检查 md 是否是"正常完成"的简报文件：
-    - 存在
-    - 以 `# ` 开头
-    - 至少 1 个 ### 二级标题（头条/快讯中的某一项）
-    - 至少 1 个外链
-    返回 (ok, reason)
+def validate_briefing_md(path: Path, strict: bool = True) -> tuple[bool, str]:
+    """简报 md 校验。返回 (ok, reason)。
+
+    内部委托给 md_lint.lint_briefing，做完整结构级检查：
+    - 文件存在 + 非空 + H1 / 外链
+    - strict=True（默认）：头条章节（1-2 条 + 每条之间 ---）/ 快讯章节（≥ 3 条）/ 表格列数一致
+    - strict=False：只查 H1 + 外链（用于历史归档兼容）
+
+    多个错误时 reason 是分号分隔的拼接字符串，便于一次修复。
     """
-    if not path.exists():
-        return False, "file not found"
-    content = path.read_text(encoding="utf-8").strip()
-    if not content:
-        return False, "empty file"
-    if not content.startswith("# "):
-        return False, "missing H1 header"
-    if not _H3_RE.search(content):
-        return False, "no H3 items"
-    if not _URL_RE.search(content):
-        return False, "no external links"
-    return True, "ok"
+    from .md_lint import lint_briefing
+    ok, errs = lint_briefing(path, strict=strict)
+    if ok:
+        return True, "ok"
+    return False, "; ".join(errs)
 
 
 # ============================================
@@ -168,8 +163,16 @@ def register_published(topic: str, date_str: str | None = None, retention_days: 
         return {"topic": topic, "date": ds, "registered": 0, "error": f"invalid briefing file: {reason}"}
 
     urls = extract_urls_from_md(f)
+    file_hash = hashlib.sha256(f.read_bytes()).hexdigest()[:16]
 
     index = cleanup_published_index(load_published_index(), retention_days)
+
+    # 幂等性 + hash 漂移检测
+    file_hashes = index.setdefault("file_hashes", {})
+    key = f"{topic}/{ds}"
+    prev_hash = file_hashes.get(key)
+    hash_changed = prev_hash is not None and prev_hash != file_hash
+
     added = 0
     for u in urls:
         if not u:
@@ -179,12 +182,27 @@ def register_published(topic: str, date_str: str | None = None, retention_days: 
             continue
         index["items"][uh] = {"url": u, "title": "", "topic": topic, "date": ds}
         added += 1
+
+    file_hashes[key] = file_hash
     save_published_index(index)
-    return {"topic": topic, "date": ds, "registered": added, "total_urls": len(urls)}
+
+    result = {
+        "topic": topic, "date": ds, "registered": added, "total_urls": len(urls),
+        "file_hash": file_hash,
+    }
+    if hash_changed:
+        result["warning"] = (
+            f"file content changed since last register (prev={prev_hash}, now={file_hash})。"
+            f"建议运行 `python3 scripts/briefing-tools.py index --topic {topic}` 同步 README"
+        )
+    return result
 
 
 def rebuild_published_index(days: int = 60) -> dict:
-    """扫描历史 md 重建 index"""
+    """扫描历史 md 重建 index。
+
+    历史文件可能用旧格式（"今日要闻"等），所以走 lenient 校验：只查 H1 + 外链。
+    """
     index = {"items": {}, "updated": ""}
     cutoff = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
     total_files = 0
@@ -202,7 +220,7 @@ def rebuild_published_index(days: int = 60) -> dict:
             date_str = m.group(1)
             if date_str < cutoff:
                 continue
-            ok, _reason = validate_briefing_md(md_file)
+            ok, _reason = validate_briefing_md(md_file, strict=False)
             if not ok:
                 continue
             total_files += 1

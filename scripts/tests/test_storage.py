@@ -62,9 +62,21 @@ VALID_MD = """# AI Agent 简报 — 2026-05-10
 
 → [原文](https://openai.com/index/unlocking-the-codex-harness/)
 
+---
+
+### 第二条头条
+
+正文...
+
+→ [原文](https://example.com/headline2)
+
+---
+
 ## ⚡ 快讯
 
-- **Anthropic**: something → [link](https://anthropic.com/x)
+- **Anthropic**: 一句话 → [link1](https://anthropic.com/x)
+- **Google**: 一句话 → [link2](https://google.com/x)
+- **Meta**: 一句话 → [link3](https://meta.com/x)
 """
 
 INCOMPLETE_MD = "# AI Agent 简报\n\n"  # 只有 H1，无 ### 无链接
@@ -135,8 +147,9 @@ class TestRegisterPublished(unittest.TestCase):
         (topic_dir / "2026-05-10.md").write_text(VALID_MD, encoding="utf-8")
 
         result = register_published("ai-agent", "2026-05-10", retention_days=60)
-        self.assertEqual(result.get("registered"), 2)
-        self.assertEqual(result.get("total_urls"), 2)
+        # VALID_MD 含 5 个外链
+        self.assertEqual(result.get("registered"), 5)
+        self.assertEqual(result.get("total_urls"), 5)
 
     def test_skip_invalid_briefing(self):
         """损坏的 md 不应污染 published-index"""
@@ -148,6 +161,37 @@ class TestRegisterPublished(unittest.TestCase):
         self.assertEqual(result.get("registered"), 0)
         self.assertIn("error", result)
         self.assertIn("invalid", result["error"])
+
+    def test_register_idempotent(self):
+        """重复 register 同一份未变的 md：第二次新增 0 条，无 warning"""
+        topic_dir = self.base / "ai-agent" / "2026" / "05"
+        topic_dir.mkdir(parents=True)
+        (topic_dir / "2026-05-10.md").write_text(VALID_MD, encoding="utf-8")
+
+        r1 = register_published("ai-agent", "2026-05-10", retention_days=60)
+        self.assertEqual(r1["registered"], 5)
+        self.assertNotIn("warning", r1)
+
+        r2 = register_published("ai-agent", "2026-05-10", retention_days=60)
+        # 已注册的 URL 跳过
+        self.assertEqual(r2["registered"], 0)
+        self.assertNotIn("warning", r2)
+        # hash 应当不变
+        self.assertEqual(r1["file_hash"], r2["file_hash"])
+
+    def test_register_detects_file_change(self):
+        """register 之后改动 md 内容，再 register 应给 warning"""
+        topic_dir = self.base / "ai-agent" / "2026" / "05"
+        topic_dir.mkdir(parents=True)
+        f = topic_dir / "2026-05-10.md"
+        f.write_text(VALID_MD, encoding="utf-8")
+        register_published("ai-agent", "2026-05-10", retention_days=60)
+
+        # 改动内容（追加一段）
+        f.write_text(VALID_MD + "\n\n额外段落", encoding="utf-8")
+        r = register_published("ai-agent", "2026-05-10", retention_days=60)
+        self.assertIn("warning", r)
+        self.assertIn("changed", r["warning"])
 
 
 if __name__ == "__main__":

@@ -152,6 +152,7 @@ def cmd_candidates(args):
             classified, t, today_str(), cfg,
             min_score=args.min_score,
             require_main_topic=args.require_main_topic,
+            top_n=args.top_n,
         )
         out_path = rd / f"candidates.{t}.jsonl"
         atomic_write_jsonl(out_path, result["items"])
@@ -170,6 +171,8 @@ def cmd_register(args):
             print(f"⚠️  {t} ({result['date']}): {result['error']}")
         else:
             print(f"📋 {t} ({result['date']}): 新增 {result['registered']}/{result['total_urls']} URLs")
+            if "warning" in result:
+                print(f"   ⚠️  {result['warning']}")
 
 
 def cmd_rebuild_index(args):
@@ -181,13 +184,90 @@ def cmd_rebuild_index(args):
 def cmd_validate(args):
     """校验一个简报 md 是否符合"已完成"的格式要求"""
     path = Path(args.path)
-    ok, reason = validate_briefing_md(path)
+    strict = not getattr(args, "lenient", False)
+    ok, reason = validate_briefing_md(path, strict=strict)
     if ok:
         print(f"✅ {path}: valid")
         sys.exit(0)
     else:
         print(f"❌ {path}: {reason}", file=sys.stderr)
         sys.exit(1)
+
+
+def cmd_compare_skeleton(args):
+    """对比简报章节骨架与金标准 fixture"""
+    from .skeleton import diff_skeleton, extract_skeleton
+
+    path = Path(args.path)
+    if not path.exists():
+        print(f"❌ 简报文件不存在: {path}", file=sys.stderr)
+        sys.exit(1)
+
+    fixtures_dir = REPO_ROOT / "scripts" / "tests" / "fixtures" / "briefings"
+    golden_path = fixtures_dir / f"{args.topic}.golden.md"
+    if not golden_path.exists():
+        print(f"❌ 金标准 fixture 不存在: {golden_path}", file=sys.stderr)
+        sys.exit(1)
+
+    actual = extract_skeleton(path)
+    golden = extract_skeleton(golden_path)
+    diffs = diff_skeleton(actual, golden)
+
+    if not diffs:
+        print(f"✅ {path}: skeleton matches {args.topic}.golden.md")
+        sys.exit(0)
+    else:
+        print(f"❌ {path}: skeleton diff vs golden", file=sys.stderr)
+        for d in diffs:
+            print(f"  - {d}", file=sys.stderr)
+        sys.exit(1)
+
+
+def cmd_render(args):
+    """从 BriefingDoc JSON 渲染 md，并自动跑 validate + skeleton 校验"""
+    from .doc_schema import BriefingDoc, DocValidationError
+    from .render import render_briefing
+    from .skeleton import diff_skeleton, extract_skeleton
+
+    json_path = Path(args.json)
+    if not json_path.exists():
+        print(f"❌ JSON 文件不存在: {json_path}", file=sys.stderr)
+        sys.exit(1)
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        print(f"❌ JSON 解析失败: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        doc = BriefingDoc.from_dict(data)
+    except DocValidationError as e:
+        print(f"❌ schema 校验失败: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    md = render_briefing(doc)
+    out = Path(args.out) if args.out else briefing_file(doc.topic, doc.date)
+    atomic_write(out, md)
+    print(f"💾 已渲染: {out}")
+
+    # 自动 validate
+    ok, reason = validate_briefing_md(out)
+    if not ok:
+        print(f"❌ 渲染产物未通过 validate: {reason}", file=sys.stderr)
+        sys.exit(2)
+
+    # 自动 skeleton 对比
+    fixtures_dir = REPO_ROOT / "scripts" / "tests" / "fixtures" / "briefings"
+    golden_path = fixtures_dir / f"{doc.topic}.golden.md"
+    if golden_path.exists():
+        diffs = diff_skeleton(extract_skeleton(out), extract_skeleton(golden_path))
+        if diffs:
+            print(f"❌ skeleton diff vs golden:", file=sys.stderr)
+            for d in diffs:
+                print(f"  - {d}", file=sys.stderr)
+            sys.exit(3)
+
+    print("✅ validate + skeleton 全部通过")
 
 
 def cmd_cleanup(args):
@@ -215,6 +295,7 @@ def cmd_run_all(args):
     args.topic = "all"
     args.min_score = getattr(args, "min_score", 12)
     args.require_main_topic = getattr(args, "require_main_topic", False)
+    args.top_n = getattr(args, "top_n", 60)
     cmd_candidates(args)
     print()
     print("=" * 60)
@@ -335,6 +416,11 @@ def _collect_status() -> dict:
     # 熔断源
     cfg = load_config()
     report["tripped_sources"] = [s["name"] for s in tripped_sources(cfg.circuit_breaker.fail_threshold_days)]
+
+    # 基线对比（近 7 天均值）
+    from .baseline import check_all_baselines
+    report["baselines"] = check_all_baselines()
+
     return report
 
 
@@ -357,6 +443,22 @@ def _format_status(report: dict) -> str:
         lines.append(f"\n### 🏃 今日运行状态 ({report['run']['dir']})")
         for stage in report["run"]["stages"]:
             lines.append(f"- {stage['file']}: {stage['items']} 条")
+
+    # 基线异常
+    anomalies = [b for b in report.get("baselines", []) if b.get("anomaly")]
+    if anomalies:
+        lines.append("\n### 🚨 基线异常")
+        for b in anomalies:
+            n = TOPIC_NAMES.get(b["topic"], b["topic"])
+            lines.append(f"- **{n}**：{b['message']}")
+    elif report.get("baselines"):
+        # 全部正常时也展示一行汇总，便于快速扫
+        normals = [b for b in report["baselines"] if b.get("ratio") is not None and not b["anomaly"]]
+        if normals:
+            lines.append("\n### 📉 基线对比（近 7 天均值）")
+            for b in normals:
+                n = TOPIC_NAMES.get(b["topic"], b["topic"])
+                lines.append(f"- {n}：{b['message']}")
 
     lines.append("\n### 💡 建议")
     for topic, info in report["topics"].items():
@@ -611,6 +713,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--min-score", type=int, default=12)
     p.add_argument("--require-main-topic", action="store_true",
                    help="只保留 main_topic 等于本主题的条目")
+    p.add_argument("--top-n", type=int, default=60,
+                   help="按 score 降序最多保留 N 条（0=不截断），默认 60")
     p.set_defaults(func=cmd_candidates)
 
     p = sub.add_parser("register", help="把已写入简报的 URL 登记到 published-index")
@@ -624,7 +728,19 @@ def build_parser() -> argparse.ArgumentParser:
 
     p = sub.add_parser("validate", help="校验简报 md 是否是有效完成状态")
     p.add_argument("path", help="简报 md 路径")
+    p.add_argument("--lenient", action="store_true",
+                   help="宽松模式，只查 H1 + 外链（用于历史归档兼容）")
     p.set_defaults(func=cmd_validate)
+
+    p = sub.add_parser("compare-skeleton", help="对比简报章节骨架与金标准 fixture")
+    p.add_argument("--topic", required=True, choices=TOPICS)
+    p.add_argument("path", help="简报 md 路径")
+    p.set_defaults(func=cmd_compare_skeleton)
+
+    p = sub.add_parser("render", help="把 BriefingDoc JSON 渲染为 md（推荐流程）")
+    p.add_argument("--json", required=True, help="结构化简报 JSON 路径")
+    p.add_argument("--out", help="输出 md 路径，默认按 topic+date 自动定")
+    p.set_defaults(func=cmd_render)
 
     p = sub.add_parser("cleanup", help="清理旧 run 目录")
     p.add_argument("--days", type=int, default=None, help="默认读 config.run_retention_days")
