@@ -4,9 +4,11 @@
 
 ## 1. 多阶段构建
 
+<!-- 修复于 2026-05-19: 示例使用 node:24 LTS（2025-10 进入 LTS），与第 6 节 2026 推荐保持一致 -->
+
 ```dockerfile
 # 阶段1：构建
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN corepack enable && pnpm install --frozen-lockfile
@@ -45,9 +47,10 @@ server {
 
 ## 3. Docker Compose
 
+<!-- 修复于 2026-05-19: 移除已废弃的 version 字段（Docker Compose v2 不再需要） -->
+
 ```yaml
 # docker-compose.yml
-version: '3.8'
 services:
   web:
     build: .

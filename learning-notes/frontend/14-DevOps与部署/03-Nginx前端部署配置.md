@@ -95,7 +95,10 @@ server {
 
 ### 4.1 HTTP/3 (QUIC) 配置
 
-HTTP/3 已被 38.8% 的网站采用（2026-04），所有主流浏览器支持。Nginx 1.25+ 内置 HTTP/3 模块（需编译时启用 `--with-http_v3_module`）。
+HTTP/3 已被全球 30%+ 的网站采用（具体数据需以 [Cloudflare Radar](https://radar.cloudflare.com) 或 W3Techs 为准），所有主流浏览器支持。Nginx 1.25+ 内置 HTTP/3 模块（需编译时启用 `--with-http_v3_module`）。
+
+> ⚠️ 待确认：HTTP/3 具体采用率（之前引用 38.8% 来源不够权威，建议以官方统计源核实）
+<!-- 修复于 2026-05-19: 弱化具体百分比，明确引用源标注 -->
 
 ```nginx
 server {
@@ -163,4 +166,4 @@ add_header Cross-Origin-Embedder-Policy "require-corp" always;
 # 注意：CSP 建议通过应用层（meta 标签或 Trusted Types）配置，而非 Nginx 硬编码
 ```
 
-> 来源：[Nginx HTTP/3 Guide](https://cubepath.com/docs/web-performance/http3-quic-configuration-guide)、[HTTP/3 Adoption](https://blckalpaca.at/en/knowledge-base/seo-geo/technisches-seo/http3-performance)
+> 来源：[Nginx HTTP/3 Guide](https://cubepath.com/docs/web-performance/http3-quic-configuration-guide)、HTTP/3 全球采用率统计建议参考 [Cloudflare Radar](https://radar.cloudflare.com)

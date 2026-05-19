@@ -127,7 +127,7 @@ A: React — 大型项目、灵活度高、生态丰富、函数式编程
 
 > 🔄 更新于 2026-05-02
 
-<!-- version-check: React 19.2.4, Vue 3.6 Vapor Mode, React Router 7.14, checked 2026-05-02 -->
+<!-- version-check: React 19.2.4, Vue 3.6 Vapor Mode, React Router 7.9.x, checked 2026-05-19 -->
 
 ### React 19 与 React Compiler
 
@@ -171,12 +171,14 @@ A: React 18 引入了自动批处理（所有 setState 都批量更新）。
 
 ```
 Q: Vue 3.6 Vapor Mode 是什么？
-A: Vapor Mode 是 Vue 3.6 引入的新编译策略，
-   跳过虚拟 DOM，直接编译为原生 DOM 操作。
+A: Vapor Mode 是 Vue 3.6 引入的新编译策略（2025-12 进入 beta，截至 2026-05 仍在 beta）：
+   <!-- 修复于 2026-05-19: 标注 beta 状态，避免读者误以为已稳定 -->
+   - 跳过虚拟 DOM，直接编译为原生 DOM 操作
    - 性能接近 Solid.js 和 Svelte 5
    - 组件级别 opt-in（不是全局开关）
    - 不改变开发者写法，编译器自动处理
    - 适合性能敏感的组件（大列表、动画密集）
+   - 生产使用建议等待稳定版
 
 Q: Vue 3 的 alien-signals 响应式引擎是什么？
 A: Vue 3.6 底层响应式系统从 @vue/reactivity 重构为
@@ -198,15 +200,18 @@ A: 这是 iOS 的概念。Vue 中对应的是：
 
 ```
 Q: React Router v7 和 v6 有什么区别？
-A: v7 从路由库变为全栈框架：
-   - 统一包名（不再分 react-router-dom）
-   - Framework Mode：内置 SSR/RSC 支持
-   - 可以替代 Next.js/Remix
+A: v7（2024-11 GA，当前 7.9.x）从路由库变为全栈框架：
+   <!-- 修复于 2026-05-19: 补充 GA 时间和当前版本 -->
+   - 统一包名（react-router 主包，react-router-dom 仅做转发）
+   - Framework Mode：内置 SSR/RSC 支持（吸收了 Remix）
+   - 三种使用模式：Declarative / Data / Framework
+   - 从 v6 升级是非破坏性的（启用所有 future flags 后）
    - Vite 8 原生支持
 
 Q: Nuxt 4 和 Nuxt 3 的主要区别？
-A: Nuxt 4 稳定版（v4.4.2）：
-   - Vue Router 5 集成
+A: Nuxt 4 稳定版（v4.4.3，2026-05）：
+   <!-- 修复于 2026-05-19: 4.4.2 → 4.4.3，与 04-Vue 文档保持一致 -->
+   - Vue Router 5 集成（4.4 升级，移除 unplugin-vue-router 依赖）
    - 更好的 TypeScript 支持
    - Nuxt 3 将于 2026-07-31 EOL
    - 新项目应直接使用 Nuxt 4
