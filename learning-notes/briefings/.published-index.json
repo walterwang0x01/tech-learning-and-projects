@@ -8723,7 +8723,366 @@
       "title": "",
       "topic": "ai-agent",
       "date": "2026-05-19"
+    },
+    "ae181e8b7575": {
+      "url": "https://www.qbitai.com/2026/05/420084.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "560bd324da6c": {
+      "url": "https://www.oschina.net/news/442702",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "05cfc07161cb": {
+      "url": "https://www.oschina.net/news/442232/easy-postman-5-5-18-released",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "4634b3b0413a": {
+      "url": "https://www.oschina.net/news/442617/ant-design-6-4-3-released",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "1a0f930a5b0c": {
+      "url": "https://www.qbitai.com/2026/05/419515.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "ca847805032b": {
+      "url": "https://www.infoq.cn/article/0cMu1bsEszkZDf09OP2M",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "ee2cdeb39c09": {
+      "url": "https://www.oschina.net/news/442708",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "75f372457abe": {
+      "url": "https://www.oschina.net/news/442772",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "f8eec40a4cc4": {
+      "url": "https://www.infoq.cn/article/eyoS3WVdltWbqJXuygQi",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "432735b9833e": {
+      "url": "https://www.oschina.net/news/442811/erupt-1-14-3-released",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "d0f2531a58e0": {
+      "url": "https://www.oschina.net/news/442809",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "1d0447ffcd2c": {
+      "url": "https://www.oschina.net/news/443027",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "224843ede5a6": {
+      "url": "https://www.oschina.net/news/442955",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "bcd3693da51e": {
+      "url": "https://www.oschina.net/news/442429",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "d29623dbf4c8": {
+      "url": "https://www.prnewswire.com/news-releases/baidu-announces-first-quarter-2026-results-302774476.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "8cf6ab32927b": {
+      "url": "https://github.com/verl-project/verl",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "c15375c23872": {
+      "url": "https://www.oschina.net/news/442593",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "93bf49e036cf": {
+      "url": "https://www.oschina.net/news/442753",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "ce8927b0d4e2": {
+      "url": "https://www.oschina.net/news/442831",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "5ad5c335d5a2": {
+      "url": "https://github.com/HorizonRobotics/HoloMotion",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-20"
+    },
+    "2e9c65393bc3": {
+      "url": "https://blog.google/innovation-and-ai/sundar-pichai-io-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "ee364359cf25": {
+      "url": "https://www.theregister.com/cyber-crime/2026/05/18/grafana-labs-admits-attackers-downloaded-its-codebase-from-github/5241686",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "6878219af3cf": {
+      "url": "https://www.oschina.net/news/442671/docker-29-5-1-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "fe2144386873": {
+      "url": "https://www.oschina.net/news/442343",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "ea9b033f34c3": {
+      "url": "https://www.oschina.net/news/442724/fabric-js-7-4-0-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "bcd6747b9b55": {
+      "url": "https://techcrunch.com/2026/05/19/with-gemini-3-5-flash-google-bets-its-next-ai-wave-on-agents-not-chatbots",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "763e211b1696": {
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "54f79cfcd8d6": {
+      "url": "https://techcrunch.com/2026/05/19/google-launches-antigravity-2-0-with-an-updated-desktop-app-and-cli-tool-at-io-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "e2c8ab9ad08d": {
+      "url": "https://archestra.ai/blog/only-responsible-ai",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "dfb52da2e5ec": {
+      "url": "https://www.theverge.com/tech/934323/google-wear-os-7-smartwatch-battery-life-wear-widgets-io-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "0c7d97cfe282": {
+      "url": "https://techcrunch.com/2026/05/19/agentic-app-coding-gets-an-upgrade-with-googles-release-of-android-cli",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "0e050775c37f": {
+      "url": "https://github.com/Mercury-Language/mercury",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "2d0ccd5a4982": {
+      "url": "https://blog.google/products-and-platforms/products/google-one/google-ai-subscriptions",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "1fcaef62f45d": {
+      "url": "https://thenextweb.com/news/meta-layoffs-8000-zuckerberg-ai-reality-may-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "132218450573": {
+      "url": "https://blog.cloudflare.com/claude-managed-agents",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "ecbe9cb3c5be": {
+      "url": "https://www.theverge.com/tech/934269/plex-pass-lifetime-subscription-triple-750-price-hike",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "8d422d15eb6c": {
+      "url": "https://www.oschina.net/news/442620",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "234f8310e417": {
+      "url": "https://my.oschina.net/u/4487475/blog/19672981",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "d541dc05bb20": {
+      "url": "https://blog.google/products-and-platforms/products/search/ai-mode-us-insights",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "7c2d0995a65d": {
+      "url": "https://techcrunch.com/2026/05/19/google-takes-a-page-out-of-metas-book-announces-new-audio-powered-smart-glasses-at-io-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "bf41a57d9ea2": {
+      "url": "https://www.techrepublic.com/article/news-meta-ai-spending-job-cuts-may-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "9f6c3a639c45": {
+      "url": "https://codeberg.org/gregburd/aether",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "17037965482e": {
+      "url": "https://www.oschina.net/news/442606/grafana-hackers-stole-code-refuses-pay-ransom",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "7f913bbbda88": {
+      "url": "https://arstechnica.com/google/2026/05/google-announces-agent-optimized-gemini-3-5-flash-and-a-do-anything-model-called-omni",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "0f5e7d94286b": {
+      "url": "https://walkinglabs.github.io/learn-harness-engineering/en",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-20"
+    },
+    "0d4d13bb0b03": {
+      "url": "https://arxiv.org/abs/2605.15846",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "75f20d5788df": {
+      "url": "https://www.anthropic.com/news/pwc-expanded-partnership",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "034d5753152e": {
+      "url": "https://www.oschina.net/news/442336",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "fe0c6b547aaf": {
+      "url": "https://arxiv.org/abs/2604.27859",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "926fcbe162e4": {
+      "url": "https://www.anthropic.com/news/anthropic-kpmg",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "d21c542c6ad3": {
+      "url": "https://arxiv.org/abs/2605.15425",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "63751fb3a376": {
+      "url": "https://huggingface.co/blog/allenai/olmoearth-v1-1",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "00b27c20f4f1": {
+      "url": "https://techcrunch.com/2026/05/19/google-launches-antigravity-2-0-with-an-updated-desktop-app-and-cli-tool",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "71b2202dce50": {
+      "url": "https://my.oschina.net/u/4939618/blog/19665040",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "b07d364c3f4f": {
+      "url": "https://arxiv.org/abs/2604.14572",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "471f78d75e20": {
+      "url": "https://www.oschina.net/news/442749/musk-has-lost-his-lawsuit-against-sam-altman-and-openai",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "8ed713f2da7b": {
+      "url": "https://github.com/antoinezambelli/forge",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "09200d698e19": {
+      "url": "https://techcrunch.com/2026/05/19/google-introduces-gemini-spark-a-24-7-agentic-assistant-with-gmail-integration",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
+    },
+    "95de2946ad51": {
+      "url": "https://claude.com/blog/claude-managed-agents-updates",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-20"
     }
   },
-  "updated": "2026-05-19 09:44"
+  "updated": "2026-05-20 09:32",
+  "file_hashes": {
+    "china-tech/2026-05-20": "32f8dcbd60de16ca",
+    "global-tech/2026-05-20": "c26133bf7aa7c02a",
+    "ai-agent/2026-05-20": "df599263e45d71d5"
+  }
 }
