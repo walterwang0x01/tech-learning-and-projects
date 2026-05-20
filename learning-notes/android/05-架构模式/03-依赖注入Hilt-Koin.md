@@ -243,3 +243,75 @@ class GetUsersUseCase(
 | Jakarta 支持 | ✅ 2.57+ | N/A |
 | 学习曲线 | 较高 | 较低 |
 | 推荐场景 | 大型 Android 项目 | KMP 项目、中小项目 |
+
+## 8. 2026-Q2 版本演进：Dagger 2.59 + Hilt 1.4.0-alpha01
+
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: Dagger 2.59, Hilt-AndroidX 1.4.0-alpha01 (2026-03-25), Hilt Gradle Plugin 2.57.x, checked 2026-05-20 -->
+
+### Dagger 2.59（当前推荐稳定版）
+
+Dagger 是 Hilt 的底层 DI 引擎。2026 年初 Dagger 推进到 **2.59**，作为生产稳定线持续接收 Bug 修复。来源：[Dagger 官网](https://dagger.dev/)、[google/dagger Releases](https://github.com/google/dagger/releases)
+
+`com.google.dagger:hilt-android` 与 Dagger 同步发版，Hilt Gradle 插件版本号即对应 Dagger 版本号。Android 项目升级到 Dagger 2.59 时，只需把 `com.google.dagger.hilt.android` 插件号升级即可，无 Breaking。
+
+```kotlin
+// build.gradle.kts (Project) — 升级 Dagger / Hilt 到 2.59
+plugins {
+    id("com.google.dagger.hilt.android") version "2.59" apply false
+}
+
+// build.gradle.kts (App)
+dependencies {
+    implementation("com.google.dagger:hilt-android:2.59")
+    ksp("com.google.dagger:hilt-android-compiler:2.59")
+}
+```
+
+### Hilt-AndroidX 1.4.0-alpha01（2026-03-25 发布）
+
+`androidx.hilt:hilt-*` 系列（即 Hilt 与 AndroidX Navigation / WorkManager / ViewModel 的桥接库）推进到 **1.4.0-alpha01**。来源：[Android Developers — Hilt Releases](https://developer.android.com/jetpack/androidx/releases/hilt)
+
+需要区分两个版本号：
+
+| 工件坐标 | 当前版本 | 含义 |
+|----------|----------|------|
+| `com.google.dagger:hilt-android` | 2.59 | Hilt 核心 + 编译器 |
+| `com.google.dagger.hilt.android`（Gradle 插件） | 2.59 | 与上面同步 |
+| `androidx.hilt:hilt-navigation-compose` | 1.4.0-alpha01 | Compose 导航集成 |
+| `androidx.hilt:hilt-work` | 1.4.0-alpha01 | WorkManager 集成 |
+| `androidx.hilt:hilt-common` | 1.4.0-alpha01 | 公共工具 |
+
+升级到 alpha01 主要为获取与最新 Navigation 3 和 WorkManager 2.11.0-alpha01 的兼容性。生产项目仍可继续使用 1.3.x 稳定线。
+
+```kotlin
+// build.gradle.kts (App) — 同时引入 Dagger 2.59 + AndroidX Hilt 1.4.0-alpha01
+dependencies {
+    // Hilt 核心（生产稳定）
+    implementation("com.google.dagger:hilt-android:2.59")
+    ksp("com.google.dagger:hilt-android-compiler:2.59")
+
+    // AndroidX Hilt 桥接（alpha 仅在需要 Navigation 3 / WorkManager 2.11 时使用）
+    implementation("androidx.hilt:hilt-navigation-compose:1.4.0-alpha01")
+    implementation("androidx.hilt:hilt-work:1.4.0-alpha01")
+    ksp("androidx.hilt:hilt-compiler:1.4.0-alpha01")
+}
+```
+
+### 升级建议（2026-Q2）
+
+| 当前版本 | 建议路径 |
+|----------|----------|
+| Hilt 2.55 / 2.56 | 直接升 2.59，无 Breaking |
+| Hilt 2.57.x | 升 2.59，受益于 Bug 修复 |
+| Koin 4.0 | 升 Koin 4.1（受益于 Compiler Plugin 编译时检查） |
+| Dagger（无 Hilt）项目 | 升 2.59 即可，迁移到 Hilt 是另一个独立决策 |
+
+**新项目选型决策树（2026-05 修订版）**：
+
+```
+是否纯 Android（不需要 KMP）？
+├─ 是 → Hilt 2.59 + AndroidX Hilt 1.3.x（生产）/ 1.4.0-alpha01（实验）
+└─ 否 → Koin 4.1 + Compiler Plugin（编译时安全 + KMP）
+```

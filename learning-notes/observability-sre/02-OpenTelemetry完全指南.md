@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: OpenTelemetry 1.x stable, OTLP 1.10.0, Collector v0.150 (2026-04-13), Declarative Config 1.0 stable, GenAI semconv (development), Profiles signal alpha, checked 2026-05-16 -->
+<!-- version-check: OpenTelemetry 1.x stable, OTLP 1.10.0, Collector v0.151.0 (2026-05-04), Declarative Config 1.0 stable, GenAI semconv (development), Profiles signal alpha, Winget support, checked 2026-05-20 -->
 
 ## 1. 核心架构
 
@@ -475,3 +475,44 @@ v0.150 → v0.151：包含 v0.150 所有改进 + 更多 bug 修复
 ```
 
 来源：[OTel Collector CHANGELOG-API](https://github.com/open-telemetry/opentelemetry-collector/blob/main/CHANGELOG-API.md)
+
+
+### 10.5 OpenTelemetry Collector v0.151（2026-05-04）
+
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: OTel Collector v0.151.0 (2026-05-04), Winget Windows package manager support, checked 2026-05-20 -->
+
+Collector v0.151.0 是 v0.150 的稳定补强版本，**最大变化是新增 Winget（Windows Package Manager）支持**——Windows 端可通过单条命令完成安装、升级、卸载，与 Linux 的 apt/yum 体验对齐。来源：[Sumo Logic — OTel Collector v0.151.0 Release Notes](https://www.sumologic.com/help/release-notes-collector/2026/05/04/otel/)
+
+```powershell
+# Windows 一键安装（v0.151.0+）
+winget install OpenTelemetry.Collector
+
+# 升级（与现有安装方式完全兼容）
+winget upgrade OpenTelemetry.Collector
+
+# 卸载
+winget uninstall OpenTelemetry.Collector
+```
+
+**其他 v0.151 改动**：
+
+| 变化 | 影响 |
+|------|------|
+| Winget 包管理器支持（Windows） | Windows IT 部署流程显著简化 |
+| azure_auth 后续 bug 修复 | v0.150 引入修复后的连带回归 |
+| Profiles 信号实现细节稳定 | Alpha 阶段的 OTLP profiles encoding 实现固化 |
+| 与 v0.150 配置完全兼容 | 升级零成本 |
+
+**升级建议（修订版）**：
+
+```
+< v0.149：必须立即升级（azure_auth CVE）
+v0.149 → v0.151：跳过 v0.150，直接升 v0.151（Winget + 稳定性双收益）
+v0.150 → v0.151：受益于 bug 修复和 Profiles encoding 稳定
+v0.151 已是当前推荐生产版本（截至 2026-05-20）
+```
+
+来源：[Sumo Logic OTel Collector v0.151.0](https://www.sumologic.com/help/release-notes-collector/2026/05/04/otel/)、[open-telemetry/opentelemetry-collector-releases](https://github.com/open-telemetry/opentelemetry-collector-releases)
+

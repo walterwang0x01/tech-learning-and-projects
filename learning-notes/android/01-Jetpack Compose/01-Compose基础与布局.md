@@ -257,3 +257,99 @@ fun Greeting() {
 ```
 
 > 来源：[Compose BOM](https://developer.android.com/develop/ui/compose/bom)、[Compose Releases](https://developer.android.com/jetpack/androidx/releases/compose)
+
+## 8. Compose May 2026 与 Material 3 Expressive
+
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: Compose BOM 2026.05.00, Compose Material3 Adaptive 1.2.0 (2026-05-06 stable), Material 3 Expressive, checked 2026-05-20 -->
+
+### Compose Material3 Adaptive 1.2.0 稳定（2026-05-06）
+
+`androidx.compose.material3.adaptive` 系列推进到 **1.2.0 stable**，是面向折叠屏 / 平板 / 大屏 ChromeOS 的官方自适应布局库。来源：[Compose Material3 Adaptive Releases](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive)
+
+```kotlin
+// build.gradle.kts — Compose BOM 2026.05 + Adaptive 1.2.0
+dependencies {
+    implementation(platform("androidx.compose:compose-bom:2026.05.00"))
+    implementation("androidx.compose.material3:material3")
+
+    // Adaptive layout（折叠/平板/大屏）
+    implementation("androidx.compose.material3.adaptive:adaptive:1.2.0")
+    implementation("androidx.compose.material3.adaptive:adaptive-layout:1.2.0")
+    implementation("androidx.compose.material3.adaptive:adaptive-navigation:1.2.0")
+
+    // Material 3 Expressive 视觉风格
+    implementation("androidx.compose.material3:material3-window-size-class")
+}
+```
+
+```kotlin
+// 使用 NavigableListDetailPaneScaffold 自动适配 list-detail 布局
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
+@Composable
+fun MyApp() {
+    val navigator = rememberListDetailPaneScaffoldNavigator<UserId>()
+
+    NavigableListDetailPaneScaffold(
+        navigator = navigator,
+        listPane = {
+            UserListScreen(
+                onUserClick = { userId ->
+                    navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, userId)
+                }
+            )
+        },
+        detailPane = {
+            val userId = navigator.currentDestination?.contentKey
+            userId?.let { UserDetailScreen(it) }
+        }
+    )
+    // 手机：单栏覆盖；平板/折叠屏：list + detail 双栏
+}
+```
+
+### Material 3 Expressive 设计语言
+
+Material 3 Expressive 是 Google I/O 2026 公布的新视觉系统，核心是 **流体动画 + 鲜活配色 + 触觉反馈**，与 iOS 26 Liquid Glass 形成对照（iOS 强调半透明玻璃质感，Android 强调情绪化的运动）。来源：[Google's Material 3 Expressive Redesign](https://www.androidsage.com/2026/05/13/google-material-3-expressive-redesign-with-gemini-intelligence-for-android/)、[Gemini 3.5 Arrives alongside Neural Expressive design](https://eftm.com/2026/05/google-i-o-keynote-gemini-3-5-arrives-alongside-neural-expressive-design-275940)
+
+落地路径：Compose Material3 1.4.x 已开始引入 Expressive 主题 token，正式的 `MaterialExpressiveTheme` 包装器会随 Compose BOM 2026.06+ 全量发布。当前最稳的做法是：
+
+```kotlin
+// 当前可用的 expressive 风格触觉反馈（2026-05）
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+
+@Composable
+fun ExpressiveButton(onClick: () -> Unit, content: @Composable () -> Unit) {
+    val haptic = LocalHapticFeedback.current
+    Button(
+        onClick = {
+            // M3 Expressive 强调"按下立即反馈"，先触觉再处理点击
+            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+            onClick()
+        }
+    ) { content() }
+}
+```
+
+### Compose BOM 2026.05.00 简明清单
+
+| 组件 | 版本 |
+|------|------|
+| Compose UI / Foundation / Animation | 1.11.x |
+| Material3 | 1.4.x |
+| Material3 Adaptive | **1.2.0 stable**（2026-05-06）|
+| Lifecycle Compose | 2.10.x |
+| Navigation Compose | 2.9.8 |
+| Navigation 3 | 1.1.1 stable |
+| Hilt Navigation Compose | 1.4.0-alpha01（按需引入）|
+
+### 升级建议
+
+| 当前 BOM | 建议路径 |
+|----------|----------|
+| 2026.03.00 / 2026.04.00 | 直接升 2026.05.00（无 Breaking） |
+| 2026.05.00 | 持续保持，等待 Material 3 Expressive 主题 token GA（预计 2026.07） |
+| 不使用 Adaptive | 在折叠屏 / 平板 / Chromebook 项目中**强烈建议**引入 `material3-adaptive` 1.2.0 |

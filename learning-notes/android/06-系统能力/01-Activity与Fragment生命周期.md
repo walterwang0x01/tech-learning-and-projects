@@ -301,3 +301,58 @@ Google 官宣 Android 17 缩短开发周期：跳过传统 "Developer Preview" �
 | ⭐️⭐️ | 内存敏感场景增加 ApplicationExitInfo 监控 | 用户感知 ANR/Kill |
 | ⭐️⭐️ | OTP 延迟保护（前台敏感字段读取行为） | UX 差异 |
 | ⭐️ | 系统级 Bubbles + Cross-device task handoff | 平板/折叠屏体验 |
+
+## 8. Android 17 Stable 跟进与 Material 3 Expressive
+
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: Android 17 API 37 stable expected June 2026, Material 3 Expressive, Google I/O 2026, checked 2026-05-20 -->
+
+Google I/O 2026（2026-05-19 至 05-20）正式公布 Android 17 的最终特性集和 Pixel/Galaxy 首批落地计划。稳定版仍按节奏在 **2026-06** 发布到 AOSP，Pixel/Galaxy 的 Gemini Intelligence 套件作为 OEM 增量功能在夏季陆续推送。来源：[Android Show 2026 — The Verge](https://www.theverge.com/tech/928624/android-show-2026-all-the-news-and-announcements)、[Android 17 Release Date — Tech Advisor](https://www.techadvisor.com/article/3122614/android-17-release-date-new-features-eligible-phones.html)
+
+### 8.1 与开发者直接相关的 12 项新特性
+
+| 类别 | 特性 | 对应用的影响 |
+|------|------|--------------|
+| 多任务 | App Bubbles（系统级悬浮气泡） | 需要适配 `Notification.BubbleMetadata`，类似 iOS Picture-in-Picture |
+| 输入法 | Rambler 语音转写 | 系统级，无需应用集成；建议优化 `EditText` 的语音输入兼容 |
+| 桌面 | AI 自定义 Widget（Gemini 生成） | Glance Widget 必须正确暴露 `WidgetMetadata` 才能被 AI 索引 |
+| 数字健康 | Pause Point（防止刷屏） | 系统级提示，应用不强制改造，但视频/Feed 流可主动尊重 |
+| 安全 | Banker Impersonator 防护 | 短信/呼叫权限审查更严，金融 App 需在权限提示中说明用途 |
+| 隐私 | One-time location（精细化） | `ACCESS_FINE_LOCATION` 用户可选 "仅这一次精确" |
+| 游戏 | Native controller remapping | `InputDevice` 新 API，游戏 App 应不再硬编码按键映射 |
+| 多设备 | Quick Share / AirDrop 互通 | 通过系统 Share Sheet 即可，无需修改应用代码 |
+| 输入 | EyeDropper API（Beta 2 引入） | 颜色选择、设计工具类应用可直接使用 |
+| 大屏 | 强制移除 orientation/resizability opt-out | sw > 600dp 设备必须支持横竖屏，影响 Activity 配置 |
+| 视觉 | 3D Emoji | 系统级，emoji 渲染会自动升级 |
+| 安全 | 系统级 Anti-Theft 持续模式 | Lock screen 与 SIM 绑定增强 |
+
+### 8.2 Material 3 Expressive 设计语言
+
+**Material 3 Expressive** 是 Android 17 的视觉重设计，与 iOS 26 Liquid Glass 在设计哲学上互为对照——但 M3 Expressive 强调"流体动画 + 鲜活配色 + 触觉反馈"，而非 iOS 的"半透明玻璃"。Gemini App、Google Tasks、Pixel 系统 UI 已开始采用。来源：[Google's Material 3 Expressive Redesign](https://www.androidsage.com/2026/05/13/google-material-3-expressive-redesign-with-gemini-intelligence-for-android/)
+
+```kotlin
+// Compose Material3 Adaptive 1.2.0（2026-05-06 stable）配合 M3 Expressive
+// build.gradle.kts
+dependencies {
+    implementation(platform("androidx.compose:compose-bom:2026.05.00"))
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material3.adaptive:adaptive:1.2.0")
+    implementation("androidx.compose.material3.adaptive:adaptive-layout:1.2.0")
+}
+```
+
+### 8.3 适配优先级建议（2026 H2 修订）
+
+| 优先级 | 项目 | 来源 |
+|--------|------|------|
+| ⭐️⭐️⭐️ | targetSdk = 37 + Contact Picker | Play 政策硬要求（2026-04-15 已生效） |
+| ⭐️⭐️⭐️ | 移除 MessageQueue 反射 / 升级卡顿监测库 | Android 17 lock-free MessageQueue |
+| ⭐️⭐️⭐️ | sw > 600dp 设备适配横竖屏 | API 37 移除 opt-out |
+| ⭐️⭐️ | App Bubbles + Notification.BubbleMetadata | 多任务 UX 跃升 |
+| ⭐️⭐️ | Glance Widget 暴露元数据 | AI 自定义 Widget 索引 |
+| ⭐️⭐️ | 内存敏感场景增加 ApplicationExitInfo 监控 | Beta 4 内存限制器 |
+| ⭐️ | Material 3 Expressive 视觉适配 | 视觉一致性，非阻塞 |
+| ⭐️ | 系统级 Bubbles + Cross-device task handoff | 平板/折叠屏体验 |
+
+> 工具链节奏：iOS 27 在 2026-04-28 强制 SDK 26 与 UIScene；Android 17 强制 targetSdk 36（Play 政策）已先行落地，targetSdk 37 适配窗口为 2026-06 至 2026-09。

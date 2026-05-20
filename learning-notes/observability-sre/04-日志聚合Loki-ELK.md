@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Loki 3.x, Elasticsearch 9.x, Fluent Bit 3.x, Vector 0.44, checked 2026-05-10 -->
+<!-- version-check: Loki 3.x stable, Loki 4.0 architecture (Kafka + DataObject), Elasticsearch 9.x, Fluent Bit 3.x, Vector 0.44, GrafanaCON 2026, checked 2026-05-20 -->
 
 ## 1. 方案对比
 
@@ -281,6 +281,118 @@ Grafana 的 Explore 和 Correlations 功能专门优化这个跳转链路。
 ☐ 日志成本可观（按 GB/天 监控）
 ```
 
+## 9. Loki 4.0 与 Kafka-backed 架构（GrafanaCON 2026）
+
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: Loki 4.0 architecture (Kafka-backed, DataObject columnar storage), Grafana 13 GrafanaCON 2026 (2026-04-21 Barcelona), checked 2026-05-20 -->
+
+GrafanaCON 2026（2026-04-21 巴塞罗那）发布的 Grafana 13 把 Loki 推向 4.0 架构方向，**核心变化是从单层"标签索引 + 对象存储"演进为"Kafka 摄取 + 列式 DataObject 存储 + 重写查询引擎"**。这是 Loki 自 3.0（2024）以来最大的架构重写。来源：[Inside Loki's new architecture for faster logging at petabyte scale](https://www.grafana.com/events/grafanacon/agenda/loki-petabyte-scale-logging-architecture/)、[InfoQ: Grafana Rearchitects Loki with Kafka and Ships a CLI](https://www.infoq.com/news/2026/04/grafana-loki-ai-agents/)、[The Road to Loki 4.0 — Loki Community Call June 2025](https://nicolevanderhoeven.com/blog/20250624-lcc-the-road-to-loki-4_0/)
+
+### 9.1 四大架构变化
+
+```
+旧架构（Loki 2.x / 3.x）:
+  Distributor → Ingester (in-memory) → Object Store (chunks)
+                                       └─ Index (BoltDB / TSDB)
+  Querier → Index → Chunks → 解压 → 行扫描
+
+新架构（Loki 4.0 方向，已部分在 Loki 3.x 实验启用）:
+  Distributor → Kafka (RF-1 持久化) → Ingester → DataObject (列式) → Object Store
+                                                                     ├─ 结构化元数据列
+                                                                     └─ 日志正文列
+  Query Planner → Scheduler → 跨分区并行扫描 → 列裁剪 → 仅读必要列
+```
+
+| 维度 | Loki 3.x | Loki 4.0 方向 |
+|------|----------|---------------|
+| 摄取持久化 | Ingester 副本（RF-3） | **Kafka 单副本（RF-1）**——Kafka 自身保证持久化 |
+| 存储格式 | Chunk（行式） | **DataObject（列式）**——结构化元数据成为独立列 |
+| 索引 | TSDB | DataObject 内嵌轻量索引（无需独立 BoltDB） |
+| 查询并行度 | 按 chunk 分区 | **按 DataObject 列 + Kafka 分区两层并行** |
+| 部署模式 | SSD（Simple Scalable）/ Microservices | SSD 模式**计划在 4.0 前废弃**，统一为 Microservices |
+| 数据扫描量（同等查询） | 100% | **5%**（20x 减少） |
+| 聚合查询延迟 | 1x | **0.1x**（10x 提速） |
+
+### 9.2 DataObject 列式存储
+
+Loki 4.0 引入新的存储格式 **DataObject**，把结构化元数据（labels、structured metadata）从行内存储改为独立列：
+
+```
+DataObject 物理布局:
+┌──────────────────────────────────────────────────┐
+│ Header                                            │
+├──────────────────────────────────────────────────┤
+│ Column: timestamp        (delta + zstd)          │
+│ Column: trace_id         (dictionary + zstd)     │
+│ Column: user_id          (dictionary + zstd)     │
+│ Column: status_code      (RLE + zstd)            │
+│ Column: log_line         (zstd)                  │
+├──────────────────────────────────────────────────┤
+│ Footer + 列偏移索引                                │
+└──────────────────────────────────────────────────┘
+```
+
+**好处**：
+
+- **列裁剪**：查询 `trace_id="..."` 只读 timestamp + trace_id 列，不必解压 log_line
+- **更高压缩率**：同列数据相似度高，zstd 压缩率比行式格式高 30-50%
+- **结构化元数据天然查询**：之前 structured metadata 必须 parse 后才能过滤，现在可以直接走列扫描
+
+来源：[The Road to Loki 4.0 with Ed Welch](https://notes.nicolevanderhoeven.com/system/cards/The+Road+to+Loki+4.0+with+Ed+Welch+-+Loki+Community+Call+June+2025)
+
+### 9.3 Kafka-backed 摄取路径
+
+```yaml
+# loki-config.yaml — Kafka 摄取（4.0 方向，3.5+ 实验性可用）
+ingester:
+  kafka:
+    enabled: true
+    brokers: ["kafka-0:9092", "kafka-1:9092", "kafka-2:9092"]
+    topic: loki-ingest
+    # Kafka 已经保证 RF-3 副本，Loki 自身只需 RF-1
+    replication_factor: 1
+  flush_period: 30s
+  max_chunk_age: 1h
+
+storage_config:
+  # DataObject 存储仍写到对象存储（S3/GCS/Azure Blob）
+  object_store:
+    type: s3
+    s3:
+      bucket: loki-data-objects
+      region: us-east-1
+```
+
+**收益**：
+
+| 项 | 旧（Ingester RF-3） | 新（Kafka RF-1） |
+|----|---------------------|------------------|
+| Ingester 内存占用 | 高（每副本一份） | 低（单副本+ Kafka 缓冲） |
+| 重启恢复 | 慢（需要从其他副本拉取 WAL） | 快（从 Kafka offset 重放） |
+| 跨可用区成本 | 高（3 副本网络写入） | 低（Kafka 自身分区） |
+| 端到端延迟 | <10s | <30s（Kafka 引入额外一跳，但仍 P99 < 1min） |
+
+### 9.4 SSD 模式废弃路径
+
+Loki 自 2024 起标记 **Simple Scalable Deployment (SSD) 模式将在 Loki 4.0 前废弃**，新部署应直接使用：
+
+- **Monolithic（单二进制）**：开发 / 小规模 / Demo
+- **Microservices（分布式）**：生产 / 大规模 / 多租户
+
+来源：[Upgrade the Helm chart to 6.0](https://grafana.com/docs/loki/latest/setup/upgrade/upgrade-to-6x/)、[Install the simple scalable Helm chart](https://grafana.com/docs/loki/latest/setup/install/helm/install-scalable/)
+
+### 9.5 适配建议（2026 H2）
+
+| 当前 Loki 版本 | 建议 |
+|----------------|------|
+| 2.9.x | 升级到 3.x microservices，避免 SSD 模式 |
+| 3.0 / 3.5 | 持续保持 microservices，跟踪 4.0 RC（预计 2026 Q4） |
+| Loki + Helm chart 6.x SSD 模式 | **开始迁移到 microservices**，4.0 不再支持 SSD |
+| 自建 ELK / OpenSearch | 评估 Loki 4.0 是否能取代——大多数运维日志场景成本下降 10x |
+
+> Grafana 13 同步发布 **GCX CLI**（`gcx query` / `gcx mcp serve`），让 Coding Agent / IDE 可以直接通过 MCP 协议查询日志，把"日志故障定位"嵌入开发工作流。这部分详见可观测性平台详解。
+
 ## 📖 参考资料
 
 - [Loki 官方文档](https://grafana.com/docs/loki/latest/)
@@ -288,3 +400,4 @@ Grafana 的 Explore 和 Correlations 功能专门优化这个跳转链路。
 - [Elasticsearch ILM](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html)
 - [Grafana Alloy](https://grafana.com/docs/alloy/latest/)
 - [Vector 文档](https://vector.dev/docs/)
+- [Inside Loki's new architecture — GrafanaCON 2026](https://www.grafana.com/events/grafanacon/agenda/loki-petabyte-scale-logging-architecture/)

@@ -326,3 +326,77 @@ fun process(value: String) {
 - 生产项目：**继续使用 2.3.21**，等 2.4 GA 稳定一段时间后再上
 - 库作者：可以用 2.4.0-Beta2 提前测试 binary compatibility，但发布版仍以 2.3.x 编译
 - KMP 项目：升级 2.4 前先确认 Compose Multiplatform 的兼容版本（CMP 1.11.0 当前对齐 Kotlin 2.3.x）
+
+### Kotlin 2.4.0-Beta2 详细稳定特性
+
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: Kotlin 2.4.0-Beta2 stable features list, KotlinConf 2026 keynote May 20-22, checked 2026-05-20 -->
+
+Kotlin 2.4.0-Beta2 已经把多个之前的 Experimental 特性升级为 **Stable**，使得 2.4 GA 后这些特性可以直接在生产项目中使用而无需 opt-in 注解。来源：[What's new in Kotlin 2.4.0-Beta2](https://kotlinlang.org/docs/whatsnew-eap.html)
+
+**1. Stable context parameters**：从 2.2 引入的 Beta 特性正式稳定
+
+```kotlin
+// 2.4 Stable：context parameters 取代旧的 context receivers
+// 可以在被调用函数内通过名字访问上下文实例
+context(logger: Logger, db: Database)
+fun saveUser(user: User) {
+    logger.info("保存用户 ${user.id}")
+    db.insert(user)
+}
+
+// 调用方使用 with(logger) { with(db) { saveUser(user) } } 自动注入
+```
+
+**2. Stable explicit backing fields**：之前需要 `@OptIn` 现在直接用
+
+```kotlin
+class Repository {
+    // 公开 List<User>，但内部用 MutableList 维护
+    val users: List<User>
+        field = mutableListOf<User>()  // backing field 类型不同于属性类型
+
+    fun add(user: User) {
+        users.field.add(user)  // 内部仍可调用 mutable API
+    }
+}
+```
+
+**3. Stable UUIDs in Standard Library**：`kotlin.uuid.Uuid` 进入 stdlib stable
+
+```kotlin
+import kotlin.uuid.Uuid
+
+val id = Uuid.random()           // 生成 v4 UUID
+val parsed = Uuid.parse("...")   // 安全解析
+```
+
+**4. Kotlin/JVM 支持 Java 26**：可以把 `jvmTarget` 设为 26，annotations in metadata 默认启用（Kotlin 反射可见 Java 注解）
+
+**5. Kotlin/Native CMS GC 成为默认**：替代之前的 stop-the-world GC，iOS App 在 Kotlin Multiplatform 共享代码段的 GC 暂停时间显著降低
+
+**6. Kotlin/Wasm 增量编译默认启用**：Wasm 项目重编译时间显著缩短，Component Model 支持是 WebAssembly 跨语言互操作的关键基础
+
+**7. Gradle 9.4.1 兼容**：必须使用 Gradle 9.4.1+ 才能用 2.4.0-Beta2 的部分 KMP 能力
+
+### KotlinConf 2026 速览（2026-05-20 至 05-22 慕尼黑）
+
+> 🔄 更新于 2026-05-20
+
+KotlinConf 2026 是 Kotlin 2.4 的发布舞台，超过 2,000 名 Kotlin 开发者到现场，全球同步直播在 [Kotlin YouTube 频道](https://www.youtube.com/@Kotlin)。Day 1 keynote 由 JetBrains Kotlin 团队主讲，Day 2 keynote 由前 Engineering VP Lena Reinhard 演讲 *We Were Meant to Be*（聚焦 AI 时代的工程团队领导力）。来源：[KotlinConf 2026 官网](https://www.kotlinconf.com/)、[KotlinConf 2026 Speakers](https://kotlinconf.com/speakers)
+
+**值得关注的方向（基于公开 schedule）**：
+
+1. **Kotlin Multiplatform 落地实战**：Jetpack Compose Multiplatform 1.11.0（2026-05-15 已发布）+ iOS 原生文本输入 opt-in，是把 KMP 在 iOS 端体验逼近 SwiftUI 的关键拼图
+2. **Koog——JetBrains 的 AI Agent 框架**：原生 Kotlin DSL，在 KotlinConf 全天 Workshop 中专题介绍。是 Kotlin 进入 AI Agent 生态的官方信号
+3. **Kotlin 2.4 路线图**：2.4 GA 时间窗预计在 KotlinConf 之后 4-6 周内（即 2026-06 末至 2026-07 初）
+
+**升级时间窗建议**：
+
+| 当前版本 | 建议路径 |
+|----------|----------|
+| 1.9.x | 先升 2.0 / 2.1 适配 K2，再升 2.3.21 |
+| 2.0 / 2.1 / 2.2 | 直接升 2.3.21（无 Breaking） |
+| 2.3.x | 持续保持 2.3.21，等 2.4 GA + Compose 1.12 BOM 同步发布后再升 |
+| 实验项目 | 可以用 2.4.0-Beta2，提前体验 stable context parameters / UUID / Java 26 |
