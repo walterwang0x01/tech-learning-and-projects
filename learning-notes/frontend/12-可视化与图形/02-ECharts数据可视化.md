@@ -57,7 +57,10 @@ window.addEventListener('resize', () => chart.resize());
 
 > ⚠️ **注意**：`echarts-for-react`（hustcc/echarts-for-react）已在 npm 标记为 deprecated（最后版本 3.0.2，2025-03-05），不再维护。新项目推荐以下替代方案。
 >
+> 🚨 **安全警告（2026-05-19）**：`echarts-for-react` 遭受 Mini Shai-Hulud 供应链攻击，攻击者通过被入侵的 `atool` npm 账号发布了恶意版本（含 CI/CD 凭证窃取器）。如果项目中仍在使用此包，请立即检查版本并锁定到 3.0.2 或更早的安全版本，或迁移到下方替代方案。来源：[StepSecurity 分析](https://www.stepsecurity.io/blog/compromised-atool-npm-account-delivers-ci-cd-credential-stealer-across-24-packages-echarts-for-react-package-timeago-js)
+>
 > <!-- 修复于 2026-05-15: echarts-for-react 已被 npm 标记为 deprecated，添加替代方案 -->
+> <!-- 修复于 2026-05-20: 补充 2026-05-19 Mini Shai-Hulud 供应链攻击安全警告 -->
 
 ```jsx
 // 方案 1：直接使用 echarts（推荐，无封装层）
@@ -113,7 +116,7 @@ const option = {
 </template>
 ```
 
-<!-- version-check: echarts 6.0.0, vue-echarts 7.x, @hugocxl/react-echarts 1.x, checked 2026-05-15 -->
+<!-- version-check: echarts 6.0.0, vue-echarts 7.x, @hugocxl/react-echarts 1.x, checked 2026-05-20 -->
 
 ## 4. 大数据量优化
 
