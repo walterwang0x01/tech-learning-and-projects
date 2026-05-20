@@ -33,7 +33,7 @@ OpenClaw 精简版，保留核心功能，去除平台级开销。
 ```bash
 # 最小配置启动（秒级）
 cat > config.yaml << EOF
-model: gpt-4o-mini
+model: gpt-5-mini  # 修复于 2026-05-20: gpt-4o-mini 已退役，改为 gpt-5-mini
 skills: [general-chat, file-manager]
 memory:
   type: sqlite
@@ -75,7 +75,8 @@ OpenFang 自主循环：
 ```python
 from openfang import TaskAgent
 
-agent = TaskAgent(model="gpt-4o", max_retries=5)
+# 修复于 2026-05-20: gpt-4o → gpt-5.2
+agent = TaskAgent(model="gpt-5.2", max_retries=5)
 
 result = agent.run(
     task="创建 Python REST API，包含用户 CRUD",

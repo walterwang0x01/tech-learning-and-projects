@@ -134,7 +134,7 @@ channels:
 # 主 Agent 配置
 agent:
   name: main-assistant
-  model: gpt-4o
+  model: gpt-5.2  # 修复于 2026-05-20: gpt-4o 已退役，统一升级为 gpt-5.2 系列
   skills:
     - general-chat
     - task-router
@@ -146,12 +146,12 @@ agent:
       trigger: "当用户询问编程相关问题时"
 
     - name: data-analyst
-      model: gpt-4o
+      model: gpt-5.2
       skills: [sql-query, data-visualization]
       trigger: "当用户需要数据分析时"
 
     - name: scheduler
-      model: gpt-4o-mini
+      model: gpt-5-mini
       skills: [calendar-assistant]
       trigger: "当用户需要日程管理时"
 ```

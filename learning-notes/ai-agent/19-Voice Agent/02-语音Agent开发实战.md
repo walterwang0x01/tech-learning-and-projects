@@ -29,6 +29,10 @@
 
 ### 2.1 环境准备
 
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: OpenAI Realtime API GA (gpt-realtime-2 / gpt-realtime-translate / gpt-realtime-whisper), checked 2026-05-20 -->
+
 ```bash
 pip install websockets openai pyaudio numpy
 # pyaudio 用于麦克风录音和音频播放
@@ -150,11 +154,12 @@ class RealtimeVoiceAgent:
         self.is_playing = False
 
     async def connect(self):
-        """建立 WebSocket 连接"""
-        url = "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview"
+        """建立 WebSocket 连接（GA 版本）"""
+        # 修复于 2026-05-20: 模型名 gpt-4o-realtime-preview → gpt-realtime-2，移除已废弃的 OpenAI-Beta header
+        url = "wss://api.openai.com/v1/realtime?model=gpt-realtime-2"
         headers = {
             "Authorization": f"Bearer {self.api_key}",
-            "OpenAI-Beta": "realtime=v1",
+            # 注意：GA 版本不再需要 "OpenAI-Beta": "realtime=v1"
         }
         self.ws = await websockets.connect(
             url,
@@ -189,6 +194,7 @@ class RealtimeVoiceAgent:
                 },
                 "input_audio_transcription": {
                     "model": "whisper-1",  # 同时输出用户语音的文字转录
+                    # ⚠️ 注意：GA 版本对此配置有变更，新版可使用 gpt-realtime-whisper 模型，请参考最新文档
                 },
                 "temperature": 0.7,
                 "max_response_output_tokens": 500,
@@ -426,7 +432,7 @@ async def entrypoint(ctx: JobContext):
             model="nova-2",
         ),
         llm=openai.LLM(                           # 大语言模型
-            model="gpt-4o",
+            model="gpt-5.2",                       # 修复于 2026-05-20: gpt-4o → gpt-5.2
             temperature=0.7,
         ),
         tts=elevenlabs.TTS(                        # 文本转语音
@@ -523,7 +529,7 @@ agent = client.conversational_ai.create_agent(
     language="zh",
     llm={
         "provider": "openai",
-        "model": "gpt-4o",
+        "model": "gpt-5.2",  # 修复于 2026-05-20: gpt-4o → gpt-5.2
         "system_prompt": """你是 XX 商城的客服助手。
 - 优先从知识库中查找答案
 - 回答简洁，不超过 3 句话
@@ -907,11 +913,13 @@ async def create_multilingual_agent(detected_language: str):
 
 ## 8. 相关文档
 
-- 语音 Agent 概览 → `语音Agent与实时交互.md`（本目录，平台对比）
-- Function Calling → `07-工具与Function Calling/Function Calling机制.md`
-- Agent 设计模式 → `01-Agentic设计模式/Agentic设计模式大全.md`
-- 可观测性 → `14-可观测与评估/LLM可观测性.md`
-- 实战案例 → `23-实战案例/智能客服Agent.md`
+<!-- 修复于 2026-05-20: 内部链接缺少编号前缀，全部补全 -->
+
+- 语音 Agent 概览 → `01-语音Agent与实时交互.md`（本目录，平台对比）
+- Function Calling → `07-工具与Function Calling/01-Function Calling机制.md`
+- Agent 设计模式 → `01-Agentic设计模式/02-Agentic设计模式大全.md`
+- 可观测性 → `14-可观测与评估/01-LLM可观测性.md`
+- 实战案例 → `23-实战案例/01-智能客服Agent.md`
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

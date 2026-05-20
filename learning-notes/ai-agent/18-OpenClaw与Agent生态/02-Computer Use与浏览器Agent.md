@@ -23,34 +23,38 @@ Computer Use 是指 AI 直接操控计算机界面（鼠标、键盘、屏幕）
 
 Claude 的 Computer Use 能力通过截图理解屏幕内容，生成鼠标/键盘操作指令。
 
+<!-- version-check: computer_20250124 (Claude 4 系列), beta header computer-use-2025-01-24, checked 2026-05-20 -->
+<!-- 修复于 2026-05-20: 工具版本 computer_20241022 已是旧版（对应已废弃的 Sonnet 3.7），Claude 4 模型须用 computer_20250124 -->
+
 ```python
 import anthropic
 
 client = anthropic.Anthropic()
 
-# Computer Use 工具定义
+# Computer Use 工具定义（Claude 4 系列）
 tools = [
     {
-        "type": "computer_20241022",
+        "type": "computer_20250124",
         "name": "computer",
-        "display_width_px": 1920,
-        "display_height_px": 1080,
+        "display_width_px": 1024,
+        "display_height_px": 768,
         "display_number": 1,
     },
     {
-        "type": "text_editor_20241022",
+        "type": "text_editor_20250124",
         "name": "str_replace_editor",
     },
     {
-        "type": "bash_20241022",
+        "type": "bash_20250124",
         "name": "bash",
     },
 ]
 
-response = client.messages.create(
+response = client.beta.messages.create(
     model="claude-sonnet-4-6-20260217",
     max_tokens=4096,
     tools=tools,
+    betas=["computer-use-2025-01-24"],  # 必须的 beta header
     messages=[{
         "role": "user",
         "content": "打开浏览器，搜索今天的天气，截图给我看",
@@ -66,6 +70,8 @@ for block in response.content:
             # action: {"action": "left_click"}
             # action: {"action": "type", "text": "today weather"}
             # action: {"action": "screenshot"}
+            # 增强动作（computer_20250124）：scroll、left_click_drag、
+            # right_click、double_click、hold_key、wait 等
             execute_computer_action(action)
 ```
 
@@ -101,13 +107,15 @@ with NovaAct(starting_page="https://github.com") as act:
 
 通过 MCP 协议将浏览器自动化能力暴露给 Agent。
 
+<!-- 修复于 2026-05-20: 官方 Playwright MCP 包是 @playwright/mcp（Microsoft 维护），不是 @anthropic/mcp-playwright -->
+
 ```json
-// MCP 配置 — Playwright
+// MCP 配置 — Playwright（官方包，Microsoft 维护）
 {
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@anthropic/mcp-playwright"]
+      "args": ["-y", "@playwright/mcp"]
     }
   }
 }

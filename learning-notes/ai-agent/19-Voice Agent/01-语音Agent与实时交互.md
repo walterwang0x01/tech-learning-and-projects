@@ -24,7 +24,7 @@
 │  原生音频模型（低延迟 ~300ms-1s）                    │
 │  ┌──────────────────────────────┐                  │
 │  │   Native Audio Model         │                  │
-│  │   (gpt-4o-realtime / Gemini) │                  │
+│  │   (gpt-realtime-2 / Gemini)  │                  │
 │  │   音频输入 → 直接音频输出      │                  │
 │  │   保留语气、情感、韵律         │                  │
 │  └──────────────────────────────┘                  │
@@ -35,16 +35,17 @@
 
 ## 2. OpenAI Realtime API（gpt-realtime）
 
-> 🔄 更新于 2026-04-21
+> 🔄 更新于 2026-05-20
 
-2026 年 Realtime API 正式 GA（脱离 Beta），模型从 `gpt-4o-realtime-preview` 升级为独立的 `gpt-realtime` 系列。2026-02-24 发布 `gpt-realtime-1.5`，指令遵循、工具调用和多语言准确性显著提升。来源：[OpenAI Community](https://community.openai.com/t/gpt-realtime-1-5-is-live-in-realtime-api/1374919)
+2026 年 Realtime API 正式 GA（脱离 Beta），模型从 `gpt-4o-realtime-preview` 升级为独立的 `gpt-realtime` 系列。2026-04 OpenAI 发布 **GPT-Realtime-2**（首个 GPT-5 类推理能力的语音模型）+ **GPT-Realtime-Translate**（70+ 语言实时翻译）+ **GPT-Realtime-Whisper**（流式语音转文本）。来源：[OpenAI - Advancing Voice Intelligence](https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api/)
 
-<!-- version-check: gpt-realtime-1.5, checked 2026-04-21 -->
+<!-- version-check: gpt-realtime-2, gpt-realtime-translate, gpt-realtime-whisper, checked 2026-05-20 -->
+<!-- 修复于 2026-05-20: 补充 GPT-Realtime-2/Translate/Whisper 三个新模型，标注 GA 后 OpenAI-Beta header 已移除 -->
 
 ```
 核心特性（2026 GA）：
 ├─ 原生音频：音频直入直出，保留语气和情感
-├─ WebSocket / WebRTC：双向流实时通信
+├─ WebSocket / WebRTC / SIP：三种连接方式
 ├─ Function Calling：语音模式下调用工具
 ├─ 远程 MCP Server：直接连接 MCP 工具（GA 新增）
 ├─ SIP 电话：连接 PSTN 电话网络（GA 新增）
@@ -52,17 +53,25 @@
 ├─ 中断处理：用户随时打断，Agent 立即停止
 ├─ 多种语音：ash, ballad, coral, sage, verse, cedar, marin
 ├─ 转录模型：约 90% 更少幻觉（对比 Whisper v2）
-└─ gpt-realtime-1.5：连接率翻倍（66%↑），电话错误减半
+└─ gpt-realtime-2：GPT-5 类推理，对话更自然，处理更复杂请求
 ```
 
-**gpt-realtime-1.5 关键改进**（2026-02-24）：
-- 更可靠的指令遵循（instruction adherence）
-- 工具调用准确性提升
-- 多语言任务表现改善
-- Genspark 报告连接率提升至 66%，电话错误减半
-- Sendbird 报告中断处理显著改善
+**GPT-Realtime-2 关键改进**（2026-04）：
+- 首个具备 GPT-5 类推理能力的语音模型
+- 更好的上下文处理和多轮对话能力
+- 支持更复杂的工具调用场景
+- WebSocket URL 改为 `wss://api.openai.com/v1/realtime?model=gpt-realtime-2`
+
+**GA 版本的重要变更**（与旧 Beta 版对比）：
+- 移除 `OpenAI-Beta: realtime=v1` header（不再需要）
+- 引入 `client_secrets` 端点（用于客户端临时凭证）
+- 引入 `session_type` 字段
+- `input_audio_transcription` 配置已变更（详见 GA 迁移指南）
+- 部分事件名更新
 
 ### WebSocket 连接与 Function Calling 示例
+
+> 🔄 更新于 2026-05-20: 模型名 `gpt-4o-realtime-preview` → `gpt-realtime-2`，移除 GA 后不再需要的 `OpenAI-Beta` header
 
 ```python
 import asyncio
@@ -70,11 +79,11 @@ import websockets
 import json
 
 async def realtime_voice_agent():
-    """OpenAI Realtime API — WebSocket 连接与 Function Calling"""
-    url = "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview"
+    """OpenAI Realtime API — WebSocket 连接与 Function Calling（GA 版本）"""
+    url = "wss://api.openai.com/v1/realtime?model=gpt-realtime-2"
     headers = {
         "Authorization": "Bearer sk-xxx",
-        "OpenAI-Beta": "realtime=v1",
+        # 注意：GA 版本不再需要 "OpenAI-Beta": "realtime=v1"
     }
 
     async with websockets.connect(url, extra_headers=headers) as ws:
@@ -169,8 +178,10 @@ asyncio.run(realtime_voice_agent())
 
 ### 定价模型
 
+> 🔄 更新于 2026-05-20: 定价数据为 2025 年 GA 后的标准价，gpt-4o 引用更新为 gpt-5.2
+
 ```
-OpenAI Realtime API 定价（2025）：
+OpenAI Realtime API 定价（2025 GA 标价）：
 ├─ 音频输入：  $0.06 / 分钟（约 $0.001/秒）
 ├─ 音频输出：  $0.24 / 分钟
 ├─ 文本输入：  $5.00 / 1M tokens
@@ -179,7 +190,7 @@ OpenAI Realtime API 定价（2025）：
 
 对比传统管道：
 ├─ Whisper STT:    $0.006 / 分钟
-├─ GPT-4o:         ~$0.01 / 请求
+├─ GPT-5.2:        ~$0.01 / 请求
 ├─ TTS:            $0.015 / 1K 字符
 └─ 管道总计 5 分钟 ≈ $0.30（更便宜但延迟高）
 ```
@@ -222,7 +233,7 @@ agent = client.conversational_ai.create_agent(
     language="zh",
     llm={
         "provider": "openai",
-        "model": "gpt-4o",
+        "model": "gpt-5.2",  # 修复于 2026-05-20: gpt-4o → gpt-5.2
         "system_prompt": "你是一个专业的中文客服，简洁友好地回答问题。"
     },
     voice={
@@ -281,11 +292,12 @@ function VoiceAgent() {
 
 ## 4. LiveKit Agents（开源）
 
-> 🔄 更新于 2026-04-21
+> 🔄 更新于 2026-05-20
 
-开源实时通信框架，Agent 作为"参与者"加入音视频房间。v1.5.0（2026-03）引入自适应中断处理和动态端点检测，是语音 Agent 开源方案的标杆。来源：[LiveKit Community](https://community.livekit.io/t/python-agents-1-5-0-released/619)
+开源实时通信框架，Agent 作为"参与者"加入音视频房间。**Python Agents v1.5.5**（2026-04 发布）持续改进自适应中断处理和动态端点检测，是语音 Agent 开源方案的标杆。来源：[LiveKit Community](https://community.livekit.io/t/released-agents-python-1-5-5-and-agents-nodejs-1-2-8/918)
 
-<!-- version-check: LiveKit Agents 1.5.2, checked 2026-04-21 -->
+<!-- version-check: LiveKit Agents Python 1.5.5, NodeJS 1.2.8, checked 2026-05-20 -->
+<!-- 修复于 2026-05-20: 1.5.2 → 1.5.5（PyPI 确认） -->
 
 ```
 核心特性（v1.5.x）：
@@ -347,7 +359,7 @@ async def entrypoint(ctx: JobContext):
     agent = VoicePipelineAgent(
         vad=silero.VAD.load(),                    # 语音活动检测
         stt=deepgram.STT(language="zh"),           # 语音转文本
-        llm=openai.LLM(model="gpt-4o"),           # 大语言模型
+        llm=openai.LLM(model="gpt-5.2"),          # 修复于 2026-05-20: gpt-4o → gpt-5.2
         tts=elevenlabs.TTS(                        # 文本转语音
             voice_id="your-voice-id",
             model_id="eleven_turbo_v2_5",
@@ -411,7 +423,7 @@ response = requests.post(
             "firstMessage": "您好，这里是XX公司，请问是张先生吗？",
             "model": {
                 "provider": "openai",
-                "model": "gpt-4o",
+                "model": "gpt-5.2",
                 "systemPrompt": "你是一个专业的电话销售助手...",
                 "tools": [
                     {
@@ -478,12 +490,22 @@ agent = client.agent.create(
 
 Google 的双向音视频流式 API，原生多模态（看+听+说）。
 
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: gemini-3.1-flash-live (2026-03), gemini-3.5-flash (2026-05-19 I/O 发布), checked 2026-05-20 -->
+<!-- 修复于 2026-05-20: gemini-2.0-flash-live → gemini-3.1-flash-live（2026-03 发布）；Gemini 3.5 Flash 在 Google I/O 2026 发布 -->
+
+**当前模型**（2026-05）：
+- `gemini-3.1-flash-live`：Gemini Live 当前主力模型（2026-03 发布），低延迟语音交互
+- `gemini-3.5-flash`：Google I/O 2026 发布的最新主力模型（2026-05-19），更强的 Agent 能力
+- 旧的 `gemini-2.0-flash-live` 已被 3.x 系列取代
+
 ```
 核心特性：
 ├─ 双向流：音频 + 视频实时双向传输
 ├─ 原生多模态：摄像头画面 + 语音同时处理
 ├─ Google ADK 集成：与 Agent Development Kit 无缝配合
-├─ 长上下文：支持长时间对话
+├─ 长上下文：1M tokens 上下文窗口（Gemini 3.5 Flash）
 ├─ 工具调用：Function Calling + Google Search
 └─ 免费额度：Gemini API 有免费调用额度
 ```
@@ -493,7 +515,7 @@ import asyncio
 from google import genai
 
 client = genai.Client(api_key="your-gemini-key")
-model = "gemini-2.0-flash-live"
+model = "gemini-3.1-flash-live"  # 修复于 2026-05-20: 旧的 gemini-2.0-flash-live 已被取代
 
 config = {
     "response_modalities": ["AUDIO"],
@@ -545,7 +567,7 @@ asyncio.run(gemini_live_session())
 | 特性 | OpenAI Realtime | ElevenLabs | LiveKit | Vapi | Retell AI | Gemini Live |
 |------|----------------|------------|---------|------|-----------|-------------|
 | 方式 | 原生音频模型 | STT+LLM+TTS | 插件管道 | 托管平台 | 托管平台 | 原生多模态 |
-| 最新模型 | gpt-realtime-1.5 | Eleven v3 Conv. | v1.5.2 | — | — | Gemini 2.0 Flash |
+| 最新模型 | gpt-realtime-2 | Eleven v3 Conv. | v1.5.5 | — | — | Gemini 3.1 Flash Live / 3.5 Flash |
 | 延迟 | ~300ms-1s | ~1s | ~1-2s（取决插件） | ~600ms | ~800ms | ~500ms-1s |
 | 语言 | 50+ | 30+ | 取决 STT/TTS 插件 | 20+ | 10+ | 40+ |
 | 电话支持 | ✅ SIP | ❌（需集成） | ✅ SIP/PSTN | ✅ 核心功能 | ✅ 核心功能 | ❌ |
@@ -644,11 +666,13 @@ VAD 决定"用户是否在说话"：
 
 ## 12. 相关文档
 
-- Agent 协议 → `02-Agent协议/Agent协议全景图.md`（MCP 协议基础）
-- Function Calling → `07-工具与Function Calling/Function Calling机制.md`
-- 实时通信 → `语音Agent开发实战.md`（本目录，开发实战指南）
-- 模型服务 → `12-模型服务/OpenAI与Claude API.md`（API 调用基础）
-- 工具平台 → `08-工具平台与沙箱/Agent工具生态总览.md`
+<!-- 修复于 2026-05-20: 内部链接缺少编号前缀，全部补全 -->
+
+- Agent 协议 → `02-Agent协议/01-Agent协议全景图.md`（MCP 协议基础）
+- Function Calling → `07-工具与Function Calling/01-Function Calling机制.md`
+- 实时通信 → `02-语音Agent开发实战.md`（本目录，开发实战指南）
+- 模型服务 → `12-模型服务/01-OpenAI与Claude API.md`（API 调用基础）
+- 工具平台 → `08-工具平台与沙箱/01-Agent工具生态总览.md`
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

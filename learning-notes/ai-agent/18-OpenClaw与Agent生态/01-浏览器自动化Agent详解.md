@@ -37,6 +37,17 @@
 - Agent 可通过 CLI 自助注册 Cloud 账户
 - 代理数据成本 $10/GB → $5/GB
 
+> 🔄 更新于 2026-05-20: Browser Use Cloud Python SDK 已独立为 `browser-use-sdk` 包（PyPI 2026-04-04），使用 `client.run()` 新 API。下面的代码示例为开源 `browser-use` 包（仍活跃维护）的本地用法，两者并存。
+>
+> Cloud SDK 用法：
+> ```python
+> from browser_use_sdk import AsyncBrowserUse
+> client = AsyncBrowserUse()
+> result = await client.run("Find the top 3 trending repos on GitHub today")
+> ```
+
+<!-- 修复于 2026-05-20: gpt-4o 已退役（ChatGPT 2026-02-13 退役，API 仍可用但不推荐），改为 gpt-5.2 -->
+
 ```python
 from browser_use import Agent, Controller
 from langchain_openai import ChatOpenAI
@@ -44,7 +55,7 @@ from langchain_openai import ChatOpenAI
 # 基本用法
 agent = Agent(
     task="去 GitHub Trending，筛选 Python，提取前 5 个项目名称和 Star 数",
-    llm=ChatOpenAI(model="gpt-4o"),
+    llm=ChatOpenAI(model="gpt-5.2"),
     max_actions_per_step=5,
 )
 result = await agent.run()
