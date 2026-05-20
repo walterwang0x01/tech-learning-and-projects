@@ -1,0 +1,72 @@
+# 简报扫描配置
+# 用于 tool-briefing-scan-for-projects hook，按项目维度做总结。
+# 改项目 / 关注栈 / 时间范围 → 改这个文件，不改 hook。
+
+# ---- 主题开关 ----
+# 哪些主题要纳入扫描（默认只扫国际 + AI agent）
+topics:
+  ai-agent: true
+  global-tech: true
+  china-tech: false   # 默认关，需要时改 true
+
+# ---- 增量游标 ----
+# 上次扫描覆盖到的最后一天（YYYY-MM-DD）。
+# 留空 → 扫全部历史；有值 → 只扫这之后到今天的简报。
+# hook 跑完会自动改写这一行。
+last_scanned_date: "2026-05-19"
+
+# ---- 项目清单 ----
+# 每个项目给出关注栈关键词，sub-agent 据此判断条目是否相关。
+# 关键词尽量具体（库名、协议、特定问题），少用泛词（如 "AI"）。
+projects:
+  - name: agenzo
+    description: AI 聊天助手 H5（FastAPI + Vue 3，对话驱动）
+    path: /Users/administrator/PycharmProjects/agenzo
+    stack:
+      backend: [Python, FastAPI, SQLAlchemy, MySQL, Redis, Celery, Alembic]
+      frontend: [Vue 3, Vite, TypeScript, Naive UI, Tailwind, Pinia]
+    interests:
+      - LLM 意图识别 / 实体提取 / prompt 工程
+      - 对话式 Agent 编排（SceneRouter 模式）
+      - prompt injection / 工具调用安全 / IPI
+      - 多渠道（微信/H5）支付与合规
+      - LangGraph / LangChain / CrewAI 架构变化
+      - FastAPI / Python 异步生态升级
+
+  - name: personal-brand-agent
+    description: 个人内容生产 Agent（briefing → post 分发）
+    path: /Users/administrator/PycharmProjects/personal-brand-agent
+    stack:
+      backend: [Python, Postiz]
+    interests:
+      - Anthropic / Claude 计费策略变化
+      - Claude Code / Codex / Agent SDK 更新
+      - 内容自动生成的版权 / 平台规则
+      - X / 微博 / 公众号自动化分发
+      - DeepSeek / Qwen / Kimi 等可替代模型
+      - MCP 内容相关 server（搜索、浏览器、社交平台）
+
+  - name: portfolio
+    description: Astro 个人站 + 静态博客
+    path: /Users/administrator/PycharmProjects/portfolio
+    stack:
+      frontend: [Astro, Tailwind, TypeScript]
+    interests:
+      - Astro / Vite / 静态站构建工具更新
+      - SEO / RSS / sitemap 生态变化
+      - 博客内容相关的 AI 写作工具
+
+  - name: tech-learning-and-projects
+    description: 简报流水线本身（ingest → classify → curate）
+    path: /Users/administrator/PycharmProjects/tech-learning-and-projects
+    stack:
+      backend: [Python, RSS, MCP]
+    interests:
+      - RSS 源 / HN API 变化
+      - LLM 批量分类 / embedding / 语义去重新方案
+      - MCP server 用于内容检索（如 Semble）
+      - Agent 框架评估基准（leaderboard）
+      - Python 工具链（uv / Ruff / pytest）
+
+# ---- 输出 ----
+output_dir: learning-notes/briefings/_summaries
