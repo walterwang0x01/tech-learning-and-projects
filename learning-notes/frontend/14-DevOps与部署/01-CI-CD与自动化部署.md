@@ -4,8 +4,8 @@
 
 ## 1. GitHub Actions
 
-<!-- version-check: actions/checkout v5/v6, setup-node v5, Node.js 22 LTS, checked 2026-05-19 -->
-<!-- 修复于 2026-05-19: 基础示例升级 actions 版本 v4 → v5（v6 已 GA），Node 20 → 22（20 即将进入维护期） -->
+<!-- version-check: actions/checkout v6, setup-node v5, pnpm 11, Node.js 24 LTS, checked 2026-05-20 -->
+<!-- 修复于 2026-05-20: actions/checkout v5 → v6（Node.js 24 runtime），pnpm 10 → 11（2026-05 发布），Node 22 → 24（当前 LTS） -->
 
 ```yaml
 # .github/workflows/ci.yml
@@ -21,12 +21,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
-        with: { version: 10 }
+        with: { version: 11 }
       - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version: 24
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
@@ -38,11 +38,11 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
-        with: { version: 10 }
+        with: { version: 11 }
       - uses: actions/setup-node@v5
-        with: { node-version: 22, cache: 'pnpm' }
+        with: { node-version: 24, cache: 'pnpm' }
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       # 部署到服务器 / CDN / Vercel / Netlify 等
@@ -56,7 +56,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
         with:
@@ -180,12 +180,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # 使用 SHA 固定依赖（防止供应链攻击）
+      # 注意：以下 SHA 对应 v4.2.2，生产环境应更新为 v6 的 SHA
+      # 获取最新 SHA：https://github.com/actions/checkout/releases
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: pnpm/action-setup@a7487c7e89a18df77bba2c740b5837da1ba4f305 # v4.1.0
-        with: { version: 10 }
+        with: { version: 11 }
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 22
+          node-version: 24
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
@@ -202,9 +204,9 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - uses: pnpm/action-setup@a7487c7e89a18df77bba2c740b5837da1ba4f305
-        with: { version: 10 }
+        with: { version: 11 }
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with: { node-version: 22, cache: 'pnpm' }
+        with: { node-version: 24, cache: 'pnpm' }
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 ```

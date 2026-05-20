@@ -127,7 +127,7 @@ A: React — 大型项目、灵活度高、生态丰富、函数式编程
 
 > 🔄 更新于 2026-05-02
 
-<!-- version-check: React 19.2.4, Vue 3.6 Vapor Mode, React Router 7.9.x, checked 2026-05-19 -->
+<!-- version-check: React 19.2.4, Vue 3.6 Vapor Mode, React Router 7.6.x, checked 2026-05-20 -->
 
 ### React 19 与 React Compiler
 
@@ -200,8 +200,8 @@ A: 这是 iOS 的概念。Vue 中对应的是：
 
 ```
 Q: React Router v7 和 v6 有什么区别？
-A: v7（2024-11 GA，当前 7.9.x）从路由库变为全栈框架：
-   <!-- 修复于 2026-05-19: 补充 GA 时间和当前版本 -->
+A: v7（2024-11 GA，当前 7.6.x）从路由库变为全栈框架：
+   <!-- 修复于 2026-05-20: 7.9.x → 7.6.x（npm 确认） -->
    - 统一包名（react-router 主包，react-router-dom 仅做转发）
    - Framework Mode：内置 SSR/RSC 支持（吸收了 Remix）
    - 三种使用模式：Declarative / Data / Framework

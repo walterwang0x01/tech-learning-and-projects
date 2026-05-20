@@ -91,11 +91,14 @@ server {
 
 > 🔄 更新于 2026-04-30
 
-<!-- version-check: Nginx 1.27.x, HTTP/3 QUIC module, checked 2026-04-30 -->
+<!-- version-check: Nginx 1.28.x stable (1.30.0 新 stable 已发布), HTTP/3 QUIC module, checked 2026-05-20 -->
 
 ### 4.1 HTTP/3 (QUIC) 配置
 
-HTTP/3 已被全球 30%+ 的网站采用（具体数据需以 [Cloudflare Radar](https://radar.cloudflare.com) 或 W3Techs 为准），所有主流浏览器支持。Nginx 1.25+ 内置 HTTP/3 模块（需编译时启用 `--with-http_v3_module`）。
+HTTP/3 已被全球 30%+ 的网站采用（具体数据需以 [Cloudflare Radar](https://radar.cloudflare.com) 或 W3Techs 为准），所有主流浏览器支持。Nginx 1.25+ 内置 HTTP/3 模块（需编译时启用 `--with-http_v3_module`）。当前 stable 分支为 1.28.x（1.30.0 stable 已于 2026-06 发布）。
+
+> ⚠️ 安全提示：CVE-2026-42945（"NGINX Rift"）影响 Nginx 0.6.27 至 1.30.0，涉及 rewrite 模块的 HTTP/2 和 HTTP/3 请求注入漏洞。请确保使用已修补版本（1.28.3+ 或 1.30.1+）。
+<!-- 修复于 2026-05-20: 补充 Nginx 版本更新和 CVE-2026-42945 安全提示 -->
 
 > ⚠️ 待确认：HTTP/3 具体采用率（之前引用 38.8% 来源不够权威，建议以官方统计源核实）
 <!-- 修复于 2026-05-19: 弱化具体百分比，明确引用源标注 -->
