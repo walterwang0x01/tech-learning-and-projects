@@ -253,3 +253,73 @@ print(result["report"])
 4. **MCP 标准化**：数据源通过 MCP Server 暴露给 Agent，统一工具接口
 
 来源：[Best AI Data Analysis Agents 2026](https://s16353.pcdn.co/resources/blog/best-ai-data-analysis-agents-in-2026-12-platforms-compared-for-nl-to-sql-autonomous-investigation-and-governance)、[MindStudio](https://www.mindstudio.ai/blog/ai-agents-data-analysis-ways)
+
+## 8. DuckLake 1.0 与 Agentic Analytics 的契合
+
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: DuckLake 1.0 GA (2026-04-13), Agent-friendly lakehouse, checked 2026-05-20 -->
+
+第 7 节谈到 Agentic Analytics 的核心变化是"Agent 自主调查"——这给底层数据基础设施提出新要求：
+
+```
+传统 Lakehouse 启动门槛：
+  Spark cluster + Iceberg REST Catalog + 对象存储
+  → 设置时间：分钟到小时
+  → Agent 等不起
+
+DuckLake 1.0 + DuckDB（2026-04-13 GA）：
+  Postgres 元数据 + S3 Parquet + DuckDB 进程
+  → 设置时间：秒级
+  → Agent 调用一次工具就能拉起
+```
+
+### 8.1 为什么 DuckLake 适合 Agent 调查场景
+
+- **元数据走 SQL**：Agent 用 `SELECT * FROM ducklake_snapshot` 就能查表的所有历史，不需要解析散落的 metadata.json
+- **多写并发由 Postgres 保证**：多个 Agent 并行写入同一数据集时，事务隔离由元数据库 ACID 处理，不需要外部 catalog
+- **Data Inlining**：小表（配置、维度表）直接存元数据库，Agent 查询零 S3 延迟
+- **与 Iceberg 互通**：Agent 在 DuckLake 里探索完，可以把表导出成 Iceberg 给 Spark/Trino 跑生产 ETL
+
+### 8.2 Agent 工具示例
+
+```python
+# Agent 通过 MCP 工具触发"在 DuckLake 上做分析"
+from mcp.server.fastmcp import FastMCP
+import duckdb
+
+mcp = FastMCP("ducklake-analytics")
+
+@mcp.tool()
+def analyze_with_ducklake(question: str, table_glob: str) -> str:
+    """让 Agent 在 DuckLake 上做即席分析。
+    table_glob 是 S3 上 Parquet 文件的 glob 模式。"""
+    con = duckdb.connect()
+    # 几秒内拉起 lakehouse：Postgres 元数据库 + S3 数据
+    con.execute("""
+        ATTACH 'ducklake:postgres:host=metadb dbname=lake' AS lake
+    """)
+    con.execute("USE lake")
+
+    # Agent 自己写 SQL 跑分析（NL-to-SQL 已在更上游完成）
+    result = con.execute(f"""
+        SELECT date_trunc('day', ts) AS day, count(*) AS events
+        FROM read_parquet('{table_glob}')
+        GROUP BY 1 ORDER BY 1 DESC LIMIT 30
+    """).fetchall()
+    return str(result)
+```
+
+### 8.3 ClickHouse Agentic Data Stack 的对照路线
+
+ClickHouse 在 2026 年同步推出了 [Agentic Data Stack](https://clickhouse.com/ai)：ClickHouse + LibreChat + Langfuse 组合。与 DuckLake 路线的差异：
+
+| 维度 | DuckLake + DuckDB | ClickHouse Agentic Data Stack |
+|------|-------------------|------------------------------|
+| 数据规模 | GB ~ 中 TB | TB ~ PB |
+| 启动方式 | 一个 DuckDB 进程 | 已有 ClickHouse 集群 |
+| 元数据 | Postgres 中的元数据表 | ClickHouse 自身 |
+| Agent 集成 | MCP 工具 + DuckDB SQL | LibreChat + Langfuse 可观测 |
+| 适合场景 | 个人 / 团队级即席分析 | 企业级 OLAP + Agent 联合 |
+
+来源：[ClickHouse — Agentic Data Stack](https://clickhouse.com/ai)、[DuckLake 1.0 GA](https://duckdb.org/2026/04/13/ducklake-10.html)

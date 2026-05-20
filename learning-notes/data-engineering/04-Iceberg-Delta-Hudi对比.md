@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Iceberg 1.10.1 stable, 1.11.0 RC, V4 spec design progressing, Delta Lake 4.0, Hudi 1.0, Polaris 1.4.1, checked 2026-05-16 -->
+<!-- version-check: Iceberg 1.10.1 stable, 1.11.0 RC, V4 spec design progressing, Delta Lake 4.0, Hudi 1.0, Polaris 1.4.1, Polaris 1.5 planning, DuckLake 1.0 GA (2026-04-13), checked 2026-05-20 -->
 
 ## 1. 为什么需要表格式
 
@@ -340,3 +340,119 @@ Iceberg 社区在 2026 年 4-5 月的 Apache Data Lakehouse Weekly 中持续推�
 - [Apache Hudi](https://hudi.apache.org/)
 - [S3 Tables Overview](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html)
 - [Iceberg vs Delta vs Hudi](https://www.onehouse.ai/blog/apache-hudi-vs-delta-lake-vs-apache-iceberg-lakehouse-feature-comparison)
+
+## 14. DuckLake 1.0：把元数据放进 SQL 数据库
+
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: DuckLake 1.0 GA (2026-04-13), production-ready, checked 2026-05-20 -->
+
+DuckDB 团队在 2026-04-13 发布 DuckLake v1.0 标准，把 lakehouse 元数据从"分散在对象存储里的成千上万个 JSON 文件"挪进 SQL 数据库。
+
+```
+传统 Iceberg / Delta：
+  S3 上的目录里
+  ├─ metadata/v1.metadata.json
+  ├─ metadata/v2.metadata.json
+  ├─ snapshots/snap-***.avro
+  ├─ manifests/...
+  └─ data/*.parquet
+  → 每次提交需要原子重写 metadata 指针
+  → 列出目录 + 读多个文件才能拿到表的当前状态
+
+DuckLake v1.0：
+  Postgres / SQLite / DuckDB 中的几张表保存元数据
+  ├─ ducklake_table（表定义）
+  ├─ ducklake_snapshot（快照）
+  ├─ ducklake_data_file（数据文件清单）
+  └─ ducklake_partition_value（分区值）
+  + 对象存储里只放 Parquet 数据文件
+  → 元数据查询走 SQL，不需要扫目录
+  → 多写并发由 SQL 数据库的 ACID 保证
+```
+
+### 14.1 设计哲学
+
+DuckLake 的核心论点：lakehouse metadata 是关系型数据，本来就该放进数据库。把元数据 JSON 文件解析成 SQL 表后，原本依赖外部 catalog 服务的能力（多写并发、跨表事务、blob 引用计数）变成了 SQL 自带能力。来源：[DuckDB Blog — DuckLake 1.0](https://duckdb.org/2026/04/13/ducklake-10.html)、[InfoQ — DuckLake 1.0](https://www.infoq.com/news/2026/05/ducklake-sql-catalog/)
+
+### 14.2 v1.0 关键能力
+
+```sql
+-- DuckDB 中创建 DuckLake catalog
+ATTACH 'ducklake:postgres:host=localhost dbname=metadata' AS lake;
+USE lake;
+
+-- 1. Sorted Tables：写入时按列排序，加速范围查询
+CREATE TABLE events (
+    user_id BIGINT,
+    ts TIMESTAMP,
+    event_type VARCHAR,
+    payload JSON
+)
+WITH (sort_by = 'ts');
+
+-- 2. Bucket Partitioning（hash 分区，避免数据倾斜）
+CREATE TABLE orders (
+    order_id BIGINT,
+    customer_id BIGINT,
+    amount DECIMAL(10, 2),
+    created_at TIMESTAMP
+)
+WITH (partition_by = 'bucket(customer_id, 16)');
+
+-- 3. Data Inlining：小表的数据直接存进元数据库，避免读 Parquet
+CREATE TABLE config (
+    key VARCHAR PRIMARY KEY,
+    value JSON
+)
+WITH (inline_data = true);  -- 行数 < 阈值时不走 S3
+```
+
+### 14.3 v1.0 还有这些
+
+- **Geometry 支持**：GeoParquet 完整集成，用于地理空间分析
+- **Iceberg 兼容的 Deletion Vectors**：行级删除走位图，与 Iceberg V3 spec 一致
+- **多人多写并发**："multiplayer DuckDB"——多个 DuckDB 进程通过 DuckLake 读写同一数据集，DuckDB 原生 `.duckdb` 格式做不到这一点
+- **Iceberg / Delta 互通**：可以把 DuckLake 表导出为 Iceberg 或 Delta，用 Spark/Trino 继续查询
+
+### 14.4 与 Iceberg / Delta / Hudi 的差异
+
+| 维度 | Iceberg / Delta / Hudi | DuckLake 1.0 |
+|------|----------------------|---------------|
+| 元数据存储 | 对象存储里的 JSON/Avro | SQL 数据库（Postgres/SQLite/DuckDB） |
+| Catalog 角色 | 必须有 REST Catalog（Polaris/Glue/Unity） | 元数据库本身就是 catalog |
+| 多写并发 | 依赖 catalog 的 atomic compare-and-swap | 依赖 SQL 数据库的事务 |
+| 启动门槛 | 需要部署 catalog + Spark/Flink | 一个 DuckDB 进程 + 一个 Postgres |
+| 适合场景 | TB - PB 级、跨引擎共享 | GB - 中 TB 级、Agentic Analytics、单机或小集群 |
+| 引擎支持 | Spark / Flink / Trino / DuckDB（部分） | DuckDB 原生 + 通过导出与 Iceberg 引擎互通 |
+
+### 14.5 选型建议
+
+```
+使用 DuckLake：
+├─ 数据规模在 GB ~ 中 TB
+├─ 团队不想运维 Polaris/Glue/Unity Catalog
+├─ Agentic Analytics 场景：Agent 几秒拉起 lakehouse 跑分析
+└─ MotherDuck 用户：托管 DuckLake 已 GA
+
+使用 Iceberg：
+├─ PB 级数据 + 跨引擎共享（Spark/Flink/Trino）
+├─ 已有 Polaris / Unity / Glue 投入
+└─ 需要 V3 spec 的 partition stats、view、object storage 兼容
+```
+
+来源：[MotherDuck Blog — DuckLake 1.0 GA](https://motherduck.com/blog/announcing-ducklake-1-0-on-motherduck/)、[ducklake.select](http://ducklake.select/)
+
+## 15. Polaris 1.5 路线图（2026-05）
+
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: Apache Polaris 1.5 planning (May 2026), 1.4.1 stable, checked 2026-05-20 -->
+
+Apache Polaris 在 1.4.1 安全补丁（修复 4 个协调披露 CVE）之后，于 2026-05 进入 1.5 规划阶段。1.5 的方向：
+
+- **Iceberg V4 spec 一等支持**：catalog-managed metadata 模式让 Polaris 不仅仅是 REST 协议代理，而是元数据所有者
+- **AI-Native 元数据**：与 Apache Lance 的多模态存储集成（2026-01 已发布），让 Polaris 同时管理 Iceberg 表和 Lance 表（向量 + 多模态）
+- **更细粒度的 RBAC**：行级 / 列级权限策略，配合 Iceberg view 用于数据共享场景
+
+来源：[Apache Data Lakehouse Weekly 2026-05](https://amdatalakehouse.substack.com/p/apache-data-lakehouse-weekly-may)、[Apache Polaris and Lance — AI-Native Storage](https://polaris.incubator.apache.org/blog/2026/01/06/apache-polaris-and-lance-bringing-ai-native-storage-to-the-open-multimodal-lakehouse/)

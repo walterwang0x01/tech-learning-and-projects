@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: ClickHouse 26.4 (latest), 26.3 LTS, checked 2026-05-14 -->
+<!-- version-check: ClickHouse 26.5 (preview), 26.4 (latest stable), 26.3 LTS, checked 2026-05-20 -->
 
 ## 1. 为什么要了解 ClickHouse
 
@@ -374,3 +374,39 @@ VALUES (now(), 'INFO', 'Agent completed task');
 | 已有 25.x 部署 | 评估升级到 26.3 LTS |
 
 来源：[ClickHouse Release 26.3](https://clickhouse.com/blog/clickhouse-release-26-03)、[ClickHouse 26.4 SQL 兼容性](https://www.tipranks.com/news/private-companies/clickhouse-enhances-sql-compatibility-in-version-26-4)（Content was rephrased for compliance with licensing restrictions）
+
+### 26.5 预告（Open House Event）
+
+> 🔄 更新于 2026-05-20
+
+ClickHouse 在 26.5 Community Call 之前已经预热了几个新能力。来源：[ClickHouse 26.5 features ahead of Open House](https://www.tipranks.com/news/private-companies/clickhouse-highlights-new-26-5-release-features-ahead-of-open-house-event)（Content was rephrased for compliance with licensing restrictions）
+
+**Negative LIMIT BY**：可以用负数从分组的"末尾开始"返回行，原本要写复杂的 `ROW_NUMBER()` 嵌套。
+
+```sql
+-- 之前：每个用户最近 3 条事件，要写窗口函数
+SELECT * FROM (
+    SELECT *, row_number() OVER (PARTITION BY user_id ORDER BY ts DESC) rn
+    FROM events
+) WHERE rn <= 3;
+
+-- 26.5：直接用负 LIMIT BY 表达"末尾 N 条"
+SELECT * FROM events
+ORDER BY user_id, ts
+LIMIT -3 BY user_id;
+-- 等价于"每个 user_id 取按 ts 升序的最后 3 行"
+```
+
+**SYSTEM PAUSE VIEW**：让 refreshable materialized view 进入暂停状态，不再触发刷新但保留状态。运维窗口期或下游系统维护时不需要 DROP/重建。
+
+```sql
+SYSTEM PAUSE VIEW analytics.daily_revenue_mv;
+-- 维护期间停止刷新
+
+SYSTEM RESUME VIEW analytics.daily_revenue_mv;
+-- 维护结束后恢复
+```
+
+**Cloud changelog 同步**：2026-05 ClickHouse Cloud 已开始把 *index analysis 阶段*分布式化，对 vector search 和 full-text search 这种重二级索引的表减少了单副本内存压力，查询性能通过分布式并行提升。来源：[ClickHouse Cloud changelog 2026](https://clickhouse.com/docs/whats-new/cloud)
+
+26.5 GA 版本号尚未正式锁定，建议生产环境继续使用 26.3 LTS，开发/测试环境关注 Open House Event 后的发布说明。

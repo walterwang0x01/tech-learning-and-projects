@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: pgvector 0.8.2, pgvectorscale 0.9.0, PostgreSQL 18.3, HNSW/DiskANN, checked 2026-05-13 -->
+<!-- version-check: pgvector 0.9.1 (PG 16+ required), pgvectorscale 0.9.0, PostgreSQL 18.4, HNSW/DiskANN, checked 2026-05-20 -->
 
 ## 1. 为什么是 pgvector 不是专用向量库
 
@@ -449,3 +449,71 @@ pgvector 0.8.0（2024-11）→ 0.8.2（2025 年底）的关键改进：
 - [Hybrid Search with pgvector](https://jkatz05.com/post/postgres/hybrid-search-postgres-pgvector/)
 - [dbi-services pgvector 索引对比（2026-03）](https://www.dbi-services.com/blog/pgvector-a-guide-for-dba-part-2-indexes-update-march-2026/)
 - 关联：[ai-agent/06-RAG进阶/02-向量数据库选型.md](../ai-agent/06-RAG进阶/02-向量数据库选型.md)
+
+## 15. pgvector 0.9.1 与 PG 18.4 协同
+
+> 🔄 更新于 2026-05-20
+
+<!-- version-check: pgvector 0.9.1, PostgreSQL 18.4 (2026-05-14), checked 2026-05-20 -->
+
+pgvector 0.9.x 把最低 PostgreSQL 版本提升到 16，对应 PG 18.4 安全发布（2026-05-14，11 个 CVE）后的推荐组合是 **pgvector 0.9.1 + PG 18.4**。
+
+### 15.1 0.9.x 关键变化
+
+- **要求 PostgreSQL 16+**：依赖 PG 16 的 generic-plan 改进，对带过滤的向量查询计划质量提升明显
+- **HNSW 维护成本进一步下降**：相比 0.8.x，0.9.1 的 HNSW 索引在批量更新场景下重组开销更低，对 RAG 场景持续注入新嵌入更友好
+- **Statistical Binary Quantization（SBQ）成熟**：与 pgvectorscale 配合，把每维向量压成 1 bit，索引体积可降至原来的 1/32，再用原向量做 rerank。来源：[DigitalOcean — Advanced Vector Workloads with pgvectorscale](https://docs.digitalocean.com/products/vector-databases/postgresql/how-to/advanced-workloads/)
+- **混合查询代价模型继续修正**：约 15% 的非向量查询时间增加（带 vector 列时），是较此前版本可接受的回归。来源：[markaicode — pgvector vs Redis 2026](https://markaicode.com/vs/pgvector-vs-redis/)（Content was rephrased for compliance with licensing restrictions）
+
+### 15.2 binary_quantize 实战示例
+
+适合内存吃紧、可接受 ~5-10% 召回率损失换 32x 索引体积压缩的场景。
+
+```sql
+-- 1. 建索引时直接用 binary_quantize 转 bit 类型
+CREATE INDEX ON items
+USING hnsw ((binary_quantize(embedding)::bit(1536)) bit_hamming_ops);
+
+-- 2. 查询：先用 Hamming 距离取前 20，再用原向量 rerank 出 top-5
+SELECT * FROM (
+    SELECT *
+    FROM items
+    ORDER BY binary_quantize(embedding)::bit(1536)
+             <~> binary_quantize('[1,-2,3,...]')
+    LIMIT 20
+) AS rerank
+ORDER BY embedding <=> '[1,-2,3,...]'
+LIMIT 5;
+```
+
+来源：[pgEdge Documentation — Binary Quantization](https://docs.pgedge.com/pgvector/development/binary-quantization/)
+
+### 15.3 PG 18.4 升级提示
+
+如果用 PG 18.0-18.2 + pgvector 0.8.x 的组合，升级到 PG 18.4 时**必须 REINDEX 依赖 `json_strip_nulls`/`jsonb_strip_nulls` 的索引**。这与 pgvector 索引无关，但很多 RAG 项目用 JSONB 存元数据 + vector 存 embedding，会同时触发：
+
+```sql
+-- 检测哪些索引需要重建
+SELECT indexrelid::regclass AS index_name, indrelid::regclass AS table_name
+FROM pg_index
+WHERE indexprs::text LIKE '%json_strip_nulls%'
+   OR indexprs::text LIKE '%jsonb_strip_nulls%';
+
+-- REINDEX
+REINDEX INDEX CONCURRENTLY my_metadata_idx;
+```
+
+来源：[PostgreSQL 18.4 安全发布](https://www.postgresql.org/about/news/postgresql-184-1710-1614-1518-and-1423-released-3297/)、[releasebot — PostgreSQL May 2026](https://releasebot.io/updates/postgresql)
+
+### 15.4 2026 年向量搜索选型表（修订版）
+
+| 场景 | 数据规模 | 推荐方案 | 备注 |
+|------|----------|---------|------|
+| RAG 单租户 | < 1000 万 | **pgvector 0.9.1 + HNSW** | PG 已部署即用 |
+| RAG 中等规模 | 1000 万 ~ 5000 万 | **pgvector 0.9.1 + HNSW + halfvec** | 内存减半 |
+| RAG 大规模 | 5000 万 ~ 10 亿 | **pgvectorscale + StreamingDiskANN** | 热数据内存 + 冷数据磁盘 |
+| 内存吃紧 | 任意 | **binary_quantize + bit_hamming_ops + rerank** | 索引体积压 32x |
+| 数十亿级 | > 10 亿 | **Aurora pgvector 联合 S3 Vectors** | 低频查询、成本敏感 |
+| 多租户 + 极低延迟 | 任意 | **专用向量库（Qdrant/Milvus/Weaviate）** | pgvector 不适合 |
+
+来源：[AWS Blog — Aurora + S3 Vectors](https://aws.amazon.com/blogs/database/query-billion-scale-vectors-with-sql-integrating-amazon-s3-vectors-and-aurora-postgresql/)、[Timescale — pgvector 完整指南](https://www.timescale.com/learn/postgresql-extensions-pgvector)
