@@ -134,7 +134,7 @@ GitHub 原生 AI 编程助手，集成于 VS Code / JetBrains / Neovim。
 
 > 🔄 更新于 2026-04-21
 
-<!-- version-check: Cursor 3.0, Kiro GA, checked 2026-04-21 -->
+<!-- version-check: Cursor 3.0, Kiro GA, Claude Code Agent View (2026-05-06), checked 2026-05-20 -->
 
 ### Cursor 3（2026-04-02）
 

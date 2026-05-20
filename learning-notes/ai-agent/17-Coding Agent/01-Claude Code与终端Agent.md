@@ -215,6 +215,39 @@ v2.1.116-123（5 月初）：
 
 来源：[Claude Code Docs - Changelog](https://code.claude.com/docs/en/changelog)、[Claude Code Plugins](https://www.anthropic.com/news/claude-code-plugins)（Content was rephrased for compliance with licensing restrictions）
 
+### "Code with Claude" SF 大会（2026-05-06）与 v2.1.139
+
+> 🔄 更新于 2026-05-20
+
+Anthropic 在旧金山举办了第二届 "Code with Claude" 开发者大会，发布了 Claude Code 从终端工具向自主开发平台的关键转型。
+
+**v2.1.139 两大核心功能：**
+
+```
+Agent View（全新界面范式）：
+├─ 从纯文本终端升级为结构化 Agent 视图
+├─ 实时展示 Agent 正在执行的步骤、文件变更、工具调用
+├─ 支持多 Agent 并行运行的可视化编排
+└─ 终端不再只是"聊天窗口"，而是"Agent 控制台"
+
+/goal 命令（自主执行模式）：
+├─ 设定完成条件，Claude 跨多轮自主工作直到目标达成
+├─ 支持 interactive 模式、-p 模式和 Remote Control
+├─ 类似 Devin 的自主执行，但保留终端的灵活性
+└─ 标志着从"对话式编码"向"目标驱动自主执行"的转变
+```
+
+**其他 5 月更新：**
+- `/loop` 命令：定时自动执行任务（Proactive Sessions）
+- `/ultrareview`：云端多 Agent 代码审查
+- Claude Code 周限额提升 50%（Pro/Max/Team/Enterprise，至 2026-07-13）
+- Opus 4.7 模型（1M token 上下文窗口）成为默认
+- Claude Managed Agents 正式 GA：托管运行时、Agent Skills、代码执行
+
+**Claude Sonnet 4 / Opus 4 废弃通知**：`claude-sonnet-4-20250514` 和 `claude-opus-4-20250514` 将于 2026-06-15 退役，需迁移至 Sonnet 4.6 和 Opus 4.7。
+
+来源：[Code with Claude SF](https://claude.com/code-with-claude/san-francisco)、[Claude Code Agent View & /goal](https://explainx.ai/blog/anthropic-claude-code-agent-view-goal-command)、[Claude Code Limits +50%](https://pasqualepillitteri.it/en/news/2494/claude-code-weekly-limits-50-percent-anti-codex-anthropic-2026)、[Anthropic Release Notes](https://docs.anthropic.com/en/release-notes/)（Content was rephrased for compliance with licensing restrictions）
+
 ## 9. 终端 Agent 对比
 
 <!-- 修复于 2026-05-20: gpt-4o/o3 已退役 → GPT-5/Codex；Claude 模型更新为最新版本 -->

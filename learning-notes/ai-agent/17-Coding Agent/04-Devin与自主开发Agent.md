@@ -267,7 +267,7 @@ OpenAI 于 4 月 17 日经历三位高管同日离职（前 CPO Kevin Weil、Sor
 
 > 🔄 更新于 2026-05-03
 
-<!-- version-check: OpenAI Symphony, GPT-5.5, Codex orchestration, checked 2026-05-03 -->
+<!-- version-check: OpenAI Symphony, GPT-5.5, Codex orchestration, Codex app May 2026 upgrades, checked 2026-05-20 -->
 
 OpenAI 开源了 **Symphony**，一个将项目管理看板（当前支持 Linear）转化为 Coding Agent 控制平面的编排规范。每个 Issue 自动分配一个 Agent，Agent 在隔离工作区中持续运行，直到提交 PR。来源：[OpenAI Symphony](https://openai.com/index/open-source-codex-orchestration-symphony/)
 
@@ -289,6 +289,36 @@ Linear Issue Board
 **与 GPT-5.5 的关系**：GPT-5.5（2026-04-23）定位为 Agent 运行时而非传统聊天模型，Symphony 是其在软件工程领域的编排层。两者共同标志着 OpenAI 从"模型提供商"向"Agent 平台"的战略转型。
 
 来源：[OpenAI Symphony GitHub](https://github.com/openai/symphony)、[TechCrunch GPT-5.5](https://techcrunch.com/2026/04/23/openai-chatgpt-gpt-5-5-ai-model-superapp/)（Content was rephrased for compliance with licensing restrictions）
+
+### OpenAI Codex App 重大升级（2026-05 月）
+
+> 🔄 更新于 2026-05-20
+
+OpenAI 在 5 月密集发布了 Codex 平台级升级，从 CLI 工具演进为全平台 Agent 开发环境：
+
+**Codex "for (almost) everything"（2026-05-14）：**
+- PR 审查：直接在 Codex 中审查 Pull Request
+- 多文件 & 终端视图：同时查看多个文件和终端输出
+- SSH 远程开发：连接到远程 devbox
+- 内置浏览器：前端设计/应用/游戏的快速迭代
+- 记忆预览：跨会话的个性化上下文记忆
+
+**Codex 移动端（2026-05-14）：**
+- iOS 和 Android ChatGPT 应用内可用
+- 所有 ChatGPT 计划（含免费版）均可使用
+- 支持在手机上启动和监控 Agent 任务
+
+**Codex Security（研究预览）：**
+- 深度项目上下文分析，识别复杂漏洞
+- 高置信度发现 + 自动修复建议
+- 区别于传统 SAST 工具的 Agent 式安全扫描
+
+**安全架构（"Running Codex Safely"）：**
+- 隔离沙箱执行环境
+- 细粒度权限控制
+- Agent 行为审计追踪
+
+来源：[Codex for (almost) everything](https://openai.com/index/codex-for-almost-everything/)、[Codex Mobile](https://www.buildfastwithai.com/blogs/openai-codex-mobile-chatgpt-app-2026)、[Codex Security](https://openai.com/index/codex-security-now-in-research-preview/)、[Running Codex Safely](https://openai.com/index/running-codex-safely/)（Content was rephrased for compliance with licensing restrictions）
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube
