@@ -143,9 +143,9 @@ Google:
 - 来源：[Google Cloud Release Notes](https://docs.cloud.google.com/vertex-ai/docs/release-notes)
 
 **阿里云**：
-- Qwen3 系列发布（2026-04）：混合推理 + MoE 架构，36T Token 训练，1M 上下文窗口
+- Qwen3 系列发布（2025-04-29）：混合推理 + MoE 架构，36T Token 训练，MoE 模型 131K 上下文窗口<!-- 修复于 2026-05-20: 发布时间从 2026-04 修正为 2025-04-29，上下文 1M 是 Qwen3.6-Plus 的特性 -->
 - Qwen3.5-397B-A17B（2026-02-16）：397B 参数 MoE，仅激活 17B，GPQA Diamond 88.4，$0.60/M 输入 Token
-- Qwen3.6-Plus / Qwen3.6-Max-Preview（2026-04-20）：增强 Agentic Coding 和多模态推理
+- Qwen3.6-Plus / Qwen3.6-Max-Preview（2026-04-20）：增强 Agentic Coding 和多模态推理，Qwen3.6-Plus 提供 1M 上下文，Qwen3.6-Max-Preview 提供 262K 上下文
 - Qwen3.6-35B-A3B 开源（Apache 2.0）：35B 总参数 / 3B 激活，SWE-Bench 73.4%
 - 战略转向：从纯开源转向开源 + 闭源商业化并行
 - 来源：[Alibaba Cloud Model Studio](https://www.alibabacloud.com/help/en/model-studio/newly-released-models)

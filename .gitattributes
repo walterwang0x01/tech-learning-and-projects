@@ -37,3 +37,8 @@ learning-notes/ai-agent/briefings/*.md filter=git-crypt diff=git-crypt
 # 2026 技术更新研究文档
 # ============================================
 learning-notes/ai-agent/24-2026技术更新/*.md filter=git-crypt diff=git-crypt
+
+# ============================================
+# 文档审查日志（直接描述 20-Agent支付加密目录的元数据）
+# ============================================
+learning-notes/.audit-progress.md filter=git-crypt diff=git-crypt
