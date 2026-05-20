@@ -125,7 +125,7 @@ yarn dlx create-react-app my-app
 
 > 🔄 更新于 2026-05-18
 
-<!-- version-check: Bun 1.3.13, built-in MySQL/Postgres/SQLite/Redis clients, Anthropic Rust rewrite ongoing, checked 2026-05-18 -->
+<!-- version-check: Bun 1.3.14 (last Zig version), Rust rewrite merged 2026-05-14, checked 2026-05-20 -->
 
 [Bun](https://bun.com/) 自 1.0（2025-09）起进入主流视野，2025-10 发布的 1.3 是把它从"快的 Node 替代"推到"全栈一体化运行时"的关键版本。**Bun 同时是 Runtime、包管理器、bundler、test runner、TypeScript 编译器和 SQL/Redis 客户端**。
 
@@ -193,7 +193,9 @@ const s = await redis.get("session:42");
 | 严格依赖 Node 原生 API 兼容性 | Node.js（Bun 仍在补齐 Node 兼容层） |
 | Monorepo 多包工作流 | pnpm 11（catalogs 体验更成熟） |
 
-> 2026-05 The Register 报道 Anthropic 正在将 Bun 的部分 Zig 代码用 Rust 重写以提升内存安全，这是 Bun 工程化进入下一个阶段的信号。来源：[The Register, 2026-05-14](https://www.theregister.com/devops/2026/05/14/anthropics-bun-rust-rewrite-merged-at-speed-of-ai/5240381)
+> 🔄 更新于 2026-05-20
+
+**Bun Rust 重写已正式合并**（2026-05-14）：Bun 创始人 Jarred Sumner 使用 Claude 将约 96 万行 Zig 代码移植为 Rust，5 月 14 日合并到主分支（2188 个文件变更，100 万+ 行重写）。v1.3.14 是最后一个 Zig 版本。Rust 重写通过了 Bun 99.8% 的测试套件，修复了部分内存泄漏，二进制体积缩小 3-8 MB。这标志着 Bun 从 Zig 时代进入 Rust 时代，是 JavaScript 运行时历史上最大规模的 AI 辅助代码迁移。来源：[The Register](https://theregister.com/devops/2026/05/14/anthropics-bun-rust-rewrite-merged-at-speed-of-ai/5240381)、[Heise](https://www.heise.de/en/news/AI-Porting-Claude-Rewrites-Bun-Codebase-in-Rust-11294318.html)
 
 ### 5.5 在已有项目里只把 Bun 当包管理器
 

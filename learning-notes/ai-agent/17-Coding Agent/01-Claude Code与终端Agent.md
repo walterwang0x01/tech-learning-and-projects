@@ -150,7 +150,7 @@ echo "检查代码中的安全漏洞" | claude --pipe
 
 > 🔄 更新于 2026-05-12
 
-<!-- version-check: Claude Code 2.1.123, checked 2026-05-12 -->
+<!-- version-check: Claude Code 2.1.139, Code with Claude SF (2026-05-06), checked 2026-05-20 -->
 
 Claude Code 在 2026 年 3-4 月进入了史上最密集的迭代周期，从 v2.1.69 到 v2.1.101，5 周内发布了 30+ 个版本。
 
