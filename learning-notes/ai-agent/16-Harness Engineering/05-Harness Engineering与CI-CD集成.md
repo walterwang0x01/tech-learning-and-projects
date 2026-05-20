@@ -22,6 +22,7 @@ Agent 写代码 → CI 运行 → 失败 → Agent 读日志 → 修复 → CI �
 
 ```yaml
 # .github/workflows/agent-ci.yml
+# <!-- 修复于 2026-05-20: actions 版本升级到 2026 标准（v4 → v5） -->
 name: Agent CI Pipeline
 on:
   push:
@@ -33,7 +34,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - run: pip install -e ".[dev]"
@@ -76,7 +77,7 @@ jobs:
       startsWith(github.event.workflow_run.head_branch, 'agent/')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
       - name: Download Reports
@@ -125,7 +126,7 @@ jobs:
       matrix:
         module: [src/api, src/service, src/repository]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Scan & Fix
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -133,7 +134,7 @@ jobs:
           claude --pipe "扫描 ${{ matrix.module }}：
             找出规范问题、复杂逻辑、缺失类型注解。
             每个问题独立 commit，不改业务逻辑。"
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v7
         with:
           title: "chore: quality sweep ${{ matrix.module }}"
           branch: "sweep/${{ matrix.module }}-${{ github.run_id }}"

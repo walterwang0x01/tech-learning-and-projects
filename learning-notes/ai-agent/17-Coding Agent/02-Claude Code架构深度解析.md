@@ -392,7 +392,8 @@ anti_distillation: ['fake_tools']
 
 ### 缓存命中 vs 未命中的成本差异
 
-以 Claude Opus 4.6 为例：
+<!-- version-check: 以 2026-03-31 泄露事件时点的 Opus 4.6 价格为例，截至 2026-05 当前主力为 Opus 4.7 -->
+以 Claude Opus 4.6 为例（泄露事件时点的旗舰版本）：
 - 标准输入：$5 / 百万 Token
 - 缓存命中：$0.5 / 百万 Token（**90% 折扣**）
 - 每次缓存未命中，成本增加 10 倍
@@ -587,7 +588,8 @@ const voiceCommand = feature('VOICE_MODE')
 
 **对我们的启示：** 特性开关是管理 Agent 功能演进的最佳实践。通过编译时消除，未启用的功能不会增加包体积。
 
-## 11. 启动优化（并行预取）
+<!-- 修复于 2026-05-20: 章节编号重复（11-14 与前文冲突），按位置重新编号为 21-24 -->
+## 21. 启动优化（并行预取）
 
 Claude Code 的启动速度优化是一个值得学习的工程实践：
 
@@ -606,7 +608,7 @@ startKeychainPrefetch()  // 预取密钥链
 2. 延迟加载 — 重模块（遥测、gRPC、分析）按需 `import()`
 3. 特性开关 — 未启用功能在编译时完全移除
 
-## 12. 服务层架构
+## 22. 服务层架构
 
 | 服务 | 职责 |
 |------|------|
@@ -622,7 +624,7 @@ startKeychainPrefetch()  // 预取密钥链
 | tokenEstimation.ts | Token 计数估算 |
 | teamMemorySync/ | 团队记忆同步 |
 
-## 13. 对 Agent 开发者的核心启示
+## 23. 对 Agent 开发者的核心启示
 
 ### 可直接借鉴的设计模式
 
@@ -700,7 +702,7 @@ startKeychainPrefetch()  // 预取密钥链
    → AI 产品的竞争壁垒在工程层，不在模型层
 ```
 
-## 14. 与其他 Coding Agent 的架构对比
+## 24. 与其他 Coding Agent 的架构对比
 
 | 维度 | Claude Code | Cursor | Devin | Aider |
 |------|------------|--------|-------|-------|
@@ -713,7 +715,7 @@ startKeychainPrefetch()  // 预取密钥链
 | MCP 支持 | 原生 | 原生 | 无 | 无 |
 | 开源 | ❌（已泄露） | ❌ | ❌ | ✅ |
 
-## 21. CLAUDE.md 四层加载机制（源码直读补充）
+## 25. CLAUDE.md 四层加载机制（源码直读补充）
 
 基于 `claudemd.ts` 源码直读，CLAUDE.md 的加载机制远比之前文档描述的复杂，实际有 **4 层优先级**：
 
@@ -736,7 +738,7 @@ startKeychainPrefetch()  // 预取密钥链
 
 ---
 
-## 22. 沙箱安全系统（源码直读补充）
+## 26. 沙箱安全系统（源码直读补充）
 
 基于 `sandbox-adapter.ts` 源码直读，Claude Code 集成了 `@anthropic-ai/sandbox-runtime` 包，提供操作系统级别的沙箱隔离：
 
@@ -752,7 +754,7 @@ startKeychainPrefetch()  // 预取密钥链
 
 ---
 
-## 23. 团队记忆密钥防护（源码直读补充）
+## 27. 团队记忆密钥防护（源码直读补充）
 
 基于 `teamMemSecretGuard.ts` 源码直读，当 Agent 写入团队记忆文件时，会自动扫描内容中的密钥：
 
@@ -774,7 +776,7 @@ Remove the sensitive content and try again."
 
 ---
 
-## 24. YOLO 分类器 / Auto Mode（源码直读补充）
+## 28. YOLO 分类器 / Auto Mode（源码直读补充）
 
 基于 `yoloClassifier.ts` 源码直读，Claude Code 有一个"自动模式分类器"（YOLO Classifier），用**独立的 LLM 调用**来判断操作是否安全：
 
@@ -793,7 +795,7 @@ Remove the sensitive content and try again."
 
 ---
 
-## 25. 工具池缓存稳定性优化（源码直读补充）
+## 29. 工具池缓存稳定性优化（源码直读补充）
 
 基于 `tools.ts` 源码直读，`assembleToolPool()` 函数揭示了一个关键的 Prompt Cache 优化策略：
 
@@ -818,7 +820,7 @@ return uniqBy(
 
 ---
 
-## 26. 完整特性开关列表（源码直读更新）
+## 30. 完整特性开关列表（源码直读更新）
 
 基于对 `commands.ts`、`tools.ts`、`context.ts`、`permissions.ts`、`teamMemSecretGuard.ts` 等源码的直读，实际发现了 **21+ 个特性开关**，远超之前文档记录的 8 个：
 

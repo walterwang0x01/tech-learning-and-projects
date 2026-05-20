@@ -153,14 +153,14 @@ jobs:
   sweep:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5  # 修复于 2026-05-20: v4 → v5（与第 14 次审查标准一致）
       - name: Run quality scan
         run: |
           # Agent 扫描并自动修复
           claude --pipe "扫描 src/ 目录，找出不符合编码规范的代码，
                          为每个问题创建独立的修复 commit"
       - name: Create PR
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7  # 修复于 2026-05-20: v6 → v7（npm 当前最新）
         with:
           title: "chore: automated quality sweep"
           branch: quality-sweep/${{ github.run_id }}
