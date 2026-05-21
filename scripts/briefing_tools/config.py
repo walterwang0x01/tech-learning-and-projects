@@ -67,7 +67,19 @@ class Config:
     llm_classify: LLMClassifyCfg
     semantic_dedup: SemanticDedupCfg
     follow_builders: FollowBuildersCfg = field(default_factory=FollowBuildersCfg)
+    # candidates 阶段每个 topic 的 top-N 上限。key 是 topic 名，"_default" 兜底，
+    # 不同 topic 的候选池规模差距很大（ai-agent 通常远多于 china/global-tech），
+    # 一刀切会让信息密集主题损失太多候选。CLI --top-n 显式指定时覆盖此配置。
+    candidates_top_n: dict[str, int] = field(default_factory=lambda: {"_default": 60})
     raw: dict = field(default_factory=dict, repr=False)
+
+    def resolve_top_n(self, topic: str) -> int:
+        """返回某 topic 的 candidates top-N。
+        优先 per-topic 配置 → _default 配置 → 硬编码 60。
+        """
+        if topic in self.candidates_top_n:
+            return self.candidates_top_n[topic]
+        return self.candidates_top_n.get("_default", 60)
 
 
 _cached: Config | None = None
@@ -88,6 +100,17 @@ def load_config(path: Path | None = None, force_reload: bool = False) -> Config:
     llm = raw.get("llm_classify", {})
     sem = raw.get("semantic_dedup", {})
     fb = raw.get("follow_builders", {})
+    top_n_raw = raw.get("candidates_top_n", {})
+    # 容错：candidates_top_n 必须是 dict，否则用默认；非数字 value 静默丢弃
+    top_n_cfg: dict[str, int] = {"_default": 60}
+    if isinstance(top_n_raw, dict):
+        for k, v in top_n_raw.items():
+            if k.startswith("_") and k != "_default":
+                continue  # 跳过 _comment 之类的注释字段
+            try:
+                top_n_cfg[k] = int(v)
+            except (TypeError, ValueError):
+                continue
 
     cfg = Config(
         freshness_hours=int(raw.get("freshness_hours", 48)),
@@ -123,6 +146,7 @@ def load_config(path: Path | None = None, force_reload: bool = False) -> Config:
             x_max_per_author=int(fb.get("x_max_per_author", 3)),
             podcast_description_chars=int(fb.get("podcast_description_chars", 800)),
         ),
+        candidates_top_n=top_n_cfg,
         raw=raw,
     )
     if path is None:

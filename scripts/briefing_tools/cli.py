@@ -148,11 +148,13 @@ def cmd_candidates(args):
 
     topics = [args.topic] if args.topic != "all" else TOPICS
     for t in topics:
+        # CLI --top-n 显式传值覆盖配置；否则按 per-topic 配置取
+        topic_top_n = args.top_n if args.top_n is not None else cfg.resolve_top_n(t)
         result = build_candidates(
             classified, t, today_str(), cfg,
             min_score=args.min_score,
             require_main_topic=args.require_main_topic,
-            top_n=args.top_n,
+            top_n=topic_top_n,
         )
         out_path = rd / f"candidates.{t}.jsonl"
         atomic_write_jsonl(out_path, result["items"])
@@ -295,7 +297,8 @@ def cmd_run_all(args):
     args.topic = "all"
     args.min_score = getattr(args, "min_score", 12)
     args.require_main_topic = getattr(args, "require_main_topic", False)
-    args.top_n = getattr(args, "top_n", 60)
+    # None = 按 config.candidates_top_n 的 per-topic 配置走，cmd_candidates 内部解析
+    args.top_n = getattr(args, "top_n", None)
     cmd_candidates(args)
     print()
     print("=" * 60)
@@ -713,8 +716,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--min-score", type=int, default=12)
     p.add_argument("--require-main-topic", action="store_true",
                    help="只保留 main_topic 等于本主题的条目")
-    p.add_argument("--top-n", type=int, default=60,
-                   help="按 score 降序最多保留 N 条（0=不截断），默认 60")
+    p.add_argument("--top-n", type=int, default=None,
+                   help="按 score 降序最多保留 N 条（0=不截断）。"
+                        "未传时按 config.candidates_top_n 的 per-topic 配置取值")
     p.set_defaults(func=cmd_candidates)
 
     p = sub.add_parser("register", help="把已写入简报的 URL 登记到 published-index")

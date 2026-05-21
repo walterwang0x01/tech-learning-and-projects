@@ -11,6 +11,13 @@
     "_comment": "一条内容同时命中多个 tag 时，决定它的 primary topic。curate 阶段优先给 main topic 收录。",
     "priority": ["ai-agent", "china-tech", "global-tech"]
   },
+  "candidates_top_n": {
+    "_comment": "candidates 阶段每个 topic 的 top-N 上限。不同 topic 候选池规模差距大（ai-agent 通常 ≥5x global-tech），一刀切会让信息密集主题损失太多候选。CLI --top-n 显式传值时覆盖此配置。",
+    "_default": 60,
+    "ai-agent": 100,
+    "china-tech": 80,
+    "global-tech": 100
+  },
   "rss_sources": [
     {"name": "LangChain Blog", "url": "https://blog.langchain.com/rss.xml", "topic_hints": ["ai-agent"]},
     {"name": "Anthropic Research", "url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_research.xml", "topic_hints": ["ai-agent"], "timeout": 30},
