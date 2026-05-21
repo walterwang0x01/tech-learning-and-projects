@@ -169,7 +169,7 @@ function FilteredList({ query }) {
 
 > 🔄 更新于 2026-04-22
 
-<!-- version-check: Next.js 16.2, checked 2026-04-22 -->
+<!-- version-check: Next.js 16.2.5 (May 2026 security release), checked 2026-05-21 -->
 
 Next.js 16.2 带来了显著的性能提升，对 React 应用的渲染和开发体验有直接影响。来源：[Next.js 16.2 Blog](https://nextjs.org/blog/next-16-2)
 
@@ -192,3 +192,14 @@ React 团队贡献了一个关键优化：将 `JSON.parse` 的 reviver 回调（
 - **`--inspect` for `next start`**：生产服务器支持 Node.js 调试器
 - **AI 改进**：`create-next-app` 内置 `AGENTS.md`、浏览器日志转发、`next-browser`（实验性）
 - **View Transitions**：`<Link>` 组件支持 `transitionTypes` prop
+
+> 🔄 更新于 2026-05-21
+
+### ⚠️ Next.js 16.2.5 安全更新（2026-05-07）
+
+Next.js May 2026 安全发布修复了 13 个安全公告（含 React RSC 上游 CVE-2025-55182 RCE 漏洞）。所有使用 App Router 的生产应用必须立即升级到 **16.2.5**（或 15.5.16）。
+
+详见 → [Web 安全文档](../09-浏览器与网络/04-Web安全XSS-CSRF.md) 第 5 节
+
+来源：[Vercel Changelog](https://vercel.com/changelog/next-js-may-2026-security-release)
+

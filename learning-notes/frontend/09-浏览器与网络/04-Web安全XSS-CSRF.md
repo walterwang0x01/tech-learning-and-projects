@@ -95,7 +95,7 @@ X-XSS-Protection: 0  // 现代浏览器建议关闭，使用 CSP 替代
 Referrer-Policy: strict-origin-when-cross-origin
 ```
 
-<!-- version-check: Trusted Types Baseline 2026-02, CSP Level 3, checked 2026-04-27 -->
+<!-- version-check: Trusted Types Baseline 2026-02, CSP Level 3, React RSC CVE-2025-55182, Next.js 16.2.5, npm Shai-Hulud 2026-05-19, checked 2026-05-21 -->
 
 > 🔄 更新于 2026-04-27
 
@@ -150,6 +150,96 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 ```
 
 来源：[W3C CSP Level 3](https://www.w3.org/TR/CSP/)
+> 🔄 更新于 2026-05-21
+
+<!-- version-check: React 19.x.6 (CVE-2025-55182 fix), Next.js 16.2.5/15.5.16, checked 2026-05-21 -->
+
+## 5. React Server Components RCE 漏洞（CVE-2025-55182）
+
+2025 年 12 月 3 日披露的 **CVSS 10.0** 严重漏洞，影响 React 19 的 Server Components "Flight" 协议。攻击者可通过向 Server Function 端点发送恶意构造的 HTTP 请求，实现未认证远程代码执行（Pre-auth RCE）。
+
+**受影响版本**：React 19.0.0、19.1.0、19.1.1、19.2.0（包含 react-server-dom-webpack、react-server-dom-turbopack、react-server-dom-parcel）
+
+**修复版本**：19.0.1、19.1.2、19.2.1（RCE 修复）→ 19.0.4、19.1.5、19.2.4（后续 DoS + 源码泄露修复）→ **19.x.6**（最新安全版本）
+
+来源：[React 官方安全公告](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)、[AWS 安全公告](https://aws.amazon.com/security/security-bulletins/rss/aws-2025-030/)
+
+```javascript
+// 漏洞原理：Flight 协议不安全地反序列化 HTTP 请求中的 payload
+// 攻击者可以通过不安全的原型引用注入恶意代码
+
+// ⚠️ 检查你的项目是否受影响：
+// 1. 使用 React 19 + Server Components / Server Functions
+// 2. 使用 Next.js App Router（内置 RSC）
+// 3. 使用 react-server-dom-* 包
+
+// 修复方式：立即升级
+// npm install react@latest react-dom@latest
+// npm install react-server-dom-webpack@latest  # 如果使用
+```
+
+### Next.js May 2026 安全发布
+
+Vercel 于 2026-05-07 发布协调安全更新，修复 **13 个安全公告**，覆盖 DoS、中间件绕过、SSRF、缓存投毒、XSS 等多种攻击面。
+
+**修复版本**：Next.js 15.5.16 / 16.2.5
+
+**三个高危漏洞**：
+
+| CVE | 类型 | 影响 |
+|-----|------|------|
+| CVE-2026-44574 | 中间件/代理绕过 | 动态路由参数注入绕过认证中间件 |
+| CVE-2026-23870 | RSC 上游漏洞 | React Server Components RCE |
+| （未公开编号） | SSRF | 服务端请求伪造 |
+
+来源：[Vercel Changelog](https://vercel.com/changelog/next-js-may-2026-security-release)、[Cloudflare WAF 公告](https://developers.cloudflare.com/changelog/post/2026-05-06-react-nextjs-vulnerabilities/)
+
+```bash
+# 立即升级
+npm install next@latest
+
+# 如果无法立即升级，临时缓解措施：
+# 1. AWS WAF：启用 AWSManagedRulesKnownBadInputsRuleSet v1.24+
+# 2. Cloudflare WAF：已自动部署规则
+# 3. 自定义 WAF：检测 Flight 协议异常 payload
+```
+
+**影响范围**：所有使用 App Router、Pages Router、中间件、代理逻辑、WebSocket 升级、缓存层、Server Functions、Cache Components、Image Optimization API 的 Next.js 应用。
+
+来源：[InfoWorld](https://www.infoworld.com/article/4100641/developers-urged-to-immediately-upgrade-react-next-js.html)、[CyberKendra](https://www.cyberkendra.com/2026/05/react-and-nextjs-hit-with-12-security.html)
+
+### npm 供应链攻击：Mini Shai-Hulud（2026-05-19）
+
+npm 账户 `atool`（i@hust.cc）被入侵，攻击者在 22 分钟内向 317+ 个包发布了 637 个恶意版本。受影响包的周下载量合计约 **1600 万**。
+
+**受影响的高流量包**：
+
+| 包名 | 月下载量 |
+|------|---------|
+| size-sensor | 420 万 |
+| echarts-for-react | 380 万 |
+| @antv/scale | 220 万 |
+| timeago.js | 115 万 |
+| @antv/g2, g6, x6, l7, s2, f2 | 数百万 |
+
+**应对措施**：
+
+```bash
+# 1. 检查项目是否使用受影响的包
+npm ls size-sensor echarts-for-react timeago.js
+
+# 2. 锁定已知安全版本（使用 lockfile）
+# 确保 package-lock.json 或 pnpm-lock.yaml 已提交到 Git
+
+# 3. 使用 Socket.dev 或 npm audit 检查
+npm audit
+
+# 4. 如果已安装恶意版本，立即降级到攻击前的版本
+# 恶意版本已被 npm 撤回，但本地缓存可能仍存在
+```
+
+来源：[The Register](https://www.theregister.com/cyber-crime/2026/05/19/shai-hulud-keeps-burrowing-314-npm-packages-infected-after-another-account-compromise/5242601)、[SafeDep](https://safedep.io/mini-shai-hulud-strikes-again-314-npm-packages-compromised/)、[SecurityWeek](https://www.securityweek.com/over-320-npm-packages-hit-by-fresh-mini-shai-hulud-supply-chain-attack/)
+
 ## 🎬 推荐视频资源
 
 - [Fireship - Web Security in 100 Seconds](https://www.youtube.com/watch?v=4YOpILi9Oxs) — Web安全快速了解
