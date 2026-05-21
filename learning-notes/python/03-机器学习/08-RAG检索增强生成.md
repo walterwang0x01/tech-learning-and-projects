@@ -2,6 +2,8 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
+<!-- version-check: LlamaIndex 0.12.x, text-embedding-3-small, checked 2026-05-21 -->
+
 > 从 private-notes 提取的技术学习笔记
 
 ## RAG 概述
@@ -19,7 +21,9 @@ RAG（Retrieval-Augmented Generation）是一种结合检索和生成的 AI 技�
 ### 2. 向量化
 
 - 使用 Embedding 模型将文本转换为向量
-- 常用模型：text-embedding-ada-002
+- 常用模型：text-embedding-3-small（推荐）、text-embedding-3-large
+
+<!-- 修复于 2026-05-21: text-embedding-ada-002 已过时，推荐 text-embedding-3-small/large -->
 
 ### 3. 向量存储
 
@@ -39,9 +43,11 @@ RAG（Retrieval-Augmented Generation）是一种结合检索和生成的 AI 技�
 
 ## 实现示例
 
+<!-- 修复于 2026-05-21: LlamaIndex 导入路径已变更为 llama_index.core -->
+
 ```python
-from llama_index import VectorStoreIndex, SimpleDirectoryReader
-from llama_index.embeddings import OpenAIEmbedding
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
+from llama_index.embeddings.openai import OpenAIEmbedding
 
 # 1. 加载文档
 documents = SimpleDirectoryReader("data").load_data()

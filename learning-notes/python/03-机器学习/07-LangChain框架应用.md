@@ -45,7 +45,7 @@ from langchain.schema import HumanMessage, SystemMessage
 
 # 初始化模型
 llm = ChatOpenAI(
-    model_name="gpt-3.5-turbo",
+    model_name="gpt-5.2",
     temperature=0.7,
     api_key="your-api-key"
 )
@@ -82,8 +82,10 @@ print(response.content)
 
 ### 3.3 链（Chains）
 
+> ⚠️ **废弃警告**：`LLMChain` 在 LangChain 1.0 中已废弃并移除。推荐使用 LCEL（LangChain Expression Language）替代。
+
 ```python
-from langchain.chains import LLMChain
+from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 
 # 定义提示模板
@@ -92,12 +94,13 @@ prompt = PromptTemplate(
     template="用一句话解释什么是{topic}？"
 )
 
-# 创建链
-chain = LLMChain(llm=llm, prompt=prompt)
+# LCEL 方式（推荐）
+llm = ChatOpenAI(model_name="gpt-5.2")
+chain = prompt | llm
 
 # 运行链
-result = chain.run("机器学习")
-print(result)
+result = chain.invoke({"topic": "机器学习"})
+print(result.content)
 ```
 
 ## 4. 数据连接
@@ -151,205 +154,476 @@ docs = vectorstore.similarity_search(query, k=3)
 
 ## 5. 检索增强生成（RAG）
 
-### 5.1 基础 RAG 实现
+> 🔄 更新于 2026-05-21：使用 LCEL 重写，替代已废弃的 `RetrievalQA` 和 `ConversationalRetrievalChain`。
+
+### 5.1 基础 RAG 实现（LCEL 方式）
 
 ```python
-from langchain.chains import RetrievalQA
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
 
-# 创建检索链
-qa_chain = RetrievalQA.from_chain_type(
-    llm=llm,
-    chain_type="stuff",
-    retriever=vectorstore.as_retriever(),
-    return_source_documents=True
+# 初始化组件
+llm = ChatOpenAI(model_name="gpt-5.2")
+embeddings = OpenAIEmbeddings()
+
+# 假设 vectorstore 已创建（参见第 4 节）
+retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+
+# 定义 RAG 提示模板
+rag_prompt = ChatPromptTemplate.from_messages([
+    ("system", "根据以下上下文回答用户问题。如果上下文中没有相关信息，请说明。\n\n上下文：\n{context}"),
+    ("human", "{question}")
+])
+
+# 格式化检索到的文档
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
+
+# 构建 LCEL RAG 链
+rag_chain = (
+    {"context": retriever | format_docs, "question": RunnablePassthrough()}
+    | rag_prompt
+    | llm
+    | StrOutputParser()
 )
 
 # 查询
-result = qa_chain.invoke({"query": "Python有哪些特性？"})
-print(result["result"])
-print(result["source_documents"])
+answer = rag_chain.invoke("Python有哪些特性？")
+print(answer)
 ```
 
-### 5.2 带记忆的 RAG
+### 5.2 带来源文档的 RAG
 
 ```python
-from langchain.chains import ConversationalRetrievalChain
-from langchain.memory import ConversationBufferMemory
+from langchain_core.runnables import RunnableParallel
 
-# 创建记忆
-memory = ConversationBufferMemory(
-    memory_key="chat_history",
-    return_messages=True
+# 同时返回答案和来源文档
+rag_chain_with_sources = RunnableParallel(
+    {"context": retriever, "question": RunnablePassthrough()}
+).assign(
+    answer=lambda x: (
+        rag_prompt.invoke({"context": format_docs(x["context"]), "question": x["question"]})
+        | llm
+        | StrOutputParser()
+    ).invoke({})
 )
 
-# 创建对话检索链
-qa_chain = ConversationalRetrievalChain.from_llm(
-    llm=llm,
-    retriever=vectorstore.as_retriever(),
-    memory=memory
-)
+# 或者更简洁的写法：分别获取
+docs = retriever.invoke("Python有哪些特性？")
+answer = rag_chain.invoke("Python有哪些特性？")
+print(f"答案: {answer}")
+print(f"来源: {[doc.metadata for doc in docs]}")
+```
 
-# 多轮对话
-result1 = qa_chain.invoke({"question": "什么是Python？"})
-result2 = qa_chain.invoke({"question": "它有什么优势？"})
+### 5.3 带记忆的 RAG（LangGraph 方式）
+
+```python
+from langgraph.checkpoint.memory import MemorySaver
+from langgraph.graph import StateGraph, START, END
+from typing import TypedDict, Annotated
+from langchain_core.messages import HumanMessage, AIMessage
+
+# 定义状态
+class RAGState(TypedDict):
+    messages: list
+    context: str
+
+# 定义节点
+def retrieve(state: RAGState) -> RAGState:
+    """检索相关文档"""
+    last_message = state["messages"][-1].content
+    docs = retriever.invoke(last_message)
+    context = format_docs(docs)
+    return {"context": context, "messages": state["messages"]}
+
+def generate(state: RAGState) -> RAGState:
+    """基于上下文生成回答"""
+    last_message = state["messages"][-1].content
+    prompt = rag_prompt.invoke({"context": state["context"], "question": last_message})
+    response = llm.invoke(prompt)
+    return {"messages": state["messages"] + [response], "context": state["context"]}
+
+# 构建图
+graph = StateGraph(RAGState)
+graph.add_node("retrieve", retrieve)
+graph.add_node("generate", generate)
+graph.add_edge(START, "retrieve")
+graph.add_edge("retrieve", "generate")
+graph.add_edge("generate", END)
+
+# 编译（带记忆持久化）
+memory = MemorySaver()
+rag_app = graph.compile(checkpointer=memory)
+
+# 多轮对话（通过 thread_id 维持上下文）
+config = {"configurable": {"thread_id": "user-123"}}
+result1 = rag_app.invoke(
+    {"messages": [HumanMessage(content="什么是Python？")], "context": ""},
+    config=config
+)
+result2 = rag_app.invoke(
+    {"messages": [HumanMessage(content="它有什么优势？")], "context": ""},
+    config=config
+)
+print(result2["messages"][-1].content)
 ```
 
 ## 6. 代理（Agents）
 
-### 6.1 工具定义
+> 🔄 更新于 2026-05-21：使用 `@tool` 装饰器和 LangGraph 重写，替代已废弃的 `initialize_agent`。
+
+### 6.1 工具定义（推荐方式）
 
 ```python
-from langchain.tools import Tool
+from langchain_core.tools import tool
 from langchain_community.utilities import WikipediaAPIWrapper
 
-# 创建工具
 wikipedia = WikipediaAPIWrapper()
 
-tools = [
-    Tool(
-        name="Wikipedia",
-        func=wikipedia.run,
-        description="用于搜索Wikipedia上的信息"
-    ),
-    Tool(
-        name="Calculator",
-        func=lambda x: str(eval(x)),
-        description="用于执行数学计算"
-    )
-]
+@tool
+def search_wikipedia(query: str) -> str:
+    """搜索 Wikipedia 获取信息。当需要查找百科知识时使用。"""
+    return wikipedia.run(query)
+
+@tool
+def calculator(expression: str) -> str:
+    """执行数学计算。输入应为合法的数学表达式。"""
+    try:
+        return str(eval(expression))
+    except Exception as e:
+        return f"计算错误: {e}"
+
+tools = [search_wikipedia, calculator]
 ```
 
-### 6.2 创建代理
+### 6.2 使用 LangGraph 创建 ReAct Agent
 
 ```python
-from langchain.agents import initialize_agent, AgentType
+from langgraph.prebuilt import create_react_agent
+from langchain_openai import ChatOpenAI
 
-# 初始化代理
-agent = initialize_agent(
-    tools=tools,
-    llm=llm,
-    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    verbose=True
-)
+# LangGraph 预构建的 ReAct Agent（推荐方式）
+llm = ChatOpenAI(model_name="gpt-5.2")
+agent = create_react_agent(llm, tools)
 
-# 运行代理
-result = agent.run("Python是什么？它在Wikipedia上的信息是什么？")
-print(result)
+# 运行 Agent
+result = agent.invoke({"messages": [("human", "Python是什么？帮我在Wikipedia上查一下")]})
+print(result["messages"][-1].content)
 ```
 
-### 6.3 自定义工具
+### 6.3 带状态的 Agent（LangGraph 自定义）
 
 ```python
-from langchain.tools import BaseTool
-from typing import Optional
+from langgraph.graph import StateGraph, START, END
+from langgraph.prebuilt import ToolNode
+from langchain_core.messages import HumanMessage
+from typing import TypedDict, Annotated
+from langgraph.graph.message import add_messages
 
-class CustomTool(BaseTool):
-    name = "custom_tool"
-    description = "这是一个自定义工具"
-    
+class AgentState(TypedDict):
+    messages: Annotated[list, add_messages]
+
+# 定义节点
+def call_model(state: AgentState) -> AgentState:
+    """调用 LLM"""
+    llm_with_tools = llm.bind_tools(tools)
+    response = llm_with_tools.invoke(state["messages"])
+    return {"messages": [response]}
+
+def should_continue(state: AgentState) -> str:
+    """判断是否需要调用工具"""
+    last_message = state["messages"][-1]
+    if last_message.tool_calls:
+        return "tools"
+    return END
+
+# 构建图
+graph = StateGraph(AgentState)
+graph.add_node("agent", call_model)
+graph.add_node("tools", ToolNode(tools))
+graph.add_edge(START, "agent")
+graph.add_conditional_edges("agent", should_continue, {"tools": "tools", END: END})
+graph.add_edge("tools", "agent")
+
+agent_app = graph.compile()
+
+# 运行
+result = agent_app.invoke({"messages": [HumanMessage(content="计算 (15 + 27) * 3")]})
+print(result["messages"][-1].content)
+```
+
+### 6.4 自定义工具（类方式）
+
+```python
+from langchain_core.tools import BaseTool
+from pydantic import BaseModel, Field
+
+class SearchInput(BaseModel):
+    query: str = Field(description="搜索关键词")
+
+class CustomSearchTool(BaseTool):
+    name: str = "custom_search"
+    description: str = "自定义搜索工具，用于查找特定信息"
+    args_schema: type[BaseModel] = SearchInput
+
     def _run(self, query: str) -> str:
         # 工具逻辑
-        return f"处理结果: {query}"
-    
+        return f"搜索结果: {query}"
+
     async def _arun(self, query: str) -> str:
-        # 异步版本
         return self._run(query)
 
-# 使用自定义工具
-custom_tool = CustomTool()
+# 使用
+custom_tool = CustomSearchTool()
 tools.append(custom_tool)
 ```
 
-## 7. 记忆管理
+## 7. 记忆与状态管理
 
-### 7.1 对话记忆
+> 🔄 更新于 2026-05-21：使用 LangGraph checkpointer 重写，替代已废弃的 `ConversationBufferMemory` 等 legacy memory API。
+
+### 7.1 LangGraph 消息持久化（推荐方式）
+
+LangChain 1.x 中，记忆管理推荐使用 LangGraph 的 checkpointer 机制，而非旧的 `ConversationBufferMemory`。
 
 ```python
-from langchain.memory import ConversationBufferMemory
+from langgraph.checkpoint.memory import MemorySaver
+from langgraph.graph import StateGraph, START, END
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage, SystemMessage
+from typing import TypedDict, Annotated
+from langgraph.graph.message import add_messages
 
-memory = ConversationBufferMemory()
-memory.save_context(
-    {"input": "你好"},
-    {"output": "你好！有什么可以帮助你的吗？"}
-)
-memory.save_context(
-    {"input": "Python是什么？"},
-    {"output": "Python是一种高级编程语言"}
-)
+# 定义状态（消息列表自动累积）
+class ChatState(TypedDict):
+    messages: Annotated[list, add_messages]
 
-# 获取记忆
-print(memory.chat_memory.messages)
+# 定义聊天节点
+llm = ChatOpenAI(model_name="gpt-5.2")
+
+def chat(state: ChatState) -> ChatState:
+    system = SystemMessage(content="你是一个有用的AI助手")
+    response = llm.invoke([system] + state["messages"])
+    return {"messages": [response]}
+
+# 构建图
+graph = StateGraph(ChatState)
+graph.add_node("chat", chat)
+graph.add_edge(START, "chat")
+graph.add_edge("chat", END)
+
+# 编译（MemorySaver 自动保存每轮对话）
+memory = MemorySaver()
+chat_app = graph.compile(checkpointer=memory)
+
+# 多轮对话（同一 thread_id 共享历史）
+config = {"configurable": {"thread_id": "session-001"}}
+
+r1 = chat_app.invoke({"messages": [HumanMessage(content="我叫张三")]}, config=config)
+print(r1["messages"][-1].content)
+
+r2 = chat_app.invoke({"messages": [HumanMessage(content="我叫什么名字？")]}, config=config)
+print(r2["messages"][-1].content)  # 能记住"张三"
 ```
 
-### 7.2 摘要记忆
+### 7.2 持久化到数据库（生产环境）
 
 ```python
-from langchain.memory import ConversationSummaryMemory
+# 生产环境推荐使用 PostgreSQL 持久化
+from langgraph.checkpoint.postgres import PostgresSaver
 
-summary_memory = ConversationSummaryMemory(llm=llm)
-summary_memory.save_context(
-    {"input": "Python是什么？"},
-    {"output": "Python是一种高级编程语言"}
-)
+# 连接 PostgreSQL
+DB_URI = "postgresql://user:password@localhost:5432/langchain"
+postgres_saver = PostgresSaver.from_conn_string(DB_URI)
 
-# 获取摘要
-print(summary_memory.buffer)
+# 编译时使用 PostgresSaver
+chat_app = graph.compile(checkpointer=postgres_saver)
+
+# 使用方式与 MemorySaver 完全一致
+config = {"configurable": {"thread_id": "user-123"}}
+result = chat_app.invoke({"messages": [HumanMessage(content="你好")]}, config=config)
 ```
 
-### 7.3 实体记忆
+### 7.3 消息窗口管理（控制上下文长度）
 
 ```python
-from langchain.memory import ConversationEntityMemory
+from langchain_core.messages import trim_messages
 
-entity_memory = ConversationEntityMemory(llm=llm)
-entity_memory.save_context(
-    {"input": "我的名字是张三"},
-    {"output": "好的，张三，很高兴认识你！"}
-)
-```
-
-## 8. 链的组合
-
-### 8.1 顺序链
-
-```python
-from langchain.chains import SimpleSequentialChain
-
-# 创建多个链
-chain1 = LLMChain(llm=llm, prompt=prompt1)
-chain2 = LLMChain(llm=llm, prompt=prompt2)
-
-# 组合链
-overall_chain = SimpleSequentialChain(
-    chains=[chain1, chain2],
-    verbose=True
+# 定义消息修剪策略
+trimmer = trim_messages(
+    max_tokens=4000,
+    strategy="last",          # 保留最近的消息
+    token_counter=llm,        # 使用 LLM 的 tokenizer 计数
+    include_system=True,      # 始终保留 system message
+    allow_partial=False,
 )
 
-result = overall_chain.run("Python编程")
+def chat_with_trim(state: ChatState) -> ChatState:
+    """带消息修剪的聊天节点"""
+    system = SystemMessage(content="你是一个有用的AI助手")
+    # 修剪消息以控制上下文窗口
+    trimmed = trimmer.invoke([system] + state["messages"])
+    response = llm.invoke(trimmed)
+    return {"messages": [response]}
 ```
 
-### 8.2 路由链
+### 7.4 摘要记忆（长对话压缩）
 
 ```python
-from langchain.chains.router import MultiPromptChain
-from langchain.chains.router.llm_router import LLMRouterChain
+from langchain.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 
-# 定义多个提示
-prompt_infos = [
-    {
-        "name": "python",
-        "description": "Python编程相关问题",
-        "prompt_template": "你是一个Python专家..."
-    },
-    {
-        "name": "ai",
-        "description": "AI相关问题",
-        "prompt_template": "你是一个AI专家..."
-    }
-]
+# 摘要链
+summary_prompt = ChatPromptTemplate.from_messages([
+    ("system", "请将以下对话历史压缩为简洁的摘要，保留关键信息："),
+    ("human", "{conversation}")
+])
+summary_chain = summary_prompt | llm | StrOutputParser()
 
-# 创建路由链
-chain = MultiPromptChain.from_prompts(llm, prompt_infos, verbose=True)
+class ChatWithSummaryState(TypedDict):
+    messages: Annotated[list, add_messages]
+    summary: str
+
+def maybe_summarize(state: ChatWithSummaryState) -> ChatWithSummaryState:
+    """当消息过多时生成摘要"""
+    messages = state["messages"]
+    if len(messages) > 10:
+        # 对前 8 条消息生成摘要
+        conversation = "\n".join(
+            f"{m.type}: {m.content}" for m in messages[:8]
+        )
+        summary = summary_chain.invoke({"conversation": conversation})
+        # 保留摘要 + 最近 2 条消息
+        return {"messages": messages[-2:], "summary": summary}
+    return state
+```
+
+## 8. 链的组合（LCEL）
+
+> 🔄 更新于 2026-05-21：使用 LCEL（LangChain Expression Language）重写，替代已废弃的 `SimpleSequentialChain` 和 `MultiPromptChain`。
+
+### 8.1 顺序组合（管道语法）
+
+```python
+from langchain_openai import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+llm = ChatOpenAI(model_name="gpt-5.2")
+
+# 第一步：生成大纲
+outline_prompt = ChatPromptTemplate.from_messages([
+    ("human", "为主题「{topic}」生成一个简短的三点大纲")
+])
+
+# 第二步：基于大纲扩展
+expand_prompt = ChatPromptTemplate.from_messages([
+    ("human", "基于以下大纲，写一段 200 字的介绍：\n{outline}")
+])
+
+# LCEL 顺序组合（管道语法）
+chain = (
+    outline_prompt
+    | llm
+    | StrOutputParser()
+    | (lambda outline: {"outline": outline})
+    | expand_prompt
+    | llm
+    | StrOutputParser()
+)
+
+result = chain.invoke({"topic": "Python编程"})
+print(result)
+```
+
+### 8.2 并行组合
+
+```python
+from langchain_core.runnables import RunnableParallel
+
+# 并行执行多个链
+parallel_chain = RunnableParallel(
+    summary=ChatPromptTemplate.from_messages([
+        ("human", "用一句话总结{topic}")
+    ]) | llm | StrOutputParser(),
+    
+    keywords=ChatPromptTemplate.from_messages([
+        ("human", "列出{topic}的5个关键词，用逗号分隔")
+    ]) | llm | StrOutputParser(),
+    
+    difficulty=ChatPromptTemplate.from_messages([
+        ("human", "评估学习{topic}的难度（1-10分），只回答数字")
+    ]) | llm | StrOutputParser(),
+)
+
+# 一次调用，三个结果并行生成
+result = parallel_chain.invoke({"topic": "机器学习"})
+print(result["summary"])
+print(result["keywords"])
+print(result["difficulty"])
+```
+
+### 8.3 条件路由
+
+```python
+from langchain_core.runnables import RunnableLambda, RunnableBranch
+
+# 定义不同领域的提示
+python_prompt = ChatPromptTemplate.from_messages([
+    ("system", "你是一个 Python 专家，擅长解答 Python 编程问题。"),
+    ("human", "{question}")
+])
+
+ai_prompt = ChatPromptTemplate.from_messages([
+    ("system", "你是一个 AI 专家，擅长解答人工智能相关问题。"),
+    ("human", "{question}")
+])
+
+general_prompt = ChatPromptTemplate.from_messages([
+    ("system", "你是一个通用助手。"),
+    ("human", "{question}")
+])
+
+# 路由函数
+def classify_question(input_dict):
+    question = input_dict["question"].lower()
+    if "python" in question or "代码" in question:
+        return "python"
+    elif "ai" in question or "机器学习" in question or "深度学习" in question:
+        return "ai"
+    return "general"
+
+# 条件分支
+branch = RunnableBranch(
+    (lambda x: classify_question(x) == "python", python_prompt | llm | StrOutputParser()),
+    (lambda x: classify_question(x) == "ai", ai_prompt | llm | StrOutputParser()),
+    general_prompt | llm | StrOutputParser(),  # 默认分支
+)
+
+# 使用
+answer = branch.invoke({"question": "Python的GIL是什么？"})
+print(answer)
+```
+
+### 8.4 带回退的链
+
+```python
+from langchain_core.runnables import RunnableWithFallbacks
+
+# 主模型 + 回退模型
+main_llm = ChatOpenAI(model_name="gpt-5.2", temperature=0)
+fallback_llm = ChatOpenAI(model_name="gpt-5-mini", temperature=0)
+
+# 如果主模型失败，自动切换到回退模型
+prompt = ChatPromptTemplate.from_messages([("human", "{question}")])
+chain_with_fallback = (
+    prompt | main_llm.with_fallbacks([fallback_llm]) | StrOutputParser()
+)
+
+result = chain_with_fallback.invoke({"question": "解释量子计算"})
 ```
 
 ## 9. 流式输出
@@ -373,10 +647,10 @@ response = streaming_llm.invoke(messages)
 ### 10.1 错误处理
 
 ```python
-from langchain.schema import OutputParserException
+from langchain_core.exceptions import OutputParserException
 
 try:
-    result = chain.run(input_text)
+    result = chain.invoke({"topic": input_text})
 except OutputParserException as e:
     print(f"解析错误: {e}")
 except Exception as e:
@@ -386,12 +660,16 @@ except Exception as e:
 ### 10.2 性能优化
 
 ```python
-# 使用批处理
+# 使用批处理（LCEL 原生支持）
 inputs = [{"topic": "Python"}, {"topic": "Java"}]
 results = chain.batch(inputs)
 
+# 异步批处理（更高吞吐）
+import asyncio
+results = asyncio.run(chain.abatch(inputs))
+
 # 使用缓存
-from langchain.cache import InMemoryCache
+from langchain_community.cache import InMemoryCache
 from langchain.globals import set_llm_cache
 
 set_llm_cache(InMemoryCache())
@@ -400,80 +678,125 @@ set_llm_cache(InMemoryCache())
 ### 10.3 成本控制
 
 ```python
-# 限制token数量
+# 限制 token 数量
 llm = ChatOpenAI(
+    model_name="gpt-5.2",
     max_tokens=100,
     temperature=0
 )
 
-# 使用更便宜的模型
-llm = ChatOpenAI(model_name="gpt-3.5-turbo")
+# 使用更便宜的模型处理简单任务
+cheap_llm = ChatOpenAI(model_name="gpt-5-mini")
+
+# 通过 with_fallbacks 实现成本分级
+chain = prompt | cheap_llm.with_fallbacks([llm]) | StrOutputParser()
 ```
 
 ## 11. 实际应用示例
 
-### 11.1 文档问答系统
+### 11.1 文档问答系统（LCEL 完整示例）
 
 ```python
-from langchain.chains import RetrievalQA
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_community.document_loaders import DirectoryLoader
+from langchain_community.vectorstores import FAISS
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
 
-# 加载文档
+# 1. 加载文档
 loader = DirectoryLoader("./documents", glob="*.txt")
 documents = loader.load()
 
-# 处理文档
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000)
+# 2. 处理文档
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 chunks = text_splitter.split_documents(documents)
 
-# 创建向量存储
+# 3. 创建向量存储
+embeddings = OpenAIEmbeddings()
 vectorstore = FAISS.from_documents(chunks, embeddings)
+retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 
-# 创建问答链
-qa_chain = RetrievalQA.from_chain_type(
-    llm=llm,
-    chain_type="stuff",
-    retriever=vectorstore.as_retriever()
+# 4. 构建 RAG 链
+llm = ChatOpenAI(model_name="gpt-5.2")
+
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "你是一个文档问答助手。根据以下上下文回答问题，如果不确定请说明。\n\n{context}"),
+    ("human", "{question}")
+])
+
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
+
+qa_chain = (
+    {"context": retriever | format_docs, "question": RunnablePassthrough()}
+    | prompt
+    | llm
+    | StrOutputParser()
 )
 
-# 查询
-answer = qa_chain.run("如何使用这个系统？")
+# 5. 查询
+answer = qa_chain.invoke("如何使用这个系统？")
+print(answer)
 ```
 
-### 11.2 代码生成助手
+### 11.2 代码生成助手（LangGraph Agent）
 
 ```python
-from langchain.agents import create_python_agent
-from langchain.tools.python.tool import PythonREPLTool
+from langgraph.prebuilt import create_react_agent
+from langchain_openai import ChatOpenAI
+from langchain_core.tools import tool
+from langchain_experimental.tools import PythonREPLTool
 
-# 创建Python代理
-agent = create_python_agent(
-    llm=llm,
-    tool=PythonREPLTool(),
-    verbose=True
+# Python REPL 工具
+python_repl = PythonREPLTool()
+
+@tool
+def run_python(code: str) -> str:
+    """执行 Python 代码并返回结果。用于验证代码是否正确。"""
+    return python_repl.run(code)
+
+# 创建代码助手 Agent
+llm = ChatOpenAI(model_name="gpt-5.2")
+code_agent = create_react_agent(
+    llm,
+    tools=[run_python],
+    state_modifier="你是一个 Python 编程助手。当用户要求写代码时，先写代码，然后用工具验证。"
 )
 
 # 执行代码生成任务
-result = agent.run("写一个函数计算斐波那契数列的前n项")
+result = code_agent.invoke({
+    "messages": [("human", "写一个函数计算斐波那契数列的前n项，并测试 n=10")]
+})
+print(result["messages"][-1].content)
 ```
 
 ## 12. 总结
 
-LangChain 提供了构建强大 LLM 应用所需的所有工具：
-- **模块化设计**：易于组合和扩展
-- **丰富的集成**：支持多种数据源和工具
-- **强大的代理系统**：让 LLM 使用外部工具
-- **灵活的记忆管理**：支持多种记忆策略
+LangChain 1.x + LangGraph 提供了构建生产级 LLM 应用所需的完整工具链：
+- **LCEL 管道语法**：通过 `|` 运算符组合 prompt → model → parser，简洁且可组合
+- **LangGraph 状态图**：用于构建有状态的 Agent、多轮对话、复杂工作流
+- **丰富的集成**：支持多种数据源、向量数据库和工具
+- **内置持久化**：通过 checkpointer 实现对话记忆和状态恢复
+- **流式与批处理**：LCEL 原生支持 `.stream()`、`.batch()`、`.astream()` 等
 
-通过 LangChain，可以快速构建从简单的问答系统到复杂的多代理应用。
+核心依赖关系：
+```
+langchain-core    → 基础抽象（Runnable、Messages、Tools）
+langchain         → 高层组件（Prompts、Parsers、Retrievers）
+langchain-openai  → OpenAI 模型集成
+langgraph         → Agent 工作流编排、状态管理
+langchain-community → 社区集成（向量数据库、文档加载器等）
+```
 ## 🎬 推荐视频资源
 
 - [DeepLearning.AI - LangChain for LLM Application Development](https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/) — LangChain入门（免费）
 - [freeCodeCamp - LangChain Tutorial](https://www.youtube.com/watch?v=lG7Uxts9SXs) — LangChain完整教程
 
-<!-- version-check: LangChain 1.2.x, LangGraph 1.x, checked 2026-04-22 -->
+<!-- version-check: LangChain 1.2.18, LangGraph 1.1.9, checked 2026-05-21 -->
 
-> 🔄 更新于 2026-04-22
+> 🔄 更新于 2026-05-21
 
 ## 13. LangChain 1.0 / 1.2.x 版本演进
 
@@ -511,7 +834,7 @@ def search(query: str) -> str:
     return f"搜索结果: {query}"
 
 # 1.x 新版 create_agent API
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatOpenAI(model="gpt-5.2")
 agent = create_agent(
     llm=llm,
     tools=[search],

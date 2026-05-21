@@ -255,8 +255,8 @@ df.dropna(subset=['列名'])  # 删除指定列的缺失值
 
 # 填充缺失值
 df.fillna(0)             # 用0填充
-df.fillna(method='ffill') # 前向填充
-df.fillna(method='bfill') # 后向填充
+df.ffill()               # 前向填充（Pandas 3.0 推荐）
+df.bfill()               # 后向填充（Pandas 3.0 推荐）
 df.fillna(df.mean())     # 用均值填充
 ```
 
@@ -496,11 +496,11 @@ Pandas 是 Python 数据分析的核心库，提供了强大的数据处理和�
 
 ## 16. Pandas 3.0 版本演进
 
-<!-- version-check: Pandas 3.0.2, checked 2026-04-23 -->
+<!-- version-check: Pandas 3.0.3, checked 2026-05-21 -->
 
 > 🔄 更新于 2026-04-23
 
-Pandas 3.0.0 于 2026-01-21 发布，是期待已久的重大版本，包含多项 Breaking Changes。当前稳定版为 3.0.2（2026-03-30）。来源：[pandas 3.0 released](https://pandas.pydata.org/community/blog/pandas-3.0.html)
+Pandas 3.0.0 于 2026-01-21 发布，是期待已久的重大版本，包含多项 Breaking Changes。当前稳定版为 3.0.3（2026-05-11）。来源：[pandas 3.0 released](https://pandas.pydata.org/community/blog/pandas-3.0.html)
 
 ### 16.1 三大核心变化
 
