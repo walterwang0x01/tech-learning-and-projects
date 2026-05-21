@@ -22,7 +22,7 @@ Agent 写代码 → CI 运行 → 失败 → Agent 读日志 → 修复 → CI �
 
 ```yaml
 # .github/workflows/agent-ci.yml
-# <!-- 修复于 2026-05-20: actions 版本升级到 2026 标准（v4 → v5） -->
+# <!-- 修复于 2026-05-21: actions/checkout v5 → v6（v6 已 GA） -->
 name: Agent CI Pipeline
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - run: pip install -e ".[dev]"
@@ -77,7 +77,7 @@ jobs:
       startsWith(github.event.workflow_run.head_branch, 'agent/')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
       - name: Download Reports
@@ -126,7 +126,7 @@ jobs:
       matrix:
         module: [src/api, src/service, src/repository]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Scan & Fix
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

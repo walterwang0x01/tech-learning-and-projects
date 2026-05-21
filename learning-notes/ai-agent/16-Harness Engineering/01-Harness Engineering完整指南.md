@@ -153,7 +153,7 @@ jobs:
   sweep:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5  # 修复于 2026-05-20: v4 → v5（与第 14 次审查标准一致）
+      - uses: actions/checkout@v6  # 修复于 2026-05-21: v5 → v6（v6 已 GA，第 13 次审查确认）
       - name: Run quality scan
         run: |
           # Agent 扫描并自动修复

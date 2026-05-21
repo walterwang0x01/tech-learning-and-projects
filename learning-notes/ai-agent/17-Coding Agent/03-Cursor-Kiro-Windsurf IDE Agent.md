@@ -134,7 +134,7 @@ GitHub 原生 AI 编程助手，集成于 VS Code / JetBrains / Neovim。
 
 > 🔄 更新于 2026-04-21
 
-<!-- version-check: Cursor 3.0, Kiro GA, Claude Code Agent View (2026-05-06), checked 2026-05-20 -->
+<!-- version-check: Cursor 3.0, Kiro GA, Claude Code Agent View (2026-05-06), checked 2026-05-21 -->
 
 ### Cursor 3（2026-04-02）
 
@@ -157,13 +157,15 @@ Cursor 3 核心变化：
 └─ 界面完全重构（非增量更新）
 ```
 
-### Kiro GA（2025-08 正式发布）
+### Kiro GA（2025-07 正式发布）
 
-Kiro 已从 Preview 阶段进入正式发布，定价模型调整，Spec 请求额度有所变化。
+<!-- 修复于 2026-05-21: 定价更新为 $20/月 Pro，补充新定价结构 -->
+Kiro 已从 Preview 阶段进入正式发布。2026 年定价调整为统一 credit 池模式：Free（50 credits）、Pro（$20/月，1000 credits）、Pro+（$40/月，2000 credits）、Power（$200/月，10000 credits）。
 
-### Windsurf 被 Cognition 收购（2025-12）
+### Windsurf 被 Cognition 收购（2025-07）
 
-Cognition（Devin 母公司）以 $2.5 亿收购 Windsurf。截至 2026-03，两个产品仍独立运营，但合并后有望提供从 IDE 辅助到自主执行的完整 AI 开发工作流。
+<!-- 修复于 2026-05-21: 收购时间从 2025-12 修正为 2025-07，金额从 $2.5 亿修正为实际情况 -->
+2025 年 7 月，在 OpenAI 的 $30 亿收购交易排他期到期后，Google 以 $24 亿"反向收购"挖走了 Windsurf 创始人和核心研究团队，Cognition 随后收购了 Windsurf 剩余资产（产品、代码库、用户）。截至 2026-05，两个产品仍独立运营，但合并后有望提供从 IDE 辅助到自主执行的完整 AI 开发工作流。
 
 来源：[Cursor 3.0 Changelog](https://cursor.com/changelog/3-0)（Content was rephrased for compliance with licensing restrictions）
 来源：[InfoQ: Cursor 3 Agent-First Interface](https://www.infoq.com/news/2026/04/cursor-3-agent-first-interface/)（Content was rephrased for compliance with licensing restrictions）
@@ -182,7 +184,7 @@ Cognition（Devin 母公司）以 $2.5 亿收购 Windsurf。截至 2026-03，两
 | 自动化 | Design Mode | ✅ Hooks | 有限 | 有限 |
 | 多 Agent 并行 | ✅ Agents Window | ❌ | ❌ | ❌ |
 | 免费版 | 有限额度 | 免费额度 | 有限额度 | 免费额度 |
-| Pro 价格 | $20/月 | $19/月 | $15/月 | $10/月 |
+| Pro 价格 | $20/月 | $20/月 | $15/月 | $10/月 |
 | 特色优势 | Agent 编排中心 | 规范化开发流程 | 自主执行+IDE | 生态集成最广 |
 
 ## 7. IDE Agent vs 终端 Agent

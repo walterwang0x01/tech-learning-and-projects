@@ -417,8 +417,8 @@ Harness Engineering（约束 + 反馈循环）
 - IDE Agent → `Cursor-Kiro-Windsurf IDE Agent.md`（本目录）
 - 终端 Agent → `Claude Code与终端Agent.md`（本目录）
 - 自主开发 → `Devin与自主开发Agent.md`（本目录）
-- Harness Engineering → `16-Harness Engineering/Harness Engineering完整指南.md`
-- Agent 设计模式 → `01-Agentic设计模式/Agentic设计模式大全.md`
+- Harness Engineering → `16-Harness Engineering/01-Harness Engineering完整指南.md`
+- Agent 设计模式 → `01-Agentic设计模式/02-Agentic设计模式大全.md`
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

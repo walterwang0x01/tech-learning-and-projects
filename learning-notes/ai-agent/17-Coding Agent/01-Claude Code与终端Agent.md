@@ -150,7 +150,7 @@ echo "检查代码中的安全漏洞" | claude --pipe
 
 > 🔄 更新于 2026-05-12
 
-<!-- version-check: Claude Code 2.1.139, Code with Claude SF (2026-05-06), checked 2026-05-20 -->
+<!-- version-check: Claude Code 2.1.145, Code with Claude SF (2026-05-06), checked 2026-05-21 -->
 
 Claude Code 在 2026 年 3-4 月进入了史上最密集的迭代周期，从 v2.1.69 到 v2.1.101，5 周内发布了 30+ 个版本。
 
@@ -215,9 +215,11 @@ v2.1.116-123（5 月初）：
 
 来源：[Claude Code Docs - Changelog](https://code.claude.com/docs/en/changelog)、[Claude Code Plugins](https://www.anthropic.com/news/claude-code-plugins)（Content was rephrased for compliance with licensing restrictions）
 
-### "Code with Claude" SF 大会（2026-05-06）与 v2.1.139
+### "Code with Claude" SF 大会（2026-05-06）与 v2.1.139+
 
-> 🔄 更新于 2026-05-20
+> 🔄 更新于 2026-05-21
+
+<!-- 修复于 2026-05-21: 补充 v2.1.145 安全修复信息 -->
 
 Anthropic 在旧金山举办了第二届 "Code with Claude" 开发者大会，发布了 Claude Code 从终端工具向自主开发平台的关键转型。
 

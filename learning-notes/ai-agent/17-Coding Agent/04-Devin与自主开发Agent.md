@@ -71,7 +71,7 @@ docker run -it \
   -e LLM_API_KEY="sk-xxx" \
   -e LLM_MODEL="claude-sonnet-4-6-20260217" \
   -p 3000:3000 \
-  ghcr.io/all-hands-ai/openhands:latest
+  ghcr.io/openhands/openhands:latest
 
 # 访问 http://localhost:3000 使用 Web UI
 ```
@@ -123,7 +123,7 @@ swe-agent run \
 
 > 🔄 更新于 2026-04-21
 
-<!-- version-check: Devin 2.2, SWE-1.6, OpenHands 1.6.0, checked 2026-04-21 -->
+<!-- version-check: Devin 2.2, SWE-1.6, OpenHands 1.14.x, checked 2026-05-21 -->
 
 ### Devin 2.2（2026-02-24）
 
@@ -148,19 +148,21 @@ Devin 2.2 核心更新：
 
 Cognition 发布 SWE-1.6，专为智能和模型 UX 优化。
 
-### Cognition 收购 Windsurf（2025-12，$2.5 亿）
+### Cognition 收购 Windsurf（2025-07）
 
-Cognition 收购 Windsurf 后，拥有了从 IDE 辅助到自主执行的完整产品线。截至 2026-03 两个产品仍独立运营。
+<!-- 修复于 2026-05-21: 收购时间从 2025-12 修正为 2025-07 -->
+2025 年 7 月，在 Google 以 $24 亿"反向收购"挖走 Windsurf 创始人后，Cognition 收购了 Windsurf 剩余资产。Cognition 随后以 $10.2B 估值融资 $400M+（Founders Fund 领投）。截至 2026-05 两个产品仍独立运营。
 
-### OpenHands v1.6.0（2026-03）
+### OpenHands v1.14.x（2026-05）
 
-开源自主编码 Agent 持续增长：70K+ GitHub Stars、490+ 贡献者、MIT 许可。
+<!-- 修复于 2026-05-21: v1.6.0 → v1.14.x（PyPI 确认），Stars 70K+ → 65K（GitHub 确认） -->
+开源自主编码 Agent 持续增长：65K GitHub Stars、490+ 贡献者、MIT 许可。
 
 ```
 OpenHands 生态数据：
-├─ 70K+ GitHub Stars（从 OpenDevin 更名后持续增长）
+├─ 65K GitHub Stars
 ├─ 490+ 贡献者，3500+ commits
-├─ 100+ 版本发布
+├─ 100+ 版本发布（当前 v1.14.x）
 ├─ 支持任意 LLM 后端（Claude/GPT/Gemini/本地模型）
 ├─ OpenHands LM 32B：基于 Qwen Coder 2.5 的开源编码模型
 └─ OpenHands Index：跨模型编码能力基准评测
@@ -327,4 +329,4 @@ OpenAI 在 5 月密集发布了 Codex 平台级升级，从 CLI 工具演进为�
 - [OpenHands - Open Source Devin](https://www.youtube.com/watch?v=dcgRMOG605w) — OpenHands开源替代
 
 ### 📖 官方文档
-- [OpenHands GitHub](https://github.com/All-Hands-AI/OpenHands) — OpenHands开源项目
+- [OpenHands GitHub](https://github.com/OpenHands/OpenHands) — OpenHands开源项目
