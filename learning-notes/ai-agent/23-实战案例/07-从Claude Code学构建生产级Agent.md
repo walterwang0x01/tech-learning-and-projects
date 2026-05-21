@@ -3,7 +3,7 @@
 > Author: Walter Wang
 > 如果你要从零构建一个 AI Agent 项目，Claude Code 的 512,000 行源码是目前最好的架构参考
 
-<!-- version-check: Claude Code 2.1.118, Claude Code Desktop GA, Agent Teams public, checked 2026-05-02 -->
+<!-- version-check: Claude Code 2.1.145, Claude Code Desktop GA, Agent Teams public, checked 2026-05-21 -->
 
 ## 1. 为什么要学 Claude Code 的架构
 
@@ -527,9 +527,9 @@ class CostOptimizer:
 
 class CostTracker:
     PRICING = {
-        "claude-opus": {"input": 15.0, "output": 75.0, "cache_read": 1.5},
+        "claude-opus": {"input": 5.0, "output": 25.0, "cache_read": 0.5},
         "claude-sonnet": {"input": 3.0, "output": 15.0, "cache_read": 0.3},
-        "claude-haiku": {"input": 0.25, "output": 1.25, "cache_read": 0.025},
+        "claude-haiku": {"input": 1.0, "output": 5.0, "cache_read": 0.1},
     }
     
     def __init__(self):

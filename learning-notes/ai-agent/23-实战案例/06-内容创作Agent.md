@@ -52,7 +52,7 @@ researcher = Agent(
     backstory="""你是经验丰富的内容研究员，擅长从多个来源收集信息，
     识别热点趋势，提供有数据支撑的调研报告。""",
     tools=[search_tool],
-    llm="gpt-4o",
+    llm="gpt-5.2",
     verbose=True,
 )
 
@@ -62,7 +62,7 @@ writer = Agent(
     goal="撰写高质量、有深度的技术文章",
     backstory="""你是资深技术作者，文风清晰简洁，善于用通俗语言解释复杂概念。
     你的文章结构清晰，代码示例实用，读者反馈一直很好。""",
-    llm="gpt-4o",
+    llm="gpt-5.2",
     verbose=True,
 )
 
@@ -73,7 +73,7 @@ editor = Agent(
     backstory="""你是严格的内容编辑，关注语法、逻辑、事实准确性。
     你会检查文章结构、论证逻辑、数据引用，确保发布质量。""",
     tools=[check_facts],
-    llm="gpt-4o",
+    llm="gpt-5.2",
     verbose=True,
 )
 
@@ -84,7 +84,7 @@ seo_optimizer = Agent(
     backstory="""你是 SEO 专家，了解搜索引擎算法，
     能优化标题、元描述、关键词密度、内链外链策略。""",
     tools=[analyze_seo],
-    llm="gpt-4o",
+    llm="gpt-5.2",
     verbose=True,
 )
 ```
@@ -190,7 +190,7 @@ evaluator = Agent(
     role="内容质量评估师",
     goal="严格评估文章质量",
     backstory="你是内容质量专家，评分标准严格但公正。",
-    llm="gpt-4o",
+    llm="gpt-5.2",
 )
 
 def content_pipeline_with_eval(topic: str, max_iterations: int = 3) -> str:
@@ -248,7 +248,7 @@ publisher = Agent(
     role="内容发布专员",
     goal="将文章发布到指定平台",
     tools=publish_tools,
-    llm="gpt-4o",
+    llm="gpt-5.2",
 )
 
 publish_task = Task(

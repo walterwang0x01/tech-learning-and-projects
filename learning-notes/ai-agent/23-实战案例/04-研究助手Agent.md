@@ -83,7 +83,7 @@ class ResearchState(TypedDict):
     analysis: str
     report: str
 
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatOpenAI(model="gpt-5.2")
 
 # 节点1：文献搜索
 async def search_literature(state: ResearchState) -> dict:

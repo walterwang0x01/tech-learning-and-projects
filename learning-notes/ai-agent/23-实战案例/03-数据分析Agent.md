@@ -22,7 +22,7 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+llm = ChatOpenAI(model="gpt-5.2", temperature=0)
 
 # 获取数据库 Schema 作为上下文
 DB_SCHEMA = """

@@ -216,7 +216,7 @@ n8n 在 2026 年初遭遇多个严重安全漏洞：
 
 **影响**：任何认证用户可完全控制服务器，窃取所有存储的凭证、API Key 和密钥。自托管和云实例均受影响。
 
-**建议**：立即升级到 n8n v2.10+，启用 Task Runner 隔离，限制 Code 节点权限。
+**建议**：立即升级到 n8n v2.20+（当前稳定版），启用 Task Runner 隔离，限制 Code 节点权限。
 
 来源：[Pillar Security](https://www.pillar.security/blog/n8n-sandbox-escape-critical-vulnerabilities-in-n8n-exposes-hundreds-of-thousands-of-enterprise-ai-systems-to-complete-takeover)、[The Hacker News](https://thehackernews.com/2026/03/critical-n8n-flaws-allow-remote-code.html)
 
@@ -224,7 +224,7 @@ n8n 在 2026 年初遭遇多个严重安全漏洞：
 
 > 🔄 更新于 2026-04-21
 
-<!-- version-check: n8n 2.10+, Flowise 3.0.6, checked 2026-04-29 -->
+<!-- version-check: n8n 2.20+, Flowise 3.0.6, checked 2026-05-21 -->
 
 ### n8n 2.0：安全加固与企业级升级
 

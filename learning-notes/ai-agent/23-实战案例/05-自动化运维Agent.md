@@ -132,7 +132,7 @@ class IncidentState(TypedDict):
     actions_taken: list[str]
     resolved: bool
 
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatOpenAI(model="gpt-5.2")
 
 # Agent 1：告警分类
 async def triage_agent(state: IncidentState) -> dict:

@@ -128,7 +128,6 @@ r2 = await chat_with_agent("具体流程是什么？", r1["conversation_id"])
 
 ```yaml
 # docker-compose.yaml（Dify 私有部署）
-version: '3'
 services:
   api:
     image: langgenius/dify-api:latest
@@ -170,7 +169,7 @@ docker compose up -d
 
 > 🔄 更新于 2026-04-21
 
-<!-- version-check: Dify v1.13.2, checked 2026-04-21 -->
+<!-- version-check: Dify v1.14.1, checked 2026-05-21 -->
 
 ### Dify v1.13.x：Human Input 节点与工作流增强
 
@@ -191,7 +190,7 @@ Dify 于 2026-03 发布 v1.13.0，当前稳定版为 v1.13.2。核心新特性�
 
 - **$3000 万 Pre-A 轮融资**（2026-03-10）：估值 $1.8 亿，由 HSG 领投
 - 2,000+ 团队、280+ 企业使用
-- GitHub Stars 持续增长（113K+）
+- GitHub Stars 持续增长（142K+）
 - **Beehive 架构重构**：模块化设计，各模块独立运行，开发者可按需调整
 
 ### Dify 2.0 预览
@@ -202,9 +201,11 @@ Dify v2.0.0-beta.1 已在 GitHub Discussions 中发布，主题为"Orchestrating
 
 > 🔄 更新于 2026-04-29
 
-<!-- version-check: Dify v1.14.0-rc1, checked 2026-04-29 -->
+<!-- version-check: Dify v1.14.1, checked 2026-05-21 -->
 
-Dify v1.14.0-rc1 于 2026-04 发布预览版，引入全新的 Agent 构建体验：
+<!-- 修复于 2026-05-21: v1.14.0 已正式发布，v1.14.1 为当前稳定版 -->
+
+Dify v1.14.0 于 2026-04-29 正式发布（非预览版），v1.14.1 于 2026-05-09 发布修复版。核心新特性：
 
 **核心新特性**：
 
@@ -227,17 +228,15 @@ Dify v1.14.0-rc1 于 2026-04 发布预览版，引入全新的 Agent 构建体�
    - 评论、@提及、实时在线状态
    - 自托管需配置 WebSocket
 
-> ⚠️ v1.14.0-rc1 为预览版，不建议用于生产环境。
-
-**Dify 生态数据**（截至 2026-04）：
-- GitHub Stars：132K+
+**Dify 生态数据**（截至 2026-05）：
+- GitHub Stars：142K+
 - 100,000+ Stars 里程碑已达成
 
 ### 平台对比更新（2026-04）
 
 | 特性 | Dify | n8n | Coze | FastGPT |
 |------|------|-----|------|---------|
-| 最新版本 | v1.13.2（稳定）/ v1.14.0-rc1（预览） | v2.10+ | v2.5 | 持续更新 |
+| 最新版本 | v1.14.1（稳定） | v2.20+ | v2.5 | 持续更新 |
 | 定位 | LLM 应用开发平台 | 工作流自动化 + AI | AI Bot 构建平台 | 知识库问答系统 |
 | Human-in-the-Loop | ✅（v1.13 原生） | ✅（Wait 节点） | 有限 | 有限 |
 | Agent Skills | ✅（v1.14 预览） | ❌ | ❌ | ❌ |
@@ -245,7 +244,17 @@ Dify v1.14.0-rc1 于 2026-04 发布预览版，引入全新的 Agent 构建体�
 | 开源 | ✅ Apache 2.0 | ✅ 可持续许可 | ✅ Coze Studio | ✅ Apache 2.0 |
 | 融资 | $3000 万 | $1.2 亿+ | 字节跳动 | 社区驱动 |
 
-> 来源：[Dify Blog](https://dify.ai/blog)、[Dify GitHub Releases](https://github.com/langgenius/dify/releases)、[Dify v1.14.0-rc1 Forum](https://forum.dify.ai/t/1-14-0-rc1-dify-x-agent-skills-for-production-workflows-collaboration-beta/1115)
+> 来源：[Dify Blog](https://dify.ai/blog)、[Dify GitHub Releases](https://github.com/langgenius/dify/releases)、[Dify v1.14.1 Forum](https://forum.dify.ai/t/dify-v1-14-1-is-here/1982)
+
+### ⚠️ Dify 安全警告（2026-05）
+
+> 🔄 更新于 2026-05-21
+
+<!-- 修复于 2026-05-21: 补充安全漏洞信息 -->
+
+Imperva 研究人员发现 Dify 存在关键漏洞，允许一键账户接管（Account Takeover）。影响 142K+ Stars 的开源部署。**自托管用户必须升级到最新版本（v1.14.1+）**。
+
+来源：[Cybernews](https://cybernews.com/security/dify-critical-vulnerabilities-disclosed/)
 
 ## 🎬 推荐视频资源
 

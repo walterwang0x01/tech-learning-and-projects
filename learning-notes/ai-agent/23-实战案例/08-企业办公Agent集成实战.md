@@ -303,7 +303,7 @@ tools = toolset.get_tools(actions=[
 ])
 
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "在 Slack #general 发消息，同时创建 Jira Issue"}],
     tools=tools,
 )
@@ -477,7 +477,7 @@ from langgraph.prebuilt import create_react_agent
 from composio_langchain import ComposioToolSet, Action
 
 # 初始化
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatOpenAI(model="gpt-5.2")
 toolset = ComposioToolSet()
 
 # 获取多平台工具

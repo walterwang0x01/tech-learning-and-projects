@@ -75,7 +75,7 @@ def search_code(repo_path: str, pattern: str) -> list[dict]:
 ```python
 from langchain_openai import ChatOpenAI
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+llm = ChatOpenAI(model="gpt-5.2", temperature=0)
 
 async def generate_code(requirement: str, context: str = "") -> str:
     """根据需求生成代码"""
@@ -242,7 +242,7 @@ async def generate_tests(code: str, file_path: str) -> str:
 | Kiro | IDE Agent | Spec 驱动开发、Hooks 自动化、Steering 项目规范 |
 | Devin 2.2 | 自主开发 Agent | Desktop Computer Use、Self-reviewing PR、PR 合并率 67% |
 | Codex CLI | 终端 Agent | OpenAI 开源、沙箱执行、多文件编辑 |
-| OpenHands | 开源 Agent | 70K+ Stars、SWE-bench 高分、完全开源 |
+| OpenHands | 开源 Agent | 65K+ Stars、SWE-bench 高分、完全开源 |
 
 ### 7.2 关键架构变化
 
