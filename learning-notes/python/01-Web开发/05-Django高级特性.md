@@ -59,10 +59,13 @@ def user_post_save(sender, instance, created, **kwargs):
 
 ### 2.2 自定义信号
 
+<!-- 修复于 2026-05-21: providing_args 在 Django 4.0 中已移除 -->
+
 ```python
 from django.dispatch import Signal
 
-order_created = Signal(providing_args=["order", "user"])
+# Django 4.0+ 不再支持 providing_args 参数
+order_created = Signal()
 
 # 发送信号
 order_created.send(sender=self.__class__, order=order, user=user)
@@ -193,7 +196,7 @@ def send_email_task(user_id, message):
 
 > 🔄 更新于 2026-04-30
 
-<!-- version-check: Django 6.0.x, django.tasks framework, checked 2026-04-30 -->
+<!-- version-check: Django 6.0.6, django.tasks framework, checked 2026-05-21 -->
 
 Django 6.0 引入了内置的 Tasks 框架（`django.tasks`），无需 Celery 即可处理简单的后台任务。这是 Django 历史上最受期待的功能之一。
 

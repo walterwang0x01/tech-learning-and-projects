@@ -60,7 +60,7 @@ django-admin --version
 
 > 🔄 更新于 2026-04-18
 
-<!-- version-check: Django 6.0.x, checked 2026-04-18 -->
+<!-- version-check: Django 6.0.6, checked 2026-05-21 -->
 
 ### 2.4 Django 版本演进与选择
 

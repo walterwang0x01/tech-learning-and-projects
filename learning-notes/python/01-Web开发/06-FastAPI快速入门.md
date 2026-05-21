@@ -10,9 +10,9 @@ FastAPI 是一个现代、快速的 Web 框架，用于构建 API，基于 Pytho
 
 > 🔄 更新于 2026-04-18
 
-<!-- version-check: FastAPI 0.136.0, checked 2026-04-18 -->
+<!-- version-check: FastAPI 0.136.1, checked 2026-05-21 -->
 
-**当前版本**：FastAPI 0.136.0（2026-04-16），支持 free-threaded Python 3.14t。
+**当前版本**：FastAPI 0.136.1（2026-04-23），支持 free-threaded Python 3.14t。
 
 ## 核心特性
 

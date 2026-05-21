@@ -165,37 +165,45 @@ app.include_router(api_router)
 
 ### 4.1 Pydantic 模型
 
+<!-- 修复于 2026-05-21: @validator → @field_validator, class Config → model_config, regex → pattern (Pydantic v2) -->
+
 ```python
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional, List
 from datetime import datetime
 
 class User(BaseModel):
     id: int
     name: str = Field(..., min_length=1, max_length=50)
-    email: str = Field(..., regex=r'^[\w\.-]+@[\w\.-]+\.\w+$')
+    email: str = Field(..., pattern=r'^[\w\.-]+@[\w\.-]+\.\w+$')
     age: Optional[int] = Field(None, ge=0, le=120)
     tags: List[str] = []
     created_at: datetime = Field(default_factory=datetime.now)
     
-    @validator('name')
-    def name_must_not_be_empty(cls, v):
+    @field_validator('name')
+    @classmethod
+    def name_must_not_be_empty(cls, v: str) -> str:
         if not v.strip():
             raise ValueError('名称不能为空')
         return v
     
-    class Config:
-        schema_extra = {
-            "example": {
-                "id": 1,
-                "name": "Alice",
-                "email": "alice@example.com",
-                "age": 25
-            }
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "id": 1,
+                    "name": "Alice",
+                    "email": "alice@example.com",
+                    "age": 25
+                }
+            ]
         }
+    }
 ```
 
 ### 4.2 响应模型
+
+<!-- 修复于 2026-05-21: orm_mode → from_attributes (Pydantic v2) -->
 
 ```python
 class UserResponse(BaseModel):
@@ -203,8 +211,7 @@ class UserResponse(BaseModel):
     name: str
     email: str
     
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 @app.get("/users/{user_id}", response_model=UserResponse)
 async def get_user(user_id: int):

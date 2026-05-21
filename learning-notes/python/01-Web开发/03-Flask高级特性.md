@@ -204,11 +204,12 @@ Flask高级特性要点：
 
 ## 9. Flask 3.1.x 版本演进
 
-<!-- version-check: Flask 3.1.2, checked 2026-04-23 -->
+<!-- version-check: Flask 3.1.3, checked 2026-05-21 -->
 
-> 🔄 更新于 2026-04-23
+> 🔄 更新于 2026-05-21
 
-Flask 3.1.2 是当前稳定版（2025-08），Flask 在 2025 年仅发布了两个补丁版本（3.1.1 和 3.1.2）。来源：[A Year In Review: Flask in 2025](https://blog.miguelgrinberg.com/post/a-year-in-review-flask-in-2025)
+<!-- 修复于 2026-05-21: Flask 3.1.2 → 3.1.3 -->
+Flask 3.1.3 是当前稳定版（2026-04）。来源：[A Year In Review: Flask in 2025](https://blog.miguelgrinberg.com/post/a-year-in-review-flask-in-2025)
 
 ### 9.1 Flask 3.1.x 新特性
 

@@ -54,26 +54,48 @@ async def get_user(
 
 ### 2.1 CoreAPI 文档
 
+<!-- 修复于 2026-05-21: CoreAPI 在 DRF 3.14+ 中已废弃，推荐使用 drf-spectacular -->
+
+> ⚠️ **已废弃**：CoreAPI 和 `include_docs_urls` 在 DRF 3.14+ 中已废弃并在 3.15 中移除。新项目推荐使用 [drf-spectacular](https://drf-spectacular.readthedocs.io/) 生成 OpenAPI 3.0 文档。
+
 ```python
+# ❌ 旧方式（DRF 3.14 之前）
+# from rest_framework.documentation import include_docs_urls
+
+# ✅ 新方式：使用 drf-spectacular
+# pip install drf-spectacular
+
 # settings.py
 INSTALLED_APPS = [
     'rest_framework',
-    'rest_framework.documentation',
+    'drf_spectacular',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'API Documentation',
+    'VERSION': '1.0.0',
+}
+
 # urls.py
-from rest_framework.documentation import include_docs_urls
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
-    path('docs/', include_docs_urls(title='API Documentation')),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]
 ```
 
 ### 2.2 Schema 定义
 
+<!-- 修复于 2026-05-21: coreapi.Field 已废弃，使用 drf-spectacular 的 @extend_schema -->
+
 ```python
 from rest_framework import serializers, viewsets
-from rest_framework.schemas import AutoSchema
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -84,15 +106,18 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
-    def get_schema_fields(self, view):
-        return [
-            coreapi.Field(
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
                 name='username',
                 required=True,
-                location='form',
+                location=OpenApiParameter.QUERY,
                 description='用户名'
             )
         ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 ```
 
 ## 3. Flask API 文档
@@ -219,7 +244,7 @@ async def search(
 
 API文档生成要点：
 - **FastAPI自动文档**：Swagger UI、ReDoc、文档增强
-- **Django DRF文档**：CoreAPI、Schema定义
+- **Django DRF文档**：drf-spectacular（OpenAPI 3.0）
 - **Flask文档**：Flask-RESTX、Flask-APIDoc
 - **OpenAPI规范**：手动编写、自定义Schema
 - **Sphinx文档**：自动生成、代码文档
