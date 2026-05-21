@@ -4,8 +4,8 @@
 
 ## 1. 概述
 
-<!-- version-check: LangGraph 1.1.9 stable, 126K+ Stars, Deep Agents v0.6, Delta Channels, Managed Deep Agents, checked 2026-05-14 -->
-LangGraph 是 LangChain 团队推出的 Agent 工作流编排框架，基于图结构定义 Agent 的执行流程。2025 年 10 月发布 1.0 GA，目前最新版本为 1.1.9 稳定版，126K+ GitHub Stars，90M+ 月下载量，是目前生产级 Agent 开发的行业标准。Uber、JP Morgan、BlackRock、Cisco、LinkedIn、Klarna、Replit、Elastic 等企业已在生产环境部署。来源：[LangChain Blog](https://blog.langchain.com/langchain-langgraph-1dot0/)、[Releasebot](https://releasebot.io/updates/langchain-ai)
+<!-- version-check: LangGraph 1.2 stable, 126K+ Stars, Deep Agents v0.6, Delta Channels GA, Streaming API v3, Managed Deep Agents, checked 2026-05-21 -->
+LangGraph 是 LangChain 团队推出的 Agent 工作流编排框架，基于图结构定义 Agent 的执行流程。2025 年 10 月发布 1.0 GA，目前最新版本为 1.2 稳定版，126K+ GitHub Stars，90M+ 月下载量，是目前生产级 Agent 开发的行业标准。Uber、JP Morgan、BlackRock、Cisco、LinkedIn、Klarna、Replit、Elastic 等企业已在生产环境部署。来源：[LangChain Blog](https://blog.langchain.com/langchain-langgraph-1dot0/)、[Releasebot](https://releasebot.io/updates/langchain-ai)
 
 > 🔄 更新于 2026-05-14
 
@@ -55,7 +55,40 @@ agent = create_deep_agent(
 
 1. **LangSmith Engine — 自治诊断 Agent**：替代"读 trace → 找 pattern → 写修复"的手动循环。Engine 持续监控生产 trace，把失败聚类成命名 issue，对照代码定位根因，并草拟 PR 和 evaluator 等待开发者评审。每解决一个 issue 都会增强 eval 套件，形成"诊断 → 修复 → 评估 → 防回归"的自我强化闭环。来源：[Introducing LangSmith Engine](https://www.langchain.com/blog/introducing-langsmith-engine)、[Everything we shipped at Interrupt](https://www.langchain.com/blog/interrupt-2026-overview)
 2. **LangChain Labs**：新成立的研究实验室，聚焦"让 Agent 更好、更便宜、更易评估"。早期方向：cost/latency 折中、模拟与评估环境、跨模型族 prompt 优化。来源：[Introducing LangChain Labs](https://www.langchain.com/blog/introducing-langchain-labs)
-3. **LangChain 1.2.18 同步发布**（2026-05-13）：agent tag 回滚、classic 模块废弃清理、依赖项瘦身。配合 LangGraph 1.1.x 持续迭代。来源：[Releasebot — May 2026](https://releasebot.io/updates/langchain-ai)
+3. **LangChain 1.2.18 同步发布**（2026-05-13）：agent tag 回滚、classic 模块废弃清理、依赖项瘦身。配合 LangGraph 1.2 持续迭代。来源：[Releasebot — May 2026](https://releasebot.io/updates/langchain-ai)
+
+> 🔄 更新于 2026-05-21
+
+**LangGraph 1.2 正式版**（2026-05 月中旬）：
+
+LangGraph 从 1.1.x 升级到 1.2，核心改进：
+
+- **Durable Error-Handler Resume**：错误处理器可跨主机崩溃恢复，Agent 在任意节点失败后可从 checkpoint 精确恢复
+- **`set_node_defaults()`**：为 StateGraph 设置全局节点默认配置（超时、重试策略等），减少重复代码
+- **DeltaChannel 正式 GA**：增量 checkpoint 存储从实验性升级为稳定特性
+- **Streaming API v3**：typed-projection API，按 channel 独立消费（messages、values、subgraphs、output），替代旧的 `stream_mode` 分支模式
+- **Graceful Shutdown**：节点执行支持优雅关闭，长时间运行的 Agent 可安全停止
+
+```python
+# LangGraph 1.2 新 API 示例
+from langgraph.graph import StateGraph
+
+# set_node_defaults：全局配置
+graph = StateGraph(AgentState)
+graph.set_node_defaults(
+    timeout=30,           # 每个节点默认 30s 超时
+    retry_policy="exponential",  # 指数退避重试
+    max_retries=3
+)
+
+# Streaming API v3：typed-projection
+async for event in graph.astream(input, stream_mode="events"):
+    # 按类型独立消费，无需 if/else 分支
+    if event.type == "messages":
+        print(event.data)  # 只看消息流
+```
+
+来源：[LangGraph Streaming Docs](https://docs.langchain.com/oss/python/langgraph/streaming) | [Delta Channels Blog](https://www.langchain.com/blog/delta-channels-evolving-agent-runtime)
 4. **生态协同**：Day 2 强调 "observability and governance ship together now" —— LangSmith Engine（诊断）、LangSmith Fleet（治理 + Agent Card 管理）、LangSmith Insights（成本/质量分析）三者形成统一控制面。
 
 ```python

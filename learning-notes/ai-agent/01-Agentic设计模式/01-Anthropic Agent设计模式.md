@@ -291,9 +291,9 @@ def autonomous_agent(task: str, max_turns: int = 10) -> str:
 
 ## 9. 2026 新模式：Managed Agents 与 Agent Teams
 
-> 🔄 更新于 2026-04-22
+> 🔄 更新于 2026-05-21
 
-<!-- version-check: Claude Managed Agents public beta, Agent Teams (Opus 4.6), checked 2026-04-22 -->
+<!-- version-check: Claude Managed Agents (Dreaming, Outcomes, Multi-Agent Orchestration), Code with Claude 2026-05-06, checked 2026-05-21 -->
 
 ### 9.1 Claude Managed Agents（托管 Agent 运行时）
 
@@ -310,7 +310,83 @@ Managed Agents 模式（托管运行时）:
   优势：harness 由 Anthropic 维护，随模型升级自动优化
 ```
 
-### 9.2 Claude Code Agent Teams
+> 🔄 更新于 2026-05-21
+
+### 9.2 Managed Agents 新能力（Code with Claude 2026-05-06）
+
+Anthropic 在 Code with Claude 大会（2026-05-06 旧金山）上发布了 Managed Agents 的三大新能力。来源：[Anthropic 公告](https://claude.com/blog/new-in-claude-managed-agents) | [9to5Mac 报道](https://9to5mac.com/2026/05/07/anthropic-updates-claude-managed-agents-with-three-new-features/)
+
+**Dreaming（研究预览）**
+
+Agent 在会话间"做梦"——离线回顾历史 session，提取模式，自动优化长期记忆：
+
+```
+Dreaming 工作流：
+  ┌─────────────────────────────────────────────┐
+  │  Session 1 → Session 2 → ... → Session N    │
+  └──────────────────┬──────────────────────────┘
+                     │ 离线触发
+                     ▼
+  ┌─────────────────────────────────────────────┐
+  │              Dreaming 进程                    │
+  │  1. 回顾历史 session                         │
+  │  2. 提取重复模式和用户偏好                    │
+  │  3. 整理/删除过时记忆                         │
+  │  4. 生成改进建议                              │
+  └──────────────────┬──────────────────────────┘
+                     │ 更新记忆
+                     ▼
+  ┌─────────────────────────────────────────────┐
+  │  Session N+1（更好的上下文理解）              │
+  └─────────────────────────────────────────────┘
+```
+
+控制粒度：
+- **自动模式**：Dreaming 直接更新 Agent 记忆，无需人工干预
+- **审核模式**：Dreaming 生成变更建议，开发者审核后才生效
+
+**Outcomes（质量评分）**
+
+为 Agent 执行结果定义成功标准，形成评测闭环：
+
+```python
+# 概念示例：定义 Agent 的 Outcome 评分标准
+outcome_config = {
+    "success_criteria": [
+        "代码通过所有测试",
+        "PR 描述清晰完整",
+        "无安全漏洞引入"
+    ],
+    "scoring": "auto",  # 自动评分
+    "feedback_loop": True  # 评分结果反馈给 Dreaming
+}
+```
+
+**Multiagent Orchestration（多 Agent 编排）**
+
+原生支持 Lead Agent 编排多个 Specialist Agent：
+
+```
+多 Agent 编排架构：
+  ┌─────────────────────────────────────┐
+  │       Lead Agent（编排者）            │
+  │  接收任务 → 分解 → 分配 → 汇总       │
+  └──────┬──────────┬──────────┬────────┘
+         │          │          │
+  ┌──────┴──┐ ┌────┴────┐ ┌───┴─────┐
+  │ Agent A │ │ Agent B │ │ Agent C │
+  │ 代码审查 │ │ 测试编写 │ │ 文档生成 │
+  └─────────┘ └─────────┘ └─────────┘
+```
+
+配套发布：
+- **Webhooks**：Agent 执行完成后通知外部系统
+- **Cloudflare Sandboxes**：每个 Agent 会话运行在独立沙箱中（Workers 控制面拉起 microVM 或 V8 Isolate）
+- **Claude Finance**：10 个预构建金融 Agent 模板
+
+来源：[Code with Claude 大会](https://claude.com/code-with-claude/san-francisco) | [Cloudflare 博客](https://blog.cloudflare.com/claude-managed-agents)
+
+### 9.3 Claude Code Agent Teams
 
 随 Opus 4.6 发布（2026-02），Claude Code 支持在一个会话中生成独立的 Agent 队友。来源：[Claude Code Agent Teams Guide](https://lushbinary.com/blog/claude-code-agent-teams-multi-agent-development-guide/)
 

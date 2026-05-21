@@ -6,8 +6,8 @@
 
 > 🔄 更新于 2026-04-16
 
-<!-- version-check: CrewAI v1.14.2 stable (v1.14.3a3 alpha), 47.8K+ Stars, checked 2026-04-23 -->
-CrewAI 是一个角色化多 Agent 协作框架，核心理念是将 AI Agent 组织为一个"团队"（Crew），每个 Agent 扮演特定角色，协作完成复杂任务。GitHub 47.8K+ Stars，2700 万+ PyPI 下载量，20 亿+ Agent 执行次数。最新稳定版 v1.14.2（checkpoint resume/fork/prune、token tracking 增强），alpha v1.14.3a3（E2B 沙箱支持、冷启动 29% 提速）。已完全独立于 LangChain，从零构建。支持 A2A 协议（含企业版）和 MCP 工具集成、Flows 事件驱动编排。来源：[CrewAI 统计](https://www.getpanto.ai/blog/crewai-platform-statistics)、[CrewAI Changelog](https://docs.crewai.com/en/changelog)
+<!-- version-check: CrewAI v1.14.5a4 (alpha), v1.14.2 stable, 38K+ Stars, checked 2026-05-21 -->
+CrewAI 是一个角色化多 Agent 协作框架，核心理念是将 AI Agent 组织为一个"团队"（Crew），每个 Agent 扮演特定角色，协作完成复杂任务。GitHub 38K+ Stars，2700 万+ PyPI 下载量，20 亿+ Agent 执行次数。最新稳定版 v1.14.2（checkpoint resume/fork/prune、token tracking 增强），alpha v1.14.5a4（2026-05-09，依赖修复、LLM listings 更新）。已完全独立于 LangChain，从零构建。支持 A2A 协议（含企业版）和 MCP 工具集成（含 Streamable HTTP Transport）、Flows 事件驱动编排。crewAI-examples 仓库已于 2026-04-20 归档，示例代码迁移至主仓库。来源：[CrewAI Changelog](https://docs.crewai.com/en/changelog)、[GitHub](https://github.com/crewAIInc/crewAI)
 
 ## 2. 核心概念
 
