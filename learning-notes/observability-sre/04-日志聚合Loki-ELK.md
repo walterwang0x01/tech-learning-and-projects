@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Loki 3.x stable, Loki 4.0 architecture (Kafka + DataObject), Elasticsearch 9.x, Fluent Bit 3.x, Vector 0.44, GrafanaCON 2026, checked 2026-05-20 -->
+<!-- version-check: Loki 3.7.x stable, Loki 4.0 architecture (Kafka + DataObject), Elasticsearch 9.x, Fluent Bit 3.x, Vector 0.55, GrafanaCON 2026, checked 2026-05-22 -->
 
 ## 1. 方案对比
 
@@ -216,12 +216,14 @@ PUT _index_template/logs-template
 
 ## 5. 日志采集器对比
 
+<!-- 修复于 2026-05-22: Vector 0.44 → 0.55（2026-04-20 发布） -->
+
 | 工具 | 语言 | 性能 | 生态 | 适用场景 |
 |------|------|------|------|----------|
 | **Fluent Bit** | C | ⭐⭐⭐⭐⭐ | 广 | 通用采集，K8s DaemonSet 首选 |
-| **Vector** | Rust | ⭐⭐⭐⭐⭐ | 中 | 复杂处理管道，高性能 |
+| **Vector** | Rust | ⭐⭐⭐⭐⭐ | 中 | 复杂处理管道，高性能（最新 0.55，2026-04） |
 | **Grafana Alloy** | Go | ⭐⭐⭐⭐ | Grafana 生态 | Prometheus/Loki 全家桶 |
-| **OTel Collector** | Go | ⭐⭐⭐⭐ | 标准 | 统一 M/T/L 采集 |
+| **OTel Collector** | Go | ⭐⭐⭐⭐ | 标准 | 统一 M/T/L 采集（最新 v0.151） |
 | **Logstash** | JVM | ⭐⭐ | ES 生态 | 过时，只在 Elastic 老架构中见 |
 
 2026 年推荐：**OTel Collector 作为中心网关**，边缘用 **Fluent Bit 或 Alloy** 做采集。

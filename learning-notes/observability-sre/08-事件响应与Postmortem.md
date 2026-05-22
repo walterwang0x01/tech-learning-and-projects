@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Incident response best practices 2026, checked 2026-05-10 -->
+<!-- version-check: Incident response best practices 2026, checked 2026-05-22 -->
 
 ## 1. 事件响应的目标
 

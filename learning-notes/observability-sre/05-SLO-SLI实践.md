@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: SRE practices 2026, Error Budget, checked 2026-05-10 -->
+<!-- version-check: SRE practices 2026, Error Budget, checked 2026-05-22 -->
 
 ## 1. 为什么要 SLO
 

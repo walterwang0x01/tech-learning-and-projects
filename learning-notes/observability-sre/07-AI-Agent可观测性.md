@@ -2,7 +2,8 @@
 
 > Author: Walter Wang
 
-<!-- version-check: LangSmith Fleet, Langfuse 4.x, Phoenix 6.x, OTel GenAI semconv (development), OTel Agent Spans, checked 2026-05-13 -->
+<!-- 修复于 2026-05-22: LangSmith / LangSmith Fleet / LangSmith Engine 定位区分清晰 -->
+<!-- version-check: LangSmith (observability), LangSmith Fleet (Agent management, 2026-03 重命名自 Agent Builder), LangSmith Engine (autonomous diagnosis), Langfuse v4 GA, Phoenix 6.x, OTel GenAI semconv (development), OTel Agent Spans, checked 2026-05-22 -->
 
 ## 1. 为什么 LLM 系统需要独立的可观测性
 
@@ -53,10 +54,14 @@ LLM 观测三层：
 
 ## 3. 工具生态（2026）
 
+<!-- 修复于 2026-05-22: LangSmith / LangSmith Fleet / LangSmith Engine 是 LangChain 三个不同产品，前版本表格混淆了它们 -->
+
 | 工具 | 定位 | 特点 |
 |------|------|------|
-| **LangSmith Fleet** | LangChain 官方 | Agent 身份、团队协作、审计追踪 |
-| **Langfuse** | 开源 | 自托管首选，OTel 原生 |
+| **LangSmith** | LangChain 官方可观测性平台 | Trace、评估、Prompt 管理；框架无关 |
+| **LangSmith Fleet** | LangChain Agent 管理（无代码平台） | 2026-03 由 Agent Builder 重命名；管理 Agent 身份、共享、权限（**不是可观测性产品**） |
+| **LangSmith Engine** | LangChain 自动化诊断（2026-05 Interrupt 发布） | 自动聚类生产失败、定位根因、建议修复 |
+| **Langfuse** | 开源（v4 GA 2026-03） | 自托管首选，OTel 原生，已加入 ClickHouse |
 | **Arize Phoenix** | 开源，专注 eval | RAG 评估、embedding 可视化最强 |
 | **Weights & Biases Traces** | 实验管理 | 适合研究型、训练+推理结合 |
 | **Datadog LLM Observability** | SaaS 综合 | 与业务 APM 统一 |
@@ -65,7 +70,7 @@ LLM 观测三层：
 
 **选型建议**：
 - 个人/小团队：**Langfuse** 自托管 + OTel
-- LangChain 生态：**LangSmith Fleet**
+- LangChain 生态：**LangSmith**（可观测）+ **LangSmith Fleet**（Agent 管理）+ **LangSmith Engine**（自动诊断）
 - 重 RAG / 评估：**Phoenix**
 - 已用 Datadog：**Datadog LLM Observability**
 
@@ -333,7 +338,8 @@ def record_usage(response, user_tier: str):
 
 - [OpenTelemetry GenAI Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/)
 - [Langfuse 文档](https://langfuse.com/docs)
-- [LangSmith Fleet](https://docs.langchain.com/langsmith/)
+- [LangSmith](https://docs.langchain.com/langsmith/)（可观测性）
+- [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet)（Agent 管理，2026-03 重命名自 Agent Builder）
 - [Arize Phoenix](https://phoenix.arize.com/)
 - [LLM Observability Guide (Martin Fowler)](https://martinfowler.com/articles/llm-observability.html)
 - 关联：[ai-agent/14-可观测与评估/](../ai-agent/14-可观测与评估/)
