@@ -4,6 +4,10 @@
 
 > 构建能够自主决策和执行任务的智能代理系统
 
+<!-- version-check: LangChain 1.x（create_agent 标准 API）, langchain-openai 1.x, checked 2026-05-22 -->
+
+> 🔄 更新于 2026-05-22：本文档已迁移到 LangChain 1.0+ 推荐 API（`create_agent` 替代废弃的 `initialize_agent` 和 `create_openai_tools_agent`）。
+
 ## 1. AI Agent 概述
 
 AI Agent（智能代理）是一个能够感知环境、做出决策并执行动作的自主系统。现代 AI Agent 通常基于大语言模型（LLM），能够：
@@ -47,41 +51,42 @@ AI Agent 架构
 ### 3.1 简单工具调用 Agent
 
 ```python
-from typing import List, Dict, Any
-from langchain.agents import AgentExecutor, create_openai_tools_agent
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+from typing import List
+from langchain.agents import create_agent  # LangChain 1.0+ 标准 API（修复于 2026-05-22）
 from langchain_openai import ChatOpenAI
 
 class SimpleAgent:
+    """LangChain 1.0+ 标准 Agent 封装。
+    
+    修复于 2026-05-22：废弃的 `create_openai_tools_agent` + `AgentExecutor` 模式
+    已替换为 `create_agent`，后者基于 LangGraph runtime，支持持久化状态、流式输出和中间件。
+    """
+    
     def __init__(self, tools: List, llm: ChatOpenAI):
         self.tools = tools
         self.llm = llm
-        self.agent = self._create_agent()
-    
-    def _create_agent(self):
-        prompt = ChatPromptTemplate.from_messages([
-            ("system", "你是一个有用的AI助手，可以使用工具来帮助用户。"),
-            ("human", "{input}"),
-            MessagesPlaceholder(variable_name="agent_scratchpad"),
-        ])
-        
-        agent = create_openai_tools_agent(self.llm, self.tools, prompt)
-        return AgentExecutor(agent=agent, tools=self.tools, verbose=True)
+        # create_agent 内部使用 ReAct 模式（推理+行动循环）
+        self.agent = create_agent(
+            model=llm,
+            tools=tools,
+            system_prompt="你是一个有用的AI助手，可以使用工具来帮助用户。",
+        )
     
     def run(self, query: str) -> str:
-        return self.agent.invoke({"input": query})["output"]
+        result = self.agent.invoke({"messages": [{"role": "user", "content": query}]})
+        return result["messages"][-1].content
 ```
 
 ### 3.2 工具定义
 
 ```python
-from langchain.tools import BaseTool
-from typing import Optional
+from langchain_core.tools import BaseTool
 import requests
 
 class WeatherTool(BaseTool):
-    name = "get_weather"
-    description = "获取指定城市的天气信息"
+    # 修复于 2026-05-22：Pydantic v2 要求字段必须有类型注解
+    name: str = "get_weather"
+    description: str = "获取指定城市的天气信息"
     
     def _run(self, city: str) -> str:
         # 调用天气API
@@ -95,11 +100,12 @@ class WeatherTool(BaseTool):
         return self._run(city)
 
 class CalculatorTool(BaseTool):
-    name = "calculator"
-    description = "执行数学计算"
+    name: str = "calculator"
+    description: str = "执行数学计算"
     
     def _run(self, expression: str) -> str:
         try:
+            # 注意：生产环境不要使用 eval，应使用 ast.literal_eval 或专用解析器
             result = eval(expression)
             return str(result)
         except Exception as e:
@@ -109,27 +115,36 @@ class CalculatorTool(BaseTool):
 tools = [WeatherTool(), CalculatorTool()]
 ```
 
+> 推荐用 `@tool` 装饰器：LangChain 1.x 中创建工具的更简洁做法是使用 `from langchain_core.tools import tool` 装饰器，配合 docstring 自动提取 description。详见 → [Function Calling机制](../../../ai-agent/07-工具与Function Calling/01-Function Calling机制.md)。
+
 ## 4. ReAct Agent 实现
 
 ### 4.1 ReAct 模式
 
-ReAct（Reasoning + Acting）结合了推理和行动：
+ReAct（Reasoning + Acting）结合了推理和行动。在 LangChain 1.0+ 中，`create_agent` 默认就是 ReAct 模式：
 
 ```python
-from langchain.agents import initialize_agent, AgentType
+# 修复于 2026-05-22：废弃的 initialize_agent + AgentType.REACT_DOCSTORE 模式
+# 已被 LangChain 1.0+ 的 create_agent 替代（自带 ReAct 推理+行动循环）
+from langchain.agents import create_agent
 
-react_agent = initialize_agent(
+react_agent = create_agent(
+    model=llm,
     tools=tools,
-    llm=llm,
-    agent=AgentType.REACT_DOCSTORE,
-    verbose=True,
-    return_intermediate_steps=True
+    system_prompt="你是一个推理型 Agent，使用工具回答问题前先思考下一步行动。",
 )
 
-result = react_agent.invoke({
-    "input": "北京今天天气怎么样？如果温度高于20度，计算20*3等于多少"
-})
+# 流式查看中间推理步骤
+for chunk in react_agent.stream(
+    {"messages": [{"role": "user", "content": "北京今天天气怎么样？如果温度高于20度，计算20*3等于多少"}]},
+    stream_mode="updates",
+):
+    print(chunk)
 ```
+
+> 升级路径参考：
+> - 旧 `initialize_agent(..., agent=AgentType.REACT_DOCSTORE)` → 新 `create_agent(model, tools)`
+> - 旧 `agent_executor.invoke({"input": ...})` → 新 `agent.invoke({"messages": [...]})`
 
 ### 4.2 自定义 ReAct Agent
 
@@ -288,7 +303,9 @@ class PlanAndExecuteAgent:
 ### 6.1 短期记忆
 
 ```python
+import time
 from collections import deque
+from typing import Dict, List
 
 class ShortTermMemory:
     def __init__(self, max_size: int = 10):
@@ -373,9 +390,12 @@ class LongTermMemory:
 ### 7.1 工具注册
 
 ```python
+from typing import Optional
+from langchain_core.tools import BaseTool
+
 class ToolRegistry:
     def __init__(self):
-        self.tools = {}
+        self.tools: Dict[str, BaseTool] = {}
     
     def register(self, tool: BaseTool):
         """注册工具"""
