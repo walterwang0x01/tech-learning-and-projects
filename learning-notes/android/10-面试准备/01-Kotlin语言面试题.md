@@ -273,3 +273,110 @@ val state by viewModel.uiState.collectAsStateWithLifecycle()
 // - compileSdk/targetSdk 推荐 36
 // - JDK 要求从 17 升级到 21
 ```
+
+### 8.4 KotlinConf 2026 与 Kotlin 2.4 面试题
+
+<!-- version-check: Kotlin 2.4.0-RC (KotlinConf 2026, May 20-22 Munich), context parameters stable, explicit backing fields stable, Kotlin VS Code support, checked 2026-05-22 -->
+
+> 🔄 更新于 2026-05-22
+
+```kotlin
+// Q: Kotlin 2.4 的 stable 时间线是什么？
+// A: KotlinConf 2026（5-20 至 5-22，慕尼黑）发布 Kotlin 2.4.0-RC：
+// - GA 时间窗：2026 年 6-7 月
+// - Tooling release 2.4.20：2026-09
+// - 同时发布 18 个月安全补丁政策（标准库进入 LTS 模式）
+// - 来源：https://blog.jetbrains.com/kotlin/2026/05/kotlinconf26-keynote-highlights/
+
+// Q: Kotlin 2.4 中 context parameters 稳定意味着什么？
+// A: context parameters（曾叫 context receivers）从实验阶段升级为稳定特性：
+// - 解决"隐式上下文"传递问题，比 receiver 更轻量
+// - 适合 Logger、Transaction、CoroutineScope 等横切关注点
+
+// 旧方式（每个函数都要传 logger）：
+fun process(input: String, logger: Logger) {
+    logger.info("processing $input")
+}
+
+// Kotlin 2.4 stable 写法：
+context(logger: Logger)
+fun process(input: String) {
+    logger.info("processing $input")  // 直接访问 context 中的 logger
+}
+
+// 调用方
+context(myLogger) {
+    process("hello")
+}
+
+// Q: Kotlin 2.4 的 explicit backing fields 怎么用？
+// A: 解决"对外只读、对内可变"场景，无需手动写 _state / state pair
+class ViewModel {
+    val items: List<String>
+        field = mutableListOf<String>()  // 内部可变
+    
+    fun addItem(item: String) {
+        items.field.add(item)  // 通过 field 访问可变版本
+    }
+}
+// 替代了之前 _items + items 双属性的写法
+
+// Q: KMP 默认项目结构变化是什么？
+// A: 配合 AGP 9.0，KMP 默认项目结构调整：
+// - shared/src/commonMain/kotlin/ 中存放跨平台代码
+// - shared/src/androidMain/、iosMain/、jsMain/ 中存放平台特定代码
+// - 模块职责更清晰，与其他构建系统约定对齐
+// - 新建项目自动遵循新结构
+// - 来源：https://blog.jetbrains.com/kotlin/2026/05/new-kmp-default-structure/
+
+// Q: Kotlin VS Code 官方支持是什么？
+// A: KotlinConf 2026 期间，JetBrains 发布 VS Code 官方 Kotlin 扩展（Alpha）：
+// - 核心编辑器支持：补全、诊断、导航、quick fix、格式化、项目导入
+// - LSP 协议实现，理论上其他支持 LSP 的编辑器（Neovim、Helix）也可用
+// - 不替代 IntelliJ IDEA，定位是"轻量编辑场景"
+// - 来源：https://blog.jetbrains.com/kotlin/2026/05/official-kotlin-support-for-visual-studio-code-is-now-available-in-alpha/
+
+// Q: 为什么 Kotlin 标准库要引入 18 个月安全支持政策？
+// A: 标准库面临的供应链安全压力越来越大：
+// - 安全补丁会向旧 release line 回溯（active release lines）
+// - 18 个月覆盖企业项目的常见升级周期
+// - 配合 deprecation cycle，让升级路径更稳
+// - 来源：https://blog.jetbrains.com/kotlin/2026/05/security-support-policy-for-the-kotlin-standard-library/
+```
+
+### 8.5 Compose Multiplatform 1.11 与 Hilt 1.4 面试题
+
+<!-- version-check: Compose Multiplatform 1.11.0 (2026-05), Hilt 1.4.0-beta01 (2026-04-22), checked 2026-05-22 -->
+
+```kotlin
+// Q: Compose Multiplatform 1.11 在 iOS 端有什么关键改进？
+// A: 实验性的 native text input（基于 UIView）：
+// - caret 移动更精准（接近原生 UIKit 体验）
+// - 原生手势 + selection handles
+// - 系统右键菜单：Autofill、Translate、Search
+// - 现有 Compose 文本输入仍然是稳定跨平台默认，新方案是 opt-in
+// - 解决 KMP 在 iOS 上"手感不够原生"的长期痛点
+// - 来源：https://blog.jetbrains.com/kotlin/2026/05/compose-multiplatform-1-11-0/
+
+// Q: Hilt 1.4.0-beta01（2026-04-22）的 rememberHiltViewModelFactory 怎么用？
+// A: 简化了 Compose 中 Hilt ViewModel 的获取流程：
+// - 移除 ViewModelStoreOwner 参数，API 更简洁
+// - 通过 delegateFactory 提供自定义工厂逻辑
+// - 适合 rememberViewModelStoreOwner 提供默认工厂的场景
+
+@Composable
+fun MyScreen() {
+    val viewModel: MyViewModel = viewModel(
+        factory = rememberHiltViewModelFactory()
+    )
+    // ...
+}
+
+// Q: 2026 年 Android 项目应该选 Hilt 还是 Koin？
+// A: 决策树：
+// - 纯 Android 项目 + 团队偏好编译时安全 → Hilt 1.4.0
+// - KMP 项目（Android + iOS 共享 DI） → Koin 4.1（Hilt 不支持 KMP）
+// - 已有 Now in Android 模板 → Hilt（官方模板沿用）
+// - 偏好运行时灵活性、热重载快 → Koin
+// 来源：https://insert-koin.io/docs/reference/koin-android/hilt-migration
+```

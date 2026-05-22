@@ -218,3 +218,45 @@ $searchText
 - Combine 不会被废弃，但 Apple 已停止为其添加新功能
 
 来源：[Swift Forums - Move from Combine to Swift concurrency?](https://forums.swift.org/t/move-from-combine-to-swift-concurrency) | [Swift 6 Concurrency Patterns](https://ignit.group/blog/swift-6-concurrency-advanced-patterns-2-3)
+
+## 8. Apple 官方信号：Combine 在 SwiftUI 中正式落幕
+
+<!-- version-check: Apple AI guidance "Avoid Combine", Observation framework, Observations type, checked 2026-05-22 -->
+
+> 🔄 更新于 2026-05-22
+
+### 8.1 Apple Intelligence 的明确指引
+
+Apple 在自家 AI 模型的代码生成指引中，**已显式要求避免使用 Combine**——这是迄今最强烈的信号，表明 SwiftUI 中 Combine 时代正式落幕。Observation framework 也在持续成熟，最新加入了 `Observations` 类型，提供更细粒度的订阅控制。
+
+来源：[Captain SwiftUI - Objectively Better, Observably Trickier](https://captainswiftui.substack.com/p/objectively-better-observably-trickier)、[@Observable Beyond SwiftUI](https://open.substack.com/pub/krishna806083/p/observable-beyond-swiftui)、[Forasoft - 2026 iOS Architecture](https://www.forasoft.com/blog/article/advanced-ios-app-architecture-explained-on-mvvm-977)
+
+### 8.2 2026 年 SwiftUI 推荐栈
+
+| 维度 | 推荐方案 | 取代的旧方案 |
+|------|---------|-------------|
+| 状态管理 | `@Observable` 类 | `ObservableObject` + `@Published` |
+| 异步加载 | `async/await` + `.task {}` | `Combine.Future` / `dataTaskPublisher` |
+| 多值流 | `AsyncSequence` / `Observations` | `Publisher` |
+| 防抖 | 自定义 actor 或第三方 | `Combine.debounce` |
+| 跨视图同步 | `@Environment` + `@Observable` | `EnvironmentObject` + `@Published` |
+
+来源：Forasoft 实测数据，2026 iOS MVVM 栈相比 2022 版本可减少 **30-50% 样板代码**，但要求开发者掌握 actor 隔离与所有权规则。
+
+### 8.3 App Store Connect 强制 SDK 26（2026-04-28 起）
+
+```
+2026-04-28 起，所有提交到 App Store Connect 的应用必须使用 SDK 26 构建。
+```
+
+这进一步加速了迁移：使用 SDK 26 编译时，Xcode 会对 `ObservableObject` 等旧 API 提示更强烈的弃用警告，为 iOS 27（预计 2026-09 随 WWDC26 发布）做准备。来源：[iOS Weekly Brief Issue 46](https://vladkhambir.substack.com/p/the-ios-weekly-brief-issue-46)
+
+### 8.4 迁移路径建议
+
+1. **新项目**：直接用 `@Observable` + `async/await`，不引入 Combine
+2. **存量项目（< 5 万行）**：Combine → @Observable 一次性迁移，复杂流操作用 AsyncSequence + 自定义 actor
+3. **存量项目（> 5 万行）**：渐进式迁移——View Model 层先迁移到 @Observable，网络层先迁移到 async/await，跨流合并/防抖暂时保留 Combine
+4. **UIKit 部分**：保持 Combine，无需变更
+5. **测试代码**：注意 @Observable 的测试需要订阅 `withObservationTracking` 而非 `@Published`，旧测试可能需要重写
+
+来源：[Bluewaves Combine Migration Skill](https://playbooks.com/skills/bluewaves-creations/bluewaves-skills/combine-migration)、[Refactoring Combine to async](https://kylenazario.com/blog/refactoring-swift-combine-to-async-await)
