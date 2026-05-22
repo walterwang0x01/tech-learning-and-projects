@@ -1,0 +1,7 @@
+# 基础功能（Markdown/TXT 切分）无需额外依赖
+
+# PDF 支持（可选）
+pymupdf>=1.24.0
+
+# DOCX 支持（可选）
+python-docx>=1.1.0
