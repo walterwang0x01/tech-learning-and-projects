@@ -4,7 +4,7 @@
 
 ## 1. 概述
 
-<!-- version-check: Spring AI 2.0.0-M4 / 1.1.4, checked 2026-04-18 -->
+<!-- version-check: Spring AI 2.0.0-M6 (2026-05-08), 1.1.6 / 1.0.7, GA 2026-05-28, checked 2026-05-22 -->
 
 > 🔄 更新于 2026-04-18
 
@@ -17,6 +17,40 @@ Spring AI 是 Spring 生态的 AI 框架，为 Java/Kotlin 开发者提供统一
 - **Bedrock AgentCore SDK GA**：Spring AI SDK for Amazon Bedrock AgentCore 正式可用
 
 > 来源：[Spring AI 2.0.0-M4 发布公告](https://spring.io/blog/2026/03/26/spring-ai-2-0-0-M4-and-1-1-4-and-1-0-5-available)、[AWS Bedrock AgentCore GA](https://aws.amazon.com/blogs/machine-learning/spring-ai-sdk-for-amazon-bedrock-agentcore-is-now-generally-available/)
+
+> 🔄 更新于 2026-05-22
+
+### 1.1 Spring AI 2.0 GA 路线图
+
+| 里程碑 | 时间 | 重点变更 |
+|-------|------|---------|
+| 2.0.0-M5 | 2026-04-27 | 5 处 Bug 修复、4 处文档更新、2 项依赖升级、3 项构建更新 |
+| **2.0.0-M6** | **2026-05-08** | **Breaking Change：Chat Memory Advisor 必须显式传入 conversation ID**（不再使用隐式默认值）；同步发布 1.1.6 / 1.0.7 维护版本 |
+| 2.0.0 GA | **2026-05-28**（计划） | 配合 Spring Boot 4.1（6 月初发布）一起上线 |
+
+**关键 Breaking Change（M6）**：
+
+```java
+// ❌ 旧写法（M5 及以前）：会使用隐式默认 conversation ID，可能导致跨会话记忆串号
+ChatClient.builder(chatModel)
+    .defaultAdvisors(new MessageChatMemoryAdvisor(chatMemory))
+    .build();
+
+// ✅ 新写法（M6 起）：必须显式传入 conversation ID
+ChatClient.builder(chatModel)
+    .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory)
+        .conversationId(userSessionId)  // 必填
+        .build())
+    .build();
+```
+
+**升级注意事项**：
+
+- Spring AI 2.0 要求 **Spring Boot 4.0+**，3.x 项目需先完成 Boot 4.0 迁移（Jakarta EE 11、Java 17+）
+- 若仍在 Spring Boot 3.x，可继续使用 Spring AI **1.1.x**（2026 年内仍维护，与 Boot 3.5 兼容）
+- 1.0.x 进入 LTS 维护，仅修 critical 缺陷
+
+来源：[Spring AI 2.0.0-M6 发布公告](https://spring.io/blog/2026/05/08/spring-ai-1-0-7-1-1-6-2-0-0-M6-available-now)、[HeroDevs - Spring AI 2.0 GA Schedule](https://www.herodevs.com/blog-posts/spring-ai-2-0-is-coming-may-28-here-is-why-that-makes-the-june-30-deadline-more-urgent-not-less)
 
 ```
 ┌─────────────────────────────────────────────┐

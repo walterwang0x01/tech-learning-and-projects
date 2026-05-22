@@ -152,7 +152,7 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 来源：[W3C CSP Level 3](https://www.w3.org/TR/CSP/)
 > 🔄 更新于 2026-05-21
 
-<!-- version-check: React 19.x.6 (CVE-2025-55182 fix), Next.js 16.2.5/15.5.16, checked 2026-05-21 -->
+<!-- version-check: React 19.x.6/19.1.7/19.2.6 (CVE-2026-23870 fix), Next.js 16.2.5/15.5.16, checked 2026-05-22 -->
 
 ## 5. React Server Components RCE 漏洞（CVE-2025-55182）
 
@@ -189,10 +189,29 @@ Vercel 于 2026-05-07 发布协调安全更新，修复 **13 个安全公告**�
 | CVE | 类型 | 影响 |
 |-----|------|------|
 | CVE-2026-44574 | 中间件/代理绕过 | 动态路由参数注入绕过认证中间件 |
-| CVE-2026-23870 | RSC 上游漏洞 | React Server Components RCE |
-| （未公开编号） | SSRF | 服务端请求伪造 |
+| CVE-2026-23870 | RSC DoS（上游 React 漏洞） | 攻击者通过精心构造的 HTTP 请求触发服务端 OOM 或 CPU 耗尽 |
+| CVE-2026-44581 | App Router XSS | 利用 CSP nonce 机制绕过 CSP 防护 |
 
-来源：[Vercel Changelog](https://vercel.com/changelog/next-js-may-2026-security-release)、[Cloudflare WAF 公告](https://developers.cloudflare.com/changelog/post/2026-05-06-react-nextjs-vulnerabilities/)
+来源：[Vercel Changelog](https://vercel.com/changelog/next-js-may-2026-security-release)、[Cloudflare WAF 公告](https://developers.cloudflare.com/changelog/post/2026-05-06-react-nextjs-vulnerabilities/)、[CyberKendra - 12 Security Flaws](https://www.cyberkendra.com/2026/05/react-and-nextjs-hit-with-12-security.html)
+
+> 🔄 更新于 2026-05-22
+
+### CVE-2026-23870 React Server Components DoS
+
+2026-05-06 与 Next.js 安全更新同步披露的高危漏洞，是 CVE-2025-55182 后续不完整修复链上的最新一环。攻击者无需认证即可向 Server Function 端点发送特制 HTTP 请求，触发反序列化阶段的 CPU 耗尽或 OOM。
+
+**修复版本**：`react-server-dom-webpack` / `react-server-dom-parcel` / `react-server-dom-turbopack` **19.0.6 / 19.1.7 / 19.2.6**
+
+```bash
+# 检查并升级 RSC 相关包
+npm ls react-server-dom-webpack react-server-dom-parcel react-server-dom-turbopack
+npm install react-server-dom-webpack@latest
+
+# Next.js 用户：升级 Next.js 即可包含上游修复
+npm install next@latest
+```
+
+来源：[NVD - CVE-2026-23870](https://nvd.nist.gov/vuln/detail/CVE-2026-23870)、[GHSA-83fc-fqcc-2hmg](https://github.com/facebook/react/security/advisories/GHSA-83fc-fqcc-2hmg)、[ZeroPath 漏洞分析](https://zeropath.com/blog/cve-2026-23870-react-server-components-dos)
 
 ```bash
 # 立即升级

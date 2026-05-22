@@ -4,7 +4,7 @@
 
 ## 1. 概述
 
-<!-- version-check: LlamaIndex 0.14.21, checked 2026-05-05 -->
+<!-- version-check: LlamaIndex 0.14.21+ (May 2026 multimodal synthesis), LlamaIndexTS archived 2026-04-30, checked 2026-05-22 -->
 
 > 🔄 更新于 2026-05-05
 
@@ -25,6 +25,62 @@ LlamaIndex 提供事件驱动的 Workflow 引擎和多种 Agent 类型，专注�
 - **LlamaParse 增强**：企业级 OCR、解析、提取和索引
 
 > 来源：[LlamaIndex PyPI](https://pypi.org/project/llama-index/)、[releasebot.io](https://releasebot.io/updates/run-llama)
+
+> 🔄 更新于 2026-05-22
+
+### 1.1 2026 年 5 月重大更新
+
+**核心新特性**（2026-05-15 前后发布）：
+
+| 类别 | 更新内容 |
+|-----|---------|
+| 多模态合成 | `llama-index-core` 新增 multimodal synthesis 能力，原生支持文本+图像混合检索结果的 LLM 合成 |
+| 模型支持 | 新增 OpenAI **GPT-5.5**（2026-04-24 GA）、AWS Bedrock **Claude Opus 4.7** 集成 |
+| 修复与依赖 | Google GenAI、可观测性、Qdrant 多处 bug 修复，依赖大规模刷新 |
+
+来源：[releasebot.io - LlamaIndex May 2026](https://releasebot.io/updates/run-llama)、[OpenAI GPT-5.5 公告](https://openai.com/index/introducing-gpt-5-5/)
+
+**LlamaIndexTS 归档**（2026-04-30）：
+
+```
+⚠️ run-llama/LlamaIndexTS 仓库于 2026-04-30 由维护方归档为只读状态。
+```
+
+含义与替代方案：
+
+- LlamaIndex 官方将资源全部聚焦在 Python 生态，TypeScript SDK 不再获得新功能或安全修复
+- 现有 TS 项目应规划迁移：
+  - **Vercel AI SDK 6+**：TypeScript Agent 抽象 + MCP 集成（替代 LlamaIndexTS Agent）
+  - **LangChain.js / LangGraph.js**：图工作流编排（替代 LlamaIndexTS Workflow）
+  - **直接调用 Python LlamaIndex**：通过 FastAPI 暴露为 HTTP API 供 TS 前端消费
+- `developers.llamaindex.ai` 文档站点的 `version-upgrades` 页面提供最后版本的迁移说明
+
+来源：[GitHub - LlamaIndexTS Archived](https://github.com/run-llama/LlamaIndexTS)、[Mintlify 迁移文档](https://run-llama-llamaindexts.mintlify.app/migration/version-upgrades)
+
+```python
+# 多模态合成示例（0.14.x 5 月新增能力）
+# pip install "llama-index>=0.14.30" "llama-index-multi-modal-llms-openai"
+
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
+from llama_index.core.response_synthesizers import ResponseMode
+from llama_index.multi_modal_llms.openai import OpenAIMultiModal
+
+# 加载混合内容（文本 + 图像）
+documents = SimpleDirectoryReader("./data", recursive=True).load_data()
+index = VectorStoreIndex.from_documents(documents)
+
+# 使用多模态 LLM 合成响应（图文一体化）
+mm_llm = OpenAIMultiModal(model="gpt-5.5", max_new_tokens=1500)
+
+query_engine = index.as_query_engine(
+    llm=mm_llm,
+    response_mode=ResponseMode.COMPACT,  # 0.14.x 多模态合成模式
+    image_similarity_top_k=2,
+)
+
+response = query_engine.query("总结这份产品手册中关于安全特性的图示与说明")
+print(response)
+```
 
 ```
 ┌─────────────────────────────────────────────────┐
