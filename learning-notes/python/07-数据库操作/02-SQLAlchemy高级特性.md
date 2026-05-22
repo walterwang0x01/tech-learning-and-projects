@@ -4,11 +4,16 @@
 
 > SQLAlchemy ORM 的高级用法和优化技巧
 
+<!-- version-check: SQLAlchemy 2.0.49, checked 2026-05-22 -->
+
+> 💡 **风格说明**：本文示例使用 SQLAlchemy 1.x 经典风格（`Column()`、`session.query()`），便于初学者过渡。新项目应优先使用 2.0 推荐的 `DeclarativeBase` + `Mapped[]` + `select()` 风格，详见 [SQLAlchemy 2.0 迁移指南](https://docs.sqlalchemy.org/en/20/changelog/migration_20.html) 和 `01-Python数据库操作.md` 第 10 节。
+
 ## 1. 关系映射
 
 ### 1.1 一对多关系
 
 ```python
+# <!-- 修复于 2026-05-22: 移除不存在的 Relationship 导入（应为 relationship 小写） -->
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 

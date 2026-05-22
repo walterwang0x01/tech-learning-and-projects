@@ -39,12 +39,16 @@ engine = create_engine('sqlite:///database.db')
 
 ### 2.3 定义模型
 
+> 💡 **SQLAlchemy 2.0 风格说明**：以下示例使用 1.x 经典风格，便于初学者理解。**新项目推荐使用 2.0 的 `DeclarativeBase` + `Mapped[]` 类型注解风格**（详见第 10 节）。
+
 ```python
+# <!-- 修复于 2026-05-22: 兼容 1.x 经典风格示例，新项目应参考第 10 节使用 DeclarativeBase + Mapped[] -->
 from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 from datetime import datetime
 
+# SQLAlchemy 2.0+ 推荐从 sqlalchemy.orm 导入 declarative_base
+# 旧路径 from sqlalchemy.ext.declarative import declarative_base 仍兼容但已废弃
 Base = declarative_base()
 
 class User(Base):
@@ -101,7 +105,8 @@ session.close()
 ### 2.5 关系映射
 
 ```python
-from sqlalchemy import ForeignKey, Relationship
+# <!-- 修复于 2026-05-22: 修正 Relationship 大写错误（应为 relationship 小写） -->
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
 class Post(Base):
@@ -153,10 +158,13 @@ result = session.query(
 
 ## 3. MongoDB操作
 
+> 💡 **异步驱动选择**（2026-05-22）：从 2025-05-14 起 Motor 库已被 [PyMongo Async](https://www.mongodb.com/docs/languages/python/pymongo-driver/current/reference/migration/) 替代（Motor 将于 2026-05-14 EOL）。新项目使用 PyMongo 4.16+ 内置的 `AsyncMongoClient`，现有 Motor 代码应尽快迁移。
+
 ### 3.1 安装
 
 ```bash
-pip install pymongo
+pip install pymongo  # 4.16.x，同时包含同步和异步 API
+# <!-- 修复于 2026-05-22: 移除 motor 推荐，PyMongo Async 已 GA 替代 motor -->
 ```
 
 ### 3.2 连接MongoDB
@@ -513,15 +521,15 @@ Python数据库操作工具：
 选择合适的工具可以高效地进行数据库操作。
 
 
-<!-- version-check: SQLAlchemy 2.0.49, Pydantic 2.13, checked 2026-04-22 -->
+<!-- version-check: SQLAlchemy 2.0.49, Pydantic 2.13.3, PyMongo 4.16.0, Motor 3.7.x（已废弃，2026-05-14 EOL）, checked 2026-05-22 -->
 
-> 🔄 更新于 2026-04-22
+> 🔄 更新于 2026-05-22
 
 ## 10. SQLAlchemy 2.0.x 版本演进
 
 ### 10.1 当前版本
 
-SQLAlchemy **2.0.49** 是当前最新稳定版（2026-04），2.1.x 正在开发中。
+SQLAlchemy **2.0.49** 是当前最新稳定版（2026-05），2.1.x 仍处于 beta 阶段（最新 2.1.0b3）。生产环境继续使用 2.0.x。
 
 ### 10.2 SQLAlchemy 2.0 vs 1.x 关键变化
 
@@ -669,3 +677,76 @@ m._priv2  # 3
 ```
 
 来源：[Pydantic v2.13 发布公告](https://pydantic.dev/articles/pydantic-v2-13-release)
+
+## 12. PyMongo Async — 异步 MongoDB 驱动
+
+<!-- 修复于 2026-05-22: 补充 PyMongo 4.16+ Async API，替代已废弃的 Motor -->
+
+PyMongo 4.16+ 内置 `AsyncMongoClient`，原 Motor 库的功能现在通过统一的 PyMongo 包提供。
+
+### 12.1 异步基本使用
+
+```python
+import asyncio
+from pymongo import AsyncMongoClient
+
+async def main():
+    # 异步客户端
+    client = AsyncMongoClient('mongodb://localhost:27017/')
+    db = client['mydb']
+    collection = db['users']
+
+    # 异步插入
+    await collection.insert_one({'username': 'john', 'age': 30})
+
+    # 异步查询单条
+    user = await collection.find_one({'username': 'john'})
+    print(user)
+
+    # 异步遍历查询结果
+    async for doc in collection.find({'age': {'$gte': 18}}):
+        print(doc)
+
+    # 异步聚合
+    pipeline = [{'$group': {'_id': '$city', 'count': {'$sum': 1}}}]
+    async for result in await collection.aggregate(pipeline):
+        print(result)
+
+    await client.close()
+
+asyncio.run(main())
+```
+
+### 12.2 与 FastAPI 集成
+
+```python
+from contextlib import asynccontextmanager
+from fastapi import FastAPI
+from pymongo import AsyncMongoClient
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    app.state.mongo = AsyncMongoClient('mongodb://localhost:27017/')
+    yield
+    await app.state.mongo.close()
+
+app = FastAPI(lifespan=lifespan)
+
+@app.get("/users/{username}")
+async def get_user(username: str):
+    db = app.state.mongo['mydb']
+    user = await db.users.find_one({'username': username})
+    return user
+```
+
+### 12.3 Motor 迁移要点
+
+| Motor (旧) | PyMongo Async (新) |
+|------------|--------------------|
+| `from motor.motor_asyncio import AsyncIOMotorClient` | `from pymongo import AsyncMongoClient` |
+| `AsyncIOMotorClient(...)` | `AsyncMongoClient(...)` |
+| `await collection.find_one(...)` | `await collection.find_one(...)`（一致） |
+| `cursor = collection.find(...)` | `cursor = collection.find(...)`（一致） |
+| `async for doc in cursor` | `async for doc in cursor`（一致） |
+
+来源：[PyMongo 异步迁移指南](https://www.mongodb.com/docs/languages/python/pymongo-driver/current/reference/migration/) / [Motor 废弃公告](https://pypi.org/project/motor/)

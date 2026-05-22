@@ -332,7 +332,8 @@ ITEM_PIPELINES = {
 
 ```bash
 pip install selenium
-# 还需要下载浏览器驱动（ChromeDriver、GeckoDriver等）
+# Selenium 4.6+ 自带 Selenium Manager，会自动下载并管理 ChromeDriver/GeckoDriver 等驱动，无需单独配置
+# <!-- 修复于 2026-05-22: Selenium 4.6 起内置 Selenium Manager，原"还需要下载浏览器驱动"已过时 -->
 ```
 
 ### 6.2 基本使用
@@ -490,9 +491,9 @@ Python爬虫工具链：
 
 ## 11. 2026 年 AI 爬虫新工具
 
-<!-- version-check: Crawl4AI 0.8.x, Crawlee-Python 0.6.x, Scrapy 2.15.1, checked 2026-05-04 -->
+<!-- version-check: Crawl4AI 0.8.x, Crawlee-Python 0.6.x, Scrapy 2.14.0, checked 2026-05-22 -->
 
-> 🔄 更新于 2026-05-04
+> 🔄 更新于 2026-05-22 <!-- 修复于 2026-05-22: Scrapy 实际最新稳定版是 2.14.0，2.15.x 尚未发布 -->
 
 2026 年爬虫生态最大的变化是 **AI Agent 驱动的爬虫工具**兴起，传统的 HTML 解析正在被 LLM 结构化提取补充。
 
@@ -564,7 +565,7 @@ await crawler.run(["https://example.com"])
 | 工具 | 适用场景 | JS 渲染 | AI 集成 | 学习曲线 |
 | ---- | -------- | ------- | ------- | -------- |
 | **requests + BS4** | 简单静态页面 | ❌ | ❌ | 低 |
-| **Scrapy 2.15** | 大规模结构化爬取 | ❌ | ❌ | 中 |
+| **Scrapy 2.14** | 大规模结构化爬取 | ❌ | ❌ | 中 |
 | **Playwright** | JS 渲染页面 | ✅ | ❌ | 中 |
 | **Crawl4AI** | AI/RAG 数据管道 | ✅ | ✅ | 低 |
 | **Crawlee** | 生产级可靠爬取 | ✅ | ❌ | 中 |

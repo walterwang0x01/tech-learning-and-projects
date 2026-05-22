@@ -4,6 +4,10 @@
 
 > Python NoSQL 数据库应用和最佳实践
 
+<!-- version-check: pymongo 4.16.0, redis-py 5.x, cassandra-driver 3.x, elasticsearch-py 8.x, checked 2026-05-22 -->
+
+> 💡 **MongoDB 异步驱动选择**（2026-05-22）：原 Motor 库已被 PyMongo 4.16+ 内置的 `AsyncMongoClient` 替代，Motor 将于 2026-05-14 EOL。本文示例使用同步 PyMongo API，异步用法请参见 `01-Python数据库操作.md` 第 12 节。
+
 ## 1. MongoDB 深入
 
 ### 1.1 聚合管道
