@@ -563,7 +563,7 @@ Python提供了多种并发编程方式：
 
 > 🔄 更新于 2026-05-04
 
-<!-- version-check: Python 3.14.4 free-threaded, Python 3.15.0a8, checked 2026-05-04 -->
+<!-- version-check: Python 3.14.5 free-threaded, Python 3.15.0b1, checked 2026-05-22 -->
 
 ## 8. Free-threaded Python 3.14：GIL 的终结
 
@@ -717,63 +717,82 @@ def safe_writer(key, value):
 
 来源：[Python's Free-Threading Mode: Is It Time to Care?](https://www.nandann.com/blog/python-free-threading-2026)
 
+<!-- 修复于 2026-05-22: 删除杜撰的 threading.serialize_iterator / asyncio.TaskGroup.cancel API，替换为基于 PEP 790、PEP 803、PEP 799 等真实文档的新特性介绍 -->
+
 ## 9. Python 3.15 并发相关新特性预览
 
-Python 3.15（当前 alpha 8，beta 1 预计 2026-05-05）引入了多项与并发相关的改进。
+<!-- version-check: Python 3.15.0b1（2026-05-05 发布，feature freeze），最终发布计划 2026-10-01，checked 2026-05-22 -->
 
-### 9.1 threading 新增并发安全迭代器
+Python 3.15 已于 2026-05-05 发布 beta 1（feature freeze），预计 2026-10-01 正式发布。以下是与并发/性能相关的真实新特性。
+
+### 9.1 PEP 803：abi3t 稳定 ABI（Free-threaded 构建）
+
+PEP 803 为 Free-threaded 构建引入新的稳定 ABI 标签 `abi3t`：
+
+- `abi3` 仍指向 GIL-enabled 构建（与 3.14 兼容）
+- `abi3t` 是 Free-threaded 专用的稳定 ABI 标签
+- 单个已安装的 C 扩展可以同时兼容 abi3 和 abi3t（它们之间存在可用的重叠）
+- C 扩展使用 `Py_LIMITED_API=0x030f0000`（3.15）+ `Py_GIL_DISABLED` 编译时，可生成 abi3t wheel
+
+意义：3.14 时代 Free-threaded C 扩展必须按版本单独编译，3.15 之后只需一次编译就能跨多个 Free-threaded Python 版本运行，显著降低生态适配成本。
+
+来源：[PEP 803 – "abi3t": Stable ABI for Free-Threaded Builds](https://peps.python.org/pep-0803/)
+
+### 9.2 PEP 779：Free-threaded 进入 Phase II（沿用自 3.14）
+
+3.14 已让 Free-threaded 进入 Phase II（officially supported），3.15 延续此状态并完善：
+
+- `sys._is_gil_enabled()` 仍是判断当前是否禁用 GIL 的标准方式
+- 标准库进一步加强 free-threaded safety（详见 [Thread Safety Guarantees](https://docs.python.org/3.15/library/threadsafety.html)）
+
+### 9.3 PEP 799：高频低开销采样 Profiler（profile.sample）
+
+3.15 标准库新增专用 profiling 模块，针对长跑生产程序（包括多线程/异步代码）：
 
 ```python
-import threading
-
-# Python 3.15 新增：线程安全的迭代器工具
-# serialize_iterator：序列化访问迭代器
-# synchronized_iterator：同步迭代器
-# concurrent_tee：并发安全的 tee
-
-# 示例：多线程安全地消费同一个生成器
-def data_generator():
-    for i in range(100):
-        yield i
-
-gen = data_generator()
-safe_iter = threading.serialize_iterator(gen)
-
-def consumer(name, iterator):
-    for item in iterator:
-        print(f"{name}: {item}")
-
-# 多个线程可以安全地从同一个迭代器消费
-t1 = threading.Thread(target=consumer, args=("A", safe_iter))
-t2 = threading.Thread(target=consumer, args=("B", safe_iter))
-t1.start()
-t2.start()
+# 概念示意：使用新的低开销采样 profiler
+# 实际 API 以 Python 3.15 release notes 为准
+import sys
+print(f"采样 profiler 模块在 Python {sys.version_info} 中可用")
 ```
 
-### 9.2 abi3t：Free-threaded 稳定 ABI
+### 9.4 JIT 编译器升级
 
-PEP 803 引入了 `abi3t`，为 Free-threaded 构建提供稳定 ABI。这意味着 C 扩展可以编译一次，在多个 Free-threaded Python 版本上运行，大幅降低了生态系统适配成本。
+3.15 的 JIT 编译器在标准解释器上有 4-5% 的几何平均性能提升（x86-64 Linux），AArch64 macOS 上相对 tail-calling interpreter 有 7-8% 提速。对 CPU 密集的纯 Python 代码尤其有意义。
 
-### 9.3 asyncio.TaskGroup.cancel
+### 9.5 asyncio TaskGroup 实践（非新增 API）
+
+> ⚠️ 待确认：截至 2026-05-22，标准库 `asyncio.TaskGroup` **未公开** `cancel()` 方法。要批量取消组内任务，目前的常用做法仍是：
+>
+> 1. 在组内某个任务中 `raise` 自定义异常 → 触发结构化退出
+> 2. 调用私有 `_abort()`（不推荐，未来可能变更）
+> 3. 使用 AnyIO 的 `TaskGroup`，原生支持 level cancellation
 
 ```python
 import asyncio
+
+class _StopGroup(Exception):
+    """触发整个 TaskGroup 提前结束的内部信号"""
 
 async def search(query: str) -> str:
     await asyncio.sleep(1)
     return f"结果: {query}"
 
-async def main():
-    # Python 3.15 新增：TaskGroup.cancel() 支持提前终止
-    async with asyncio.TaskGroup() as tg:
-        task1 = tg.create_task(search("query1"))
-        task2 = tg.create_task(search("query2"))
+async def first_match(target: str):
+    try:
+        async with asyncio.TaskGroup() as tg:
+            t1 = tg.create_task(search("query1"))
+            t2 = tg.create_task(search("query2"))
+            # 业务条件满足后，抛异常让整个组结构化退出
+            # raise _StopGroup
+    except* _StopGroup:
+        # ExceptionGroup 解构：吃掉自定义信号，把已完成结果取出
+        pass
+    return t1.result() if t1.done() else None
 
-        # 当第一个结果满足条件时，取消整个 TaskGroup
-        # 之前需要复杂的异常机制，现在一行搞定
-        # tg.cancel()  # 取消所有未完成的任务
-
-asyncio.run(main())
+asyncio.run(first_match("..."))
 ```
 
-来源：[Python 3.15 What's New](https://docs.python.org/3.15/whatsnew/3.15.html)
+来源：[Feature freeze for Python 3.15 as first beta released](https://www.theregister.com/2026/05/11/feature-freeze-for-python-315-as-first-beta-released/)
+| [PEP 790 – Python 3.15 Release Schedule](https://peps.python.org/pep-0790/)
+| [Python 3.15.0b1 Release](https://www.python.org/downloads/release/python-3150b1/)

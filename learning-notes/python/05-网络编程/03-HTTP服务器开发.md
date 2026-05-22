@@ -4,6 +4,8 @@
 
 > 使用 Python 构建高性能 HTTP 服务器
 
+<!-- version-check: FastAPI 0.136.x, aiohttp 3.12.x, Tornado 6.5.x, Pydantic v2.x, slowapi 0.1.9, checked 2026-05-22 -->
+
 ## 1. 使用 http.server（基础）
 
 ### 1.1 简单HTTP服务器
@@ -89,7 +91,8 @@ async def get_users():
 
 @app.post("/api/users")
 async def create_user(user: User):
-    return {"id": 2, **user.dict()}
+    # 修复于 2026-05-22: Pydantic v2 起 .dict() 已废弃，改用 .model_dump()
+    return {"id": 2, **user.model_dump()}
 ```
 
 ### 3.2 依赖注入
@@ -191,13 +194,14 @@ async def websocket_endpoint(websocket: WebSocket):
 async def websocket_handler(request):
     ws = web.WebSocketResponse()
     await ws.prepare(request)
-    
+
+    # 修复于 2026-05-22: 完善异常分支，CLOSE/CLOSED/ERROR 时都需要退出循环
     async for msg in ws:
         if msg.type == aiohttp.WSMsgType.TEXT:
             await ws.send_str(f"Echo: {msg.data}")
-        elif msg.type == aiohttp.WSMsgType.ERROR:
+        elif msg.type in (aiohttp.WSMsgType.CLOSE, aiohttp.WSMsgType.CLOSED, aiohttp.WSMsgType.ERROR):
             break
-    
+
     return ws
 
 app.router.add_get('/ws', websocket_handler)

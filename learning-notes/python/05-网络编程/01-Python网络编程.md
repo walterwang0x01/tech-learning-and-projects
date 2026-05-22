@@ -219,7 +219,9 @@ response = session.get('https://www.example.com')
 ```python
 import requests
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+# 修复于 2026-05-22: requests.packages.urllib3 是历史兼容路径
+# 推荐直接从 urllib3 导入（urllib3 2.x 起为正式依赖）
+from urllib3.util.retry import Retry
 
 # 设置超时
 response = requests.get('https://www.example.com', timeout=5)
@@ -252,7 +254,9 @@ pip install websockets
 import asyncio
 import websockets
 
-async def handle_client(websocket, path):
+# 修复于 2026-05-22: websockets 14+ 起 handler 第二参数 path 已废弃
+# 应使用单参数签名 handler(websocket)，如需获取 path 用 websocket.request.path
+async def handle_client(websocket):
     print(f'客户端连接: {websocket.remote_address}')
     try:
         async for message in websocket:
@@ -446,15 +450,15 @@ Python提供了丰富的网络编程工具：
 
 ## 11. 2026 年 Python HTTP 客户端选型
 
-<!-- version-check: httpx 0.28.1, aiohttp 3.11.x, requests 2.32.3, checked 2026-05-04 -->
+<!-- version-check: httpx 0.28.1（1.0 仍在 dev 阶段）, aiohttp 3.12.x（GA）, requests 2.32.x, urllib3 2.x, checked 2026-05-22 -->
 
-> 🔄 更新于 2026-05-04
+> 🔄 更新于 2026-05-22
 
 ### 11.1 httpx：现代 Python HTTP 客户端
 
-httpx 是 requests 的现代替代品，同时支持同步和异步 API，内置 HTTP/2 支持。当前稳定版 **0.28.1**（2024-12-06），1.0 开发版已在 PyPI 上发布（`1.0.dev1`），正式版预计 2026 年内发布。
+httpx 是 requests 的现代替代品，同时支持同步和异步 API，内置 HTTP/2 支持。截至 2026-05-22，**0.28.1**（2024-12-06）仍是当前稳定版，1.0 处于 `1.0.dev1` pre-release 阶段，正式版尚未发布。
 
-来源：[httpx 官方文档](https://www.python-httpx.org/)、[httpx GitHub](https://github.com/encode/httpx)
+来源：[httpx 官方文档](https://www.python-httpx.org/)、[httpx GitHub Releases](https://github.com/encode/httpx/releases)
 
 ```bash
 # 安装
@@ -492,10 +496,10 @@ client = httpx.Client(
 
 | 库 | 版本 | 同步 | 异步 | HTTP/2 | 适用场景 |
 |----|------|------|------|--------|---------|
-| **httpx** | 0.28.1 | ✅ | ✅ | ✅ | **新项目推荐**，统一同步/异步 API |
-| requests | 2.32.3 | ✅ | ❌ | ❌ | 简单同步请求，生态最丰富 |
-| aiohttp | 3.11.x | ❌ | ✅ | ❌ | 纯异步场景，WebSocket 支持好 |
-| urllib3 | 2.3.x | ✅ | ❌ | ❌ | 底层库，requests 的依赖 |
+| **httpx** | 0.28.1 | ✅ | ✅ | ✅ | **新项目推荐**，统一同步/异步 API（1.0 仍在 dev） |
+| requests | 2.32.x | ✅ | ❌ | ❌ | 简单同步请求，生态最丰富 |
+| aiohttp | 3.12.x | ❌ | ✅ | ❌ | 纯异步场景，WebSocket 支持好（3.12 GA） |
+| urllib3 | 2.x | ✅ | ❌ | ❌ | 底层库，requests 的依赖 |
 
 **选型建议**：
 - **新项目**：优先选择 httpx，一个库覆盖同步和异步场景
