@@ -198,6 +198,104 @@ def register_published(topic: str, date_str: str | None = None, retention_days: 
     return result
 
 
+def doctor_check_index_consistency(auto_fix: bool = False, retention_days: int = 60) -> dict:
+    """检查 md 与 published-index 的一致性。
+
+    扫描 `learning-notes/briefings/{topic}/YYYY/MM/*.md`，对比
+    `.published-index.json` 的 `file_hashes`，找出三类不一致：
+
+    - missing: md 在文件系统但 file_hashes 没记录（最常见，subagent 中断造成）
+    - hash_drift: md 已修改但 file_hashes 还是旧 hash（手动改了 md 但忘了 register）
+    - orphan: file_hashes 有记录但 md 文件已不存在（删除了文件）
+
+    auto_fix=True 时对 missing 和 hash_drift 自动跑 register_published 修复，
+    orphan 只报告不删（删除是用户决策）。返回各类问题的清单和修复结果。
+    """
+    issues = {"missing": [], "hash_drift": [], "orphan": [], "fixed": []}
+
+    index = load_published_index()
+    file_hashes = index.get("file_hashes", {})
+
+    # 扫文件系统
+    md_keys: set[str] = set()
+    for topic in TOPICS:
+        topic_base = BASE_DIR / topic
+        if not topic_base.exists():
+            continue
+        for md_file in topic_base.rglob("*.md"):
+            if md_file.name == "README.md":
+                continue
+            m = re.match(r"(\d{4}-\d{2}-\d{2})", md_file.stem)
+            if not m:
+                continue  # 跳过 weekly 等非日报文件
+            date_str = m.group(1)
+            key = f"{topic}/{date_str}"
+            md_keys.add(key)
+
+            actual_hash = hashlib.sha256(md_file.read_bytes()).hexdigest()[:16]
+            recorded = file_hashes.get(key)
+
+            if recorded is None:
+                issues["missing"].append({"key": key, "topic": topic, "date": date_str, "actual": actual_hash})
+            elif recorded != actual_hash:
+                issues["hash_drift"].append({
+                    "key": key, "topic": topic, "date": date_str,
+                    "recorded": recorded, "actual": actual_hash,
+                })
+
+    # 反向找孤儿：file_hashes 有但 md 没了
+    for key in file_hashes:
+        if key not in md_keys:
+            try:
+                topic, date_str = key.split("/", 1)
+            except ValueError:
+                continue
+            issues["orphan"].append({"key": key, "topic": topic, "date": date_str})
+
+    if auto_fix:
+        for problem in issues["missing"] + issues["hash_drift"]:
+            r = register_published(problem["topic"], problem["date"], retention_days=retention_days)
+            if "error" not in r:
+                issues["fixed"].append({
+                    "key": problem["key"],
+                    "registered": r.get("registered", 0),
+                    "total_urls": r.get("total_urls", 0),
+                })
+            elif "invalid briefing file" in r.get("error", ""):
+                # strict 校验失败的旧格式 md：lenient 通过就只补 file_hash，不动 items
+                f = briefing_file(problem["topic"], problem["date"])
+                ok_lenient, _ = validate_briefing_md(f, strict=False)
+                if ok_lenient:
+                    backfilled = _backfill_file_hash_only(problem["topic"], problem["date"])
+                    if backfilled:
+                        issues["fixed"].append({
+                            "key": problem["key"],
+                            "registered": 0,
+                            "total_urls": 0,
+                            "backfilled_legacy": True,
+                        })
+
+    return issues
+
+
+def _backfill_file_hash_only(topic: str, date_str: str) -> bool:
+    """只补 file_hashes，不动 items。
+
+    用于历史 md：URL 已经通过 v1 旧路径登记到 items，但当时 register
+    还没引入 file_hashes 字段。strict 校验对历史格式 fail 时调用此函数
+    只把当前 hash 写进去，避免 doctor 永远报警。
+    """
+    f = briefing_file(topic, date_str)
+    if not f.exists():
+        return False
+    file_hash = hashlib.sha256(f.read_bytes()).hexdigest()[:16]
+    index = load_published_index()
+    file_hashes = index.setdefault("file_hashes", {})
+    file_hashes[f"{topic}/{date_str}"] = file_hash
+    save_published_index(index)
+    return True
+
+
 def rebuild_published_index(days: int = 60) -> dict:
     """扫描历史 md 重建 index。
 

@@ -32,7 +32,6 @@
 
     {"name": "36氪", "url": "https://36kr.com/feed", "topic_hints": ["china-tech"]},
     {"name": "InfoQ CN", "url": "https://www.infoq.cn/feed", "topic_hints": ["china-tech"]},
-    {"name": "极客公园", "url": "https://www.geekpark.net/rss", "topic_hints": ["china-tech"]},
     {"name": "量子位", "url": "https://www.qbitai.com/feed", "topic_hints": ["china-tech"]},
     {"name": "开源中国", "url": "https://www.oschina.net/news/rss", "topic_hints": ["china-tech"]},
     {"name": "少数派", "url": "https://sspai.com/feed", "topic_hints": ["china-tech"]},

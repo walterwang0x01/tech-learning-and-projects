@@ -40,6 +40,7 @@ from .storage import (
     atomic_write_json,
     atomic_write_jsonl,
     briefing_file,
+    doctor_check_index_consistency,
     load_published_index,
     now_str,
     read_jsonl,
@@ -181,6 +182,58 @@ def cmd_rebuild_index(args):
     print(f"🔄 扫描最近 {args.days} 天的简报文件…")
     result = rebuild_published_index(days=args.days)
     print(f"✅ 扫描 {result['files_scanned']} 个 md 文件，登记 {result['urls_registered']} 个 URL")
+
+
+def cmd_doctor(args):
+    """检查 published-index 与 md 文件的一致性，可选自动修复"""
+    cfg = load_config()
+    issues = doctor_check_index_consistency(
+        auto_fix=args.fix,
+        retention_days=cfg.published_index_retention_days,
+    )
+
+    miss = issues["missing"]
+    drift = issues["hash_drift"]
+    orph = issues["orphan"]
+    fixed = issues["fixed"]
+
+    print(f"## 🩺 简报索引一致性检查\n")
+    print(f"- ❓ 缺失登记 (md 存在但无 file_hash): {len(miss)}")
+    print(f"- 🔀 hash 漂移 (md 修改但未重新 register): {len(drift)}")
+    print(f"- 👻 孤儿记录 (file_hash 存在但 md 已删): {len(orph)}")
+
+    if miss:
+        print("\n### 缺失登记")
+        for p in miss:
+            print(f"  - {p['key']} (hash={p['actual']})")
+    if drift:
+        print("\n### hash 漂移")
+        for p in drift:
+            print(f"  - {p['key']} (recorded={p['recorded']}, actual={p['actual']})")
+    if orph:
+        print("\n### 孤儿记录（不会自动删，需手动确认）")
+        for p in orph:
+            print(f"  - {p['key']}")
+
+    if args.fix:
+        if fixed:
+            normal = [f for f in fixed if not f.get("backfilled_legacy")]
+            legacy = [f for f in fixed if f.get("backfilled_legacy")]
+            print(f"\n✅ 自动修复 {len(fixed)} 条:")
+            for f in normal:
+                print(f"  - {f['key']}: 新增 {f['registered']}/{f['total_urls']} URLs")
+            for f in legacy:
+                print(f"  - {f['key']}: 仅补 file_hash（旧格式 md，items 已通过 v1 路径登记）")
+        else:
+            print("\n（无需修复）")
+    else:
+        if miss or drift:
+            print("\n💡 加 --fix 自动跑 register_published 修复 missing 和 hash_drift")
+
+    # 退出码：有问题但没修复时退 1，便于 CI/hook 用
+    has_unresolved = (miss or drift) and not args.fix
+    if has_unresolved or orph:
+        sys.exit(1)
 
 
 def cmd_validate(args):
@@ -729,6 +782,10 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("rebuild-index", help="从历史 md 文件重建 published-index")
     p.add_argument("--days", type=int, default=60)
     p.set_defaults(func=cmd_rebuild_index)
+
+    p = sub.add_parser("doctor", help="检查 published-index 与 md 文件一致性")
+    p.add_argument("--fix", action="store_true", help="对 missing/hash_drift 自动 register 修复")
+    p.set_defaults(func=cmd_doctor)
 
     p = sub.add_parser("validate", help="校验简报 md 是否是有效完成状态")
     p.add_argument("path", help="简报 md 路径")

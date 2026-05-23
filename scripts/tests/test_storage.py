@@ -13,6 +13,7 @@ from briefing_tools.storage import (
     atomic_write,
     atomic_write_json,
     atomic_write_jsonl,
+    doctor_check_index_consistency,
     register_published,
     validate_briefing_md,
 )
@@ -192,6 +193,145 @@ class TestRegisterPublished(unittest.TestCase):
         r = register_published("ai-agent", "2026-05-10", retention_days=60)
         self.assertIn("warning", r)
         self.assertIn("changed", r["warning"])
+
+
+class TestDoctorCheckIndexConsistency(unittest.TestCase):
+    """doctor 一致性检查：md 与 published-index 的 file_hashes 是否一致"""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.base = Path(self.tmp.name)
+        self.p_cfg_base = patch.object(cfg_mod, "BASE_DIR", self.base)
+        self.p_cfg_idx = patch.object(cfg_mod, "PUBLISHED_INDEX", self.base / ".published-index.json")
+        self.p_st_base = patch.object(storage, "BASE_DIR", self.base)
+        self.p_st_idx = patch.object(storage, "PUBLISHED_INDEX", self.base / ".published-index.json")
+        for p in (self.p_cfg_base, self.p_cfg_idx, self.p_st_base, self.p_st_idx):
+            p.start()
+
+    def tearDown(self):
+        for p in (self.p_cfg_base, self.p_cfg_idx, self.p_st_base, self.p_st_idx):
+            p.stop()
+        self.tmp.cleanup()
+
+    def _write_md(self, topic: str, date_str: str, content: str = VALID_MD) -> Path:
+        year, month = date_str[:4], date_str[5:7]
+        d = self.base / topic / year / month
+        d.mkdir(parents=True, exist_ok=True)
+        f = d / f"{date_str}.md"
+        f.write_text(content, encoding="utf-8")
+        return f
+
+    def test_all_clean(self):
+        """注册过的 md，doctor 不应报问题"""
+        self._write_md("ai-agent", "2026-05-10")
+        register_published("ai-agent", "2026-05-10")
+
+        issues = doctor_check_index_consistency(auto_fix=False)
+        self.assertEqual(issues["missing"], [])
+        self.assertEqual(issues["hash_drift"], [])
+        self.assertEqual(issues["orphan"], [])
+
+    def test_detects_missing(self):
+        """md 存在但 file_hashes 没记录 → missing"""
+        self._write_md("ai-agent", "2026-05-10")
+        # 不跑 register
+
+        issues = doctor_check_index_consistency(auto_fix=False)
+        self.assertEqual(len(issues["missing"]), 1)
+        self.assertEqual(issues["missing"][0]["key"], "ai-agent/2026-05-10")
+        self.assertEqual(issues["hash_drift"], [])
+
+    def test_detects_hash_drift(self):
+        """注册后改 md → hash_drift"""
+        f = self._write_md("ai-agent", "2026-05-10")
+        register_published("ai-agent", "2026-05-10")
+        f.write_text(VALID_MD + "\n\n新增段落", encoding="utf-8")
+
+        issues = doctor_check_index_consistency(auto_fix=False)
+        self.assertEqual(issues["missing"], [])
+        self.assertEqual(len(issues["hash_drift"]), 1)
+        self.assertEqual(issues["hash_drift"][0]["key"], "ai-agent/2026-05-10")
+
+    def test_detects_orphan(self):
+        """register 之后删 md → orphan"""
+        f = self._write_md("ai-agent", "2026-05-10")
+        register_published("ai-agent", "2026-05-10")
+        f.unlink()
+
+        issues = doctor_check_index_consistency(auto_fix=False)
+        self.assertEqual(issues["missing"], [])
+        self.assertEqual(len(issues["orphan"]), 1)
+        self.assertEqual(issues["orphan"][0]["key"], "ai-agent/2026-05-10")
+
+    def test_auto_fix_resolves_missing(self):
+        """auto_fix=True 应当跑 register 把 missing 补上"""
+        self._write_md("ai-agent", "2026-05-10")
+
+        issues = doctor_check_index_consistency(auto_fix=True)
+        self.assertEqual(len(issues["missing"]), 1)
+        self.assertEqual(len(issues["fixed"]), 1)
+        self.assertEqual(issues["fixed"][0]["key"], "ai-agent/2026-05-10")
+        # 修复后再查应该干净
+        issues2 = doctor_check_index_consistency(auto_fix=False)
+        self.assertEqual(issues2["missing"], [])
+        self.assertEqual(issues2["hash_drift"], [])
+
+    def test_auto_fix_resolves_drift(self):
+        """auto_fix=True 应当对 hash_drift 重新 register"""
+        f = self._write_md("ai-agent", "2026-05-10")
+        register_published("ai-agent", "2026-05-10")
+        f.write_text(VALID_MD + "\n\n新增段落", encoding="utf-8")
+
+        issues = doctor_check_index_consistency(auto_fix=True)
+        self.assertEqual(len(issues["hash_drift"]), 1)
+        self.assertEqual(len(issues["fixed"]), 1)
+        # 再查无问题
+        issues2 = doctor_check_index_consistency(auto_fix=False)
+        self.assertEqual(issues2["hash_drift"], [])
+
+    def test_skips_readme_and_weekly(self):
+        """README.md 和 *-weekly.md 不应被纳入检查"""
+        # 写一个普通日报
+        self._write_md("ai-agent", "2026-05-10")
+        register_published("ai-agent", "2026-05-10")
+        # 加 README 和 weekly
+        (self.base / "ai-agent" / "README.md").write_text("# index\n", encoding="utf-8")
+        weekly = self.base / "ai-agent" / "2026" / "05"
+        weekly.mkdir(parents=True, exist_ok=True)
+        (weekly / "2026-W18-weekly.md").write_text(VALID_MD, encoding="utf-8")
+
+        issues = doctor_check_index_consistency(auto_fix=False)
+        self.assertEqual(issues["missing"], [])  # weekly 用 W 前缀，不匹配 YYYY-MM-DD
+
+    def test_backfill_legacy_md(self):
+        """旧格式 md（strict 校验 fail 但 lenient 通过）应只补 file_hash"""
+        # INCOMPLETE_MD 只有 H1，strict 必 fail；但下面这个旧格式有 H1 + 链接，lenient 通过
+        legacy_md = (
+            "# 旧版简报 — 2026-04-01\n\n"
+            "## 今日要闻\n\n"
+            "1. 第一条 → [link](https://example.com/a)\n"
+            "2. 第二条 → [link2](https://example.com/b)\n"
+        )
+        self._write_md("ai-agent", "2026-04-01", content=legacy_md)
+
+        issues = doctor_check_index_consistency(auto_fix=True)
+        self.assertEqual(len(issues["missing"]), 1)
+        # 应该被 backfill 而不是普通 register
+        self.assertEqual(len(issues["fixed"]), 1)
+        self.assertTrue(issues["fixed"][0].get("backfilled_legacy"))
+
+        # 再查应该干净
+        issues2 = doctor_check_index_consistency(auto_fix=False)
+        self.assertEqual(issues2["missing"], [])
+
+    def test_truly_invalid_md_not_fixed(self):
+        """连 lenient 都 fail 的 md（如缺 H1）不应被修复，留下 missing 让用户处理"""
+        broken = "## subheader only\nno h1, no link\n"
+        self._write_md("ai-agent", "2026-04-02", content=broken)
+
+        issues = doctor_check_index_consistency(auto_fix=True)
+        self.assertEqual(len(issues["missing"]), 1)
+        self.assertEqual(len(issues["fixed"]), 0)
 
 
 if __name__ == "__main__":
