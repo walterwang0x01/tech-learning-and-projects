@@ -10601,9 +10601,393 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-05-24"
+    },
+    "419be1d17422": {
+      "url": "https://www.hollandtech.net/claude-is-not-your-architect",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "11bb6f769b1b": {
+      "url": "https://news.ycombinator.com/item?id=48256912",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "5134834648ab": {
+      "url": "https://arxiv.org/abs/2605.21434",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "040cf1bd1e8e": {
+      "url": "https://www.bloomberg.com/news/articles/2026-05-23/deepseek-to-make-permanent-75-discount-on-flagship-ai-model",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "33a023623897": {
+      "url": "https://www.infoq.cn/article/HzTpYj4SIqzFOHybIO2q",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "7f7af92fbb42": {
+      "url": "https://arxiv.org/abs/2605.06445",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "970e5fb41e29": {
+      "url": "https://x.com/garrytan/status/2058378310254793013",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "ee829720e9a7": {
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "27c38f3a2c75": {
+      "url": "https://arstechnica.com/ai/2026/05/anthropic-blames-dystopian-sci-fi-for-training-ai-models-to-act-evil",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "7e586dfa05cc": {
+      "url": "https://news.ycombinator.com/item?id=48259784",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "61926588aa0c": {
+      "url": "https://www.wired.com/story/these-robots-are-making-meals-for-a-nonprofit-in-san-franciscos-tenderloin",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "ec1623b95c8d": {
+      "url": "https://arxiv.org/abs/2605.02741",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "233819bf2baf": {
+      "url": "https://api-docs.deepseek.com/quick_start/agent_integrations/reasonix",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "8f1b9b0cf736": {
+      "url": "https://esengine.github.io/DeepSeek-Reasonix",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-25"
+    },
+    "0a2483621ccf": {
+      "url": "https://36kr.com/newsflashes/3824000341594241?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "2796044cff6b": {
+      "url": "http://aastocks.com/sc/stocks/news/aafn-con/NOW.1519010/popular-news/AAFN",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "f16e29e47cda": {
+      "url": "https://36kr.com/newsflashes/3824007076679809?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "23c61fbf8e6f": {
+      "url": "https://www.infoq.cn/article/SS6HIq6yvrJaV4PJMHG1",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "19e46ceafb69": {
+      "url": "https://recodechinaai.substack.com/p/chinese-ai-companies-just-had-their",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "72c625a94051": {
+      "url": "https://cnevpost.com/2026/05/22/tesla-renames-fsd-again-in-china",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "01293ef3db73": {
+      "url": "https://www.kucoin.com/news/flash/q1-ai-funding-surpasses-110-billion-yuan-domestic-large-models-see-sharp-rise",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "ff4416e8e631": {
+      "url": "https://electrek.co/2026/05/23/tesla-now-calls-fsd-tesla-assisted-driving-in-china-a-more-truthful-name",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "0bd64c4aa2ec": {
+      "url": "https://news.ycombinator.com/item?id=48256953",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "aec7a2864079": {
+      "url": "https://36kr.com/p/3823941399826566?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "c74210a73708": {
+      "url": "https://www.qbitai.com/2026/05/423202.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "09d754a7a0ac": {
+      "url": "https://www.oschina.net/news/445308",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "104ff3d788c4": {
+      "url": "https://www.qbitai.com/2026/05/423159.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-25"
+    },
+    "dadfec1fe6d5": {
+      "url": "https://www.tomshardware.com/software/operating-systems/45-years-later-earliest-dos-source-code-transcribed-from-a-stack-of-old-printouts-found-in-a-garage-code-was-open-sourced-to-mark-86-dos-1-00s-anniversary",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "f433288baca4": {
+      "url": "https://arstechnica.com/gadgets/2026/04/microsoft-open-sources-the-earliest-dos-source-code-discovered-to-date",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "a3b87b8f5898": {
+      "url": "https://www.theverge.com/transportation/936126/nuro-robotaxi-dave-ferguson-interview-uber-lucid-waymo",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "b6584e23d79c": {
+      "url": "https://corrode.dev/learn/migration-guides",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "9df7df82ee3e": {
+      "url": "https://news.ycombinator.com/item?id=48259808",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "6640b48e5e01": {
+      "url": "https://x.com/steipete/status/2058381186884411473",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "793f352bc18a": {
+      "url": "https://arxiv.org/abs/2605.05148",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "0a0ec4f6c4c9": {
+      "url": "https://techcrunch.com/2026/05/20/musks-xai-is-being-sued-over-its-data-center-generators-now-its-buying-2-8b-more",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "979330dc8577": {
+      "url": "https://apple.github.io/ml-pico",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "9ca7a6c1016f": {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-cost-crisis-hits-tech-giants-as-employee-tokenmaxxing-backfires-agentic-ai-eats-up-to-1000x-more-tokens-than-standard-ai-sparks-corporate-pullback-at-microsoft-meta-and-amazon",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "a702696dfd68": {
+      "url": "https://www.cnbc.com/2026/05/22/microsoft-was-positioned-to-win-in-ai-coding-outages-got-in-the-way.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "463665812cf8": {
+      "url": "https://fs.blog/knowledge-project-podcast/greg-brockman",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "b8bd1deae335": {
+      "url": "https://corrode.dev/learn/migration-guides/go-to-rust",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "095b23ee688e": {
+      "url": "https://sspai.com/post/110130",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "d9613c5b7356": {
+      "url": "https://github.com/apple/ml-pico",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "58dfa91a7344": {
+      "url": "https://adaptivesupport.amd.com/s/question/0D5Pd00001YQLdMKAX/why-is-vivado-20261-dropping-linux-support-for-free-tier-?language=en_US",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "1d4ee5172053": {
+      "url": "https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vivado/vivado-buy.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "efafd467fb47": {
+      "url": "https://tuxmachines.org/n/2026/04/30/Microsoft_GitHub_Exodus_Technical_Failures_and_Slopfest.shtml",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "3c6c88bc98bb": {
+      "url": "https://theverge.com/tech/935250/microsoft-github-struggles-notepad",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "ff6f7bc08d6f": {
+      "url": "https://winbuzzer.com/2026/05/21/microsoft-alert-emails-abused-to-deliver-scam-links-xcxwbn",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "029f9382d495": {
+      "url": "https://techcrunch.com/2026/05/23/elon-musk-has-given-up-on-solar-power-on-earth",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "e580471c3581": {
+      "url": "https://news.ycombinator.com/item?id=48253186",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "1dd81ad114a3": {
+      "url": "https://techcrunch.com/2026/05/24/techcrunch-mobility-robotaxi-reality-check",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "f721c960fef3": {
+      "url": "https://www.macrumors.com/2026/05/22/the-macrumors-show-wwdc26-promises-siri-upgrades",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "b84703144dfa": {
+      "url": "https://audiomass.co/?multitrack=1",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "d95a349e5650": {
+      "url": "https://techcrunch.com/2026/05/21/scammers-are-abusing-an-official-microsoft-email-address-to-send-spam",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "8de25bc98473": {
+      "url": "https://investor.uber.com/news-events/news/press-release-details/2026/Lucid-Nuro-and-Uber-Unveil-Global-Robotaxi-at-CES-Announce-Autonomous-On-Road-Testing-2026-3kWDFYe--b/default.aspx",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "91c9cd305e30": {
+      "url": "https://memeburn.com/microsoft-drops-claude-code-what-changes-for-you",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "ca5c2919cf33": {
+      "url": "https://winbuzzer.com/2026/05/24/xai-adds-28b-in-gas-turbines-as-spacex-pitches-space-solar-xcxwbn",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "f9af63ed9125": {
+      "url": "https://techcrunch.com/2026/05/24/xreal-googles-smartglasses-partner-thinks-it-has-finally-mastered-this-notoriously-tricky-industry",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "4022d5ca4c43": {
+      "url": "https://gizmodo.com/spacex-ipo-filing-reveals-nearly-3-billion-investment-in-gas-turbines-for-ai-data-centers-2000761859",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "0cfffbdfbb8f": {
+      "url": "http://hardware.slashdot.org/story/26/05/23/1917255/amd-xilinx-is-excluding-linux-from-the-free-tier-for-its-fpga-dev-tool",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "745c34c7e96a": {
+      "url": "https://mastering.dyalog.com/README.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "b17f1a8b9353": {
+      "url": "https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "78fd310610c1": {
+      "url": "https://ikesau.co/blog/defeating-git-rigour-fatigue-with-jujutsu",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "77295f8d5247": {
+      "url": "https://opensource.microsoft.com/blog/2026/04/28/continuing-the-story-of-early-dos-development",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
+    },
+    "8c50adcd2dae": {
+      "url": "https://9to5mac.com/2026/05/18/apple-sends-invites-for-wwdc26-keynote-unveils-schedule",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-25"
     }
   },
-  "updated": "2026-05-24 11:19",
+  "updated": "2026-05-25 09:23",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -10709,6 +11093,9 @@
     "global-tech/2026-05-04": "aad29e352f2c3542",
     "ai-agent/2026-05-24": "cb81a69cde0cc517",
     "china-tech/2026-05-24": "5d8aabbeb25587df",
-    "global-tech/2026-05-24": "073321c361b15f68"
+    "global-tech/2026-05-24": "073321c361b15f68",
+    "ai-agent/2026-05-25": "7dd29ae0769f5d50",
+    "china-tech/2026-05-25": "adb03eadd02e850f",
+    "global-tech/2026-05-25": "021d4dfe4045ea6d"
   }
 }
