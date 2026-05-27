@@ -11471,9 +11471,213 @@
       "title": "",
       "topic": "ai-agent",
       "date": "2026-05-26"
+    },
+    "b178016cd32d": {
+      "url": "https://skyworkai.github.io/skyclaw",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "0e6bb4f66d69": {
+      "url": "https://www.oschina.net/news/446114",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "44d32c4a10b2": {
+      "url": "https://www.oschina.net/news/446092",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "83d62fd2eb6d": {
+      "url": "https://www.qbitai.com/2026/05/424851.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "85016d8534a6": {
+      "url": "https://36kr.com/p/3826385821192841?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "4718b6120b67": {
+      "url": "https://www.oschina.net/news/446227",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "bd6c9c39bd16": {
+      "url": "https://www.alibabacloud.com/blog/building-a-unified-entity-search-engine-by-using-umodel-for-observability-scenarios_602813",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "863ff91ecdef": {
+      "url": "https://36kr.com/p/3825882266407815?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "d2ce9add529c": {
+      "url": "https://www.oschina.net/news/446248",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "8c228bb87d9e": {
+      "url": "https://my.oschina.net/u/3874284/blog/19681635",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "726c3c1a66ea": {
+      "url": "https://www.infoq.cn/article/bdsq4OUrTNJdvCLaxo0u",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "e3d750bac5aa": {
+      "url": "https://huggingface.co/collections/openbmb/bitcpm-cann",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "81dcad6c7f59": {
+      "url": "https://www.qbitai.com/2026/05/425150.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "46daa6a6d6a2": {
+      "url": "https://www.qbitai.com/2026/05/425296.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "d7bfa67150f1": {
+      "url": "https://huggingface.co/openbmb/BitCPM-CANN-8B-gguf",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "e74dc8b4912e": {
+      "url": "https://36kr.com/p/3825928694846085?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-27"
+    },
+    "4a1cabea6676": {
+      "url": "https://www.oschina.net/news/445706/bbs-go-4-4-0-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "04ab10a73a95": {
+      "url": "https://techcrunch.com/2026/05/26/7-eleven-data-breach-affects-over-185000-peoples-personal-data",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "842a9066f6ce": {
+      "url": "https://www.cnbc.com/2026/05/26/dropbox-ceo-drew-houston-ashraf-alkarmi.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "f7b5746b2063": {
+      "url": "https://www.infoq.cn/article/gSSOTxhzL4BkUwuA52ur",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "5a8a47ff6afd": {
+      "url": "https://www.oschina.net/news/446411/perplexity-is-open-sourcing-bumblebee",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "b3f31b7a74e7": {
+      "url": "https://github.com/redraw/rapel",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "487ecc28fa22": {
+      "url": "https://www.infoq.cn/article/kadDStA9JWuOGHujwdoz",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "e74af3bfb460": {
+      "url": "https://www.langchain.com/blog/mission-control-operating-self-hosted-langsmith-on-kubernetes",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "fe9a6cd829bc": {
+      "url": "https://www.oschina.net/news/446052/vureact-1-8-4-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "694a66405400": {
+      "url": "https://www.oschina.net/news/445754/javamelody-2-8-0-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "3808b58f135c": {
+      "url": "https://theguptalog.blogspot.com/2026/04/i-bypassed-aws-api-gateway-auth-with.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "2e2721c79ece": {
+      "url": "https://blog.cloudflare.com/agents-week-in-review",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "de945f24ee13": {
+      "url": "https://www.infoq.cn/article/qYvZLNOkClhFPWJWYfIP",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "7ff39f81ef9a": {
+      "url": "https://techcrunch.com/2026/05/26/dutch-government-blocks-us-company-from-acquisition-citing-risk-to-public-interest",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "3183bdc25210": {
+      "url": "https://www.oschina.net/news/446365/koordinator-1-8-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "d83a370874b3": {
+      "url": "https://arxiv.org/abs/2605.24248",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "8d1a0b771dc8": {
+      "url": "https://arstechnica.com/information-technology/2026/05/millions-of-ai-agents-imperiled-by-critical-vulnerability-in-open-source-package",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
+    },
+    "27b1c9c6a41c": {
+      "url": "https://www.infoq.cn/article/4gwXqyRPs4RTUIMpRte7",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-27"
     }
   },
-  "updated": "2026-05-26 09:28",
+  "updated": "2026-05-27 10:19",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -11585,6 +11789,8 @@
     "global-tech/2026-05-25": "021d4dfe4045ea6d",
     "china-tech/2026-05-26": "dd0a7dd9c7497d5b",
     "global-tech/2026-05-26": "5221a7ed005c7be1",
-    "ai-agent/2026-05-26": "761ef7d1ff7dc591"
+    "ai-agent/2026-05-26": "761ef7d1ff7dc591",
+    "china-tech/2026-05-27": "be6b09b0089d1d20",
+    "global-tech/2026-05-27": "19108033051d9cb0"
   }
 }
