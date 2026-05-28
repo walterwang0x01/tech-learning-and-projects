@@ -11675,9 +11675,357 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-05-27"
+    },
+    "3b1b9c197020": {
+      "url": "https://arxiv.org/abs/2605.26494",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "69ad7675d37c": {
+      "url": "https://www.langchain.com/blog/may-2026-langchain-newsletter",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "618f8e9d20c0": {
+      "url": "https://www.infoq.cn/article/yB9yJlJADmFBNurNUEaG",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "f329729ec771": {
+      "url": "https://my.oschina.net/u/6179068/blog/19684510",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "9528a6f54b21": {
+      "url": "https://www.langchain.com/blog/lyft-built-a-self-serve-ai-agent-platform-for-customer-support-with-langgraph-and-langsmith",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "e6beed5555e0": {
+      "url": "https://arxiv.org/abs/2605.26165",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "b9184106b309": {
+      "url": "https://www.langchain.com/blog/langsmith-sandboxes-generally-available",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "d50e70450f35": {
+      "url": "https://x.com/zarazhangrui/status/2059354487823978586",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "6c6d47b51097": {
+      "url": "https://huggingface.co/blog/ibm-research/itbench-aa",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "c211343c2784": {
+      "url": "https://www.oschina.net/news/446711",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "f08d8cf2c7ba": {
+      "url": "https://github.com/thedotmack/claude-mem",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "8e5a5660818b": {
+      "url": "https://www.oschina.net/news/446641",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "25685952e14f": {
+      "url": "https://artificialanalysis.ai/evaluations/itbench-aa",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "a31299854584": {
+      "url": "https://rocketmq.apache.org/docs/bestPractice/04multiagent",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "42ecd5370488": {
+      "url": "https://my.oschina.net/u/3874284/blog/19681780",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "fe1c579855f5": {
+      "url": "https://arxiv.org/abs/2605.26302",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "bd9fa2a76bae": {
+      "url": "https://huggingface.co/papers/2605.26494",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "6e8663fb5d3b": {
+      "url": "https://www.oschina.net/news/446402",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "f4691c9ece36": {
+      "url": "https://arxiv.org/abs/2605.26252",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-05-28"
+    },
+    "b81f490c1fe7": {
+      "url": "https://www.qbitai.com/2026/05/425600.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "9c09efb0a609": {
+      "url": "https://www.infoq.cn/article/YHD4cguvebWJled2FK96",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "cf990a525b78": {
+      "url": "https://www.oschina.net/news/446699",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "cccc0429d08c": {
+      "url": "https://36kr.com/p/3827658881323649",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "d6ee8e68fab1": {
+      "url": "https://huggingface.co/openbmb/MiniCPM-V-4.6",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "bae45cecf96b": {
+      "url": "http://www.aastocks.com/sc/stocks/news/aafn-con/NOW.1526266/latest-news/AAFN",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "1a3704e9eff0": {
+      "url": "https://www.qbitai.com/2026/05/425870.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "3ef81ad5769b": {
+      "url": "https://sspai.com/post/110368",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "79cec3747e8a": {
+      "url": "https://www.qbitai.com/2026/05/425511.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "c237c85b097c": {
+      "url": "https://www.caixinglobal.com/2026-05-28/xiaomi-slashes-ai-model-api-prices-by-99-to-match-deepseek-102448357.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "f7ea4f158de7": {
+      "url": "https://www.qbitai.com/2026/05/425660.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "abe3d22a7b93": {
+      "url": "https://www.infoq.cn/article/et26CZlCZQoEK2wSkkSc",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "da9e03b9313c": {
+      "url": "https://www.oschina.net/news/446680",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-05-28"
+    },
+    "030dbde2fe63": {
+      "url": "https://github.com/facebook/CacheLib",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "30fec115c497": {
+      "url": "https://techcrunch.com/2026/05/26/duckduckgo-installs-are-up-30-as-users-reject-being-force-fed-googles-ai-search",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "92347dfc2cf2": {
+      "url": "https://www.reuters.com/world/asia-pacific/volvo-cars-wins-us-approval-keep-importing-vehicles-with-connected-car-2026-05-26",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "bf0135e7aa04": {
+      "url": "https://arstechnica.com/cars/2026/05/volvo-gets-us-government-approval-to-bypass-chinese-connected-car-ban",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "fb80a6ba882d": {
+      "url": "https://www.theregister.com/cyber-crime/2026/05/27/crowdstrike-google-shatter-glassworm-botnet/5247337",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "7a08a1d5d995": {
+      "url": "https://waxy.org/2026/05/last-fm-goes-independent-after-19-years-at-cbs-interactive",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "adc37b782abf": {
+      "url": "https://www.oschina.net/news/446875/mai-image-2-5-launches-at-no-3-on-arena-ai",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "0a4b2e6bcbcc": {
+      "url": "https://www.phoronix.com/news/AlmaLinux-10.2-Released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "32bafbc04f51": {
+      "url": "https://www.crowdstrike.com/en-us/blog/inside-crowdstrike-takedown-of-a-developer-targeting-botnet",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "5e644ae20506": {
+      "url": "https://thenextweb.com/news/cognition-just-raised-1-billion-at-a-26-billion-valuation-and-90-of-its-own-code-is-written-by-its-ai",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "741674f01a2c": {
+      "url": "https://www.infoq.com/news/2026/05/pullfrog-ai-github",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "aad481ad1d13": {
+      "url": "https://www.oschina.net/news/446896",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "37177b18cf11": {
+      "url": "https://theverge.com/news/937221/nvidia-geforce-control-panel-app-retirement",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "58c4e05f1e50": {
+      "url": "https://www.engadget.com/2181849/duckduckgo-installs-surge-after-google-ai-search",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "cf4e29401410": {
+      "url": "https://techcrunch.com/2026/05/27/crowdstrike-and-google-take-down-botnet-used-by-hackers-to-target-software-developers-in-supply-chain-attacks",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "e0fb5a632786": {
+      "url": "https://www.securityweek.com/glassworm-botnet-disrupted",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "6d3778ef279f": {
+      "url": "https://techcrunch.com/2026/05/27/ai-coding-startup-cognition-raises-1b-at-25b-pre-money-valuation",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "f016f5252b13": {
+      "url": "https://www.oschina.net/news/446809/nativescript-9-0-19-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "ff1fc298c859": {
+      "url": "https://pullfrog.com/",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "9e4b027d5393": {
+      "url": "https://almalinux.org/blog/2026-05-26-almalinux_98_and_102_stable",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "d87d21108fc4": {
+      "url": "https://kubernetes.io/blog/2026/05/26/reconciling-unfixed-kubernetes-cves",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "bbb8f9ae2ea0": {
+      "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-is-finally-ditching-its-iconic-control-panel-after-20-years-new-driver-updates-only-ship-in-the-nvidia-app",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "75d055b395a5": {
+      "url": "https://www.engadget.com/2182644/lastfm-independent-company-cbs-paramount-skydance",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "f80b845cc12e": {
+      "url": "https://www.oschina.net/news/446810",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "d9276b7a316b": {
+      "url": "https://blog.cloudflare.com/iran-internet-partially-restored-may-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
+    },
+    "4c6f22d29291": {
+      "url": "https://aws.amazon.com/blogs/aws/meet-our-newest-aws-heroes-may-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-05-28"
     }
   },
-  "updated": "2026-05-27 10:19",
+  "updated": "2026-05-28 10:05",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -11791,6 +12139,9 @@
     "global-tech/2026-05-26": "5221a7ed005c7be1",
     "ai-agent/2026-05-26": "761ef7d1ff7dc591",
     "china-tech/2026-05-27": "be6b09b0089d1d20",
-    "global-tech/2026-05-27": "19108033051d9cb0"
+    "global-tech/2026-05-27": "19108033051d9cb0",
+    "ai-agent/2026-05-28": "f6e5300283e79ac9",
+    "china-tech/2026-05-28": "5940cbe593702469",
+    "global-tech/2026-05-28": "07c5d84486d3ad7a"
   }
 }
