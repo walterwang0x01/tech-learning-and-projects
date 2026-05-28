@@ -298,6 +298,23 @@ Iceberg 1.10.0（2026-01）→ 1.10.1（2025-12-22）→ **1.11.0（2026-05-19 �
 | **Google Storage Analytics 集成** | GCS 读写性能进一步优化 |
 | **REST Catalog 联邦能力** | 配合 Polaris 1.5 实现跨 catalog 表读取 |
 | **持续向 V4 spec 推进** | 1.11 是 1.10 → V4 之间的过渡版本 |
+| **`PartitionStatsHandler` 旧 API 移除** | 1.10 已 deprecated，1.11.0 正式移除 |
+
+**升级到 1.11.0 后启用 partition stats**：
+
+partition stats **不会自动生成**，现有表升级到 1.11.0 后需要显式触发一次计算（增量计算，重复运行开销低）：
+
+```sql
+-- Spark SQL：为现有表计算 partition stats
+CALL my_catalog.system.compute_partition_stats(
+    table => 'db.orders'
+    -- 可选：snapshot_id => 12345，默认使用当前快照
+);
+```
+
+底层调用 `ComputePartitionStatsSparkAction`，从已有 partition stats 的快照之后增量计算到目标快照，写入 `PartitionStatisticsFile`。后续每次大量写入后建议重新触发，配合 compaction 一起调度。
+
+来源：[ComputePartitionStatsSparkAction Javadoc](https://iceberg.apache.org/javadoc/latest/org/apache/iceberg/spark/actions/ComputePartitionStatsSparkAction.html)
 
 来源：[Iceberg 1.11.0 In-Depth Overview](https://medium.com/@alexmercedtech/an-in-depth-overview-of-the-apache-iceberg-1-11-0-release-93b1186199de)、[Announcing Apache Iceberg 1.11.0 - Google](https://www.googblogs.com/announcing-apache-iceberg-1-11-0/)
 
