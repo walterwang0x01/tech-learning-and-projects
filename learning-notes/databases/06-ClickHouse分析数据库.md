@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: ClickHouse 26.5 (preview), 26.4 (latest stable), 26.3 LTS, checked 2026-05-20 -->
+<!-- version-check: ClickHouse 26.5 (2026-05-21 GA), 26.4 stable, 26.3 LTS, checked 2026-05-28 -->
 
 ## 1. 为什么要了解 ClickHouse
 
@@ -375,11 +375,11 @@ VALUES (now(), 'INFO', 'Agent completed task');
 
 来源：[ClickHouse Release 26.3](https://clickhouse.com/blog/clickhouse-release-26-03)、[ClickHouse 26.4 SQL 兼容性](https://www.tipranks.com/news/private-companies/clickhouse-enhances-sql-compatibility-in-version-26-4)（Content was rephrased for compliance with licensing restrictions）
 
-### 26.5 预告（Open House Event）
+### 26.5 已正式发布（2026-05-21 GA）
 
-> 🔄 更新于 2026-05-20
+> 🔄 更新于 2026-05-28（修复：26.5 已正式 GA，不再是预告）
 
-ClickHouse 在 26.5 Community Call 之前已经预热了几个新能力。来源：[ClickHouse 26.5 features ahead of Open House](https://www.tipranks.com/news/private-companies/clickhouse-highlights-new-26-5-release-features-ahead-of-open-house-event)（Content was rephrased for compliance with licensing restrictions）
+ClickHouse 26.5 在 2026-05-21 Community Call 上正式发布。来源：[ClickHouse Changelog 26.5](https://clickhouse.com/docs/whats-new/changelog)、[Release 26.5 Call presentation](https://presentations.clickhouse.com/2026-release-26.5/)、[ClickHouse 26.5 Performance Highlights](https://www.tipranks.com/news/private-companies/clickhouse-emphasizes-performance-and-iceberg-enhancements-in-version-26-5)（Content was rephrased for compliance with licensing restrictions）
 
 **Negative LIMIT BY**：可以用负数从分组的"末尾开始"返回行，原本要写复杂的 `ROW_NUMBER()` 嵌套。
 
@@ -407,6 +407,14 @@ SYSTEM RESUME VIEW analytics.daily_revenue_mv;
 -- 维护结束后恢复
 ```
 
-**Cloud changelog 同步**：2026-05 ClickHouse Cloud 已开始把 *index analysis 阶段*分布式化，对 vector search 和 full-text search 这种重二级索引的表减少了单副本内存压力，查询性能通过分布式并行提升。来源：[ClickHouse Cloud changelog 2026](https://clickhouse.com/docs/whats-new/cloud)
+**Iceberg 增强**：26.5 重点提升了对 Apache Iceberg 表格式的兼容性，包括读取性能和元数据处理。
 
-26.5 GA 版本号尚未正式锁定，建议生产环境继续使用 26.3 LTS，开发/测试环境关注 Open House Event 后的发布说明。
+**Cloud changelog 同步**：2026-05 ClickHouse Cloud 已开始把 *index analysis 阶段*分布式化，对 vector search 和 full-text search 这种重二级索引的表减少了单副本内存压力，查询性能通过分布式并行提升。来源：[ClickHouse Cloud changelog 2026](https://clickhouse.com/docs/whats-new/changelog/cloud)
+
+### 版本选择建议（更新版）
+
+| 场景 | 推荐版本 |
+|------|---------|
+| 生产环境（稳定优先） | 26.3 LTS |
+| 开发/测试（最新特性） | 26.5（已 GA） |
+| 已有 25.x 部署 | 评估升级到 26.3 LTS 或 26.5 |

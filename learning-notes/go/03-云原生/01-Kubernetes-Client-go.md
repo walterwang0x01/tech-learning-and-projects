@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: client-go v0.36 (K8s 1.36), Kubernetes 1.36 (2026-04-22), controller-runtime 0.21, checked 2026-05-15 -->
+<!-- version-check: client-go v0.36 (K8s 1.36), Kubernetes 1.36.1 (patch 2026-05-22), controller-runtime v0.22+ (latest v0.23.x), checked 2026-05-28 -->
 
 ## 1. 为什么要用 client-go
 
@@ -79,6 +79,7 @@ import (
     corev1 "k8s.io/api/core/v1"
     "k8s.io/apimachinery/pkg/api/resource"
     metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+    "k8s.io/utils/ptr"  // ptr.To 辅助函数
 )
 
 // 创建 Deployment
@@ -142,7 +143,12 @@ func scale(client *kubernetes.Clientset, name string, replicas int32) error {
 
 ```go
 import (
+    "time"
+
+    corev1 "k8s.io/api/core/v1"
+    "k8s.io/apimachinery/pkg/labels"
     "k8s.io/client-go/informers"
+    "k8s.io/client-go/kubernetes"
     "k8s.io/client-go/tools/cache"
 )
 
@@ -328,9 +334,10 @@ func TestReconcile(t *testing.T) {
 
 ## 9. K8s 1.36 与 client-go 演进（2026-05 更新）
 
-> 🔄 更新于 2026-05-15
+> 🔄 更新于 2026-05-28
 >
-> Kubernetes 1.36 "ハル (Haru)" 已于 **2026-04-22** 发布（来源：[K8s 1.36 Release Blog](https://kubernetes.io/blog/2026/04/22/kubernetes-v1-36-release/)）。对应的 `client-go v0.36` 与 `controller-runtime v0.21` 在 4 月底相继 cut。
+> Kubernetes 1.36 "ハル (Haru)" 已于 **2026-04-22** 发布（来源：[K8s 1.36 Release Blog](https://kubernetes.io/blog/2026/04/22/kubernetes-v1-36-release/)）。**1.36.1 补丁版本** 在 2026-05-22 跟进发布，修复了若干升级路径问题（来源：[Last Week in Kubernetes Development 2026-05-22](https://lwkd.info/2026/20260522)）。对应的 `client-go v0.36` 与 `controller-runtime v0.22+` 在 4 月底相继 cut，`controller-runtime` 主线已推进到 v0.23.x。
+> <!-- 修复于 2026-05-28: controller-runtime 0.21 已过时，K8s 1.36 对应 v0.22+，主线推进到 v0.23.x -->
 
 ### 9.1 Declarative Validation GA — Webhook 的退场
 
@@ -395,7 +402,8 @@ Kubelet 的子资源（exec、log、metrics）现在可以独立授权。Operato
 ```bash
 # 升级 client-go 与 controller-runtime
 go get k8s.io/client-go@v0.36.0
-go get sigs.k8s.io/controller-runtime@v0.21.0
+go get sigs.k8s.io/controller-runtime@v0.22.0
+# 主线已发布 v0.23.x，但与 K8s 1.36 的稳定对应关系仍是 v0.22.x
 
 # 重新生成 CRD（使用 controller-gen v0.18+）
 controller-gen crd paths=./api/... output:crd:dir=./config/crd

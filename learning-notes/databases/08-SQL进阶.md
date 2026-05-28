@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: SQL:2023 standard, PostgreSQL 18, checked 2026-05-10 -->
+<!-- version-check: SQL:2023 standard, PostgreSQL 18.4, checked 2026-05-28 -->
 
 ## 1. 窗口函数全解
 

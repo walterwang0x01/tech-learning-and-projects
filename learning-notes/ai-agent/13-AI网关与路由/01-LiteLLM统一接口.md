@@ -28,8 +28,9 @@ LiteLLM 提供统一的 OpenAI 兼容接口，支持 100+ LLM 提供商（OpenAI
 pip install litellm
 ```
 
-<!-- version-check: LiteLLM 1.83.x, checked 2026-05-13 -->
+<!-- version-check: LiteLLM 1.85.1 (2026-05-20, Gemini 3.5 Flash day-0 + cross-pod spend fix), checked 2026-05-28 -->
 <!-- 修复于 2026-05-13: gpt-4o → gpt-5.2（gpt-4o 已从 ChatGPT 退役，推荐使用新模型） -->
+<!-- 修复于 2026-05-28: LiteLLM 1.83.x → 1.85.1，注意 v1.77.6.2 前发生过 SQL 注入安全事件 (CVE-2026-42208)，生产请使用 1.83+ -->
 
 ```python
 import litellm

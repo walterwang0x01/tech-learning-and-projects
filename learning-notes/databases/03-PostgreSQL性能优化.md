@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: PostgreSQL 18.3, pg_stat_statements, checked 2026-05-10 -->
+<!-- version-check: PostgreSQL 18.4 (2026-05-14 security release), pg_stat_statements, checked 2026-05-28 -->
 
 ## 1. 优化的思维框架
 

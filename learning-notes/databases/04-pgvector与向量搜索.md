@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: pgvector 0.9.1 (PG 16+ required), pgvectorscale 0.9.0, PostgreSQL 18.4, HNSW/DiskANN, checked 2026-05-20 -->
+<!-- version-check: pgvector 0.8.2 (2026-02-26, CVE-2026-3172 fix), pgvectorscale 0.7.x, PostgreSQL 18.4, HNSW/DiskANN, checked 2026-05-28 -->
 
 ## 1. 为什么是 pgvector 不是专用向量库
 
@@ -450,18 +450,21 @@ pgvector 0.8.0（2024-11）→ 0.8.2（2025 年底）的关键改进：
 - [dbi-services pgvector 索引对比（2026-03）](https://www.dbi-services.com/blog/pgvector-a-guide-for-dba-part-2-indexes-update-march-2026/)
 - 关联：[ai-agent/06-RAG进阶/02-向量数据库选型.md](../ai-agent/06-RAG进阶/02-向量数据库选型.md)
 
-## 15. pgvector 0.9.1 与 PG 18.4 协同
+## 15. pgvector 0.8.2 与 PG 18.4 协同
 
-> 🔄 更新于 2026-05-20
+> 🔄 更新于 2026-05-28（修复：版本号从虚构的 0.9.1 改为实际的 0.8.2）
 
-<!-- version-check: pgvector 0.9.1, PostgreSQL 18.4 (2026-05-14), checked 2026-05-20 -->
+<!-- version-check: pgvector 0.8.2 (2026-02-26 release), PostgreSQL 18.4 (2026-05-14), checked 2026-05-28 -->
 
-pgvector 0.9.x 把最低 PostgreSQL 版本提升到 16，对应 PG 18.4 安全发布（2026-05-14，11 个 CVE）后的推荐组合是 **pgvector 0.9.1 + PG 18.4**。
+pgvector 0.8.x 把最低 PostgreSQL 版本提升到 13，对应 PG 18.4 安全发布（2026-05-14，11 个 CVE）后的推荐组合是 **pgvector 0.8.2 + PG 18.4**。
 
-### 15.1 0.9.x 关键变化
+> ⚠️ 重要修正：之前文档中提到的 0.9.1 是错误的版本号——pgvector 当前最新稳定版是 0.8.2（2026-02-26 发布，修复 CVE-2026-3172 并行 HNSW 构建缓冲区溢出）。来源：[pgvector 0.8.2 Released](https://www.postgresql.org/about/news/pgvector-082-released-3245/)
 
-- **要求 PostgreSQL 16+**：依赖 PG 16 的 generic-plan 改进，对带过滤的向量查询计划质量提升明显
-- **HNSW 维护成本进一步下降**：相比 0.8.x，0.9.1 的 HNSW 索引在批量更新场景下重组开销更低，对 RAG 场景持续注入新嵌入更友好
+### 15.1 0.8.x 关键变化
+
+- **0.8.2（2026-02-26）安全修复**：修复 CVE-2026-3172，并行 HNSW 索引构建可能泄露其他关系数据或导致服务崩溃，建议立即升级
+- **0.8.0（2024-11）核心改进**：HNSW 维护成本下降、过滤查询代价模型改进（AWS 测试显示带过滤向量查询延迟降低 9.4x）
+- **HNSW + iterative scan**：0.8 起支持迭代式向量索引扫描，对带过滤的查询召回率显著提升
 - **Statistical Binary Quantization（SBQ）成熟**：与 pgvectorscale 配合，把每维向量压成 1 bit，索引体积可降至原来的 1/32，再用原向量做 rerank。来源：[DigitalOcean — Advanced Vector Workloads with pgvectorscale](https://docs.digitalocean.com/products/vector-databases/postgresql/how-to/advanced-workloads/)
 - **混合查询代价模型继续修正**：约 15% 的非向量查询时间增加（带 vector 列时），是较此前版本可接受的回归。来源：[markaicode — pgvector vs Redis 2026](https://markaicode.com/vs/pgvector-vs-redis/)（Content was rephrased for compliance with licensing restrictions）
 
@@ -509,8 +512,8 @@ REINDEX INDEX CONCURRENTLY my_metadata_idx;
 
 | 场景 | 数据规模 | 推荐方案 | 备注 |
 |------|----------|---------|------|
-| RAG 单租户 | < 1000 万 | **pgvector 0.9.1 + HNSW** | PG 已部署即用 |
-| RAG 中等规模 | 1000 万 ~ 5000 万 | **pgvector 0.9.1 + HNSW + halfvec** | 内存减半 |
+| RAG 单租户 | < 1000 万 | **pgvector 0.8.2 + HNSW** | PG 已部署即用 |
+| RAG 中等规模 | 1000 万 ~ 5000 万 | **pgvector 0.8.2 + HNSW + halfvec** | 内存减半 |
 | RAG 大规模 | 5000 万 ~ 10 亿 | **pgvectorscale + StreamingDiskANN** | 热数据内存 + 冷数据磁盘 |
 | 内存吃紧 | 任意 | **binary_quantize + bit_hamming_ops + rerank** | 索引体积压 32x |
 | 数十亿级 | > 10 亿 | **Aurora pgvector 联合 S3 Vectors** | 低频查询、成本敏感 |

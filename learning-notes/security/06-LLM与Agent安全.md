@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: OWASP LLM Top 10 2025, MCP CVE-2025-49596, checked 2026-05-10 -->
+<!-- version-check: OWASP LLM Top 10 2025 (released 2025-12), MCP CVE-2025-49596, checked 2026-05-28 -->
 
 ## 1. 为什么 LLM 系统需要独立的安全考量
 

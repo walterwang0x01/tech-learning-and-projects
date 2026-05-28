@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Iceberg 1.10.1 stable, 1.11.0 RC, V4 spec design progressing, Delta Lake 4.0, Hudi 1.0, Polaris 1.4.1, Polaris 1.5 planning, DuckLake 1.0 GA (2026-04-13), checked 2026-05-20 -->
+<!-- version-check: Iceberg 1.11.0 (released 2026-05-19), 1.10.1/1.10.2, V4 spec design progressing, Delta Lake 4.0, Hudi 1.0, Polaris 1.5.0 (released 2026-05-18), DuckLake 1.0 GA (2026-04-13), checked 2026-05-28 -->
 
 ## 1. 为什么需要表格式
 
@@ -41,7 +41,7 @@ Parquet / ORC 只是"文件格式"，不是"表"：
 
 ## 3. 三者对比
 
-| 维度 | Iceberg 1.10 | Delta Lake 4.0 | Hudi 1.0 |
+| 维度 | Iceberg 1.11 | Delta Lake 4.0 | Hudi 1.0 |
 |------|-------------|-----------------|----------|
 | **主导** | Apache（Netflix 起源） | Databricks 主导，开源 | Apache（Uber 起源） |
 | **引擎支持** | Spark / Flink / Trino / DuckDB / Snowflake / BQ / Redshift | Spark 最强，Trino / Flink / DuckDB | Spark / Flink / Presto |
@@ -84,7 +84,7 @@ Parquet / ORC 只是"文件格式"，不是"表"：
 from pyspark.sql import SparkSession
 
 spark = SparkSession.builder \
-    .config("spark.jars.packages", "org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.10.1") \
+    .config("spark.jars.packages", "org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.11.0") \
     .config("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions") \
     .config("spark.sql.catalog.my_catalog", "org.apache.iceberg.spark.SparkCatalog") \
     .config("spark.sql.catalog.my_catalog.type", "rest") \
@@ -268,13 +268,14 @@ ALTER TABLE orders RENAME COLUMN amount TO amount_cents;
    → 绕过 metadata 会读到废弃数据
 ```
 
-## 13. Iceberg 1.10.x 版本演进
+## 13. Iceberg 1.10 → 1.11 版本演进
 
-> 🔄 更新于 2026-05-13
+> 🔄 更新于 2026-05-28
 
-Iceberg 1.10.0（2026-01）→ 1.10.1（当前最新稳定版），109 PRs / 28 贡献者。
+Iceberg 1.10.0（2026-01）→ 1.10.1（2025-12-22）→ **1.11.0（2026-05-19 正式发布）**。
+<!-- 修复于 2026-05-28: 将"1.11.0 RC"改为"1.11.0 正式发布"，社区已在 2026-05-19 完成投票 -->
 
-### 13.1 核心新特性
+### 13.1 1.10 核心新特性
 
 | 特性 | 说明 |
 |------|------|
@@ -286,11 +287,23 @@ Iceberg 1.10.0（2026-01）→ 1.10.1（当前最新稳定版），109 PRs / 28 
 
 来源：[Iceberg 1.10 Release](https://iceberg.apache.org/releases/)、[Google Cloud Blog](https://goo.gle/apache-iceberg-1-10)、[Snowflake Blog](https://www.snowflake.com/en/engineering-blog/apache-iceberg-1-10-new-features-fixes/)
 
-### 13.2 V4 Spec 设计中（2026 Q2 更新）
+### 13.2 1.11.0 关键新特性（2026-05-19 正式发布）
 
-> 🔄 更新于 2026-05-16
+> 🔄 更新于 2026-05-28：1.11.0 已 GA，不再是 RC
 
-Iceberg 社区在 2026 年 4-5 月的 Apache Data Lakehouse Weekly 中持续推进 V4 设计，**1.11.0 已经进入 release candidate**（基于多周的 V4 设计跟进工作）。来源：[Apache Data Lakehouse Weekly 2026-05](https://amdatalakehouse.substack.com/p/apache-data-lakehouse-weekly-may)
+| 特性 | 说明 |
+|------|------|
+| **Partition Statistics Scan API** | 优化器有了支持的接口读取表分区分布 |
+| **内置表加密（Envelope Encryption）** | 配合 Google KMS 等密钥管理服务 |
+| **Google Storage Analytics 集成** | GCS 读写性能进一步优化 |
+| **REST Catalog 联邦能力** | 配合 Polaris 1.5 实现跨 catalog 表读取 |
+| **持续向 V4 spec 推进** | 1.11 是 1.10 → V4 之间的过渡版本 |
+
+来源：[Iceberg 1.11.0 In-Depth Overview](https://medium.com/@alexmercedtech/an-in-depth-overview-of-the-apache-iceberg-1-11-0-release-93b1186199de)、[Announcing Apache Iceberg 1.11.0 - Google](https://www.googblogs.com/announcing-apache-iceberg-1-11-0/)
+
+### 13.3 V4 Spec 设计中（2026 Q2）
+
+Iceberg 社区在 2026 年 4-5 月的 Apache Data Lakehouse Weekly 中持续推进 V4 设计，1.11.0 是 V4 之前的最后一个稳定中转。来源：[Apache Data Lakehouse Weekly 2026-05](https://amdatalakehouse.substack.com/p/apache-data-lakehouse-weekly-may)
 
 **V4 核心设计方向**：
 
@@ -303,14 +316,12 @@ Iceberg 社区在 2026 年 4-5 月的 Apache Data Lakehouse Weekly 中持续推�
 
 **驱动 V4 的关键贡献者**：Anton Okolnychyi、Yufei Gu、Shawn Chang、Steven Wu。来源：[Apache Data Lakehouse Weekly 2026-04](https://amdatalakehouse.substack.com/p/apache-data-lakehouse-weekly-april-29b)
 
-**Polaris 1.4.1 + 1.5 路线图**：与 Iceberg V4 同步推进 catalog 端的能力，1.4.1 是 security-focused 补丁，4 个 CVE 协调披露。Polaris 已被多家 Lakehouse 厂商作为标准 Catalog。来源：[Apache Polaris Standard](https://www.dremio.com/blog/apache-polaris-the-catalog-standard-for-lakehouses-and-ai/)
-
 **对工程团队的影响**：
 
 ```
-现在生产用 1.10.1：
-├─ 持续观察 V4 草案，但不要急于试用 1.11.0 RC
-├─ 把 catalog 升级到 Polaris 1.4.1（修复 CVE）
+现在生产用 1.11.0：
+├─ V3 spec 完整功能 + partition stats API + 内置加密
+├─ 把 catalog 升级到 Polaris 1.5（federation 能力）
 └─ 评估 catalog-managed metadata 模式对运维的简化
 
 2026 H2 准备升级：
@@ -319,17 +330,17 @@ Iceberg 社区在 2026 年 4-5 月的 Apache Data Lakehouse Weekly 中持续推�
 └─ 提前规划 metadata 压缩策略，迁移成本相对小
 ```
 
-### 13.3 版本选择建议
+### 13.4 版本选择建议
 
 ```
-新项目：直接用 Iceberg 1.10.1
+新项目：直接用 Iceberg 1.11.0
 ├─ Spark 4.0 + Flink 2.0 支持
-├─ REST Catalog 标准化
-└─ V3 Spec 完整功能
+├─ Partition Statistics + 内置加密
+└─ V3 Spec 完整功能 + 向 V4 平滑过渡
 
-已有 1.9.x 项目：
-├─ 建议升级到 1.10.1（向后兼容）
-├─ 流式 Schema Evolution 减少运维负担
+仍在 1.10.x 项目：
+├─ 建议在下次维护窗口升级到 1.11.0（向后兼容）
+├─ 重点关注 Partition Stats API 带来的查询计划优化
 └─ 注意 Spark/Flink 版本对齐
 ```
 
@@ -443,16 +454,22 @@ WITH (inline_data = true);  -- 行数 < 阈值时不走 S3
 
 来源：[MotherDuck Blog — DuckLake 1.0 GA](https://motherduck.com/blog/announcing-ducklake-1-0-on-motherduck/)、[ducklake.select](http://ducklake.select/)
 
-## 15. Polaris 1.5 路线图（2026-05）
+## 15. Polaris 1.5.0 GA（2026-05-18 发布）
 
-> 🔄 更新于 2026-05-20
+> 🔄 更新于 2026-05-28
 
-<!-- version-check: Apache Polaris 1.5 planning (May 2026), 1.4.1 stable, checked 2026-05-20 -->
+<!-- version-check: Apache Polaris 1.5.0 (released 2026-05-18), Iceberg V4 federation, checked 2026-05-28 -->
+<!-- 修复于 2026-05-28: 1.5.0 已正式发布，原文档说"路线图/规划中"过时 -->
 
-Apache Polaris 在 1.4.1 安全补丁（修复 4 个协调披露 CVE）之后，于 2026-05 进入 1.5 规划阶段。1.5 的方向：
+Apache Polaris 在 1.4.1 安全补丁（修复 4 个协调披露 CVE）之后，于 **2026-05-18 正式发布 1.5.0**（[官方下载页](https://polaris.apache.org/downloads/1.5.0/)）。
 
-- **Iceberg V4 spec 一等支持**：catalog-managed metadata 模式让 Polaris 不仅仅是 REST 协议代理，而是元数据所有者
+**1.5.0 核心新特性**：
+
+- **Iceberg REST 联邦（GA）**：Polaris 可以代理远端 Iceberg REST Catalog 的表与视图，实现跨 catalog 数据访问（[REST Federation 文档](https://polaris.apache.org/releases/1.5.0/federation/iceberg-rest-federation/)）
+- **Hive Metastore 联邦（GA）**：把已有 HMS 直接接入 Polaris，平滑过渡到现代 Catalog 架构（[HMS Federation 文档](https://polaris.apache.org/releases/1.5.0/federation/hive-metastore-federation/)）
 - **AI-Native 元数据**：与 Apache Lance 的多模态存储集成（2026-01 已发布），让 Polaris 同时管理 Iceberg 表和 Lance 表（向量 + 多模态）
-- **更细粒度的 RBAC**：行级 / 列级权限策略，配合 Iceberg view 用于数据共享场景
+- **更细粒度的 RBAC**：行级 / 列级权限策略，配合 Iceberg view 用于数据共享场景，支持外部 OPA Policy Decision Point
 
-来源：[Apache Data Lakehouse Weekly 2026-05](https://amdatalakehouse.substack.com/p/apache-data-lakehouse-weekly-may)、[Apache Polaris and Lance — AI-Native Storage](https://polaris.incubator.apache.org/blog/2026/01/06/apache-polaris-and-lance-bringing-ai-native-storage-to-the-open-multimodal-lakehouse/)
+**1.5.0 与 Iceberg V4 协同**：1.5.0 是 V4 spec 落地的 catalog 端铺垫，催化 catalog-managed metadata 成为可选模式。
+
+来源：[Apache Polaris 1.5.0 Deep-Dive (Dremio)](https://www.dremio.com/blog/apache-polaris-1-5-0-deep-dive-into-the-future-of-open-data-catalogs/)、[Apache Polaris and Lance — AI-Native Storage](https://polaris.incubator.apache.org/blog/2026/01/06/apache-polaris-and-lance-bringing-ai-native-storage-to-the-open-multimodal-lakehouse/)、[Polaris 在 2026-02-15 从 Apache 孵化器毕业为 TLP](https://incubator.apache.org/projects/polaris.html)

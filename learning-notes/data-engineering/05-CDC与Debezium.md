@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Debezium 3.2, Flink CDC 3.4, Kafka Connect, checked 2026-05-10 -->
+<!-- version-check: Debezium 3.4 (released 2026-03-30), Debezium 3.6.0.Alpha2 (2026-05-15), Flink CDC 3.4, Kafka Connect, checked 2026-05-28 -->
 
 ## 1. 什么是 CDC
 
@@ -146,7 +146,7 @@ curl -X POST http://kafka-connect:8083/connectors \
       "status": "pending"
     },
     "source": {
-      "version": "3.2.0.Final",
+      "version": "3.4.0.Final",
       "connector": "postgresql",
       "name": "mydb",
       "ts_ms": 1715328000000,
@@ -378,6 +378,34 @@ FROM pg_replication_slots;
 | **Striim** | 企业级实时集成 |
 | **AWS DMS** | AWS 托管，侧重迁移场景 |
 | **PeerDB** | Postgres → 分析库，性能优化 |
+
+## 12. Debezium 3.2 → 3.4 版本演进（2026-05 更新）
+
+> 🔄 更新于 2026-05-28
+<!-- 修复于 2026-05-28: 补充 3.4 release 信息和 3.6 Alpha 进展，原文档基于 3.2 偏旧 -->
+
+| 版本 | 发布时间 | 关键变化 |
+|------|---------|---------|
+| Debezium 3.2 | 2026-02-27 | 新 unbuffered LogMiner adapter for Oracle、Kafka 4.x 支持、IBM i 连接器 BOOLEAN 支持 |
+| Debezium 3.3 | 2026-q1 | 维护版本，主要 bugfix |
+| **Debezium 3.4** | **2026-03-30** | **当前最新稳定版**，PostgreSQL pgoutput 性能优化、incremental snapshot 改进、Schema History 增强 |
+| Debezium 3.6.0.Alpha2 | 2026-05-15 | 下一代主版本预览，向 4.0 准备 |
+
+来源：[Debezium Releases Overview](https://debezium.io/releases/)、[Debezium 3.4 Release Notes](https://debezium.io/releases/3.4/release-notes)、[Debezium 3.6.0.Alpha2 Released](https://debezium.io/blog/2026/05/15/debezium-3-6-alpha2-released/)
+
+**升级建议**：
+
+```
+新项目：Debezium 3.4 + pgoutput 插件
+├─ pgoutput 是 Postgres 10+ 内置的 logical decoding 插件
+├─ 性能比 wal2json/decoderbufs 更好
+└─ Debezium 3.x 默认插件（推荐）
+
+旧项目升级路径：
+├─ 3.0/3.1 → 3.4（小版本平滑升级，配置不需要改）
+├─ 2.x → 3.4（注意 Kafka Connect 4.x 兼容性变化）
+└─ 1.x → 3.4（建议先升到 2.7 LTS 再到 3.4）
+```
 
 ## 📖 参考资料
 

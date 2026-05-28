@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: PostgreSQL 18.3, Patroni 4.0, pgBackRest 2.54, CloudNativePG 1.25, checked 2026-05-10 -->
+<!-- version-check: PostgreSQL 18.4, Patroni 4.1.x, pgBackRest 2.58.x, CloudNativePG 1.29.1 (CVE fix), checked 2026-05-28 -->
 
 ## 1. 运维的三个核心问题
 
@@ -85,6 +85,8 @@ Patroni 会：
 
 配置示例（Kubernetes 方案推荐用 **CloudNativePG**）：
 
+> ⚠️ **2026-05-14 重要安全更新**：CloudNativePG 1.29.1 和 1.28.3 修复了 **CVE-2026-44477**（CVSS 9.4 Critical），是 CloudNativePG 项目第一个被分配的 CVE。生产环境务必尽快升级到 1.29.1 或 1.28.3。来源：[CloudNativePG 1.29.1 Released](https://cloudnative-pg.io/releases/cloudnative-pg-1-29.1-released/)
+
 ```yaml
 # CloudNativePG Operator
 apiVersion: postgresql.cnpg.io/v1
@@ -93,7 +95,7 @@ metadata:
   name: pg-cluster
 spec:
   instances: 3        # 1 主 2 备
-  imageName: ghcr.io/cloudnative-pg/postgresql:18.3
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.4
 
   storage:
     size: 100Gi
@@ -143,6 +145,8 @@ CREATE SUBSCRIPTION my_sub
 ## 5. 备份：pgBackRest（推荐）
 
 2026 年生产级首选。
+
+> 🔄 更新于 2026-05-28：pgBackRest 2026-04-27 一度宣布归档，但 2026-05-18 项目宣布找到多家赞助商支持继续维护。最新版本 2.58.0（2026-01-19）。来源：[pgBackRest News](https://pgbackrest.org/news.html)、[Backrest's back, alright!](https://percona.community/blog/2026/05/19/backrests-back-alright/)
 
 ```bash
 # 配置 /etc/pgbackrest.conf
