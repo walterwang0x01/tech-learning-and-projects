@@ -460,3 +460,67 @@ Event Storming 产出物 → LLM Context 映射：
 5. **限界上下文 = LLM 工作边界**：给 Coding Agent 提供单个上下文的代码和文档，生成质量显著高于全库投喂。
 
 来源：[Understanding Data - DDD Bounded Contexts for LLMs](https://understandingdata.com/posts/ddd-bounded-contexts-for-llms/)
+
+## 8. 2026-05 更新：DDD 与 LLM 编码的协同范式
+
+> 🔄 更新于 2026-05-28
+
+<!-- version-check: DDD bounded context for LLM code generation, DDD Europe 2026, checked 2026-05-28 -->
+
+### 8.1 「为 LLM 代码生成而设计的限界上下文」
+
+DDD 社区在 2026 年形成的新共识：限界上下文不仅是服务边界、团队边界，也是 **LLM 代码生成的「输入边界」**。`understandingdata.com` 等社区把这套实践总结为：
+
+```
+┌──── 限界上下文 × LLM 编码协同 ────┐
+│                                    │
+│  没有清晰边界：                      │
+│  Prompt = 整个仓库 → token 爆炸 →   │
+│           上下文混乱 → 生成质量差     │
+│                                    │
+│  有清晰边界：                        │
+│  Prompt = 单个限界上下文 +           │
+│           Ubiquitous Language 词典  │
+│  → token 精准 → 生成贴合业务         │
+└────────────────────────────────────┘
+```
+
+实践要点：
+- 每个限界上下文配一个 `CONTEXT.md`，描述领域术语、聚合边界、对外契约
+- LLM 提交 PR 时强制声明改动所属上下文，跨上下文改动必须经过领域事件或 API
+- Context Map 直接喂给 Coding Agent，作为它的「世界模型」
+
+来源：[Understanding Data - DDD Bounded Contexts for LLM Code Generation](https://understandingdata.com/posts/ddd-bounded-contexts-for-llms/)（内容已重写以符合许可）
+
+### 8.2 DDD Europe 2026：Domains as LLM Consumers
+
+DDD Europe 2026 议题 *The Curse of Unbounded Contexts: Using Domains as LLM Consumers* 引申出一个反向思考：**不是「把代码喂给 LLM」，而是「把领域作为 LLM 的消费者」**。具体含义：
+
+| 视角 | 传统理解 | DDD-LLM 视角 |
+| ---- | -------- | ------------ |
+| LLM 角色 | 工具 / 助手 | 限界上下文里的「自动化角色」 |
+| 上下文 | 输入数据 | 一种能力消费者，需要 ACL（防腐层）翻译 |
+| 通用语言 | 团队共识 | 同时是 Prompt 词汇表，必须严格、稳定 |
+| 失败模式 | LLM 幻觉 | 领域语言模糊导致的边界错位 |
+
+**架构含义**：当 Agent 进入限界上下文，传统的 ACL（防腐层）模式被复用 —— Agent 暴露的「工具」就是上下文的对外契约，Agent 内部对模型/Prompt 的演化对上下文不可见。来源：[DDD Europe 2026 - The Curse of Unbounded Contexts](https://2026.dddeurope.com/program/the-curse-of-unbounded-contexts-using-domains-as-llm-consumers/)、[DDD Academy - Strategic Design with LLMs](https://ddd.academy/accelerate-your-strategic-design-with-llms)（内容已重写以符合许可）
+
+### 8.3 把 DDD 工件作为 Coding Agent 的 Steering 文件
+
+落地方式：
+
+```
+.kiro/steering/
+├─ domain-glossary.md          # Ubiquitous Language 词典
+├─ context-map.md              # Context Map + Relationship Patterns
+└─ aggregate-rules.md          # 各聚合的不变量与一致性边界
+
+.kiro/specs/{feature}/
+├─ requirements.md             # 用 EARS 表达，词汇全部来自 glossary
+└─ design.md                   # 引用具体限界上下文与聚合
+```
+
+效果：
+- Coding Agent 生成的代码自然使用领域术语，命名一致性高
+- 跨上下文改动会被显式拦截（防腐层 / API 契约）
+- 新人 onboarding 和 Agent prompt 用同一份 steering，知识统一
