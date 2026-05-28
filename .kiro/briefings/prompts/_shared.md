@@ -151,6 +151,19 @@ cat .kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.{topic}.jsonl
 
 ## Phase 5: 写入 + 登记 + 分发
 
+### ⚠️ 命令签名速查（错一字就报参数错误）
+
+| 命令 | 正确签名 | ❌ 常见错写 |
+|------|----------|-------------|
+| `validate` | `validate <md_path>` （位置参数，不接受 `--topic` / `--date`） | `validate --topic xxx --date YYYY-MM-DD` |
+| `register` | `register --topic {topic}` （`--date` 可选，默认今天） | `register --topic xxx --date YYYY-MM-DD` 也能跑通，但额外参数没必要 |
+| `index` | `index --topic {topic}` 或 `--topic all` | — |
+| `notify` | `notify --topic {topic}` | — |
+| `compare-skeleton` | `compare-skeleton --topic {topic} <md_path>` | — |
+| `render` | `render --json <draft_json_path>` | — |
+
+报错时立刻 `python3 scripts/briefing-tools.py {子命令} --help` 自查，不要瞎试。
+
 **两条等价路径，二选一：**
 
 ### 路径 A（推荐，结构化产出）
