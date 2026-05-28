@@ -4,7 +4,7 @@
 
 ## 1. 概述
 
-<!-- version-check: Spring AI 2.0.0-M6 (2026-05-08), 1.1.6 / 1.0.7, GA 2026-05-28, checked 2026-05-22 -->
+<!-- version-check: Spring AI 2.0.0-M8 (2026-05-27), 1.1.7 / 1.0.8, GA originally 2026-05-28, checked 2026-05-28 -->
 
 > 🔄 更新于 2026-04-18
 
@@ -26,7 +26,13 @@ Spring AI 是 Spring 生态的 AI 框架，为 Java/Kotlin 开发者提供统一
 |-------|------|---------|
 | 2.0.0-M5 | 2026-04-27 | 5 处 Bug 修复、4 处文档更新、2 项依赖升级、3 项构建更新 |
 | **2.0.0-M6** | **2026-05-08** | **Breaking Change：Chat Memory Advisor 必须显式传入 conversation ID**（不再使用隐式默认值）；同步发布 1.1.6 / 1.0.7 维护版本 |
-| 2.0.0 GA | **2026-05-28**（计划） | 配合 Spring Boot 4.1（6 月初发布）一起上线 |
+| 2.0.0-M7 | 2026-05-23 | MCP Streamable HTTP 成为默认服务端协议，SSE 传输被标记 deprecated；同步 1.1.7 / 1.0.8 |
+| 2.0.0-M8 | 2026-05-27 | GA 候选版本，团队明确表示后续将基于该版本继续构建增强能力 |
+| 2.0.0 GA | **2026-05-28**（计划，可能微调） | 配合 Spring Boot 4.1（6 月初发布）一起上线 |
+
+> 🔄 更新于 2026-05-28
+>
+> M7/M8 在 GA 节点前一周内连续发布两个里程碑，反映了 GA 计划可能从 5-28 微调至 5 月底或 6 月初。版本号锁定建议：生产环境暂时锁定 **1.1.7**（与 Spring Boot 3.5.x 兼容）等待 2.0 GA 公告，避免直接拉取 2.0.0-M8 进入生产。
 
 **关键 Breaking Change（M6）**：
 
@@ -49,8 +55,9 @@ ChatClient.builder(chatModel)
 - Spring AI 2.0 要求 **Spring Boot 4.0+**，3.x 项目需先完成 Boot 4.0 迁移（Jakarta EE 11、Java 17+）
 - 若仍在 Spring Boot 3.x，可继续使用 Spring AI **1.1.x**（2026 年内仍维护，与 Boot 3.5 兼容）
 - 1.0.x 进入 LTS 维护，仅修 critical 缺陷
+- **MCP 传输层变化（M7 起）**：Streamable HTTP 成为默认服务端协议，SSE 传输被标记 deprecated。新项目应直接使用 Streamable HTTP；老项目保留 SSE 至少到 1.1.x EOL
 
-来源：[Spring AI 2.0.0-M6 发布公告](https://spring.io/blog/2026/05/08/spring-ai-1-0-7-1-1-6-2-0-0-M6-available-now)、[HeroDevs - Spring AI 2.0 GA Schedule](https://www.herodevs.com/blog-posts/spring-ai-2-0-is-coming-may-28-here-is-why-that-makes-the-june-30-deadline-more-urgent-not-less)
+来源：[Spring AI 2.0.0-M6 发布公告](https://spring.io/blog/2026/05/08/spring-ai-1-0-7-1-1-6-2-0-0-M6-available-now)、[Spring AI 2.0.0-M7 发布公告](https://spring.io/blog/2026/05/23/spring-ai-1-0-8-1-1-7-2-0-0-M7-available-now)、[Spring AI 2.0.0-M8 发布公告](https://spring.io/blog/2026/05/27/spring-ai-2-0-0-M8-available-now)、[HeroDevs - Spring AI 2.0 GA Schedule](https://www.herodevs.com/blog-posts/spring-ai-2-0-is-coming-may-28-here-is-why-that-makes-the-june-30-deadline-more-urgent-not-less)
 
 ```
 ┌─────────────────────────────────────────────┐

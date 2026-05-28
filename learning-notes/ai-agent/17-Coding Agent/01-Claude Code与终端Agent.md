@@ -150,7 +150,7 @@ echo "检查代码中的安全漏洞" | claude --pipe
 
 > 🔄 更新于 2026-05-12
 
-<!-- version-check: Claude Code 2.1.145, Code with Claude SF (2026-05-06), checked 2026-05-21 -->
+<!-- version-check: Claude Code 2.1.145, Code with Claude SF (2026-05-06), Code with Claude London + Security Guidance Plugin (2026-05-26/27), checked 2026-05-28 -->
 
 Claude Code 在 2026 年 3-4 月进入了史上最密集的迭代周期，从 v2.1.69 到 v2.1.101，5 周内发布了 30+ 个版本。
 
@@ -249,6 +249,42 @@ Agent View（全新界面范式）：
 **Claude Sonnet 4 / Opus 4 废弃通知**：`claude-sonnet-4-20250514` 和 `claude-opus-4-20250514` 将于 2026-06-15 退役，需迁移至 Sonnet 4.6 和 Opus 4.7。
 
 来源：[Code with Claude SF](https://claude.com/code-with-claude/san-francisco)、[Claude Code Agent View & /goal](https://explainx.ai/blog/anthropic-claude-code-agent-view-goal-command)、[Claude Code Limits +50%](https://pasqualepillitteri.it/en/news/2494/claude-code-weekly-limits-50-percent-anti-codex-anthropic-2026)、[Anthropic Release Notes](https://docs.anthropic.com/en/release-notes/)（Content was rephrased for compliance with licensing restrictions）
+
+> 🔄 更新于 2026-05-28
+
+### 8.1 Security Guidance Plugin（2026-05-26 上线）
+
+Anthropic 在 Code with Claude London 大会上发布了 **security-guidance** 插件，所有 Claude Code 用户均可通过 `/plugins` 市场安装：
+
+```text
+功能架构：
+├─ 实时审查 AI 生成的代码、模型输出和提交
+├─ 基于 regex 匹配约 25 种风险代码模式
+├─ 覆盖硬编码密钥、不安全反序列化等常见漏洞
+└─ 在同一开发会话中识别并提示修复建议
+```
+
+**与传统 SAST 工具的差异**：
+- 传统 SAST：在 PR 或 CI 阶段扫描，发现问题已经提交
+- security-guidance：在编码会话内拦截，问题代码不会进入 commit 流程
+- 设计目标：「让漏洞在键盘前就被解决，而不是在 PR 评审时」
+
+> ⚠️ 待确认：security-guidance 当前以 regex 模式匹配为主，**不能替代完整的应用安全程序**。语义级漏洞（如业务逻辑缺陷、复杂的注入链）仍需 Snyk、Semgrep、CodeQL 等专业工具。
+
+### 8.2 Self-hosted Sandbox（Code with Claude London 公布）
+
+Managed Agents 体系新增 **Self-hosted Sandbox**，允许企业在自有基础设施上运行 Agent 工作负载，对受监管行业（金融、医疗）尤为重要：
+
+| 维度 | Anthropic 托管 Sandbox | Self-hosted Sandbox |
+| ---- | --------------------- | ------------------- |
+| 部署位置 | Anthropic 云 | 企业 VPC / 私有 K8s |
+| 数据流 | 经过 Anthropic | 不离开企业网络 |
+| 合规 | SOC 2 / HIPAA（取决于套餐） | 客户自行控制 |
+| 启动速度 | < 1 秒 | 需要本地容器编排 |
+
+同步发布的还有 **MCP Tunnels**：让本地 MCP Server 通过隧道连接到云端 Agent，使 Agent 可以访问开发者本机的开发环境（数据库、私有 API）而不需要公网暴露。
+
+来源：[Anthropic Security Plugin - SecurityWeek](https://www.securityweek.com/anthropic-releases-new-claude-sandbox-security-guidance-plugin/)、[Code with Claude London](https://blockchain.news/news/claude-code-london-2026-managed-agents-updates)、[Claude Code Plugins Reference](https://code.claude.com/docs/en/plugins-reference)（Content was rephrased for compliance with licensing restrictions）
 
 ## 9. 终端 Agent 对比
 
