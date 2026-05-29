@@ -107,15 +107,15 @@ def score_item(item: dict, tags: list[str], cfg: Config, now: datetime | None = 
 
 def classify_rule(item: dict, cfg: Config) -> list[str]:
     """规则分类：
-    1. 关键词命中优先
+    1. 关键词命中优先（只匹配 title + description，不匹配 source 字段——
+       source 是来源标识、与主题正交，参与匹配会让站点名当关键词时无条件兜底）
     2. 关键词完全未命中时用 source hint 兜底
     """
     haystack = (item.get("title", "") + " " + item.get("description", "")).lower()
-    src = item.get("source", "").lower()
     tags: set[str] = set()
     for topic, rules in cfg.classify_rules.items():
         for kw in rules.get("keywords", []):
-            if kw_hit(kw, haystack) or kw_hit(kw, src):
+            if kw_hit(kw, haystack):
                 tags.add(topic)
                 break
     if not tags:

@@ -117,7 +117,9 @@ class TestEndToEnd(unittest.TestCase):
         self.assertEqual(deepseek["main_topic"], "ai-agent")
 
     def test_candidates_no_cross_pollution(self):
-        """关键回归：三个主题各自的候选集应不互相污染"""
+        """关键回归：三个主题各自的候选集应不互相污染。
+        Dirty Frag 没有中国语境信号（标题/描述里只有 CVE 字样），
+        虽然来自 OSChina，但不该被算成 china-tech——这是我们 2026-05 修掉的污染 bug。"""
         cfg = _make_cfg()
         classified = run_classify(FIXTURE_POOL, cfg)
 
@@ -130,7 +132,9 @@ class TestEndToEnd(unittest.TestCase):
         gl_titles = {it["title"] for it in gl["items"]}
 
         self.assertIn("OpenAI Codex for Chrome 发布", ai_titles)
-        self.assertIn("Dirty Frag 漏洞曝光", cn_titles)  # oschina source → china
+        # CVE 内容归 global-tech，不归 china-tech（即使 source 是开源中国）
+        self.assertIn("Dirty Frag 漏洞曝光", gl_titles)
+        self.assertNotIn("Dirty Frag 漏洞曝光", cn_titles)
         self.assertIn("Rust 1.86 release", gl_titles)
         # DeepSeek 两个主题都能看到
         self.assertIn("DeepSeek V4.1 即将发布", ai_titles)

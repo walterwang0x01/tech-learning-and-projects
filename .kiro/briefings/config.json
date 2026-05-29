@@ -33,7 +33,7 @@
     {"name": "36氪", "url": "https://36kr.com/feed", "topic_hints": ["china-tech"]},
     {"name": "InfoQ CN", "url": "https://www.infoq.cn/feed", "topic_hints": ["china-tech"]},
     {"name": "量子位", "url": "https://www.qbitai.com/feed", "topic_hints": ["china-tech"]},
-    {"name": "开源中国", "url": "https://www.oschina.net/news/rss", "topic_hints": ["china-tech"]},
+    {"name": "开源中国", "url": "https://www.oschina.net/news/rss", "topic_hints": []},
     {"name": "少数派", "url": "https://sspai.com/feed", "topic_hints": ["china-tech"]},
     {"name": "IT之家", "url": "https://www.ithome.com/rss/", "topic_hints": ["china-tech"]},
     {"name": "HN 中国科技", "url": "https://hnrss.org/newest?q=DeepSeek+OR+Qwen+OR+Baidu+AI+OR+China+AI&points=10", "topic_hints": ["china-tech"]},
@@ -64,13 +64,17 @@
       ]
     },
     "china-tech": {
+      "_comment": "china-tech 关键词只放真正的中国语境信号。不要把站点名（开源中国/IT之家/InfoQ CN/量子位/36氪/少数派）当关键词——RSS 源 source 字段已带这些字，会让该源所有内容（含国际新闻）误判为 china-tech。纯模型名（如 kimi/qwen/deepseek）放在 ai-agent，这里只放厂商主体。",
       "keywords": [
         "阿里", "腾讯", "字节", "百度", "美团", "京东", "华为", "小米",
         "蚂蚁", "网易", "快手", "拼多多", "滴滴", "理想", "小鹏", "蔚来",
-        "deepseek", "qwen", "baidu", "alibaba", "tencent", "bytedance",
-        "36氪", "量子位", "it之家", "ithome", "开源中国", "少数派", "infoq cn",
-        "中国", "国内", "国产", "大陆",
-        "工信部", "网信办", "发改委", "监管", "合规"
+        "vivo", "oppo", "荣耀", "中兴", "联想",
+        "baidu", "alibaba", "tencent", "bytedance",
+        "moonshot", "月之暗面", "智谱", "面壁", "minimax", "阶跃星辰",
+        "米哈游", "鸿蒙", "余承东", "雷军",
+        "中国", "国内", "国产", "大陆", "出海", "信创",
+        "国产算力", "国产 gpu", "国产芯片", "国产模型",
+        "工信部", "网信办", "发改委", "备案"
       ]
     },
     "global-tech": {

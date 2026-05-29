@@ -119,6 +119,25 @@ class TestClassifyRule(unittest.TestCase):
         }
         self.assertEqual(classify_rule(item, self.cfg), [])
 
+    def test_keyword_does_not_match_source_field(self):
+        """回归（2026-05 修复）：source 字段名不参与关键词匹配。
+        否则站点名「开源中国」会让该源所有内容（含国际新闻）无条件命中
+        china-tech 的 '中国' 关键词，造成大面积污染。"""
+        cfg = _make_cfg(classify_rules={
+            "ai-agent": {"keywords": ["llm"]},
+            "china-tech": {"keywords": ["中国", "国产"]},
+            "global-tech": {"keywords": ["rust"]},
+        })
+        # 内容里没有任何中国语境信号，但 source 是「开源中国」
+        item = {
+            "title": "Krita 6.0.2 发布",
+            "description": "Open source painting tool",
+            "source": "开源中国",
+            "source_topic_hints": [],  # 显式不给 hint，确认完全不会进 china-tech
+        }
+        tags = classify_rule(item, cfg)
+        self.assertNotIn("china-tech", tags)
+
 
 class TestMainTopic(unittest.TestCase):
     def test_priority_order(self):
