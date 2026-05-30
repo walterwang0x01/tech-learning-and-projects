@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Gin 1.12.0 (2026-03), Echo 5.x, Fiber 2.53, Chi 5.x, checked 2026-05-15 -->
+<!-- version-check: Gin 1.12.0 (2026-03), Echo 5.x, Fiber 3.x (2026-04), Chi 5.x, checked 2026-05-30 -->
 
 ## 1. Go Web 框架全景
 
@@ -12,7 +12,7 @@
 ├─ Chi                      最接近标准库的 idiomatic 选择
 ├─ Gin                      最流行，中间件生态丰富
 ├─ Echo                     API 更优雅，内置功能多
-├─ Fiber                    基于 fasthttp，性能最高（但生态稍小）
+├─ Fiber                    基于 fasthttp，性能最高（但生态稍小）<!-- 修复于 2026-05-30: Fiber v3 已发布（2026-04），要求 Go 1.25+，新增 extractors 包、请求绑定、生命周期 hooks -->
 └─ Huma / Fuego             声明式 OpenAPI 优先（2026 新趋势）
 ```
 

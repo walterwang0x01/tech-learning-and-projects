@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Apache Flink 2.0, Flink CDC 3.4, RisingWave 2.2, Materialize, checked 2026-05-10 -->
+<!-- version-check: Apache Flink 2.1, Flink CDC 3.5, RisingWave 2.8, Materialize, checked 2026-05-30 -->
 
 ## 1. 流处理 vs 批处理
 
@@ -178,15 +178,26 @@ alerts.sinkTo(
 env.execute("fraud-detection");
 ```
 
-## 5. Flink 2.0 亮点（2025）
+## 5. Flink 2.0 / 2.1 亮点（2025-2026）
+
+<!-- 修复于 2026-05-30: Flink 2.0 已演进到 2.1（当前最新稳定版），Flink CDC 已发布 3.5（stable）；补充版本演进 -->
 
 ```
+Flink 2.0（2025 GA）：
 ├─ Python API 成熟度大幅提升（PyFlink）
 ├─ Async 状态 API
 ├─ Disaggregated State（状态和计算分离，云原生友好）
 ├─ SQL 增强（Lateral Join、Window TVF 改进）
-├─ Flink CDC 3.4：支持 Kafka Connect 模式
 └─ 移除遗留 API（DataSet API 废弃）
+
+Flink 2.1（2026，当前最新稳定版）：
+├─ 持续完善 Disaggregated State 与云原生存算分离
+├─ SQL / Table API 进一步增强
+└─ 大量 bug 修复与稳定性改进
+
+Flink CDC 3.5（stable，2026）：
+├─ 支持 Kafka Connect 模式（3.4 引入，3.5 延续增强）
+└─ Schema Evolution、整库同步持续完善
 ```
 
 ## 6. RisingWave：流数据库新贵
@@ -339,7 +350,7 @@ Exactly-once 语义需要：
 ## 📖 参考资料
 
 - [Apache Flink 官方](https://flink.apache.org/)
-- [Flink CDC](https://nightlies.apache.org/flink/flink-cdc-docs-release-3.4/)
+- [Flink CDC](https://nightlies.apache.org/flink/flink-cdc-docs-release-3.5/)
 - [RisingWave 文档](https://docs.risingwave.com/)
 - [Materialize 文档](https://materialize.com/docs/)
 - [Streaming Systems（书）](https://learning.oreilly.com/library/view/streaming-systems/9781491983867/)

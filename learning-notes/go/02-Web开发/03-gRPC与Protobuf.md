@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: google.golang.org/grpc 1.67, protoc-gen-go 1.35, Buf 1.46, checked 2026-05-10 -->
+<!-- version-check: google.golang.org/grpc 1.76.0, protoc-gen-go (protobuf-go) 1.36.1, Buf 1.52.1, checked 2026-05-30 -->
 
 ## 1. 为什么微服务用 gRPC
 
