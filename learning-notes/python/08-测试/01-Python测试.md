@@ -507,15 +507,57 @@ Python测试工具：
 
 > 🔄 更新于 2026-04-18
 
-<!-- version-check: pytest 8.3.5+, checked 2026-04-18 -->
+<!-- version-check: pytest 9.0.3 (2026-04-07), pytest-asyncio 1.4.0, checked 2026-05-31 -->
 
 ## 11. pytest 2026 年最新实践
 
 ### 11.1 版本状态
 
-pytest 8.3.5 是当前稳定版（2025-03-02），支持 Python 3.14。pytest 是 2026 年 Python 测试的事实标准。
+> 🔄 更新于 2026-05-31
 
-### 11.2 与 uv 集成
+pytest **9.0.3**（2026-04-07）是当前稳定版，要求 Python ≥ 3.10。pytest 是 2026 年 Python 测试的事实标准。
+
+pytest 9.0 是一次大版本升级（9.0.0 于 2025-11 发布），带来两个值得关注的新特性，同时也包含若干破坏性变化。来源：[pytest 9.0.0 Release Notes](https://github.com/pytest-dev/pytest/releases/tag/9.0.0)、[GitHub Releases](https://github.com/pytest-dev/pytest/releases)
+
+**新特性：**
+
+- **原生 subtests 支持**：`pytest-subtests` 插件能力合入核心，适合参数化值在收集阶段还无法全部确定的场景。每个子测试的断言失败会被独立捕获和报告：
+
+  ```python
+  from pathlib import Path
+
+  def test_py_files_contain_docstring(subtests: pytest.Subtests) -> None:
+      for path in Path.cwd().glob("*.py"):
+          with subtests.test(path=str(path)):
+              assert contains_docstring(path)
+  ```
+
+  > 该特性目前标记为实验性（功能稳定，但失败报告格式可能调整）。
+
+- **原生 TOML 配置**：除了原有的 `[tool.pytest.ini_options]`（INI 兼容模式，所有值按字符串处理），新增原生 TOML 数据模型，配置位于 `[tool.pytest]` 表下，支持真正的 TOML 类型（数组、布尔等）：
+
+  ```toml
+  # pyproject.toml
+  [tool.pytest]
+  minversion = "9.0"
+  addopts = ["-ra", "-q"]
+  testpaths = ["tests", "integration"]
+  ```
+
+  > `[tool.pytest]` 与 `[tool.pytest.ini_options]` 不能同时使用。也可使用独立的 `pytest.toml` / `.pytest.toml` 文件。
+
+### 11.2 pytest 9 破坏性变化（升级须知）
+
+> 🔄 更新于 2026-05-31
+
+从 8.x 升级到 9.0 时需注意以下破坏性变化。来源：[pytest 9.0.0 Removals](https://github.com/pytest-dev/pytest/releases/tag/9.0.0)
+
+- **`PytestRemovedIn9Warning` 弃用警告默认升级为错误**：此前标记为 `PytestRemovedIn9Warning` 的弃用功能现在默认直接报错，相关功能将在 **pytest 9.1 中彻底移除**。9.0.x 系列可临时把错误降回警告作为过渡，但应尽快按 [deprecations 文档](https://docs.pytest.org/en/stable/deprecations.html)迁移代码。
+- **丢弃 Python 3.9 支持**：3.9 已 EOL，pytest 9 不再支持，最低要求 Python 3.10。
+- **重叠路径参数行为变化**：`pytest a/ a/b` 现在等价于 `pytest a`（重叠参数只保留前缀）；`pytest x.py x.py` 不再重复运行同一文件的测试。若依赖旧行为（含重复运行），使用 `--keep-duplicates`。
+- **CI 检测更严格**：此前只要定义了 `$CI` 或 `$BUILD_NUMBER` 环境变量即判定为 CI 环境；现在要求变量值为**非空**才激活 CI 模式。
+
+### 11.3 与 uv 集成
 
 ```bash
 # 使用 uv 管理测试依赖
@@ -528,16 +570,16 @@ uv run pytest
 uv run pytest --cov=src --cov-report=html
 ```
 
-### 11.3 pyproject.toml 配置（推荐）
+### 11.4 pyproject.toml 配置（推荐）
 
-2026 年推荐在 `pyproject.toml` 中统一配置 pytest，替代 `pytest.ini` 或 `setup.cfg`：
+2026 年推荐在 `pyproject.toml` 中统一配置 pytest，替代 `pytest.ini` 或 `setup.cfg`。下面是兼容性最好的 INI 兼容模式写法（如需原生 TOML 类型，可改用 11.1 中的 `[tool.pytest]` 表）：
 
 ```toml
 [tool.pytest.ini_options]
 # 测试目录
 testpaths = ["tests"]
 # 最小 Python 版本
-minversion = "8.0"
+minversion = "9.0"
 # 默认参数
 addopts = [
     "-ra",           # 显示所有非通过测试的摘要
@@ -553,7 +595,9 @@ markers = [
 asyncio_mode = "auto"
 ```
 
-### 11.4 异步测试（pytest-asyncio）
+### 11.5 异步测试（pytest-asyncio）
+
+> pytest-asyncio 当前稳定版为 1.4.0。
 
 ```python
 import pytest
@@ -577,7 +621,7 @@ async def async_db():
     await db.close()
 ```
 
-### 11.5 2026 年推荐的 CI 配置
+### 11.6 2026 年推荐的 CI 配置
 
 ```yaml
 name: Tests
