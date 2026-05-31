@@ -187,7 +187,7 @@ Kiro 已从 Preview 阶段进入正式发布。2026 年定价调整为统一 cre
 | Pro 价格 | $20/月 | $20/月 | $15/月 | $10/月 |
 | 特色优势 | Agent 编排中心 | 规范化开发流程 | 自主执行+IDE | 生态集成最广 |
 
-## 7. IDE Agent vs 终端 Agent
+## 8. IDE Agent vs 终端 Agent
 
 ```
 IDE Agent 优势：
@@ -205,7 +205,7 @@ IDE Agent 优势：
 推荐：日常开发用 IDE Agent，自动化/CI 用终端 Agent
 ```
 
-## 8. 选型建议
+## 9. 选型建议
 
 ```
 追求补全体验和灵活性     → Cursor

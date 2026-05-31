@@ -59,10 +59,16 @@ OpenCode 架构：
 └──────────────────────────────────────┘
 ```
 
-- **语言**：Go / TypeScript
-- **特点**：支持 12+ 编程语言，Conductor 插件强制结构化开发流程
-- **模型**：Qwen3-Coder、DeepSeek-Coder 等 GGUF 模型
-- **来源**：[GitHub](https://github.com/opencode-ai/opencode) / [分析](https://www.thenextgentechinsider.com/pulse/opencode-launches-fully-local-ai-coding-agents-with-optimized-gguf-models)
+- **语言**：Go（已归档版本）
+- **特点**：终端原生 AI coding agent，支持多语言，可切换本地/云端模型后端
+- **模型**：Qwen3-Coder、DeepSeek-Coder 等
+- **来源**：[官网](https://opencode.ai/) / [GitHub（活跃版 anomalyco/opencode）](https://github.com/anomalyco/opencode)
+
+> 🔄 更新于 2026-06-02：经核对，名为 "OpenCode" 的项目有两个，**本节已更正指向活跃的主流版本**：
+> - `opencode-ai/opencode`（Go，约 1.3 万 stars）—— **已于 2025-09 归档停止维护**，是早期终端 agent。原文引用的「主打本地 GGUF」定位与该项目实际描述（"terminal AI coding agent"）并不吻合，疑似引用的二手分析文章解读有误。
+> - `anomalyco/opencode`（原 `sst/opencode`，TypeScript，约 16.7 万 stars，官网 opencode.ai）—— **活跃维护中**（2026-05 仍在更新），是业界主流的开源 coding agent，支持本地与云端模型。
+>
+> ⚠️ 待确认：若作者本意确实是介绍那个「纯本地 GGUF」的小众项目，请改回 `opencode-ai/opencode` 并注明其已归档；否则保留指向活跃主流版本。
 
 ### Junco
 
@@ -79,7 +85,7 @@ OpenCode 架构：
 
 OpenAI 的终端原生 Coding Agent，虽然主要依赖云端 API，但支持 MCP 服务器和本地工具调用。
 
-- **Stars**：75.6k
+- **Stars**：87k+（2026-06 核对，`openai/codex`）<!-- 修复于 2026-06-02: 75.6k → 87k+，GitHub API 实测 -->
 - **特点**：支持 MCP 服务器、并行工具调用、ChatGPT 计划集成
 - **来源**：[GitHub](https://github.com/openai/codex)
 

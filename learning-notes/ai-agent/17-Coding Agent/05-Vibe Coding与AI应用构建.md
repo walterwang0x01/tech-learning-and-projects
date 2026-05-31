@@ -412,7 +412,7 @@ Harness Engineering（约束 + 反馈循环）
   └─ "人人都是开发者" 时代加速到来
 ```
 
-## 10. 相关文档
+## 11. 相关文档
 
 - IDE Agent → `Cursor-Kiro-Windsurf IDE Agent.md`（本目录）
 - 终端 Agent → `Claude Code与终端Agent.md`（本目录）

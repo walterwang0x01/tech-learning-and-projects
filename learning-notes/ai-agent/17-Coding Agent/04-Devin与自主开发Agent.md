@@ -102,10 +102,11 @@ print(result.summary)
 
 ```bash
 # 安装 SWE-Agent
-pip install swe-agent
+# 修复于 2026-06-02: pip 包名是 sweagent（无连字符），swe-agent 在 PyPI 返回 404
+pip install sweagent
 
 # 修复 GitHub Issue
-swe-agent run \
+sweagent run \
   --model claude-sonnet-4-6-20260217 \
   --issue "https://github.com/user/repo/issues/42" \
   --repo "https://github.com/user/repo"
@@ -123,7 +124,7 @@ swe-agent run \
 
 > 🔄 更新于 2026-04-21
 
-<!-- version-check: Devin 2.2, SWE-1.6, OpenHands 1.14.x, checked 2026-05-21 -->
+<!-- version-check: Devin 2.2, SWE-1.6, OpenHands 1.7.0（框架）/ openhands CLI 1.16.0, checked 2026-06-02 -->
 
 ### Devin 2.2（2026-02-24）
 
@@ -153,16 +154,18 @@ Cognition 发布 SWE-1.6，专为智能和模型 UX 优化。
 <!-- 修复于 2026-05-21: 收购时间从 2025-12 修正为 2025-07 -->
 2025 年 7 月，在 Google 以 $24 亿"反向收购"挖走 Windsurf 创始人后，Cognition 收购了 Windsurf 剩余资产。Cognition 随后以 $10.2B 估值融资 $400M+（Founders Fund 领投）。截至 2026-05 两个产品仍独立运营。
 
-### OpenHands v1.14.x（2026-05）
+### OpenHands v1.7.0（框架，2026-05）
 
 <!-- 修复于 2026-05-21: v1.6.0 → v1.14.x（PyPI 确认），Stars 70K+ → 65K（GitHub 确认） -->
-开源自主编码 Agent 持续增长：65K GitHub Stars、490+ 贡献者、MIT 许可。
+<!-- 修复于 2026-06-02: Stars 65K → 75K+（GitHub API 实测 OpenHands/OpenHands 75.4K） -->
+<!-- version-check: 已核实并统一口径（2026-06-02）— OpenHands 有双版本号体系：核心框架 = GitHub release tag 1.7.0 = PyPI 包 openhands-ai 1.7.0（summary "Code Less, Make More"，homepage OpenHands/OpenHands）；终端 CLI = PyPI 包 openhands 1.16.0（"Terminal User Interface"）。旧文写的 v1.14.x 来源不明，已更正为框架版 1.7.0。 -->
+开源自主编码 Agent 持续增长：75K+ GitHub Stars、490+ 贡献者、MIT 许可。
 
 ```
 OpenHands 生态数据：
-├─ 65K GitHub Stars
+├─ 75K+ GitHub Stars
 ├─ 490+ 贡献者，3500+ commits
-├─ 100+ 版本发布（当前 v1.14.x）
+├─ 100+ 版本发布（核心框架 v1.7.0；终端 CLI 包 openhands 独立编号至 1.16.0）
 ├─ 支持任意 LLM 后端（Claude/GPT/Gemini/本地模型）
 ├─ OpenHands LM 32B：基于 Qwen Coder 2.5 的开源编码模型
 └─ OpenHands Index：跨模型编码能力基准评测
@@ -170,7 +173,9 @@ OpenHands 生态数据：
 
 ### Codex CLI v0.116.0（2026-03-19）
 
-OpenAI 终端编码 Agent：67K Stars、9K Forks、400 贡献者。新增 ChatGPT 设备码登录、用户 Prompt Hook、插件简化配置。
+OpenAI 终端编码 Agent：87K+ Stars、12K+ Forks、400 贡献者。新增 ChatGPT 设备码登录、用户 Prompt Hook、插件简化配置。<!-- 修复于 2026-06-02: 67K → 87K+ Stars、9K → 12K+ Forks，GitHub API 实测 openai/codex -->
+
+<!-- version-check: 已核实 — openai/codex 实际 tag 为 rust-v0.116.0，发布日期 2026-03-19，与正文一致（GitHub Releases API 2026-06-02 实测）。注意官方 tag 前缀是 rust-v，正文简写为 v0.116.0。截至 2026-05 已迭代到 rust-v0.135.0。 -->
 
 ### 自主 Agent 市场格局（2026-04）
 
@@ -208,7 +213,7 @@ SWE-bench：标准化软件工程 Agent 评测基准
 注：成绩持续更新，仅供参考趋势
 ```
 
-## 6. 自主 vs 辅助：何时使用
+## 7. 自主 vs 辅助：何时使用
 
 | 维度 | 自主 Agent（Devin 类） | 辅助 Agent（Cursor 类） |
 |------|----------------------|----------------------|
@@ -220,7 +225,7 @@ SWE-bench：标准化软件工程 Agent 评测基准
 | 成本 | 高（多轮推理） | 中（交互式） |
 | 适用团队 | 有 Code Review 流程 | 所有团队 |
 
-## 7. 局限性
+## 8. 局限性
 
 ```
 当前自主开发 Agent 的局限：
@@ -233,7 +238,7 @@ SWE-bench：标准化软件工程 Agent 评测基准
 └─ 幻觉风险：可能生成看似正确但有隐患的代码
 ```
 
-## 8. 未来展望
+## 9. 未来展望
 
 > 🔄 更新于 2026-04-21
 
