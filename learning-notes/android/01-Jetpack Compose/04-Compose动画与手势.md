@@ -193,9 +193,9 @@ fun SwipeItem(onDismiss: () -> Unit, content: @Composable () -> Unit) {
 
 ## 7. Compose 动画 2026 更新
 
-<!-- version-check: Compose Animation 1.10.x, checked 2026-04-21 -->
+<!-- version-check: Compose Animation 1.11.x (latest 1.11.2), checked 2026-05-31 -->
 
-> 🔄 更新于 2026-04-21
+> 🔄 更新于 2026-04-21（2026-05-31 校准版本号与 01-基础文档对齐）
 
 ### SharedTransitionLayout（共享元素过渡）
 

@@ -180,9 +180,11 @@ fun MainScreen(navController: NavController) {
 
 ## 7. Compose 2026 版本演进
 
-<!-- version-check: Compose BOM 2026.04.01, Compose 1.11.0, Navigation 3 1.1.1, checked 2026-05-18 -->
+<!-- version-check: 见第 8 节最新清单（Compose BOM 2026.05.01, Compose 1.11.2, Navigation 3 1.1.2），本节为版本演进背景，checked 2026-05-31 -->
 
-> 🔄 更新于 2026-05-04（2026-05-18 增补与 CMP 1.11 对齐说明）
+> 🔄 更新于 2026-05-04（2026-05-18 增补与 CMP 1.11 对齐说明；2026-05-31 注：最新版本以第 8 节清单为准）
+>
+> ℹ️ 下表为 2026-04 时点的版本快照，用于说明版本演进脉络。**当前最新版本请以第 8 节「Compose BOM 2026.05.01 简明清单」为准。**
 
 ### 当前版本
 
@@ -262,7 +264,7 @@ fun Greeting() {
 
 > 🔄 更新于 2026-05-20
 
-<!-- version-check: Compose BOM 2026.05.00, Compose Material3 Adaptive 1.2.0 (2026-05-06 stable), Material 3 Expressive, checked 2026-05-20 -->
+<!-- version-check: Compose BOM 2026.05.01 (latest), Compose Material3 Adaptive 1.2.0 (2026-05-06 stable), Material 3 Expressive, checked 2026-05-31 -->
 
 ### Compose Material3 Adaptive 1.2.0 稳定（2026-05-06）
 
@@ -271,7 +273,7 @@ fun Greeting() {
 ```kotlin
 // build.gradle.kts — Compose BOM 2026.05 + Adaptive 1.2.0
 dependencies {
-    implementation(platform("androidx.compose:compose-bom:2026.05.00"))
+    implementation(platform("androidx.compose:compose-bom:2026.05.01"))
     implementation("androidx.compose.material3:material3")
 
     // Adaptive layout（折叠/平板/大屏）
@@ -334,7 +336,7 @@ fun ExpressiveButton(onClick: () -> Unit, content: @Composable () -> Unit) {
 }
 ```
 
-### Compose BOM 2026.05.00 简明清单
+### Compose BOM 2026.05.01 简明清单
 
 | 组件 | 版本 |
 |------|------|
@@ -350,6 +352,6 @@ fun ExpressiveButton(onClick: () -> Unit, content: @Composable () -> Unit) {
 
 | 当前 BOM | 建议路径 |
 |----------|----------|
-| 2026.03.00 / 2026.04.00 | 直接升 2026.05.00（无 Breaking） |
-| 2026.05.00 | 持续保持，等待 Material 3 Expressive 主题 token GA（预计 2026.07） |
+| 2026.03.00 / 2026.04.00 | 直接升 2026.05.01（无 Breaking） |
+| 2026.05.00 / 2026.05.01 | 持续保持，等待 Material 3 Expressive 主题 token GA（预计 2026.07） |
 | 不使用 Adaptive | 在折叠屏 / 平板 / Chromebook 项目中**强烈建议**引入 `material3-adaptive` 1.2.0 |

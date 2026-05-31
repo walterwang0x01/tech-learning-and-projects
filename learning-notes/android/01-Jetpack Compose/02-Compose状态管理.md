@@ -182,9 +182,9 @@ fun ScrollTracker(listState: LazyListState) {
 
 ## 6. 2026 状态管理更新
 
-<!-- version-check: Compose 1.10.x, Lifecycle 2.9.x, checked 2026-04-21 -->
+<!-- version-check: Compose 1.11.x (latest 1.11.2), Lifecycle 2.10.x, checked 2026-05-31 -->
 
-> 🔄 更新于 2026-04-21
+> 🔄 更新于 2026-04-21（2026-05-31 校准版本号与 01-基础文档对齐）
 
 ### collectAsStateWithLifecycle（推荐替代 collectAsState）
 

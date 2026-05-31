@@ -231,11 +231,14 @@ val user = createUser().also {
 
 ## 8. Kotlin 2.x 新特性
 
-<!-- version-check: Kotlin 2.3.21 stable, 2.4.0-Beta2 EAP, checked 2026-05-18 -->
+<!-- version-check: Kotlin 2.3.21 stable, 2.4.0-RC2 (2026-05-27) prerelease, checked 2026-05-31 -->
 
-> 🔄 更新于 2026-04-21（2026-05-18 增补 2.3.21 + 2.4 EAP）
+> 🔄 更新于 2026-04-21（2026-05-31 校准 2.4 状态：已到 RC2）
 
-Kotlin 2.0 于 2024 年发布，引入了全新的 **K2 编译器**，当前最新稳定版为 **Kotlin 2.3.21**（2026-04-23），下一代 **2.4.0-Beta2** 已进入 EAP 阶段。
+Kotlin 2.0 于 2024 年发布，引入了全新的 **K2 编译器**，当前最新稳定版为 **Kotlin 2.3.21**（2026-04-23），下一代 **2.4.0** 已进入 RC 阶段（2026-05-27 发布 2.4.0-RC2），GA 临近。
+
+<!-- 修复于 2026-05-31: 原文称"2.4.0-Beta2 已进入 EAP"，经 GitHub Releases 实测 Kotlin 已发布 2.4.0-RC（2026-05-13）、2.4.0-RC2（2026-05-27），早已超出 Beta 阶段，校准为 RC -->
+
 
 ### K2 编译器
 
@@ -293,7 +296,7 @@ val (y, x) = point  // 按名称匹配，而非位置
 | 新项目 | Kotlin 2.3.21 | 最新稳定版，K2 编译器默认启用 |
 | 现有项目升级 | Kotlin 2.1.x+ | 先迁移到 2.1，再逐步升级 |
 | KMP 跨平台 | Kotlin 2.3.21 | KMP 在 2.x 中显著改进 |
-| 尝鲜 / 提前适配 | Kotlin 2.4.0-Beta2 | 仅用于实验项目，正式版预计随 KotlinConf 2026 发布 |
+| 尝鲜 / 提前适配 | Kotlin 2.4.0-RC2 | 仅用于实验项目，GA 临近（KotlinConf 2026 后释出 RC，正式版预计 2026-06） |
 
 > 来源：[Kotlin 2.3.0 Released](https://blog.jetbrains.com/kotlin/2025/12/kotlin-2-3-0-released/)、[What's new in Kotlin 2.3.20](https://kotlinlang.org/docs/whatsnew2320.html)
 
@@ -301,13 +304,13 @@ val (y, x) = point  // 按名称匹配，而非位置
 
 > 🔄 更新于 2026-05-18
 
-<!-- version-check: Kotlin 2.3.21 stable, 2.4.0-Beta2 EAP, KotlinConf 2026 May 20-22 Munich, checked 2026-05-18 -->
+<!-- version-check: Kotlin 2.3.21 stable, 2.4.0-RC2 prerelease, KotlinConf 2026 May 20-22 Munich, checked 2026-05-31 -->
 
 Kotlin 2.3.21 是 2.3.x 分支的补丁版本（2026-04-23 发布），主要内容是工具链 / IDE 支持的稳定性修复，不引入语法变化。Android 项目可直接从 2.3.20 升级，无 Breaking Change。来源：[Kotlin Documentation FAQ](https://kotlinlang.org/docs/faq.html)
 
-### Kotlin 2.4.0-Beta2（2026-04 EAP）
+### Kotlin 2.4.0-RC2（2026-05 RC 阶段）
 
-Kotlin 2.4 进入 Beta2 阶段，预计在 KotlinConf 2026（2026-05-20 至 22，慕尼黑）期间释出更多发布信号。来源：[Kodee's Kotlin Roundup — May 2026](https://blog.jetbrains.com/kotlin/2026/05/kodees-kotlin-roundup-golden-kodee-finalists-kotlin-2-4-0-beta2-and-new-learning-resources/)、[What's new in Kotlin 2.4.0-Beta2](https://kotlinlang.org/docs/whatsnew-eap.html)
+Kotlin 2.4 已进入 RC2 阶段（2026-05-27 发布），在 KotlinConf 2026（2026-05-20 至 22，慕尼黑）期间释出了 RC，GA 临近。来源：[Kodee's Kotlin Roundup — May 2026](https://blog.jetbrains.com/kotlin/2026/05/kodees-kotlin-roundup-golden-kodee-finalists-kotlin-2-4-0-beta2-and-new-learning-resources/)、[Kotlin GitHub Releases](https://github.com/JetBrains/kotlin/releases)
 
 ```kotlin
 // 2.4 EAP：上下文参数（context parameters）实验性增强
@@ -324,16 +327,16 @@ fun process(value: String) {
 **升级建议**：
 
 - 生产项目：**继续使用 2.3.21**，等 2.4 GA 稳定一段时间后再上
-- 库作者：可以用 2.4.0-Beta2 提前测试 binary compatibility，但发布版仍以 2.3.x 编译
+- 库作者：可以用 2.4.0-RC2 提前测试 binary compatibility，但发布版仍以 2.3.x 编译
 - KMP 项目：升级 2.4 前先确认 Compose Multiplatform 的兼容版本（CMP 1.11.0 当前对齐 Kotlin 2.3.x）
 
-### Kotlin 2.4.0-Beta2 详细稳定特性
+### Kotlin 2.4.0-RC2 详细稳定特性
 
-> 🔄 更新于 2026-05-20
+> 🔄 更新于 2026-05-20（2026-05-31 校准：Beta2 → RC2）
 
-<!-- version-check: Kotlin 2.4.0-Beta2 stable features list, KotlinConf 2026 keynote May 20-22, checked 2026-05-20 -->
+<!-- version-check: Kotlin 2.4.0-RC2 stable features list, KotlinConf 2026 keynote May 20-22, checked 2026-05-31 -->
 
-Kotlin 2.4.0-Beta2 已经把多个之前的 Experimental 特性升级为 **Stable**，使得 2.4 GA 后这些特性可以直接在生产项目中使用而无需 opt-in 注解。来源：[What's new in Kotlin 2.4.0-Beta2](https://kotlinlang.org/docs/whatsnew-eap.html)
+Kotlin 2.4.0-RC2 已经把多个之前的 Experimental 特性升级为 **Stable**，使得 2.4 GA 后这些特性可以直接在生产项目中使用而无需 opt-in 注解。来源：[What's new in Kotlin 2.4.0-RC](https://kotlinlang.org/docs/whatsnew-eap.html)
 
 **1. Stable context parameters**：从 2.2 引入的 Beta 特性正式稳定
 
@@ -378,7 +381,7 @@ val parsed = Uuid.parse("...")   // 安全解析
 
 **6. Kotlin/Wasm 增量编译默认启用**：Wasm 项目重编译时间显著缩短，Component Model 支持是 WebAssembly 跨语言互操作的关键基础
 
-**7. Gradle 9.4.1 兼容**：必须使用 Gradle 9.4.1+ 才能用 2.4.0-Beta2 的部分 KMP 能力
+**7. Gradle 9.4.1 兼容**：必须使用 Gradle 9.4.1+ 才能用 2.4.0-RC2 的部分 KMP 能力
 
 ### KotlinConf 2026 速览（2026-05-20 至 05-22 慕尼黑）
 
@@ -390,7 +393,7 @@ KotlinConf 2026 是 Kotlin 2.4 的发布舞台，超过 2,000 名 Kotlin 开发�
 
 1. **Kotlin Multiplatform 落地实战**：Jetpack Compose Multiplatform 1.11.0（2026-05-15 已发布）+ iOS 原生文本输入 opt-in，是把 KMP 在 iOS 端体验逼近 SwiftUI 的关键拼图
 2. **Koog——JetBrains 的 AI Agent 框架**：原生 Kotlin DSL，在 KotlinConf 全天 Workshop 中专题介绍。是 Kotlin 进入 AI Agent 生态的官方信号
-3. **Kotlin 2.4 路线图**：2.4 GA 时间窗预计在 KotlinConf 之后 4-6 周内（即 2026-06 末至 2026-07 初）
+3. **Kotlin 2.4 路线图**：2.4 已于 KotlinConf 期间进入 RC（2026-05-13 RC、2026-05-27 RC2），GA 时间窗预计在 RC 之后数周内（约 2026-06）<!-- 修复于 2026-05-31: 原文称"GA 预计 KotlinConf 后 4-6 周"，实测 2.4 已发布 RC/RC2，校准为 RC 已出、GA 临近 -->
 
 **升级时间窗建议**：
 
@@ -399,4 +402,4 @@ KotlinConf 2026 是 Kotlin 2.4 的发布舞台，超过 2,000 名 Kotlin 开发�
 | 1.9.x | 先升 2.0 / 2.1 适配 K2，再升 2.3.21 |
 | 2.0 / 2.1 / 2.2 | 直接升 2.3.21（无 Breaking） |
 | 2.3.x | 持续保持 2.3.21，等 2.4 GA + Compose 1.12 BOM 同步发布后再升 |
-| 实验项目 | 可以用 2.4.0-Beta2，提前体验 stable context parameters / UUID / Java 26 |
+| 实验项目 | 可以用 2.4.0-RC2，提前体验 stable context parameters / UUID / Java 26 |

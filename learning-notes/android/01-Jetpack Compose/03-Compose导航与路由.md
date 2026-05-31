@@ -162,9 +162,9 @@ fun MainScreen() {
 
 ## 6. Navigation 2026 更新与 Navigation 3
 
-<!-- version-check: Navigation Compose 2.9.8, Navigation 3 1.1.1 stable, checked 2026-05-04 -->
+<!-- version-check: Navigation Compose 2.9.8, Navigation 3 1.1.2 stable (1.2.0 in alpha), checked 2026-05-31 -->
 
-> 🔄 更新于 2026-05-04
+> 🔄 更新于 2026-05-04（2026-05-31 校准 Navigation 3 最新补丁版）
 
 ### Navigation Compose 2.8+ 类型安全路由
 
@@ -201,12 +201,12 @@ fun AppNavigation() {
 
 ### Navigation 3（1.1.1 稳定版）
 
-Navigation 3 是全新的 Compose-first 导航库，已于 2025-11 发布 1.0 稳定版，当前最新稳定版为 **1.1.1**（2026-04-22）。
+Navigation 3 是全新的 Compose-first 导航库，已于 2025-11 发布 1.0 稳定版，当前最新稳定版为 **1.1.2**（2026-05，1.1.1 于 2026-04-22 发布），1.2.0 处于 alpha 阶段。<!-- 修复于 2026-05-31: 原文写 1.1.1，实测 androidx maven 已发布 1.1.2 补丁 -->
 
 ```kotlin
 // Navigation 3 核心概念：开发者完全拥有 back stack
-// 依赖: implementation("androidx.navigation3:navigation3-runtime:1.1.1")
-//       implementation("androidx.navigation3:navigation3-ui:1.1.1")
+// 依赖: implementation("androidx.navigation3:navigation3-runtime:1.1.2")
+//       implementation("androidx.navigation3:navigation3-ui:1.1.2")
 
 @Serializable object Home : NavKey
 @Serializable data class Detail(val itemId: String) : NavKey
