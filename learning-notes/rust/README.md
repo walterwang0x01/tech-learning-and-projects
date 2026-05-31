@@ -2,17 +2,18 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Rust 1.97.1 (2026-03-26 with CVE-2026-33055/33056 fix), Edition 2024, Tokio 1.47, Axum 0.8.8, checked 2026-05-15 -->
+<!-- version-check: Rust 1.96.0 (2026-05-28), Edition 2024, Tokio 1.49, Axum 0.8.8, checked 2026-05-30 -->
 
 Rust 在 2026 年不是"可能有用的"，而是"你正在使用的工具的底层语言"：uv、ruff、Vite、Turbopack、Polars、SurrealDB、Rustls、Alacritty、zed 全部 Rust 写的。
 
-> 🔄 更新于 2026-05-15
+<!-- 修复于 2026-05-30: 原文将不存在的 "Rust 1.97.1（2026-03-26）" 写成当前最新稳定版（与 01 文件同一杜撰来源）。经 blog.rust-lang.org / releases.rs 权威源核实，审查时点最新稳定版为 1.96.0（2026-05-28）。Tokio 最新 1.49（2026-03-03）。 -->
+> 🔄 更新于 2026-05-30
 >
-> **Rust 1.97.1**（2026-03-26）修复了 Cargo 依赖的 tar 库的 **CVE-2026-33055 / CVE-2026-33056**，所有使用非 crates.io 来源（git、tar.gz）依赖的项目都应升级（来源：[Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)）。
+> **Rust 1.96.0**（2026-05-28）是当前最新稳定版：新增 `Copy` 兼容的 `core::range` 区间类型、稳定带实际值输出的断言宏、收紧 WebAssembly 链接（来源：[Rust 1.96.0 released](https://www.linuxcompatible.org/story/rust-1960-released/)）。
 >
 > **Axum 0.8.x** 已成为生态事实稳定线（不是之前笔记里写的 0.9），最新为 0.8.8。新项目直接用 0.8 即可。
 >
-> **Tokio dial9 飞行记录器**（2026-03）：用于高并发服务定位调度延迟，详见 [03-异步编程.md](./03-异步编程.md)。
+> **Tokio 1.49**（2026-03-03）为当前稳定版；配套的 **dial9 飞行记录器**（2026-03）用于高并发服务定位调度延迟，详见 [03-异步编程.md](./03-异步编程.md)。
 
 这个目录是精简的"为什么 + 最小工作集"，不追求和 iOS/Android 那种全栈覆盖。
 

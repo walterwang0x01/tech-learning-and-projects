@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Cargo 1.97, crates.io, Edition 2024, checked 2026-05-10 -->
+<!-- version-check: Cargo 1.96, crates.io, Edition 2024, checked 2026-05-30 -->
 
 ## 1. Cargo 基础
 
@@ -45,7 +45,7 @@ keywords = ["cli", "tool"]
 categories = ["command-line-utilities"]
 
 [dependencies]
-tokio = { version = "1.47", features = ["full"] }
+tokio = { version = "1.49", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 
@@ -99,7 +99,7 @@ members = [
 
 [workspace.dependencies]
 # 所有子 crate 共享的版本
-tokio = { version = "1.47", features = ["full"] }
+tokio = { version = "1.49", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 
 [workspace.package]
