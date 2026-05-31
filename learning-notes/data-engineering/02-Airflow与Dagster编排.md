@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Airflow 3.2 (2026-Q2), Airflow 3.1 (HITL), Dagster 1.10, Prefect 3.x, checked 2026-05-16 -->
+<!-- version-check: Airflow 3.2 (2026-04-22 GA), Airflow 3.1 (HITL), Dagster 1.13, Prefect 3.x, checked 2026-05-30 -->
 
 ## 1. 为什么要编排
 
@@ -375,7 +375,7 @@ dbt_run = DbtCloudRunJobOperator(task_id="dbt_run", job_id=123)
 
 ## 11. 2026 年版本演进
 
-> 🔄 更新于 2026-05-16
+> 🔄 更新于 2026-05-30（补充 Airflow 3.2 GA 日期、HITL operator 正确 API、Dagster 1.13）
 
 ### 11.1 Airflow 3.1：Human-in-the-Loop（2025-09 发布）
 
@@ -385,17 +385,23 @@ Airflow 3.1 把"人在回路（HITL）"做成内置一等公民——AI/ML 工�
 
 | 特性 | 说明 |
 |------|------|
-| HITL Tasks | DAG 里直接定义"等待人工批准"任务 |
+| HITL Tasks | standard provider 提供 `HITLOperator`/`ApprovalOperator`/`HITLEntryOperator`/`HITLBranchOperator`，DAG 里直接定义"等待人工批准"任务 |
 | 17 种语言国际化 | UI 默认支持中文、日文、韩文等 |
 | Deadline Alerts | DAG 错过 SLA 直接触发告警（不再依赖 timeout 黑魔法） |
 | React Plugin System | 插件用 React 编写，融入新 UI |
 
 **HITL 代码示例**：
 
+> <!-- 修复于 2026-05-30: 原示例使用杜撰的 `from airflow.providers.human.operators import HumanInTheLoopOperator` 和不存在的参数（prompt/skip_if/timeout_minutes）。
+> 实际 HITL operator 由 `apache-airflow-providers-standard` 包提供，类名为 HITLOperator/ApprovalOperator/HITLEntryOperator/HITLBranchOperator，
+> 真实参数为 subject/options/body/defaults/multiple/assigned_users/notifiers/execution_timeout。已按官方 tutorial 重写。
+> 来源：https://airflow.apache.org/docs/apache-airflow/stable/tutorial/hitl.html -->
+
 ```python
 from airflow.decorators import dag, task
-from airflow.providers.human.operators import HumanInTheLoopOperator
-from datetime import datetime
+# HITL operator 来自 standard provider（apache-airflow-providers-standard，需 Airflow 3.1+）
+from airflow.providers.standard.operators.hitl import ApprovalOperator
+from datetime import datetime, timedelta
 
 @dag(start_date=datetime(2026, 1, 1), schedule="@daily")
 def llm_data_pipeline():
@@ -407,25 +413,28 @@ def llm_data_pipeline():
 
     summary = generate_summary()
 
-    review = HumanInTheLoopOperator(
+    # ApprovalOperator：只有 Approve / Reject 两个选项的 HITL operator
+    # 它是 deferrable 的，等待人工响应期间会释放 worker slot
+    review = ApprovalOperator(
         task_id="manual_review",
-        prompt="请审核 LLM 生成的摘要",
-        # 低置信度才进入人工审核
-        skip_if=lambda ctx: ctx["task_instance"].xcom_pull(
-            task_ids="generate_summary"
-        )["confidence"] > 0.9,
-        timeout_minutes=30,
+        subject="请审核 LLM 生成的摘要",
+        body="摘要内容：{{ ti.xcom_pull(task_ids='generate_summary')['summary'] }}",
+        defaults="Reject",                       # 超时默认动作
+        execution_timeout=timedelta(minutes=30),  # 超时时间
     )
 
     @task
-    def publish(approved_summary):
-        # 发布到下游
+    def publish():
+        # 发布到下游（ApprovalOperator 通过则继续，Reject 则下游任务被跳过）
         pass
 
-    publish(review)
+    summary >> review >> publish()
 
 llm_data_pipeline()
 ```
+
+> 说明：HITL operator 没有内置"按置信度跳过人工审核"的参数，若要实现"低置信度才进入审核"，可用
+> `@task.branch` 分支任务根据 `confidence` 决定走 `ApprovalOperator` 还是直接发布。
 
 ### 11.2 Airflow 3.2：Asset Partitioning + Multi-Team
 
@@ -444,12 +453,12 @@ Airflow 3.2 在 3.1 之后聚焦"数据感知工作流"，将 Asset（资产）�
 |------|------|------|
 | 3.0 | 2025-04 | DAG Versioning、Event-Driven Scheduling、Remote Execution |
 | 3.1 | 2025-09 | HITL、i18n、Deadline Alerts |
-| 3.2 | 2026 春季 | Asset Partitioning、Multi-team |
+| 3.2 | 2026-04-22 | Asset Partitioning、Multi-team |
 
 **升级建议**：
 
 ```
-2.x  →  必须升级！2.x EOL 于 2026 年内（详见 Apache Release Plan）
+2.x  →  必须升级！Airflow 2 已于 2026-04-22 EOL（不再有安全更新，详见 Apache Release Plan）
 3.0  →  3.1 / 3.2 都是平滑升级（API 兼容）
 3.1  →  3.2（已发布版本）
 ```

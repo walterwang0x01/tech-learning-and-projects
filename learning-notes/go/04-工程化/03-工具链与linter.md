@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: golangci-lint v2.12.2 (2026-05-06), goreleaser 2.5, delve 1.24, checked 2026-05-15 -->
+<!-- version-check: golangci-lint v2.12.2 (2026-05-06), goreleaser 2.5, delve 1.24, checked 2026-05-30 -->
 
 ## 1. 必装工具（2026 年推荐）
 
