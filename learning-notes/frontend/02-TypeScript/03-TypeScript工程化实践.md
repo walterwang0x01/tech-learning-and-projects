@@ -4,11 +4,13 @@
 
 ## 1. tsconfig.json 配置
 
-<!-- version-check: TypeScript 5.9 stable, TypeScript 7.0 Beta (2026-04), checked 2026-05-18 -->
+<!-- version-check: TypeScript 6.0 stable (last JS-based, 2026-03), TypeScript 7.0 Beta (Go rewrite, 2026-04), checked 2026-05-31 -->
 
-> 🔄 更新于 2026-05-18：TypeScript 7.0 Beta 已正式发布（2026 年 4 月），编译器使用 Go 重写（Project Corsa），构建速度比 TypeScript 6.0 快约 10 倍。Beta 阶段建议与 5.9 并行使用，正式生产仍以 5.9 为主。TypeScript 5.9（2025-07 发布）继续作为稳定线维护，`--strictInference` 在 `--strict` 下默认启用、`tsc --init` 生成精简 tsconfig、支持 `import defer`。
+> 🔄 更新于 2026-05-31：当前稳定线是 **TypeScript 6.0**（2026-03 正式发布）。官方明确 6.0 是**最后一个基于 JavaScript 代码库**的版本，由 5.9（2025-08 发布，引入 `import defer`、`tsc --init` 精简 tsconfig）演进而来。TypeScript 7.0 Beta（2026-04 发布）将编译器用 Go 重写（Project Corsa），构建速度比 6.0 快约 10 倍，与 6.0 **并行开发**——生态完成迁移前 6.x 仍是生产稳定线，7.0 作为预览加速本地类型检查。
+> <!-- 修复于 2026-05-31: 原文称"以 5.9 为稳定线"，与本文第 5.1 节"与 TypeScript 6 并行"自相矛盾，且与官方不符（6.0 已于 2026-03 发布、是最后一个 JS 版本）。统一更正为 6.0 为稳定线 -->
+> ⚠️ 待确认：`--strictInference` 是否为 5.9/6.0 官方默认启用项（官方 5.9 release notes 未明确列出，仅二手博客提及，故从正文移除）。
 
-来源：[Announcing TypeScript 7.0 Beta](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0-beta/) | [TypeScript 5.9 文档](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-9.html)
+来源：[Announcing TypeScript 7.0 Beta](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0-beta/) | [TypeScript Dev Blog（6.0 是最后一个 JS 版本）](https://devblogs.microsoft.com/typescript/) | [TypeScript 5.9 文档](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-9.html)
 
 ```jsonc
 {
@@ -164,8 +166,8 @@ TypeScript 7.0 Beta 于 2026 年 4 月发布，是 TypeScript 自创建以来最
 ### 5.1 性能与定位
 
 - 构建速度相对 TypeScript 6.0 提升约 10 倍（来源数据由 Microsoft 公开）
-- 设计上与 TypeScript 6 并行运行：`tsgo` 二进制独立分发，`@typescript/native-preview` npm 包可作为预览
-- TypeScript 6（即原 5.9 后续版本）在生态完成迁移前继续作为稳定线维护
+- 设计上与 TypeScript 6.0 并行运行：`tsgo` 二进制独立分发，`@typescript/native-preview` npm 包可作为预览
+- TypeScript 6.0（最后一个基于 JavaScript 代码库的版本，由 5.9 演进）在生态完成迁移前继续作为稳定线维护
 - RC 里程碑见 [microsoft/typescript-go Milestone 1](https://github.com/microsoft/typescript-go/milestone/1)
 
 ### 5.2 安装预览版
@@ -186,9 +188,9 @@ npx tsgo -p tsconfig.json  # 按配置构建
 // package.json — 同时保留 tsc 和 tsgo 脚本
 {
   "scripts": {
-    "type-check": "tsc --noEmit",                   // TS 5.9 稳定路径
+    "type-check": "tsc --noEmit",                   // TS 6.0 稳定路径
     "type-check:fast": "tsgo --noEmit",             // TS 7.0 Beta 加速
-    "build": "tsc -p tsconfig.build.json",          // 生产构建仍用 5.9
+    "build": "tsc -p tsconfig.build.json",          // 生产构建仍用 6.0
     "ci:check": "tsgo --noEmit && tsc --noEmit"    // 双校验，确认行为一致
   }
 }
@@ -199,7 +201,7 @@ npx tsgo -p tsconfig.json  # 按配置构建
 ```
 迁移建议（2026-Q2）
 ├── 本地 type-check 可切换 tsgo，CI 双跑校验
-├── tsc-watch / IDE Language Server 仍以 5.9 为准
+├── tsc-watch / IDE Language Server 仍以 6.0 为准
 ├── 自定义 transformer / ts-patch 等深度集成尚未适配 Go 版
 └── 等待 7.0 RC 后再考虑生产构建迁移
 ```
