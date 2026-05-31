@@ -189,11 +189,19 @@ JVM在Java程序运行时把它所管理的内存划分为几个不同的数据�
   - 空间整合：整体采用标记-整理算法，局部采用复制算法
   - 可预测的停顿：可以建立可预测的停顿时间模型
 
+> 🔄 更新于 2026-05-31
+>
+> **Java 26 G1 吞吐量改进（JEP 522）**：通过减少 GC 线程间的同步开销提升 G1 吞吐量，对 G1 仍是默认收集器的通用服务端场景直接受益，无需修改代码或参数。
+>
+> 此外，Java 26 的 **AOT 对象缓存（JEP 516）现在支持任意 GC**——此前提前对象缓存（Project Leyden 一部分）受收集器限制，Java 26 让它与 G1、ZGC、Parallel 等任意收集器配合，缩短应用启动时间。
+>
+> 来源：[JDK 26 — OpenJDK](https://openjdk.org/projects/jdk/26/) | [JDK 26: The new features (InfoWorld)](https://www.infoworld.com/article/4050993/jdk-26-the-new-features-in-java-26.html)
+
 ### 4.8 ZGC 收集器
 
 > 🔄 更新于 2026-04-18
 
-<!-- version-check: ZGC Generational (Java 24 default), checked 2026-04-18 -->
+<!-- version-check: ZGC Generational (Java 24 default), G1 throughput JEP 522 (Java 26), checked 2026-05-31 -->
 
 - **特点**：超低延迟垃圾收集器，停顿时间不超过 1ms
 - **演进**：

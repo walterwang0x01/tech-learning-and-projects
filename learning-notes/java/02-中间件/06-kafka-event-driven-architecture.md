@@ -123,6 +123,38 @@ consumer.subscribe(List.of("my-topic"));
 
 > 来源：[Apache Kafka 4.2.0 Release](https://kafka.apache.org/blog/2026/02/17/apache-kafka-4.2.0-release-announcement/)
 
+### Kafka 4.3.0（2026-05-22）
+
+> 🔄 更新于 2026-05-31
+
+<!-- version-check: Kafka 4.3.0 (2026-05-22), Share Groups production-ready, checked 2026-05-31 -->
+
+Kafka 4.3.0 于 2026-05-22 发布，自 4.2.0 起包含约 25 个 KIP、600+ 次提交。这是 Share Groups 在 4.2 GA 之后第一个"调优可用"的版本，同时确立了 Kafka 向"无盘（Diskless）"架构演进的方向。
+
+| 主题 | 4.3.0 变化 |
+|------|-----------|
+| **Share Groups 可调优** | 队列语义消费者的 `max records`、`lock timeout` 等参数可配置，吞吐量与 Consumer Group 相当 |
+| **消费并行度解耦** | Share Groups 让消费者数量不再受分区数限制，无需重新分区即可独立扩展消费者 |
+| **Diskless 方向（KIP-1150/1163）** | broker 持久化下沉到对象存储，broker 趋向无状态计算层（设计/孵化阶段，非默认） |
+| **运维改进** | broker cordoning、分区大小指标、tiered storage 改进 |
+
+**架构含义**：单一日志存储可同时支撑 Stream（消费组）与 Queue（Share Group）两种消费模式，Kafka 不再把"队列语义"市场让给 RabbitMQ / SQS，运维栈大幅收敛。架构师选型在"Kafka vs Pulsar"之外，新增了"自管 broker / 托管 broker / 对象存储原生"第二维度。
+
+```java
+// Share Groups 调优（Kafka 4.3）：控制单次拉取记录数与锁超时
+Properties props = new Properties();
+props.put("bootstrap.servers", "localhost:9092");
+props.put("group.id", "order-share-group");
+props.put("group.type", "share");
+// 4.3 可调参数
+props.put("share.max.poll.records", "500");                 // 单次拉取上限
+props.put("group.share.record.lock.duration.ms", "30000");  // 记录锁定时长
+
+KafkaShareConsumer<String, String> consumer = new KafkaShareConsumer<>(props);
+```
+
+> 来源：[Apache Kafka 4.3.0 Release Announcement](https://kafka.apache.org/blog/2026/05/22/apache-kafka-4.3.0-release-announcement/) | [KIP-1150: Diskless Topics](https://cwiki.apache.org/confluence/display/KAFKA/KIP-1150:+Diskless+Topics) | [Kafka Monthly Digest: April 2026 (Red Hat)](https://developers.redhat.com/blog/2026/05/04/kafka-monthly-digest-april-2026)
+
 ## 参考资料
 
 - [Kafka 官方文档](https://kafka.apache.org/documentation/)

@@ -541,7 +541,7 @@ Gradle是一个功能强大的构建工具，相比Maven具有更好的灵活性
 
 > 🔄 更新于 2026-04-18
 
-<!-- version-check: Gradle 9.x, checked 2026-04-18 -->
+<!-- version-check: Gradle 9.5.1 (2026-05-12), Gradle 8.14.5 (维护分支), checked 2026-05-31 -->
 
 ### Gradle 8.x → 9.x 重要变化
 
@@ -549,6 +549,22 @@ Gradle是一个功能强大的构建工具，相比Maven具有更好的灵活性
 |------|---------|
 | **Gradle 8.x** | Kotlin DSL 成为默认、版本目录（Version Catalog）正式发布、配置缓存改进 |
 | **Gradle 9.x** | Spring Boot 4.0 支持、构建性能进一步优化、废弃 API 清理 |
+
+> 🔄 更新于 2026-05-31
+>
+> **Gradle 9.x 版本线动态**（截至 2026-05）：
+>
+> | 版本 | 发布日期 | 关键变化 |
+> |------|---------|---------|
+> | 9.3.0 | 2026-01-16 | 测试报告改进（嵌套/参数化/套件测试的 HTML 报告）、TestKit 流式 API |
+> | 9.4.0 | 2026-03-04 | 支持非 class 测试（直接执行 Cucumber feature / 自定义测试引擎）、更丰富的测试元数据 |
+> | 9.5.0 | 2026-04-28 | — |
+> | **9.5.1** | **2026-05-12** | **当前最新稳定版**：错误与报告中加入 task provenance（快速定位失败任务来源）、客户端 JVM 与 daemon 不兼容时日志更清晰 |
+> | 8.14.5 | 2026-05-07 | 8.x 维护分支补丁（仍需 Java 8-21 兼容的遗留项目） |
+>
+> Gradle 9.0 起，配置缓存（Configuration Cache）成为首选执行模式，并升级到 Kotlin 2 + Groovy 4。Kotlin 2.4（KMP/AGP 9.0）项目需要 Gradle 9.4.1+。
+>
+> 来源：[Gradle Releases](https://gradle.org/releases/) | [Gradle 9.5.1 Release Notes](https://docs.gradle.org/current/release-notes) | [What's new in Gradle 9](https://gradle.org/whats-new/gradle-9)
 
 ### Kotlin DSL（推荐）
 
