@@ -139,7 +139,6 @@ row.axis = .horizontal
 row.spacing = 8
 ```
 
-
 ## 8. UIKit + iOS 26 Liquid Glass 适配
 
 > 🔄 更新于 2026-05-18
@@ -161,16 +160,22 @@ iOS 26 引入 Liquid Glass 设计语言。用 Xcode 26 SDK 重新编译后，原
 
 ### 8.2 自定义 View 启用 Liquid Glass
 
-```swift
-// 1) 使用 UIBackdropView（iOS 26+）
-let backdrop = UIBackdropView()
-backdrop.style = .liquidGlass
-view.insertSubview(backdrop, at: 0)
+<!-- 修复于 2026-05-31: 移除私有 API UIBackdropView（历来非公开，App Store 会拒）。
+     iOS 26 Liquid Glass 的公开 API 是 UIGlassEffect / UIGlassContainerEffect，
+     通过 UIVisualEffectView 使用。来源：腾讯云 iOS26 适配指南之 UIVisualEffectView -->
 
-// 2) UIVisualEffectView 走系统效果
-let blur = UIVisualEffectView(effect: UIGlassEffect())   // iOS 26 新效果类型
-blur.frame = container.bounds
-container.insertSubview(blur, at: 0)
+```swift
+// 1) UIVisualEffectView + UIGlassEffect（iOS 26 公开 API）
+let glass = UIVisualEffectView(effect: UIGlassEffect())   // iOS 26 新效果类型
+glass.frame = container.bounds
+glass.clipsToBounds = true
+container.insertSubview(glass, at: 0)
+
+// 2) 多个玻璃元素相互融合时，用 UIGlassContainerEffect 容器
+let containerEffect = UIGlassContainerEffect()
+let glassContainer = UIVisualEffectView(effect: containerEffect)
+glassContainer.frame = panel.bounds
+panel.insertSubview(glassContainer, at: 0)
 
 // 3) 工具栏间距 + tint
 let spacer = UIBarButtonItem(systemItem: .flexibleSpace) // ToolbarSpacer 等价

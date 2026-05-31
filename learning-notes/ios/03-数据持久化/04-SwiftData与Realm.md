@@ -113,7 +113,7 @@ struct FilteredView: View {
 
 ## 5. SwiftData iOS 26 新特性：继承与 Schema 迁移
 
-<!-- version-check: SwiftData iOS 26 (Xcode 26.4), Unique Constraints, checked 2026-05-04 -->
+<!-- version-check: SwiftData iOS 26 (Xcode 26.x) 类继承 + Schema 迁移；#Unique/#Index 实为 iOS 18 引入；checked 2026-05-31 -->
 
 > 🔄 更新于 2026-04-22
 
@@ -217,7 +217,12 @@ enum VehicleMigrationPlan: SchemaMigrationPlan {
 
 > 🔄 更新于 2026-05-04
 
-iOS 26 新增 `#Unique` 宏，可以为 SwiftData 模型添加唯一约束，防止重复数据并提升查询性能。来源：[What's new about SwiftData (WWDC25)](https://askwwdc.com/q/whats-new-about-swiftdata)
+<!-- 修复于 2026-05-31: #Unique 宏并非 iOS 26 新增，而是 iOS 18 / WWDC 2024 引入
+     （含复合唯一约束 + #Index）。来源：WWDC24 Session 10137 What's new in SwiftData -->
+
+`#Unique` 宏可以为 SwiftData 模型添加唯一约束，防止重复数据并提升查询性能。该宏在 **iOS 18（WWDC 2024）** 引入，同期还带来了 `#Index` 索引和更丰富的 `#Predicate` 表达式，并非 iOS 26 才有的能力。来源：[What's new in SwiftData (WWDC24 Session 10137)](https://developer.apple.com/videos/play/wwdc2024/10137/)
+
+> ⚠️ 注意：当 SwiftData 存储后端为 CloudKit 时，唯一约束存在与 Core Data + CloudKit 相同的限制（CloudKit 不支持唯一约束），`#Unique` 不会生效。
 
 ```swift
 import SwiftData
@@ -267,6 +272,16 @@ class OrderItem {
 
 ## 6. Realm 数据模型
 
+> ⚠️ 弃用警告（2026-05-31 核实）
+>
+> Realm 已被 MongoDB 弃用，**新项目不应再选用**：
+>
+> - 2024-09，MongoDB 宣布 **Atlas Device SDK（即 Realm）整体弃用**（[GitHub Discussion #8680](https://github.com/realm/realm-swift/discussions/8680)）。
+> - Realm 的核心卖点 **Atlas Device Sync 已于 2025-09-30 EOL 关停**，连同整个 Atlas App Services / Data API 一并下线（[MongoDB 官方 EOL 公告](https://www.mongodb.com/community/forums/t/atlas-device-sync-end-of-life-and-deprecation/296687)）。
+> - 仅**本地数据库**部分作为开源项目（`realm/realm-swift`，Apache-2.0）保留，但官方不再积极投入。需要云同步的可评估 Couchbase Lite、Ditto 等替代方案。
+>
+> **iOS 本地持久化新项目首选 SwiftData（iOS 17+）或 Core Data**。以下 Realm 用法仅供存量项目维护参考。
+
 ```swift
 import RealmSwift
 
@@ -284,7 +299,7 @@ class Person: Object {
 }
 ```
 
-## 6. Realm CRUD
+## 7. Realm CRUD
 
 ```swift
 let realm = try! Realm()
