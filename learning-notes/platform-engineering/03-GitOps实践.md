@@ -2,7 +2,9 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Argo CD 2.14, Flux 2.5, Argo Rollouts 1.8, checked 2026-05-10 -->
+<!-- version-check: Argo CD 3.4.3, Flux 2.8 GA, Argo Rollouts 1.8, checked 2026-05-31 -->
+<!-- 修复于 2026-05-31: Argo CD 2.14 → 3.x 系列（3.0 于 2025-05 发布，2.x 全部 EOL）；Flux 2.5 → 2.8 GA -->
+<!-- 注：正文第 4-12 节的 apiVersion 和命令在 Argo CD 3.x 仍兼容，最新版本动态见文末第 14 节 -->
 
 ## 1. 什么是 GitOps
 
@@ -397,6 +399,51 @@ spec:
    → 新版本有 bug，全流量中招
 ```
 
+## 14. 2026 年 5 月版本动态
+
+> 🔄 更新于 2026-05-31
+
+> 本节内容为版本演进信息增量补充，前文第 4-12 节的 `apiVersion: argoproj.io/v1alpha1`、安装命令、Application/Rollout 写法在 Argo CD 3.x 中均保持兼容，无需改动。
+
+### 14.1 Argo CD 进入 3.x 系列（重要：本文前文基于 2.x）
+
+Argo CD 的 2.x 系列已全部 EOL。2026 年的版本格局：
+
+| 版本线 | 首次发布 | 最新补丁 | 状态 |
+| ---- | ---- | ---- | ---- |
+| 3.4 | 2026-05-05 | 3.4.3（2026-05-28） | 当前最新稳定线 |
+| 3.3 | 2026-02-02 | 3.3.11 | 维护中 |
+| 3.2 | 2025-11-04 | 3.2.12 | 维护中 |
+| 3.1 | 2025-08-13 | 3.1.16 | 2026-05-05 EOL |
+| 3.0 | 2025-05-06 | 3.0.23 | 2026-02-02 EOL |
+| 2.14 及更早 | — | — | 全部 EOL，不应再用于新集群 |
+
+来源：[endoflife.date - Argo CD](https://endoflife.date/argo-cd)、[Argo CD Releases](https://github.com/argoproj/argo-cd/releases)
+
+Argo CD 维护策略是「最近 3 个 minor 版本」，升级要逐个 minor 递进（如 3.1 → 3.2 → 3.3 → 3.4），不能跨多个 minor 直跳。3.0 的主要 Breaking Change 是默认 RBAC 收紧和 Server-Side Apply 成为同步默认行为，升级前需查官方迁移说明。
+
+> ⚠️ 待确认：3.4 的逐版本新特性清单建议以官方 Release Notes 为准，本表仅记录版本时间线与 EOL 状态（已通过 endoflife.date 精确核对）。
+
+### 14.2 Flux v2.8 GA — Helm v4 支持
+
+Flux v2.8.0 已 GA（Q1 2026 路线图里程碑），核心变化：
+
+```
+Flux 2.8 关键更新
+├─ Helm v4 支持（helm-controller 适配 Helm 4 API）
+├─ Server-Side Apply 成为新默认
+├─ kstatus-based 健康检查成为新默认（更准确判断资源就绪）
+└─ 降低应用部署的 MTTR（平均恢复时间）
+```
+
+来源：[Announcing Flux 2.8 GA](https://fluxcd.io/blog/)、[Flux Roadmap](https://fluxcd.io/roadmap/)
+
+注意：Server-Side Apply 和 kstatus 健康检查改为默认后，部分依赖旧 client-side apply 行为的清单可能出现 diff 变化，升级前建议在非生产环境验证。Flux v2.7+ 的升级流程参见官方 Discussion #5572。
+
+### 14.3 选型补充（2026）
+
+第 3 节的 Argo CD vs Flux 对比仍然成立，补充一条 2026 年观察：两者都已是 CNCF Graduated 项目，差异主要在「GUI 优先 vs CLI/K8s-native 优先」。Flux 2.8 的 Helm v4 原生支持让它在「以 Helm 为核心的平台」场景更有优势；Argo CD 3.x 的 ApplicationSet 仍是多集群/跨 Region 的首选。
+
 ## 📖 参考资料
 
 - [Argo CD 官方文档](https://argo-cd.readthedocs.io/)
@@ -405,3 +452,4 @@ spec:
 - [Argo Rollouts](https://argoproj.github.io/argo-rollouts/)
 - [External Secrets Operator](https://external-secrets.io/)
 - [CNCF GitOps Working Group](https://github.com/open-gitops/project)
+- [endoflife.date - Argo CD 版本周期](https://endoflife.date/argo-cd)

@@ -2,7 +2,8 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Backstage 1.50, Port 2024, Cortex, OpsLevel, AIContext RFC, checked 2026-05-14 -->
+<!-- version-check: Backstage 1.51, Port 2024, Cortex, OpsLevel, AIContext RFC, checked 2026-05-31 -->
+<!-- 修复于 2026-05-31: Backstage 1.50 → 1.51（2026-05 稳定发布） -->
 
 ## 1. Portal 的核心价值
 
@@ -371,6 +372,26 @@ IDP 作为 Context Engineering 基础设施：
 94% 组织已采用或计划采用平台团队（Frontiers in Computer Science 2026 研究），Gartner 预测 2026 年底 80% 大型工程组织将有专职平台团队。
 
 > 来源：[Backstage Weekly #130](https://roadie.io/backstage-weekly/130-v1-50-0-backstagecon-context-engineering/)、[Backstage Weekly #131 AIContext RFC](https://roadie.io/backstage-weekly/131-context-engineering-for-developers-and-new-releases/)、[IDP as AI Goldmine](https://roadie.io/blog/idp-ai-goldmine-context-engineering/)
+
+### 10.5 Backstage 1.51（2026-05）
+
+> 🔄 更新于 2026-05-31
+
+Backstage **v1.51.0** 已稳定发布（继 v1.50.0 之后的常规月度版本）。本次主要是核心服务和组件层面的打磨：
+
+```
+v1.51.0 关键变化
+├─ 新增 CachedUserInfoService（5 秒 TTL 缓存 + 并发请求合并）
+│   减少重复的用户信息查询，降低 auth backend 压力
+├─ Backend.start() 返回 BackendStartupResult
+│   提供每个插件/模块的成功/失败状态和启动耗时，便于排查启动问题
+└─ New Frontend System 组件库持续完善
+    Select 组件支持分组分区、Header 组件新增 description/tags/metadata 属性
+```
+
+来源：[Backstage v1.51.0 Release Notes](https://backstage.io/docs/releases/v1.51.0)、[Spotify for Backstage Release Notes](https://backstage.spotify.com/release-notes/)
+
+升级提示：v1.51 延续 New Frontend System 默认化的方向（v1.49 起），仍在用旧 Frontend System 的应用建议参考官方迁移指南逐步切换。`BackendStartupResult` 是新增返回值，不影响现有 `Backend.start()` 调用，属于向后兼容的增强。
 
 ## 📖 参考资料
 

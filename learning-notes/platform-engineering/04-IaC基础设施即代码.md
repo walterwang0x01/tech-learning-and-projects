@@ -2,7 +2,8 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Terraform 1.11, OpenTofu 1.11, Pulumi 3.150, Crossplane 2.x, checked 2026-05-10 -->
+<!-- version-check: Terraform 1.11, OpenTofu 1.11, Pulumi 3.150, Crossplane 2.3, checked 2026-05-31 -->
+<!-- 修复于 2026-05-31: Crossplane 2.x → 2.3（2.2 季度发布后续到 2.3），补充 v2 升级路径 -->
 
 ## 1. 为什么 IaC
 
@@ -343,6 +344,40 @@ State：
 └─ Platform Engineering 中 IaC 通常封装到 Crossplane / Backstage 后面
     业务团队不直接写 Terraform
 ```
+
+### 12.1 Crossplane v2 与最新版本动态
+
+> 🔄 更新于 2026-05-31
+
+Crossplane 已在 2025-10-28 升级为 CNCF **Graduated** 项目，并发布了 2.0 大版本。2026 年持续迭代到 **v2.3**（v2.2 为季度发布，后续递进到 v2.3）。
+
+来源：[Announcing Crossplane 2.0](https://blog.crossplane.io/announcing-crossplane-2-0/)、[Crossplane v2.2 发布说明](https://blog.crossplane.io/crossplane-v2-2-more-capable-more-reliable-more-observable/)、[CNCF Crossplane](https://www.cncf.io/projects/crossplane/)
+
+Crossplane v2 的核心变化：
+
+```
+Crossplane v2 关键能力
+├─ Namespaced 资源（XR/MR 可放在 namespace 里，不再强制 cluster-scoped）
+├─ 可组合任意 Kubernetes 资源（不限于云资源）
+├─ 新的运维工作流（Operations）
+└─ 与大多数 v1 配置向后兼容
+```
+
+升级路径有严格约束（官方明确要求逐版本递进）：
+
+```
+只能从 v1.20（最后一个 v1.x 版本）升级到 v2.0
+  v1.19 → v1.20 → v2.0 → v2.1 → v2.2 → v2.3
+  （每次只跨一个 minor，并用该 minor 的最新 patch）
+
+注意：v1 的 cluster-scoped XR/MR 暂无自动迁移工具
+  升级后存量 v1 资源继续按原样工作
+  新资源可直接用 v2 的 namespaced 风格
+```
+
+来源：[Upgrade to Crossplane v2](https://docs.crossplane.io/master/guides/upgrade-to-crossplane-v2/)
+
+第 8 节的 `kubectl apply` 创建云资源示例在 v2 中仍然有效；v2 额外允许把这些 Managed Resource 放进具体 namespace 做多租户隔离。
 
 ## 📖 参考资料
 
