@@ -152,9 +152,10 @@ function usePrevious(value) {
 
 > 🔄 更新于 2026-04-18
 
-<!-- version-check: React 19.2.4, checked 2026-04-18 -->
+<!-- version-check: React 19.2.6, checked 2026-05-31 -->
+<!-- 修复于 2026-05-31: 19.2.4 → 19.2.6（npm 实测最新补丁，且与 09-浏览器与网络/04-Web安全 的 CVE-2026-23870 修复版本对齐） -->
 
-React 19（2024-12 稳定版，当前最新补丁 19.2.4）引入了多个面向异步和表单场景的新 Hook，配合 React Compiler 实现自动记忆化优化。
+React 19（2024-12 稳定版，当前最新补丁 19.2.6）引入了多个面向异步和表单场景的新 Hook，配合 React Compiler 实现自动记忆化优化。
 
 ```jsx
 // use() — 在渲染期间读取 Promise 或 Context（替代 useContext）

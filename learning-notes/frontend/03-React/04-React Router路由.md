@@ -4,9 +4,10 @@
 
 ## 1. 基本配置（v6）
 
-> 🔄 更新于 2026-04-18：React Router v7（当前 v7.14.0）已将 `react-router-dom` 合并到 `react-router` 单一包中，v6 API 仍可用但建议迁移。详见下方第 6 节。
+> 🔄 更新于 2026-04-18：React Router v7（当前 v7.16.0）已将 `react-router-dom` 合并到 `react-router` 单一包中，v6 API 仍可用但建议迁移。详见下方第 6 节。
 
-<!-- version-check: React Router 7.14.0, checked 2026-04-18 -->
+<!-- version-check: React Router 7.16.0, checked 2026-05-31 -->
+<!-- 修复于 2026-05-31: 7.14.0 → 7.16.0（npm registry 实测 latest） -->
 
 ```jsx
 import { BrowserRouter, Routes, Route, Link, NavLink, Outlet } from 'react-router-dom';
@@ -143,11 +144,11 @@ function App() {
 
 > 🔄 更新于 2026-04-18
 
-<!-- version-check: React Router 7.14.0, checked 2026-04-18 -->
+<!-- version-check: React Router 7.16.0, checked 2026-05-31 -->
 
 React Router v7 是一次重大升级，从路由库演进为全栈框架，支持 SSR、数据加载、RSC 等能力。核心变化：
 
-- **统一包名**：`react-router-dom` 已废弃，统一使用 `react-router` 单一包
+- **统一包名**：推荐统一使用 `react-router` 单一包；`react-router-dom` 在 v7 中**仍作为 `react-router` 的 re-export 发布**（平滑 v6 升级路径），旧导入仍可用，但新项目建议直接用 `react-router` <!-- 修复于 2026-05-31: 原文"react-router-dom 已废弃"措辞失实，官方文档明确 v7 仍发布该包作为 re-export，并未废弃 -->
 - **Framework Mode**：内置 SSR、代码分割、数据预加载，可替代 Next.js/Remix
 - **Vite 8 支持**：v7.14.0 新增 Vite 8 集成
 - **RSC 支持**：实验性 React Server Components 框架模式

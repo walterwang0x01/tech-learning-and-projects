@@ -158,9 +158,10 @@ function CreateUser() {
 
 > 🔄 更新于 2026-05-03
 
-<!-- version-check: Zustand 5.0.3, Redux Toolkit 2.9.x, TanStack Query 5.100.x, Jotai 2.12.x, checked 2026-05-03 -->
+<!-- version-check: Zustand 5.0.14, Redux Toolkit 2.12.x, TanStack Query 5.100.x, Jotai 2.20.x, checked 2026-05-31 -->
+<!-- 修复于 2026-05-31: 版本号按 npm registry 实测刷新（Zustand 5.0.3→5.0.14、RTK 2.9.x→2.12.x、Jotai 2.12.x→2.20.x）；TanStack AI 归属修正 -->
 
-### 6.1 Zustand 5.x（当前稳定版 5.0.3）
+### 6.1 Zustand 5.x（当前稳定版 5.0.14）
 
 Zustand 5 于 2024-10 发布，是一次面向现代化的重构。51.6K+ GitHub Stars，约 40% 新项目采用。来源：[Announcing Zustand v5](https://pmnd.rs/blog/announcing-zustand-v5/)
 
@@ -198,9 +199,9 @@ const useTodoStore = create<TodoStore>()(
 );
 ```
 
-### 6.2 Redux Toolkit 2.x（当前稳定版 2.9.x）
+### 6.2 Redux Toolkit 2.x（当前稳定版 2.12.x）
 
-RTK 2.0 于 2023-11 发布，当前 2.9.x 持续迭代。在企业级项目中仍占主导地位。来源：[Redux Toolkit Releases](https://github.com/reduxjs/redux-toolkit/releases)
+RTK 2.0 于 2023-11 发布，当前 2.12.x 持续迭代。在企业级项目中仍占主导地位。来源：[Redux Toolkit Releases](https://github.com/reduxjs/redux-toolkit/releases)
 
 **RTK 2.x 关键变化：**
 - ESM/CJS 双格式发布
@@ -220,16 +221,17 @@ const injectedReducer = rootReducer.inject(lazySlice);
 
 ### 6.3 TanStack Query v5（当前 5.100.x）
 
-TanStack Query v5 是服务端状态管理的事实标准，当前 @tanstack/query-core 5.100.5。来源：[TanStack Query Releases](https://github.com/TanStack/query/releases)
+TanStack Query v5 是服务端状态管理的事实标准，当前 @tanstack/react-query 5.100.14。来源：[TanStack Query Releases](https://github.com/TanStack/query/releases)
 
 **v5 关键改进：**
 - 统一对象参数格式（移除所有重载）
 - `gcTime` 替代 `cacheTime`
 - 更好的 TypeScript 推断
 - 支持 Angular、Svelte、Solid 等多框架
-- TanStack AI 集成（2026-04 新增，AI 工具调用编译时类型检查）
 
-### 6.4 Jotai 2.x（当前 2.12.x）
+> **注意**：TanStack AI 是 TanStack 生态中**独立的库**（`@tanstack/ai`，提供 AI 聊天、AG-UI 协议、实时语音、客户端工具调用等），并非 TanStack Query v5 的内置特性，二者不要混淆。来源：[TanStack AI Blog](https://tanstack.com/blog) <!-- 修复于 2026-05-31: 原文将"TanStack AI 集成"误列为 Query v5 特性，实为独立库，已澄清归属 -->
+
+### 6.4 Jotai 2.x（当前 2.20.x）
 
 Jotai 是原子化状态管理方案，19K+ Stars。适合需要精确控制重渲染的场景。来源：[Jotai Documentation](https://jotai.org/docs)
 

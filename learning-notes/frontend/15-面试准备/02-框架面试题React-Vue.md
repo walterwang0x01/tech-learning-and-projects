@@ -127,7 +127,8 @@ A: React — 大型项目、灵活度高、生态丰富、函数式编程
 
 > 🔄 更新于 2026-05-02
 
-<!-- version-check: React 19.2.4, Vue 3.6 Vapor Mode, React Router 7.6.x, checked 2026-05-20 -->
+<!-- version-check: React 19.2.6, Vue 3.6 Vapor Mode, React Router 7.16.x, checked 2026-05-31 -->
+<!-- 修复于 2026-05-31: 跨文档同步——React 19.2.4 → 19.2.6、React Router 7.6.x → 7.16.x（npm 实测最新） -->
 
 ### React 19 与 React Compiler
 
