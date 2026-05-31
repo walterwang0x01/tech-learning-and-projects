@@ -95,6 +95,8 @@ class Router: ObservableObject {
     func pop() { path.removeLast() }
     func popToRoot() { path = NavigationPath() }
 }
+```
+<!-- 修复于 2026-05-31: 第4节 Router 代码块缺少闭合标记，导致第5节内容渲染错乱 -->
 
 ## 5. iOS 26 导航与 TabView 新特性
 
@@ -153,4 +155,3 @@ struct MyApp: App {
 ### UIHostingSceneDelegate
 
 新增 `UIHostingSceneDelegate`，可以将 SwiftUI Scene 桥接到 UIKit，扩展了 SwiftUI 与 UIKit 的集成能力。
-```

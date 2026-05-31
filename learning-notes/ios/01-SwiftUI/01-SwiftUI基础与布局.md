@@ -185,6 +185,7 @@ SwiftUI 新增原生 `WebView` 类型，支持在应用内展示 HTML/CSS/JavaSc
 
 ```swift
 import SwiftUI
+import WebKit  // WebView/WebPage 由 WebKit 提供，需显式导入
 
 struct BrowserView: View {
     @State private var page = WebPage()
