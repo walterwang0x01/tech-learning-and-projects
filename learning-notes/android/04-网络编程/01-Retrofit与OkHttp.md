@@ -128,6 +128,23 @@ class UserRepository @Inject constructor(private val api: ApiService) {
 }
 ```
 
+<!-- 修复于 2026-05-31: 调整章节顺序，原"## 5. 连接池与性能"误排在"## 6. 版本演进"之后，现移回此处恢复 1-2-3-4-5-6 顺序 -->
+
+## 5. 连接池与性能
+
+```kotlin
+val client = OkHttpClient.Builder()
+    .connectionPool(ConnectionPool(5, 5, TimeUnit.MINUTES))
+    .protocols(listOf(Protocol.HTTP_2, Protocol.HTTP_1_1))
+    .dns(object : Dns {
+        override fun lookup(hostname: String): List<InetAddress> {
+            // 自定义 DNS 解析
+            return Dns.SYSTEM.lookup(hostname)
+        }
+    })
+    .build()
+```
+
 ## 6. OkHttp 5.x 与 Retrofit 3.0 版本演进
 
 <!-- version-check: OkHttp 5.3.2, Retrofit 3.0.0, checked 2026-04-22 -->
@@ -209,19 +226,4 @@ val retrofit = Retrofit.Builder()
 已有项目（OkHttp 4.x）  按需升级，API 基本兼容
 需要 Zstd 压缩          OkHttp 5.2+
 需要 JPMS              OkHttp 5.2+
-```
-
-## 5. 连接池与性能
-
-```kotlin
-val client = OkHttpClient.Builder()
-    .connectionPool(ConnectionPool(5, 5, TimeUnit.MINUTES))
-    .protocols(listOf(Protocol.HTTP_2, Protocol.HTTP_1_1))
-    .dns(object : Dns {
-        override fun lookup(hostname: String): List<InetAddress> {
-            // 自定义 DNS 解析
-            return Dns.SYSTEM.lookup(hostname)
-        }
-    })
-    .build()
 ```

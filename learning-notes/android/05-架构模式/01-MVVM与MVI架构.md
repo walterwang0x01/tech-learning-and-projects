@@ -169,7 +169,9 @@ fun UserMviScreen(viewModel: UserMviViewModel = hiltViewModel()) {
 
 > 🔄 更新于 2026-04-21
 
-<!-- version-check: Android Architecture 2026, Compose 1.10.x, checked 2026-04-21 -->
+<!-- version-check: Android Architecture 2026, Compose 1.11.x (latest 1.11.2), checked 2026-05-31 -->
+
+<!-- 修复于 2026-05-31: Compose 1.10.x → 1.11.x，与同栈 01-Jetpack Compose/ 文档（第 34/35 次审查确认 1.11.2）对齐 -->
 
 ### MVVM vs MVI 选型指南（2026）
 

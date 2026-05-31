@@ -131,11 +131,13 @@ Retrofit.Builder()
 
 ## 6. 2026 版本演进与 Ktor 集成
 
-<!-- version-check: kotlinx-serialization 1.8.x (Kotlin 2.3.20), Ktor 3.4.0, checked 2026-04-22 -->
+<!-- version-check: kotlinx-serialization-json 1.11.0, Ktor 3.5.0, checked 2026-05-31 -->
 
 > 🔄 更新于 2026-04-22
 
-kotlinx.serialization 随 Kotlin 2.3.20 持续更新，Ktor 3.4.0 带来了 OpenAPI 生成和 Zstd 支持。来源：[Ktor 3.4.0](https://blog.jetbrains.com/kotlin/2026/01/ktor-3-4-0-is-now-available/)
+<!-- 修复于 2026-05-31: kotlinx-serialization-json 1.8.1 → 1.11.0（Maven Central 实测最新 stable，2026-04-09，跨 1.9/1.10/1.11 三个 minor）；Ktor 3.4.0 → 3.5.0（Maven Central 实测最新） -->
+
+kotlinx.serialization 作为独立库持续更新，当前最新稳定版 **1.11.0**（库版本独立于 Kotlin 编译器版本，序列化插件版本仍跟随 Kotlin 版本）。Ktor 3.4.0 带来了 OpenAPI 生成和 Zstd 支持，3.5.0 进一步加入 RFC 7616 Digest 认证、自定义 DNS 解析等改进。来源：[Ktor 3.4.0](https://blog.jetbrains.com/kotlin/2026/01/ktor-3-4-0-is-now-available/)、[Ktor 3.5 Changelog](https://ktor.io/changelog/3.5/)
 
 ### 6.1 kotlinx.serialization 最新实践
 
@@ -146,7 +148,8 @@ plugins {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
+    // 修复于 2026-05-31: 1.8.1 → 1.11.0（Maven Central 实测最新 stable）
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
 }
 
 // 2026 推荐 Json 配置
@@ -160,16 +163,16 @@ val json = Json {
 }
 ```
 
-### 6.2 Ktor 3.4.0 网络客户端
+### 6.2 Ktor 3.5.0 网络客户端
 
 ```kotlin
-// Ktor 3.4.0 作为 OkHttp 的 Kotlin 原生替代
+// Ktor 3.5.0 作为 OkHttp 的 Kotlin 原生替代
 // build.gradle.kts
 dependencies {
-    implementation("io.ktor:ktor-client-core:3.4.0")
-    implementation("io.ktor:ktor-client-okhttp:3.4.0")  // 或 CIO 引擎
-    implementation("io.ktor:ktor-client-content-negotiation:3.4.0")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:3.4.0")
+    implementation("io.ktor:ktor-client-core:3.5.0")
+    implementation("io.ktor:ktor-client-okhttp:3.5.0")  // 或 CIO 引擎
+    implementation("io.ktor:ktor-client-content-negotiation:3.5.0")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.5.0")
 }
 
 // 配置 Ktor 客户端
@@ -203,4 +206,4 @@ Gson                    已有 Java 项目               ❌ JVM only
 Ktor serialization      Ktor 客户端/服务端           ✅ 全平台
 ```
 
-> **2026 推荐**：新项目统一使用 `kotlinx.serialization`，配合 Ktor 3.4.0 或 Retrofit 3.0 使用。KMP 项目必须使用 `kotlinx.serialization`。
+> **2026 推荐**：新项目统一使用 `kotlinx.serialization`，配合 Ktor 3.5.0 或 Retrofit 3.0 使用。KMP 项目必须使用 `kotlinx.serialization`。
