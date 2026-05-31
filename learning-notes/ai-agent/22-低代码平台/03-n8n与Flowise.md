@@ -199,7 +199,7 @@ docker run -d --name flowise -p 3000:3000 \
 
 来源：[Flowise Blog](https://blog.flowiseai.com/coming-soon/)
 
-**⚠️ Flowise 安全警告**（2026-04）：CVE-2025-59528（CVSS 10.0）在 Flowise 3.0.5 的 CustomMCP 节点中发现 RCE 漏洞，12,000+ 实例暴露。**必须升级到 3.0.6+**。来源：[The Hacker News](https://thehackernews.com/2026/04/flowise-ai-agent-builder-under-active.html)
+**⚠️ Flowise 安全警告**（2026-04）：CVE-2025-59528（CVSS 10.0）在 Flowise 3.0.5 的 CustomMCP 节点中发现 RCE 漏洞，12,000+ 实例暴露。**必须升级到 3.0.6+**（当前最新稳定版 3.1.2）。<!-- 修复于 2026-05-31: npm 实测当前最新为 3.1.2 -->来源：[The Hacker News](https://thehackernews.com/2026/04/flowise-ai-agent-builder-under-active.html)
 
 ### n8n 安全事件（2026 Q1-Q2）
 
@@ -216,7 +216,7 @@ n8n 在 2026 年初遭遇多个严重安全漏洞：
 
 **影响**：任何认证用户可完全控制服务器，窃取所有存储的凭证、API Key 和密钥。自托管和云实例均受影响。
 
-**建议**：立即升级到 n8n v2.20+（当前稳定版），启用 Task Runner 隔离，限制 Code 节点权限。
+**建议**：立即升级到 n8n v2.22+（当前稳定版），启用 Task Runner 隔离，限制 Code 节点权限。
 
 来源：[Pillar Security](https://www.pillar.security/blog/n8n-sandbox-escape-critical-vulnerabilities-in-n8n-exposes-hundreds-of-thousands-of-enterprise-ai-systems-to-complete-takeover)、[The Hacker News](https://thehackernews.com/2026/03/critical-n8n-flaws-allow-remote-code.html)
 
@@ -224,7 +224,7 @@ n8n 在 2026 年初遭遇多个严重安全漏洞：
 
 > 🔄 更新于 2026-04-21
 
-<!-- version-check: n8n 2.20+, Flowise 3.0.6, checked 2026-05-21 -->
+<!-- version-check: n8n 2.22+, Flowise 3.1.2, checked 2026-05-31 -->
 
 ### n8n 2.0：安全加固与企业级升级
 

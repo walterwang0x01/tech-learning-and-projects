@@ -22,17 +22,7 @@
 ```python
 from agents import Agent, handoff, Runner
 
-# 分诊 Agent：根据问题类型路由
-triage_agent = Agent(
-    name="triage",
-    instructions="""你是智能客服分诊员。根据用户问题分类并转交：
-    - 产品咨询 → product_agent
-    - 订单问题 → order_agent
-    - 投诉建议 → complaint_agent
-    - 无法处理 → 转人工""",
-    handoffs=["product_agent", "order_agent", "complaint_agent"],
-)
-
+# 子 Agent 需先定义，triage_agent 的 handoffs 引用的是 Agent 对象（非字符串）
 product_agent = Agent(
     name="product_agent",
     instructions="你是产品咨询专家。基于知识库回答产品相关问题。",
@@ -49,6 +39,18 @@ complaint_agent = Agent(
     name="complaint_agent",
     instructions="你是投诉处理专家。安抚用户情绪，记录投诉并创建工单。",
     tools=[create_ticket, escalate_to_human],
+)
+
+# 分诊 Agent：根据问题类型路由
+# 修复于 2026-05-31: OpenAI Agents SDK 的 handoffs 接受 Agent 对象列表，非字符串
+triage_agent = Agent(
+    name="triage",
+    instructions="""你是智能客服分诊员。根据用户问题分类并转交：
+    - 产品咨询 → product_agent
+    - 订单问题 → order_agent
+    - 投诉建议 → complaint_agent
+    - 无法处理 → 转人工""",
+    handoffs=[product_agent, order_agent, complaint_agent],
 )
 ```
 

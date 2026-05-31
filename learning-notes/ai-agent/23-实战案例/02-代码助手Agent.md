@@ -216,6 +216,8 @@ async def generate_tests(code: str, file_path: str) -> str:
   }
 }
 ```
+
+<!-- 修复于 2026-05-31: @modelcontextprotocol/server-github 为早期 reference 实现，现已归档（modelcontextprotocol/servers-archived）。GitHub 官方现维护 github/github-mcp-server（Go 实现），推荐通过 https://api.githubcopilot.com/mcp/ 远程接入或本地二进制运行。 -->
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

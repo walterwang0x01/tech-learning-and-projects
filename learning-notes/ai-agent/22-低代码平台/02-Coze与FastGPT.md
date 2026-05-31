@@ -183,7 +183,7 @@ services:
 
 > 🔄 更新于 2026-04-21
 
-<!-- version-check: Coze 2.5, Coze Studio v0.3.0, Flowise 3.0.6, checked 2026-05-21 -->
+<!-- version-check: Coze 2.5, Coze Studio v0.5.0, checked 2026-05-31 -->
 
 ### Coze 2.5："Agent World" 生态
 
@@ -211,7 +211,7 @@ services:
 Coze Studio（扣子开源版）于 2025-07 正式开源，基于 Apache 2.0 许可：
 
 - GitHub 仓库：[coze-dev/coze-studio](https://github.com/coze-dev/coze-studio)
-- 当前版本：v0.3.0（支持 chatflow、工作流、Agent、应用场景）
+- 当前版本：v0.5.0（2026 年发布；支持 chatflow、工作流、Agent、应用场景）<!-- 修复于 2026-05-31: v0.3.0 已过时，SourceForge/GitHub 镜像确认最新为 v0.5.0 -->
 - 提供可视化工具，支持无代码/低代码方式构建 AI Agent
 - 配套 [Coze Loop](https://github.com/coze-dev/coze-loop)：Agent 全生命周期管理平台（开发、调试、评估、监控）
 

@@ -137,11 +137,14 @@ Slack 将自己定位为"企业 Agentic OS"，提供多层 Agent 集成能力。
 
 ```python
 # Slack MCP Server 配置
+# 修复于 2026-05-31: @anthropic/slack-mcp-server 包不存在（杜撰）。
+# 官方 reference 包 @modelcontextprotocol/server-slack 已停止维护并归档。
+# 此处改用活跃维护的社区实现 slack-mcp-server（npm 可装）。
 {
   "mcpServers": {
     "slack": {
       "command": "npx",
-      "args": ["-y", "@anthropic/slack-mcp-server"],
+      "args": ["-y", "slack-mcp-server"],
       "env": {
         "SLACK_BOT_TOKEN": "xoxb-xxx",
         "SLACK_TEAM_ID": "T0xxx"
@@ -554,7 +557,7 @@ result = agent.invoke({
 ### 📖 官方文档
 - [lark-cli GitHub](https://github.com/larksuite/cli) — 飞书 CLI 开源项目（MIT）
 - [Notion MCP Docs](https://developers.notion.com/guides/mcp/mcp) — Notion MCP 官方文档
-- [Slack MCP Server](https://github.com/anthropics/slack-mcp-server) — Slack MCP Server
+- [Slack MCP Server](https://github.com/korotovsky/slack-mcp-server) — 社区维护的 Slack MCP Server（官方 reference 包已归档）<!-- 修复于 2026-05-31: anthropics/slack-mcp-server 链接不存在 -->
 - [Copilot Studio Docs](https://learn.microsoft.com/en-us/microsoft-copilot-studio/) — 微软 Copilot Studio
 - [Rovo Developer Docs](https://developer.atlassian.com/platform/forge/manifest-reference/modules/rovo-agent/) — Atlassian Rovo Agent 开发
 - [Composio Docs](https://docs.composio.dev/) — Composio 官方文档
