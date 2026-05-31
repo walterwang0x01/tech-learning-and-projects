@@ -146,24 +146,25 @@ class LongUploadWorker(context: Context, params: WorkerParameters)
 
 ## 7. WorkManager 2.10 / 2.11 版本演进
 
-> 🔄 更新于 2026-05-01
+> 🔄 更新于 2026-05-01（2026-05-31 校准版本）
 
-WorkManager 2.10.0 是当前稳定版（2025-01），2.11.0-alpha01 已发布。WorkManager 持续改进网络约束和任务追踪能力。来源：[Android Developers](https://developer.android.com/jetpack/androidx/releases/work)
+**WorkManager 2.11.2 是当前稳定版**（androidx maven 实测）。WorkManager 持续改进网络约束和任务追踪能力。来源：[Android Developers](https://developer.android.com/jetpack/androidx/releases/work)
 
-<!-- version-check: WorkManager 2.10.0 stable, 2.11.0-alpha01, checked 2026-05-01 -->
+<!-- version-check: WorkManager 2.11.2 stable, checked 2026-05-31 -->
+<!-- 修复于 2026-05-31: 原文写"2.10.0 stable + 2.11.0-alpha01"，实测 androidx maven 已发布 2.11.2 stable -->
 
 ### 关键更新
 
 - **精细化网络约束**（2.10+）：更精确的网络类型和连接状态判断
 - **Generation 追踪**（2.10+）：任务代际追踪，更好地管理周期性任务
 - **Flow API**（2.10+）：`getWorkInfoByIdFlow()` 替代 LiveData 版本
-- **KMP 支持探索**（2.11 alpha）：实验性跨平台支持
+- **持续迭代**（2.11）：稳定性与约束处理改进
 
 ```kotlin
-// WorkManager 2.10.x 依赖
+// WorkManager 2.11.x 依赖
 // libs.versions.toml
 // [versions]
-// work = "2.10.0"
+// work = "2.11.2"
 // [libraries]
 // androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 

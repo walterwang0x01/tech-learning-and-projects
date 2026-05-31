@@ -141,9 +141,9 @@ class CollapsingFragment : Fragment(R.layout.fragment_collapsing) {
 
 ## 7. 2026 版本演进
 
-<!-- version-check: ConstraintLayout 2.2.1, ConstraintLayout-compose 1.1.0-alpha, checked 2026-05-04 -->
+<!-- version-check: ConstraintLayout 2.2.1, ConstraintLayout-compose 1.1.1 stable, checked 2026-05-31 -->
 
-> 🔄 更新于 2026-05-04
+> 🔄 更新于 2026-05-04（2026-05-31 校准 ConstraintLayout Compose 版本）
 
 ### 7.1 ConstraintLayout 2.2.1（2025-02-26）
 
@@ -155,8 +155,9 @@ ConstraintLayout 最新稳定版为 **2.2.1**，修复了 constraintlayout-core 
 // 推荐依赖版本（2026）
 dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.1")
-    // Compose 版本（仍在 alpha）
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha14")
+    // Compose 版本（已发布 1.1.1 稳定版）
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.1")
+    // <!-- 修复于 2026-05-31: 原文写 1.1.0-alpha14 并称"仍在 alpha"，实测 androidx maven 已发布 1.1.1 stable -->
 }
 ```
 
@@ -168,8 +169,8 @@ dependencies {
 |------|---------|
 | 新项目 UI | Compose `Row`/`Column`/`Box` 组合 |
 | 复杂相对定位 | ConstraintLayout（XML 或 Compose 版） |
-| MotionLayout 动画 | ConstraintLayout MotionLayout（Compose 版仍在 alpha） |
+| MotionLayout 动画 | ConstraintLayout MotionLayout（Compose 版仍在实验阶段） |
 | 已有 XML 布局维护 | ConstraintLayout 2.2.1 |
 | 性能敏感的扁平布局 | ConstraintLayout（单层布局减少测量次数） |
 
-> ⚠️ ConstraintLayout Compose 版（1.1.0-alpha）的 MotionLayout API 仍标记为实验性，生产环境建议谨慎使用。
+> ⚠️ ConstraintLayout Compose 版（1.1.1）的 MotionLayout API 仍标记为实验性（`@ExperimentalMotionApi`），生产环境建议谨慎使用。

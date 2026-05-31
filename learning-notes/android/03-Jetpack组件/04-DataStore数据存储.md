@@ -123,11 +123,12 @@ val Context.dataStore by preferencesDataStore(
 
 ## 5. DataStore 1.1.x / 1.2.x 版本演进
 
-> 🔄 更新于 2026-05-01
+> 🔄 更新于 2026-05-01（2026-05-31 校准版本）
 
-DataStore 1.1.x 是当前稳定版（2024-08 发布），引入了 Kotlin Multiplatform（KMP）支持和存储后端抽象。DataStore 1.2.0-alpha01 已于 2026-04 发布，进一步增强 KMP 和文件系统抽象。来源：[Android Developers - DataStore Releases](https://developer.android.com/jetpack/androidx/releases/datastore)
+DataStore 1.1.x 引入了 Kotlin Multiplatform（KMP）支持和存储后端抽象。**DataStore 1.2.1 已发布稳定版**（androidx maven 实测），进一步增强 KMP 和文件系统抽象；1.3.0 处于 alpha 阶段。来源：[Android Developers - DataStore Releases](https://developer.android.com/jetpack/androidx/releases/datastore)
 
-<!-- version-check: DataStore 1.1.7 stable, 1.2.0-alpha01, checked 2026-05-01 -->
+<!-- version-check: DataStore 1.2.1 stable, 1.3.0-alpha, checked 2026-05-31 -->
+<!-- 修复于 2026-05-31: 原文写"1.1.7 stable + 1.2.0-alpha01"，实测 androidx maven 已发布 1.2.1 stable -->
 
 ### DataStore 1.1.x 核心变化
 
@@ -166,7 +167,7 @@ fun createIOSDataStore(): DataStore<Preferences> =
     )
 ```
 
-### DataStore 1.2.0-alpha01 新特性
+### DataStore 1.2.x 新特性
 
 - **MultiProcess DataStore 改进**：跨进程数据一致性增强
 - **FileStorage 抽象**：更灵活的文件系统操作
@@ -176,8 +177,8 @@ fun createIOSDataStore(): DataStore<Preferences> =
 
 ```
 你的项目情况？
-├─ 仅 Android → DataStore 1.1.7（稳定版）
-├─ KMP（Android + iOS） → DataStore 1.1.7 + OkioStorage
-├─ 需要多进程支持 → DataStore 1.1.7（MultiProcess 已稳定）
-└─ 尝试最新特性 → DataStore 1.2.0-alpha01（实验性）
+├─ 仅 Android → DataStore 1.2.1（稳定版）
+├─ KMP（Android + iOS） → DataStore 1.2.1 + OkioStorage
+├─ 需要多进程支持 → DataStore 1.2.1（MultiProcess 已稳定）
+└─ 尝试最新特性 → DataStore 1.3.0-alpha（实验性）
 ```

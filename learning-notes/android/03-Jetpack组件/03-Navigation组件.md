@@ -142,11 +142,11 @@ class LoginFragment : Fragment() {
 
 ## 6. Navigation Compose 类型安全路由（2.8+）
 
-> 🔄 更新于 2026-05-01
+> 🔄 更新于 2026-05-01（2026-05-31 校准 Navigation Compose / Navigation 3 版本）
 
-Navigation Compose 2.8+ 引入了基于 `@Serializable` 数据类的类型安全路由，替代字符串路由。Navigation 2.9.7 是当前稳定版。来源：[Android Developers - Navigation Compose](https://developer.android.com/guide/navigation/design/type-safety)
+Navigation Compose 2.8+ 引入了基于 `@Serializable` 数据类的类型安全路由，替代字符串路由。Navigation 2.9.8 是当前稳定版。来源：[Android Developers - Navigation Compose](https://developer.android.com/guide/navigation/design/type-safety)
 
-<!-- version-check: Navigation Compose 2.9.7, Navigation 3 alpha, checked 2026-05-01 -->
+<!-- version-check: Navigation Compose 2.9.8, Navigation 3 1.1.2 stable, checked 2026-05-31 -->
 
 ```kotlin
 // 定义路由（使用 @Serializable 数据类）
@@ -183,38 +183,44 @@ fun AppNavigation() {
 }
 ```
 
-### Navigation 3 预览版
+### Navigation 3（已发布 1.1.2 稳定版）
 
-Navigation 3 是全新的 Compose-first 导航库，开发者完全控制 back stack。目前处于 alpha 阶段，API 可能变化。
+Navigation 3 是全新的 Compose-first 导航库，开发者完全控制 back stack。已于 2025-11 发布 1.0 稳定版，当前最新稳定版为 **1.1.2**（2026-05，androidx maven 实测；1.1.1 于 2026-04-22 发布），1.2.0 处于 alpha 阶段。<!-- 修复于 2026-05-31: 原文写"处于 alpha 阶段、依赖 0.1.0-alpha04"，实测 navigation3 已发布 1.1.2 stable，与 01-Jetpack Compose/03 文档对齐 -->
 
 ```kotlin
-// Navigation 3 核心概念：开发者管理 back stack
-// 依赖：androidx.navigation3:navigation3-compose:0.1.0-alpha04
+// Navigation 3 核心概念：开发者自己持有并管理 back stack
+// 依赖: implementation("androidx.navigation3:navigation3-runtime:1.1.2")
+//       implementation("androidx.navigation3:navigation3-ui:1.1.2")
+
+@Serializable object Home : NavKey
+@Serializable data class Detail(val itemId: String) : NavKey
+
 @Composable
 fun Nav3Example() {
-    // 开发者自己持有 back stack
-    val backStack = rememberMutableStateListOf<Any>(Home)
+    val backStack = rememberNavBackStack(Home)
 
     NavDisplay(
         backStack = backStack,
-        onBack = { backStack.removeLastOrNull() }
-    ) { destination ->
-        when (destination) {
-            is Home -> HomeScreen(
-                onNavigate = { backStack.add(Detail(it)) }
-            )
-            is Detail -> DetailScreen(itemId = destination.itemId)
+        entryProvider = entryProvider {
+            entry<Home> {
+                HomeScreen(onNavigate = { backStack.add(Detail(it)) })
+            }
+            entry<Detail> { detail ->
+                DetailScreen(itemId = detail.itemId)
+            }
         }
-    }
+    )
 }
 ```
+
+来源：[Navigation 3 Releases](https://developer.android.com/jetpack/androidx/releases/navigation3) | [Navigation 3 Guide](https://developer.android.com/guide/navigation/navigation-3)
 
 ### Navigation 版本选择
 
 ```
 你的项目情况？
-├─ Fragment + XML → Navigation 2.9.7（Safe Args）
-├─ Compose 项目 → Navigation Compose 2.9.7（类型安全路由）
-├─ 新项目想尝鲜 → Navigation 3 alpha（API 不稳定）
-└─ KMP 项目 → Navigation Compose 2.9.7（支持 KMP）
+├─ Fragment + XML → Navigation 2.9.8（Safe Args）
+├─ Compose 项目 → Navigation Compose 2.9.8（类型安全路由）
+├─ 新项目想完全掌控 back stack → Navigation 3 1.1.2（已稳定）
+└─ KMP 项目 → Navigation Compose 2.9.8（支持 KMP）
 ```

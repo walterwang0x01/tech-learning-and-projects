@@ -136,9 +136,9 @@ LazyColumn {
 
 ## 6. 2026 版本演进
 
-<!-- version-check: RecyclerView 1.4.0, Paging 3.5.0-rc01, checked 2026-05-04 -->
+<!-- version-check: RecyclerView 1.4.0, Paging 3.5.0 stable, checked 2026-05-31 -->
 
-> 🔄 更新于 2026-05-04
+> 🔄 更新于 2026-05-04（2026-05-31 校准 Paging 版本）
 
 ### 6.1 RecyclerView 1.4.0（2025-01-15）
 
@@ -160,46 +160,61 @@ dependencies {
 
 > ⚠️ RecyclerView 1.4.0 要求 compileSdk 35+（API 35）。
 
-### 6.2 Paging 3.5.0（即将发布）
+### 6.2 Paging 3.5.0（已发布稳定版）
 
-Paging 3.5.0 目前处于 **rc01** 阶段（2026-04-22），引入了两个重要新 API：
+Paging 3.5.0 已正式发布稳定版（`androidx.paging:paging-runtime:3.5.0`，androidx maven 实测）。<!-- 修复于 2026-05-31: 原文写"目前处于 rc01 阶段、即将发布"，实测 androidx maven 已发布 3.5.0 stable -->
 
 来源：[AndroidX Paging Releases](https://developer.android.com/jetpack/androidx/releases/paging)
 
-**`asState` Flow 操作符**：将 `Flow<PagingData>` 转换为 `Flow<ItemSnapshotList>`，解锁多种新能力：
+```kotlin
+// 推荐依赖版本（2026）
+dependencies {
+    implementation("androidx.paging:paging-runtime:3.5.0")
+    implementation("androidx.paging:paging-compose:3.5.0")
+}
+```
+
+Compose 中展示分页数据的标准 API 仍是 `collectAsLazyPagingItems()`（见上方第 5 节），它返回 `LazyPagingItems`，可直接配合 `LazyColumn` 的 `items` 使用：
 
 ```kotlin
-// ViewModel 中
+// Compose 标准用法（官方推荐）
+val lazyPagingItems = viewModel.users.collectAsLazyPagingItems()
+LazyColumn {
+    items(
+        count = lazyPagingItems.itemCount,
+        key = lazyPagingItems.itemKey { it.id }
+    ) { index ->
+        lazyPagingItems[index]?.let { UserCard(it) }
+    }
+}
+```
+
+Paging 3.5.0 在 `paging-common` 中新增了 `Flow<PagingData>.asItemSnapshotListFlow` 操作符（3.5.0-alpha01 时名为 `asState`，3.5.0-beta01 起重命名为 `asItemSnapshotListFlow`），将 `Flow<PagingData>` 转换为 `Flow<ItemSnapshotList>`，可把分页数据作为 UI 状态的一部分缓存/共享：<!-- 修复于 2026-05-31: 经官方 release notes 核实，asState/append/prepend 确为 3.5.0 真实新增 API；asState 已于 3.5.0-beta01 重命名为 asItemSnapshotListFlow -->
+
+```kotlin
+// ViewModel 中：转换为 ItemSnapshotList 流
 val pager = Pager(pagingConfig, pagingSourceFactory)
-val pagerFlow = pager.flow.asState()
+val snapshotFlow = pager.flow.asItemSnapshotListFlow()  // 3.5.0-alpha01 时为 asState()
 
-// Compose UI 中
-val snapshotFlow = viewModel.pagerFlow.collectAsStateWithLifecycle(initialList)
-val snapshot = snapshotFlow.value
-
+// Compose UI 中收集
+val snapshot by viewModel.snapshotFlow.collectAsStateWithLifecycle(ItemSnapshotList(0, 0, emptyList()))
 LazyColumn {
-    items(items = snapshot.items) { item ->
-        UserCard(item)
-    }
+    items(items = snapshot.items) { item -> UserCard(item) }
 }
 ```
 
-**`Pager.append` / `Pager.prepend`**：手动触发加载，不依赖滚动：
+配合 `asItemSnapshotListFlow` 使用时，`Pager.append()` / `Pager.prepend()` 用于手动触发加载（不依赖滚动），`Pager.refresh()` / `Pager.retry()` 用于从加载错误中恢复：
 
 ```kotlin
-// 手动加载更多数据
+// 手动触发加载（不依赖滚动）
 LazyColumn {
-    item {
-        // 滚动到顶部时加载更多
-        LaunchedEffect(viewModel) { viewModel.prepend() }
-    }
+    item { LaunchedEffect(viewModel) { viewModel.prepend() } }  // 顶部加载更多
     items(snapshot.items) { item -> Text("Item: $item") }
-    item {
-        // 滚动到底部时加载更多
-        LaunchedEffect(viewModel) { viewModel.append() }
-    }
+    item { LaunchedEffect(viewModel) { viewModel.append() } }   // 底部加载更多
 }
 ```
+
+> 详见官方示例 [PagerAsStateSamples.kt](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:paging/samples/src/main/java/androidx/paging/samples/PagerAsStateSamples.kt)（来源：Paging 3.5.0 / 3.5.0-alpha01 release notes）。
 
 ### 6.3 Compose 迁移趋势
 
