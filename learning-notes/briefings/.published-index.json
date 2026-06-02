@@ -13337,9 +13337,225 @@
       "title": "",
       "topic": "china-tech",
       "date": "2026-06-01"
+    },
+    "e2024dd469d5": {
+      "url": "https://arxiv.org/abs/2605.31509",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "f994992c8253": {
+      "url": "https://aws.amazon.com/blogs/aws/get-started-with-openai-gpt-5-5-gpt-5-4-models-and-codex-on-amazon-bedrock",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "7b52e4995638": {
+      "url": "https://arxiv.org/abs/2605.30738",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "3a733f982355": {
+      "url": "https://www.anthropic.com/news/confidential-draft-s1-sec",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "25951641fdb9": {
+      "url": "https://arxiv.org/abs/2605.31042",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "6bade46fe360": {
+      "url": "https://x.com/levie/status/2061247380897579500",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "e009950527cf": {
+      "url": "https://www.oschina.net/news/450274",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "8c9e08e186d8": {
+      "url": "https://www.langchain.com/blog/how-rippling-went-ai-native-across-every-product-in-6-months-with-deep-agents-and-langsmith",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "b95b6a775780": {
+      "url": "https://arxiv.org/abs/2605.30711",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "722855066181": {
+      "url": "https://www.oschina.net/news/450406/godex-1-1-0-released",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "3e2916ff5986": {
+      "url": "https://www.minimax.io/blog/minimax-m3",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "68df3196ae79": {
+      "url": "https://techcrunch.com/2026/06/01/anthropic-files-to-go-public",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "95d570dfcea0": {
+      "url": "https://arxiv.org/abs/2605.31278",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "0da8068e4f9e": {
+      "url": "https://claude.com/blog/introducing-dynamic-workflows-in-claude-code",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-02"
+    },
+    "3595ed246611": {
+      "url": "https://36kr.com/p/3834310434875011?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-02"
+    },
+    "dbf1a6f606d3": {
+      "url": "https://www.oschina.net/news/450198",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-02"
+    },
+    "c2e55a40209a": {
+      "url": "https://www.ithome.com/0/958/486.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-02"
+    },
+    "df75fb49f83b": {
+      "url": "https://www.ithome.com/0/958/491.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-02"
+    },
+    "c5a5730c90a6": {
+      "url": "https://www.odaily.news/en/newsflash/485924",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-02"
+    },
+    "055a334c86ce": {
+      "url": "https://www.aibase.com/en/news/28533",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-02"
+    },
+    "e0f50c8d8e7f": {
+      "url": "http://www.odaily.news/en/newsflash/485768",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-02"
+    },
+    "7a43ab2fb620": {
+      "url": "https://www.ithome.com/0/958/449.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-02"
+    },
+    "8df3f6b2ebee": {
+      "url": "https://36kr.com/p/3835278829008257?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-02"
+    },
+    "07bf1426fcda": {
+      "url": "https://blog.cloudflare.com/optimizing-core-unit-boot-time",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "6a4ceacc18ad": {
+      "url": "https://github.com/RedHatInsights/javascript-clients/issues/492",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "c61214fd6d00": {
+      "url": "https://news.ycombinator.com/item?id=48356312",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "9b71b016455b": {
+      "url": "https://arstechnica.com/security/2026/06/dozens-of-red-hat-packages-backdoored-through-its-offical-npm-channel",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "0d6d4ea16365": {
+      "url": "https://headlamp.dev/",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "5d45cc53b174": {
+      "url": "https://arstechnica.com/gadgets/2026/06/nvidia-gets-into-the-arm-pc-business-with-new-high-end-rtx-spark-processor",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "01150b5de837": {
+      "url": "https://github.com/arnica/depsguard",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "41149213a2d8": {
+      "url": "https://www.oschina.net/news/450380",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "8925d308da56": {
+      "url": "https://www.oschina.net/news/450197/dbeaver-26-1-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "a207d88d7f91": {
+      "url": "https://kubernetes.io/blog/2026/06/01/dashboard-to-headlamp",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "2d800ff4e626": {
+      "url": "https://www.404media.co/hackers-simply-asked-meta-ai-to-give-them-access-to-high-profile-instagram-accounts-it-worked",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "4ac8854a8af3": {
+      "url": "https://www.nvidia.com/en-us/products/rtx-spark",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
+    },
+    "8eaca0400e1f": {
+      "url": "https://trifectatech.org/blog/announcing-zstandard-in-rust",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-02"
     }
   },
-  "updated": "2026-06-01 09:06",
+  "updated": "2026-06-02 09:31",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -13468,6 +13684,9 @@
     "ai-agent/2026-05-31": "cde9a176b9b9bced",
     "ai-agent/2026-06-01": "ebc9c6a8e46df610",
     "global-tech/2026-06-01": "339dabb43cb93799",
-    "china-tech/2026-06-01": "20b42c591c56094e"
+    "china-tech/2026-06-01": "20b42c591c56094e",
+    "ai-agent/2026-06-02": "6d221833f07669d0",
+    "china-tech/2026-06-02": "af3075c07c023936",
+    "global-tech/2026-06-02": "fea9d433f7d4c27a"
   }
 }
