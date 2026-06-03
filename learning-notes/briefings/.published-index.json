@@ -13553,9 +13553,273 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-06-02"
+    },
+    "eab7fd2cbbb1": {
+      "url": "https://arxiv.org/abs/2606.01838",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "4c82b7437cb0": {
+      "url": "https://arxiv.org/abs/2606.02470",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "a4890222abaa": {
+      "url": "https://www.anthropic.com/news/apple-xcode-claude-agent-sdk",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "9778206cba75": {
+      "url": "https://arxiv.org/abs/2606.00448",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "9f5f7bf6d007": {
+      "url": "https://arxiv.org/abs/2606.02132",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "58508707fa86": {
+      "url": "https://9to5mac.com/2026/05/28/anthropic-upgrades-claude-with-new-opus-4-8-model-heres-whats-new",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "06e5948364b0": {
+      "url": "https://fortune.com/2026/06/01/anthropic-confidentially-files-ipo-965-billion-valuation",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "f6f7abe41a3d": {
+      "url": "https://arxiv.org/abs/2606.00619",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "28ceb0ba908b": {
+      "url": "https://arxiv.org/abs/2606.01065",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "ee3d7d2d54e9": {
+      "url": "https://techcrunch.com/2026/06/02/openai-launches-new-codex-tools-for-white-collar-work",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "2bbf78957a51": {
+      "url": "https://arxiv.org/abs/2606.00050",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "a07c7ddca380": {
+      "url": "https://openai.com/news/product-releases",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "0c6af7e8273b": {
+      "url": "https://arxiv.org/abs/2606.01508",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "8a83e2e7ca9a": {
+      "url": "https://arxiv.org/abs/2606.01991",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "999f1acc8d43": {
+      "url": "https://code.claude.com/docs/en/agent-sdk/overview",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "d9e26de86db7": {
+      "url": "https://www.axios.com/2026/05/26/deepmind-ceo-demis-hassabis",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "4f975f972871": {
+      "url": "https://arxiv.org/abs/2504.16129",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-03"
+    },
+    "ebe5a27489d7": {
+      "url": "https://www.oschina.net/news/450936",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-03"
+    },
+    "fa07eef5d84e": {
+      "url": "https://www.qbitai.com/2026/06/427810.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-03"
+    },
+    "0f26c5800de2": {
+      "url": "https://www.qbitai.com/2026/06/427729.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-03"
+    },
+    "f1565094b8d2": {
+      "url": "https://www.qbitai.com/2026/06/428092.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-03"
+    },
+    "90f2f95d6272": {
+      "url": "https://www.infoq.cn/article/CRcTLqE135yNxrlZsN8R",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-03"
+    },
+    "7f6c18d112d5": {
+      "url": "https://z.ai/blog/glm-5",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-03"
+    },
+    "24ca01391269": {
+      "url": "https://www.oschina.net/news/450911",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-03"
+    },
+    "cc3b0c3e26c8": {
+      "url": "https://www.siliconflow.com/blog/minimax-m3-now-on-siliconflow-frontier-coding-1m-context-and-native-multimodality",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-03"
+    },
+    "0d86eefb0aae": {
+      "url": "https://www.oschina.net/news/450693",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-03"
+    },
+    "21a792301885": {
+      "url": "https://www.theverge.com/policy/941775/trump-ai-executive-order",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "a772b50387c8": {
+      "url": "https://gleam.run/news/single-file-gleam-beam-programs-with-escript",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "b331a23a7086": {
+      "url": "https://c9x.me/compile/release/qbe-1.3.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "5042e49aa00f": {
+      "url": "https://thehackernews.com/2026/06/google-june-2026-android-update-patches.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "d33e153f8705": {
+      "url": "https://arstechnica.com/gadgets/2026/06/microsoft-plans-linux-tools-and-an-rtx-spark-desktop-for-windows-developers",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "a6e82664e249": {
+      "url": "https://blogs.nvidia.com/blog/rtx-ai-garage-computex-spark-local-agents",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "a15f8e56747d": {
+      "url": "https://www.reuters.com/legal/transactional/spacex-targets-175-trillion-valuation-including-greenshoe-option-record-ipo-2026-06-02",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "02414efde9a4": {
+      "url": "https://www.systemtek.co.uk/2026/06/exploitation-of-critical-sql-injection-vulnerability-in-drupal-cve-2026-9082",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "2ad43870da88": {
+      "url": "https://blog.tjll.net/you-dont-love-systemd-timers-enough",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "48dba5169a6a": {
+      "url": "https://x.org/wiki/Development/Security",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "75ebe27daae2": {
+      "url": "https://krebsonsecurity.com/2026/06/hackers-used-metas-ai-support-bot-to-seize-instagram-accounts",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "5f044f7907d3": {
+      "url": "https://blog.davidedmundson.co.uk/blog/596",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "312f7282d6e4": {
+      "url": "https://www.theverge.com/tech/941738/microsoft-build-2026-biggest-announcements",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "3d76a515077f": {
+      "url": "https://github.com/lateos-ai/npm-scan",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "b7d095547a6e": {
+      "url": "https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "faef99983818": {
+      "url": "https://arstechnica.com/ai/2026/06/ai-costs-how-much-github-copilot-users-react-to-new-usage-based-pricing-system",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "2b9a2d4d8381": {
+      "url": "https://www.tomshardware.com/laptops/nvidia-unveils-rtx-spark-superchip-at-computex-2026-new-platform-promises-to-turn-windows-into-an-agentic-ai-os-with-arm-cpu-blackwell-gpu-and-128gb-unified-memory",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
+    },
+    "b5588d7edcc4": {
+      "url": "https://www.oschina.net/news/450664",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-03"
     }
   },
-  "updated": "2026-06-02 09:31",
+  "updated": "2026-06-03 10:27",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -13687,6 +13951,9 @@
     "china-tech/2026-06-01": "20b42c591c56094e",
     "ai-agent/2026-06-02": "6d221833f07669d0",
     "china-tech/2026-06-02": "af3075c07c023936",
-    "global-tech/2026-06-02": "fea9d433f7d4c27a"
+    "global-tech/2026-06-02": "fea9d433f7d4c27a",
+    "ai-agent/2026-06-03": "d24c4e9f1c3a2c3f",
+    "china-tech/2026-06-03": "6f4d868d09e62858",
+    "global-tech/2026-06-03": "d943d41be4703c9b"
   }
 }
