@@ -13817,9 +13817,225 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-06-03"
+    },
+    "8e9247d5b89c": {
+      "url": "https://www.infoq.cn/article/Sj1hUamVJF0iIDuclUXC",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-04"
+    },
+    "668187e5c545": {
+      "url": "https://thetechportal.com/2026/06/04/deepseek-could-raise-7-4bn-in-its-first-funding-round-at-a-59bn-valuation",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-04"
+    },
+    "0ac2807262ce": {
+      "url": "https://www.oschina.net/news/451366",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-04"
+    },
+    "abc467cd2048": {
+      "url": "https://www.ithome.com/0/959/560.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-04"
+    },
+    "91ec5c849b4d": {
+      "url": "https://www.ithome.com/0/959/566.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-04"
+    },
+    "9172b3fa1fa3": {
+      "url": "https://36kr.com/p/3836973710423429",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-04"
+    },
+    "10a2ebba89d0": {
+      "url": "https://www.ithome.com/0/959/593.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-04"
+    },
+    "3c4ad2c5bda5": {
+      "url": "https://36kr.com/p/3836068296209537",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-04"
+    },
+    "5d50a8d0e609": {
+      "url": "https://www.semafor.com/article/06/02/2026/chinese-super-app-could-get-an-ai-agent",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-04"
+    },
+    "64e786b22330": {
+      "url": "https://www.csoonline.com/article/4179309/flowises-mcp-implementation-can-run-ghost-commands.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "698662b4ac46": {
+      "url": "https://arxiv.org/abs/2606.02581",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "898ee2bac2e7": {
+      "url": "https://www.oschina.net/news/451516",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "c9edca228384": {
+      "url": "https://huggingface.co/blog/Hcompany/holo31",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "17cc5a24196e": {
+      "url": "https://www.langchain.com/blog/introducing-rubrics-for-deepagents",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "951093ddfc86": {
+      "url": "https://huggingface.co/blog/adding-mcp-tools-to-reachy-mini",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "1e35e43ec8c0": {
+      "url": "https://arxiv.org/abs/2606.02871",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "6ae2642f4731": {
+      "url": "https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "6424fee68fa7": {
+      "url": "https://www.infoq.cn/article/OVsDMDL84vuoXXdTDALd",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "1133433b55fb": {
+      "url": "https://arxiv.org/abs/2606.02644",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "3106093a365b": {
+      "url": "https://www.langchain.com/blog/how-to-build-a-custom-agent-harness",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "1a654943dc71": {
+      "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "c84ff9419a80": {
+      "url": "https://arxiv.org/abs/2606.03518",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-04"
+    },
+    "62182fd310cb": {
+      "url": "https://techcrunch.com/2026/06/03/meet-wander-a-stumbleupon-inspired-tool-for-discovering-the-small-web",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "86cd700a8967": {
+      "url": "https://www.oschina.net/news/451528/netty-4-2-15-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "80b9c79e2615": {
+      "url": "https://www.cnbc.com/2026/06/03/spacex-ipo-stock-price-roadshow-musk.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "db2ea3874f3d": {
+      "url": "https://blog.calif.io/p/codex-discovered-a-hidden-http2-bomb",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "b37ad1a502ab": {
+      "url": "https://blog.cloudflare.com/enforce-first-as-bgp",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "4d38e1f581ba": {
+      "url": "https://blog.nns.ee/2026/06/03/katana-badusb",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "cffee7cbf2ce": {
+      "url": "https://www.oschina.net/news/451461/goa-3-28-0-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "9067f6b6f015": {
+      "url": "https://techcrunch.com/2026/06/03/gitlab-cuts-14-of-staff-as-it-scales-its-platform-to-serve-ai-workloads",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "6a49e16daa93": {
+      "url": "https://aws.amazon.com/blogs/aws/improve-your-application-resilience-with-amazon-cognito-multi-region-replication",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "8beeef1d0220": {
+      "url": "https://www.theverge.com/games/942808/nintendo-switch-2-replaceable-battery-eu",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "540c9db0ff77": {
+      "url": "https://blog.ammaraskar.com/github-token-stealing",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "56de79b35d59": {
+      "url": "https://www.oschina.net/news/450990",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "3067011d655e": {
+      "url": "https://www.reuters.com/business/eu-parliament-switch-french-search-engine-google-tech-sovereignty-push-2026-06-03",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
+    },
+    "8bfadd158b1e": {
+      "url": "https://elixir-lang.org/blog/2026/06/03/elixir-v1-20-0-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-04"
     }
   },
-  "updated": "2026-06-03 10:27",
+  "updated": "2026-06-04 09:28",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -13954,6 +14170,9 @@
     "global-tech/2026-06-02": "fea9d433f7d4c27a",
     "ai-agent/2026-06-03": "d24c4e9f1c3a2c3f",
     "china-tech/2026-06-03": "6f4d868d09e62858",
-    "global-tech/2026-06-03": "d943d41be4703c9b"
+    "global-tech/2026-06-03": "d943d41be4703c9b",
+    "china-tech/2026-06-04": "82bfdf8e2817a426",
+    "ai-agent/2026-06-04": "6b68ecc96caae639",
+    "global-tech/2026-06-04": "aa9973d91a72fcef"
   }
 }
