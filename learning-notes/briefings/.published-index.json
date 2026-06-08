@@ -14861,9 +14861,249 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-06-07"
+    },
+    "f4a6c38c4de5": {
+      "url": "https://github.com/vercel-labs/coding-agent-template",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "fd77e5f2f6b1": {
+      "url": "https://36kr.com/newsflashes/3843821102237952?f=rss",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "ed0ebfd0e2ed": {
+      "url": "https://arxiv.org/abs/2601.17549v1",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "862515db611d": {
+      "url": "https://arxiv.org/abs/2506.01716",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "f71e561eb410": {
+      "url": "https://blog.janestreet.com/i-design-with-claude-code-more-than-figma-now-index",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "8214dbd09536": {
+      "url": "https://fortune.com/2026/06/05/anthropic-ai-pause-development-recursive-self-improvement",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "443b4c833196": {
+      "url": "https://www.ithome.com/0/961/185.htm",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "c71aa91fe167": {
+      "url": "https://github.com/eresende/pitlane-mcp",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "4095a1c9c206": {
+      "url": "https://techcrunch.com/2026/06/06/openai-unveils-lockdown-mode-to-protect-sensitive-data-from-prompt-injection-attacks",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "79ba10f6d670": {
+      "url": "https://antirez.com/news/168",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "10a459ca3104": {
+      "url": "https://www.cnbc.com/2026/06/05/anthropic-warns-of-ais-rapid-development-societal-risk-ahead-of-ipo.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "b8754bcd3653": {
+      "url": "https://github.com/devenjarvis/lathe",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "9b923bad35af": {
+      "url": "https://openai.com/index/codex-for-every-role-tool-workflow",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "314f2c8a2a7d": {
+      "url": "https://techcrunch.com/2026/06/07/openai-is-still-working-on-that-super-app",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "9c178fdb5fe5": {
+      "url": "https://www.infoworld.com/article/4171274/anthropic-puts-claude-agents-on-a-meter-across-its-subscriptions.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "a021892089e5": {
+      "url": "https://docs.crewai.com/en/changelog",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "904e4e874aca": {
+      "url": "https://github.com/pydantic/pydantic-ai",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "b6da5ac11de6": {
+      "url": "https://docs.langchain.com/oss/javascript/releases/changelog",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "3fb77613480f": {
+      "url": "https://arxiv.org/html/2510.16558",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "0375112fb2fb": {
+      "url": "http://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4496698/nsa-releases-security-design-considerations-for-ai-driven-automation-leveraging",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-08"
+    },
+    "798bb7b27ed3": {
+      "url": "https://www.ioccc.org/2025",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "ee8c23e3e94b": {
+      "url": "https://www.phoronix.com/news/Firefox-Vulkan-Video-Merged",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "d12c6fbdcb6c": {
+      "url": "https://developers.cloudflare.com/changelog",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "4371d0389017": {
+      "url": "https://www.macrumors.com/roundup/wwdc",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "a4ee4398ecb3": {
+      "url": "https://www.ithome.com/0/961/176.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "6690f5d776a1": {
+      "url": "https://www.tomsguide.com/news/live/wwdc-2026-live-news-updates",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "5a55e254e9ea": {
+      "url": "https://www.wsj.com/tech/ai/meta-keeps-delaying-the-release-of-its-new-ai-model-to-developers-f8569c8c",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "2c76e5cee93c": {
+      "url": "https://human-in-the-loop.bearblog.dev/llms-are-eroding-my-software-engineering-career-and-i-dont-know-what-to-do",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "87d59ffc0d9f": {
+      "url": "https://blog.podman.io/2025/10/podman-6-machine-usability-improvements",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "7039d267b60d": {
+      "url": "https://performance.dev/how-is-linear-so-fast-a-technical-breakdown",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "99d32e30e712": {
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/06/aws-databases-vercel-aws-regions",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "6a8a23535dd7": {
+      "url": "https://github.com/yukiyokotani/office-open-xml-viewer",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-08"
+    },
+    "844be6498d1d": {
+      "url": "https://www.ithome.com/0/961/219.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-08"
+    },
+    "82b5317548c9": {
+      "url": "https://www.qbitai.com/2026/06/431401.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-08"
+    },
+    "fa7ac3355967": {
+      "url": "https://help.aliyun.com/zh/model-studio/text-to-image",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-08"
+    },
+    "4f9dae095f20": {
+      "url": "https://www.ithome.com/0/961/215.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-08"
+    },
+    "52ab7a42cd4c": {
+      "url": "https://www.ithome.com/0/961/188.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-08"
+    },
+    "9ce1c11674d6": {
+      "url": "https://36kr.com/newsflashes/3843805375793409?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-08"
+    },
+    "b28fcb7442a3": {
+      "url": "https://www.ithome.com/0/961/214.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-08"
+    },
+    "8806ee7e364a": {
+      "url": "https://www.zhipuai.cn/en",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-08"
     }
   },
-  "updated": "2026-06-07 12:05",
+  "updated": "2026-06-08 09:55",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -15010,6 +15250,9 @@
     "global-tech/2026-06-06": "a96c2da4b1ec010c",
     "ai-agent/2026-06-07": "a956566ed31fe7d2",
     "china-tech/2026-06-07": "32ee6c40b8a77cfa",
-    "global-tech/2026-06-07": "c39a3d17323fcccd"
+    "global-tech/2026-06-07": "c39a3d17323fcccd",
+    "ai-agent/2026-06-08": "3596c7a3ff6ff304",
+    "global-tech/2026-06-08": "0a3302058393e340",
+    "china-tech/2026-06-08": "d7fb67391cbf53ea"
   }
 }
