@@ -15101,9 +15101,279 @@
       "title": "",
       "topic": "china-tech",
       "date": "2026-06-08"
+    },
+    "4cd526a0df04": {
+      "url": "https://huggingface.co/blog/openenv-agentic-rl",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "71be5603ca67": {
+      "url": "https://www.anthropic.com/research/agents-in-biology",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "30ff34363e42": {
+      "url": "https://arxiv.org/abs/2606.06566",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "cf5270b3f668": {
+      "url": "https://arxiv.org/abs/2606.06523",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "7de51c6f834c": {
+      "url": "https://codersera.com/blog/anthropic-june-2026-billing-change-claude-code",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "52ef9cc89a3e": {
+      "url": "https://arxiv.org/abs/2606.07299",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "3b8f068c4740": {
+      "url": "https://blog.modelcontextprotocol.io/posts",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "536b87e02f14": {
+      "url": "https://openai.com/index/next-phase-of-enterprise-ai",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "233f70c225e8": {
+      "url": "https://techcrunch.com/2026/06/08/following-anthropic-openai-files-confidentially-for-ipo",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "2286d34e8a59": {
+      "url": "https://36kr.com/newsflashes/3845237188774401?f=rss",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "4083c90185ee": {
+      "url": "https://arxiv.org/abs/2606.06545",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "c39ad57d6bd7": {
+      "url": "https://openai.com/index/openai-submits-confidential-s-1",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-09"
+    },
+    "3e9ed30045a6": {
+      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/alibaba-ceo-takes-direct-control-of-new-ai-business-unit",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "eac403c7fdad": {
+      "url": "https://36kr.com/p/3841459663030532?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "f364fe3b9103": {
+      "url": "https://www.moonshot.ai/",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "e50b04a56016": {
+      "url": "http://www.aastocks.com/sc/stocks/news/aafn-con/GLH2491184L/latest-news/GLH",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "9953ef703eb9": {
+      "url": "https://www.infoq.cn/article/gSR7FTxv2trGQjSIMkmp",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "3029c12c65a2": {
+      "url": "https://www.ithome.com/0/961/749.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "345035dbeb9c": {
+      "url": "https://36kr.com/p/3839626642344454?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "afde89721945": {
+      "url": "https://www.cnblogs.com/wwkjs/p/19453882/glm-47",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "a13761d82eff": {
+      "url": "https://help.aliyun.com/zh/model-studio/machine-translation",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "330e6174fcb5": {
+      "url": "https://www.infoq.cn/article/xpNN4PdosoOVt5FtQUJw",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "d3f7d76f0a7a": {
+      "url": "https://amp.scmp.com/tech/article/3356408/alibaba-forges-token-foundry-it-hammers-ai-ambitions-shape",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "895f11133bd4": {
+      "url": "https://www.ithome.com/0/961/726.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "ee6f45e3615e": {
+      "url": "https://www.infoq.cn/article/QHSuhmxx4CsdUHl0348D",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-09"
+    },
+    "56ff6e8746f6": {
+      "url": "https://arstechnica.com/gadgets/2026/06/apples-ios-27-macos-27-golden-gate-and-other-updates-focus-on-refinement",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "88c839a6c55e": {
+      "url": "https://thehackernews.com/2026/06/critical-check-point-vpn-flaw-exploited.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "737fe2b28f7a": {
+      "url": "https://vorpus.github.io/performativeUI",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "b444b92525ee": {
+      "url": "https://code.visualstudio.com/updates/v1_122",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "8d156c70f85f": {
+      "url": "https://www.infoq.cn/article/A0yhe6dD2Vu3V2AmyoLu",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "9a393d9c358c": {
+      "url": "https://aws.amazon.com/blogs/aws/aws-weekly-roundup-byom-for-amazon-rds-for-sql-server-aws-iot-device-sdk-for-swift-and-more-june-8-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "8aa3d7126110": {
+      "url": "https://mimo.xiaomi.com/blog/mimo-tilert-1000tps",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "169ec97353b1": {
+      "url": "https://developer.apple.com/documentation/coreai",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "b568b9c632bd": {
+      "url": "https://www.apple.com/apple-intelligence",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "35f946c1ebb1": {
+      "url": "https://www.oschina.net/news/453978/opencv-5-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "8666b243b22b": {
+      "url": "https://safedep.io/config-files-that-run-code",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "9007a9ccadf7": {
+      "url": "https://www.oschina.net/news/454020/tiobe-index-202606",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "fea7fa9a1f16": {
+      "url": "https://techcrunch.com/2026/06/08/massachusetts-votes-to-pass-new-privacy-rights-bill-that-bans-sale-of-precise-location-data",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "37584cd83472": {
+      "url": "https://gitdot.io/",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "5a7b9410bc17": {
+      "url": "https://techcrunch.com/2026/06/08/wwdc-2026-everything-announced-on-siri-ai-os-27-apple-intelligence-and-more",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "df1281a430fa": {
+      "url": "https://techcrunch.com/2026/06/08/microsofts-open-source-tools-were-hacked-to-steal-passwords-of-ai-developers",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "5575a16b75fe": {
+      "url": "https://arstechnica.com/gadgets/2026/06/macos-27-requires-apple-silicon-as-apple-draws-down-the-intel-mac-era",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "125061a4c0ca": {
+      "url": "https://blog.rust-lang.org/releases",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "0f20823d91f2": {
+      "url": "https://blog.cloudflare.com/realtime-threat-intel-waf-rules",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
+    },
+    "a7559729b45a": {
+      "url": "https://arstechnica.com/security/2026/06/for-the-2nd-time-in-weeks-microsoft-packages-laced-with-credential-stealer",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-09"
     }
   },
-  "updated": "2026-06-08 09:55",
+  "updated": "2026-06-09 09:32",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -15253,6 +15523,9 @@
     "global-tech/2026-06-07": "c39a3d17323fcccd",
     "ai-agent/2026-06-08": "3596c7a3ff6ff304",
     "global-tech/2026-06-08": "0a3302058393e340",
-    "china-tech/2026-06-08": "d7fb67391cbf53ea"
+    "china-tech/2026-06-08": "d7fb67391cbf53ea",
+    "ai-agent/2026-06-09": "e5b8a5cfff9b74e6",
+    "china-tech/2026-06-09": "eafdca20f82a66c6",
+    "global-tech/2026-06-09": "954b0ea725241807"
   }
 }
