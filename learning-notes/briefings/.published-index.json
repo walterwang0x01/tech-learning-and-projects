@@ -15371,9 +15371,225 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-06-09"
+    },
+    "4b1a1d596c66": {
+      "url": "https://arxiv.org/abs/2606.07992",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "de0a2342d5aa": {
+      "url": "https://openai.com/index/nextdoor",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "f68187f03b7a": {
+      "url": "https://arxiv.org/abs/2604.10842",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "0fc530558efd": {
+      "url": "https://arxiv.org/abs/2606.07808",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "4794da9ccaa7": {
+      "url": "https://arxiv.org/abs/2606.09316",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "8c41b0c94cdd": {
+      "url": "https://arxiv.org/abs/2606.09730",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "0d81376fb072": {
+      "url": "https://www.oschina.net/news/454240",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "fbb449340331": {
+      "url": "https://openai.com/index/notion",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "9abd7db52487": {
+      "url": "https://36kr.com/p/3845645258541319?f=rss",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "a573c52801e9": {
+      "url": "https://arxiv.org/abs/2606.09441",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "c16ae7550b7f": {
+      "url": "https://arxiv.org/abs/2606.08094",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "46c0e23a5d1d": {
+      "url": "https://arxiv.org/abs/2606.07594",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "11c4ac33ca74": {
+      "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "1c652bdd319b": {
+      "url": "https://aws.amazon.com/blogs/aws/anthropic-claude-fable-5-on-aws-mythos-class-capabilities-with-built-in-safeguards-now-available",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-10"
+    },
+    "ed7cb5908ca7": {
+      "url": "https://thehackernews.com/2026/06/miasma-worm-hits-73-microsoft-github.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "3a1ec2d5ecb1": {
+      "url": "https://www.oschina.net/news/454877/semi-design-2-100-0-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "a2e4d3ee3f7d": {
+      "url": "https://www.wired.com/story/meta-removes-face-recognition-code-meta-ai-app-smart-glasses",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "d403d99526be": {
+      "url": "https://github.com/graemeg/blaise/discussions/82",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "a24a9e07f672": {
+      "url": "https://www.apple.com/newsroom/2026/06/apple-aids-app-development-with-new-intelligence-frameworks-and-advanced-tools",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "ed5f31510505": {
+      "url": "https://github.com/duanebester/gooey",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "1e2d4d89d5fa": {
+      "url": "https://blog.cloudflare.com/frontier-model-defense",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "b0d280435061": {
+      "url": "https://tratt.net/laurie/blog/2026/test_case_reducers_are_underappreciated_debugging_tools.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "686e9739e92d": {
+      "url": "https://techcrunch.com/2026/06/09/lovable-says-it-has-hit-500m-in-annualized-revenue-with-1-million-new-projects-a-week",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "a702e714b502": {
+      "url": "https://staniks.github.io/articles/catlantean-3d-blog-1",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "942c2dce9a4f": {
+      "url": "https://letsencrypt.org/documents/LE-SA-v1.7-June-04-2026-diff.pdf",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "8dfa1a2b8dec": {
+      "url": "https://www.amazon.science/blog/how-flat-is-replacing-fat-in-aws-data-center-networks",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-10"
+    },
+    "a8a372feec2e": {
+      "url": "https://www.oschina.net/news/454718",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-10"
+    },
+    "31ca6719768a": {
+      "url": "https://www.oschina.net/news/454842",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-10"
+    },
+    "16ba8d455061": {
+      "url": "https://www.scmp.com/tech/article/3356408/alibaba-forges-token-foundry-it-hammers-ai-ambitions-shape",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-10"
+    },
+    "1505b3403209": {
+      "url": "https://36kr.com/p/3845293120621057?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-10"
+    },
+    "2c1229330d3b": {
+      "url": "https://www.ithome.com/0/962/144.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-10"
+    },
+    "27e271a213e6": {
+      "url": "https://www.qbitai.com/2026/06/432735.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-10"
+    },
+    "3206d716cfad": {
+      "url": "https://www.infoq.cn/article/dXrSfgKc1E2Ck60IGYhT",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-10"
+    },
+    "8e0c3c071766": {
+      "url": "https://www.oschina.net/news/454135",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-10"
+    },
+    "157da64faf0e": {
+      "url": "https://www.qbitai.com/2026/06/433066.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-10"
+    },
+    "faf892feaebd": {
+      "url": "https://www.oschina.net/news/454931",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-10"
     }
   },
-  "updated": "2026-06-09 09:32",
+  "updated": "2026-06-10 09:34",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -15526,6 +15742,9 @@
     "china-tech/2026-06-08": "d7fb67391cbf53ea",
     "ai-agent/2026-06-09": "e5b8a5cfff9b74e6",
     "china-tech/2026-06-09": "eafdca20f82a66c6",
-    "global-tech/2026-06-09": "954b0ea725241807"
+    "global-tech/2026-06-09": "954b0ea725241807",
+    "ai-agent/2026-06-10": "0747407384e7ab60",
+    "global-tech/2026-06-10": "7995b8c5785a5caa",
+    "china-tech/2026-06-10": "aad3a7b888d81d07"
   }
 }
