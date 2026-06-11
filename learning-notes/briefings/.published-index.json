@@ -15587,9 +15587,279 @@
       "title": "",
       "topic": "china-tech",
       "date": "2026-06-10"
+    },
+    "c5d12d64b9e4": {
+      "url": "https://36kr.com/p/3846956646124036?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "5917994c1900": {
+      "url": "https://www.ithome.com/0/962/703.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "b0835cf8bb1f": {
+      "url": "https://www.ithome.com/0/962/707.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "f63e7bc31901": {
+      "url": "https://www.oschina.net/news/455560",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "430f5e57c07b": {
+      "url": "https://www.oschina.net/news/455509",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "ddce94c28ab6": {
+      "url": "https://www.infoq.cn/article/zrRC0hYrZ2K49JVWt49E",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "a6e920aa8d82": {
+      "url": "https://www.infoq.cn/article/FDIT4N6S583uNKGmUm8F",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "1070edbba477": {
+      "url": "https://www.qbitai.com/2026/06/434196.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "fd025aa83019": {
+      "url": "https://www.infoq.cn/article/C1Fqp2WOao7d72b1kHR1",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "26287c2da37f": {
+      "url": "https://www.oschina.net/news/455288",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "054ec2ec0c87": {
+      "url": "https://www.ithome.com/0/962/693.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "21ed58501f68": {
+      "url": "https://www.reuters.com/world/china/xpeng-boss-head-robot-unit-with-humanoid-mass-production-imminent-2026-06-10",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-11"
+    },
+    "c6fecd915567": {
+      "url": "https://openai.com/index/openai-on-oracle-cloud",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "048ea3fdad19": {
+      "url": "https://arxiv.org/abs/2606.10209",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "ab3f9502ad9d": {
+      "url": "https://arxiv.org/abs/2606.10749",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "613b3ba1b2b6": {
+      "url": "https://arstechnica.com/ai/2026/06/chat-is-dead-openai-preps-overhaul-of-chatgpt",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "2bb43f3ba033": {
+      "url": "https://arxiv.org/abs/2606.10507",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "b7895950fe7e": {
+      "url": "https://www.langchain.com/blog/agents-and-applications",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "6d8d3867b1f2": {
+      "url": "https://huggingface.co/blog/mishig/spaces-agents-md",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "afa0b048354e": {
+      "url": "https://arxiv.org/abs/2606.11042",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "8615adb2e92b": {
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27794",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "2428838e44d4": {
+      "url": "https://huggingface.co/blog/CohereLabs/introducing-north-mini-code",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "67faf4a94f87": {
+      "url": "https://arxiv.org/abs/2605.03344",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "fcfc809c030b": {
+      "url": "https://arxiv.org/abs/2606.10525",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "c90ac1a2611f": {
+      "url": "https://anthropic.com/news/claude-fable-5-mythos-5",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-11"
+    },
+    "968a9ee6ed0d": {
+      "url": "https://github.com/HelixDB/helix-db/tree/main",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "7ffa535e1f56": {
+      "url": "https://krebsonsecurity.com/2026/06/a-record-breaking-patch-tuesday-for-june-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "e901173aaccd": {
+      "url": "https://blog.gitbutler.com/true-grit",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "22fc700f1ccc": {
+      "url": "https://the-decoder.com/landmark-german-ruling-declares-googles-ai-overviews-are-googles-own-words-and-makes-it-liable-for-false-answers",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "2f163a378107": {
+      "url": "https://mohkohn.co.uk/writing/html-first",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "5ff7546ee8a2": {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-june-2026-patch-tuesday-fixes-6-zero-days-200-flaws",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "33b6b6511416": {
+      "url": "https://github.com/react/react/pull/36173",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "e4352961bba9": {
+      "url": "https://aws.amazon.com/blogs/aws/now-available-amazon-ec2-m9g-and-m9gd-instances-powered-by-new-aws-graviton5-processors",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "b20249dc4fc5": {
+      "url": "https://www.oschina.net/news/454881",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "8c389a179a3c": {
+      "url": "https://github.com/denoland/clawpatrol",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "ee0b3acf7891": {
+      "url": "https://blog.cloudflare.com/private-origins-dns-routing",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "caddcdfcde5f": {
+      "url": "https://techcrunch.com/2026/06/10/servicenow-tells-customers-a-bug-left-some-of-their-data-exposed-to-the-internet",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "a03c43eb7f32": {
+      "url": "https://github.blog/ai-and-ml/github-copilot/give-github-copilot-cli-real-code-intelligence-with-language-servers",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "cae7f454334d": {
+      "url": "https://pgdog.dev/blog/our-funding-announcement",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "c863b17db9cd": {
+      "url": "https://www.extend.ai/ui",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "4e8b0dbcf737": {
+      "url": "https://arstechnica.com/tech-policy/2026/06/nobody-needs-ai-to-search-the-internet-court-says-in-ruling-against-google",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "8582e57b0d4a": {
+      "url": "https://github.blog/ai-and-ml/github-copilot/from-one-off-prompts-to-workflows-how-to-use-custom-agents-in-github-copilot-cli",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "5241c6e28419": {
+      "url": "https://www.theverge.com/tech/947157/passports-data-breach-cannabis-club-systems-nefos-puffpal",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "034077ec71da": {
+      "url": "https://github.com/sig-id/nucleus",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
+    },
+    "ffc218855bf7": {
+      "url": "https://www.oschina.net/news/455453",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-11"
     }
   },
-  "updated": "2026-06-10 09:34",
+  "updated": "2026-06-11 10:01",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -15745,6 +16015,9 @@
     "global-tech/2026-06-09": "954b0ea725241807",
     "ai-agent/2026-06-10": "0747407384e7ab60",
     "global-tech/2026-06-10": "7995b8c5785a5caa",
-    "china-tech/2026-06-10": "aad3a7b888d81d07"
+    "china-tech/2026-06-10": "aad3a7b888d81d07",
+    "china-tech/2026-06-11": "c89a840f9847b07a",
+    "ai-agent/2026-06-11": "266201f063c82d90",
+    "global-tech/2026-06-11": "5ae830b706459a47"
   }
 }
