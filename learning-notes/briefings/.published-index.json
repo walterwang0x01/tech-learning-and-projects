@@ -15857,9 +15857,261 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-06-11"
+    },
+    "435925c99545": {
+      "url": "https://www.oschina.net/news/455954",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "bc7325079d88": {
+      "url": "https://www.langchain.com/blog/full-text-search-in-smithdb-designing-an-inverted-index-for-object-storage",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "c31683854993": {
+      "url": "https://www.oschina.net/news/456237",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "3aa89f300267": {
+      "url": "https://arxiv.org/abs/2606.11634",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "0c24003e145a": {
+      "url": "https://www.anthropic.com/news/claude-corps",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "e0f0ae3a46fe": {
+      "url": "https://research.checkpoint.com/2026/from-sqli-to-rce-exploiting-langgraphs-checkpointer",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "da532212e869": {
+      "url": "https://arxiv.org/abs/2606.11672",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "e1425f169af0": {
+      "url": "https://arxiv.org/abs/2606.11290",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "372b8d6173ea": {
+      "url": "https://www.oschina.net/news/455883",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "2bd548adabb7": {
+      "url": "https://arxiv.org/abs/2606.11632",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "466bb6d78c69": {
+      "url": "https://www.oschina.net/news/456209",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "9b77dce7b354": {
+      "url": "https://openai.com/index/openai-to-acquire-ona",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "e5e9283156db": {
+      "url": "https://github.blog/security/making-secret-scanning-more-trustworthy-reducing-false-positives-at-scale",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "20417054e486": {
+      "url": "https://arxiv.org/abs/2606.11198",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-12"
+    },
+    "2b2d4bf09712": {
+      "url": "https://www.digitimes.com/news/a20260609PD216.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "84b583d99ccc": {
+      "url": "https://www.ithome.com/0/963/267.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "ac4cbb82786b": {
+      "url": "https://www.oschina.net/news/456070",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "c0b79de16dd0": {
+      "url": "https://www.ithome.com/0/963/238.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "49f5b9343b72": {
+      "url": "https://www.oschina.net/news/455951",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "413084504003": {
+      "url": "https://www.ithome.com/0/963/214.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "3cd946d20288": {
+      "url": "https://codingfleet.com/blog/kimi-k2-6-vs-glm-5-1-comparison",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "1afb4773ee87": {
+      "url": "https://www.qbitai.com/2026/06/434298.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "b4e22fee4606": {
+      "url": "https://36kr.com/p/3849431503869187?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "e57826c168eb": {
+      "url": "https://36kr.com/newsflashes/3849503495853314?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "a4a3ac02b86a": {
+      "url": "https://36kr.com/p/3848094835217666?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-12"
+    },
+    "1c6597910511": {
+      "url": "https://github.com/icitry/FPS.cob",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "54c9b7df9b92": {
+      "url": "https://www.oschina.net/news/455363/grafana-13-0-2-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "8dabee99f6fc": {
+      "url": "https://www.cnbc.com/2026/06/11/spacex-raises-75-billion-in-record-setting-ipo-ahead-of-nasdaq-debut.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "471684cd1c22": {
+      "url": "https://www.theverge.com/transportation/947974/waymo-premier-monthly-membership-perks-priority-cash-back",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "610356a91f51": {
+      "url": "https://techcrunch.com/2026/06/11/south-korea-hits-coupang-with-400m-fine-for-data-breach-that-affected-millions",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "c2c5450d5498": {
+      "url": "https://mrbruh.com/amd2",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "98f62c93b442": {
+      "url": "https://mimo.xiaomi.com/mimocode",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "e3905f28e7a6": {
+      "url": "https://zed.dev/blog/introducing-deltadb",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "b5385a39f4ff": {
+      "url": "https://www.oschina.net/news/455594",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "47a098d496d1": {
+      "url": "https://techcrunch.com/2026/06/11/oracle-warns-of-security-bug-that-hackers-abused-to-breach-100-companies",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "88d60374a475": {
+      "url": "https://www.oschina.net/news/456126/python-3146",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "033ccf63529d": {
+      "url": "https://www.theverge.com/tech/948534/amazon-data-centers-water-use",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "117c27a034a2": {
+      "url": "https://techcrunch.com/2026/06/11/bluesky-launches-group-chats-as-company-shifts-focus-to-community-features",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "41214b7014d8": {
+      "url": "https://techcrunch.com/2026/06/11/spacex-officially-prices-shares-at-135-in-the-largest-ipo-ever",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "d2bac324c663": {
+      "url": "https://www.ithome.com/0/963/263.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "2129638ac0ad": {
+      "url": "https://github.com/coder/boo",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
+    },
+    "b86743f1ebfa": {
+      "url": "https://brew.sh/2026/06/11/homebrew-6.0.0",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-12"
     }
   },
-  "updated": "2026-06-11 10:01",
+  "updated": "2026-06-12 10:04",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -16018,6 +16270,9 @@
     "china-tech/2026-06-10": "aad3a7b888d81d07",
     "china-tech/2026-06-11": "c89a840f9847b07a",
     "ai-agent/2026-06-11": "266201f063c82d90",
-    "global-tech/2026-06-11": "5ae830b706459a47"
+    "global-tech/2026-06-11": "5ae830b706459a47",
+    "ai-agent/2026-06-12": "78ccd7ef3cee5f04",
+    "china-tech/2026-06-12": "ebae81df74bd0bd0",
+    "global-tech/2026-06-12": "3680163602f8e0c4"
   }
 }
