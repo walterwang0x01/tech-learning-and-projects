@@ -16109,9 +16109,255 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-06-12"
+    },
+    "7f11d34d85c0": {
+      "url": "https://thehackernews.com/2026/06/langgraph-flaw-chain-exposes-self.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "3f4af54d019e": {
+      "url": "https://arxiv.org/abs/2606.12703",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "58b8d8244bfb": {
+      "url": "https://arxiv.org/abs/2606.12674",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "6b6bf2dad0f1": {
+      "url": "https://arxiv.org/abs/2606.12797",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "5965ec32ce01": {
+      "url": "https://developers.cloudflare.com/changelog/post/2026-06-12-kimi-k2-7-code-workers-ai",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "1e934acd0663": {
+      "url": "https://www.langchain.com/blog/building-box-ai-how-an-enterprise-content-platform-went-ai-native-with-deep-agents",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "ee3a2b90ff67": {
+      "url": "https://www.axios.com/2026/06/12/anthropic-trump-mythos-fable-national-security",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "87ea392fa1a3": {
+      "url": "https://www.reuters.com/technology/us-blocks-foreign-access-anthropics-most-advanced-ai-models-axios-reports-2026-06-13",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "ae4cb1b293b0": {
+      "url": "https://thehackernews.com/2026/06/agentjacking-attack-tricks-ai-coding.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "1880831d5bca": {
+      "url": "https://huggingface.co/moonshotai/Kimi-K2.7-Code",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "ac513792e724": {
+      "url": "https://www.anthropic.com/news/anthropic-public-record",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "3832d2831a50": {
+      "url": "https://arxiv.org/abs/2606.12563",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "e8bdc063325c": {
+      "url": "https://www.anthropic.com/news/fable-mythos-access",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "da3d71ecc817": {
+      "url": "https://www.langchain.com/blog/how-to-choose-the-right-sandbox-for-your-agent",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "7faf879bd287": {
+      "url": "https://36kr.com/newsflashes/3850885678306561?f=rss",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "f7fb7b8cbf73": {
+      "url": "https://arxiv.org/abs/2606.12737",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-13"
+    },
+    "17e1abe71e73": {
+      "url": "https://www.ithome.com/0/963/725.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-13"
+    },
+    "9f30fca43cce": {
+      "url": "https://www.infoq.cn/article/GTYmDTKIy8f79604Jz1V",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-13"
+    },
+    "539d5bd24672": {
+      "url": "http://english.scio.gov.cn/pressroom/2026-06/11/content_118542936.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-13"
+    },
+    "9641363a6e25": {
+      "url": "https://www.infoq.cn/article/g31NXdeRpwyGWbGAi937",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-13"
+    },
+    "8493d941a87a": {
+      "url": "https://developer.nvidia.com/blog/run-step-3-7-flash-on-nvidia-gpus-with-enterprise-ready-multimodal-ai",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-13"
+    },
+    "8a97fb22b850": {
+      "url": "https://www.ithome.com/0/963/721.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-13"
+    },
+    "86880930b83b": {
+      "url": "https://www.ithome.com/0/963/764.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-13"
+    },
+    "96482c7733c5": {
+      "url": "https://www.odaily.news/en/newsflash/489773",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-13"
+    },
+    "7f1a93345757": {
+      "url": "https://www.oschina.net/news/457565",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-13"
+    },
+    "dab5f276112e": {
+      "url": "https://sgaud.com/texts/pdf",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "89994ef3d453": {
+      "url": "https://depthfirst.com/research/21-zero-days-in-ffmpeg",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "133469bebd03": {
+      "url": "https://techcrunch.com/2026/06/12/spacex-ipo-closes-up-19-and-delivers-the-worlds-first-trillionaire",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "465e96ecee50": {
+      "url": "https://blog.cloudflare.com/scaling-security-scans",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "b84885be713c": {
+      "url": "https://www.swift.org/blog/migrating-truetype-hinting-to-swift",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "47f560d79e88": {
+      "url": "https://www.securityweek.com/openssl-patches-high-severity-vulnerability-found-with-ai",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "2fd0e0fd96dd": {
+      "url": "https://innovativegenomics.org/news/crispr-technique-selectively-shreds-cancer-cells",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "5d91a9a2cb89": {
+      "url": "https://www.macrumors.com/2026/06/12/notion-is-migrating-to-swiftui",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "752b90fa6106": {
+      "url": "https://thehackernews.com/2026/06/shinyhunters-exploits-oracle-peoplesoft.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "db68066bfb9e": {
+      "url": "https://www.renaultgroup.com/en/magazine/energy-and-powertrains/all-about-electric-motors-with-no-rare-earths",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "3fc9bb1d0cbb": {
+      "url": "https://www.theverge.com/news/949517/valve-vr-headset-import-records-steam-frame-steam-machine-game-console",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "4747fcbbf9b8": {
+      "url": "https://www.phoronix.com/news/Git-2.55-rc0-Released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "f166f009720c": {
+      "url": "https://www.bloomberg.com/news/articles/2026-06-11/meta-severs-manus-data-access-after-china-orders-buyout-unwound",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "2c594905a87f": {
+      "url": "https://www.nasdaq.com/newsroom/spacex-ipo-rocket-company-launches-historic-ipo",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "8e5632adb588": {
+      "url": "https://www.oschina.net/news/457562/protobuf-35-1-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
+    },
+    "5fa61b46ddf7": {
+      "url": "https://www.oschina.net/news/457283/git-2-55-rc0",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-13"
     }
   },
-  "updated": "2026-06-12 10:04",
+  "updated": "2026-06-13 10:00",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -16273,6 +16519,9 @@
     "global-tech/2026-06-11": "5ae830b706459a47",
     "ai-agent/2026-06-12": "78ccd7ef3cee5f04",
     "china-tech/2026-06-12": "ebae81df74bd0bd0",
-    "global-tech/2026-06-12": "3680163602f8e0c4"
+    "global-tech/2026-06-12": "3680163602f8e0c4",
+    "ai-agent/2026-06-13": "89a8585f94062ccb",
+    "china-tech/2026-06-13": "2c7ed8df214167bd",
+    "global-tech/2026-06-13": "fdda1eeaafb973ea"
   }
 }
