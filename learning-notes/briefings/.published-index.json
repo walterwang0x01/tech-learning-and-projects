@@ -16577,9 +16577,243 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-06-14"
+    },
+    "ab965ee89be9": {
+      "url": "https://36kr.com/newsflashes/3853769391887362?f=rss",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "ca9a04121ae3": {
+      "url": "https://www.crn.com/news/ai/2026/openai-unveils-partner-program-150m-investment-channel-chief-sees-massive-opportunity-ahead",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "8098f1522465": {
+      "url": "https://arxiv.org/html/2603.10062v1",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "258e5ef30730": {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/949601/amazon-anthropic-fablemythos-government-ban",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "81462d1ab584": {
+      "url": "https://github.com/Ahoo-Wang/GodeX",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "146c08ecef3d": {
+      "url": "https://github.com/Paca-AI/paca",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "2526d3aeeaaf": {
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "ce8daeddc295": {
+      "url": "https://x.com/levie/status/2065989559905812973",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "9b41ef631f1c": {
+      "url": "https://openai.com/index/introducing-openai-partner-network",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "8d9717471389": {
+      "url": "https://www.wired.com/story/anthropic-says-us-government-ordered-it-to-shut-down-mythos-models",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "1de51b49658a": {
+      "url": "https://arstechnica.com/ai/2026/06/anthropic-shuts-down-fable-mythos-models-following-trump-admin-directive",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-15"
+    },
+    "bc452c4fbd88": {
+      "url": "https://amp.scmp.com/tech/article/3356952/huawei-arms-harmonyos-2000-ai-agents-challenge-apple",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "88477ee1fb90": {
+      "url": "https://36kr.com/p/3853016586359817?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "be722ec5359b": {
+      "url": "http://www.aastocks.com/sc/stocks/news/aafn-con/NOW.1528969/latest-news/AAFN",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "d82a82318746": {
+      "url": "https://www.reuters.com/world/china/nvidia-begins-vera-cpu-sales-pitch-chinese-clients-sources-say-2026-06-12",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "1bd6badd2d44": {
+      "url": "https://www.ithome.com/0/964/205.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "b07b76cc90c6": {
+      "url": "https://www.gsmarena.com/huawei_unveils_harmonyos_7_with_a_lot_of_glasslike_effects_better_performance-news-73259.php",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "0eb842378cbc": {
+      "url": "http://www.aastocks.com/sc/stocks/news/aafn-con/IC4924078/latest-news/INFOCAST",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "b89959aafddf": {
+      "url": "https://www.ithome.com/0/964/240.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "6a857d1c9eac": {
+      "url": "https://36kr.com/newsflashes/3853718682375433?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "77fbe9f8baa3": {
+      "url": "https://36kr.com/p/3853011900142848?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "4b2d5c5b3146": {
+      "url": "https://www.odaily.news/en/newsflash/490359",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "9b383f6a7e33": {
+      "url": "https://www.oschina.net/news/458338",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-15"
+    },
+    "f7f191af3c70": {
+      "url": "https://github.com/joske/yserver",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "77645118947e": {
+      "url": "https://github.com/tamnd/kage",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "7fd6fe94fee6": {
+      "url": "https://www.phoronix.com/news/Linux-7.1-Released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "abc45318be2c": {
+      "url": "https://www.cnbc.com/2026/06/12/spacex-ipo-spcx-live-updates.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "752f092ac1eb": {
+      "url": "https://www.theverge.com/games/949584/microsoft-spinning-off-xbox",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "2258e55c2bc2": {
+      "url": "https://paulgraham.com/earn.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "624c721f5879": {
+      "url": "https://kubernetes.io/blog/2026/06/15/sig-storage-spotlight-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "610ca16371c7": {
+      "url": "https://lore.kernel.org/lkml/CAHk-=wi4BF4bMhZNZ1tqs+FFV4OuZRe3ZqdWB+LxRLmRweUzQw@mail.gmail.com/T",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "754831d11778": {
+      "url": "https://www.reuters.com/world/google-appeal-german-court-ruling-assigning-liability-ai-overviews-false-claims-2026-06-12",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "3b69ff53ed5a": {
+      "url": "https://www.wired.com/story/a-court-has-ruled-that-google-is-liable-for-false-statements-generated-by-ai-overviews",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "dbe06fb8b819": {
+      "url": "https://zinnia-os.org/",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "a30d9590eb02": {
+      "url": "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "2ce499703558": {
+      "url": "https://su3.io/posts/zeroserve-caddy-compat",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "8b443d6e6441": {
+      "url": "https://traceapp.info",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "e3850feb973b": {
+      "url": "https://blog.janestreet.com/formal-methods-at-jane-street-index",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
+    },
+    "0e1f7bf713f8": {
+      "url": "https://www.oschina.net/news/458127",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-15"
     }
   },
-  "updated": "2026-06-14 11:06",
+  "updated": "2026-06-15 09:59",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -16747,6 +16981,9 @@
     "global-tech/2026-06-13": "fdda1eeaafb973ea",
     "ai-agent/2026-06-14": "dc500d3b1440fbb7",
     "china-tech/2026-06-14": "2f473a64940fcf02",
-    "global-tech/2026-06-14": "96b3cefdbacacb0b"
+    "global-tech/2026-06-14": "96b3cefdbacacb0b",
+    "ai-agent/2026-06-15": "341ef01bed80d592",
+    "china-tech/2026-06-15": "f6db577d32bffbd3",
+    "global-tech/2026-06-15": "3c89b1e7b9e3d52e"
   }
 }
