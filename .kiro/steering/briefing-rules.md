@@ -43,10 +43,15 @@ fileMatchPattern: 'learning-notes/briefings/**'
 
 ### Phase 0：幂等性检查
 
+⚠️ **工作目录必须是 `/Users/administrator/PycharmProjects/tech-learning-and-projects/`**。
+简报的所有操作（检查、脚本执行、文件写入）都在此项目下，不在 agenzo 或其他 workspace 下。
+多 workspace 环境中容易混淆——**每次执行前先确认 cwd**。
+
 1. 确认今天日期
-2. 检查 `learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`：
-   - **已存在** → 告知用户"今日已完成"并结束
+2. 在 **tech-learning-and-projects** 项目下检查 `learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`：
+   - **已存在** → 告知用户"✅ {主题} 今日已完成，跳过"并结束
    - **不存在** → 继续
+3. 三个主题都已存在 → 输出汇总后终止，**不执行 run-all**
 
 ### Phase 1：确定性流水线
 

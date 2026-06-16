@@ -14,10 +14,14 @@
 
 ## Phase 0: 幂等性检查
 
+⚠️ **所有检查和操作必须在工作目录 `/Users/administrator/PycharmProjects/tech-learning-and-projects/` 下执行。**
+多 workspace 环境中严禁在 agenzo 或其他项目目录下做文件存在性检查。
+
 1. 今天日期已由工作区注入，动态计算年（YYYY）/ 月（MM）
-2. 检查 `learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`：
-   - 已存在 → 告知用户「今日已完成」并结束
+2. 在 **tech-learning-and-projects** 项目下检查 `learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`：
+   - 已存在 → 告知用户「✅ {主题} 今日已完成，跳过」并结束
    - 不存在 → 继续
+3. 三个主题都已存在 → 输出汇总后终止，**不执行 run-all 或任何后续步骤**
 
 ---
 
