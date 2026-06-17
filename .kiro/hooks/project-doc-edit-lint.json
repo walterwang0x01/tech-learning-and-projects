@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "🛡 新建文档格式兜底（技术笔记专属）",
+      "description": "新建 learning-notes/**/*.md 时做格式兜底检查（与 project-doc-write-guard 共享同一脚本）。确定性脚本，零 LLM 成本。",
+      "trigger": "PostFileCreate",
+      "matcher": "learning-notes/.*[^/]*\\.md$",
+      "action": {
+        "type": "command",
+        "command": "python3 .kiro/hooks/lib/check_doc_format.py"
+      },
+      "enabled": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "🛡 简报 md 编辑后一致性兜底",
+      "description": "改动 learning-notes/briefings/**/*.md 后跑 doctor 只读检查；发现 hash_drift 或 missing 时退出码 1 提醒手动跑 `doctor --fix` 或 `register`。确定性脚本，零 LLM 成本。",
+      "trigger": "PostFileSave",
+      "matcher": "learning-notes/briefings/.*[^/]*\\.md$",
+      "action": {
+        "type": "command",
+        "command": "python3 scripts/briefing-tools.py doctor"
+      },
+      "enabled": true
+    }
+  ]
+}

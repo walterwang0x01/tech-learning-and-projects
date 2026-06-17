@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "⚙️ 验证已完成任务（技术笔记专属）",
+      "description": "技术笔记 Spec 任务完成后用脚本做快速验证（ruff + doc-lint），零 LLM。非本项目工作区自动跳过。",
+      "trigger": "PostTaskExec",
+      "action": {
+        "type": "command",
+        "command": "python3 .kiro/hooks/lib/post_task_verify.py"
+      },
+      "enabled": false
+    }
+  ]
+}
