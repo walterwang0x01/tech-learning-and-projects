@@ -17279,9 +17279,237 @@
       "title": "",
       "topic": "china-tech",
       "date": "2026-06-16"
+    },
+    "d46238bbb16a": {
+      "url": "https://www.reuters.com/world/asia-pacific/chinas-deepseek-closes-over-7-billion-funding-with-unusual-deal-structure-2026-06-16",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "37829b339bac": {
+      "url": "https://arxiv.org/abs/2606.15822",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "ce085604bc1f": {
+      "url": "https://arxiv.org/abs/2602.09222",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "097935ae2913": {
+      "url": "https://arxiv.org/abs/2606.15874",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "c4e52ed07a34": {
+      "url": "https://arxiv.org/abs/2605.30208",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "eae2304dee24": {
+      "url": "https://www.langchain.com/blog/the-art-of-loop-engineering",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "1932b643f950": {
+      "url": "https://www.oschina.net/news/459601",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "6a25a8b8d112": {
+      "url": "https://www.langchain.com/blog/public-langsmith-benchmarks",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "31e1d2a2a331": {
+      "url": "https://www.anthropic.com/research/claude-code-expertise",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "1a2bc27d5c0e": {
+      "url": "https://research.nvidia.com/labs/nemotron/Nemotron-3-Ultra",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "40390ba01748": {
+      "url": "https://arxiv.org/abs/2606.16038",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "a55433228cde": {
+      "url": "https://www.langchain.com/blog/customers-monte-carlo",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "d574e99cd4b8": {
+      "url": "https://www.oschina.net/news/459588/spring-tools-5-2-0-released",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "031fe56c38cf": {
+      "url": "https://openai.com/index/deployment-simulation",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-17"
+    },
+    "12a711994817": {
+      "url": "https://amp.scmp.com/tech/big-tech/article/3357260/alibaba-eyes-physical-world-its-first-suite-ai-models-robots",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-17"
+    },
+    "79e303b2ffa5": {
+      "url": "https://amp.scmp.com/tech/big-tech/article/3357307/ni-hao-ah-bao-chinas-alipay-gets-ai-agent-overhaul-challenge-big-tech-rivals",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-17"
+    },
+    "bf7d966d8985": {
+      "url": "https://www.oschina.net/news/459762",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-17"
+    },
+    "0098f2131442": {
+      "url": "https://global.chinadaily.com.cn/a/202606/16/WS6a30f972a310986e2b460486.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-17"
+    },
+    "936c6d6a0067": {
+      "url": "https://www.oschina.net/news/459505",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-17"
+    },
+    "c491a77a4414": {
+      "url": "https://github.com/MiniMax-AI/MiniMax-M3",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-17"
+    },
+    "3b31ed312bac": {
+      "url": "https://36kr.com/p/3826129009234824?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-17"
+    },
+    "628ab3532c00": {
+      "url": "https://www.ithome.com/0/965/167.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-17"
+    },
+    "aa77803b08d0": {
+      "url": "https://huggingface.co/zai-org/GLM-5.2",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-17"
+    },
+    "c7e3ec406fe0": {
+      "url": "https://www.oschina.net/news/459778",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-17"
+    },
+    "3f248660d89f": {
+      "url": "https://nlnet.nl/news/2026/20260616-67-new-projects.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "ad5b94cd4b1e": {
+      "url": "https://aws.amazon.com/blogs/aws/amazon-s3-annotations-attach-rich-queryable-context-directly-to-your-objects",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "dfadce444b91": {
+      "url": "https://www.oschina.net/news/459626/freebsd-15-1-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "40628cb79183": {
+      "url": "https://techcrunch.com/2026/06/16/snap-finally-debuts-its-long-awaited-ar-glasses-specs-and-oof-they-arent-cheap",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "b6b29cc02037": {
+      "url": "https://www.oschina.net/news/459605",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "7c6e97636ed6": {
+      "url": "https://runtimewire.com/article/microsoft-github-aws-ai-capacity-crunch",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "0e5e9f65879c": {
+      "url": "https://blog.cloudflare.com/dmarc-management-ga",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "6d010d3a4097": {
+      "url": "https://www.oschina.net/news/459641",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "05a986d0e72d": {
+      "url": "https://www.oschina.net/news/459470/wasp-typescript-spec",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "ef9a36394847": {
+      "url": "https://techcrunch.com/2026/06/16/spacex-to-acquire-cursor-for-60b-in-stock-days-after-blockbuster-ipo",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "0e44c10a623c": {
+      "url": "https://techcrunch.com/2026/06/16/android-17-launches-with-new-multitasking-tools-as-google-expands-gemini-features",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "023e5cff3b44": {
+      "url": "https://code.visualstudio.com/updates/v1_123",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "b2914209fd56": {
+      "url": "https://www.oschina.net/news/459806",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
+    },
+    "3654baf549b4": {
+      "url": "https://www.reuters.com/legal/transactional/spacex-buy-anysphere-60-billion-2026-06-16",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-17"
     }
   },
-  "updated": "2026-06-16 09:28",
+  "updated": "2026-06-17 09:35",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -17455,6 +17683,9 @@
     "global-tech/2026-06-15": "3c89b1e7b9e3d52e",
     "china-tech/2026-06-16": "f4a6c160a94b5c81",
     "ai-agent/2026-06-16": "71e715fb8f4e60ad",
-    "global-tech/2026-06-16": "104b6c798824c436"
+    "global-tech/2026-06-16": "104b6c798824c436",
+    "ai-agent/2026-06-17": "567c8bcaf4a0ee1c",
+    "china-tech/2026-06-17": "cd7234490392ee41",
+    "global-tech/2026-06-17": "6851ca3b68516b9f"
   }
 }
