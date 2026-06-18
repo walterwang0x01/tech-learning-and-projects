@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "🧹 整理项目目录",
+      "description": "扫描产出物目录，检查索引一致性，标记可归档内容，清理孤儿文件。",
+      "trigger": "Manual",
+      "action": {
+        "type": "agent",
+        "prompt": "你是一个项目目录整理助手。请对 learning-notes/ 下的产出物进行全面扫描和整理建议。\n\n## 1. 简报目录扫描\n\n先执行脚本获取精确状态：\n```bash\npython3 scripts/briefing-tools.py status --json\n```\n\n然后扫描 `learning-notes/briefings/` 下三个主题目录：\n- 统计文件总数、本月文件数、本周文件数\n- 找出最早和最近的文件日期\n- 标记超过 30 天的文件为「可归档」\n- 检查是否有非标准命名的文件（应为 YYYY-MM-DD.md 或 YYYY-WXX-weekly.md）\n\n## 2. README 索引一致性修复\n\n执行脚本自动同步所有索引：\n```bash\npython3 scripts/briefing-tools.py index --topic all\n```\n\n## 3. 孤儿文件检查\n\n扫描 `learning-notes/` 下所有子目录：\n- 空目录（没有任何文件）\n- 孤立的 .md 文件（不在任何技术栈目录结构中）\n- 临时文件（如 .DS_Store、*.tmp、*~）\n\n对于 .DS_Store 文件，直接删除。其他孤儿文件只报告不删除。\n\n## 4. 进度文件健康检查\n\n检查以下状态文件是否存在且格式正确：\n- `learning-notes/.audit-progress.md`\n- `learning-notes/.update-log.md`\n- `learning-notes/briefings/.errors.log`\n- `learning-notes/briefings/.dedup-index.json`（去重索引）\n\n如果错误日志超过 100 行，建议截断保留最近 50 行。\n如果去重索引超过 30 天的条目过多，执行清理。\n\n## 5. 输出整理报告\n\n```\n## 🧹 项目目录整理报告 — YYYY-MM-DD\n\n### 📊 简报统计\n| 主题 | 总文件数 | 本月 | 本周 | 最早 | 可归档 |\n|------|----------|------|------|------|--------|\n\n### 🔗 索引修复\n- 已通过脚本自动同步所有索引 ✅\n\n### 🗑 清理结果\n- 删除 .DS_Store X 个\n- 发现空目录 X 个\n- 发现孤儿文件 X 个\n\n### 📋 归档建议\n\n### 💡 其他建议\n```\n\n## 规则\n- 只修复 README.md 索引和删除 .DS_Store，其他操作只建议不执行\n- 使用中文回复\n- 保持报告简洁"
+      },
+      "enabled": true
+    }
+  ]
+}

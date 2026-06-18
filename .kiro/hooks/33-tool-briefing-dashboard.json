@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "📊 Hook 运行总览",
+      "description": "调用脚本生成简报状态面板，补充文档维护状态。",
+      "trigger": "Manual",
+      "action": {
+        "type": "agent",
+        "prompt": "请生成一份 Hook 运行状态总览。\n\n## 1. 简报采集状态（脚本生成）\n\n执行以下命令获取精确的采集状态：\n```bash\npython3 scripts/briefing-tools.py status\n```\n\n将输出直接展示给用户。\n\n## 2. 文档维护状态\n\n读取以下文件（如果存在）：\n- `learning-notes/.audit-progress.md` — 提取上次审查的技术栈、日期\n- `learning-notes/.update-log.md` — 提取上次知识追踪的技术栈和日期\n\n输出表格：\n| 项目 | 上次执行 | 覆盖技术栈 | 下次建议 |\n|------|----------|------------|----------|\n\n## 3. 错误日志与采集源健康检查\n\n检查 `learning-notes/briefings/.errors.log`，如果有则：\n1. 展示最近 10 行\n2. **连续失败源检测**：统计最近 7 天内同一 URL 出现 `HTTP GET 失败` 的次数。如果同一源连续 3 天以上失败，高亮警告：\n   - `🚨 {源名称} 已连续 {N} 天失败，建议检查 scripts/briefing-tools.py 中的 RSS_SOURCES 配置是否需要更新`\n\n## 4. 建议\n\n根据状态给出今天建议执行哪些 hook。使用中文回复，保持简洁。"
+      },
+      "enabled": true
+    }
+  ]
+}

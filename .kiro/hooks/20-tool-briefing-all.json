@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "📰 一键采集全部简报",
+      "description": "跑一次流水线 → 三个主题 subagent 并行 curate。",
+      "trigger": "Manual",
+      "action": {
+        "type": "agent",
+        "prompt": "请执行三个简报的完整采集流程。架构是「一次流水线 + 三个并行 curate」。\n\n## Phase 0: 幂等性检查\n\n检查今天哪些简报已存在：\n- `learning-notes/briefings/ai-agent/YYYY/MM/YYYY-MM-DD.md`\n- `learning-notes/briefings/china-tech/YYYY/MM/YYYY-MM-DD.md`\n- `learning-notes/briefings/global-tech/YYYY/MM/YYYY-MM-DD.md`\n\n已存在的跳过（输出「✅ {主题} 今日已完成，跳过」）。\n三个都在则结束。\n\n## Phase 1: 确定性流水线（一次跑完）\n\n```bash\npython3 scripts/briefing-tools.py run-all\n```\n\n这条命令串行跑 ingest → classify → candidates，产出：\n- `.kiro_tmp/briefings/runs/YYYY-MM-DD/pool.jsonl`\n- `.kiro_tmp/briefings/runs/YYYY-MM-DD/classified.jsonl`\n- `.kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.{topic}.jsonl` × 3\n- `.kiro_tmp/briefings/runs/YYYY-MM-DD/metrics.json`\n\n不要单独跑 collect / dedup（v1 命令，已 deprecated）。\n\n## Phase 2: 并行 curate（subagent）\n\n对缺失的简报，并行调用 subagent：\n- AI Agent — prompt 用 `.kiro/briefings/prompts/curate.ai-agent.md` + `_shared.md`\n- 国内科技 — `.kiro/briefings/prompts/curate.china-tech.md` + `_shared.md`\n- 国际科技 — `.kiro/briefings/prompts/curate.global-tech.md` + `_shared.md`\n\n每个 subagent：读候选集 → web search 补充 → 精选 → 写 md → register → 返回摘要\n\n### Subagent 失败降级策略（重要）\n\nsubagent 池偶尔会报 `Encountered unexpectedly high load` 或超时。对每个主题按以下顺序处理：\n\n1. **第一次调用失败** → 等 30 秒后重试一次\n2. **第二次仍失败** → 等 60 秒后重试第三次\n3. **第三次仍失败** → **orchestrator 自己兜底**：\n   - 读 `.kiro/briefings/prompts/_shared.md` 和对应的 `curate.{topic}.md`\n   - 读 `.kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.{topic}.jsonl`\n   - 自己做 web search 补充 → 精选 → fs_write → validate → register → index → notify\n   - 在最终汇总里标注「⚠️ {主题} 因 subagent 高负载由主线程兜底」\n\n**不要**无限重试，也不要放弃该主题。目标是「三份简报当天一定齐」。\n\n## Phase 3: 最终同步\n\n无论 Phase 2 有多少份走了兜底路径，都必须跑：\n\n```bash\npython3 scripts/briefing-tools.py index --topic all\npython3 scripts/briefing-tools.py status\n```\n\n## 输出汇总\n\n```\n## 📰 今日简报汇总 — YYYY-MM-DD\n\n### AI Agent（X 条收录 / ✅ 已跳过 / ⚠️ 主线程兜底）\n- 最值得关注：...\n\n### 国内科技（X 条收录 / ✅ 已跳过 / ⚠️ 主线程兜底）\n- 最值得关注：...\n\n### 国际科技（X 条收录 / ✅ 已跳过 / ⚠️ 主线程兜底）\n- 最值得关注：...\n\n### 跨领域趋势\n- 列出跨三个简报的共同趋势（如果有）\n\n### 执行异常（可选）\n- subagent 高负载 / RSS 源熔断 / validate 失败等 → 一行一条\n```"
+      },
+      "enabled": true
+    }
+  ]
+}
