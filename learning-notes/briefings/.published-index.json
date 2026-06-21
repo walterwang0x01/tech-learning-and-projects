@@ -1,101 +1,5 @@
 {
   "items": {
-    "78e343869d7e": {
-      "url": "https://github.com/langchain-ai/langgraph",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "3142061aa41c": {
-      "url": "https://arxiv.org/abs/2604.00835",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "e0a3b207794e": {
-      "url": "https://github.com/openai/openai-agents-python",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "c2dd84557b03": {
-      "url": "https://www.thedeepview.com/articles/anthropic-gives-claude-code-a-multi-agent-upgrade",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "24731f904f8f": {
-      "url": "https://github.com/AIGNE-io/afs-paper",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "61b9cfade272": {
-      "url": "https://arxiv.org/abs/2601.05504",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "67cbd7ba2811": {
-      "url": "https://fordelstudios.com/research/cursor-vs-claude-code-april-2026-what-changed",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "db0654ec5072": {
-      "url": "https://claude.com/blog/claude-code-desktop-redesign",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "96afefaf428b": {
-      "url": "https://arxiv.org/abs/2512.05470",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "94204fc81f1b": {
-      "url": "https://www.thenextgentechinsider.com/pulse/rsac-2026-exposes-critical-security-flaws-in-autonomous-ai-agent-deployment",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "6698bac42fd5": {
-      "url": "https://github.com/crewAIInc/crewAI",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "ee121b99fa34": {
-      "url": "https://www.nxcode.io/resources/news/cursor-vs-claude-code-vs-github-copilot-2026-ultimate-comparison",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "2e1f41d195b2": {
-      "url": "https://crewai.com/blog/how-we-built-cognitive-memory-for-agentic-systems",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "978e35c60717": {
-      "url": "https://github.com/NousResearch/hermes-agent",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "a1dbe618eb05": {
-      "url": "https://news.harvard.edu/gazette/story/2026/04/time-for-government-business-leaders-to-figure-out-ai-cybersecurity-regulation",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
-    "6682cff7e690": {
-      "url": "https://openai.com/index/the-next-evolution-of-the-agents-sdk",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-19"
-    },
     "c2c01ec9deee": {
       "url": "https://arxiv.org/abs/2604.22934",
       "title": "",
@@ -444,12 +348,6 @@
       "topic": "ai-agent",
       "date": "2026-04-23"
     },
-    "c12e26751f70": {
-      "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
     "f1f0cc76182b": {
       "url": "https://openai.com/index/making-chatgpt-better-for-clinicians",
       "title": "",
@@ -623,126 +521,6 @@
       "title": "",
       "topic": "ai-agent",
       "date": "2026-04-26"
-    },
-    "2b9d770ccfd9": {
-      "url": "https://github.com/microsoft/agent-governance-toolkit",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "22512c034826": {
-      "url": "https://www.anthropic.com/news/anthropic-amazon-compute",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "761696ef9682": {
-      "url": "https://blockchain.news/news/nvidia-red-team-exposes-ai-coding-agent-vulnerability-openai-codex",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "69ea979e7fad": {
-      "url": "https://arxiv.org/abs/2604.07745v1",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "f04b49221fdc": {
-      "url": "https://github.com/opencode-ai/opencode",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "902b2065c6ae": {
-      "url": "https://techcommunity.microsoft.com/blog/linuxandopensourceblog/agent-governance-toolkit-architecture-deep-dive-policy-engines-trust-and-sre-for/4510105",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "196dba896d29": {
-      "url": "https://techcrunch.com/2026/04/17/kevin-weil-and-bill-peebles-exit-openai-as-company-continues-to-shed-side-quests",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "ed04d7fea340": {
-      "url": "https://barrasso.me/posts/2026-04-09-on-device-coding-with-apple-intelligence",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "b4b704008c4d": {
-      "url": "https://www.globenewswire.com/news-release/2026/03/25/3262262/0/en/Vorlon-Brings-Forensics-and-Coordinated-Response-to-Agentic-Ecosystem-Security-for-the-First-Time.html",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "49fc8af9e6aa": {
-      "url": "https://www.thenextgentechinsider.com/pulse/opencode-launches-fully-local-ai-coding-agents-with-optimized-gguf-models",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "8f582cd9e40f": {
-      "url": "https://arxiv.org/html/2603.19896v1",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "ed15b918edce": {
-      "url": "https://conzit.com/post/openai-addresses-critical-security-flaws-in-codex-and-chatgpt",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "37bdb38f952a": {
-      "url": "https://the-decoder.com/openai-sets-two-stage-sora-shutdown-with-app-closing-april-2026-and-api-following-in-september",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "117801e34a0c": {
-      "url": "https://siliconangle.com/2026/04/20/amazon-invest-25b-anthropic-part-expanded-cloud-partnership",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "765cbd076c3c": {
-      "url": "https://www.anthropic.com/news/google-broadcom-partnership-compute",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "5edaa1d779c7": {
-      "url": "https://www.msspalert.com/news/vorlon-looks-to-close-the-gap-in-ai-saas-security",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "1670a8c84b62": {
-      "url": "https://www.cnbc.com/2026/04/20/amazon-invest-up-to-25-billion-in-anthropic-part-of-ai-infrastructure.html",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "653dfb4561b3": {
-      "url": "https://thenextweb.com/news/openai-departures-kevin-weil-sora-peebles-enterprise-pivot",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "1a57528ba5a4": {
-      "url": "https://github.com/openai/codex",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
-    },
-    "cab3d6f13ef5": {
-      "url": "https://blockchain.news/news/openai-agents-sdk-sandbox-execution-model-native-harness",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-21"
     },
     "3aa1538062af": {
       "url": "https://openai.com/index/introducing-gpt-5-5",
@@ -989,174 +767,6 @@
       "title": "",
       "topic": "ai-agent",
       "date": "2026-04-30"
-    },
-    "6387736fab08": {
-      "url": "https://www.digitalapplied.com/blog/claude-design-anthropic-labs-ai-native-design-tool",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "0842b80ec269": {
-      "url": "https://www.prnewswire.com/news-releases/salt-security-research-as-ai-agents-outpace-security-most-organizations-face-an-unsecured-api-surge-302736506.html",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "b167cfc3b564": {
-      "url": "https://changelog.langchain.com",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "e7dc15ec972c": {
-      "url": "https://www.theregister.com/2026/04/16/anthropic_mcp_design_flaw",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "b5ece7fb31d6": {
-      "url": "https://arxiv.org/html/2603.04900v1",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "66c31dc42fbc": {
-      "url": "https://arxiv.org/html/2508.19598v1",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "933d13d2c9d9": {
-      "url": "https://www.anthropic.com/research/automated-alignment-researchers",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "7ba53585676f": {
-      "url": "https://www.gartner.com/en/newsroom/press-releases/2026-04-09-gartner-predicts-25-percent-of-all-enterprise-gen-ai-applications-will-experience-at-least-five-minor-security-incidents-per-year-by-2028",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "f9831aa06855": {
-      "url": "https://www.pixee.ai/blog/agentic-ai-governance-gap-strategic-framework-2026",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "1ccb2e90f708": {
-      "url": "https://www.anthropic.com/news",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "d5cff0a2e410": {
-      "url": "https://thehackernews.com/2026/04/openai-launches-gpt-54-cyber-with.html",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "33a94c3f523b": {
-      "url": "https://www.computing.co.uk/news/2026/security/flaw-in-anthropic-s-mcp-putting-200k-servers-at-risk",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "0573c40907ec": {
-      "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "8ae7ef478aa4": {
-      "url": "https://openai.com/index/scaling-trusted-access-for-cyber-defense",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "40419045a7f2": {
-      "url": "https://www.infosecurity-magazine.com/news/openai-unveils-gpt-54-cyber-defense",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "97c7d705d007": {
-      "url": "https://www.testingcatalog.com/anthropic-launches-claude-cowork-in-general-availability",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "80fdb2007a0a": {
-      "url": "https://community.openai.com/t/introducing-the-new-codex-for-almost-everything/1379125",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "105536c8407b": {
-      "url": "https://www.ghacks.net/2026/04/17/openai-updates-codex-with-computer-use-in-app-browser-memory-and-90-plus-new-plugins",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "4f617080cfff": {
-      "url": "https://docs.anthropic.com/en/release-notes/claude-apps",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "19917466a0ac": {
-      "url": "https://console.anthropic.com/docs/en/release-notes/overview",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "48864671f932": {
-      "url": "https://www.cnbc.com/2026/04/16/anthropic-claude-opus-4-7-model-mythos.html",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "7f3414b7e1fc": {
-      "url": "https://felloai.com/anthropic-claude-opus-4-7",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "0f3ab3b192a9": {
-      "url": "https://www.anthropic.com/research/trustworthy-agents",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "c9581350e38f": {
-      "url": "https://blockchain.news/news/anthropic-claude-cowork-enterprise-rollout-april-2026",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "764d49a238b4": {
-      "url": "https://www.modemguides.com/blogs/ai-news/claude-managed-agents-agent-platform-sovereignty",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "e2ac370c3650": {
-      "url": "https://www.cybersecurity-insiders.com/ai-risk-and-readiness-report-2026",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "33969ad40ceb": {
-      "url": "https://blockchain.news/news/anthropic-ai-researchers-outperform-humans-alignment-task",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
-    },
-    "769efa426c2d": {
-      "url": "https://www.infosecurity-magazine.com/news/systemic-flaw-mcp-expose-150",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-20"
     },
     "ca5f4abc6475": {
       "url": "https://arxiv.org/abs/2605.03195",
@@ -2100,12 +1710,6 @@
       "topic": "china-tech",
       "date": "2026-04-29"
     },
-    "0abd18afdbb4": {
-      "url": "https://www.pymnts.com/cpi-posts/analysis-of-chinas-draft-administrative-measures-for-digital-virtual-human-information-services",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
     "c8ac3afab1f5": {
       "url": "https://www.infoq.cn/article/3kfZZXewSZzErupjYGkT",
       "title": "",
@@ -2274,18 +1878,6 @@
       "topic": "china-tech",
       "date": "2026-04-27"
     },
-    "20d9a710e853": {
-      "url": "https://blockchain.news/ainews/deepseek-v4-latest-analysis-1t-moe-1m-token-context-ascend-950pr-support-and-35x-inference-speed-2026-launch-insights",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "ec9e768d357d": {
-      "url": "https://www.implicator.ai/china-gave-away-its-best-ai-models-agents-made-the-giveaway-profitable",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
     "0aae514cee27": {
       "url": "https://cybernews.com/ai-news/china-ban-ai-digital-humans-virtual-relationships-children",
       "title": "",
@@ -2327,12 +1919,6 @@
       "title": "",
       "topic": "china-tech",
       "date": "2026-04-23"
-    },
-    "e7564a42a488": {
-      "url": "https://fortune.com/2026/04/12/china-token-economy-ai-boom-big-tech-startups",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
     },
     "445e371b66da": {
       "url": "https://techxplore.com/news/2026-04-china-rein-ai-digital-humans.html",
@@ -2453,138 +2039,6 @@
       "title": "",
       "topic": "china-tech",
       "date": "2026-04-26"
-    },
-    "cc3a6e779b26": {
-      "url": "https://lawandkoffee.substack.com/p/the-dragon-might-thinks-differently",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "e32886d93078": {
-      "url": "https://news.futunn.com/en/post/71705403/a-new-battleground-for-ai-alibaba-s-entry-tencent-s",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "40f060b21a9a": {
-      "url": "https://www.ivinco.com/blog/china-agentic-commerce-future",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "ef7218343f6c": {
-      "url": "https://siliconangle.com/2026/04/13/stanford-hais-2026-ai-index-reveals-china-u-s-now-neck-neck-race-global-dominance",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "98f1d37d4486": {
-      "url": "https://www.mayerbrown.com/ja/pdf/insights/publications/2026/04/china-issues-draft-rules-on-interactive-ai-services",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "7ad9bfb910c1": {
-      "url": "https://www.turingpost.com/p/minimax",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "e5d77f8ece1c": {
-      "url": "https://hk.marketscreener.com/news/shanghai-tashi-zhihang-technology-co-ltd-announced-that-it-has-received-455-million-in-funding-f-ce7e50dddd8af320",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "011f5a306cd9": {
-      "url": "https://fortune.com/2026/04/13/china-uninvestable-unavoidable-hong-kong-cashing-ai-centric-ipos",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "372677827b1f": {
-      "url": "https://www.globaltimes.cn/page/202604/1358662.shtml",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "d337a1cf50a0": {
-      "url": "https://evolink.ai/blog/deepseek-v4-release-window-prep",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "68ad0897dae9": {
-      "url": "https://github.com/THUDM/GLM-5",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "6b1106e96b9f": {
-      "url": "https://www.kucoin.com/news/flash/tashizhihang-secures-455m-pre-a-round-sets-new-record-in-china-s-embodied-intelligence-sector",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "421b71e0f3a5": {
-      "url": "https://www.chosun.com/english/world-en/2026/04/20/MT6SIGKK7JCHDCZHWDWHXLY4T4",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "6c35e20c4039": {
-      "url": "https://www.theguardian.com/sport/2026/apr/19/humanoid-robots-race-beijing-half-marathon",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "ad6217deaf7e": {
-      "url": "https://www.thenextgentechinsider.com/pulse/deepseek-v4-leaks-fast-and-expert-modes-amid-official-silence",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "be3ae319c2b6": {
-      "url": "https://www.maniac.ai/blog/chinese-frontier-models-compared-glm5-minimax-kimi-qwen",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "ba8efec55229": {
-      "url": "https://fortune.com/2026/04/16/stanford-study-how-has-china-gained-on-us-ai-war",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "59fc13902531": {
-      "url": "https://news.aibase.com/news/27167",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "aeb91443b58b": {
-      "url": "https://thenextweb.com/news/stanford-ai-index-2026-china-us-performance-gap",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "1601e6c2a7aa": {
-      "url": "https://www.buildfastwithai.com/blogs/glm-5-1-open-source-review-2026",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "3080a0c50087": {
-      "url": "https://www.thenextgentechinsider.com/pulse/alibaba-launches-happy-oyster-ai-world-model-for-3d-simulation-and-gaming",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
-    },
-    "4b477e603aa3": {
-      "url": "https://www.geopolitechs.org/p/china-rolls-out-interim-regulations",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-21"
     },
     "a6b13a44b817": {
       "url": "https://sg.finance.yahoo.com/news/chinas-deepseek-says-releases-long-043811064.html",
@@ -4031,126 +3485,6 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-04-26"
-    },
-    "e13745a54cd2": {
-      "url": "https://exposuresecurity.com/briefings/executive-briefing-teampcp-supply-chain-attack-v3-0-web-version.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "949bb98d9d43": {
-      "url": "https://www.parseable.com/blog/supply-chain-audit-monitoring-otel-parseable",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "4829a693ad6e": {
-      "url": "https://www.macrumors.com/guide/apple-smart-glasses",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "091b27d99b86": {
-      "url": "https://www.thenextgentechinsider.com/pulse/cisa-adds-critical-trivy-supply-chain-vulnerability-to-known-exploited-catalog",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "14b4d3c07b74": {
-      "url": "https://www.theverge.com/tech/914723/vercel-hacked",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "491ca3673706": {
-      "url": "https://vercel.com/changelog",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "1df8a12e03af": {
-      "url": "https://devblogs.microsoft.com/typescript/announcing-typescript-6-0-rc",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "88b66f39ddae": {
-      "url": "https://blog.python.org/2026/04/rust-for-cpython-2026-04",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "dcf81f881948": {
-      "url": "https://www.implicator.ai/meta-plans-to-open-source-new-ai-models-but-will-keep-its-most-powerful-closed",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "759798c20c87": {
-      "url": "https://www.theregister.com/2026/04/20/vercel_context_ai_security_incident",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "86fbae041291": {
-      "url": "https://www.crowdstrike.com/en-us/blog/patch-tuesday-analysis-april-2026",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "794ef05eb043": {
-      "url": "https://thehackernews.com/2026/04/april-patch-tuesday-fixes-critical.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "7c17dadfe71f": {
-      "url": "https://www.cnbc.com/2026/04/10/google-meta-big-tech-6-billion-euros-eu-fine.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "9fc477972e69": {
-      "url": "https://vercel.com/kb/bulletin/vercel-april-2026-security-incident",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "d12afc0439b5": {
-      "url": "https://www.thenextgentechinsider.com/pulse/typescript-60-is-last-javascript-release-before-go-rewrite",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "970b6890c236": {
-      "url": "https://www.humai.blog/meta-released-muse-spark-its-first-closed-model-here-is-what-it-gave-up-to-do-it",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "de978a57f52d": {
-      "url": "https://blog.google/company-news/inside-google/company-announcements/joint-statement-google-apple",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "d20e5262fd94": {
-      "url": "https://cybernews.com/security/vercel-hacked-after-oauth-compromise",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "a95a786072fd": {
-      "url": "https://www.thenextgentechinsider.com/pulse/meta-stands-by-open-source-amid-shift-to-proprietary-models",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
-    },
-    "739f4c8d28e4": {
-      "url": "https://isc.sans.edu/diary/rss/32898",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-21"
     },
     "d7eb85f0bca7": {
       "url": "https://www.computerweekly.com/news",
@@ -17657,9 +16991,267 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-06-18"
+    },
+    "426e1218f4cf": {
+      "url": "https://www.theverge.com/gadgets/953066/nothing-cmf-phone-delayed-ram-prices",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "78335ed65305": {
+      "url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0-rc",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "5a60fcd9ee73": {
+      "url": "https://www.smpte.org/blog/smpte-makes-its-standards-freely-accessible-openingstandards-library-to-the-global-media-technology-community",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "e41ee18dbbcf": {
+      "url": "https://github.blog/ai-and-ml/github-copilot/how-we-built-an-internal-data-analytics-agent",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "ca4348dd926d": {
+      "url": "https://townsquare.cauenapier.com/",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "6ee86e9a5f09": {
+      "url": "https://www.heise.de/en/news/Report-EU-to-soon-classify-AWS-and-Azure-as-gatekeepers-under-DSA-11337873.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "678f28803074": {
+      "url": "https://www.crowdstrike.com/en-us/blog/patch-tuesday-analysis-june-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "7cd3cc79f777": {
+      "url": "https://pypi.org/project/prylint",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "8331b567ff2e": {
+      "url": "https://www.cnn.com/2026/06/20/americas/brazil-hackers-unauthorized-alert-latam",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "7c18c2d18b64": {
+      "url": "https://www.ithome.com/0/966/580.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "031d6f045040": {
+      "url": "https://github.com/oven-sh/WebKit/pull/249",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "c722b3ccf652": {
+      "url": "https://www.phoronix.com/news/Linux-7.2-Drops-strncpy",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "33c8c894d4da": {
+      "url": "https://www.theverge.com/science/952988/nasa-relativity-space-eric-schmidt-mars",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "0d6f71fbc3bd": {
+      "url": "https://www.fsf.org/news/statement-regarding-gnu-savannah-security-reports",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "22d0fd4090c8": {
+      "url": "https://www.lispm.net/apps/uhf-x11",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "85a07497876c": {
+      "url": "https://github.com/mysk-research/loupe",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "e3b2908be661": {
+      "url": "https://github.com/overflowy/make-look-scanned",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "30d20529197b": {
+      "url": "https://github.com/playX18/lisp-in-types",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-21"
+    },
+    "90269535bace": {
+      "url": "https://www.techtimes.com/articles/318543/20260617/glm-52-open-weights-live-top-coding-benchmark-api-use-carries-china-data-risk.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-21"
+    },
+    "ebf3a7289d28": {
+      "url": "https://www.ithome.com/0/966/543.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-21"
+    },
+    "5eb63ca8335c": {
+      "url": "https://la.china-embassy.gov.cn/eng/news/202604/t20260413_11890858.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-21"
+    },
+    "1eb84ddba046": {
+      "url": "https://www.odaily.news/en/newsflash/492561",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-21"
+    },
+    "7ea23dda13a0": {
+      "url": "https://www.caixinglobal.com/2026-06-18/chinese-startup-manifold-ai-raises-fresh-funding-as-investors-bet-on-world-models-102455541.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-21"
+    },
+    "ab40cb5fe470": {
+      "url": "https://36kr.com/p/3859926114161665?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-21"
+    },
+    "73e6bed4bc3e": {
+      "url": "https://platform.kimi.ai/",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-21"
+    },
+    "02acfebf8035": {
+      "url": "https://www.cnblogs.com/longxiabest/articles/19824350",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-21"
+    },
+    "d2e474f6817c": {
+      "url": "https://www.ithome.com/0/966/591.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-21"
+    },
+    "008d303683e2": {
+      "url": "https://www.cnbc.com/2026/06/17/china-securities-regulator-csrc-artificial-intelligence-investing-stocks-.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-21"
+    },
+    "40acebafa9dc": {
+      "url": "https://www.techtimes.com/articles/318492/20260616/gpt-56-openai-chief-scientist-calls-it-meaningful-leap-june-launch-nears.htm",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "e0b13ebed847": {
+      "url": "https://aiweekly.co/alerts/openai-plans-june-gpt-56-as-meaningful-improvement",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "32b85d5e9013": {
+      "url": "https://arxiv.org/abs/2606.19980",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "76682d0266dd": {
+      "url": "https://www.augmentcode.com/learn/everything-claude-code-github",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "d1d1e1ccdb27": {
+      "url": "https://claude.com/blog/enterprise-managed-auth",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "4c09a02ad6d4": {
+      "url": "https://arxiv.org/abs/2606.20520",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "a702772a165c": {
+      "url": "https://arxiv.org/abs/2606.19893",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "3625d20766c8": {
+      "url": "https://arxiv.org/abs/2606.19992",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "f9ead70f10cc": {
+      "url": "https://arxiv.org/abs/2606.19464",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "09511579c3c9": {
+      "url": "https://blog.modelcontextprotocol.io/posts/enterprise-managed-auth",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "5a0b507c5958": {
+      "url": "https://www.cyfirma.com/research/exploitation-of-model-context-protocol-in-agentic-ai-deployments",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "a472f7b6e0da": {
+      "url": "https://www.technobezz.com/news/anthropic-launches-claude-design-update-with-direct-pipeline-to-claude-code",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "4dc9bb018c98": {
+      "url": "https://arxiv.org/abs/2606.19911",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "9c35b31b7a61": {
+      "url": "https://x.com/levie/status/2068068247413694532",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
+    },
+    "f2c58b6a231a": {
+      "url": "https://vercel.com/blog/introducing-eve",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-21"
     }
   },
-  "updated": "2026-06-18 13:47",
+  "updated": "2026-06-21 11:46",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -17839,6 +17431,9 @@
     "global-tech/2026-06-17": "6851ca3b68516b9f",
     "ai-agent/2026-06-18": "bcb930f5b3ccbaf2",
     "china-tech/2026-06-18": "afc0b30ce0cfbce1",
-    "global-tech/2026-06-18": "f1f0a4d4f98d32f9"
+    "global-tech/2026-06-18": "f1f0a4d4f98d32f9",
+    "global-tech/2026-06-21": "bcf6163d8379e70c",
+    "china-tech/2026-06-21": "ed0587239e9e3d48",
+    "ai-agent/2026-06-21": "74e4ddea9f3e47b1"
   }
 }
