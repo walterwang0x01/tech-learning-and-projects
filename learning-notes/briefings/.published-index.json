@@ -204,66 +204,6 @@
       "topic": "ai-agent",
       "date": "2026-04-28"
     },
-    "f079e801cd3d": {
-      "url": "https://news.ycombinator.com/item?id=47911524",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-27"
-    },
-    "3355bd3a71aa": {
-      "url": "https://github.com/delta-hq/cc-canary",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-27"
-    },
-    "e56c45faf4ba": {
-      "url": "https://github.com/sachitrafa/YourMemory",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-27"
-    },
-    "1ba739b09513": {
-      "url": "https://openai.com/index/our-principles",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-27"
-    },
-    "df7300217668": {
-      "url": "https://www.odaily.news/en/newsflash/478430",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-27"
-    },
-    "b08d5d87df50": {
-      "url": "https://usenimbus.app",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-27"
-    },
-    "b075a2170611": {
-      "url": "https://news.ycombinator.com/item?id=47895029",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-27"
-    },
-    "e09c091ba491": {
-      "url": "https://rafter.so/blog/incidents/replit-agent-trust-and-guardrails",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-27"
-    },
-    "992c4f5c92af": {
-      "url": "https://www.implicator.ai/openai-posts-five-principle-framework-for-agi-altman-concedes-bigger-role-2",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-27"
-    },
-    "f6f35946da20": {
-      "url": "https://twitter.com/lifeof_jer/status/2048103471019434248",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-27"
-    },
     "1ac5591d9ec4": {
       "url": "https://legallayer.substack.com/p/who-owns-the-claude-code-wrote",
       "title": "",
@@ -1374,72 +1314,6 @@
       "topic": "china-tech",
       "date": "2026-04-28"
     },
-    "1c6782d398d3": {
-      "url": "https://english.news.cn/20260426/c5d30880b9d540a0b2f6f71a5a0630a5/c.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
-    "28237d9fdcfd": {
-      "url": "https://36kr.com/p/3784365164322055",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
-    "d40c71befe68": {
-      "url": "https://ground.news/article/openclaw-adds-deepseek-v4-models-as-tech-world-assesses-huawei-tie-up",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
-    "d8146f596619": {
-      "url": "http://en.people.cn/n3/2026/0427/c90000-20450463.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
-    "3419f8591709": {
-      "url": "https://www.buildfastwithai.com/blogs/qwen-3-6-plus-vs-glm-5-1-vs-kimi-2-5-coding-2026",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
-    "ab0172b223a8": {
-      "url": "https://36kr.com/p/3783828639571203",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
-    "9b247e7c87c8": {
-      "url": "https://news.aibase.com/news/27465",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
-    "cc10535c7b1a": {
-      "url": "https://www.newsbytesapp.com/news/science/openclaw-adopts-deepseek-s-latest-v4-flash-model-as-default/story",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
-    "ed462f34bd31": {
-      "url": "https://sspai.com/post/109114",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
-    "52d6298c9df0": {
-      "url": "https://www.lixueduan.com/posts/ai/19-deploy-kimi26-by-vllm",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
-    "65a0e936f78d": {
-      "url": "https://36kr.com/p/3784311487945735",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-27"
-    },
     "230be135c0b3": {
       "url": "https://sspai.com/post/109062",
       "title": "",
@@ -2429,108 +2303,6 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-04-28"
-    },
-    "82e520591e28": {
-      "url": "https://news.ycombinator.com/item?id=47861454",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "0657be0df2ef": {
-      "url": "https://www.cnbc.com/2026/04/24/google-to-invest-up-to-40-billion-in-anthropic-as-search-giant-spreads-its-ai-bets.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "dc447ebb7d84": {
-      "url": "https://github.blog/open-source/git/highlights-from-git-2-54",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "08481ca48762": {
-      "url": "https://thenextweb.com/news/musk-altman-openai-trial-credibility-nonprofit",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "8111339f42d7": {
-      "url": "https://arstechnica.com/security/2026/04/why-are-top-university-websites-serving-porn-it-comes-down-to-shoddy-housekeeping",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "4c49eeafc50d": {
-      "url": "https://coderoasis.com/typescript-7-0-beta-go-compiler-project-corsa-10x-faster",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "3ca87bf8448b": {
-      "url": "https://www.theguardian.com/technology/2026/apr/26/musk-altman-openai-court",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "67928345b3ff": {
-      "url": "https://github.blog/engineering/infrastructure/how-github-uses-ebpf-to-improve-deployment-safety",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "459fd0b774f2": {
-      "url": "https://fortune.com/2026/04/25/elon-musk-fraud-claims-openai-sam-altman-trial",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "c8017cc5675d": {
-      "url": "https://github.blog/security/hack-the-ai-agent-build-agentic-ai-security-skills-with-the-github-secure-code-game",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "0ffbe8615ed1": {
-      "url": "https://techcrunch.com/2026/04/26/to-buy-this-bay-area-home-youll-need-anthropic-equity",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "d7daa91b9e63": {
-      "url": "https://www.sentinelone.com/labs/fast16-mystery-shadowbrokers-reference-reveals-high-precision-software-sabotage-5-years-before-stuxnet",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "68e22f4efc32": {
-      "url": "https://ca.finance.yahoo.com/news/elon-musks-years-long-legal-battle-with-openai-and-sam-altman-will-finally-head-to-trial-on-monday-130000137.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "a932328070e5": {
-      "url": "https://arstechnica.com/tech-policy/2026/04/fcc-says-ban-on-foreign-made-routers-includes-portable-wi-fi-hotspots",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "34c3dbd56588": {
-      "url": "https://arstechnica.com/ai/2026/04/mozilla-anthropics-mythos-found-271-zero-day-vulnerabilities-in-firefox-150",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "a31a4ab16426": {
-      "url": "https://arstechnica.com/ai/2026/04/google-will-invest-as-much-as-40-billion-in-anthropic",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
-    },
-    "0523f385f175": {
-      "url": "https://www.livemint.com/companies/news/40-billion-from-google-25-billion-from-amazon-anthropic-is-now-the-most-fought-over-ai-company-on-earth-11777076260150.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-27"
     },
     "759586a9ddbe": {
       "url": "https://techcrunch.com/2026/04/29/meta-is-still-burning-money-on-ar-vr",
@@ -17339,9 +17111,255 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-06-26"
+    },
+    "821ced831e9e": {
+      "url": "https://github.com/workweave/router",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "673a62107226": {
+      "url": "https://www.oschina.net/news/467874",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "a6a74c2f6828": {
+      "url": "https://www.oschina.net/news/467860/lilianweng-scaling-laws",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "70fe6fb54851": {
+      "url": "https://www.wired.com/story/anthropic-restores-access-to-mythos",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "6b3dca155dd4": {
+      "url": "https://techcrunch.com/2026/06/25/patronus-ai-lands-50m-to-build-digital-worlds-that-stress-test-ai-agents",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "0b130ad158c7": {
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-DSpark",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "4958572dbbd6": {
+      "url": "https://siliconangle.com/2026/06/25/new-mcp-specification-kills-old-risks-opens-fresh-attack-surfaces-akamai-finds",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "be336d820bcb": {
+      "url": "https://www.ithome.com/0/969/319.htm",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "ce10af2a5887": {
+      "url": "https://techcrunch.com/2026/06/26/trump-admin-releases-anthropic-mythos-to-be-used-by-more-than-100-us-companies-agencies",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "f19680e225dc": {
+      "url": "https://www.wired.com/story/openai-gpt-56-model-release-trump-admin-approval",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "e5397ade2125": {
+      "url": "https://arstechnica.com/gadgets/2026/06/notion-killing-skiff-influenced-email-app-since-most-users-use-ai-agents-instead",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "242ce50d3450": {
+      "url": "https://www.langchain.com/blog/deep-agents-prompt-caching",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "7843b9ea14bc": {
+      "url": "https://openai.com/index/previewing-gpt-5-6-sol",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-27"
+    },
+    "f4e847f540d8": {
+      "url": "https://www.infoq.cn/article/MVDrYfoCovqj6zBNxr9e",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "2256ebf0a0d6": {
+      "url": "https://36kr.com/p/3869622921041156?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "ec78e9109cc9": {
+      "url": "https://www.ithome.com/0/969/334.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "3be3b52342ac": {
+      "url": "https://arstechnica.com/tech-policy/2026/06/anthropic-claims-alibaba-defied-trump-to-attack-claude-and-steal-capabilities",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "36411552ab49": {
+      "url": "https://36kr.com/newsflashes/3871102147908867?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "6d68697792f5": {
+      "url": "https://36kr.com/p/3870720040588295?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "c280694c6c60": {
+      "url": "https://www.qbitai.com/2026/06/438887.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "8243dc15e3d1": {
+      "url": "https://www.infoq.cn/article/j1XdsvKMeFio6oyHGTkK",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "5702bd95fb9d": {
+      "url": "https://www.oschina.net/news/468048",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "ccf0868d6d52": {
+      "url": "https://www.qbitai.com/2026/06/438750.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "321b7aff7522": {
+      "url": "https://codersera.com/blog/kimi-k2-7-complete-guide-2026",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-27"
+    },
+    "c553c2aa83d8": {
+      "url": "https://curl.se/mail/lib-2026-06/0026.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "8a222f3db388": {
+      "url": "https://arstechnica.com/space/2026/06/spacex-plans-to-launch-starlink-mobile-service-in-the-us",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "00e41e8053d7": {
+      "url": "https://techcrunch.com/2026/06/26/corgi-the-buzzy-y-combinator-backed-insurance-tech-startup-says-it-didnt-steal-an-open-source-product",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "1ec25ebb6ff7": {
+      "url": "https://gossamer-lang.org/",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "de3f43ec6efc": {
+      "url": "https://alephneuro.com/blog/ultrasound-brain",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "b45f1c7ca474": {
+      "url": "https://securityaffairs.com/194220/security/curl-fixes-a-25-year-old-bug-in-its-largest-cve-release-yet.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "3e38fb6604f4": {
+      "url": "https://www.reuters.com/business/media-telecom/musks-spacex-targets-us-consumers-with-starlink-mobile-service-push-ft-reports-2026-06-26",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "e359ec819484": {
+      "url": "https://www.eff.org/deeplinks/2026/06/we-can-still-stop-californias-3d-printer-surveillance-scheme",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "d8a93151ca6b": {
+      "url": "https://kubernetes.io/blog/2026/06/26/open-source-maintainership-in-the-age-of-ai",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "2eff12ece1c1": {
+      "url": "https://arstechnica.com/gadgets/2026/06/netflix-now-requires-every-user-profile-to-be-tied-to-unique-email-address",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "6ae18dd7d3cf": {
+      "url": "https://www.oschina.net/news/467755/curl-8-21-0-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "555c98888b22": {
+      "url": "https://kubernetes.io/blog/2026/06/25/headlamp-knative-plugin",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "35e3989a1adc": {
+      "url": "https://github.blog/open-source/social-impact/github-and-undp-team-up-to-advance-development-priorities-in-ghana-with-open-source",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "12f45c208662": {
+      "url": "https://research.jfrog.com/post/dissecting-and-exploiting-linux-lpe-variant-dirtyclone-cve-2026-43503",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "bcf751138281": {
+      "url": "https://www.openttd.org/news/2026/06/25/openttd-16-0-beta1",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "a4adf4a4e250": {
+      "url": "https://www.theverge.com/gadgets/956830/prime-day-macbook-deals-apple-price-hikes",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
+    },
+    "0611c94111c9": {
+      "url": "https://www.oschina.net/news/467739/electron-42-5-0-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-27"
     }
   },
-  "updated": "2026-06-26 09:30",
+  "updated": "2026-06-27 16:11",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -17539,6 +17557,9 @@
     "china-tech/2026-06-25": "ea35732aebe9c9db",
     "ai-agent/2026-06-26": "f3efeb55f50234e4",
     "china-tech/2026-06-26": "06f0b9a103331cf1",
-    "global-tech/2026-06-26": "8064a23eba7a1e7a"
+    "global-tech/2026-06-26": "8064a23eba7a1e7a",
+    "ai-agent/2026-06-27": "034f0231f28c1e14",
+    "china-tech/2026-06-27": "d4d1420886954dce",
+    "global-tech/2026-06-27": "38de84351922bcfe"
   }
 }
