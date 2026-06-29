@@ -1,107 +1,5 @@
 {
   "items": {
-    "c2c01ec9deee": {
-      "url": "https://arxiv.org/abs/2604.22934",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "02e66100e59b": {
-      "url": "https://arxiv.org/abs/2604.23049",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "104b57e9a431": {
-      "url": "https://github.com/microsoft/VibeVoice",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "765ecc0819a6": {
-      "url": "https://www.aboutamazon.com/news/aws/bedrock-openai-models",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "4e08eb7c13d5": {
-      "url": "https://thenextweb.com/news/nvidia-nemotron-nano-omni-multimodal-agent-edge",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "2744cceff260": {
-      "url": "https://www.implicator.ai/anthropic-brings-claude-into-9-creative-tools-as-openai-and-gemini-push-images",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "3fabcf9934d1": {
-      "url": "https://huggingface.co/blog/nvidia/nemotron-3-nano-omni-multimodal-intelligence",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "34c573214a61": {
-      "url": "https://nofilmschool.com/anthropic-claude-connectors-announced",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "5a96948e044f": {
-      "url": "https://blogs.nvidia.com/blog/nemotron-3-nano-omni-multimodal-ai-agents",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "2356a1407803": {
-      "url": "https://arxiv.org/abs/2604.23072",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "5c8164483a4d": {
-      "url": "https://developer.nvidia.com/blog/nvidia-nemotron-3-nano-omni-powers-multimodal-agent-reasoning-in-a-single-efficient-open-model",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "15849abf4dcf": {
-      "url": "https://www.anthropic.com/news/claude-for-creative-work",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "d807b102f496": {
-      "url": "https://arxiv.org/abs/2604.23057",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "46283821114d": {
-      "url": "https://chrisnager.com/blog/doom-runs-in-chatgpt-and-claude",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "d0682fe009b6": {
-      "url": "https://openai.com/index/openai-on-aws",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "4bbb320b1e2a": {
-      "url": "https://www.cnbc.com/2026/04/28/openai-brings-models-to-aws-after-ending-exclusivity-with-microsoft.html",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
-    "a75ad66abeae": {
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/04/bedrock-openai-models-codex-managed-agents",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-04-29"
-    },
     "1ac5591d9ec4": {
       "url": "https://legallayer.substack.com/p/who-owns-the-claude-code-wrote",
       "title": "",
@@ -1068,90 +966,6 @@
       "topic": "ai-agent",
       "date": "2026-05-10"
     },
-    "32115be26cc1": {
-      "url": "https://www.infoq.cn/article/YzBjivSoby8NR3gPWRtR",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "fe0aaad3ddd8": {
-      "url": "https://www.forbes.com/sites/jonmarkman/2026/04/28/chinas-deepseek-v4-and-qwen-reshape-the-open-source-ai-race",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "ed07662d90cb": {
-      "url": "https://www.thestandard.com.hk/china/article/330592/Xiaomi-open-sources-MiMo-V25-Pro-model-under-MIT-license-topping-benchmarks",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "38c7748d1285": {
-      "url": "https://fal.ai/learn/devs/happyhorse-1-0-what-do-we-know-so-far",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "4adc95a38d28": {
-      "url": "https://36kr.com/p/3787150633065728",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "861c51613a2b": {
-      "url": "https://36kr.com/p/3786324189027332",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "c8ac3afab1f5": {
-      "url": "https://www.infoq.cn/article/3kfZZXewSZzErupjYGkT",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "e52634522c7e": {
-      "url": "https://www.infoq.cn/article/ipRw9Isjy5w96qmFDmpr",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "1f962edc106b": {
-      "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "8c31a12e1973": {
-      "url": "https://www.infoworld.com/article/4164184/xiaomi-releases-mit%E2%80%91licensed-mimo-models-for-long%E2%80%91running-ai-agents.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "6f484bb4de04": {
-      "url": "https://huggingface.co/happyhorseai/happy-horse-ai-video-generator",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "2c16673dd3bf": {
-      "url": "https://www.prnewswire.com/news-releases/fal-launches-happyhorse-1-0--the-1-ranked-ai-video-model-as-official-api-partner-302755003.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "a92ac6656512": {
-      "url": "https://github.com/XiaomiMiMo/MiMo",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
-    "365cd2fde75e": {
-      "url": "https://36kr.com/p/3786123369094405",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-04-29"
-    },
     "230be135c0b3": {
       "url": "https://sspai.com/post/109062",
       "title": "",
@@ -1949,84 +1763,6 @@
       "title": "",
       "topic": "china-tech",
       "date": "2026-05-10"
-    },
-    "37029d8cf4c0": {
-      "url": "https://arstechnica.com/ai/2026/04/github-will-start-charging-copilot-users-based-on-their-actual-ai-usage",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "2ad588547eb1": {
-      "url": "https://techcrunch.com/2026/04/28/amazon-launches-an-ai-powered-audio-qa-experience-on-product-pages",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "c0d956a22ec5": {
-      "url": "https://github.com/pgcentralfoundation/pgrx",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "cc4e942ec361": {
-      "url": "https://thehackernews.com/2026/04/researchers-discover-critical-github.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "e1d6661d3e3c": {
-      "url": "https://news.ycombinator.com/item?id=47936479",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "c6ffff8de7ff": {
-      "url": "https://chrisdell.info/using-rust-to-build-a-1-dollar-handheld-gaming-console",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "e43508424141": {
-      "url": "https://www.wiz.io/blog/github-rce-vulnerability-cve-2026-3854",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "704b164c0ea4": {
-      "url": "https://techcrunch.com/2026/04/28/google-expands-pentagons-access-to-its-ai-after-anthropics-refusal",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "65e755f18954": {
-      "url": "http://gamasutra.com/production/github-copilot-is-pivoting-to-usage-based-billing-because-it-s-currently-unsustainable",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "ff4713c1f4a9": {
-      "url": "https://www.infoworld.com/article/4164236/github-shifts-copilot-to-usage-based-billing-signaling-new-cost-model-for-enterprise-ai-tools.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "89eae6eebb45": {
-      "url": "https://mitchellh.com/writing/ghostty-leaving-github",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "055eef772ce9": {
-      "url": "https://github.blog/security/securing-the-git-push-pipeline-responding-to-a-critical-remote-code-execution-vulnerability",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
-    },
-    "9811cffca2d2": {
-      "url": "https://news.ycombinator.com/item?id=47939579",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-04-29"
     },
     "759586a9ddbe": {
       "url": "https://techcrunch.com/2026/04/29/meta-is-still-burning-money-on-ar-vr",
@@ -17351,9 +17087,225 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-06-28"
+    },
+    "957a0257ae9e": {
+      "url": "https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/introducing-model-context-protocol-mcp-in-copilot-studio-simplified-integration-with-ai-apps-and-agents",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-29"
+    },
+    "ed78ae8d8736": {
+      "url": "https://web-hub.aliz.ai/blog/mcp-specification-release-candidate",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-29"
+    },
+    "b3734ceee3fe": {
+      "url": "https://www.panewslab.com/en/articles/019f0bea-beb5-719f-8425-fdfb7a8b5633",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-29"
+    },
+    "536604e9e1ff": {
+      "url": "https://openai.com/index/built-to-benefit-everyone-our-plan",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-29"
+    },
+    "57f46cfea018": {
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-DSpark",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-29"
+    },
+    "52250215d90e": {
+      "url": "https://www.oschina.net/",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-29"
+    },
+    "e8c825064af3": {
+      "url": "https://www.securityweek.com/new-enterprise-ready-mcp-specification-brings-new-security-challenges",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-29"
+    },
+    "fba181286680": {
+      "url": "https://www.cnbc.com/2026/06/26/us-government-anthropic-claude-mythos5-ai.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-29"
+    },
+    "00c7685fee46": {
+      "url": "https://www.macrumors.com/2026/06/26/openai-gpt-5-6-sol",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-06-29"
+    },
+    "2b27c1402ea1": {
+      "url": "https://www.qbitai.com/",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "e84913ba53c7": {
+      "url": "https://www.36kr.com/",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "8728458ed225": {
+      "url": "https://carnewschina.com/2026/06/25/backed-by-global-auto-giants-chinese-autonomous-driving-startup-momenta-files-for-hkex-ipo",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "491984f7883f": {
+      "url": "https://finance.yahoo.com/technology/ai/articles/baidus-ai-chip-unit-kunlunxin-181913432.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "e061cbb1da78": {
+      "url": "https://m.ebrun.com/684640.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "4ac1fcd5ca20": {
+      "url": "https://www.businesstimes.com.sg/international/samsung-sk-invest-2000-trillion-won-south-koreas-new-three-mega-projects-over-10-years",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "29b53ea902a0": {
+      "url": "https://eu.36kr.com/en/p/3818355071484803",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "482de5f9fa7c": {
+      "url": "https://www.infoq.cn/",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "4020e9dc158e": {
+      "url": "https://www.huaweicentral.com/huawei-harmonyos-device-ecosystem-surpassed-1-3-billion-units",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "c5c5b7455257": {
+      "url": "https://amp.scmp.com/tech/big-tech/article/3358647/faster-ai-lower-costs-dspark-eases-inference-bottlenecks-and-chip-strain-says-deepseek",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "53f8571efdfb": {
+      "url": "https://www.axios.com/2026/06/25/china-glm-52-open-source-hackers",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "452b491bccfd": {
+      "url": "https://www.reuters.com/business/autos-transportation/chinas-momenta-seeks-up-751-million-hong-kong-ipo-boost-autonomous-driving-rd-2026-06-29",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "76d917b91e43": {
+      "url": "https://x.com/elonmusk",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-06-29"
+    },
+    "188d0f81e952": {
+      "url": "https://top500.org/news/lineshine-debuts-no-1-top500-enters-new-global-exascale-era",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "6d385992bbc4": {
+      "url": "https://github.com/kavishdevar/aln",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "c6c7c778e768": {
+      "url": "https://xonaly.com",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "af5d7ca0cda7": {
+      "url": "https://www.ibm.com/think/insights/tokenmaxxing-dead-long-live-valuemaxxing",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "8cbc54e7084f": {
+      "url": "https://techcrunch.com/2026/06/28/ford-rehires-gray-beard-engineers-after-ai-falls-short",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "877abb606503": {
+      "url": "https://techcrunch.com/2026/06/28/instagram-testing-ways-to-customize-your-algorithm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "034fb847bac3": {
+      "url": "https://www.techspot.com/news/112875-china-built-world-most-powerful-supercomputer-using-huawei.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "2ba324da2e7e": {
+      "url": "https://www.phantafield.com/whitepaper",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "97c51afce1c1": {
+      "url": "https://github.com/openai/codex/issues/2847",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "3187c992dcb5": {
+      "url": "https://gitee.com/thinkgem/jeesite4",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "4b5b95e206ec": {
+      "url": "https://linuxiac.com/airpods-on-linux-librepods-project-makes-it-possible",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "9a6fcba87b73": {
+      "url": "https://www.eff.org/deeplinks/2026/06/kids-act-would-require-age-checks-get-online",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "86241d6f39d5": {
+      "url": "https://www.producthunt.com/leaderboard/daily/2026/6/28",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
+    },
+    "594b61c2765b": {
+      "url": "https://techcrunch.com/2026/06/28/california-law-targeting-loud-streaming-ads-july-1",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-06-29"
     }
   },
-  "updated": "2026-06-28 13:21",
+  "updated": "2026-06-29 09:48",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -17557,6 +17509,9 @@
     "global-tech/2026-06-27": "38de84351922bcfe",
     "china-tech/2026-06-28": "fa4393fbde8c2a48",
     "ai-agent/2026-06-28": "055d8cec56322619",
-    "global-tech/2026-06-28": "450506851f970e15"
+    "global-tech/2026-06-28": "450506851f970e15",
+    "ai-agent/2026-06-29": "3a7a3dc248ef25b5",
+    "china-tech/2026-06-29": "2ce64746436ca359",
+    "global-tech/2026-06-29": "e5fff45f4c948a38"
   }
 }
