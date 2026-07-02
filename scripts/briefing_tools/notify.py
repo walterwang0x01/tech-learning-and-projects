@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 import os
 import re
+import time
+import urllib.error
 import urllib.request
 from datetime import datetime
 from pathlib import Path
@@ -40,7 +42,14 @@ def get_bark_url() -> str | None:
     return url or None
 
 
-def push_bark(bark_url: str, title: str, body: str, group: str = "AI简报", open_url: str = "") -> bool:
+def push_bark(
+    bark_url: str, title: str, body: str, group: str = "AI简报", open_url: str = "",
+    timeout: int = 10, retries: int = 2,
+) -> bool:
+    """推送 Bark 通知，带指数退避重试（模式同 http.py 的 http_get）。
+
+    网络超时 / 5xx 视为临时错误重试；4xx（配置错误等）不重试。
+    """
     url = bark_url.rstrip("/") + "/"
     data = {
         "title": title,
@@ -52,22 +61,33 @@ def push_bark(bark_url: str, title: str, body: str, group: str = "AI简报", ope
     if open_url:
         data["url"] = open_url
     payload = json.dumps(data).encode("utf-8")
-    try:
-        req = urllib.request.Request(
-            url, data=payload,
-            headers={"Content-Type": "application/json; charset=utf-8"},
-            method="POST",
-        )
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            result = json.loads(resp.read().decode("utf-8"))
-            if result.get("code") == 200:
-                print(f"  ✅ Bark 推送成功：{title}")
-                return True
-            print(f"  ❌ Bark 推送失败：{result}")
-            return False
-    except Exception as e:
-        print(f"  ❌ Bark 推送异常：{e}")
-        return False
+    backoffs = [2, 5, 10]
+    last_err: Exception | None = None
+    for attempt in range(1 + retries):
+        try:
+            req = urllib.request.Request(
+                url, data=payload,
+                headers={"Content-Type": "application/json; charset=utf-8"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                result = json.loads(resp.read().decode("utf-8"))
+                if result.get("code") == 200:
+                    print(f"  ✅ Bark 推送成功：{title}")
+                    return True
+                print(f"  ❌ Bark 推送失败：{result}")
+                return False
+        except urllib.error.HTTPError as e:
+            last_err = e
+            if 400 <= e.code < 500 and e.code not in (408, 429):
+                break
+        except Exception as e:
+            last_err = e
+        if attempt < retries:
+            print(f"  ⚠️  Bark 推送超时/异常，{backoffs[attempt]}s 后重试（{attempt + 1}/{retries}）：{last_err}")
+            time.sleep(backoffs[min(attempt, len(backoffs) - 1)])
+    print(f"  ❌ Bark 推送异常（已重试 {retries} 次）：{last_err}")
+    return False
 
 
 def count_briefing_items(content: str) -> int:
