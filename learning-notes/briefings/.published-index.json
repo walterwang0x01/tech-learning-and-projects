@@ -126,48 +126,6 @@
       "topic": "ai-agent",
       "date": "2026-05-07"
     },
-    "8c6efbd27f1d": {
-      "url": "https://mljar.com",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-05-03"
-    },
-    "6110753a9b31": {
-      "url": "https://arxiv.org/abs/2509.00462",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-05-03"
-    },
-    "1d4f674f82a1": {
-      "url": "https://github.com/mahimairaja/voiceai",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-05-03"
-    },
-    "ed9192b8d313": {
-      "url": "https://github.com/nexu-io/open-design",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-05-03"
-    },
-    "40a58a742cd6": {
-      "url": "https://arxiv.org/abs/2505.01441",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-05-03"
-    },
-    "5ba77ceb2d37": {
-      "url": "https://copilot.simplepdf.com",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-05-03"
-    },
-    "30998a404fc0": {
-      "url": "https://www.mendral.com/blog/agent-harness-belongs-outside-sandbox",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-05-03"
-    },
     "00f5548b55e3": {
       "url": "https://tooldirectory.ai/ai-graveyard",
       "title": "",
@@ -912,54 +870,6 @@
       "topic": "china-tech",
       "date": "2026-05-07"
     },
-    "afdace39e749": {
-      "url": "https://github.com/TauricResearch/TradingAgents",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-05-03"
-    },
-    "f147dc6d17e1": {
-      "url": "https://www.qbitai.com/2026/05/412696.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-05-03"
-    },
-    "0c46f167421e": {
-      "url": "https://api-docs.deepseek.com/news/news260424",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-05-03"
-    },
-    "fdcda74e220f": {
-      "url": "https://www.qbitai.com/2026/05/412870.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-05-03"
-    },
-    "c6c434fb0902": {
-      "url": "https://www.qbitai.com/2026/05/412585.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-05-03"
-    },
-    "62d5832affa7": {
-      "url": "https://www.qbitai.com/2026/05/412737.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-05-03"
-    },
-    "f7acd55c94f0": {
-      "url": "https://36kr.com/newsflashes/3792999844338951",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-05-03"
-    },
-    "9e9de1c37250": {
-      "url": "https://www.cnbc.com/2026/04/27/meta-manus-china-blocks-acquisition-ai-startup.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-05-03"
-    },
     "2e579d63d85d": {
       "url": "https://sspai.com/post/109410",
       "title": "",
@@ -1589,60 +1499,6 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-05-07"
-    },
-    "b364dea4c1a2": {
-      "url": "https://ladybird.org/newsletter/2026-04-30",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-05-03"
-    },
-    "88b1c8243cb5": {
-      "url": "https://blog.cloudflare.com/dynamic-workflows",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-05-03"
-    },
-    "d0e81f40b75b": {
-      "url": "https://nethack.org/v500/release.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-05-03"
-    },
-    "cffd7666db47": {
-      "url": "https://kubernetes.io/blog/2026/05/01/kubernetes-v1-36-feature-pod-level-resource-managers-alpha",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-05-03"
-    },
-    "6227202d83e9": {
-      "url": "https://www.theverge.com/policy/922380/new-mexico-meta-public-nuisance-trial-kids-safety",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-05-03"
-    },
-    "7b7dea0bbb57": {
-      "url": "https://flueframework.com",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-05-03"
-    },
-    "38a940f36bca": {
-      "url": "https://blog.cloudflare.com/code-orange-fail-small-complete",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-05-03"
-    },
-    "138eaafc703d": {
-      "url": "https://hnup.date/hn-sota",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-05-03"
-    },
-    "1e2fb6a87ea6": {
-      "url": "https://github.com/microsoft/vscode/pull/310226",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-05-03"
     },
     "4ab944a300ef": {
       "url": "https://news.ycombinator.com/item?id=48024859",
@@ -17423,9 +17279,255 @@
       "title": "",
       "topic": "china-tech",
       "date": "2026-07-02"
+    },
+    "52eae6e7b073": {
+      "url": "https://www.oschina.net/news/471291/github-com-gh-stack",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "672dfcc7f900": {
+      "url": "https://www.dbos.dev/blog/co-locating-workflow-state-with-your-data",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "e5948236c7c7": {
+      "url": "https://techcrunch.com/2026/07/02/tesla-saw-a-massive-sales-jump-in-the-second-quarter",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "b33a5e42aa87": {
+      "url": "https://www.oschina.net/news/471210",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "6cfe7dbe0331": {
+      "url": "https://arstechnica.com/gaming/2026/07/sony-will-stop-making-physical-copies-of-playstation-games-in-2028",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "3f0e1b5456b6": {
+      "url": "https://github.com/Chocobozzz/PeerTube",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "3263d666c083": {
+      "url": "https://arstechnica.com/ai/2026/07/googles-ai-buildout-drove-37-increase-in-electricity-use-in-2025",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "3dc5ba30e21c": {
+      "url": "https://blog.podman.io/2026/07/introducing-podman-v6-0-0",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "df4a745d1f17": {
+      "url": "https://github.com/immich-app/immich/discussions/29439",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "1763e93d33e2": {
+      "url": "https://github.com/FractalFir/crustc",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "486d391fa031": {
+      "url": "https://www.hunton.com/privacy-and-cybersecurity-law-blog/virginia-bans-sale-of-geolocation-data",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "b0bf99b30153": {
+      "url": "http://www.lmdb.tech/doc",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "25690440ee43": {
+      "url": "https://www.oschina.net/news/471196/rust-1-96-1-released",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "ca8585806e4b": {
+      "url": "https://arstechnica.com/gadgets/2026/07/google-loses-long-running-appeal-of-record-eu-fine-will-have-to-cough-up-4-7-billion",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "5cf6a5939b15": {
+      "url": "https://developers.cloudflare.com/changelog/product/bots",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "60280f9dab25": {
+      "url": "https://www.ithome.com/0/971/929.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-07-03"
+    },
+    "bc9ac2c56a8c": {
+      "url": "https://my.oschina.net/u/4487475/blog/19715726",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "c1074f799768": {
+      "url": "https://arxiv.org/abs/2607.00016",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "1b491ed59c6a": {
+      "url": "https://www.catonetworks.com/blog/duneslide-two-critical-rce-vulnerabilities",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "7e157f79708a": {
+      "url": "https://github.com/clidey/deptrust",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "6779922dddab": {
+      "url": "https://www.oschina.net/news/470800/nano-banana-2-lite",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "74eb4c420230": {
+      "url": "https://arxiv.org/abs/2607.00269",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "d84319003959": {
+      "url": "https://arxiv.org/abs/2607.00692",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "1e90d4ca83b7": {
+      "url": "https://manufact.com",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "2e7658882ecd": {
+      "url": "https://www.oschina.net/news/470846",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "95f6d5232954": {
+      "url": "https://thehackernews.com/2026/07/critical-cursor-flaws-could-let-prompt.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "4a8442e0f41c": {
+      "url": "https://www.oschina.net/news/471446/kimi-k2-7-is-now-available-in-github-copilot",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "24a872edf329": {
+      "url": "https://www.anthropic.com/news/redeploying-fable-5",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "2b15a2cb9286": {
+      "url": "https://www.oschina.net/news/471416/anthropic-removing-its-code-for-catching-chinese-competitors",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "a9075cea3750": {
+      "url": "https://www.langchain.com/blog/fix-your-coding-agent-bill",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-07-03"
+    },
+    "0ae4f0b4be5c": {
+      "url": "https://www.ithome.com/0/971/952.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
+    },
+    "59157759ccca": {
+      "url": "https://36kr.com/p/3877863381741577?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
+    },
+    "da514f44d8a1": {
+      "url": "https://www.oschina.net/news/471428",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
+    },
+    "5256777e7c4e": {
+      "url": "https://36kr.com/p/3879158039834629?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
+    },
+    "3aceb51a824c": {
+      "url": "https://www.ithome.com/0/971/998.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
+    },
+    "9dcdc7bdb67d": {
+      "url": "https://36kr.com/p/3877830625046535?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
+    },
+    "5e7fdbc4dfac": {
+      "url": "https://www.qbitai.com/2026/07/442047.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
+    },
+    "dc38a969a4c2": {
+      "url": "https://www.qbitai.com/2026/07/441786.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
+    },
+    "72b58e76980a": {
+      "url": "https://36kr.com/newsflashes/3879180027817992?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
+    },
+    "bdd008c05e22": {
+      "url": "https://36kr.com/p/3877814169530630?f=rss",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
+    },
+    "748086f96649": {
+      "url": "https://www.qbitai.com/2026/07/442134.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-07-03"
     }
   },
-  "updated": "2026-07-02 09:02",
+  "updated": "2026-07-03 09:35",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -17641,6 +17743,9 @@
     "global-tech/2026-07-01": "93d327c70fc5f63d",
     "ai-agent/2026-07-02": "de65989471993f24",
     "global-tech/2026-07-02": "fdcb9658f828de27",
-    "china-tech/2026-07-02": "f972f7ff7c57ba27"
+    "china-tech/2026-07-02": "f972f7ff7c57ba27",
+    "global-tech/2026-07-03": "825030a795b42013",
+    "ai-agent/2026-07-03": "5cab0059bb7ae378",
+    "china-tech/2026-07-03": "e9358bd1f1456040"
   }
 }
