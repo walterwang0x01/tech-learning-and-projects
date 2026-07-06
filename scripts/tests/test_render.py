@@ -117,6 +117,15 @@ class TestRenderEndToEnd(unittest.TestCase):
         finally:
             p.unlink()
 
+    def test_optional_sections_markdown(self):
+        doc = _ai_doc()
+        doc["optional_sections"] = [
+            {"type": "markdown", "content": "**Paper X** — one line. → [arXiv](https://arxiv.org/abs/1234)"}
+        ]
+        rendered = render_briefing(BriefingDoc.from_dict(doc))
+        self.assertIn("**Paper X**", rendered)
+        self.assertIn("arXiv", rendered)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -87,6 +87,17 @@ class TestClassifyRule(unittest.TestCase):
         self.assertIn("ai-agent", tags)
         self.assertIn("china-tech", tags)
 
+    def test_follow_builders_x_no_hint_fallback(self):
+        """follow-builders/x 无 AI 关键词时不应靠 hint 兜底进 ai-agent"""
+        item = {
+            "title": "Someone (@x): random life update",
+            "description": "just had coffee",
+            "source": "follow-builders/x/@someone",
+            "source_topic_hints": [],
+        }
+        tags = classify_rule(item, self.cfg)
+        self.assertEqual(tags, [])
+
     def test_source_hint_fallback(self):
         """关键词完全未命中时，source hint 兜底"""
         item = {

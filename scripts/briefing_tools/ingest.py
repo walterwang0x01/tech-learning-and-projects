@@ -8,20 +8,58 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from .config import Config
 from .follow_builders import fetch_follow_builders
 from .health import is_source_tripped, record_source_result
+from .hn_algolia import fetch_hn_algolia
 from .http import filter_by_freshness, http_get, parse_rss
+
+
+def _cap_items(items: list[dict], max_items: int | None) -> list[dict]:
+    if max_items is None or max_items <= 0 or len(items) <= max_items:
+        return items
+    return items[:max_items]
 
 
 def _fetch_one(src: dict) -> tuple[dict, list[dict], float, bool]:
     timeout = src.get("timeout", 15)
+    retries = src.get("retries", 3)
     t0 = time.time()
-    xml_text = http_get(src["url"], timeout=timeout)
+    xml_text = None
+    urls = [src["url"]]
+    fallback = src.get("fallback_url")
+    if fallback:
+        urls.append(fallback)
+
+    for url in urls:
+        xml_text = http_get(url, timeout=timeout, retries=retries)
+        if xml_text:
+            break
+
     elapsed = time.time() - t0
     if xml_text:
         items = parse_rss(xml_text, src["name"])
+        items = _cap_items(items, src.get("max_items"))
         hints = src.get("topic_hints", [])
         for it in items:
             it["source_topic_hints"] = hints
         return src, items, elapsed, True
+
+    # Algolia HN 备用（hnrss 502/超时时）
+    algolia = src.get("algolia_fallback")
+    if algolia:
+        fb_items = fetch_hn_algolia(
+            algolia.get("query", ""),
+            tags=algolia.get("tags", "story"),
+            points_min=algolia.get("points_min"),
+            hits_per_page=int(algolia.get("hits_per_page", 30)),
+            timeout=timeout,
+        )
+        if fb_items:
+            hints = src.get("topic_hints", [])
+            for it in fb_items:
+                it["source"] = f"{src['name']} (Algolia)"
+                it["source_topic_hints"] = hints
+            elapsed = time.time() - t0
+            return src, fb_items, elapsed, True
+
     return src, [], elapsed, False
 
 
@@ -67,7 +105,6 @@ def run_ingest(cfg: Config) -> tuple[list[dict], list[dict], list[str]]:
                     all_items.extend(items)
 
     # follow-builders 中心化 feed（X 推文 + 播客 transcript）
-    # 与 RSS 同池，下游 dedup / freshness / classify 不用区分类型
     if cfg.follow_builders.enabled:
         fb_t0 = time.time()
         fb_items, fb_metrics = fetch_follow_builders(cfg.follow_builders)

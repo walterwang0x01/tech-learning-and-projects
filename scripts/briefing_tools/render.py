@@ -60,6 +60,27 @@ def _format_trend(t: TrendItem) -> str:
     return f"- {t.icon} {t.text}"
 
 
+def _format_optional_section(section: dict) -> str:
+    """渲染 optional_sections：灵活块（论文段落、补充说明等）"""
+    sec_type = str(section.get("type", "markdown")).strip().lower()
+    if sec_type == "markdown":
+        content = str(section.get("content", "")).strip()
+        if not content:
+            raise ValueError("optional_sections markdown 块 content 不能为空")
+        return content
+    if sec_type == "prose":
+        title = str(section.get("title", "")).strip()
+        lines = [str(x).strip() for x in section.get("lines", []) if str(x).strip()]
+        if not lines:
+            raise ValueError("optional_sections prose 块 lines 不能为空")
+        parts: list[str] = []
+        if title:
+            parts.extend([f"## {title}", ""])
+        parts.extend(lines)
+        return "\n".join(parts)
+    raise ValueError(f"不支持的 optional_sections.type: {sec_type!r}")
+
+
 def render_briefing(doc: BriefingDoc) -> str:
     """渲染完整 markdown"""
     lines: list[str] = [
@@ -82,6 +103,10 @@ def render_briefing(doc: BriefingDoc) -> str:
 
     for section in doc.extra_sections:
         lines.append(_format_table(section))
+        lines.append("")
+
+    for section in doc.optional_sections:
+        lines.append(_format_optional_section(section))
         lines.append("")
 
     if doc.trends:

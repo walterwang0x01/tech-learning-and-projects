@@ -202,11 +202,14 @@ JSON 结构：
   "trends": [
     {"icon": "🆕", "text": "..."},
     {"icon": "🔺", "text": "..."}
+  ],
+  "optional_sections": [
+    {"type": "markdown", "content": "**论文标题** — 一句话贡献。→ [arXiv](url)"}
   ]
 }
 ```
 
-格式由模板渲染，写错了会被 schema 在 render 阶段直接拒。**这是消除格式飘移的根本方法。**
+`optional_sections` 用于表格区之后的自由块（如论文段落），`render` 会自动渲染。
 
 ### 路径 B（手写 markdown，仅用于路径 A 不可用时）
 
@@ -226,11 +229,15 @@ python3 scripts/briefing-tools.py compare-skeleton --topic {topic} learning-note
 # 4. 通过校验后再登记 URL 到 published-index（hash 漂移自动告警）
 python3 scripts/briefing-tools.py register --topic {topic}
 
-# 5. 同步 README 索引
-python3 scripts/briefing-tools.py index --topic {topic}
+# 5. 同步 README 索引 + Bark 推送由 orchestrator 统一执行（见下方「收尾」）
+#    subagent 不要各自跑 index / notify，避免重复推送
+```
 
-# 6. 推送 Bark 通知
-python3 scripts/briefing-tools.py notify --topic {topic}
+**单主题 hook** 可自己跑完整收尾；**一键采集全部简报** 由主线程最后统一：
+
+```bash
+python3 scripts/briefing-tools.py finalize --topic all
+# 等价于 register(all) + index --topic all + notify --topic all + status
 ```
 
 **顺序重要**：validate / compare-skeleton 先于 register。前置校验让 subagent 在失败时直接停手而不是污染索引。

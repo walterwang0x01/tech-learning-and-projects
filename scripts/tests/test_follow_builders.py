@@ -62,28 +62,28 @@ class TestItemsFromX(unittest.TestCase):
                     "tweets": [
                         # 长推，应入选（即使 likes 未达阈值）
                         {
-                            "text": "A" * 250,
+                            "text": "AI agent " + "A" * 240,
                             "url": "https://x.com/swyx/status/1",
                             "createdAt": "2026-05-10T07:06:29.000Z",
                             "likes": 10,
                         },
-                        # 含链接，应入选
+                        # 含链接 + AI 信号，应入选
                         {
-                            "text": "check this https://example.com/paper",
+                            "text": "new MCP release https://example.com/paper",
                             "url": "https://x.com/swyx/status/2",
                             "createdAt": "2026-05-10T08:00:00.000Z",
                             "likes": 5,
                         },
-                        # 高 likes，应入选
+                        # 高 likes + AI 信号，应入选
                         {
-                            "text": "short hot take",
+                            "text": "short hot take on Claude Codex",
                             "url": "https://x.com/swyx/status/3",
                             "createdAt": "2026-05-10T09:00:00.000Z",
                             "likes": 100,
                         },
-                        # 低 likes 短文本无链接，应过滤
+                        # 低信号，应过滤（无 AI 关键词）
                         {
-                            "text": "boring update",
+                            "text": "boring update about football",
                             "url": "https://x.com/swyx/status/4",
                             "createdAt": "2026-05-10T09:05:00.000Z",
                             "likes": 5,
@@ -108,7 +108,7 @@ class TestItemsFromX(unittest.TestCase):
             self.assertIn("title", it)
             self.assertIn("url", it)
             self.assertIn("published", it)
-            self.assertEqual(it["source_topic_hints"], ["ai-agent"])
+            self.assertEqual(it["source_topic_hints"], [])
             self.assertTrue(it["source"].startswith("follow-builders/x/@"))
             # per-feed freshness override
             self.assertEqual(it["freshness_override_hours"], FEED_FRESHNESS_HOURS["x"])
@@ -119,7 +119,7 @@ class TestItemsFromX(unittest.TestCase):
         feed = {
             "x": [{
                 "name": "A", "handle": "a",
-                "tweets": [{"text": "x" * 250, "url": "https://x.com/a/1",
+                "tweets": [{"text": "x" * 200 + " AI agent framework", "url": "https://x.com/a/1",
                             "createdAt": "", "likes": 0}]
             }]
         }
@@ -131,7 +131,7 @@ class TestItemsFromX(unittest.TestCase):
         feed = {
             "x": [{
                 "name": "A", "handle": "a",
-                "tweets": [{"text": "look https://example.com", "url": "https://x.com/a/1",
+                "tweets": [{"text": "look at this LLM paper https://example.com", "url": "https://x.com/a/1",
                             "createdAt": "", "likes": 0}]
             }]
         }
@@ -156,9 +156,9 @@ class TestItemsFromX(unittest.TestCase):
                     "name": "A",
                     "handle": "a",
                     "tweets": [
-                        {"text": "first valid long tweet", "url": "https://x.com/a/1", "createdAt": "", "likes": 10},
-                        {"text": "second valid long tweet", "url": "https://x.com/a/2", "createdAt": "", "likes": 50},
-                        {"text": "third valid long tweet", "url": "https://x.com/a/3", "createdAt": "", "likes": 30},
+                        {"text": "first valid long tweet about AI agents", "url": "https://x.com/a/1", "createdAt": "", "likes": 10},
+                        {"text": "second valid long tweet on MCP release", "url": "https://x.com/a/2", "createdAt": "", "likes": 50},
+                        {"text": "third valid long tweet Claude Codex", "url": "https://x.com/a/3", "createdAt": "", "likes": 30},
                     ],
                 }
             ]
@@ -171,6 +171,19 @@ class TestItemsFromX(unittest.TestCase):
     def test_iso_normalized(self):
         items = items_from_x(self.feed, self.cfg)
         self.assertTrue(items[0]["published"].endswith("+00:00"))
+
+    def test_non_ai_tweet_filtered_even_with_likes(self):
+        feed = {
+            "x": [{
+                "name": "A", "handle": "a",
+                "tweets": [{
+                    "text": "Happy birthday America!",
+                    "url": "https://x.com/a/99",
+                    "createdAt": "", "likes": 500,
+                }],
+            }]
+        }
+        self.assertEqual(items_from_x(feed, self.cfg), [])
 
     def test_empty_tweets_skipped(self):
         feed = {"x": [{"name": "X", "handle": "x", "tweets": []}]}
@@ -234,7 +247,7 @@ class TestFetchFollowBuilders(unittest.TestCase):
         x_payload = json.dumps({
             "generatedAt": fresh,
             "x": [{"name": "A", "handle": "a", "tweets": [
-                {"text": "long enough tweet content here", "url": "https://x.com/a/1",
+                {"text": "long enough tweet about LangGraph agents", "url": "https://x.com/a/1",
                  "createdAt": "2026-05-10T07:00:00.000Z", "likes": 100},
             ]}]
         })

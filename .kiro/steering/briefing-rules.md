@@ -97,13 +97,11 @@ python3 scripts/briefing-tools.py run-all
 python3 scripts/briefing-tools.py validate \
     learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
 
-# 3. 通过后登记
-python3 scripts/briefing-tools.py register --topic {topic}
-python3 scripts/briefing-tools.py index --topic {topic}
-python3 scripts/briefing-tools.py notify --topic {topic}
+# 3. 通过后登记 + 分发
+python3 scripts/briefing-tools.py finalize --topic {topic}
 ```
 
-**顺序重要**：validate → register。register 内部也会校验，但前置校验让失败时立刻停手、不污染索引。
+单主题 hook 用 `finalize --topic {topic}`；一键采集全部用 `finalize --topic all`。
 
 ---
 

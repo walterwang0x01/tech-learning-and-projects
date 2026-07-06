@@ -31,6 +31,7 @@ class CircuitBreakerCfg:
 @dataclass
 class LLMClassifyCfg:
     enabled: bool = False
+    borderline_only: bool = False  # 仅对规则未命中任何 tag 的条目调 LLM
     provider: str = "anthropic"
     model: str = "claude-3-5-haiku-20241022"
 
@@ -127,6 +128,7 @@ def load_config(path: Path | None = None, force_reload: bool = False) -> Config:
         score_overrides=dict(raw.get("score_overrides", {})),
         llm_classify=LLMClassifyCfg(
             enabled=bool(llm.get("enabled", False)),
+            borderline_only=bool(llm.get("borderline_only", False)),
             provider=str(llm.get("provider", "anthropic")),
             model=str(llm.get("model", "claude-3-5-haiku-20241022")),
         ),

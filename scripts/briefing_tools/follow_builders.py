@@ -44,6 +44,20 @@ FEED_FRESHNESS_HOURS = {
 # feed.generatedAt 超过这个小时数视为上游停更
 FEED_STALE_THRESHOLD_HOURS = 48
 
+# X 推文准入：正文须命中至少一个 AI/工程信号词（避免世界杯/NIMBY 等误入 ai-agent）
+_AI_SIGNAL_KEYWORDS = (
+    "ai", "agent", "llm", "gpt", "claude", "gemini", "openai", "anthropic",
+    "mcp", "rag", "langchain", "langgraph", "crewai", "codex", "deepseek",
+    "model", "token", "inference", "benchmark", "arxiv", "huggingface",
+    "release", "api", "github.com", "function calling", "context engineering",
+    "prompt", "fine-tun", "embedding", "vector", "sandbox", "tool use",
+)
+
+
+def _has_ai_signal(text: str) -> bool:
+    t = text.lower()
+    return any(k in t for k in _AI_SIGNAL_KEYWORDS)
+
 
 def _normalize_iso(ts: str | None) -> str:
     """把 feed 里的 ISO8601 ('2026-05-10T07:06:29.000Z') 转成 parse_pub_date 能认的格式。
@@ -92,14 +106,15 @@ def _fetch_json(url: str, timeout: int) -> dict[str, Any] | None:
 def items_from_x(feed: dict[str, Any], cfg: FollowBuildersCfg) -> list[dict]:
     """把 X feed 展开成单条 tweet → PoolItem。
 
-    准入规则（三件套，任一命中即收）：
-    - 文本 ≥ 200 字（长推，有观点密度）
-    - 含 http URL（带外链，有信号）
-    - likes ≥ x_min_likes（广受认可）
+    准入规则（须先命中 AI 信号词，再满足质量三件套之一）：
+    - 正文含 AI/工程信号词（见 _AI_SIGNAL_KEYWORDS）
+    - 且满足：文本 ≥ 200 字 / 含 http URL / likes ≥ x_min_likes 之一
 
     额外过滤：
     - 短 @ 回复（<120 字且不含链接）直接丢
     - 每作者按 likes 取 Top-N (x_max_per_author)
+
+    不打 source_topic_hints——分类须靠正文关键词，避免无关节推误入 ai-agent。
     """
     authors = feed.get("x") or []
     out: list[dict] = []
@@ -116,7 +131,8 @@ def items_from_x(feed: dict[str, Any], cfg: FollowBuildersCfg) -> list[dict]:
         is_reply_short = text.startswith("@") and not has_link and len(text) < 120
         if is_reply_short:
             return False
-        # 三件套任一命中
+        if not _has_ai_signal(text):
+            return False
         return is_long or has_link or likes >= min_likes
 
     for author in authors:
@@ -141,7 +157,7 @@ def items_from_x(feed: dict[str, Any], cfg: FollowBuildersCfg) -> list[dict]:
                 "published": _normalize_iso(t.get("createdAt")),
                 "description": text[:500],
                 "source": f"follow-builders/x/@{handle}",
-                "source_topic_hints": ["ai-agent"],
+                "source_topic_hints": [],
                 "freshness_override_hours": FEED_FRESHNESS_HOURS["x"],
             })
     return out

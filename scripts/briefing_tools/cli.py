@@ -17,6 +17,7 @@ from .config import (
     LEGACY_INDEX,
     PUBLISHED_INDEX,
     REPO_ROOT,
+    RUNS_DIR,
     SOURCE_HEALTH_FILE,
     TOPIC_ICONS,
     TOPIC_NAMES,
@@ -104,7 +105,8 @@ def cmd_classify(args):
         print(f"  🛡  schema 校验跳过 {skipped} 条损坏数据")
 
     if cfg.llm_classify.enabled:
-        print(f"  🤖 LLM 分类已启用: {cfg.llm_classify.provider}/{cfg.llm_classify.model}")
+        mode = "边界补标" if cfg.llm_classify.borderline_only else "全量"
+        print(f"  🤖 LLM 分类已启用 ({mode}): {cfg.llm_classify.provider}/{cfg.llm_classify.model}")
 
     classified = run_classify(items, cfg)
     atomic_write_jsonl(rd / "classified.jsonl", classified)
@@ -387,6 +389,75 @@ def cmd_health(args):
               f"{s.get('consecutive_failures', 0)} | {s.get('total_runs', 0)} |")
 
 
+def cmd_curate_status(args):
+    """列出今日 curate 状态：哪些主题缺简报、候选集路径、基线/熔断异常"""
+    date = args.date or today_str()
+    rd = RUNS_DIR / date
+    missing = []
+    done = []
+    for t in TOPICS:
+        fp = briefing_file(t, date)
+        if fp.exists():
+            done.append(t)
+        else:
+            missing.append(t)
+
+    print(f"## 📋 Curate 状态 — {date}\n")
+    if done:
+        print("### ✅ 已完成")
+        for t in done:
+            print(f"- {TOPIC_NAMES.get(t, t)}: {briefing_file(t, date)}")
+    if missing:
+        print("\n### ⏳ 待 curate")
+        for t in missing:
+            cand = rd / f"candidates.{t}.jsonl"
+            print(f"- {TOPIC_NAMES.get(t, t)}")
+            print(f"  - prompt: `.kiro/briefings/prompts/curate.{t}.md` + `_shared.md`")
+            print(f"  - 候选集: {cand if cand.exists() else '（需先 run-all）'}")
+    else:
+        print("\n✅ 三份简报今日均已存在")
+
+    report = _collect_status()
+    if report.get("tripped_sources"):
+        print(f"\n🚨 熔断源: {', '.join(report['tripped_sources'])}")
+    anomalies = [b for b in report.get("baselines", []) if b.get("anomaly")]
+    if anomalies:
+        print("\n🚨 基线异常")
+        for b in anomalies:
+            print(f"- {TOPIC_NAMES.get(b['topic'], b['topic'])}: {b['message']}")
+
+    if args.json:
+        print(json.dumps({
+            "date": date,
+            "done": done,
+            "missing": missing,
+            "run_dir": str(rd) if rd.exists() else None,
+        }, ensure_ascii=False, indent=2))
+
+
+def cmd_finalize(args):
+    """curate 完成后统一收尾：register → index → notify（避免 subagent 重复执行）"""
+    date = args.date or today_str()
+    topics = [args.topic] if args.topic != "all" else TOPICS
+
+    for t in topics:
+        fp = briefing_file(t, date)
+        if not fp.exists():
+            print(f"⚠️  跳过 {t}: 简报不存在 {fp}")
+            continue
+        result = register_published(t, date)
+        if "error" in result:
+            print(f"⚠️  register {t}: {result['error']}")
+        else:
+            print(f"📋 register {t}: 新增 {result['registered']}/{result['total_urls']} URLs")
+
+    cmd_index(args)
+    if not args.skip_notify:
+        cmd_notify(args)
+    cmd_status(argparse.Namespace(json=False, check_sources=False))
+    print("\n✅ finalize 完成")
+
+
 def cmd_health_reset(args):
     reset_source(args.name)
     print(f"✅ 已重置源健康状态: {args.name}")
@@ -494,6 +565,10 @@ def _format_status(report: dict) -> str:
 
     if report.get("tripped_sources"):
         lines.append(f"\n🚨 熔断源: {', '.join(report['tripped_sources'])}")
+        lines.append(
+            "   💡 源恢复后可执行: "
+            "`python3 scripts/briefing-tools.py health-reset \"源名称\"`"
+        )
 
     if report.get("run", {}).get("exists"):
         lines.append(f"\n### 🏃 今日运行状态 ({report['run']['dir']})")
@@ -816,6 +891,17 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("health-reset", help="重置某个源的健康计数")
     p.add_argument("name", help="源名称")
     p.set_defaults(func=cmd_health_reset)
+
+    p = sub.add_parser("curate-status", help="今日 curate 进度与候选集路径")
+    p.add_argument("--date", help="YYYY-MM-DD，默认今天")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_curate_status)
+
+    p = sub.add_parser("finalize", help="curate 后统一 register + index + notify")
+    p.add_argument("--topic", default="all", choices=TOPICS + ["all"])
+    p.add_argument("--date", help="YYYY-MM-DD，默认今天")
+    p.add_argument("--skip-notify", action="store_true", help="不推 Bark")
+    p.set_defaults(func=cmd_finalize)
 
     # v1 兼容
     p = sub.add_parser("collect", help="[v1] 单主题采集")

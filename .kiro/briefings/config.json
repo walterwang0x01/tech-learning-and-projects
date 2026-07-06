@@ -22,13 +22,13 @@
     {"name": "LangChain Blog", "url": "https://blog.langchain.com/rss.xml", "topic_hints": ["ai-agent"]},
     {"name": "Anthropic Research", "url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_research.xml", "topic_hints": ["ai-agent"], "timeout": 30},
     {"name": "Anthropic News", "url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_news.xml", "topic_hints": ["ai-agent"], "timeout": 30},
-    {"name": "OpenAI Blog", "url": "https://openai.com/blog/rss.xml", "topic_hints": ["ai-agent"]},
+    {"name": "OpenAI Blog", "url": "https://openai.com/blog/rss.xml", "topic_hints": ["ai-agent"], "max_items": 80},
     {"name": "Google AI Blog", "url": "https://blog.google/technology/ai/rss/", "topic_hints": ["ai-agent"]},
-    {"name": "Hugging Face Blog", "url": "https://huggingface.co/blog/feed.xml", "topic_hints": ["ai-agent"]},
+    {"name": "Hugging Face Blog", "url": "https://huggingface.co/blog/feed.xml", "fallback_url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_huggingface_blog.xml", "topic_hints": ["ai-agent"], "timeout": 25, "retries": 4},
     {"name": "Wired AI", "url": "https://www.wired.com/feed/tag/ai/latest/rss", "topic_hints": ["ai-agent"]},
     {"name": "arXiv AI", "url": "https://rss.arxiv.org/rss/cs.AI", "topic_hints": ["ai-agent"]},
-    {"name": "HN AI 关键词 A", "url": "https://hnrss.org/newest?q=AI+agent+OR+MCP+OR+LLM&points=30", "topic_hints": ["ai-agent"]},
-    {"name": "HN AI 关键词 B", "url": "https://hnrss.org/newest?q=LangGraph+OR+CrewAI+OR+Claude+OR+RAG+OR+function+calling+OR+context+engineering&points=20", "topic_hints": ["ai-agent"]},
+    {"name": "HN AI 关键词 A", "url": "https://hnrss.org/newest?q=AI+agent+OR+MCP+OR+LLM&points=30", "topic_hints": ["ai-agent"], "timeout": 25, "retries": 4, "algolia_fallback": {"query": "AI agent MCP LLM", "tags": "story", "points_min": 30, "hits_per_page": 30}},
+    {"name": "HN AI 关键词 B", "url": "https://hnrss.org/newest?q=LangGraph+OR+CrewAI+OR+Claude+OR+RAG+OR+function+calling+OR+context+engineering&points=20", "topic_hints": ["ai-agent"], "timeout": 25, "retries": 4, "algolia_fallback": {"query": "LangGraph CrewAI Claude RAG", "tags": "story", "points_min": 20, "hits_per_page": 25}},
 
     {"name": "36氪", "url": "https://36kr.com/feed", "topic_hints": ["china-tech"]},
     {"name": "InfoQ CN", "url": "https://www.infoq.cn/feed", "topic_hints": ["china-tech"]},
@@ -36,7 +36,7 @@
     {"name": "开源中国", "url": "https://www.oschina.net/news/rss", "topic_hints": []},
     {"name": "少数派", "url": "https://sspai.com/feed", "topic_hints": ["china-tech"]},
     {"name": "IT之家", "url": "https://www.ithome.com/rss/", "topic_hints": ["china-tech"]},
-    {"name": "HN 中国科技", "url": "https://hnrss.org/newest?q=DeepSeek+OR+Qwen+OR+Baidu+AI+OR+China+AI&points=10", "topic_hints": ["china-tech"]},
+    {"name": "HN 中国科技", "url": "https://hnrss.org/newest?q=DeepSeek+OR+Qwen+OR+Baidu+AI+OR+China+AI&points=10", "topic_hints": ["china-tech"], "timeout": 25, "retries": 4, "algolia_fallback": {"query": "DeepSeek Qwen China AI", "tags": "story", "points_min": 10, "hits_per_page": 20}},
 
     {"name": "HN Top", "url": "https://hnrss.org/frontpage?count=30", "topic_hints": ["global-tech"]},
     {"name": "TechCrunch", "url": "https://techcrunch.com/feed/", "topic_hints": ["global-tech"]},
@@ -47,7 +47,7 @@
     {"name": "AWS Blog", "url": "https://aws.amazon.com/blogs/aws/feed/", "topic_hints": ["global-tech"]},
     {"name": "Cloudflare Blog", "url": "https://blog.cloudflare.com/rss/", "topic_hints": ["global-tech"]},
     {"name": "Kubernetes Blog", "url": "https://kubernetes.io/feed.xml", "topic_hints": ["global-tech"]},
-    {"name": "HN 开发者", "url": "https://hnrss.org/newest?q=Rust+OR+TypeScript+OR+Kubernetes+OR+AWS+OR+security+vulnerability&points=20", "topic_hints": ["global-tech"]}
+    {"name": "HN 开发者", "url": "https://hnrss.org/newest?q=Rust+OR+TypeScript+OR+Kubernetes+OR+AWS+OR+security+vulnerability&points=20", "topic_hints": ["global-tech"], "timeout": 25, "retries": 4, "algolia_fallback": {"query": "Rust TypeScript Kubernetes security", "tags": "story", "points_min": 20, "hits_per_page": 25}}
   ],
   "classify_rules": {
     "ai-agent": {
@@ -124,13 +124,14 @@
     "podcast_description_chars": 300
   },
   "llm_classify": {
-    "enabled": false,
+    "enabled": true,
+    "borderline_only": true,
     "provider": "anthropic",
     "model": "claude-3-5-haiku-20241022",
-    "_comment": "启用后，classify 阶段会优先用 LLM 打标。无 key 或调用失败时自动退回规则。"
+    "_comment": "borderline_only=true 时仅对规则未命中 tag 的条目调 LLM。无 key 时自动退回规则。"
   },
   "semantic_dedup": {
-    "enabled": false,
+    "enabled": true,
     "threshold": 0.85,
     "_comment": "启用后使用 title+description 的 shingle Jaccard 做近义去重。"
   }

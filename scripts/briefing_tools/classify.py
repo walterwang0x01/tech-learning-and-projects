@@ -107,9 +107,9 @@ def score_item(item: dict, tags: list[str], cfg: Config, now: datetime | None = 
 
 def classify_rule(item: dict, cfg: Config) -> list[str]:
     """规则分类：
-    1. 关键词命中优先（只匹配 title + description，不匹配 source 字段——
-       source 是来源标识、与主题正交，参与匹配会让站点名当关键词时无条件兜底）
+    1. 关键词命中优先（只匹配 title + description，不匹配 source 字段）
     2. 关键词完全未命中时用 source hint 兜底
+       — follow-builders/x 推文不打 hint，避免无关节推误入 ai-agent
     """
     haystack = (item.get("title", "") + " " + item.get("description", "")).lower()
     tags: set[str] = set()
@@ -119,6 +119,9 @@ def classify_rule(item: dict, cfg: Config) -> list[str]:
                 tags.add(topic)
                 break
     if not tags:
+        source = item.get("source", "")
+        if source.startswith("follow-builders/x/"):
+            return []
         hints = item.get("source_topic_hints", []) or []
         tags.update(hints)
     return sorted(tags)
@@ -234,24 +237,35 @@ def _anthropic_classify(items: list[dict], model: str, api_key: str) -> list[lis
 def run_classify(items: list[dict], cfg: Config) -> list[dict]:
     """
     产出 classified 条目：
-    - tags（LLM 或规则）
+    - tags（规则 + 可选 LLM 补标）
     - main_topic（根据 priority）
     - score 细目
     """
-    use_llm = cfg.llm_classify.enabled
-    if use_llm:
-        try:
-            tag_lists = classify_llm_batch(items, cfg)
-        except LLMClassifyError as e:
-            print(f"  ⚠️  LLM 分类失败，退回规则: {e}")
-            tag_lists = [classify_rule(it, cfg) for it in items]
-    else:
-        tag_lists = [classify_rule(it, cfg) for it in items]
+    tag_lists = [classify_rule(it, cfg) for it in items]
+
+    if cfg.llm_classify.enabled:
+        if cfg.llm_classify.borderline_only:
+            borderline_idx = [i for i, tags in enumerate(tag_lists) if not tags]
+            if borderline_idx:
+                try:
+                    borderline_items = [items[i] for i in borderline_idx]
+                    llm_tags = classify_llm_batch(borderline_items, cfg)
+                    for idx, tags in zip(borderline_idx, llm_tags):
+                        tag_lists[idx] = tags
+                    print(f"  🤖 LLM 补标 {len(borderline_idx)} 条边界条目")
+                except LLMClassifyError as e:
+                    print(f"  ⚠️  LLM 边界补标失败，保留规则结果: {e}")
+        else:
+            try:
+                tag_lists = classify_llm_batch(items, cfg)
+            except LLMClassifyError as e:
+                print(f"  ⚠️  LLM 分类失败，退回规则: {e}")
+                tag_lists = [classify_rule(it, cfg) for it in items]
 
     out = []
     for it, tags in zip(items, tag_lists):
-        # LLM 没命中时也走 source hint 兜底
-        if not tags:
+        # 非 follow-builders/x 条目：LLM/规则都没命中时走 source hint 兜底
+        if not tags and not (it.get("source", "").startswith("follow-builders/x/")):
             tags = list(it.get("source_topic_hints", []) or [])
         main = decide_main_topic(tags, cfg.main_topic_priority)
         score = score_item(it, tags, cfg)
