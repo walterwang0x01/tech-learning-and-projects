@@ -10,6 +10,7 @@ from .follow_builders import fetch_follow_builders
 from .health import is_source_tripped, record_source_result
 from .hn_algolia import fetch_hn_algolia
 from .http import filter_by_freshness, http_get, parse_rss
+from .supplements import run_supplements
 
 
 def _cap_items(items: list[dict], max_items: int | None) -> list[dict]:
@@ -119,6 +120,16 @@ def run_ingest(cfg: Config) -> tuple[list[dict], list[dict], list[str]]:
             f"  🔗 follow-builders: {len(fb_items)} 条 ({feed_breakdown})，"
             f"耗时 {time.time() - fb_t0:.1f}s"
         )
+
+    # 补充采集层（B站 / V2EX 等，无 Cookie 社区源）
+    sup_items, sup_metrics = run_supplements(cfg)
+    if sup_metrics:
+        for m in sup_metrics:
+            record_source_result(m["name"], m["ok"])
+        metrics.extend(sup_metrics)
+        all_items.extend(sup_items)
+        breakdown = ", ".join(f"{m['name']}={m['count']}" for m in sup_metrics)
+        print(f"  📎 supplement: {len(sup_items)} 条 ({breakdown})")
 
     # 本 run 内按 URL/title 去重
     seen = set()

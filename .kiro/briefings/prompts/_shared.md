@@ -37,9 +37,11 @@ python3 scripts/briefing-tools.py run-all
 ```
 
 `run-all` 串行跑：ingest → classify → candidates，产出：
-- `pool.jsonl`：原始采集池
+- `pool.jsonl`：原始采集池（含 RSS + follow-builders + **supplement** 补充源）
 - `classified.jsonl`：带 tags 和 score
 - `candidates.{topic}.jsonl`：本主题已过滤候选集
+
+**supplement 补充层**（`config.json` → `supplement_sources`）：B站搜索、V2EX 等无 Cookie 社区源，确定性并入 pool。本机若安装 Agent-Reach 的 `bili-cli` 会自动优先 CLI。curate 阶段无需再单独搜这些平台。
 
 ### 1b. 读取本主题候选集
 

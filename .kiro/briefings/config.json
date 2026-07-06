@@ -104,7 +104,9 @@
         "36氪": 3,
         "量子位": 4,
         "IT之家": 3,
-        "少数派": 3
+        "少数派": 3,
+        "supplement/bilibili": 3,
+        "supplement/v2ex": 3
       }
     },
     "ai-agent": {
@@ -134,5 +136,25 @@
     "enabled": true,
     "threshold": 0.85,
     "_comment": "启用后使用 title+description 的 shingle Jaccard 做近义去重。"
+  },
+  "supplement_sources": {
+    "_comment": "补充采集层：Agent-Reach 理念的生产落地。只接无 Cookie 源；结果并入 pool.jsonl 走 classify。本机有 bili-cli 时自动优先 CLI。",
+    "enabled": true,
+    "bilibili": {
+      "enabled": true,
+      "queries": [
+        "DeepSeek 大模型",
+        "AI Agent 教程"
+      ],
+      "max_per_query": 5,
+      "topic_hints": ["china-tech", "ai-agent"]
+    },
+    "v2ex": {
+      "enabled": true,
+      "include_hot": true,
+      "nodes": ["programmer", "cloud", "create"],
+      "max_per_node": 8,
+      "topic_hints": ["ai-agent", "global-tech"]
+    }
   }
 }
