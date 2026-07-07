@@ -185,7 +185,7 @@ def try_agent_reach_bilibili(
     for q in queries:
         try:
             proc = subprocess.run(
-                [bili, "search", q, "--json", "--limit", str(max_per_query)],
+                [bili, "search", q, "--type", "video", "--json", "--max", str(max_per_query)],
                 capture_output=True,
                 text=True,
                 timeout=30,
@@ -195,16 +195,29 @@ def try_agent_reach_bilibili(
                 continue
             rows = json.loads(proc.stdout or "[]")
             if isinstance(rows, dict):
-                rows = rows.get("items") or rows.get("results") or []
+                rows = (
+                    rows.get("data")
+                    or rows.get("items")
+                    or rows.get("results")
+                    or []
+                )
             for row in rows if isinstance(rows, list) else []:
+                bvid = str(row.get("bvid") or row.get("id") or "").strip()
                 url = normalize_url(str(row.get("url") or row.get("link") or ""))
+                if not url and bvid:
+                    url = normalize_url(f"https://www.bilibili.com/video/{bvid}")
                 title = str(row.get("title") or "").strip()
                 if url and title:
+                    desc_parts = []
+                    if row.get("author"):
+                        desc_parts.append(f"UP: {row['author']}")
+                    if row.get("play") is not None:
+                        desc_parts.append(f"播放 {row['play']}")
                     items.append({
                         "title": title,
                         "url": url,
-                        "published": str(row.get("published") or ""),
-                        "description": str(row.get("description") or "")[:500],
+                        "published": str(row.get("published") or row.get("pubdate") or ""),
+                        "description": str(row.get("description") or " · ".join(desc_parts))[:500],
                         "source": "supplement/bilibili-cli",
                         "source_topic_hints": list(hints),
                     })

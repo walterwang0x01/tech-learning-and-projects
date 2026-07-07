@@ -32,8 +32,9 @@ class CircuitBreakerCfg:
 class LLMClassifyCfg:
     enabled: bool = False
     borderline_only: bool = False  # 仅对规则未命中任何 tag 的条目调 LLM
-    provider: str = "anthropic"
-    model: str = "claude-3-5-haiku-20241022"
+    provider: str = "openai"  # openai（OpenAI 兼容，含 llm-gw）| anthropic
+    model: str = "aws-bedrock/claude-haiku-4-5"
+    api_base: str | None = None  # openai 专用；缺省读 OPENAI_API_BASE 或 api.openai.com
 
 
 @dataclass
@@ -129,8 +130,9 @@ def load_config(path: Path | None = None, force_reload: bool = False) -> Config:
         llm_classify=LLMClassifyCfg(
             enabled=bool(llm.get("enabled", False)),
             borderline_only=bool(llm.get("borderline_only", False)),
-            provider=str(llm.get("provider", "anthropic")),
-            model=str(llm.get("model", "claude-3-5-haiku-20241022")),
+            provider=str(llm.get("provider", "openai")),
+            model=str(llm.get("model", "aws-bedrock/claude-haiku-4-5")),
+            api_base=str(llm["api_base"]).strip() if llm.get("api_base") else None,
         ),
         semantic_dedup=SemanticDedupCfg(
             enabled=bool(sem.get("enabled", False)),
@@ -156,10 +158,53 @@ def load_config(path: Path | None = None, force_reload: bool = False) -> Config:
     return cfg
 
 
+_ENV_FILE_CANDIDATES = (
+    REPO_ROOT / ".env",
+    REPO_ROOT.parent / "personal-brand-agent" / ".env",
+    REPO_ROOT.parent / "agenzo" / ".env",
+    REPO_ROOT.parent / "llmgateway" / ".env",
+)
+
+
+def get_env_var(name: str) -> str | None:
+    """从进程 env 或项目 .env 文件读取配置（不覆盖已存在的 os.environ）。"""
+    val = os.environ.get(name, "").strip()
+    if val:
+        return val
+    for env_path in _ENV_FILE_CANDIDATES:
+        if not env_path.exists():
+            continue
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if line.startswith(f"{name}=") and not line.endswith("="):
+                parsed = line.split("=", 1)[1].strip().strip('"').strip("'")
+                if parsed and "你的" not in parsed:
+                    return parsed
+    return None
+
+
 def get_api_key(provider: str) -> str | None:
-    """从 env 读 API key"""
+    """从 env 读 API key；未设置时回退到 sibling 项目的 .env。"""
     env_map = {
         "anthropic": "ANTHROPIC_API_KEY",
         "openai": "OPENAI_API_KEY",
     }
-    return os.environ.get(env_map.get(provider, ""), "").strip() or None
+    env_name = env_map.get(provider, "")
+    if not env_name:
+        return None
+    return get_env_var(env_name)
+
+
+def get_openai_api_base(cfg: Config) -> str:
+    """OpenAI 兼容网关 base URL（末尾无 /）。"""
+    raw = (cfg.llm_classify.api_base or get_env_var("OPENAI_API_BASE") or "https://api.openai.com/v1").strip()
+    return raw.rstrip("/")
+
+
+def get_llm_classify_model(cfg: Config) -> str:
+    """LLM 分类模型：openai 时 OPENAI_MODEL 优先，否则读 config.json。"""
+    if cfg.llm_classify.provider == "openai":
+        return (get_env_var("OPENAI_MODEL") or cfg.llm_classify.model).strip()
+    return cfg.llm_classify.model.strip()

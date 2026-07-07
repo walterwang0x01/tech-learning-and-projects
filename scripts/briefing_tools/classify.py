@@ -8,7 +8,7 @@ import urllib.error
 import urllib.request
 from datetime import datetime
 
-from .config import Config, TOPICS, get_api_key
+from .config import Config, TOPICS, get_api_key, get_llm_classify_model, get_openai_api_base
 from .http import hours_since_published
 
 
@@ -143,28 +143,20 @@ class LLMClassifyError(RuntimeError):
     pass
 
 
-def classify_llm_batch(items: list[dict], cfg: Config, batch_size: int = 40) -> list[list[str]]:
-    """用 LLM 批量分类。失败时抛错让调用方退回规则。
-
-    当前只实现 Anthropic Messages API（JSON 模式）。
-    """
-    if cfg.llm_classify.provider != "anthropic":
-        raise LLMClassifyError(f"Unsupported provider: {cfg.llm_classify.provider}")
-    api_key = get_api_key("anthropic")
-    if not api_key:
-        raise LLMClassifyError("ANTHROPIC_API_KEY not set")
-
-    all_tags: list[list[str]] = []
-    for i in range(0, len(items), batch_size):
-        chunk = items[i:i + batch_size]
-        tags = _anthropic_classify(chunk, cfg.llm_classify.model, api_key)
-        all_tags.extend(tags)
-    return all_tags
+_CLASSIFY_SYSTEM_PROMPT = (
+    "You tag news articles with topic tags. "
+    "Tags are a subset of: ai-agent, china-tech, global-tech. "
+    "A single article can carry multiple tags. "
+    "Respond ONLY with JSON: {\"results\":[{\"idx\":0,\"tags\":[\"...\"]}, ...]}. "
+    "Use 'ai-agent' for content about LLMs, AI frameworks, agents, MCP, RAG, prompt engineering. "
+    "Use 'china-tech' for content about Chinese tech companies/products/policy. "
+    "Use 'global-tech' for general global tech, programming languages, cloud, devtools, security. "
+    "If nothing fits, return empty tags []."
+)
 
 
-def _anthropic_classify(items: list[dict], model: str, api_key: str) -> list[list[str]]:
-    """单批次调用 Claude，返回每条的 tags 列表"""
-    labeled = [
+def _build_labeled_items(items: list[dict]) -> list[dict]:
+    return [
         {
             "idx": i,
             "title": (it.get("title") or "")[:180],
@@ -173,21 +165,62 @@ def _anthropic_classify(items: list[dict], model: str, api_key: str) -> list[lis
         }
         for i, it in enumerate(items)
     ]
-    system = (
-        "You tag news articles with topic tags. "
-        "Tags are a subset of: ai-agent, china-tech, global-tech. "
-        "A single article can carry multiple tags. "
-        "Respond ONLY with JSON: {\"results\":[{\"idx\":0,\"tags\":[\"...\"]}, ...]}. "
-        "Use 'ai-agent' for content about LLMs, AI frameworks, agents, MCP, RAG, prompt engineering. "
-        "Use 'china-tech' for content about Chinese tech companies/products/policy. "
-        "Use 'global-tech' for general global tech, programming languages, cloud, devtools, security. "
-        "If nothing fits, return empty tags []."
-    )
+
+
+def _parse_classify_json(text: str, provider: str) -> dict:
+    try:
+        s = text.strip()
+        if s.startswith("```"):
+            s = re.sub(r"^```(?:json)?\s*", "", s)
+            s = re.sub(r"\s*```$", "", s)
+        return json.loads(s)
+    except json.JSONDecodeError:
+        raise LLMClassifyError(f"{provider} response not JSON: {text[:200]}")
+
+
+def _tags_from_results(data: dict, n: int) -> list[list[str]]:
+    results: dict[int, list[str]] = {}
+    for r in data.get("results", []):
+        idx = int(r.get("idx", -1))
+        tags = [t for t in (r.get("tags") or []) if t in TOPICS]
+        if idx >= 0:
+            results[idx] = tags
+    return [results.get(i, []) for i in range(n)]
+
+
+def classify_llm_batch(items: list[dict], cfg: Config, batch_size: int = 40) -> list[list[str]]:
+    """用 LLM 批量分类。失败时抛错让调用方退回规则。"""
+    provider = cfg.llm_classify.provider
+    if provider == "anthropic":
+        api_key = get_api_key("anthropic")
+        if not api_key:
+            raise LLMClassifyError("ANTHROPIC_API_KEY not set")
+        classify_fn = lambda chunk: _anthropic_classify(chunk, cfg.llm_classify.model, api_key)
+    elif provider == "openai":
+        api_key = get_api_key("openai")
+        if not api_key:
+            raise LLMClassifyError("OPENAI_API_KEY not set")
+        api_base = get_openai_api_base(cfg)
+        model = get_llm_classify_model(cfg)
+        classify_fn = lambda chunk: _openai_classify(chunk, model, api_key, api_base)
+    else:
+        raise LLMClassifyError(f"Unsupported provider: {provider}")
+
+    all_tags: list[list[str]] = []
+    for i in range(0, len(items), batch_size):
+        chunk = items[i:i + batch_size]
+        all_tags.extend(classify_fn(chunk))
+    return all_tags
+
+
+def _anthropic_classify(items: list[dict], model: str, api_key: str) -> list[list[str]]:
+    """单批次调用 Claude Messages API，返回每条的 tags 列表。"""
+    labeled = _build_labeled_items(items)
     user = "Tag these:\n" + json.dumps(labeled, ensure_ascii=False)
     payload = {
         "model": model,
         "max_tokens": 4000,
-        "system": system,
+        "system": _CLASSIFY_SYSTEM_PROMPT,
         "messages": [{"role": "user", "content": user}],
     }
     req = urllib.request.Request(
@@ -210,24 +243,44 @@ def _anthropic_classify(items: list[dict], model: str, api_key: str) -> list[lis
     for block in body.get("content", []):
         if block.get("type") == "text":
             text += block.get("text", "")
+    data = _parse_classify_json(text, "Anthropic")
+    return _tags_from_results(data, len(items))
 
+
+def _openai_classify(items: list[dict], model: str, api_key: str, api_base: str) -> list[list[str]]:
+    """单批次调用 OpenAI 兼容 chat/completions（含 llm-gw），返回每条的 tags 列表。"""
+    labeled = _build_labeled_items(items)
+    user = "Tag these:\n" + json.dumps(labeled, ensure_ascii=False)
+    payload = {
+        "model": model,
+        "max_tokens": 4000,
+        "messages": [
+            {"role": "system", "content": _CLASSIFY_SYSTEM_PROMPT},
+            {"role": "user", "content": user},
+        ],
+    }
+    url = f"{api_base}/chat/completions"
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "content-type": "application/json",
+        },
+        method="POST",
+    )
     try:
-        # 容错：剥掉可能的 ```json 包裹
-        s = text.strip()
-        if s.startswith("```"):
-            s = re.sub(r"^```(?:json)?\s*", "", s)
-            s = re.sub(r"\s*```$", "", s)
-        data = json.loads(s)
-    except json.JSONDecodeError:
-        raise LLMClassifyError(f"Anthropic response not JSON: {text[:200]}")
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            body = json.loads(resp.read().decode("utf-8"))
+    except (urllib.error.URLError, TimeoutError) as e:
+        raise LLMClassifyError(f"OpenAI API error: {e}")
 
-    results: dict[int, list[str]] = {}
-    for r in data.get("results", []):
-        idx = int(r.get("idx", -1))
-        tags = [t for t in (r.get("tags") or []) if t in TOPICS]
-        if idx >= 0:
-            results[idx] = tags
-    return [results.get(i, []) for i in range(len(items))]
+    choices = body.get("choices") or []
+    if not choices:
+        raise LLMClassifyError(f"OpenAI API empty choices: {str(body)[:200]}")
+    text = (choices[0].get("message") or {}).get("content") or ""
+    data = _parse_classify_json(text, "OpenAI")
+    return _tags_from_results(data, len(items))
 
 
 # ============================================

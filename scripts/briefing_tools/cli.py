@@ -23,6 +23,7 @@ from .config import (
     TOPIC_NAMES,
     TOPICS,
     load_config,
+    get_llm_classify_model,
 )
 from .health import is_source_tripped, load_health, reset_source, tripped_sources
 from .http import http_get
@@ -106,7 +107,7 @@ def cmd_classify(args):
 
     if cfg.llm_classify.enabled:
         mode = "边界补标" if cfg.llm_classify.borderline_only else "全量"
-        print(f"  🤖 LLM 分类已启用 ({mode}): {cfg.llm_classify.provider}/{cfg.llm_classify.model}")
+        print(f"  🤖 LLM 分类已启用 ({mode}): {cfg.llm_classify.provider}/{get_llm_classify_model(cfg)}")
 
     classified = run_classify(items, cfg)
     atomic_write_jsonl(rd / "classified.jsonl", classified)

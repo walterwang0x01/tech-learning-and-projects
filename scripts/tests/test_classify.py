@@ -1,10 +1,18 @@
 """分类 + 评分回归测试"""
 
 from conftest import *  # noqa
+import json
 import unittest
+from unittest.mock import MagicMock, patch
 
-from briefing_tools.classify import classify_rule, decide_main_topic, kw_hit, score_item
-from briefing_tools.config import Config, CircuitBreakerCfg, LLMClassifyCfg, SemanticDedupCfg
+from briefing_tools.classify import (
+    classify_llm_batch,
+    classify_rule,
+    decide_main_topic,
+    kw_hit,
+    score_item,
+)
+from briefing_tools.config import Config, CircuitBreakerCfg, LLMClassifyCfg, SemanticDedupCfg, get_llm_classify_model, get_openai_api_base
 
 
 def _make_cfg(**overrides) -> Config:
@@ -194,6 +202,65 @@ class TestScoreItem(unittest.TestCase):
         score = score_item(item, ["global-tech"], self.cfg)
         # "release" 应该触发 utility=4
         self.assertEqual(score["utility"], 4)
+
+
+class TestOpenAIClassify(unittest.TestCase):
+    def test_openai_classify_batch(self):
+        cfg = _make_cfg(
+            llm_classify=LLMClassifyCfg(
+                enabled=True,
+                provider="openai",
+                model="aws-bedrock/claude-haiku-4-5",
+                api_base="https://llm-gw.example.com/v1",
+            ),
+        )
+        items = [
+            {"title": "MCP server for agents", "description": "", "source": "HN"},
+            {"title": "华为新品发布", "description": "", "source": "36氪"},
+        ]
+        mock_body = {
+            "choices": [
+                {
+                    "message": {
+                        "content": json.dumps({
+                            "results": [
+                                {"idx": 0, "tags": ["ai-agent"]},
+                                {"idx": 1, "tags": ["china-tech"]},
+                            ],
+                        }),
+                    },
+                },
+            ],
+        }
+        mock_resp = MagicMock()
+        mock_resp.read.return_value = json.dumps(mock_body).encode("utf-8")
+        mock_resp.__enter__ = lambda s: s
+        mock_resp.__exit__ = MagicMock(return_value=False)
+
+        with patch("briefing_tools.classify.get_api_key", return_value="test-key"):
+            with patch("urllib.request.urlopen", return_value=mock_resp) as mock_open:
+                tags = classify_llm_batch(items, cfg)
+
+        self.assertEqual(tags, [["ai-agent"], ["china-tech"]])
+        req = mock_open.call_args[0][0]
+        self.assertEqual(req.full_url, "https://llm-gw.example.com/v1/chat/completions")
+        self.assertEqual(req.get_header("Authorization"), "Bearer test-key")
+
+    def test_get_openai_api_base_prefers_config(self):
+        cfg = _make_cfg(
+            llm_classify=LLMClassifyCfg(api_base="https://custom.gw/v1/"),
+        )
+        self.assertEqual(get_openai_api_base(cfg), "https://custom.gw/v1")
+
+    def test_get_llm_classify_model_prefers_env(self):
+        cfg = _make_cfg(
+            llm_classify=LLMClassifyCfg(
+                provider="openai",
+                model="aws-bedrock/claude-haiku-4-5",
+            ),
+        )
+        with patch("briefing_tools.config.get_env_var", return_value="aws-bedrock/claude-opus-4-8"):
+            self.assertEqual(get_llm_classify_model(cfg), "aws-bedrock/claude-opus-4-8")
 
 
 if __name__ == "__main__":
