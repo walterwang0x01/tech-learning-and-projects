@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Gin 1.12.0 (2026-03), Echo 5.x, Fiber 3.x (2026-04), Chi 5.x, checked 2026-05-30 -->
+<!-- version-check: Gin 1.12.0 (2026-02-28), Echo 5.2.1 (2026-06-15), Fiber 3.4.0 (2026-07-02), Chi 5.x, checked 2026-07-07 -->
 
 ## 1. Go Web 框架全景
 
@@ -22,20 +22,24 @@
 - 极致性能：**Fiber**
 - API First：**Huma**
 
-> 🔄 更新于 2026-05-15
+> 🔄 更新于 2026-07-07
 >
 > **JetBrains 2025 Go Developer Ecosystem 报告**给出的市场份额（2025 年底数据）：
 >
-> | 框架 | 市场份额 | GitHub Stars（2026-05） | 状态 |
+> | 框架 | 市场份额 | GitHub Stars（2026-07） | 状态 |
 > | ---- | -------- | ----------------------- | ---- |
 > | Gin | 48% | 75K+ | 事实标准 |
 > | Gorilla | 17% | — | 项目已重启维护 |
 > | Echo | 16% | 30K+ | 企业方向 |
 > | Fiber | 11% | — | 性能优先 |
 >
-> 数据来源：[Tech Insider — Gin Golang Tutorial 2026](https://tech-insider.org/gin-golang-tutorial-rest-api-2026/)、[JetBrains Blog — Popular Go Web Frameworks](https://blog.jetbrains.com/go/2026/04/28/popular-golang-web-frameworks/)
+> 数据来源：[JetBrains Blog — Popular Go Web Frameworks](https://blog.jetbrains.com/go/2026/04/28/popular-golang-web-frameworks/)、[Gin 官方发布说明](https://gin-gonic.com/en/blog/news/gin-1-12-0-release-announcement/)、[Echo v5.2.1 Release](https://github.com/labstack/echo/releases/tag/v5.2.1)、[Fiber v3.4.0 Release](https://github.com/gofiber/fiber/releases/tag/v3.4.0)
 >
 > **Gin v1.12.0**（2026-03）：基准测试在 Go 1.25.8 下完成，httprouter 路由器仍然是性能护城河（来源：[Gin Benchmarks](https://gin-gonic.com/en/docs/benchmarks/)）。
+>
+> **Echo v5.2.1**（2026-06-15）是当前稳定版：`Context` 从 interface 调整为 struct、日志体系切到 `log/slog`，Go 最低版本提升到 1.25；`v4` 线官方承诺维护到 2026-12-31，老项目可以渐进迁移。
+>
+> **Fiber v3.4.0**（2026-07-02）仍是当前主线：统一 `c.Bind()` 绑定接口、增强 lifecycle hooks，并保持对常见 `net/http` handler 形态的兼容，适合追求极致吞吐但接受 `fasthttp` 生态约束的团队。
 >
 > **2026 年新趋势**：
 >

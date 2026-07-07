@@ -2,17 +2,19 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Go 1.26.x (2026-02-10 release), client-go v0.36, golangci-lint v2.12, checked 2026-05-15 -->
+<!-- version-check: Go 1.26.x (2026-02-10 release), client-go v0.36, Echo 5.2.1, Fiber 3.4.0, golangci-lint v2.12, checked 2026-07-07 -->
 
 Go 在 2026 年是云原生、微服务、CLI 工具、高性能网关的主力语言。K8s、Docker、Istio、Traefik、Kafka Connect、CockroachDB 都是 Go 写的。
 
-> 🔄 更新于 2026-05-15
+> 🔄 更新于 2026-07-07
 >
 > **2026 年 Go 生态关键节点**：
 >
 > - **Go 1.26** 于 2026-02-10 发布，Green Tea GC 默认启用，cgo 开销降 30%（[Go Blog](https://blog.golang.org/go1.26)）
 > - **Kubernetes 1.36** 于 2026-04-22 发布，client-go v0.36 同步 cut，Declarative Validation GA（[K8s Release](https://kubernetes.io/blog/2026/04/22/kubernetes-v1-36-release/)）
 > - **JetBrains 2025 调查**：Gin 占 48% Go Web 框架份额，46% Go 开发者用于 web/API（[JetBrains Blog](https://blog.jetbrains.com/go/2026/04/28/popular-golang-web-frameworks/)）
+> - **Echo 5.2.1**（2026-06-15）是当前稳定版，Go 最低要求 1.25，`v4` 安全维护到 2026-12-31（[Echo Release](https://github.com/labstack/echo/releases/tag/v5.2.1)）
+> - **Fiber 3.4.0**（2026-07-02）继续推进 v3 主线，统一绑定 API、增强 hooks，适合极致吞吐场景（[Fiber Release](https://github.com/gofiber/fiber/releases/tag/v3.4.0)）
 > - **golangci-lint v2** 成为主线，v2.12.2 已发布，需要从 v1 配置迁移
 > - **Go 1.26.1 / 1.25.8** 安全补丁（2026-03-03）已发布，建议线上集群尽快升级
 

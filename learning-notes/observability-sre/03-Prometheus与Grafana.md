@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Prometheus 3.10.0, Grafana 13.0 (GrafanaCON 2026), Alertmanager 0.28, checked 2026-05-16 -->
+<!-- version-check: Prometheus 3.13.0 (2026-07-01), Grafana 13.1.0 (2026-07-01), Alertmanager 0.28, checked 2026-07-07 -->
 
 ## 1. Prometheus 架构
 
@@ -205,7 +205,7 @@ time_intervals:
 - 大规模、多租户：**Mimir**
 - 已有 S3 基础设施、只要长期存储：**Thanos**
 
-## 7. Grafana 11 实战要点
+## 7. Grafana 13 实战要点
 
 ### 7.1 Dashboard as Code
 
@@ -233,6 +233,8 @@ time_intervals:
 - **Grafana LLM App**：Dashboard 中直接嵌入 LLM 问答，自然语言查询
 - **Correlations**：Logs ↔ Traces ↔ Metrics 一键跳转
 - **Adaptive Metrics**：自动识别无人查询的指标并降采样，省存储
+- **Alert Activity（13.1）**：把告警状态历史、静默与规则上下文放进同一条工作流，减少值班时在多个页面来回切换
+- **Mimir Alertmanager Auto-sync（13.1）**：Grafana 设置页可直接同步 Mimir Alertmanager 配置，减轻多租户环境下的手工配置成本
 
 ## 8. RED / USE 仪表盘模板
 
@@ -294,7 +296,7 @@ time_intervals:
 
 Prometheus 3.x 在 2025 年底发布，核心新特性是 **Native Histograms**（原生直方图）成为标准功能。使用指数桶边界，无需手动配置桶，自动适应数据分布，显著减少存储和配置复杂度。来源：[dasroot.net](https://dasroot.net/posts/2026/02/go-observability-stack-prometheus-grafana-opentelemetry/)
 
-### 8.2 Grafana 12.x / 13.0
+### 8.2 Grafana 12.x / 13.1
 
 | 版本 | 发布时间 | 核心特性 |
 |------|---------|---------|
@@ -302,6 +304,7 @@ Prometheus 3.x 在 2025 年底发布，核心新特性是 **Native Histograms**�
 | 12.2 | 2025-08 | 增强 ad hoc 过滤、重新设计的 Table 可视化 |
 | 12.4 | 2025-12 | Dynamic Dashboards、模板驱动工作流、Observability as Code 更新 |
 | 13.0 | 2026-04 | 解决"空白光标问题"——帮助团队更快上手并从数据中获取洞察 |
+| 13.1 | 2026-07 | Alert Activity、Mimir Alertmanager auto-sync、色盲友好图表填充、告警权限收紧 |
 
 来源：[Grafana What's New](https://grafana.com/docs/grafana/latest/whatsnew/)、[Releasebot](https://releasebot.io/updates/grafana)
 
@@ -311,11 +314,11 @@ Prometheus 3.x 在 2025 年底发布，核心新特性是 **Native Histograms**�
 - **新 Terraform Provider + CLI**：Dashboard as Code 完整工具链
 - **SQL Expressions**：在 Dashboard 中直接用 SQL 转换数据
 
-### 8.3 Prometheus 3.10 新特性
+### 8.3 Prometheus 3.13 新特性
 
-> 🔄 更新于 2026-05-16
+> 🔄 更新于 2026-07-07
 
-Prometheus 3.10.0 于 2026-04 发布，**最受关注的功能是 PromQL fill() 系列函数**——长期被请求的"填充缺失序列默认值"能力终于落地。来源：[PromLabs Blog](https://promlabs.com/blog/)、[Prometheus 3.10 Announce](https://groups.google.com/g/prometheus-announce/c/oYiQWLMGICI)
+Prometheus **3.13.0** 于 **2026-07-01** 发布，并被标注为一条 **LTS** 版本线。对工程团队最重要的不是单个语法糖，而是 3.x 线进入更稳的生产节奏：原生直方图、Remote Write v2、distroless 镜像和近期 PromQL 演进可以按 LTS 节点统一落地，而不必追每个小版本。来源：[Prometheus 3.13.0 Release](https://github.com/prometheus/prometheus/releases/tag/v3.13.0)、[Prometheus Download](https://prometheus.io/download/)
 
 ```promql
 # 旧问题：A and on(label) B 中如果某些标签组合在 B 里不存在，结果直接消失
@@ -335,25 +338,25 @@ fill(
 sum by (service) (rate(http_requests_total[5m]))
 ```
 
-`fill_left()` / `fill_right()` 控制填充方向，对 `or` / `unless` / `and` 等二元运算特别有用。
+`fill_left()` / `fill_right()` 控制填充方向，对 `or` / `unless` / `and` 等二元运算特别有用；在 3.13 LTS 上已经可以把这些 3.x 新能力当成默认基线，而不是实验特性。
 
 **其他改进**：
 - **Distroless Docker 镜像**：除默认 busybox 镜像外，新增 distroless 变体，攻击面更小、镜像更小
 - **OpenMetrics 2.0 进展**：原生直方图与 OpenMetrics 协议对齐
 - **Remote Write v2 持续完善**：减少远程写入开销
 
-### 8.4 Grafana 13 GrafanaCON 2026 重磅发布
+### 8.4 Grafana 13 / 13.1 发布节奏
 
-> 🔄 更新于 2026-05-16
+> 🔄 更新于 2026-07-07
 
-Grafana 13 于 2026-04-21 在 GrafanaCON 2026（巴塞罗那）正式发布，是社区"开源观测性"的下一代里程碑。来源：[Grafana 13 Blog](https://grafana.com/blog/grafana-13-release-all-the-latest-features/)、[GrafanaCON 2026 Announcements](https://grafana.com/blog/grafanacon-2026-announcements/)
+Grafana 13 于 2026-04 在 GrafanaCON 2026 发布，**Grafana 13.1.0** 又在 **2026-07-01** 推出一轮更适合生产团队感知的增强：Alert Activity、Mimir Alertmanager auto-sync、告警权限收紧和图表无障碍改进。来源：[Grafana Releases](https://github.com/grafana/grafana/releases)、[Grafana 13 Blog](https://grafana.com/blog/grafana-13-release-all-the-latest-features/)
 
 **核心改进**：
 
 | 维度 | 改进 | 数据 |
 |------|------|------|
 | Loki 架构 | Kafka 后端日志接入 | 数据扫描量减少最高 20x，查询提速最高 10x |
-| Grafana 体验 | 新版 Dashboard 编辑器、Explore Metrics 升级 | 解决"空白光标问题" |
+| Grafana 体验 | 新版 Dashboard 编辑器、Explore Metrics 升级、Alert Activity | 从“看图”走向“看图 + 值班动作”一体化 |
 | OpenTelemetry 路径 | Linux/K8s 自动 OTel 采集 | 简化指标 + 日志 + 追踪上手 |
 | GCX CLI | 全新 Observability CLI | 把观测性嵌入 IDE / Coding Agent |
 
@@ -374,9 +377,9 @@ GCX 是 Grafana 拥抱 AI Agent 工作流的关键产品——观测性数据成
 **升级建议**：
 
 ```
-Grafana 12.x  →  Grafana 13.0
+Grafana 12.x  →  Grafana 13.1
 ├─ Loki 用户：评估 Kafka 后端（生产前先在 staging 验证）
 ├─ K8s 用户：检查 OTel 自动采集是否覆盖现有 Prometheus 指标
 ├─ AI 团队：试用 GCX CLI 把观测性接入 Coding Agent
-└─ 企业用户：等 13.x 第一个 LTS（预计 13.3）再大规模升级
+└─ 企业用户：若重视值班体验与 Mimir 一体化，可以直接评估 13.1；极保守团队仍可等待 13.x 更长维护窗口
 ```

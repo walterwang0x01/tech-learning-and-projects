@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: OpenTelemetry 1.x stable, Prometheus 3.x, Grafana 11.x, checked 2026-05-10 -->
+<!-- version-check: OpenTelemetry Collector v0.155.0, Prometheus 3.13.0, Grafana 13.1.0, checked 2026-07-07 -->
 
 这个目录覆盖现代系统的可观测性和 SRE 实践，是各技术栈（Java/Go/Python/Frontend）共用的"工程侧"内容。配合 `ai-agent/14-可观测与评估/` 可以看到 LLM 时代的可观测性全景。
 
