@@ -48,9 +48,12 @@ def _fetch_one(src: dict) -> tuple[dict, list[dict], float, bool]:
     if algolia:
         fb_items = fetch_hn_algolia(
             algolia.get("query", ""),
+            queries=algolia.get("queries"),
             tags=algolia.get("tags", "story"),
             points_min=algolia.get("points_min"),
             hits_per_page=int(algolia.get("hits_per_page", 30)),
+            freshness_hours=int(algolia.get("freshness_hours", 168)),
+            max_pages_per_query=int(algolia.get("max_pages_per_query", 2)),
             timeout=timeout,
         )
         if fb_items:
@@ -59,6 +62,10 @@ def _fetch_one(src: dict) -> tuple[dict, list[dict], float, bool]:
                 it["source"] = f"{src['name']} (Algolia)"
                 it["source_topic_hints"] = hints
             elapsed = time.time() - t0
+            print(
+                f"  🔁 Algolia 备用: {src['name']} → {len(fb_items)} 条",
+                file=sys.stderr,
+            )
             return src, fb_items, elapsed, True
 
     return src, [], elapsed, False
