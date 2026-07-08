@@ -4,12 +4,13 @@
 
 ## 1. Portkey 概述
 
-> 🔄 更新于 2026-05-13
+> 🔄 更新于 2026-07-08
 >
-> **Portkey Agent Gateway**（2026-02）：Portkey 从 AI Gateway 升级为 Agent Gateway，新增 Agent 级别的治理、可观测性和控制能力。支持 1600+ 模型（之前 200+）。同时发布 MCP Gateway（2026-01 GA），支持 MCP 协议的集中式管理。OSS Gateway 1.8.2，Enterprise Gateway 2.6.2。
-> 来源：[Portkey Blog - Agent Gateway](https://portkey.ai/blog/agent-gateway/)、[Portkey Changelog](https://portkey.ai/docs/changelog)
+> **Enterprise Gateway v2.13.0** + **Backend v1.17.0**：服务端 MCP 执行 Beta（`@portkey-mcp` 前缀 + `x-portkey-beta: server-side-mcp-2026-06-01`，Bedrock/Vertex 等无原生 MCP 的 Provider 可用 MCP 工具）；MCP/Agent OTel 日志导出与 Token 计量；gRPC 传输协议；Responses/Messages API 通用适配器（任意 Provider 路由）；API Key 轮换与 Cato Networks 护栏。2026-04 Palo Alto Networks 宣布拟收购 Portkey，定位为 Prisma AIRS 的 AI Gateway。
+> 来源：[Portkey Enterprise Changelog](https://portkey.ai/docs/changelog/enterprise)、[April 2026 Changelog](https://portkey.ai/docs/changelog/2026/april)
 
-<!-- version-check: Portkey OSS Gateway 1.8.2, Enterprise 2.6.2, checked 2026-05-13 -->
+<!-- version-check: Portkey Enterprise Gateway 2.13.0, Backend 1.17.0, portkey-ai 2.3.2, checked 2026-07-08 -->
+<!-- 修复于 2026-07-08: Enterprise 2.6.2 → 2.13.0，增量补充服务端 MCP、gRPC、Palo Alto 收购 -->
 
 Portkey 是面向生产环境的 AI 网关（现已升级为 Agent Gateway），提供自动重试、Fallback、负载均衡、缓存、护栏、可观测性等企业级功能。支持 1600+ 语言、视觉、音频和图像模型。
 
@@ -27,7 +28,7 @@ Portkey 是面向生产环境的 AI 网关（现已升级为 Agent Gateway），
 │  │Guard   │ │Observe │ │Analytic│ │Logs  │ │
 │  └────────┘ └────────┘ └────────┘ └──────┘ │
 ├──────┬──────┬──────┬──────┬────────────────┤
-│OpenAI│Claude│Gemini│Azure │ 200+ Providers  │
+│OpenAI│Claude│Gemini│Azure │ 1600+ Models    │
 └──────┴──────┴──────┴──────┴────────────────┘
 ```
 
@@ -241,24 +242,63 @@ client = OpenAI(
 )
 ```
 
-## 9. AI 网关全面对比
+## 9. 服务端 MCP 与通用 API 适配（v2.13+）
+
+```python
+from portkey_ai import Portkey, createHeaders
+
+# 服务端 MCP 执行 — Bedrock/Vertex 等无原生 MCP 的 Provider 可用 MCP 工具
+portkey = Portkey(
+    api_key="pk-xxx",
+    virtual_key="bedrock-key",
+)
+
+response = portkey.chat.completions.create(
+    model="anthropic.claude-sonnet-4-6-20260217-v1:0",
+    messages=[{"role": "user", "content": "列出 workspace 文件"}],
+    tools=[{"type": "function", "function": {"name": "@portkey-mcp/filesystem/list"}}],
+    extra_headers={
+        "x-portkey-beta": "server-side-mcp-2026-06-01",
+    },
+)
+# Gateway 自动拉取 MCP 工具定义、注入请求、服务端执行 tool call
+```
+
+```python
+# Messages API / Responses API 通用适配器 — 任意 Provider 路由
+# 保持 Anthropic Messages API 代码，Gateway 自动格式转换
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.portkey.ai/v1",
+    default_headers=createHeaders(
+        api_key="pk-xxx",
+        virtual_key="openai-key",
+    ),
+)
+# POST /v1/messages 或 /v1/responses 均可路由到 OpenAI、Google 等
+```
+
+## 10. AI 网关全面对比
 
 | 特性           | LiteLLM        | Vercel Gateway  | Portkey         | Helicone        |
 |---------------|----------------|-----------------|-----------------|-----------------|
 | 模型支持       | 100+           | 主流            | 1600+           | 主流            |
 | 部署方式       | 自托管          | 云服务          | 云服务/自托管    | 云服务          |
+| 传输协议       | HTTP           | HTTP            | HTTP + gRPC     | HTTP            |
 | 负载均衡       | ✅             | ✅              | ✅              | ❌              |
 | Fallback      | ✅             | ✅              | ✅ 多级         | ❌              |
 | 自动重试       | ✅             | ✅              | ✅ 细粒度       | ❌              |
+| MCP Gateway   | ✅ OAuth v2    | ✅ MCP Apps     | ✅ 服务端执行   | ❌              |
 | 语义缓存       | ✅ Redis       | ❌              | ✅ 内置         | ✅              |
-| 护栏           | ❌             | ❌              | ✅ 内置         | ❌              |
-| 可观测性       | ✅ 基础        | ✅ 基础         | ✅ 全面         | ✅ 核心功能      |
+| 护栏           | ✅ Gateway 级  | ❌              | ✅ 内置+Cato    | ❌              |
+| 可观测性       | ✅ OTel v2     | ✅ @ai-sdk/otel | ✅ OTel 租户    | ✅ 核心功能      |
 | 预算管理       | ✅ 细粒度      | ✅ 基础         | ✅              | ✅              |
-| 开源           | ✅ Apache 2.0  | ❌              | ❌              | ✅ 部分         |
+| 开源           | ✅ Apache 2.0  | ✅ SDK 开源     | ❌              | ✅ 部分         |
 | 定价           | 免费（自托管）  | 按用量          | 免费层+付费      | 免费层+付费     |
-| 适用场景       | 自托管团队      | Vercel 生态     | 企业级生产       | 轻量可观测      |
+| 适用场景       | 自托管团队      | Vercel Agent    | 企业级生产       | 轻量可观测      |
 
-## 10. 选型指南
+## 11. 选型指南
 
 ```
 选型决策树：

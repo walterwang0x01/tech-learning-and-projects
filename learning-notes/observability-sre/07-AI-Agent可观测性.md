@@ -3,7 +3,7 @@
 > Author: Walter Wang
 
 <!-- 修复于 2026-05-22: LangSmith / LangSmith Fleet / LangSmith Engine 定位区分清晰 -->
-<!-- version-check: LangSmith (observability), LangSmith Fleet (Agent management, 2026-03 重命名自 Agent Builder), LangSmith Engine (autonomous diagnosis), Langfuse v4 GA, Phoenix 6.x, OTel GenAI semconv (development), OTel Agent Spans, checked 2026-05-22 -->
+<!-- version-check: LangSmith (observability), LangSmith Fleet (Agent management, 2026-03), LangSmith Engine, Langfuse platform v3.206 / Python SDK v4.12, Phoenix 6.x, OTel GenAI semconv, checked 2026-07-08 -->
 
 ## 1. 为什么 LLM 系统需要独立的可观测性
 
@@ -61,7 +61,7 @@ LLM 观测三层：
 | **LangSmith** | LangChain 官方可观测性平台 | Trace、评估、Prompt 管理；框架无关 |
 | **LangSmith Fleet** | LangChain Agent 管理（无代码平台） | 2026-03 由 Agent Builder 重命名；管理 Agent 身份、共享、权限（**不是可观测性产品**） |
 | **LangSmith Engine** | LangChain 自动化诊断（2026-05 Interrupt 发布） | 自动聚类生产失败、定位根因、建议修复 |
-| **Langfuse** | 开源（v4 GA 2026-03） | 自托管首选，OTel 原生，已加入 ClickHouse |
+| **Langfuse** | 开源平台（自托管 v3.206+）+ **Python SDK v4.12** | 注意区分：**平台版本**（GitHub `langfuse/langfuse` v3.x）与 **SDK 版本**（PyPI `langfuse` v4.x，2026-03 重写）是两套编号；OTel 原生，Experiments API/MCP（2026-07-07）支持 CI 门禁 |
 | **Arize Phoenix** | 开源，专注 eval | RAG 评估、embedding 可视化最强 |
 | **Weights & Biases Traces** | 实验管理 | 适合研究型、训练+推理结合 |
 | **Datadog LLM Observability** | SaaS 综合 | 与业务 APM 统一 |
@@ -140,10 +140,12 @@ with tracer.start_as_current_span("chat gpt-5.5") as span:
 
 ## 5. Langfuse 生产接入示例
 
+> 🔄 更新于 2026-07-08：Python SDK 已升级到 **v4.x**（`pip install langfuse`），API 与 v3 不兼容，迁移见 [Python v3→v4 指南](https://langfuse.com/docs/observability/sdk/upgrade-path/python-v3-to-v4)。自托管平台当前稳定线为 **v3.206+**。
+
 Langfuse 是 2026 年最活跃的开源 LLM 观测平台：
 
 ```bash
-pip install langfuse
+pip install "langfuse>=4.12"
 ```
 
 ```python
@@ -200,7 +202,7 @@ def customer_service_agent(question: str, user_id: str):
 **关键能力**：
 - 生产流量自动采样
 - Prompt Management：Prompt 版本化，A/B 对比
-- Evaluations：定期跑 eval 集合
+- Evaluations：定期跑 eval 集合；**2026-07-07** 起可通过 Public API / MCP 拉取 experiment 结果做 CI/CD 门禁（来源：[Langfuse Changelog](https://langfuse.com/changelog/2026-07-07-experiments-public-api-and-mcp)）
 - Datasets：收集 bad case 持续迭代
 - 用户反馈关联：点赞/点踩直接挂到 Trace
 

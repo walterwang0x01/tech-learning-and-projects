@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Loki 3.7.x stable, Loki 4.0 architecture (Kafka + DataObject), Elasticsearch 9.x, Fluent Bit 3.x, Vector 0.55, GrafanaCON 2026, checked 2026-05-22 -->
+<!-- version-check: Loki 3.7.x stable (Loki 4.0 未 GA), Promtail EOL 2026-03-02, Elasticsearch 9.x, Fluent Bit 3.x, Vector 0.55, GrafanaCON 2026, checked 2026-07-08 -->
 
 ## 1. 方案对比
 
@@ -57,7 +57,7 @@ Java/Go/Node.js 都有对应的结构化日志库（Logback JSON encoder、zap�
 ```
 ┌───────── Loki 架构 ─────────┐
 │                              │
-│  App → Promtail/Alloy/       │
+│  App → Grafana Alloy/        │
 │        Fluent Bit/Vector     │
 │          │                   │
 │          ▼                   │
@@ -96,7 +96,9 @@ sum by (service) (
 {service="order"} |~ "error.*timeout" |> pattern `<level> <msg> <kv>`
 ```
 
-### 3.2 Promtail / Grafana Alloy 配置
+### 3.2 Grafana Alloy / Fluent Bit 配置
+
+> 🔄 更新于 2026-07-08：Promtail 已于 **2026-03-02 EOL**，新部署应使用 **Grafana Alloy**（官方推荐）或 Fluent Bit / Vector。来源：[Grafana Loki deployment modes](https://grafana.com/docs/loki/latest/get-started/deployment-modes/)
 
 Grafana Alloy（2024 年发布，Grafana Agent 的继任者）是当前推荐的采集器：
 
@@ -283,7 +285,9 @@ Grafana 的 Explore 和 Correlations 功能专门优化这个跳转链路。
 ☐ 日志成本可观（按 GB/天 监控）
 ```
 
-## 9. Loki 4.0 与 Kafka-backed 架构（GrafanaCON 2026）
+## 9. Loki 4.0 路线图与 Kafka-backed 架构（GrafanaCON 2026）
+
+> 🔄 更新于 2026-07-08：**Loki 4.0 截至 2026-07 尚未正式发布**，生产环境仍以 **3.7.x stable** 为主；4.0 方向是 Kafka 摄取 + DataObject 列存 + 新查询引擎，且 **SSD 模式将在 4.0 移除**。
 
 > 🔄 更新于 2026-05-20
 

@@ -182,9 +182,9 @@ fun ScrollTracker(listState: LazyListState) {
 
 ## 6. 2026 状态管理更新
 
-<!-- version-check: Compose 1.11.x (latest 1.11.2), Lifecycle 2.10.x, checked 2026-05-31 -->
+<!-- version-check: Compose 1.11.4, Lifecycle 2.11.0, Kotlin 2.4.0, AGP 8.5.2+, checked 2026-07-08 -->
 
-> 🔄 更新于 2026-04-21（2026-05-31 校准版本号与 01-基础文档对齐）
+> 🔄 更新于 2026-04-21（2026-07-08 校准至 BOM 2026.06.01 清单）
 
 ### collectAsStateWithLifecycle（推荐替代 collectAsState）
 
@@ -213,4 +213,6 @@ data class UserState(
 )
 ```
 
-> 来源：[Lifecycle Runtime Compose](https://developer.android.com/jetpack/androidx/releases/lifecycle)
+### Kotlin 2.4.0 与状态管理工具链
+
+Kotlin **2.4.0**（2026-06-03）将 **explicit backing fields** 升为稳定特性，可简化 ViewModel 中 `_uiState` / `uiState` 双属性模式，与 `collectAsStateWithLifecycle` 配合更简洁。最低 AGP **8.5.2**，推荐 `lifecycle-runtime-compose` **2.11.0**。来源：[What's new in Kotlin 2.4.0](https://kotlinlang.org/docs/whatsnew24.html)、[Lifecycle Runtime Compose](https://developer.android.com/jetpack/androidx/releases/lifecycle)

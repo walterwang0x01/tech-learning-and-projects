@@ -1550,3 +1550,27 @@ spring:
 
 ### 🌐 其他平台
 - [Baeldung - Spring Boot](https://www.baeldung.com/spring-boot) — 英文Spring Boot权威教程
+
+---
+
+## 版本演进补充（2026-07）
+
+> 本文档正文基于 **Spring Boot 2.5.x** 入门教学，核心概念（自动配置、起步依赖、内嵌容器）仍然有效。以下为当前版本线速查，详细实践见 → [Spring Boot 最佳实践](./07-spring-boot-best-practices.md)
+
+<!-- version-check: Spring Boot 4.1.0, Spring AI 2.0.0, checked 2026-07-08 -->
+
+| 维度 | 本文档版本 | 当前推荐（2026-07） |
+|------|-----------|-------------------|
+| Spring Boot | 2.5.x | **4.1.0**（4.0.7 维护线） |
+| Java | 8/11 | **Java 21**（最低 17） |
+| 构建工具 | Maven | Maven / Gradle（Kotlin DSL + Version Catalog） |
+| 数据访问 | MyBatis | MyBatis-Plus / Spring Data JPA |
+| AI 集成 | — | **Spring AI 2.0.0**（Boot 4.x）/ 1.1.8（Boot 3.5.x 遗留） |
+
+**2026 年 7 月关键节点**：
+
+- **Spring Boot 4.1.0 GA**（2026-06-10）：gRPC 自动配置、HTTP SSRF 缓解、懒加载数据源
+- **Spring AI 2.0.0 GA**（2026-06-12）：`ToolCallingAdvisor`、MCP SDK 2.0、Jackson 3 基线
+- **Spring Boot 3.5 OSS 结束**（2026-06-30）：3.5.16 为最终补丁，须向 4.x 迁移
+
+来源：[Spring Boot 4.1.0 Release](https://github.com/spring-projects/spring-boot/releases/tag/v4.1.0) | [Spring AI 2.0.0 GA](https://spring.io/blog/2026/06/12/spring-ai-2-0-0-GA-available-now)

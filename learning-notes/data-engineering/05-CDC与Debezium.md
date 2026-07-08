@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Debezium 3.4 (released 2026-03-30), Debezium 3.6.0.Alpha2 (2026-05-15), Flink CDC 3.4, Kafka Connect, checked 2026-05-28 -->
+<!-- version-check: Debezium 3.6.0.Final (2026-07-01), Debezium 3.5.x, Flink CDC 3.4, Kafka Connect, checked 2026-07-08 -->
 
 ## 1. 什么是 CDC
 
@@ -379,32 +379,32 @@ FROM pg_replication_slots;
 | **AWS DMS** | AWS 托管，侧重迁移场景 |
 | **PeerDB** | Postgres → 分析库，性能优化 |
 
-## 12. Debezium 3.2 → 3.4 版本演进（2026-05 更新）
+## 12. Debezium 3.4 → 3.6 版本演进（2026-07 更新）
 
-> 🔄 更新于 2026-05-28
-<!-- 修复于 2026-05-28: 补充 3.4 release 信息和 3.6 Alpha 进展，原文档基于 3.2 偏旧 -->
+> 🔄 更新于 2026-07-08
+<!-- 修复于 2026-07-08: 3.6.0.Final GA，补充统一 CLI 与 JDBC sink 等生产特性 -->
 
 | 版本 | 发布时间 | 关键变化 |
 |------|---------|---------|
-| Debezium 3.2 | 2026-02-27 | 新 unbuffered LogMiner adapter for Oracle、Kafka 4.x 支持、IBM i 连接器 BOOLEAN 支持 |
-| Debezium 3.3 | 2026-q1 | 维护版本，主要 bugfix |
-| **Debezium 3.4** | **2026-03-30** | **当前最新稳定版**，PostgreSQL pgoutput 性能优化、incremental snapshot 改进、Schema History 增强 |
-| Debezium 3.6.0.Alpha2 | 2026-05-15 | 下一代主版本预览，向 4.0 准备 |
+| Debezium 3.4 | 2026-03-30 | PostgreSQL pgoutput 性能优化、incremental snapshot 改进 |
+| Debezium 3.5 | 2026-06-02 | 维护线，Engine Quarkus Extension、Docling SMT、Amazon SNS sink |
+| **Debezium 3.6.0.Final** | **2026-07-01** | **当前最新稳定版**：统一 **Debezium CLI**、Debezium Server **原生 JDBC sink**、Spanner UUID、RocksDB off-heap schema history、Kafka 4.2 |
+| Debezium 3.7 | 开发中 | 跟踪 [Debezium Releases](https://debezium.io/releases/) |
 
-来源：[Debezium Releases Overview](https://debezium.io/releases/)、[Debezium 3.4 Release Notes](https://debezium.io/releases/3.4/release-notes)、[Debezium 3.6.0.Alpha2 Released](https://debezium.io/blog/2026/05/15/debezium-3-6-alpha2-released/)
+来源：[Debezium 3.6 Release Summary](https://debezium.io/blog/2026/07/01/debezium-3-6-final-release/)、[Debezium Releases Overview](https://debezium.io/releases/)
 
 **升级建议**：
 
 ```
-新项目：Debezium 3.4 + pgoutput 插件
+新项目：Debezium 3.6 + pgoutput 插件
 ├─ pgoutput 是 Postgres 10+ 内置的 logical decoding 插件
-├─ 性能比 wal2json/decoderbufs 更好
-└─ Debezium 3.x 默认插件（推荐）
+├─ 需要 JDBC sink 到分析库时，优先评估 3.6 原生 Server sink
+└─ 运维侧可用统一 CLI 管理 connector / platform
 
 旧项目升级路径：
-├─ 3.0/3.1 → 3.4（小版本平滑升级，配置不需要改）
-├─ 2.x → 3.4（注意 Kafka Connect 4.x 兼容性变化）
-└─ 1.x → 3.4（建议先升到 2.7 LTS 再到 3.4）
+├─ 3.4/3.5 → 3.6（小版本平滑升级，先读 release notes 中的 breaking changes）
+├─ 2.x → 3.6（注意 Kafka Connect 4.x 兼容性变化）
+└─ 1.x → 3.6（建议先升到 2.7 LTS 再到 3.x）
 ```
 
 ## 📖 参考资料

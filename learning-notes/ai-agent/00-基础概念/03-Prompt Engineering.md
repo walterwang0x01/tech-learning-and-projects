@@ -28,9 +28,9 @@ system_prompt = """你是一位专业的数据分析师。
 - 分析结论使用要点列表
 """
 
-<!-- version-check: OpenAI gpt-5.2, checked 2026-04-16 -->
+<!-- version-check: OpenAI gpt-5.5, checked 2026-07-08 -->
 response = client.chat.completions.create(
-    model="gpt-5.2",  # gpt-4o 已于 2026-02 退役，使用 gpt-5.2
+    model="gpt-5.5",  # gpt-4o 已于 2026-02 退役，使用 gpt-5.5
     messages=[
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": "分析上月各产品线的销售趋势"},
@@ -53,7 +53,7 @@ messages = [
 ]
 
 response = client.chat.completions.create(
-    model="gpt-5.2",  # gpt-4o 已于 2026-02 退役
+    model="gpt-5.5",  # gpt-4o 已于 2026-02 退役
     messages=messages,
     response_format={"type": "json_object"},  # 强制 JSON 输出
 )
@@ -126,7 +126,7 @@ class AnalysisResult(BaseModel):
     confidence: float
 
 response = client.beta.chat.completions.parse(
-    model="gpt-5.2",  # gpt-4o 已于 2026-02 退役
+    model="gpt-5.5",  # gpt-4o 已于 2026-02 退役
     messages=[
         {"role": "system", "content": "分析用户提供的文本"},
         {"role": "user", "content": "AI Agent 正在改变软件开发的方式..."},

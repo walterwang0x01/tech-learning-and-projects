@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Incident response best practices 2026, checked 2026-05-22 -->
+<!-- version-check: Grafana 13.1.0 Alert Activity, Grafana IRM, Incident response best practices 2026, checked 2026-07-08 -->
 
 ## 1. 事件响应的目标
 
@@ -77,6 +77,7 @@ Scribe（记录员）
 
 诊断（Diagnosis）
   ├─ 查看近期变更（部署、配置）
+  ├─ Grafana Alert Activity（13.1）查看告警历史、静默与规则上下文
   ├─ 查看 Metric 异常点
   ├─ 看 Error Logs
   └─ 看 Trace 异常链路
@@ -139,8 +140,9 @@ Runbook 必备内容：
 
 ## 第一步
 1. 打开 Dashboard: https://grafana/d/order-overview
-2. 看过去 1 小时错误率趋势
-3. 看过去 30 分钟的 Trace 样本 (错误 Trace)
+2. 在 Grafana **Alert Activity（13.1）** 查看告警状态历史、静默与规则上下文
+3. 看过去 1 小时错误率趋势
+4. 看过去 30 分钟的 Trace 样本 (错误 Trace)
 
 ## 常见原因
 
@@ -265,7 +267,7 @@ v2.34.5 中引入了新的订单验证逻辑，使用了 Redis 作为临时去�
 
 ## 附录
 
-- 链接：告警详情、Grafana Dashboard 截图、相关 Trace、回滚 PR
+- 链接：告警详情、Grafana Alert Activity 时间线、Dashboard 截图、相关 Trace、回滚 PR
 ```
 
 ### 7.3 Action Items 治理
@@ -311,6 +313,7 @@ v2.34.5 中引入了新的订单验证逻辑，使用了 Redis 作为临时去�
 ☐ 有明确的事件分级（SEV-1/2/3/4）
 ☐ 每个告警有 Runbook
 ☐ On-call 排班工具（PagerDuty / Opsgenie / Grafana IRM）
+☐ Grafana Alert Activity（13.1）已启用，值班可在同一视图查看告警历史与静默
 ☐ 事故协调 channel 标准（Slack #incident-xxx）
 ☐ 事故时间线自动记录（OncallLogger / Firehydrant）
 ☐ 状态页更新流程（Statuspage / Cachet）

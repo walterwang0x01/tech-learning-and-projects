@@ -279,6 +279,66 @@ swift run --swift-sdk wasm
 )
 ```
 
+## 9. Swift 6.3 / 6.4 新增特性（WWDC26）
+
+> 🔄 更新于 2026-07-08
+
+<!-- version-check: Swift 6.3 + 6.4 (WWDC26), Xcode 27 / Swift 6.4, checked 2026-07-08 -->
+
+WWDC26 一次性发布 **Swift 6.3 与 6.4**，随 **Xcode 27** 提供。变更分两类：日常语法摩擦消除，以及所有权系统进入普通业务代码。来源：[What's new in Swift (WWDC26 Session 262)](https://developer.apple.com/videos/play/wwdc2026/262/)、[WWDC26 Swift Guide](https://developer.apple.com/wwdc26/guides/swift/)
+
+### 日常语法改进（Swift 6.4）
+
+```swift
+// 1) anyAppleOS — 跨平台可用性一行声明
+@available(anyAppleOS 27, *)
+func newFeature() { }
+
+// 2) @diagnose — 单声明级警告控制（迁移期抑制 deprecation 等）
+@diagnose(.ignored, group: .deprecatedDeclaration)
+func legacyWrapper() { callOldAPI() }
+
+// 3) 模块选择器 :: — 解决跨模块同名冲突（Swift 6.3）
+let rocket = Rocket::SaturnV   // 左侧始终是模块名，不是类型
+
+// 4) 可选 existential 去括号
+let handler: any P? = nil      // 不再需要 (any P)?
+
+// 5) defer 中支持 async 清理（SE-0493）
+defer { await flushBuffer() }
+
+// 6) weak let / ~Sendable
+weak let delegate: Delegate?   // 替代 @unchecked Sendable 的常见场景
+struct NotSendable: ~Sendable { }
+```
+
+### 所有权与性能（Swift 6.4）
+
+`Iterable` 协议让 `for` 循环可**借用**元素而非拷贝，适用于 `Span`、`InlineArray` 等非可复制类型；`borrow`/`mutate` 访问器替代 `get`/`set`，避免大结构体拷贝。
+
+```swift
+// Iterable：for 循环优先 Sequence，回退 Iterable（批量 Span 迭代）
+for element in uniqueArray { process(element) }  // 无引用计数开销
+
+// borrow / mutate 访问器
+var box: UniqueBox<[256 of Int]>
+box[0] = 42   // 原地修改，不拷贝整个 InlineArray
+```
+
+新增标准库类型：`UniqueArray`、`UniqueBox`、`Continuation`（单次 resume 编译期检查）、`Ref`/`MutableRef`（单值借用容器）。`Containers` 模块（SE-0527）可通过 [swift-collections 1.3](https://github.com/apple/swift-collections) 提前试用。
+
+### 跨平台与工具链
+
+| 变更 | 版本 | 说明 |
+|------|------|------|
+| Swift SDK for Android | 6.3 | 首次官方 Android SDK，iOS/Android 共享 Swift 代码 |
+| Swift Build 默认后端 | 6.4 | SPM 默认使用 Swift Build，与 Xcode 构建行为一致 |
+| `@C` 属性 | 6.4 | 将 Swift 函数导出给 C 调用 |
+| Foundation URL 解析 | 6.4 | 性能最高 **4×** 提升 |
+| Subprocess 1.0 | 6.4 | 子进程 API 正式版，`AsyncBufferSequence` 流式输出 |
+
+来源：[Swift 6.4 Release Blog](https://www.swift.org/blog/)、[What's New in Swift 2026](https://blakecrosley.com/blog/whats-new-swift-2026)
+
 ## 🎬 推荐视频资源
 
 - [CodeWithChris - Swift Tutorial for Beginners](https://www.youtube.com/watch?v=comQ1-x2a1Q) — Swift入门教程

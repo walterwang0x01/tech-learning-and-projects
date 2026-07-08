@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Apache Flink 2.1, Flink CDC 3.5, RisingWave 2.8, Materialize, checked 2026-05-30 -->
+<!-- version-check: Apache Flink 2.3.0 (2026-06-25), Flink CDC 3.5, RisingWave 2.8, Materialize, checked 2026-07-08 -->
 
 ## 1. 流处理 vs 批处理
 
@@ -178,9 +178,10 @@ alerts.sinkTo(
 env.execute("fraud-detection");
 ```
 
-## 5. Flink 2.0 / 2.1 亮点（2025-2026）
+## 5. Flink 2.0 → 2.3 亮点（2025-2026）
 
-<!-- 修复于 2026-05-30: Flink 2.0 已演进到 2.1（当前最新稳定版），Flink CDC 已发布 3.5（stable）；补充版本演进 -->
+<!-- 修复于 2026-07-08: Flink 2.3.0 GA（2026-06-25），补充原生 S3 FS 与 SQL changelog 算子 -->
+<!-- 修复于 2026-05-30: Flink 2.0 已演进到 2.1，Flink CDC 已发布 3.5（stable） -->
 
 ```
 Flink 2.0（2025 GA）：
@@ -190,10 +191,16 @@ Flink 2.0（2025 GA）：
 ├─ SQL 增强（Lateral Join、Window TVF 改进）
 └─ 移除遗留 API（DataSet API 废弃）
 
-Flink 2.1（2026，当前最新稳定版）：
+Flink 2.1（2026）：
 ├─ 持续完善 Disaggregated State 与云原生存算分离
 ├─ SQL / Table API 进一步增强
 └─ 大量 bug 修复与稳定性改进
+
+Flink 2.3.0（2026-06-25，当前最新稳定版）：
+├─ 实验性 **flink-s3-fs-native**（AWS SDK v2，无 Hadoop 依赖，checkpoint + FileSink 统一）
+├─ SQL：`FROM_CHANGELOG` / `TO_CHANGELOG` 算子、物化表刷新策略细化
+├─ Application Management（FLIP-549）与 Adaptive Partition Selection
+└─ 来源：[Flink 2.3.0 Release](https://flink.apache.org/2026/06/25/apache-flink-2.3.0-release-announcement/)
 
 Flink CDC 3.5（stable，2026）：
 ├─ 支持 Kafka Connect 模式（3.4 引入，3.5 延续增强）

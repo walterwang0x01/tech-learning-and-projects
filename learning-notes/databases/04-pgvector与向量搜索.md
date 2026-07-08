@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: pgvector 0.8.2 (2026-02-26, CVE-2026-3172 fix), pgvectorscale 0.7.x, PostgreSQL 18.4, HNSW/DiskANN, checked 2026-05-28 -->
+<!-- version-check: pgvector 0.8.4 (2026-06-30), pgvectorscale 0.7.x, PostgreSQL 18.4, HNSW/DiskANN, checked 2026-07-08 -->
 
 ## 1. 为什么是 pgvector 不是专用向量库
 
@@ -417,7 +417,7 @@ pgvectorscale 的 SBQ 将 float32 向量压缩为二值表示，内存占用降�
 
 ### 13.5 pgvector 0.8.x 版本改进
 
-pgvector 0.8.0（2024-11）→ 0.8.2（2025 年底）的关键改进：
+pgvector 0.8.0（2024-11）→ 0.8.4（2026-06）的关键改进：
 
 - **过滤查询代价估算改进**：PostgreSQL 优化器更准确判断何时使用 ANN 索引 vs B-tree 索引，AWS 测试显示过滤查询延迟降低 **9.4x**
 - **HNSW 构建速度提升 40%**（大规模数据集）
@@ -450,18 +450,20 @@ pgvector 0.8.0（2024-11）→ 0.8.2（2025 年底）的关键改进：
 - [dbi-services pgvector 索引对比（2026-03）](https://www.dbi-services.com/blog/pgvector-a-guide-for-dba-part-2-indexes-update-march-2026/)
 - 关联：[ai-agent/06-RAG进阶/02-向量数据库选型.md](../ai-agent/06-RAG进阶/02-向量数据库选型.md)
 
-## 15. pgvector 0.8.2 与 PG 18.4 协同
+## 15. pgvector 0.8.4 与 PG 18.4 协同
 
-> 🔄 更新于 2026-05-28（修复：版本号从虚构的 0.9.1 改为实际的 0.8.2）
+> 🔄 更新于 2026-07-08：pgvector 最新稳定版 0.8.4（pgxn.org 2026-06-30）
 
-<!-- version-check: pgvector 0.8.2 (2026-02-26 release), PostgreSQL 18.4 (2026-05-14), checked 2026-05-28 -->
+<!-- version-check: pgvector 0.8.4 (2026-06-30 release), PostgreSQL 18.4 (2026-05-14), checked 2026-07-08 -->
 
-pgvector 0.8.x 把最低 PostgreSQL 版本提升到 13，对应 PG 18.4 安全发布（2026-05-14，11 个 CVE）后的推荐组合是 **pgvector 0.8.2 + PG 18.4**。
+pgvector 0.8.x 把最低 PostgreSQL 版本提升到 13，对应 PG 18.4 安全发布（2026-05-14，11 个 CVE）后的推荐组合是 **pgvector 0.8.4 + PG 18.4**。
 
-> ⚠️ 重要修正：之前文档中提到的 0.9.1 是错误的版本号——pgvector 当前最新稳定版是 0.8.2（2026-02-26 发布，修复 CVE-2026-3172 并行 HNSW 构建缓冲区溢出）。来源：[pgvector 0.8.2 Released](https://www.postgresql.org/about/news/pgvector-082-released-3245/)
+> ⚠️ 重要修正：之前文档中提到的 0.9.1 是错误的版本号——pgvector 当前最新稳定版是 0.8.4（2026-06-30 发布）。0.8.2（2026-02-26）修复 CVE-2026-3172 并行 HNSW 构建缓冲区溢出，0.8.3/0.8.4 继续修复 HNSW vacuum 相关问题。来源：[pgvector CHANGELOG](https://pgxn.org/dist/vector/CHANGELOG.html)、[pgvector 0.8.2 Released](https://www.postgresql.org/about/news/pgvector-082-released-3245/)
 
 ### 15.1 0.8.x 关键变化
 
+- **0.8.4（2026-06-30）**：修复 HNSW vacuum 期间 `hnsw graph not repaired` 错误及插入冲突
+- **0.8.3（2026-06-17）**：修复 HNSW vacuum 可能导致的索引损坏；修复 PG 18 上 Hamming/Jaccard 距离性能回归
 - **0.8.2（2026-02-26）安全修复**：修复 CVE-2026-3172，并行 HNSW 索引构建可能泄露其他关系数据或导致服务崩溃，建议立即升级
 - **0.8.0（2024-11）核心改进**：HNSW 维护成本下降、过滤查询代价模型改进（AWS 测试显示带过滤向量查询延迟降低 9.4x）
 - **HNSW + iterative scan**：0.8 起支持迭代式向量索引扫描，对带过滤的查询召回率显著提升
@@ -512,8 +514,8 @@ REINDEX INDEX CONCURRENTLY my_metadata_idx;
 
 | 场景 | 数据规模 | 推荐方案 | 备注 |
 |------|----------|---------|------|
-| RAG 单租户 | < 1000 万 | **pgvector 0.8.2 + HNSW** | PG 已部署即用 |
-| RAG 中等规模 | 1000 万 ~ 5000 万 | **pgvector 0.8.2 + HNSW + halfvec** | 内存减半 |
+| RAG 单租户 | < 1000 万 | **pgvector 0.8.4 + HNSW** | PG 已部署即用 |
+| RAG 中等规模 | 1000 万 ~ 5000 万 | **pgvector 0.8.4 + HNSW + halfvec** | 内存减半 |
 | RAG 大规模 | 5000 万 ~ 10 亿 | **pgvectorscale + StreamingDiskANN** | 热数据内存 + 冷数据磁盘 |
 | 内存吃紧 | 任意 | **binary_quantize + bit_hamming_ops + rerank** | 索引体积压 32x |
 | 数十亿级 | > 10 亿 | **Aurora pgvector 联合 S3 Vectors** | 低频查询、成本敏感 |

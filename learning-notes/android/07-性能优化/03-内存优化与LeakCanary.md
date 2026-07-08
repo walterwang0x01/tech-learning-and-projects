@@ -148,3 +148,77 @@ sparseArray.put(1, "one")
 // 避免自动装箱
 val intArray = IntArray(100)  // 而非 Array<Int>
 ```
+
+> 🔄 更新于 2026-07-08
+
+## 6. Android 17 应用内存限制与 Profiling
+
+<!-- version-check: Android 17 API 37 MemoryLimiter, ProfilingManager ANOMALY/OOM, LeakCanary 2.14+, Kotlin 2.4.0, checked 2026-07-08 -->
+
+Android 17 Beta 4 起引入基于设备总 RAM 的**每进程内存上限**（2026-06 stable 起在部分设备强制执行），超限进程被系统直接终止，**不一定产生标准 crash 堆栈**。来源：[Behavior changes: all apps — App memory limits](https://developer.android.com/about/versions/17/behavior-changes-all)、[Android 17 Release Notes](https://developer.android.com/about/versions/17/release-notes)
+
+### 6.1 检测 MemoryLimiter 终止
+
+```kotlin
+// ApplicationExitInfo 中 exit reason = REASON_OTHER
+// description 含 "MemoryLimiter:AnonSwap" 表示被内存限制器杀死
+fun checkMemoryKill(context: Context) {
+    val am = context.getSystemService(ActivityManager::class.java)
+    am.getHistoricalProcessExitReasons(context.packageName, 0, 10).forEach { info ->
+        if (info.reason == ApplicationExitInfo.REASON_OTHER &&
+            info.description?.contains("MemoryLimiter:AnonSwap") == true
+        ) {
+            reportMemoryLimitKill(info)  // 上报 + 降级缓存策略
+        }
+    }
+}
+```
+
+### 6.2 ProfilingManager 在杀进程前抓 Heap Dump
+
+```kotlin
+// TRIGGER_TYPE_ANOMALY — 内存逼近上限时系统在杀进程前触发，可拿到现场 heap dump
+// TRIGGER_TYPE_OOM — 下次启动时上传上次 OOM 的 Java Heap Dump
+profilingManager.registerForProfiling(
+    ProfilingManager.ProfilingTriggerRequest.Builder()
+        .setTriggerType(ProfilingManager.TRIGGER_TYPE_ANOMALY)
+        .build(),
+    executor,
+    object : ProfilingManager.ProfilingResultCallback {
+        override fun onResultReady(result: ProfilingResult) {
+            uploadHeapDump(result.artifact)
+        }
+    }
+)
+```
+
+来源：[Android 17 Features — ProfilingManager](https://developer.android.com/about/versions/17/features#profilingmanager)
+
+### 6.3 本地调试内存上限
+
+```bash
+# 查看当前内存限制器状态
+adb shell am memory-limiter status
+
+# 对指定 PID 施加 30MB 上限（仅支持设备已启用限制器时有效）
+adb shell am memory-limiter manual <pid> 30
+
+# 移除手动限制，恢复系统默认
+adb shell am memory-limiter manual <pid> none
+
+# 全局忽略 / 恢复限制（调试用）
+adb shell am memory-limiter ignore all
+adb shell am memory-limiter ignore none
+```
+
+### 6.4 防御性优化清单（2026 Q3）
+
+| 措施 | 说明 |
+|------|------|
+| `onTrimMemory()` | 后台立即释放图片缓存、预览 Buffer |
+| R8 fullMode | 确认 release 未关闭 `android.enableR8.fullMode` |
+| LeakCanary 2.14+ | 开发期捕获泄漏，避免生产触发 MemoryLimiter |
+| Coil / Glide 尺寸约束 | 大图按 View 尺寸采样，禁止无界内存缓存 |
+| FGS 内存审计 | 前台服务持有大 Buffer 是高风险场景 |
+
+来源：[New Memory Limits in Android 17](https://pbxscience.com/new-memory-limits-in-android-17-can-kill-your-app-without-a-crash-log/)

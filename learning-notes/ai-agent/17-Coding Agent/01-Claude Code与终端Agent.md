@@ -2,6 +2,14 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
+> 🔄 更新于 2026-07-08
+>
+> **Claude Code v2.1.203**（7 月）：Sonnet 5 成为默认模型（1M 上下文）；Claude in Chrome GA；后台 Agent 完成后自动 commit/push/开 draft PR；默认权限模式改为 Manual；Skill 可堆叠调用（最多 5 个）；`/dataviz` 技能上线。
+>
+> 来源：[Claude Code Changelog](https://code.claude.com/docs/en/changelog) · [v2.1.198 Release](https://github.com/anthropics/claude-code/releases/tag/v2.1.198) · [Claude Sonnet 5](https://www.anthropic.com/news/claude-sonnet-5)
+
+<!-- version-check: Claude Code v2.1.203, Sonnet 5 default, checked 2026-07-08 -->
+
 ## 1. Claude Code 概述
 
 Claude Code 是 Anthropic 推出的终端原生 Agentic 编码工具。直接在终端中运行，能理解整个代码库、编辑文件、执行命令、操作 Git，无需离开命令行。
@@ -286,13 +294,57 @@ Managed Agents 体系新增 **Self-hosted Sandbox**，允许企业在自有基�
 
 来源：[Anthropic Security Plugin - SecurityWeek](https://www.securityweek.com/anthropic-releases-new-claude-sandbox-security-guidance-plugin/)、[Code with Claude London](https://blockchain.news/news/claude-code-london-2026-managed-agents-updates)、[Claude Code Plugins Reference](https://code.claude.com/docs/en/plugins-reference)（Content was rephrased for compliance with licensing restrictions）
 
+### 8.3 2026 年 7 月增量（v2.1.197–2.1.203）
+
+> 🔄 更新于 2026-07-08
+
+7 月迭代重心从「新功能发布」转向**无人值守可靠性**与**更安全的默认权限**：
+
+```
+v2.1.197（6/30）— 模型换代：
+├─ Claude Sonnet 5 成为默认模型，原生 1M token 上下文
+├─ 促销定价 $2/$10 per Mtok（至 2026-08-31）
+└─ 需升级至 v2.1.197+ 才能使用
+
+v2.1.198（7/1）— 后台 Agent 闭环：
+├─ Claude in Chrome 正式 GA
+├─ 后台 Agent 完成代码工作后自动 commit → push → 开 draft PR
+├─ Notification Hook：agent_needs_input / agent_completed
+├─ /dataviz 技能：图表/仪表盘设计指导 + 配色校验器
+├─ Gateway 新增 Claude Platform on AWS（anthropicAws）上游
+├─ Explore 子 Agent 继承主会话模型（上限 opus）
+└─ 子 Agent 默认后台运行，完成后通知主 Agent
+
+v2.1.199–2.1.200（7/2–7/3）— 可靠性 + 权限收紧：
+├─ Skill 堆叠：/skill-a /skill-b task 一次加载最多 5 个前置 Skill
+├─ 默认权限模式 default → Manual（CLI / VS Code / JetBrains）
+├─ AskUserQuestion 不再自动超时继续，需显式确认
+├─ 流式输出中断时保留 partial 内容（不再整段丢弃）
+├─ 子 Agent 遇 rate limit / API 错误时向父 Agent 正确上报
+├─ 订阅用户 429 瞬态错误自动重试（CLAUDE_CODE_RETRY_WATCHDOG）
+└─ SSL 证书错误快速失败并给出修复提示
+
+v2.1.202–2.1.203（7/4–7/7）— 后台会话稳定性：
+├─ Dynamic workflow size 设置（small/medium/large 建议规模）
+├─ Workflow OTel 遥测：workflow.run_id / workflow.name 属性
+├─ /review 恢复为快速单遍审查；多 Agent 审查走 /code-review
+├─ macOS 后台会话低内存误报修复（15–20s 卡顿回归）
+├─ 后台 daemon token 过期自动恢复（不再永久无响应）
+├─ Worktree 隔离子 Agent 命令执行修复
+└─ VS Code 新增 Remote Control 全局开关
+```
+
+**与竞品差异点**：Claude Code 7 月未推新 UI 范式，而是把后台 Agent 的「完成即 PR」闭环和权限默认值收紧做到极致——适合团队把 `claude agents` 当作无人值守流水线而非交互式聊天。
+
+来源：[Claude Code Changelog](https://code.claude.com/docs/en/changelog)、[v2.1.198](https://github.com/anthropics/claude-code/releases/tag/v2.1.198)、[Claude Sonnet 5 公告](https://www.anthropic.com/news/claude-sonnet-5)（Content was rephrased for compliance with licensing restrictions）
+
 ## 9. 终端 Agent 对比
 
 <!-- 修复于 2026-05-20: gpt-4o/o3 已退役 → GPT-5/Codex；Claude 模型更新为最新版本 -->
 | 特性 | Claude Code | Aider | Codex CLI | Gemini CLI |
 |------|------------|-------|-----------|------------|
 | 开发商 | Anthropic | 开源 | OpenAI | Google |
-| 模型 | Opus 4.7 / Sonnet 4.6 | 多模型 | GPT-5.2 / Codex | Gemini 3.1 Pro |
+| 模型 | Sonnet 5 / Opus 4.7 | 多模型 | GPT-5.6 Sol / Codex | Gemini 3.1 Pro |
 | 代码库理解 | 全局索引 | Git 感知 | 全局索引 | 全局索引 |
 | 多文件编辑 | ✅ | ✅ | ✅ | ✅ |
 | 命令执行 | ✅ | 有限 | ✅ 沙箱 | ✅ |

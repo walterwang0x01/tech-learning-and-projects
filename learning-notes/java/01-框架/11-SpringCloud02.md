@@ -1216,6 +1216,25 @@ spring:
             maxAge: 360000 # 这次跨域检测的有效期
 ```
 
+---
+
+## 版本演进补充（2026-07）
+
+> 本文档正文基于 **Spring Cloud Hoxton + Spring Boot 2.x + Gateway 2.x** 教学，Gateway 路由/过滤器/跨域等核心概念仍然有效。以下为当前版本线速查。
+
+<!-- version-check: Spring Boot 4.1.0, Spring Cloud 2025.1.2, Spring Cloud Gateway 5.0.2, checked 2026-07-08 -->
+
+| 维度 | 本文档版本 | 当前推荐（2026-07） |
+|------|-----------|-------------------|
+| Spring Boot | 2.x | **4.1.0**（4.0.7 维护线） |
+| Spring Cloud | Hoxton | **2025.1.2 (Oakwood)** |
+| Spring Cloud Gateway | 2.x（Netty） | **5.0.2**（WebFlux + WebMVC 双 starter） |
+| 熔断降级 | — | Sentinel / Resilience4j（Hystrix 已废弃） |
+
+**Gateway 5.x 重要变化**：`spring-cloud-starter-gateway` 拆分为 `spring-cloud-starter-gateway-server-webflux`（响应式）和 `spring-cloud-starter-gateway-server-webmvc`（Servlet + 虚拟线程）两个 starter。
+
+来源：[Spring Cloud 2025.1.2 发布](https://spring.io/blog/2026/06/11/spring-cloud-2025-1-2-aka-oakwood-has-been-released) | [Spring Cloud 01 版本演进](./10-SpringCloud01.md#spring-cloud-版本演进)
+
 
 
 

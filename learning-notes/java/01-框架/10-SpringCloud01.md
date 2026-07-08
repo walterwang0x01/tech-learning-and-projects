@@ -1132,9 +1132,9 @@ Nacos和Eureka整体结构类似，服务注册、服务拉取、心跳等待，
 
 ## Spring Cloud 版本演进
 
-> 🔄 更新于 2026-04-18
+> 🔄 更新于 2026-07-08
 
-<!-- version-check: Spring Cloud 2025.1 Oakwood, checked 2026-04-18 -->
+<!-- version-check: Spring Boot 4.1.0, Spring Cloud 2025.1.2 Oakwood, checked 2026-07-08 -->
 
 ### 本文档版本说明
 
@@ -1144,17 +1144,18 @@ Nacos和Eureka整体结构类似，服务注册、服务拉取、心跳等待，
 - 注册中心：Eureka + Nacos
 - 负载均衡：Ribbon
 
-### 当前最新版本（2026-04）
+### 当前最新版本（2026-07）
 
 | 组件 | 本文版本 | 当前版本 | 变化说明 |
 |------|---------|---------|---------|
-| Spring Boot | 2.3.x | **4.0.x** | 3.0 迁移 Jakarta EE，4.0 升级 Spring Framework 7 |
-| Spring Cloud | Hoxton | **2025.1 (Oakwood)** | 对齐 Spring Boot 4.0 |
-| 注册中心 | Eureka | **Nacos 2.x** | Eureka 已停止维护，Nacos 成为国内标准 |
+| Spring Boot | 2.3.x | **4.1.0**（推荐）/ 4.0.7 | 4.1 GA（2026-06-10）；3.5 OSS 已于 2026-06-30 结束 |
+| Spring Cloud | Hoxton | **2025.1.2 (Oakwood)** | 兼容 Boot 4.0.7 与 4.1.0（2026-06-11 GA） |
+| 注册中心 | Eureka | **Nacos 2.x / 3.x** | Eureka 已停止维护；Nacos 3.2+ 支持 Agent Card 元数据 |
 | 负载均衡 | Ribbon | **Spring Cloud LoadBalancer** | Ribbon 已停止维护 |
 | 熔断降级 | — | **Sentinel / Resilience4j** | Hystrix 已停止维护 |
 | 链路追踪 | — | **Micrometer Tracing** | Sleuth 已合并到 Micrometer |
 | HTTP 客户端 | RestTemplate | **RestClient / HTTP Interface** | RestTemplate 进入维护模式 |
+| AI 集成 | — | **Spring AI 2.0.0** | 基线 Boot 4.0/4.1 + Jackson 3（2026-06-12 GA） |
 
 ### 关键迁移变化
 
@@ -1194,5 +1195,7 @@ User user = restClient.get()
     .body(User.class);
 ```
 
-> 建议新项目直接使用 Spring Boot 3.5.x 或 4.0.x + Spring Cloud 2024.0/2025.1。
+> 建议新项目直接使用 **Spring Boot 4.1.0 + Spring Cloud 2025.1.2**；仍在 4.0.x 维护线的团队至少升级到 **4.0.7**。
 > 详见 → [Spring Boot 最佳实践](./07-spring-boot-best-practices.md) 和 [微服务架构模式](./12-microservices-patterns.md)
+
+来源：[Spring Cloud 2025.1.2 发布](https://spring.io/blog/2026/06/11/spring-cloud-2025-1-2-aka-oakwood-has-been-released) | [Spring Boot 4.1.0 Release](https://github.com/spring-projects/spring-boot/releases/tag/v4.1.0)

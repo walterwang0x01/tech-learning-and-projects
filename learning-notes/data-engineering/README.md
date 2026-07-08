@@ -2,7 +2,8 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Airflow 3.x, dbt 1.10, Iceberg 1.9, Debezium 3.x, Flink 2.x, checked 2026-05-10 -->
+<!-- version-check: Airflow 3.3, dbt 1.11, Iceberg 1.11, Debezium 3.6.0.Final, Flink 2.3, checked 2026-07-08 -->
+<!-- 修复于 2026-07-08: dbt 1.10 已 EOS，更新为 1.11 -->
 
 数据工程连接事件驱动架构和数据分析，是 AI Agent 时代"数据供给"的关键环节。
 

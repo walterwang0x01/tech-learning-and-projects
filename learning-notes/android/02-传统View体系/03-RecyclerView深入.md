@@ -136,9 +136,9 @@ LazyColumn {
 
 ## 6. 2026 版本演进
 
-<!-- version-check: RecyclerView 1.4.0, Paging 3.5.0 stable, checked 2026-05-31 -->
+<!-- version-check: RecyclerView 1.4.0, Paging 3.5.0 stable, Kotlin 2.4.0, compileSdk 37, checked 2026-07-08 -->
 
-> 🔄 更新于 2026-05-04（2026-05-31 校准 Paging 版本）
+> 🔄 更新于 2026-05-04（2026-07-08 校准 compileSdk 37 与 Kotlin 2.4.0 工具链）
 
 ### 6.1 RecyclerView 1.4.0（2025-01-15）
 
@@ -158,7 +158,7 @@ dependencies {
 }
 ```
 
-> ⚠️ RecyclerView 1.4.0 要求 compileSdk 35+（API 35）。
+> ⚠️ RecyclerView 1.4.0 最低要求 compileSdk 35+；2026 年新项目建议 **compileSdk 37**（Android 17 stable），配合 Kotlin **2.4.0** 与 AGP **≥ 8.5.2**。
 
 ### 6.2 Paging 3.5.0（已发布稳定版）
 

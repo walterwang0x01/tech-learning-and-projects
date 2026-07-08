@@ -67,10 +67,10 @@ Answer: 您最近的订单是...
 
 ### 4.2 框架成熟
 
-<!-- version-check: LangGraph 1.1.3, checked 2026-04-16 -->
-- LangGraph 1.1 GA：图结构工作流编排，生产级 Agent 框架（90M+ 月下载量）
-<!-- version-check: CrewAI 47.8K+ Stars, checked 2026-04-16 -->
-- CrewAI：角色化多 Agent 协作，47.8K+ GitHub Stars
+<!-- version-check: LangGraph 1.2.8, checked 2026-07-08 -->
+- LangGraph 1.2 GA：图结构工作流编排，生产级 Agent 框架（90M+ 月下载量）
+<!-- version-check: CrewAI 55K+ Stars, checked 2026-07-08 -->
+- CrewAI：角色化多 Agent 协作，55K+ GitHub Stars
 - OpenAI Agents SDK：OpenAI 官方 Agent 开发工具包
 
 ### 4.3 多 Agent 系统

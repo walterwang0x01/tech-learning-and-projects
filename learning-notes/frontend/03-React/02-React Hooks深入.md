@@ -150,12 +150,16 @@ function usePrevious(value) {
 
 ## 7. React 19 新增 Hooks
 
-> 🔄 更新于 2026-04-18
+> 🔄 更新于 2026-07-08
 
-<!-- version-check: React 19.2.6, checked 2026-05-31 -->
-<!-- 修复于 2026-05-31: 19.2.4 → 19.2.6（npm 实测最新补丁，且与 09-浏览器与网络/04-Web安全 的 CVE-2026-23870 修复版本对齐） -->
+<!-- version-check: React 19.2.7 (2026-06-01 FormData fix), checked 2026-07-08 -->
+<!-- 修复于 2026-07-08: 19.2.6 → 19.2.7（19.2.6 CVE-2026-23870 DoS 修复引入 Server Actions FormData 丢失回归，19.2.7 修复） -->
 
-React 19（2024-12 稳定版，当前最新补丁 19.2.6）引入了多个面向异步和表单场景的新 Hook，配合 React Compiler 实现自动记忆化优化。
+React 19（2024-12 稳定版，当前最新补丁 **19.2.7**，2026-06-01）引入了多个面向异步和表单场景的新 Hook，配合 React Compiler 实现自动记忆化优化。
+
+> **⚠️ Server Actions + FormData 回归（2026-06）**：19.2.6 修复 CVE-2026-23870（DoS）时，Server Function 请求反序列化路径变更导致 `useActionState` 提交的 `FormData` 在服务端**静默为空**（`formData.get()` 返回 `null`，无报错）。**19.2.7 / 19.1.8 / 19.0.7** 已修复。若使用下方 `useActionState` 示例，请确保 `react` ≥ 19.2.7。排查：`console.log([...formData.entries()])`。
+>
+> 来源：[React 19.2.7 Release](https://github.com/facebook/react/releases/tag/v19.2.7) · [osbytes 分析](https://www.osbytes.io/blog/react-19-2-7-security-patch-dropped-server-action-formdata) · [Next.js #93754](https://github.com/vercel/next.js/issues/93754)
 
 ```jsx
 // use() — 在渲染期间读取 Promise 或 Context（替代 useContext）

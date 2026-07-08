@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: SRE practices 2026, Error Budget, checked 2026-05-22 -->
+<!-- version-check: Prometheus 3.13.0, Grafana 13.1.0, SRE practices 2026, Error Budget, checked 2026-07-08 -->
 
 ## 1. 为什么要 SLO
 
@@ -119,7 +119,7 @@ SLI = 成功读写次数 / 总次数（分读和写）
   消耗 10% 预算 → 一般警告，工作时间处理
 ```
 
-Prometheus 实现：
+Prometheus 实现（适用于 **Prometheus 3.13 LTS**，`rate()` / recording rules 语法与 2.x 兼容）：
 
 ```yaml
 # 计算 30 天窗口的燃烧率
@@ -183,7 +183,7 @@ SLO as Code：
 ├─ Sloth（Prometheus 原生）：YAML → 生成 recording/alerting rules
 ├─ OpenSLO：Spec 规范，多后端支持
 ├─ Nobl9（SaaS）：可视化 SLO 管理
-└─ Grafana SLO：Grafana 11+ 内置
+└─ Grafana SLO：Grafana 13+ 内置（SLO 仪表盘与错误预算可视化；13.1 的 Alert Activity 可联动 SLO 告警值班）
 
 使用 Sloth 示例：
   slos:

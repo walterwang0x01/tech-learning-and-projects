@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Airflow 3.2 (2026-04-22 GA), Airflow 3.1 (HITL), Dagster 1.13, Prefect 3.x, checked 2026-05-30 -->
+<!-- version-check: Airflow 3.3.0 (2026-07-06), Airflow 3.2.2, Dagster 1.13.12, dbt Core v2.0-alpha.3, checked 2026-07-08 -->
 
 ## 1. 为什么要编排
 
@@ -321,6 +321,8 @@ from airflow.providers.dbt.cloud.operators.dbt import DbtCloudRunJobOperator
 dbt_run = DbtCloudRunJobOperator(task_id="dbt_run", job_id=123)
 ```
 
+> 🔄 更新于 2026-07-08：**dbt Core v2.0 alpha** 已发布（Rust 重写，与 Fusion 同源），`manifest.json` 仍兼容但 run result 格式有变。Dagster 1.13.12 已修复 `dagster-dbt` 解析 Fusion 结果时 `failures` 字段缺失的 `KeyError`；1.13.11 新增 `DbtProjectComponent` 的 `"insights"` 元数据选项。编排器选型暂不受影响，但新项目建议先在 v1.12 上用 `dbt parse --use-v2-parser` 预检。来源：[dbt Core v2 公告](https://docs.getdbt.com/blog/dbt-core-v2-is-here)、[Dagster 1.13.12 Release](https://github.com/dagster-io/dagster/releases/tag/1.13.12)
+
 ## 9. 反模式
 
 ```
@@ -375,7 +377,7 @@ dbt_run = DbtCloudRunJobOperator(task_id="dbt_run", job_id=123)
 
 ## 11. 2026 年版本演进
 
-> 🔄 更新于 2026-05-30（补充 Airflow 3.2 GA 日期、HITL operator 正确 API、Dagster 1.13）
+> 🔄 更新于 2026-07-08（补充 Airflow 3.3.0、Dagster 1.13.12、dbt Core v2.0 alpha）
 
 ### 11.1 Airflow 3.1：Human-in-the-Loop（2025-09 发布）
 
@@ -453,14 +455,46 @@ Airflow 3.2 在 3.1 之后聚焦"数据感知工作流"，将 Asset（资产）�
 |------|------|------|
 | 3.0 | 2025-04 | DAG Versioning、Event-Driven Scheduling、Remote Execution |
 | 3.1 | 2025-09 | HITL、i18n、Deadline Alerts |
-| 3.2 | 2026-04-22 | Asset Partitioning、Multi-team |
+| 3.2 | 2026-04-07 | Asset Partitioning、Multi-team |
+| 3.3 | 2026-07-06 | Partition Mapper、Task/Asset State Store、Coordinator（Java/Go SDK 实验性） |
 
+<!-- 修复于 2026-07-08: 3.2.0 GA 日为 2026-04-07（非 04-22）；补充 3.3.0 时间线 -->
 **升级建议**：
 
 ```
 2.x  →  必须升级！Airflow 2 已于 2026-04-22 EOL（不再有安全更新，详见 Apache Release Plan）
-3.0  →  3.1 / 3.2 都是平滑升级（API 兼容）
-3.1  →  3.2（已发布版本）
+3.0  →  3.1 / 3.2 / 3.3 都是平滑升级（API 兼容）
+3.1  →  3.3（当前最新稳定版）
 ```
 
 来源：[Apache Airflow Release Plan](https://cwiki.apache.org/confluence/display/AIRFLOW/Release+Plan)
+
+### 11.3 Airflow 3.3.0：Partition Mapper + State Store + 多语言 SDK（2026-07-06）
+
+> 🔄 更新于 2026-07-08
+
+Airflow 3.3.0 在 3.2 的 Asset 分区基础上大幅扩展编排粒度。来源：[Airflow 3.3.0 Release Notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html)
+
+**关键能力**：
+
+| 特性 | 说明 |
+|------|------|
+| **Partition Mapper** | `RollupMapper`（多对一）、`FanOutMapper`（一对多）、`FixedKeyMapper` + `SegmentWindow`，配合 `wait_policy` 控制分区 DAG 触发 |
+| **PartitionedAtRuntime** | 分区键在 run 启动时分配，而非从上游事件映射 |
+| **Task/Asset State Store (AIP-103)** | 任务和资产可持久化 key-value 状态，跨重试/run 保留 |
+| **Language Task SDK (AIP-108)** | `@task.stub(queue=...)` 声明 Java/Go 等非 Python 任务（**实验性**） |
+| **Pluggable Retry Policies (AIP-105)** | 可插拔重试策略，按异常类型或自定义逻辑决定重试 |
+| **HITL `awaiting_input`** | 人工审核任务在 triggerer 上运行，不占 worker slot |
+
+**同期**：Airflow 3.2.2（2026-05-29）为 bugfix 补丁；Airflow CTL 0.1.5（2026-06-03）新增 bulk delete dag runs、JSON backfill payload。来源：[Airflow CTL 0.1.5](https://airflow.apache.org/docs/apache-airflow-ctl/0.1.5/release_notes.html)
+
+### 11.4 Dagster 1.13.x 近期补丁（2026-06 ~ 07）
+
+> 🔄 更新于 2026-07-08
+
+Dagster 1.13 线保持每周补丁节奏，最新 **1.13.12**（2026-07-02）。来源：[Dagster Releases](https://github.com/dagster-io/dagster/releases)、[CHANGES.md](https://github.com/dagster-io/dagster/blob/HEAD/CHANGES.md)
+
+| 版本 | 日期 | 亮点 |
+|------|------|------|
+| 1.13.11 | 2026-06-25 | Asset Catalog 虚拟化列表；`DbtProjectComponent` 支持 `"insights"` 元数据 |
+| 1.13.12 | 2026-07-02 | Runs feed 性能优化；K8s 滚动部署后 gRPC 刷新卡死修复；dbt Fusion run result 兼容 |

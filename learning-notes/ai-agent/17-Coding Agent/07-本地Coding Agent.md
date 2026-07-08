@@ -4,6 +4,14 @@
 
 > 🔄 创建于 2026-04-21
 
+> 🔄 更新于 2026-07-08
+>
+> **OpenAI Codex + GPT-5.6 Sol**（6/26 预览，7/6 确认）：Codex 工程负责人确认 GPT-5.6 Sol Ultra（内置协作子 Agent）即将接入 Codex；Sol 定价 $5/$30 per Mtok，Terra/Luna 为平衡/低成本档；Cerebras 推理达 750 tok/s。当前仍为政府门控的有限预览。
+>
+> 来源：[GPT-5.6 Sol Preview](https://openai.com/index/previewing-gpt-5-6-sol/) · [Codex Ultra 确认](https://kompozy.io/news/openai-gpt-5-6-sol-ultra-codex)
+
+<!-- version-check: OpenAI Codex GPT-5.6 Sol preview, checked 2026-07-08 -->
+
 ## 1. 背景与动机
 
 在 OpenAI Codex 和 Claude Code 争夺云端 Coding Agent 市场的同时，开源社区正在走一条不同的路线：**完全本地运行的 Coding Agent**。核心理念是代码不应该离开开发者的机器。
@@ -88,6 +96,36 @@ OpenAI 的终端原生 Coding Agent，虽然主要依赖云端 API，但支持 M
 - **Stars**：87k+（2026-06 核对，`openai/codex`）<!-- 修复于 2026-06-02: 75.6k → 87k+，GitHub API 实测 -->
 - **特点**：支持 MCP 服务器、并行工具调用、ChatGPT 计划集成
 - **来源**：[GitHub](https://github.com/openai/codex)
+
+> 🔄 更新于 2026-07-08
+
+**GPT-5.6 模型家族与 Codex 集成（2026 年 6–7 月）：**
+
+```
+GPT-5.6 三档模型（6/26 预览）：
+├─ Sol（旗舰）：$5 input / $30 output per Mtok
+├─ Terra（平衡）：$2.50 / $15，约 2× 便宜于 GPT-5.5
+└─ Luna（快速低成本）：$1 / $6
+
+Sol Ultra 模式（7/6 Codex 工程负责人确认）：
+├─ 模型内部 spawn 协作子 Agent，并行处理复杂多步任务
+├─ 区别于 max reasoning（单 Agent 深思考）和外部编排
+├─ 单任务 token 消耗高于普通 Sol 调用
+└─ 预计数周内向更广泛用户开放
+
+推理加速：
+├─ GPT-5.6 Sol on Cerebras：最高 750 tokens/s
+└─ API priority processing + Codex fast mode 降低延迟
+
+当前访问限制：
+├─ 预览期仅 API + Codex，ChatGPT 尚未开放
+├─ 政府门控：约 20 家受信合作伙伴先行
+└─ OpenAI 表示数周内计划 GA（ChatGPT / Codex / API）
+```
+
+**与 Claude Code 7 月动态的对比**：Claude Code 侧重后台 Agent 无人值守闭环（自动 PR），Codex 侧重模型层子 Agent 协作（Ultra 模式）——两者都在解决「单 Agent 搞不定大任务」的问题，但路径不同。
+
+来源：[GPT-5.6 Sol Preview](https://openai.com/index/previewing-gpt-5-6-sol/)、[Codex Ultra 确认报道](https://kompozy.io/news/openai-gpt-5-6-sol-ultra-codex)（Content was rephrased for compliance with licensing restrictions）
 
 ## 3. 本地模型选择
 

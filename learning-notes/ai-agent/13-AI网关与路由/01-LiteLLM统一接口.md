@@ -4,6 +4,11 @@
 
 ## 1. 概述
 
+> 🔄 更新于 2026-07-08
+>
+> **LiteLLM v1.91.0**（2026-07-04）：MCP Gateway OAuth 2.0 v2（跨副本 single-flight token 刷新）、Rust OCR 桥接（Mistral OCR 打包进 wheel）、实验性 Axum Realtime Gateway、上游连接池预热降低 Realtime 建连延迟、Team Key 最小权限 MCP 默认；新增约 48 个模型（Gemini 3 图像、Mistral Medium 3.5、Cloudflare Workers AI 批量等）。v1.90.0 引入 OpenTelemetry v2 对齐与 6 个新 Provider；Docker 镜像 cosign 签名验证。
+> 来源：[LiteLLM v1.91.0 Release Notes](https://docs.litellm.ai/release_notes/v1.91.0/v1-91-0)
+
 LiteLLM 提供统一的 OpenAI 兼容接口，支持 100+ LLM 提供商（OpenAI、Anthropic、Google、AWS Bedrock、Azure 等）。核心价值：一套代码切换任意模型。
 
 ```
@@ -28,9 +33,10 @@ LiteLLM 提供统一的 OpenAI 兼容接口，支持 100+ LLM 提供商（OpenAI
 pip install litellm
 ```
 
-<!-- version-check: LiteLLM 1.85.1 (2026-05-20, Gemini 3.5 Flash day-0 + cross-pod spend fix), checked 2026-05-28 -->
+<!-- version-check: LiteLLM 1.91.0 (2026-07-04, MCP OAuth v2 + Rust OCR/Realtime gateway), checked 2026-07-08 -->
 <!-- 修复于 2026-05-13: gpt-4o → gpt-5.2（gpt-4o 已从 ChatGPT 退役，推荐使用新模型） -->
 <!-- 修复于 2026-05-28: LiteLLM 1.83.x → 1.85.1，注意 v1.77.6.2 前发生过 SQL 注入安全事件 (CVE-2026-42208)，生产请使用 1.83+ -->
+<!-- 修复于 2026-07-08: LiteLLM 1.85.1 → 1.91.0，增量补充 MCP OAuth v2、Rust OCR/Realtime、OTel v2 -->
 
 ```python
 import litellm
@@ -128,7 +134,9 @@ litellm_settings:
 ```
 
 ```bash
-# 启动代理服务器
+# 启动代理服务器（生产推荐固定镜像版本）
+docker run -e STORE_MODEL_IN_DB=True -p 4000:4000 docker.litellm.ai/berriai/litellm:1.91.0
+# 或本地启动
 litellm --config litellm_config.yaml --port 4000
 ```
 
@@ -303,10 +311,39 @@ LiteLLM 内置管理界面：http://localhost:4000/ui
 | 模型支持     | 100+             | 主流模型           | 1600+            |
 | 部署方式     | 自托管            | 云服务             | 云服务/自托管     |
 | 负载均衡     | ✅               | ✅                | ✅               |
+| MCP Gateway | ✅ OAuth v2       | ✅ MCP Apps        | ✅ 服务端执行 Beta |
+| 护栏         | ✅ Gateway 级     | ❌                | ✅ 内置           |
+| 可观测性     | ✅ OTel v2       | ✅ @ai-sdk/otel   | ✅ OTel 租户属性  |
 | 预算管理     | ✅ 细粒度         | ✅ 基础           | ✅               |
 | 缓存         | ✅ Redis         | ❌                | ✅ 语义缓存       |
-| 开源         | ✅ Apache 2.0    | ❌                | ❌               |
+| 开源         | ✅ Apache 2.0    | ✅ SDK 开源        | ❌               |
 | 适用场景     | 团队自托管网关     | Vercel 生态       | 企业级 AI 网关    |
+
+## 10. MCP Gateway 与 Realtime（v1.91+）
+
+```yaml
+# litellm_config.yaml — MCP Server 注册（OAuth v2 自动刷新 token）
+mcp_servers:
+  filesystem:
+    url: "https://mcp.example.com/sse"
+    auth_type: oauth2
+    client_id: "${MCP_CLIENT_ID}"
+    client_secret: "${MCP_CLIENT_SECRET}"
+
+general_settings:
+  mcp_oauth_v2: true  # 跨副本 single-flight token 刷新
+```
+
+```python
+# Realtime API — v1.91 连接池预热降低建连延迟
+import litellm
+
+response = await litellm.aresponses(
+    model="openai/gpt-realtime",
+    input="你好",
+    stream=True,
+)
+```
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

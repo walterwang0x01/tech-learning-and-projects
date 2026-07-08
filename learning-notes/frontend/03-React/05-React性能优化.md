@@ -169,7 +169,7 @@ function FilteredList({ query }) {
 
 > 🔄 更新于 2026-04-22
 
-<!-- version-check: Next.js 16.2.5 (May 2026 security release), checked 2026-05-21 -->
+<!-- version-check: Next.js 16.2.10 (2026-07-01 latest stable), 16.3.0-preview (2026-06), checked 2026-07-08 -->
 
 Next.js 16.2 带来了显著的性能提升，对 React 应用的渲染和开发体验有直接影响。来源：[Next.js 16.2 Blog](https://nextjs.org/blog/next-16-2)
 
@@ -195,11 +195,59 @@ React 团队贡献了一个关键优化：将 `JSON.parse` 的 reviver 回调（
 
 > 🔄 更新于 2026-05-21
 
-### ⚠️ Next.js 16.2.5 安全更新（2026-05-07）
+### ⚠️ Next.js 16.2.5+ 安全更新（2026-05-07）
 
-Next.js May 2026 安全发布修复了 13 个安全公告（含 React RSC 上游 CVE-2025-55182 RCE 漏洞）。所有使用 App Router 的生产应用必须立即升级到 **16.2.5**（或 15.5.16）。
+Next.js May 2026 安全发布修复了 13 个安全公告（含 React RSC 上游 CVE-2025-55182 RCE 漏洞）。所有使用 App Router 的生产应用必须立即升级到 **16.2.5+**（或 15.5.16+）。**16.2.10**（2026-07-01）为当前 `latest` 稳定线；若已升到 16.2.6 且 Server Actions 表单静默失败，需同步升级 React 至 **19.2.7**（见 [React Hooks 文档](./02-React%20Hooks深入.md) 第 7 节）。
 
 详见 → [Web 安全文档](../09-浏览器与网络/04-Web安全XSS-CSRF.md) 第 5 节
 
-来源：[Vercel Changelog](https://vercel.com/changelog/next-js-may-2026-security-release)
+来源：[Vercel Changelog](https://vercel.com/changelog/next-js-may-2026-security-release) · [Next.js 16.2.10 Release](https://github.com/vercel/next.js/releases/tag/v16.2.10)
+
+## 8. Next.js 16.3 Preview（2026-06 ~ 7 月）
+
+> 🔄 更新于 2026-07-08
+
+Next.js 16.3 已进入 **Preview** 阶段（`npm install next@preview`），稳定版预计数周内发布。canary 线持续迭代（**16.3.0-canary.79**，2026-07-07）。16.3 聚焦 Turbopack 性能、Instant Navigations 与 AI Agent 工作流集成。
+
+来源：[Next.js 16.3: Instant Navigations](https://nextjs.org/blog/next-16-3-instant-navigations) · [Next.js 16.3: Turbopack](https://nextjs.org/blog/next-16-3-turbopack) · [16.3.0-canary.79](https://github.com/vercel/next.js/releases/tag/v16.3.0-canary.79)
+
+### Turbopack 编译器改进
+
+| 改进项 | 说明 |
+|--------|------|
+| 开发服务器内存 | 长会话内存占用最高降 **90%**（路由级缓存驱逐到文件系统，默认开启） |
+| 持久化构建缓存 | `turbopackFileSystemCacheForBuild: true` 可加速 CI 增量构建 |
+| Rust React Compiler | `reactCompiler: true` + `turbopackRustReactCompiler: true` 实验性原生编译 |
+| `import.meta.glob` | Turbopack 原生支持 Vite 风格 glob 导入 |
+| HMR / 冷启动 | 复杂应用 HMR 冷启动 15%+ 更快；Safari CSS HMR 修复 |
+
+### Instant Navigations（SPA 级导航体验）
+
+16.3 引入 **Instant Navigations**，让 Server Components 应用获得 SPA 式即时导航：
+
+```js
+// next.config.js — 启用 Cache Components + Partial Prefetching
+const nextConfig = {
+  cacheComponents: true,      // 动态默认 + 显式缓存
+  partialPrefetching: true,   // 每路由只预取一次可复用 shell（非每链接一次）
+};
+```
+
+- **Stream**：用 `<Suspense>` 包裹慢数据 → 导航瞬间显示 loading shell
+- **Cache**：用 `'use cache'` → 导航瞬间复用已缓存 UI
+- **Block**：`export const instant = false` → 显式选择阻塞式导航（如博客文章）
+- **测试**：`@next/playwright` 的 `instant()` helper 断言导航后即时可见内容
+- **DevTools**：Navigation Inspector 可暂停导航查看预取 shell
+
+### 升级建议
+
+```bash
+# 体验 16.3 Preview
+npm install next@preview
+
+# 生产环境仍用 latest 稳定线
+npm install next@latest   # 当前 16.2.10
+```
+
+> 若曾因 Turbopack 内存问题回退 `next dev --webpack`，16.3 的内存驱逐修复值得重新尝试 Turbopack。
 

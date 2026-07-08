@@ -217,11 +217,11 @@ Android 16 大屏幕变化：
 
 ## 7. Android 17 (API 37) 行为变化
 
-> 🔄 更新于 2026-05-18
+> 🔄 更新于 2026-07-08
 
-<!-- version-check: Android 17 API 37 "Cinnamon Bun", Beta 4, stable June 2026 expected, checked 2026-05-18 -->
+<!-- version-check: Android 17 API 37 "Cinnamon Bun" stable (June 2026), Beta 4.1, Kotlin 2.4.0, checked 2026-07-08 -->
 
-Android 17（内部代号 **Cinnamon Bun**，API 37）已于 2026-03 进入 Beta 3 平台稳定阶段，API 表面冻结；Beta 4（2026-04）增加了 app 内存限制等运行时变化，**正式稳定版预计 2026-06 发布**。来源：[The Third Beta of Android 17](https://android-developers.googleblog.com/2026/03/the-third-beta-of-android-17.html)、[Android 17 Behavior Changes](https://developer.android.com/about/versions/17/behavior-changes-17)
+Android 17（内部代号 **Cinnamon Bun**，API 37）已于 **2026-06 正式发布**，Pixel 设备率先 OTA，其余 OEM 在 2026 H2 陆续推送；Beta 4.1（2026-06-01）为最终 Beta 修复版。来源：[Android 17 is here](https://android-developers.googleblog.com/2026/06/Android-17.html)、[Android 17 Release Notes](https://developer.android.com/about/versions/17/release-notes)、[Android 17 Behavior Changes](https://developer.android.com/about/versions/17/behavior-changes-17)
 
 ### 7.1 lock-free MessageQueue 与 main looper 行为
 
@@ -277,7 +277,7 @@ class MyApp : Application() {
 
         for (info in exitReasons) {
             // 检查是否被新内存限制器杀死
-            if (info.description?.contains("MemoryLimiter") == true) {
+            if (info.description?.contains("MemoryLimiter:AnonSwap") == true) {
                 // 上报异常，触发降级（停止预加载、清理缓存等）
                 reportMemoryKill(info)
             }
@@ -304,11 +304,11 @@ Google 官宣 Android 17 缩短开发周期：跳过传统 "Developer Preview" �
 
 ## 8. Android 17 Stable 跟进与 Material 3 Expressive
 
-> 🔄 更新于 2026-05-20
+> 🔄 更新于 2026-07-08
 
-<!-- version-check: Android 17 API 37 stable expected June 2026, Material 3 Expressive, Google I/O 2026, checked 2026-05-20 -->
+<!-- version-check: Android 17 API 37 stable (June 2026), Handoff API, Kotlin 2.4.0 explicit backing fields, checked 2026-07-08 -->
 
-Google I/O 2026（2026-05-19 至 05-20）正式公布 Android 17 的最终特性集和 Pixel/Galaxy 首批落地计划。稳定版仍按节奏在 **2026-06** 发布到 AOSP，Pixel/Galaxy 的 Gemini Intelligence 套件作为 OEM 增量功能在夏季陆续推送。来源：[Android Show 2026 — The Verge](https://www.theverge.com/tech/928624/android-show-2026-all-the-news-and-announcements)、[Android 17 Release Date — Tech Advisor](https://www.techadvisor.com/article/3122614/android-17-release-date-new-features-eligible-phones.html)
+Android 17 稳定版已于 **2026-06** 推送到 Pixel，Google 官方博客确认正式落地；Gemini Intelligence 等 OEM 增量功能在 2026 夏季陆续推送。来源：[Android 17 is here](https://android-developers.googleblog.com/2026/06/Android-17.html)、[Android 17 Features](https://developer.android.com/about/versions/17/features)、[Android 17 用户向新特性](https://blog.google/products-and-platforms/platforms/android/android-17-features/)
 
 ### 8.1 与开发者直接相关的 12 项新特性
 
@@ -355,4 +355,54 @@ dependencies {
 | ⭐️ | Material 3 Expressive 视觉适配 | 视觉一致性，非阻塞 |
 | ⭐️ | 系统级 Bubbles + Cross-device task handoff | 平板/折叠屏体验 |
 
-> 工具链节奏：iOS 27 在 2026-04-28 强制 SDK 26 与 UIScene；Android 17 强制 targetSdk 36（Play 政策）已先行落地，targetSdk 37 适配窗口为 2026-06 至 2026-09。
+### 8.4 Handoff 跨设备 Activity 接续
+
+```kotlin
+// Android 17 新增 Handoff API，按 Activity 粒度启用跨设备接续
+class DetailActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // 声明此 Activity 支持 Handoff
+        setHandoffEnabled(true)
+    }
+
+    override fun onHandoffActivityDataRequested(): HandoffActivityData {
+        // 接收端重建 Activity 时恢复状态
+        return HandoffActivityData.Builder()
+            .setIntent(Intent(this, DetailActivity::class.java).apply {
+                putExtra("itemId", currentItemId)
+            })
+            .build()
+    }
+}
+```
+
+来源：[Android 17 Features — Handoff](https://developer.android.com/about/versions/17/features#handoff)
+
+### 8.5 配置变更不再默认重启 Activity
+
+```
+Android 17 优化（面向所有应用）：
+├─ CONFIG_KEYBOARD / CONFIG_KEYBOARD_HIDDEN 不再触发 Activity 重建
+├─ CONFIG_NAVIGATION / CONFIG_TOUCHSCREEN / CONFIG_COLOR_MODE 同理
+├─ CONFIG_UI_MODE 仅在 Desk 模式切换时例外
+└─ 若业务依赖重建加载资源 → 在 Manifest 显式声明 android:recreateOnConfigChanges
+```
+
+### 8.6 Kotlin 2.4.0 与生命周期状态管理
+
+Kotlin **2.4.0**（2026-06-03 stable）将 **explicit backing fields** 升为稳定特性，可简化 ViewModel / MVI 中 `_state` / `state` 双属性模式，与 `lifecycleScope`、`repeatOnLifecycle` 配合更简洁。最低 AGP **8.5.2**。来源：[What's new in Kotlin 2.4.0](https://kotlinlang.org/docs/whatsnew24.html)、[Kotlin 2.4.0 Released](https://blog.jetbrains.com/kotlin/2026/06/kotlin-2-4-0-released/)
+
+```kotlin
+// Kotlin 2.4.0 explicit backing fields（替代 _uiState / uiState 双属性样板）
+class DetailViewModel : ViewModel() {
+    val uiState: StateFlow<UiState>
+        field = MutableStateFlow(UiState.Loading)
+
+    fun refresh() {
+        uiState.value = uiState.value.copy(loading = true)  // 类内解析为 MutableStateFlow
+    }
+}
+```
+
+> 工具链节奏：Kotlin 2.4.0 stable（2026-06-03）；Android 17 stable（2026-06）已落地，targetSdk 37 适配窗口为 2026-06 至 2026-09；Kotlin 2.4.20-Beta1 于 2026-07-06 进入预览。

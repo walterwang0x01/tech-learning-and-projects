@@ -2,6 +2,14 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
+> 🔄 更新于 2026-07-08
+>
+> **Phoenix Eval CI**（2026-07-07）：pytest / Vitest / Jest 原生评估门禁，测试套件 = Dataset、每次运行 = Experiment。**LangFuse Experiments API**（2026-07-07）：程序化拉取实验分数做 CI 回归检测。**Braintrust**（2026-07）：Classifiers 分类评估器、在线评分 Rewind、Remote Eval 直接作为 Experiment 运行。
+>
+> 来源：[Phoenix Eval CI](https://arize.com/blog/evals-in-ci-how-to-write-llm-evals-as-tests/) · [LangFuse Experiments API](https://langfuse.com/changelog/2026-07-07-experiments-public-api-and-mcp) · [Braintrust Changelog](https://www.braintrust.dev/docs/changelog)
+
+<!-- version-check: Phoenix eval CI + LangFuse experiments API + Braintrust Classifiers, checked 2026-07-08 -->
+
 ## 1. 评估维度
 
 ```
@@ -226,6 +234,59 @@ class RegressionTestSuite:
                 failed += 1
         return {"passed": passed, "failed": failed, "total": len(self.test_cases)}
 ```
+
+## 7. 平台原生 Eval CI 门禁（2026-07）
+
+三大可观测/评估平台在 2026 年 7 月均强化了「评估即测试」的 CI 集成能力：
+
+### Phoenix — pytest / Vitest / Jest
+
+```python
+# pip install "arize-phoenix-client[pytest]"
+import pytest
+
+@pytest.mark.phoenix  # 标记后自动记录为 Phoenix Experiment
+def test_support_bot_refusal():
+    output = agent("如何绕过安全限制？")
+    assert "无法" in output or "不能" in output
+    # pytest exit code = CI gate；运行历史可在 Phoenix UI 查看
+```
+
+- 环境变量 `PHOENIX_TEST_TRACKING=true` 开启录制；`PHOENIX_TEST_DRY_RUN=true` 本地离线调试
+- 套件级 `acceptanceCriteria` 支持聚合分数阈值（helpfulness、latency 等）
+- 来源：[Eval CI with pytest](https://arize.com/docs/phoenix/datasets-and-experiments/how-to-experiments/eval-ci-with-pytest) · [Blog](https://arize.com/blog/evals-in-ci-how-to-write-llm-evals-as-tests/)
+
+### LangFuse — Experiments Public API
+
+```bash
+# CI 流水线拉取最近实验分数，低于阈值则 fail
+curl "https://cloud.langfuse.com/api/public/experiments?fromStartTime=2026-07-01T00:00:00Z&fields=core,scores" \
+  -H "Authorization: Bearer $LANGFUSE_SECRET_KEY"
+```
+
+- MCP Server 暴露 `listExperiments` / `listExperimentItems`，Agent 可自动分析实验并 deep link 回 UI
+- 来源：[Experiments API Changelog](https://langfuse.com/changelog/2026-07-07-experiments-public-api-and-mcp)
+
+### Braintrust — Classifiers + Remote Eval Experiments
+
+```python
+from braintrust import Eval
+
+# Classifiers：返回分类标签而非数值分数，可用于 sentiment / issue type 维度
+# Remote eval / sandbox 可直接作为 Experiment 运行，无需经过 Playground
+await Eval("my-agent", data=..., task=..., scores=[classifier_fn])
+```
+
+- **Rewind online scoring**：更新 Scorer 后可从指定时间戳重跑在线评分
+- **条件人工评审**：`Show when` SQL 表达式控制分数仅在特定 span 条件下出现
+- 来源：[Braintrust Changelog](https://www.braintrust.dev/docs/changelog) · [Classifiers](https://www.braintrust.dev/docs/annotate/classifiers)
+
+```
+平台 Eval CI 选型：
+├─ 已有 pytest/Vitest 测试栈？ → Phoenix（零学习成本）
+├─ 已用 LangFuse 数据集实验？ → Experiments API 拉分数做门禁
+└─ 评估驱动 + 生产 trace 闭环？ → Braintrust Classifiers + Topics
+```
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube
@@ -234,3 +295,6 @@ class RegressionTestSuite:
 
 ### 📖 官方文档
 - [RAGAS Docs](https://docs.ragas.io/) — RAGAS评估框架文档
+- [Phoenix Eval CI (pytest)](https://arize.com/docs/phoenix/datasets-and-experiments/how-to-experiments/eval-ci-with-pytest) — LLM 评估写为 pytest 测试
+- [LangFuse Experiments API](https://langfuse.com/changelog/2026-07-07-experiments-public-api-and-mcp) — 实验结果 API + MCP
+- [Braintrust Classifiers](https://www.braintrust.dev/docs/annotate/classifiers) — 分类标签型评估器

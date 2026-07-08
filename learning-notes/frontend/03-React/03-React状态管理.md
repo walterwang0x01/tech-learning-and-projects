@@ -158,7 +158,7 @@ function CreateUser() {
 
 > 🔄 更新于 2026-05-03
 
-<!-- version-check: Zustand 5.0.14, Redux Toolkit 2.12.x, TanStack Query 5.100.x, Jotai 2.20.x, checked 2026-05-31 -->
+<!-- version-check: Zustand 5.0.14, Redux Toolkit 2.12.0, TanStack Query 5.101.2, Jotai 2.20.1, checked 2026-07-08 -->
 <!-- 修复于 2026-05-31: 版本号按 npm registry 实测刷新（Zustand 5.0.3→5.0.14、RTK 2.9.x→2.12.x、Jotai 2.12.x→2.20.x）；TanStack AI 归属修正 -->
 
 ### 6.1 Zustand 5.x（当前稳定版 5.0.14）
@@ -219,9 +219,9 @@ const rootReducer = combineSlices(counterSlice, todosSlice);
 const injectedReducer = rootReducer.inject(lazySlice);
 ```
 
-### 6.3 TanStack Query v5（当前 5.100.x）
+### 6.3 TanStack Query v5（当前 5.101.x）
 
-TanStack Query v5 是服务端状态管理的事实标准，当前 @tanstack/react-query 5.100.14。来源：[TanStack Query Releases](https://github.com/TanStack/query/releases)
+TanStack Query v5 是服务端状态管理的事实标准，当前 @tanstack/react-query **5.101.2**。来源：[TanStack Query Releases](https://github.com/TanStack/query/releases)
 
 **v5 关键改进：**
 - 统一对象参数格式（移除所有重载）

@@ -379,7 +379,7 @@ df['2023-01-01':'2023-01-31']  # 时间范围
 
 ```python
 # 按天重采样为月
-df.resample('M').mean()
+df.resample('ME').mean()  # Pandas 3.0：'M' 已移除，改用月末 'ME'
 
 # 按周重采样
 df.resample('W').sum()
@@ -496,7 +496,7 @@ Pandas 是 Python 数据分析的核心库，提供了强大的数据处理和�
 
 ## 16. Pandas 3.0 版本演进
 
-<!-- version-check: Pandas 3.0.3, checked 2026-05-21 -->
+<!-- version-check: Pandas 3.0.3, checked 2026-07-08 -->
 
 > 🔄 更新于 2026-04-23
 
@@ -751,6 +751,99 @@ print(plan.explain(streaming=True))
 数 TB 以上 / 真正分布式
     → 不在本系三者范围，考虑 Spark / Ray / Dask
 ```
+
+## 19. Pandas 3.0.4 与 Polars 1.42 生态同步（2026-06/07）
+
+> 🔄 更新于 2026-07-08
+
+<!-- version-check: Pandas 3.0.4, Polars 1.42.1, checked 2026-07-08 -->
+
+2026 年 6 月底至 7 月初，Pandas 与 Polars 均发布了重要补丁/次版本，直接影响数据分析流水线的稳定性与互操作。
+
+### 19.1 Pandas 3.0.4（2026-06-28）
+
+Pandas 3.0.4 是当前 3.0.x 系列最新稳定版，以回归修复和 Bug 修复为主，建议所有 3.0.x 用户升级：
+
+```bash
+pip install --upgrade "pandas==3.0.*"
+```
+
+关键修复（与日常分析相关）：
+
+| 问题 | 修复 |
+| ---- | ---- |
+| `StringDtype` 列 `searchsorted` 性能回退 | 恢复 O(log n) 二分查找，不再做全量 NA 扫描 |
+| `isin(pd.NA)` + `ArrowDtype` 报错 | 修复 `drop()` 等依赖 `isin` 的操作 |
+| `eval()` 在 CoW 下意外修改原 DataFrame | Python 引擎现在正确遵守 Copy-on-Write |
+| `to_sql()` ADBC 引擎 SQL 注入风险 | 表名/模式名正确引用为 SQL 标识符 |
+| `Period`/`MonthEnd` 等并发 segfault | 修复多线程（如 `pytest-xdist`）下的崩溃 |
+
+```python
+import pandas as pd
+
+# 3.0.4 修复：eval 在 CoW 下不再意外修改原 DataFrame
+df = pd.DataFrame({"a": [1, 2], "b": [3, 4]})
+result = df.eval("a + b")  # 安全，不污染 df
+```
+
+### 19.2 Polars 1.41 → 1.42（2026-05 至 2026-06）
+
+Polars 在 1.41-1.42 周期继续打磨查询引擎与 Parquet I/O：
+
+**1.41 亮点（2026-05-22）**
+
+- **Parquet 元数据解码加速**：宽表（10000 列）footer 解码提速 3.29×，所有 `scan_parquet` 调用自动受益
+- **嵌套公共子计划消除**：查询优化器在任意嵌套深度去重重复子计划，复杂 `concat` 链不再重复计算
+- **`LazyFrame.gather()`**：按行索引选取数据无需 `collect()` 后再操作
+
+```python
+import polars as pl
+
+lf = pl.LazyFrame({"product": ["A", "B", "C"], "revenue": [100, 250, 80]})
+# 1.41+：行选取留在 lazy 层
+result = lf.gather([1]).collect()
+```
+
+**1.42 亮点（2026-06-24 至 2026-06-30，当前 1.42.1）**
+
+- 多文件 Parquet 元数据采样解析模式（`sampled resolve`），大目录扫描更快
+- 小 dtype 列求和内核优化
+- 修复 `groupby` 后 `select(len())` 的投影下推 panic 等稳定性问题
+
+### 19.3 Pandas 3.0.4 与 Polars 互操作注意
+
+Polars 1.42.1 在 CI 中**跳过 pandas 3.0.4**（`pd.Timedelta` 存在 segfault，[polars#28125](https://github.com/pola-rs/polars/pull/28125)）。在混合 Pandas + Polars 流水线中：
+
+```python
+# 推荐：锁定 pandas 3.0.3 或等待 3.0.5 修复 Timedelta segfault
+# pip install "pandas==3.0.3"  # 与 Polars 互操作更稳妥
+
+import polars as pl
+import pandas as pd
+
+pdf = pd.read_csv("data.csv", dtype_backend="pyarrow")
+pldf = pl.from_pandas(pdf)  # Arrow PyCapsule 零拷贝
+```
+
+> scikit-learn 1.9 已通过 [narwhals](https://narwhals-dev.github.io/narwhals/) 统一 Pandas / Polars DataFrame 输入，特征工程场景可绕过部分互操作坑，详见 → [特征工程](08-特征工程.md)。
+
+### 19.4 选型建议（2026-07 修订）
+
+```
+Pandas 3.0.4 + pyarrow
+    → 中小数据探索、可视化、sklearn 最后一跳
+
+Polars 1.42 + set_engine_affinity("streaming")
+    → 百万至数亿行 ETL / 特征工程
+
+Pandas 3.0.3 + Polars 1.42（若需频繁互转）
+    → 规避 3.0.4 Timedelta segfault，待 3.0.5 再升
+
+DuckDB 1.5+ 配合 Polars
+    → SQL 协作 / 嵌入式分析 / Iceberg 仓库
+```
+
+来源：[Pandas 3.0.4 whatsnew](https://pandas.pydata.org/docs/whatsnew/v3.0.4.html)、[Pandas 3.0.4 GitHub Release](https://github.com/pandas-dev/pandas/releases/tag/v3.0.4)、[Polars 1.41 公告](https://pola.rs/posts/polars-1-41/)、[Polars 1.42.1 PyPI](https://pypi.org/project/polars/1.42.1/)、[Polars GitHub Releases](https://github.com/pola-rs/polars/releases)
 
 ## 🎬 推荐视频资源
 

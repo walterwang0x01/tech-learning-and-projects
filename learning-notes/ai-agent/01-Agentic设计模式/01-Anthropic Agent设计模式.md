@@ -20,8 +20,8 @@ Anthropic 在 "Building Effective Agents" 指南中将 Agentic 系统分为两�
 
 核心原则：**从简单开始，仅在必要时增加复杂度。**
 
-<!-- version-check: Claude claude-sonnet-4-6-20260401, checked 2026-04-16 -->
-<!-- 修复于 2026-04-16: claude-sonnet-4-20250514 → claude-sonnet-4-6-20260401 -->
+<!-- version-check: Claude claude-sonnet-4-6, checked 2026-07-08 -->
+<!-- 修复于 2026-07-08: claude-sonnet-4-6-20260401 → claude-sonnet-4-6（4.6 起采用无日期 pinned ID） -->
 
 ## 2. Workflow 模式一：Prompt Chaining（提示链）
 
@@ -37,14 +37,14 @@ def prompt_chaining(topic: str) -> dict:
 
     # 步骤1：生成初稿
     draft = client.messages.create(
-        model="claude-sonnet-4-6-20260401",
+        model="claude-sonnet-4-6",
         max_tokens=1024,
         messages=[{"role": "user", "content": f"写一篇关于 {topic} 的技术博客大纲"}]
     ).content[0].text
 
     # 门控：验证质量
     validation = client.messages.create(
-        model="claude-sonnet-4-6-20260401",
+        model="claude-sonnet-4-6",
         max_tokens=256,
         messages=[{"role": "user", "content": f"评估大纲质量，回答 PASS 或 FAIL：\n{draft}"}]
     ).content[0].text
@@ -54,7 +54,7 @@ def prompt_chaining(topic: str) -> dict:
 
     # 步骤2：扩展为完整文章
     article = client.messages.create(
-        model="claude-sonnet-4-6-20260401",
+        model="claude-sonnet-4-6",
         max_tokens=4096,
         messages=[{"role": "user", "content": f"基于大纲写完整文章：\n{draft}"}]
     ).content[0].text
@@ -72,7 +72,7 @@ def routing_workflow(user_input: str) -> str:
 
     # 分类器
     category = client.messages.create(
-        model="claude-sonnet-4-6-20260401",
+        model="claude-sonnet-4-6",
         max_tokens=50,
         messages=[{"role": "user", "content": f"""将以下请求分类为：code_help / general_qa / creative_writing
 请求：{user_input}
@@ -88,7 +88,7 @@ def routing_workflow(user_input: str) -> str:
 
     system_prompt = handlers.get(category, handlers["general_qa"])
     response = client.messages.create(
-        model="claude-sonnet-4-6-20260401",
+        model="claude-sonnet-4-6",
         max_tokens=2048,
         system=system_prompt,
         messages=[{"role": "user", "content": user_input}]
@@ -113,7 +113,7 @@ async def parallel_sectioning(topic: str) -> dict:
 
     async def generate_section(section: str) -> str:
         resp = await async_client.messages.create(
-            model="claude-sonnet-4-6-20260401",
+            model="claude-sonnet-4-6",
             max_tokens=1024,
             messages=[{"role": "user", "content": f"为 {topic} 文章写 {section} 部分"}]
         )
@@ -126,7 +126,7 @@ async def parallel_voting(question: str, n_votes: int = 3) -> str:
     """并行投票：多次生成取多数"""
     async def get_answer() -> str:
         resp = await async_client.messages.create(
-            model="claude-sonnet-4-6-20260401",
+            model="claude-sonnet-4-6",
             max_tokens=100,
             messages=[{"role": "user", "content": f"{question}\n简短回答。"}]
         )
@@ -150,7 +150,7 @@ def orchestrator_workers(task: str) -> dict:
 
     # 编排者：分解任务
     plan = client.messages.create(
-        model="claude-sonnet-4-6-20260401",
+        model="claude-sonnet-4-6",
         max_tokens=1024,
         messages=[{"role": "user", "content": f"""将以下任务分解为子任务，输出 JSON 数组：
 任务：{task}
@@ -163,7 +163,7 @@ def orchestrator_workers(task: str) -> dict:
     results = {}
     for st in subtasks:
         worker_resp = client.messages.create(
-            model="claude-sonnet-4-6-20260401",
+            model="claude-sonnet-4-6",
             max_tokens=2048,
             messages=[{"role": "user", "content": f"执行以下任务：{st['subtask']}"}]
         ).content[0].text
@@ -171,7 +171,7 @@ def orchestrator_workers(task: str) -> dict:
 
     # 编排者：合并结果
     synthesis = client.messages.create(
-        model="claude-sonnet-4-6-20260401",
+        model="claude-sonnet-4-6",
         max_tokens=4096,
         messages=[{"role": "user", "content": f"合并以下子任务结果为完整输出：\n{json.dumps(results, ensure_ascii=False)}"}]
     ).content[0].text
@@ -192,14 +192,14 @@ def evaluator_optimizer(task: str, max_iterations: int = 3) -> str:
         # 生成器
         gen_prompt = f"任务：{task}" if i == 0 else f"任务：{task}\n上次输出：{current_output}\n改进建议：{feedback}\n请改进。"
         current_output = client.messages.create(
-            model="claude-sonnet-4-6-20260401",
+            model="claude-sonnet-4-6",
             max_tokens=2048,
             messages=[{"role": "user", "content": gen_prompt}]
         ).content[0].text
 
         # 评估器
         eval_resp = client.messages.create(
-            model="claude-sonnet-4-6-20260401",
+            model="claude-sonnet-4-6",
             max_tokens=512,
             messages=[{"role": "user", "content": f"""评估输出质量（1-10分），给出改进建议。
 任务：{task}
@@ -236,7 +236,7 @@ def autonomous_agent(task: str, max_turns: int = 10) -> str:
 
     for _ in range(max_turns):
         response = client.messages.create(
-            model="claude-sonnet-4-6-20260401",
+            model="claude-sonnet-4-6",
             max_tokens=4096,
             tools=tools,
             messages=messages,
@@ -293,7 +293,7 @@ def autonomous_agent(task: str, max_turns: int = 10) -> str:
 
 > 🔄 更新于 2026-05-21
 
-<!-- version-check: Claude Managed Agents (Dreaming, Outcomes, Multi-Agent Orchestration), Code with Claude 2026-05-06, checked 2026-05-21 -->
+<!-- version-check: Claude Managed Agents (Dreaming, Outcomes, Multi-Agent Orchestration), Code with Claude 2026-05-06, checked 2026-07-08 -->
 
 ### 9.1 Claude Managed Agents（托管 Agent 运行时）
 

@@ -123,11 +123,11 @@ let result: Int = filtered.reduce(0, +)
 
 ## 7. Xcode 26 版本演进
 
-> 🔄 更新于 2026-04-18
+> 🔄 更新于 2026-07-08
 
-<!-- version-check: Xcode 26.4, checked 2026-04-18 -->
+<!-- version-check: Xcode 26.6 stable, Xcode 27 beta 3, checked 2026-07-08 -->
 
-Xcode 26 于 WWDC 2025 发布，当前稳定版为 Xcode 26.4（2026-03-24）。来源：[Xcode What's New](https://developer.apple.com/xcode/whats-new/)、[Apple Newsroom - Xcode 26.3](https://www.apple.com/gq/newsroom/2026/02/xcode-26-point-3-unlocks-the-power-of-agentic-coding/)
+Xcode 26 于 WWDC 2025 发布；**WWDC26（2026-06-08）** 同期发布 **Xcode 27 beta**（内置 Swift 6.4）。当前 **26 代稳定工具链**为 Xcode 26.6（2026-06-25）。来源：[Xcode What's New](https://developer.apple.com/xcode/whats-new/)、[Xcode 26.6 Release](https://developer.apple.com/news/releases/?id=06252026a)、[Apple Newsroom - Xcode 27](https://www.apple.com/newsroom/2026/06/apple-aids-app-development-with-new-intelligence-frameworks-and-advanced-tools/)
 
 ### 版本对比
 
@@ -137,7 +137,9 @@ Xcode 26 于 WWDC 2025 发布，当前稳定版为 Xcode 26.4（2026-03-24）。
 | Xcode 26 | 2025-09 | Swift 6.2 | AI 编码助手、Liquid Glass、Approachable Concurrency |
 | Xcode 26.3 | 2026-02 | Swift 6.2 | **Agentic Coding**（Claude Agent、Codex 集成） |
 | Xcode 26.4 | 2026-03 | Swift 6.2 | 稳定性修复 |
-| Xcode 26.5 | Beta | Swift 6.2 | 预览中 |
+| Xcode 26.5 | 2026-05 | Swift 6.2 | iOS 26.5 SDK、Gemini 编码助手 |
+| Xcode 26.6 | 2026-06-25 | Swift 6.2 | 当前 26 代稳定版，维护 iOS 26.6 轨道 |
+| Xcode 27 | Beta 3 | Swift 6.4 | WWDC26 发布；多 Agent 集成、Swift Testing 互操作默认开启 |
 
 ### AI Coding Intelligence
 
@@ -183,9 +185,9 @@ IPHONEOS_DEPLOYMENT_TARGET = 18.0  // 或 26.0（新命名）
 
 ## 8. iOS 26 SDK 强制要求与 iOS 27 准备
 
-> 🔄 更新于 2026-05-18
+> 🔄 更新于 2026-07-08
 
-<!-- version-check: SDK 26 deadline 2026-04-28, iOS 27 / Xcode 27 breaking changes preparation, checked 2026-05-18 -->
+<!-- version-check: SDK 26 deadline 2026-04-28, iOS 27 beta 3 / Xcode 27 beta 3, iOS 26.6 beta 4, checked 2026-07-08 -->
 
 ### 8.1 SDK 26 提交 Deadline（已生效）
 
@@ -314,3 +316,57 @@ Xcode 26 / 26.3 / 26.4 / 26.5 选型
 ```
 
 来源：[Apple Newsroom - Xcode 26.3 Agentic Coding](https://www.apple.com/ca/newsroom/2026/02/xcode-26-point-3-unlocks-the-power-of-agentic-coding/)、[ClassMethod - iOS 27 / Xcode 27 准备指南](https://dev.classmethod.jp/en/articles/ios27-xcode27-migration-preparation-guide/)
+
+## 9. WWDC26 与 2026 年 7 月平台动态
+
+> 🔄 更新于 2026-07-08
+
+<!-- version-check: WWDC26 iOS 27 / Swift 6.4 / iOS 26.6 beta 4, checked 2026-07-08 -->
+
+WWDC26（**2026-06-08**）已发布 **iOS 27 / iPadOS 27 / macOS 27** 开发者 Beta，以及 **Xcode 27**（内置 Swift 6.4）。截至 **2026-07-06**，Apple 同时维护两条 Beta 轨道：
+
+```
+Beta 轨道（2026-07）
+├── 27 代（新特性）：iOS 27 beta 3 — Siri AI、Foundation Models、App Intents 增强
+└── 26 代（维护）：iOS 26.6 beta 4（build 23G5057c）— 性能/安全修复，无重大新特性
+```
+
+来源：[WWDC26 iOS Guide](https://developer.apple.com/wwdc26/guides/ios/)、[iOS 26.6 Beta 4](https://9to5mac.com/2026/07/06/apple-releases-ios-26-6-beta-4-for-iphone-heres-what-to-expect/)、[Xcode 27 Beta 3 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-27-release-notes)
+
+### 9.1 iOS 27 开发者重点（WWDC26）
+
+| 框架 | 要点 |
+|------|------|
+| **Foundation Models** | 原生 Swift API 访问端侧 Apple Intelligence 模型；支持 Claude/Gemini 等符合 `LanguageModel` 协议的云模型；多模态 Prompt + Evaluations 框架 |
+| **App Intents** | Entity/Intent Schemas 接入 Siri；**View Annotations API** 映射屏幕实体；**AppIntentsTesting** 无需 UI 自动化即可验证集成 |
+| **Core AI** | 新框架，设备端加载/特化/运行自定义模型；零拷贝数据路径、有状态推理 |
+| **SwiftUI / UIKit** | 文档型 App 直写磁盘、Lazy 子视图预取；UIKit iPhone Mirroring 自适应布局 |
+
+来源：[Foundation Models framework](https://developer.apple.com/wwdc26/guides/ios/)、[What's new in Xcode 27](https://developer.apple.com/videos/play/wwdc2026/258/)
+
+### 9.2 Xcode 27 工具链亮点
+
+- **多 Agent 集成**：Anthropic、Google、OpenAI 编码 Agent 直接嵌入工作流，支持交互式规划与 Markdown/代码 Diff 画布
+- **Agent Skills**：内置 Swift/SwiftUI/UIKit 现代化与安全审计技能包
+- **Device Hub**：远程真机调试与性能分析增强
+- **要求**：macOS Tahoe 26.4+；支持 iOS 17+ 真机调试
+
+### 9.3 iOS 26.6 维护轨道（2026-07）
+
+iOS 26.6 面向已发布设备的增量更新，**2026-07-06** 发布 Developer Beta 4。已知变更：
+
+- 联系人屏蔽上限（20,000）达限时新增提醒
+- Apple Maps 安全修复
+- 为 iOS 27 的 Siri AI 预建 Spotlight 索引（9to5Mac 报道）
+
+Public Beta 4 已于 Developer Beta 次日发布。预计 **2026-07~08** 仍有 1–2 个 Beta，随后进入 RC。
+
+### 9.4 工具链选型建议（2026-07）
+
+```
+2026-07 工具链选型
+├── App Store 上架（当前）：Xcode 26.6 + iOS 26 SDK（满足 2026-04-28 deadline）
+├── 探索 iOS 27 / Swift 6.4：Xcode 27 beta 3（独立 runner，勿污染主线）
+├── 维护版验证：iOS 26.6 beta 4（仅性能/回归测试）
+└── 秋季发布前：逐步迁移 UIScene + 评估 Foundation Models / App Intents 集成
+```

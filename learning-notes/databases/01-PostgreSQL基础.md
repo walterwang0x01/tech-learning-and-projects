@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: PostgreSQL 18.4 (2026-05-14 security release, 11 CVE fixes), checked 2026-05-16 -->
+<!-- version-check: PostgreSQL 18.4 (2026-05-14 security release, 11 CVE fixes), checked 2026-07-08 -->
 
 ## 1. 为什么是 PostgreSQL
 

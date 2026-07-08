@@ -180,11 +180,11 @@ fun MainScreen(navController: NavController) {
 
 ## 7. Compose 2026 版本演进
 
-<!-- version-check: 见第 8 节最新清单（Compose BOM 2026.05.01, Compose 1.11.2, Navigation 3 1.1.2），本节为版本演进背景，checked 2026-05-31 -->
+<!-- version-check: 见第 8 节最新清单（Compose BOM 2026.06.01, Compose 1.11.4, Navigation 3 1.1.4, Kotlin 2.4.0），本节为版本演进背景，checked 2026-07-08 -->
 
 > 🔄 更新于 2026-05-04（2026-05-18 增补与 CMP 1.11 对齐说明；2026-05-31 注：最新版本以第 8 节清单为准）
 >
-> ℹ️ 下表为 2026-04 时点的版本快照，用于说明版本演进脉络。**当前最新版本请以第 8 节「Compose BOM 2026.05.01 简明清单」为准。**
+> ℹ️ 下表为 2026-04 时点的版本快照，用于说明版本演进脉络。**当前最新版本请以第 8 节「Compose BOM 2026.06.01 简明清单」为准。**
 
 ### 当前版本
 
@@ -264,16 +264,16 @@ fun Greeting() {
 
 > 🔄 更新于 2026-05-20
 
-<!-- version-check: Compose BOM 2026.05.01 (latest), Compose Material3 Adaptive 1.2.0 (2026-05-06 stable), Material 3 Expressive, checked 2026-05-31 -->
+<!-- version-check: Compose BOM 2026.06.01 (latest), Compose 1.11.4, Kotlin 2.4.0, AGP 8.5.2+, Material3 Adaptive 1.2.0, checked 2026-07-08 -->
 
 ### Compose Material3 Adaptive 1.2.0 稳定（2026-05-06）
 
 `androidx.compose.material3.adaptive` 系列推进到 **1.2.0 stable**，是面向折叠屏 / 平板 / 大屏 ChromeOS 的官方自适应布局库。来源：[Compose Material3 Adaptive Releases](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive)
 
 ```kotlin
-// build.gradle.kts — Compose BOM 2026.05 + Adaptive 1.2.0
+// build.gradle.kts — Compose BOM 2026.06 + Adaptive 1.2.0 + Kotlin 2.4.0
 dependencies {
-    implementation(platform("androidx.compose:compose-bom:2026.05.01"))
+    implementation(platform("androidx.compose:compose-bom:2026.06.01"))
     implementation("androidx.compose.material3:material3")
 
     // Adaptive layout（折叠/平板/大屏）
@@ -315,7 +315,7 @@ fun MyApp() {
 
 Material 3 Expressive 是 Google I/O 2026 公布的新视觉系统，核心是 **流体动画 + 鲜活配色 + 触觉反馈**，与 iOS 26 Liquid Glass 形成对照（iOS 强调半透明玻璃质感，Android 强调情绪化的运动）。来源：[Google's Material 3 Expressive Redesign](https://www.androidsage.com/2026/05/13/google-material-3-expressive-redesign-with-gemini-intelligence-for-android/)、[Gemini 3.5 Arrives alongside Neural Expressive design](https://eftm.com/2026/05/google-i-o-keynote-gemini-3-5-arrives-alongside-neural-expressive-design-275940)
 
-落地路径：Compose Material3 1.4.x 已开始引入 Expressive 主题 token，正式的 `MaterialExpressiveTheme` 包装器会随 Compose BOM 2026.06+ 全量发布。当前最稳的做法是：
+落地路径：Compose Material3 **1.4.0** 已稳定引入 Expressive 主题 token；`MaterialExpressiveTheme` 包装器随 Compose BOM **2026.06.01** 全量可用。当前最稳的做法是：
 
 ```kotlin
 // 当前可用的 expressive 风格触觉反馈（2026-05）
@@ -336,22 +336,38 @@ fun ExpressiveButton(onClick: () -> Unit, content: @Composable () -> Unit) {
 }
 ```
 
-### Compose BOM 2026.05.01 简明清单
+### Compose BOM 2026.06.01 简明清单
 
 | 组件 | 版本 |
 |------|------|
-| Compose UI / Foundation / Animation | 1.11.x |
-| Material3 | 1.4.x |
+| Compose UI / Foundation / Animation | **1.11.4** |
+| Material3 | **1.4.0** |
 | Material3 Adaptive | **1.2.0 stable**（2026-05-06）|
-| Lifecycle Compose | 2.10.x |
-| Navigation Compose | 2.9.8 |
-| Navigation 3 | 1.1.1 stable |
-| Hilt Navigation Compose | 1.4.0-alpha01（按需引入）|
+| Lifecycle Compose | **2.11.0** |
+| Navigation Compose | **2.9.8** |
+| Navigation 3 | **1.1.4 stable** |
+| Kotlin | **2.4.0**（Compose Compiler 内置，无需单独指定）|
+| AGP | **≥ 8.5.2**（compileSdk 37 推荐）|
+| Hilt Navigation Compose | **1.4.0**（按需引入）|
+
+### Kotlin 2.4.0 与 Compose 工具链
+
+Kotlin **2.4.0**（2026-06-03 stable）移除 K1 前端，Compose Compiler 与之紧耦合；升级前确保 AGP **≥ 8.5.2**，`compileSdk` 建议 **37**（Android 17 stable）。来源：[What's new in Kotlin 2.4.0](https://kotlinlang.org/docs/whatsnew24.html)
+
+```kotlin
+// build.gradle.kts（根项目）
+plugins {
+    alias(libs.plugins.android.application) version "8.5.2" apply false
+    alias(libs.plugins.kotlin.android) version "2.4.0" apply false
+    alias(libs.plugins.compose.compiler) apply false
+}
+```
 
 ### 升级建议
 
 | 当前 BOM | 建议路径 |
 |----------|----------|
-| 2026.03.00 / 2026.04.00 | 直接升 2026.05.01（无 Breaking） |
-| 2026.05.00 / 2026.05.01 | 持续保持，等待 Material 3 Expressive 主题 token GA（预计 2026.07） |
+| 2026.03.00 / 2026.04.00 / 2026.05.x | 直接升 2026.06.01（无 Breaking） |
+| 2026.06.00 / 2026.06.01 | 持续保持；Material 3 Expressive 主题 token 已随 BOM 2026.06 GA |
+| Kotlin 2.3.x | 先升 AGP 8.5.2+，再升 Kotlin 2.4.0，最后升 BOM 2026.06.01 |
 | 不使用 Adaptive | 在折叠屏 / 平板 / Chromebook 项目中**强烈建议**引入 `material3-adaptive` 1.2.0 |

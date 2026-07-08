@@ -4,8 +4,9 @@
 
 ## 1. OpenAI Chat Completions API
 
-<!-- version-check: GPT-5.2 gpt-5.2, checked 2026-05-13 -->
+<!-- version-check: GPT-5.5 gpt-5.5, checked 2026-07-08 -->
 <!-- 修复于 2026-05-13: gpt-4o → gpt-5.2（gpt-4o 已从 ChatGPT 退役，API 仍可用但推荐使用新模型） -->
+<!-- 修复于 2026-07-08: gpt-5.2 → gpt-5.5（GPT-5.5 API 自 2026-04-24 GA，$5/$30 per MTok） -->
 
 ```python
 from openai import OpenAI
@@ -14,7 +15,7 @@ client = OpenAI()  # 自动读取 OPENAI_API_KEY
 
 # 基础调用
 response = client.chat.completions.create(
-    model="gpt-5.2",
+    model="gpt-5.5",
     messages=[
         {"role": "system", "content": "你是一个有帮助的助手"},
         {"role": "user", "content": "解释什么是 RAG"},
@@ -27,7 +28,7 @@ print(f"Token 用量: {response.usage.prompt_tokens} + {response.usage.completio
 
 # 流式响应
 stream = client.chat.completions.create(
-    model="gpt-5.2",
+    model="gpt-5.5",
     messages=[{"role": "user", "content": "写一首关于编程的诗"}],
     stream=True,
 )
@@ -38,7 +39,8 @@ for chunk in stream:
 
 ## 2. Anthropic Messages API
 
-<!-- version-check: Claude Sonnet 4.6 claude-sonnet-4-6-20260217, checked 2026-04-18 -->
+<!-- version-check: Claude Sonnet 4.6 claude-sonnet-4-6, checked 2026-07-08 -->
+<!-- 修复于 2026-07-08: claude-sonnet-4-6 → claude-sonnet-4-6（4.6 起采用无日期 pinned ID） -->
 
 ```python
 import anthropic
@@ -47,7 +49,7 @@ client = anthropic.Anthropic()  # 自动读取 ANTHROPIC_API_KEY
 
 # 基础调用
 response = client.messages.create(
-    model="claude-sonnet-4-6-20260217",  # Sonnet 4.6，$3/$15 per MTok
+    model="claude-sonnet-4-6",  # Sonnet 4.6，$3/$15 per MTok
     max_tokens=1024,
     system="你是一个专业的技术顾问",
     messages=[{"role": "user", "content": "对比 MCP 和 A2A 协议"}],
@@ -57,7 +59,7 @@ print(f"Token: {response.usage.input_tokens} + {response.usage.output_tokens}")
 
 # 流式响应
 with client.messages.stream(
-    model="claude-sonnet-4-6-20260217",
+    model="claude-sonnet-4-6",
     max_tokens=1024,
     messages=[{"role": "user", "content": "解释 Transformer 架构"}],
 ) as stream:
@@ -84,8 +86,28 @@ with client.messages.stream(
 > **GPT-5.5**（2026-04-23）：OpenAI 最新旗舰模型（代号 Spud），$5/M 输入、$30/M 输出（GPT-5.5 Pro：$30/$180）。1M+ 上下文窗口（922K 输入 + 128K 输出），支持文本和图像输入。API 于 4/24 开放，支持 Responses API 和 Chat Completions。知识截止日期 2025-12-01。相比 GPT-5.4 价格翻倍但推理能力显著提升。
 > 来源：[OpenAI API](https://openai.com/api)、[OpenRouter](https://openrouter.ai/openai/gpt-5.5)
 
-<!-- version-check: Claude Opus 4.7 claude-opus-4-7, Sonnet 4/Opus 4 deprecated 2026-06-15, checked 2026-05-20 -->
-<!-- version-check: GPT-5.5, checked 2026-05-05 -->
+> 🔄 更新于 2026-07-08
+>
+> **GPT-Realtime-2.1 / 2.1-mini**（2026-07-06）：OpenAI 在 Realtime API 发布两款低延迟语音/多模态模型。`gpt-realtime-2.1` 支持可配置推理强度、工具调用与指令遵循；`gpt-realtime-2.1-mini` 为 mini 推理版，定价与旧版 `gpt-realtime-mini` 持平但新增推理能力。全系列 Realtime 语音模型 p95 延迟降低 ≥25%（缓存优化）。音频输出定价：2.1 为 $64/M，mini 为 $20/M。
+> 来源：[OpenAI Developer Community](https://community.openai.com/t/new-realtime-models-on-the-api-gpt-realtime-2-1-and-gpt-realtime-2-1-mini/1385896) / [MarkTechPost](https://www.marktechpost.com/2026/07/06/openai-gpt-realtime-2-1-mini-reasoning-realtime-api/)
+>
+> **GPT-5.6 系列（Sol / Terra / Luna）**（2026-06-26 预览 → 2026-07-08 获准广泛发布）：Sol 为旗舰（更强编码、科学推理、长程规划与 agentic 工作流，新增 ultra 推理模式）；Terra 性能对标 GPT-5.5 但 2x 更便宜；Luna 为最低成本档。7 月 8 日美国商务部批准广泛发布，预计本周全面上线 API / Codex / ChatGPT。Sol 亦将登陆 Cerebras（7 月，最高 750 tok/s）。
+> 来源：[OpenAI 官方博客](https://openai.com/index/previewing-gpt-5-6-sol/) / [Axios](https://www.axios.com/2026/07/08/openai-gpt-trump-ban-lifted)
+>
+> **GPT-5.5 Instant Mini**（2026-07-06）：ChatGPT 将 GPT-5.3 Instant Mini 替换为 GPT-5.5 Instant Mini 作为限速后的 fallback 模型，改善意图跟踪与事实准确性；不影响 API 或 Codex。
+> 来源：[Releasebot](https://releasebot.io/updates/openai)
+>
+> **Claude Sonnet 5**（2026-06-30）：Anthropic 发布迄今最 agentic 的 Sonnet，`claude-sonnet-5`，1M 上下文 / 128K 输出，默认开启 adaptive thinking。定价 $3/$15 per MTok（至 8/31 优惠价 $2/$10）。在 Terminal-Bench 2.1 与知识工作场景接近或超越 Opus 4.8，但 SWE-bench Pro 等深度编码仍由 Opus 4.8 领先。
+> 来源：[llm-stats 对比](https://llm-stats.com/blog/research/claude-sonnet-5-vs-claude-opus-4-8) / [docsbot](https://docsbot.ai/models/compare/claude-opus-4-8/claude-4-5-sonnet)
+>
+> **Claude Cowork 扩展至 Web / Mobile**（2026-07-07）：Cowork 从桌面扩展到 claude.ai 与 iOS/Android，会话与文件跨设备同步，支持后台执行与定时任务（无需设备在线）。Chat 与 Cowork 合并为统一入口；Max 用户先行，8/5 前双倍用量限额。
+> 来源：[Anthropic 官方博客](https://claude.com/blog/cowork-web-mobile)
+>
+> **Claude for Government 公测**（2026-07）：FedRAMP High 授权的 Claude Code + Cowork 桌面版面向公共部门开放公测，含防篡改审计日志与支出治理。
+> 来源：[Releasebot - Anthropic](https://releasebot.io/updates/anthropic/claude)
+
+<!-- version-check: Claude Opus 4.7 claude-opus-4-7, Sonnet 4/Opus 4 deprecated 2026-06-15, checked 2026-07-08 -->
+<!-- version-check: GPT-5.5 gpt-5.5, checked 2026-07-08 -->
 
 > 🔄 更新于 2026-04-21
 >
@@ -106,7 +128,7 @@ with open("chart.png", "rb") as f:
     image_data = base64.standard_b64encode(f.read()).decode()
 
 response = client.chat.completions.create(
-    model="gpt-5.2",
+    model="gpt-5.5",
     messages=[{
         "role": "user",
         "content": [
@@ -120,7 +142,7 @@ response = client.chat.completions.create(
 
 # Claude 图片输入
 response = anthropic_client.messages.create(
-    model="claude-sonnet-4-6-20260217",
+    model="claude-sonnet-4-6",
     max_tokens=1024,
     messages=[{
         "role": "user",
@@ -186,7 +208,7 @@ if status.status == "completed":
 def select_model(task_complexity: str) -> str:
     models = {
         "simple": "gpt-5-mini",        # $0.25/1M input — 简单任务
-        "medium": "gpt-5.2",           # $1.75/1M input — 常规任务
+        "medium": "gpt-5.5",           # $5/1M input — 常规任务
         "complex": "claude-opus-4-7",     # $5/1M input — 复杂推理
     }
     return models.get(task_complexity, "gpt-5-mini")
@@ -194,7 +216,7 @@ def select_model(task_complexity: str) -> str:
 # 策略 2：Prompt 缓存（Claude）
 # 对于重复的 system prompt，Claude 自动缓存，节省 90% 输入成本
 response = anthropic_client.messages.create(
-    model="claude-sonnet-4-6-20260217",
+    model="claude-sonnet-4-6",
     max_tokens=1024,
     system=[{
         "type": "text",
@@ -216,8 +238,8 @@ class TokenTracker:
 
     @property
     def estimated_cost(self) -> float:
-        # GPT-5.2 价格
-        return (self.total_input * 1.75 + self.total_output * 14) / 1_000_000
+        # GPT-5.5 价格
+        return (self.total_input * 5 + self.total_output * 30) / 1_000_000
 ```
 ## 🎬 推荐视频资源
 

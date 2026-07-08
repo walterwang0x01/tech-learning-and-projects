@@ -2,6 +2,14 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
+> 🔄 更新于 2026-07-08
+>
+> **Cursor 3.10**（6/30）：Automations 常驻 Agent + `/automate` 技能；Customize 页统一插件/Skill/MCP 管理；Team MCP 一次配置全局分发；iOS 公测版上线。**Windsurf → Devin Desktop 3.4.27**：Devin Local 自主模式可审阅 diff；`/mcp` 状态面板；沙箱 `excluded` 命令白名单。
+>
+> 来源：[Cursor Changelog](https://cursor.com/changelog) · [Cursor Automations](https://cursor.com/changelog) · [Devin Desktop Changelog](https://docs.devin.ai/desktop/changelog)
+
+<!-- version-check: Cursor 3.10, Devin Desktop 3.4.27, checked 2026-07-08 -->
+
 ## 1. IDE 集成 Coding Agent 概述
 
 IDE Agent 将 AI 能力直接嵌入开发环境，提供代码补全、多文件编辑、对话式编程等能力。相比终端 Agent，IDE Agent 拥有更丰富的上下文（语法树、诊断信息、UI 交互）。
@@ -104,17 +112,18 @@ Hooks 示例：
 └─ Agent 完成任务后自动运行测试
 ```
 
-## 4. Windsurf
+## 4. Windsurf（现 Devin Desktop）
 
-Codeium 推出的 AI IDE，以 Cascade 流式编辑和深度上下文理解为特色。
+2026 年起 Cognition 将 Windsurf 重命名为 **Devin Desktop**，与云端 Devin Agent 形成 IDE + Cloud 双轨。本地终端 Agent 称 **Devin Local**（原 Devin CLI）。
 
 ```
-核心功能：
+核心功能（Devin Desktop 3.4）：
 ├─ Cascade：多步骤 Agent 流，自动执行编辑链
-├─ Flows：上下文感知的代码操作流
-├─ Supercomplete：超级补全（预测下一步操作）
-├─ 命令执行：内置终端命令执行
-└─ 多模型：支持 GPT/Claude/Gemini
+├─ Devin Local：本地终端 Agent，支持子 Agent + MCP 直连
+├─ Devin Review / Quick Review：PR 审查 + 本地 SWE-check 快审
+├─ Agent Command Center：多会话编排与云端 Devin 切换
+├─ Agent/Editor 模式切换：Cmd+. 快捷键
+└─ 多模型：GPT/Claude/Gemini/Opus 4.7 fast mode
 ```
 
 ## 5. GitHub Copilot
@@ -170,19 +179,74 @@ Kiro 已从 Preview 阶段进入正式发布。2026 年定价调整为统一 cre
 来源：[Cursor 3.0 Changelog](https://cursor.com/changelog/3-0)（Content was rephrased for compliance with licensing restrictions）
 来源：[InfoQ: Cursor 3 Agent-First Interface](https://www.infoq.com/news/2026/04/cursor-3-agent-first-interface/)（Content was rephrased for compliance with licensing restrictions）
 
+### 6.1 2026 年 6–7 月增量
+
+> 🔄 更新于 2026-07-08
+
+**Cursor 3.10（6/30）— 从 prompt-and-monitor 到 Automations 流水线：**
+
+```
+Automations（常驻 Agent）：
+├─ 触发器：代码变更 / Slack 消息 / 定时器 / GitHub 五类事件
+├─ /automate 技能：自然语言描述即可配置触发器 + 指令 + 工具
+├─ Slack emoji 触发：对消息加指定 emoji 即启动自动化
+├─ Computer Use：云端 Agent 可生成 demo、截图等工件
+└─ 典型场景：Bugbot 安全审计、PagerDuty 事件响应、周报摘要
+
+Customize 页 + Team Marketplaces：
+├─ 统一管理 plugins / skills / MCPs / subagents / rules / hooks
+├─ Team MCP：管理员一次配置，分发至云端 Agent / IDE / CLI
+├─ 组织组（SCIM）权限控制 marketplace 访问
+├─ 支持从 GitLab / Bitbucket / Azure DevOps 导入插件仓库
+└─ Marketplace 排行榜：团队内最热门插件一目了然
+
+移动端 + PR 工作流：
+├─ Cursor for iOS 公测（付费计划）：启动/跟踪云端或本地 Agent
+├─ Remote Control：手机遥控本地 Agent；Live Activities + 推送通知
+├─ 本地 ↔ 云端无缝切换：笔记本合上也能继续跑 Agent
+├─ PR Review 体验重构（5/7）：创建到合并一站式
+├─ Build in Parallel：计划独立部分用 async subagent 并行执行
+└─ Split PRs：按逻辑切片自动拆分变更并开多个 PR
+```
+
+**商业信号**：Bloomberg 报道 Cursor ARR 突破 $20 亿（3 个月翻倍），年化估值约 $293 亿，正从代码编辑器转型为「编码 Agent 平台」。
+
+**Devin Desktop 3.4.27（7 月）— Windsurf 更名后的本地 Agent 强化：**
+
+```
+Devin Local 增量：
+├─ 自主模式产出可审阅 diff（不再只有终端输出）
+├─ /mcp 斜杠命令 + 实时 MCP 服务器状态面板
+├─ sandbox.excluded 配置：特定命令可跳出沙箱执行
+├─ Skill permissions: frontmatter 控制自动批准
+├─ 子 Agent 可配置默认模型、直接调用 MCP 工具
+├─ devin plugin 系统（企业预览）：扩展 Devin Local
+└─ Windows：bash 解析为 Git Bash（非 WSL stub）
+
+Devin Desktop 增量：
+├─ Devin Cloud 断网自动重连
+├─ 超大 session 事件缓存不再崩溃
+├─ 孤儿 ACP Agent 进程启动时自动清理
+└─ 新用户默认进入 Agent 模式
+```
+
+来源：[Cursor Changelog](https://cursor.com/changelog)、[Cursor for iOS](https://cursor.com/changelog)、[Devin Desktop Changelog](https://docs.devin.ai/desktop/changelog)（Content was rephrased for compliance with licensing restrictions）
+
 ## 7. 综合对比
 
 | 特性 | Cursor | Kiro | Windsurf | GitHub Copilot |
 |------|--------|------|----------|----------------|
-| 基础 | 自研界面（v3） | VS Code fork | VS Code fork（Cognition 旗下） | VS Code 插件 |
-| 核心模式 | Agents Window | Specs 驱动 | Cascade 流 | Copilot Edits |
+| 基础 | 自研界面（v3.10） | VS Code fork | Devin Desktop（Cognition） | VS Code 插件 |
+| 核心模式 | Agents Window + Automations | Specs 驱动 | Cascade + Devin Local | Copilot Edits |
 | 多文件编辑 | ✅ 强 | ✅ | ✅ | ✅ |
 | 项目配置 | .cursorrules | Steering/Hooks | Cascade Rules | .github/copilot |
 | 模型支持 | Claude/GPT/自选 | Claude/多模型 | GPT/Claude/Gemini | GPT/Claude |
 | MCP 支持 | ✅ | ✅ 原生 | ✅ | ✅ |
 | 结构化开发 | ❌ | ✅ Specs | ❌ | ❌ |
 | 自动化 | Design Mode | ✅ Hooks | 有限 | 有限 |
-| 多 Agent 并行 | ✅ Agents Window | ❌ | ❌ | ❌ |
+| 多 Agent 并行 | ✅ Agents Window + Build in Parallel | ❌ | ✅ Devin Local 子 Agent | ❌ |
+| 常驻自动化 | ✅ Automations | ❌ | 有限 | 有限 |
+| 移动端 | ✅ iOS 公测 | ❌ | ❌ | ❌ |
 | 免费版 | 有限额度 | 免费额度 | 有限额度 | 免费额度 |
 | Pro 价格 | $20/月 | $20/月 | $15/月 | $10/月 |
 | 特色优势 | Agent 编排中心 | 规范化开发流程 | 自主执行+IDE | 生态集成最广 |

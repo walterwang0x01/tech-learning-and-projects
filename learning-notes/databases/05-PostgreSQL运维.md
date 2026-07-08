@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: PostgreSQL 18.4, Patroni 4.1.x, pgBackRest 2.58.x, CloudNativePG 1.29.1 (CVE fix), checked 2026-05-28 -->
+<!-- version-check: PostgreSQL 18.4, Patroni 4.1.3, pgBackRest 2.58.0, CloudNativePG 1.30.0, checked 2026-07-08 -->
 
 ## 1. 运维的三个核心问题
 
@@ -85,7 +85,8 @@ Patroni 会：
 
 配置示例（Kubernetes 方案推荐用 **CloudNativePG**）：
 
-> ⚠️ **2026-05-14 重要安全更新**：CloudNativePG 1.29.1 和 1.28.3 修复了 **CVE-2026-44477**（CVSS 9.4 Critical），是 CloudNativePG 项目第一个被分配的 CVE。生产环境务必尽快升级到 1.29.1 或 1.28.3。来源：[CloudNativePG 1.29.1 Released](https://cloudnative-pg.io/releases/cloudnative-pg-1-29.1-released/)
+> ⚠️ **2026-06-29 重要更新**：CloudNativePG **1.30.0** 已 GA（DatabaseRole CRD、Lease 主选举）；1.29.2 为 1.29 系列维护版。1.28.x 已于 2026-06-30 EOL。此前 **CVE-2026-44477**（CVSS 9.4 Critical）已在 1.29.1/1.28.3 修复——仍在 1.28 的用户必须升级到 1.29.2 或 1.30.0。来源：[CloudNativePG 1.30.0 Released](https://cloudnative-pg.io/releases/cloudnative-pg-1-30.0-released/)、[CloudNativePG 1.29.1 Released](https://cloudnative-pg.io/releases/cloudnative-pg-1-29.1-released/)
+<!-- 修复于 2026-07-08: CloudNativePG 1.29.1 → 1.30.0，补充 1.28.x EOL -->
 
 ```yaml
 # CloudNativePG Operator

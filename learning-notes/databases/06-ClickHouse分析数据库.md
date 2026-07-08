@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: ClickHouse 26.5 (2026-05-21 GA), 26.4 stable, 26.3 LTS, checked 2026-05-28 -->
+<!-- version-check: ClickHouse 26.6 (2026-06-25 GA), 26.5 stable, 26.3 LTS, checked 2026-07-08 -->
 
 ## 1. 为什么要了解 ClickHouse
 
@@ -411,10 +411,24 @@ SYSTEM RESUME VIEW analytics.daily_revenue_mv;
 
 **Cloud changelog 同步**：2026-05 ClickHouse Cloud 已开始把 *index analysis 阶段*分布式化，对 vector search 和 full-text search 这种重二级索引的表减少了单副本内存压力，查询性能通过分布式并行提升。来源：[ClickHouse Cloud changelog 2026](https://clickhouse.com/docs/whats-new/changelog/cloud)
 
-### 版本选择建议（更新版）
+### 26.6 已正式发布（2026-06-25 GA）
+
+> 🔄 更新于 2026-07-08：ClickHouse 26.6 已 GA，取代 26.5 为最新稳定版
+
+ClickHouse 26.6 在 2026-06-25 Community Call 上正式发布。来源：[ClickHouse Release 26.6](https://clickhouse.com/blog/clickhouse-release-26-06)、[GitHub v26.6.1.1193-stable](https://github.com/ClickHouse/ClickHouse/releases/tag/v26.6.1.1193-stable)
+
+**Continuous queries（实验性）**：通过 `FROM t STREAM` 修饰符支持 MergeTree 表的持续流式查询，客户端可执行长连接 `SELECT STREAM` 随新数据插入实时返回行。
+
+**Cascading refreshable materialized views**：刷新依赖关系重构，支持级联刷新链。
+
+**Hypothetical skip indexes**：`EXPLAIN WHATIF` 可在不实际创建索引的情况下评估假设二级索引的效果。
+
+**查询启动性能**：简单查询启动开销显著降低（官方基准 26.6 最佳 30ms vs 26.5 最佳 98ms）。
+
+### 版本选择建议（2026-07 更新）
 
 | 场景 | 推荐版本 |
 |------|---------|
 | 生产环境（稳定优先） | 26.3 LTS |
-| 开发/测试（最新特性） | 26.5（已 GA） |
-| 已有 25.x 部署 | 评估升级到 26.3 LTS 或 26.5 |
+| 开发/测试（最新特性） | 26.6（已 GA） |
+| 已有 25.x 部署 | 评估升级到 26.3 LTS 或 26.6 |

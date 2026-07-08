@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: dbt-core 1.11 (GA), dbt Fusion 2.x GA on Snowflake, SQLMesh 0.170, checked 2026-05-30 -->
+<!-- version-check: dbt-core 1.11.12 (GA), dbt Fusion 2.x GA on Snowflake, SQLMesh 0.236, checked 2026-07-08 -->
 
 ## 1. 为什么 dbt
 
@@ -417,10 +417,11 @@ dbt fusion validate
 # 从 `dbt-core` 改为 `dbt-fusion`，命令保持不变
 ```
 
-非 Snowflake 用户当前仍应使用 dbt-core 1.11（GA，最新 1.11.2，支持到 2026-12-19），等待 Fusion 在自己的适配器上 GA。Snowflake 用户可以放心切换。
+非 Snowflake 用户当前仍应使用 dbt-core 1.11（GA，最新 1.11.12，支持到 2026-12-19），等待 Fusion 在自己的适配器上 GA。Snowflake 用户可以放心切换。
 
 <!-- 修复于 2026-05-30: dbt-core 1.11 已 GA（getdbt.com 确认最新 1.11.2，1.10 将于 2026-06-16 EOS），原文仍写 1.10 -->
-> 🔄 更新于 2026-05-30：dbt Core 1.11 已 GA（最新补丁 1.11.2），支持到 2026-12-19；1.10 将于 2026-06-16 EOS。新项目应直接用 1.11。来源：[dbt Core v1.11 is GA](https://www.getdbt.com/blog/dbt-core-v1-11-is-ga)、[dbt Core EOL](https://eosl.date/eol/product/dbt-core/)
+<!-- 修复于 2026-07-08: 最新补丁 1.11.12（PyPI 2026-07-01）；1.10 已于 2026-06-16 EOS -->
+> 🔄 更新于 2026-07-08：dbt Core 1.11 已 GA（最新补丁 1.11.12），支持到 2026-12-19；1.10 已于 2026-06-16 EOS。新项目应直接用 1.11。来源：[dbt Core Releases](https://github.com/dbt-labs/dbt-core/releases)、[dbt Core EOL](https://eosl.date/eol/product/dbt-core/)
 
 ## 13. 生产检查清单
 

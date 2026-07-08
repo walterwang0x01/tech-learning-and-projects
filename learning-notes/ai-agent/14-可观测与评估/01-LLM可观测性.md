@@ -2,6 +2,13 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
+> 🔄 更新于 2026-07-08
+>
+> **LangSmith SDK v0.9.7**（2026-07-02）：Google ADK Live 语音追踪 + 成本归因；**LangFuse v3.206.0**（2026-07-07）：Experiments Public API / MCP 支持 CI 门禁；**Phoenix Eval CI**（2026-07-07）：`@pytest.mark.phoenix` 将评估写入版本化 Experiment。
+>
+> 来源：[LangSmith SDK v0.9.7](https://github.com/langchain-ai/langsmith-sdk/releases/tag/v0.9.7) · [LangFuse Experiments API](https://langfuse.com/changelog/2026-07-07-experiments-public-api-and-mcp) · [Phoenix Eval CI Blog](https://arize.com/blog/evals-in-ci-how-to-write-llm-evals-as-tests/)
+
+<!-- version-check: LangSmith SDK v0.9.7, LangFuse v3.206.0, Phoenix eval CI, checked 2026-07-08 -->
 <!-- version-check: LangSmith, LangFuse v4, Phoenix, checked 2026-05-13 -->
 
 ## 1. 可观测性概览
@@ -20,6 +27,8 @@
 ```
 
 ## 2. LangSmith 集成
+
+> **2026-07 增量**：SDK v0.9.7 新增 Google ADK Live 语音 trace；JS `wrapAnthropic` 支持 Claude Managed Agents。Engine 技术架构见 [How We Built LangSmith Engine](https://www.langchain.com/blog/how-we-built-langsmith-engine-our-agent-for-improving-agents)。
 
 ```python
 import os
@@ -41,6 +50,8 @@ result = chain.invoke({"topic": "RAG 架构"})
 ```
 
 ## 3. LangFuse 自托管追踪
+
+> **2026-07 增量**：Experiments Public API（`GET /api/public/experiments`）+ MCP `listExperiments` 工具，支持 CI/CD 拉取分数做回归门禁。详见 [Changelog](https://langfuse.com/changelog/2026-07-07-experiments-public-api-and-mcp)。
 
 ```python
 from langfuse import Langfuse
@@ -82,6 +93,8 @@ langfuse.flush()
 ```
 
 ## 4. Phoenix（Arize）实时监控
+
+> **2026-07 增量**：可用 `@pytest.mark.phoenix` 将 LLM 评估写成普通 pytest 测试，每次运行自动记录为 Phoenix Experiment（`arize-phoenix-client` 2.10.0+）。Vitest/Jest 支持见 `@arizeai/phoenix-client` 6.11.1+（beta）。指南：[Eval CI with pytest](https://arize.com/docs/phoenix/datasets-and-experiments/how-to-experiments/eval-ci-with-pytest)。
 
 ```python
 import phoenix as px
@@ -180,3 +193,4 @@ def tracked_completion(model: str, messages: list) -> str:
 
 - [DeepLearning.AI - Evaluating and Debugging Generative AI](https://www.deeplearning.ai/short-courses/evaluating-debugging-generative-ai/) — LLM评估与调试（免费）
 - [LangSmith - Getting Started](https://www.youtube.com/watch?v=tFXm5ijih98) — LangSmith可观测性平台入门
+- [Phoenix Eval CI Blog](https://arize.com/blog/evals-in-ci-how-to-write-llm-evals-as-tests/) — 用 pytest/Vitest 写评估门禁（2026-07）

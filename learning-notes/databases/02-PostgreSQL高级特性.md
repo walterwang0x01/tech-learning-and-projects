@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: PostgreSQL 18.4 (2026-05-14, 11 CVE security release), async I/O, UUIDv7, virtual generated columns, OAuth 2.0, checked 2026-05-16 -->
+<!-- version-check: PostgreSQL 18.4 (2026-05-14, 11 CVE security release), async I/O, UUIDv7, virtual generated columns, OAuth 2.0, checked 2026-07-08 -->
 
 ## 1. PostgreSQL 18 亮点（2025-09 发布，2026-05 已到 18.4）
 

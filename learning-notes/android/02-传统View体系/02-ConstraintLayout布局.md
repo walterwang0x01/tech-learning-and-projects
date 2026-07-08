@@ -141,9 +141,9 @@ class CollapsingFragment : Fragment(R.layout.fragment_collapsing) {
 
 ## 7. 2026 版本演进
 
-<!-- version-check: ConstraintLayout 2.2.1, ConstraintLayout-compose 1.1.1 stable, checked 2026-05-31 -->
+<!-- version-check: ConstraintLayout 2.2.1, ConstraintLayout-compose 1.1.1 stable, Kotlin 2.4.0, AGP 8.5.2+, checked 2026-07-08 -->
 
-> 🔄 更新于 2026-05-04（2026-05-31 校准 ConstraintLayout Compose 版本）
+> 🔄 更新于 2026-05-04（2026-07-08 校准工具链：Kotlin 2.4.0 + AGP 8.5.2+）
 
 ### 7.1 ConstraintLayout 2.2.1（2025-02-26）
 

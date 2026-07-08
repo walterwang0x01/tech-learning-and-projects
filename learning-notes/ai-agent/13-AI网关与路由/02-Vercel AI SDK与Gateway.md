@@ -4,12 +4,13 @@
 
 ## 1. 概述
 
-> 🔄 更新于 2026-05-13
+> 🔄 更新于 2026-07-08
 >
-> **AI SDK 6**（2026-06 发布）：Vercel AI SDK 当前最新大版本，20M+ 月下载量。核心变化：Server Actions 替代 API Routes（`useChat` 直连 Server Action，无需 `/api/chat` 端点）；`StreamingTextResponse` 移除，改用 `toDataStreamResponse`/`toDataStream`；统一 `LanguageModelV1` 接口；原生 Zod 4 集成；Provider 包重构为独立 tree-shakeable 包。v5 API Routes 模式仍兼容（过渡期支持）。
-> 来源：[Vercel Blog - AI SDK 6](https://vercel.com/blog/ai-sdk-6)
+> **AI SDK 7**（2026-06-25 发布，npm `ai@7.0.17`）：从模型调用工具包升级为生产级 Agent 平台。核心变化：`ToolLoopAgent` / `WorkflowAgent`（可恢复、耐久的 Agent 执行）；工具审批 `toolApproval`；`runtimeContext` + `toolsContext` 分离编排状态与工具密钥；`@ai-sdk/otel` 稳定版可观测性；顶层 `reasoning` 统一控制推理深度；`uploadFile`/`uploadSkill` 提供商文件复用。**破坏性变更**：最低 Node.js 22、纯 ESM（移除 CommonJS）、`parameters` → `inputSchema`、`experimental_telemetry` → `telemetry`。迁移：`npx @ai-sdk/codemod v7`。
+> 来源：[Vercel Blog - AI SDK 7](https://vercel.com/blog/ai-sdk-7)
 
-<!-- version-check: Vercel AI SDK 6.x, @ai-sdk/openai 2.0.x, checked 2026-05-13 -->
+<!-- version-check: Vercel AI SDK 7.0.17, @ai-sdk/openai 4.0.8, @ai-sdk/gateway 4.0.13, checked 2026-07-08 -->
+<!-- 修复于 2026-07-08: AI SDK 6.x → 7.0.17，增量补充 ToolLoopAgent/WorkflowAgent、toolApproval、@ai-sdk/otel -->
 
 Vercel AI SDK 是 TypeScript 生态的 AI 开发工具包，提供统一的模型接口、流式响应、工具调用等能力。AI Gateway 提供集中式模型路由和管理。
 
@@ -34,7 +35,10 @@ Vercel AI SDK 是 TypeScript 生态的 AI 开发工具包，提供统一的模�
 ## 2. 基础用法
 
 ```bash
-npm install ai @ai-sdk/openai @ai-sdk/anthropic
+# AI SDK 7 要求 Node.js 22+，项目需配置 "type": "module"
+npm install ai@7 @ai-sdk/openai @ai-sdk/anthropic
+# 从 v6 迁移
+npx @ai-sdk/codemod v7
 ```
 
 ```typescript
@@ -78,7 +82,7 @@ const result = await generateText({
   tools: {
     getWeather: tool({
       description: '获取城市天气',
-      parameters: z.object({
+      inputSchema: z.object({
         city: z.string().describe('城市名称'),
       }),
       execute: async ({ city }) => {
@@ -88,7 +92,7 @@ const result = await generateText({
     }),
     searchWeb: tool({
       description: '搜索互联网',
-      parameters: z.object({
+      inputSchema: z.object({
         query: z.string().describe('搜索关键词'),
       }),
       execute: async ({ query }) => {
@@ -118,12 +122,12 @@ const { text, steps } = await generateText({
   tools: {
     search: tool({
       description: '搜索技术文档和博客',
-      parameters: z.object({ query: z.string() }),
+      inputSchema: z.object({ query: z.string() }),
       execute: async ({ query }) => `搜索结果: ${query}...`,
     }),
     readUrl: tool({
       description: '读取网页内容',
-      parameters: z.object({ url: z.string() }),
+      inputSchema: z.object({ url: z.string() }),
       execute: async ({ url }) => `页面内容: ${url}...`,
     }),
   },
@@ -227,7 +231,64 @@ const result = await generateText({
 });
 ```
 
-## 8. AI Gateway
+## 8. Agent 生产特性（AI SDK 7）
+
+```typescript
+import { ToolLoopAgent, tool } from 'ai';
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod';
+
+// ToolLoopAgent — 带 runtimeContext 与工具审批的 Agent 循环
+const agent = new ToolLoopAgent({
+  model: openai('gpt-5.2'),
+  runtimeContext: { audience: 'developers' },
+  prepareStep({ runtimeContext }) {
+    return { instructions: `面向 ${runtimeContext.audience} 写作。` };
+  },
+  tools: {
+    deploy: tool({
+      description: '部署到生产环境',
+      inputSchema: z.object({ service: z.string() }),
+      execute: async ({ service }) => `已部署 ${service}`,
+    }),
+  },
+  toolApproval: {
+    // 高风险工具需人工审批后才执行
+    deploy: async () => ({ approved: false, reason: '需人工确认' }),
+  },
+});
+
+const { text } = await agent.generate({ prompt: '部署 payment-service' });
+```
+
+```typescript
+// WorkflowAgent — 可恢复、耐久的 Agent 执行（需 Vercel Workflows）
+import { WorkflowAgent } from '@ai-sdk/workflow';
+
+const durableAgent = new WorkflowAgent({
+  model: openai('gpt-5.2'),
+  // 进程重启、冷启动、延迟审批后仍可恢复状态
+});
+```
+
+```typescript
+// @ai-sdk/otel — 稳定版可观测性（替代 experimental_telemetry）
+import { generateText } from 'ai';
+import { openai } from '@ai-sdk/openai';
+import { NodeSDK } from '@opentelemetry/sdk-node';
+import { AISDKTelemetry } from '@ai-sdk/otel';
+
+const sdk = new NodeSDK({ instrumentations: [new AISDKTelemetry()] });
+sdk.start();
+
+const result = await generateText({
+  model: openai('gpt-5.2'),
+  prompt: '分析日志',
+  telemetry: { isEnabled: true, functionId: 'log-analysis' },
+});
+```
+
+## 9. AI Gateway
 
 ```
 Vercel AI Gateway 功能：
@@ -261,21 +322,24 @@ const result = await generateText({
 // smart-model → gpt-5.2 (primary) → claude-sonnet (fallback)
 ```
 
-## 9. 与 LiteLLM 对比
+## 10. 与 LiteLLM 对比
 
 | 特性         | Vercel AI SDK      | LiteLLM            |
 |-------------|--------------------|--------------------|
 | 语言         | TypeScript         | Python             |
-| 定位         | 前端+全栈 AI 开发   | 后端 LLM 网关       |
+| 定位         | 全栈 Agent 平台     | 后端 LLM 网关       |
 | 流式支持     | ✅ 原生 + React    | ✅ 基础             |
 | React Hooks | ✅ useChat 等      | ❌                  |
-| 工具调用     | ✅ Zod Schema      | ✅ OpenAI 格式      |
-| MCP 支持    | ✅ 客户端           | ❌                  |
+| Agent 运行时 | ✅ ToolLoop/Workflow| ❌（网关层）        |
+| 工具审批     | ✅ toolApproval    | ❌                  |
+| 工具调用     | ✅ inputSchema     | ✅ OpenAI 格式      |
+| MCP 支持    | ✅ MCP Apps        | ✅ MCP Gateway      |
+| 可观测性     | ✅ @ai-sdk/otel    | ✅ OTel v2          |
 | 结构化输出   | ✅ generateObject   | ✅ response_format  |
 | 负载均衡     | ✅ Gateway         | ✅ Router           |
 | 预算管理     | ✅ Gateway         | ✅ 细粒度           |
 | 自托管       | ✅ SDK / ❌ Gateway| ✅ 完全自托管        |
-| 适用场景     | Next.js/React 应用 | Python 后端/Agent   |
+| 适用场景     | Next.js/React Agent| Python 后端/Agent   |
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

@@ -2,7 +2,8 @@
 
 > Author: Walter Wang
 
-<!-- version-check: PostgreSQL 18.3, Redis 8.6, MongoDB 8.x, ClickHouse 25.x, checked 2026-05-10 -->
+<!-- version-check: PostgreSQL 18.4, Redis 8.6, MongoDB 8.x, ClickHouse 26.6, pgvector 0.8.4, checked 2026-07-08 -->
+<!-- 修复于 2026-07-08: README version-check 与正文文档版本线对齐（PG 18.4、ClickHouse 26.6、pgvector 0.8.4） -->
 
 这个目录补齐 Java/Python 之外的数据库通用知识。PostgreSQL 在 2026 年已经是开源关系型的事实标准，向量、JSON、地理、时序、Agent 记忆都可以由它一站式支持。
 
