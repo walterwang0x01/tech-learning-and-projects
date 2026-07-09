@@ -4,13 +4,14 @@
 
 ## 1. 概述
 
-<!-- version-check: Vercel AI SDK 6, checked 2026-04-18 -->
+<!-- version-check: Vercel AI SDK 7.0.18, checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: AI SDK 6 → 7.0.18（npm 实测最新） -->
 
 > 🔄 更新于 2026-04-18
 
 使用 Vercel AI SDK（TypeScript）构建 AI Agent，核心模式：`generateText` + `tools` + `maxSteps` 实现 Agent 循环。
 
-**AI SDK 6 重大更新**（2000万+ 月下载量）：
+**AI SDK 7 重大更新**（2000万+ 月下载量）：
 - **Agent 抽象**：一等公民 `Agent` 类，定义可复用的 Agent（模型 + 指令 + 工具）
 - **MCP 集成**：原生支持 MCP Server 连接和工具发现
 - **工具执行审批**：Human-in-the-loop 工具调用审批机制

@@ -389,3 +389,14 @@ Supabase 的核心就是用 RLS 实现"无后端"API。
 - [Crunchy Data Blog](https://www.crunchydata.com/blog)
 - [Supabase RLS 文档](https://supabase.com/docs/guides/database/postgres/row-level-security)
 - [Use The Index, Luke!](https://use-the-index-luke.com/)
+
+> 更新于 2026-07-09
+
+## 12. PostgreSQL 19 Beta 与 18.4 维护线（2026-07）
+
+| 版本 | 日期 | 要点 |
+| ---- | ---- | ---- |
+| **PostgreSQL 18.4** | 2026-05-14 | 修复 11 个安全漏洞 + 60+ bug |
+| **PostgreSQL 19 Beta 1** | 2026-06-04 | 下一代预览；生产仍以 18.x 为主 |
+
+> 来源：[PostgreSQL 18.4 Release](https://www.postgresql.org/about/news/postgresql-184-1710-1614-1518-and-1423-released-3297/)、[PG 18 文档](https://www.postgresql.org/docs/18/release-18.html)

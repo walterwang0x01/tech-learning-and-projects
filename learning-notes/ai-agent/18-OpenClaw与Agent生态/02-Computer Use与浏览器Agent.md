@@ -207,6 +207,23 @@ content = page.extract("提取所有产品信息")
 ├─ 人工确认：关键操作前请求人工审批
 └─ 超时控制：设置操作超时，防止无限循环
 ```
+
+> 更新于 2026-07-09
+
+### Claude Computer Use 2025-11-24 与 OpenClaw 浏览器对比
+
+| 能力 | Claude `computer_20251124` | OpenClaw `browser` 工具 |
+| ---- | -------------------------- | ----------------------- |
+| 驱动方式 | 应用层实现 screenshot/click/type 循环 | Gateway CDP 托管 |
+| zoom 局部放大 | ✅ `enable_zoom: true` | ❌（可用 Playwright skill 补） |
+| 模型绑定 | Anthropic 模型族 | 模型无关（OpenAI/Claude/本地均可） |
+| 渠道触达 | 需自建 UI/API | 20+ 消息渠道原生 |
+| SDK 入口 | `client.beta.messages.create`（非 Agent SDK） | `openclaw browser` CLI / agent tool |
+
+**面试/架构常考点**：Agent SDK 不含 Computer Use；二者可组合——OpenClaw 做渠道编排 + 消息触达，Claude Computer Use 做高精度桌面操作。
+
+> 来源：[Claude Computer Use 文档](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool)、[Computer Use 最佳实践](https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude)、[OpenClaw Browser CLI](https://docs.openclaw.ai/cli/browser)
+
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

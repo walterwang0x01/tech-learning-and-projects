@@ -139,7 +139,7 @@ from strands import Agent
 from strands.models import BedrockModel
 from strands_tools import http_request, shell
 
-model = BedrockModel(model_id="us.anthropic.claude-sonnet-4-6-20260217-v1:0")
+model = BedrockModel(model_id="us.anthropic.claude-sonnet-4-6-v1:0")  # <!-- 修复于 2026-07-09: 移除日期后缀，与 Anthropic API ID 对齐 -->
 agent = Agent(model=model, tools=[http_request, shell])
 response = agent("检查 API 健康状态")
 ```
@@ -244,10 +244,35 @@ smolagents   → "最少代码，HuggingFace 生态"
 | **GPT-5.5 发布**（2026-04-23） | $5/M 输入、$30/M 输出，1M 上下文，Responses API 支持 |
 | **OpenAI Agents SDK v0.8+** | Sandbox + Harness 架构，支持文件操作、命令执行、代码编辑 |
 | **PydanticAI 生态扩展** | pydantic-deep 框架发布：规划、沙箱执行、任务委派、人机协作 |
-| **LlamaIndex 0.14.21** | 从 0.12.x 跃升至 0.14.x，核心稳定性修复 |
+| **LlamaIndex 0.14.23** | 从 0.12.x 跃升至 0.14.x，核心稳定性修复 |
 | **Dapr Agents v1.0 GA** | CNCF 托管，生产就绪度从 ★★★ 升至 ★★★★ |
 
 > 来源：[OpenAI Agents SDK](https://openai.com/index/the-next-evolution-of-the-agents-sdk/)、[GPT-5.5 API](https://openrouter.ai/openai/gpt-5.5)、[pydantic-deep](https://pydantic.dev/articles/pydantic-deep-agents)
+
+> 更新于 2026-07-09
+
+### 2026 年 7 月框架选型增量
+
+| 变化 | 说明 |
+| ---- | ---- |
+| **CrewAI v1.10.1** | 新增 A2A（Agent-to-Agent）协议支持、流式输出；原型速度仍领先 LangGraph 约 40%，但生产场景建议 PoC 后迁移至 LangGraph |
+| **LangGraph 生产标准地位巩固** | 约 400 家企业生产部署；Klarna/Uber/LinkedIn 等案例；checkpoint 恢复是长时 Agent 的刚需 |
+| **Spring AI 2.0.0 GA**（2026-07） | Java 团队首选框架生产就绪；2.1 路线图含 Agent 模块（预计 2026-11） |
+| **行业共识：CrewAI 原型 → LangGraph 生产** | CrewAI token 开销可达 LangGraph 的 3×；LangGraph 用确定性 Python 路由，CrewAI 委派常触发额外 LLM 调用 |
+
+**选型速查（2026-07）**：
+
+```
+内容流水线 / 研究 PoC     → CrewAI（角色隐喻直观，2–4 小时可跑通）
+代码生成 + 测试重试循环   → LangGraph（循环图 + checkpoint）
+企业 SLA / 合规审计       → LangGraph + LangSmith
+Java 微服务内嵌 Agent     → Spring AI 2.0 GA
+RAG 密集 + 文档解析       → LlamaIndex Workflows 2.22.x
+TypeScript 全栈           → Vercel AI SDK 7.x
+```
+
+> 来源：[CrewAI vs LangGraph 2026](https://agentsindex.ai/blog/crewai-vs-langgraph)、[Agentic AI Frameworks 2026](https://uvik.net/blog/agentic-ai-frameworks/)、[Speakeasy 框架对比](https://www.speakeasy.com/blog/ai-agent-framework-comparison)
+
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

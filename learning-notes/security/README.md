@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: OWASP Top 10 2025, OAuth 2.1, Zero Trust, checked 2026-05-10 -->
+<!-- version-check: OWASP Top 10 2025, OAuth 2.1 draft-15, Zero Trust, checked 2026-07-09 -->
 
 这个目录覆盖通用的应用安全和基础设施安全，补齐各语言独立目录（Python/13-安全编程、Java、Frontend/09-浏览器与网络/04）之外的体系化安全知识。
 

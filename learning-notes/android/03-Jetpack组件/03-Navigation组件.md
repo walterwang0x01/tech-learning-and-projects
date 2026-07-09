@@ -146,7 +146,8 @@ class LoginFragment : Fragment() {
 
 Navigation Compose 2.8+ 引入了基于 `@Serializable` 数据类的类型安全路由，替代字符串路由。Navigation 2.9.8 是当前稳定版。来源：[Android Developers - Navigation Compose](https://developer.android.com/guide/navigation/design/type-safety)
 
-<!-- version-check: Navigation Compose 2.9.8, Navigation 3 1.1.2 stable, checked 2026-05-31 -->
+<!-- version-check: Navigation Compose 2.10.2, Navigation 3 1.1.4 stable, checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: 2.9.8/1.1.2 → 2.10.2/1.1.4（与 Compose 导航文档对齐） -->
 
 ```kotlin
 // 定义路由（使用 @Serializable 数据类）

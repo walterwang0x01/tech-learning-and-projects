@@ -2,14 +2,15 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Rust 1.96.0 (2026-05-28), Edition 2024, Tokio 1.52.3, Axum 0.8.9, checked 2026-07-07 -->
+<!-- version-check: Rust 1.97.0 (2026-07-09), Edition 2024, Tokio 1.52.3, Axum 0.8.9, checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: 1.96.0 → 1.97.0（v0 symbol mangling 默认、pin! 修复） -->
 
 Rust 在 2026 年不是"可能有用的"，而是"你正在使用的工具的底层语言"：uv、ruff、Vite、Turbopack、Polars、SurrealDB、Rustls、Alacritty、zed 全部 Rust 写的。
 
 <!-- 修复于 2026-05-30: 原文将不存在的 "Rust 1.97.1（2026-03-26）" 写成当前最新稳定版（与 01 文件同一杜撰来源）。经 blog.rust-lang.org / releases.rs 权威源核实，审查时点最新稳定版为 1.96.0（2026-05-28 发布）。 -->
 > 🔄 更新于 2026-07-07
 >
-> **Rust 1.96.0**（2026-05-28）是当前最新稳定版：新增 `Copy` 兼容的 `core::range` 区间类型、稳定带实际值输出的断言宏、收紧 WebAssembly 链接（来源：[Rust 1.96.0 released](https://www.linuxcompatible.org/story/rust-1960-released/)）。
+> **Rust 1.97.0**（2026-07-09）是当前最新稳定版：v0 symbol mangling 成为默认、修复 `pin!` 可变引用 soundness 回归（来源：[Rust Blog](https://blog.rust-lang.org/)）。
 >
 > **Axum 0.8.x** 已成为生态事实稳定线（不是之前笔记里写的 0.9），最新为 **0.8.9**。新项目直接用 0.8 即可。
 >

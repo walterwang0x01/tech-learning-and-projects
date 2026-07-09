@@ -132,7 +132,7 @@ template = """基于以下上下文回答问题。如果上下文中没有相关
 回答："""
 
 prompt = ChatPromptTemplate.from_template(template)
-llm = ChatOpenAI(model="gpt-5.2", temperature=0)  # <!-- 修复于 2026-05-13: gpt-4o 已退役 -->
+llm = ChatOpenAI(model="gpt-5.5", temperature=0)  # <!-- 修复于 2026-07-09: gpt-5.2 → gpt-5.5 -->
 
 def format_docs(docs):
     return "\n\n".join(f"[{i+1}] {doc.page_content}" for i, doc in enumerate(docs))

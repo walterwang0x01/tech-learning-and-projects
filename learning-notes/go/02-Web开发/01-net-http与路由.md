@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Go 1.26 net/http, ServeMux 1.22+ enhanced, checked 2026-05-10 -->
+<!-- version-check: Go 1.26.2 net/http, ServeMux 1.22+ enhanced, checked 2026-07-09 -->
 
 ## 1. Go 1.22 让 net/http 变强
 

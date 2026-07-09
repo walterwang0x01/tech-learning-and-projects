@@ -514,5 +514,27 @@ v0.151 → v0.155：补齐 declarative schema 收敛与连接稳定性修复
 v0.155 已是当前推荐生产版本（截至 2026-07-07）
 ```
 
+> 更新于 2026-07-09
+
+### Collector v0.156.0（2026-07-07）
+
+**v0.156.0** / core **v1.62.0** 已发布，contrib 同步：
+
+| 变化 | 影响 |
+| ---- | ---- |
+| 与 v0.155 同周的补丁节奏 | 建议 v0.155 → v0.156 小版本滚动升级 |
+| contrib 组件同步 bump | 自定义 distro 需对齐 [collector-contrib v0.156.0](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.156.0) |
+| collector-releases 镜像更新 | K8s Operator / Helm 用户检查镜像 tag |
+
+**升级路径（修订）**：
+
+```
+< v0.149：紧急升级（安全 CVE）
+v0.151–v0.155：declarative schema + Winget 基线
+v0.156：当前最新（2026-07-07），建议季度内跟进
+```
+
+> 来源：[Collector v0.156.0 Release](https://github.com/open-telemetry/opentelemetry-collector/releases/tag/v0.156.0)、[Collector Releases v0.156.0](https://github.com/open-telemetry/opentelemetry-collector-releases/releases/tag/v0.156.0)、[Collector Contrib v0.156.0](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.156.0)
+
 来源：[OpenTelemetry Collector Releases](https://github.com/open-telemetry/opentelemetry-collector/releases)、[OpenTelemetry Declarative Config Stable Blog](https://opentelemetry.io/blog/2026/stable-declarative-config/)、[Collector Configuration Docs](https://opentelemetry.io/docs/collector/configuration/)
 

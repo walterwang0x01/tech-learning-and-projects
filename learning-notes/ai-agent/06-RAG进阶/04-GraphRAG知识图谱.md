@@ -20,7 +20,7 @@ GraphRAG：文档 → 实体/关系提取 → 知识图谱 → 图检索 + 向�
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
-llm = ChatOpenAI(model="gpt-5.2", temperature=0)  # <!-- 修复于 2026-05-13: gpt-4o 已退役 -->
+llm = ChatOpenAI(model="gpt-5.5", temperature=0)  # <!-- 修复于 2026-07-09: gpt-5.2 → gpt-5.5 -->
 
 extraction_prompt = ChatPromptTemplate.from_template("""
 从以下文本中提取实体和关系，以 JSON 格式输出。
@@ -101,7 +101,7 @@ def graph_query(question: str) -> list:
 # 2. 配置 settings.yaml
 """
 llm:
-  model: gpt-5.2
+  model: gpt-5.5
   api_key: ${OPENAI_API_KEY}
 
 embeddings:

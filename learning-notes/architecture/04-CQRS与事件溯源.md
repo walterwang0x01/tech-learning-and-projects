@@ -367,3 +367,15 @@ Serverless 事件驱动常用模式：
 ```
 
 AWS 的典型实现是 EventBridge + Lambda + DynamoDB Streams，Serverless 天生降低了事件驱动的运维门槛，但在成本和冷启动上需要仔细评估。来源：[Event-Driven Serverless Architecture Patterns](https://kindatechnical.com/serverless-architecture/event-driven-serverless-architecture-patterns.html)（内容已重写以符合许可）
+
+> 更新于 2026-07-09
+
+### 8.5 KurrentDB 与 CQRS 读模型同步（2026-07）
+
+事件溯源写侧与 CQRS 读侧的组合在 2026 年更强调 **投影可观测性**：
+
+- KurrentDB（原 EventStoreDB）26.x 仅 gRPC 客户端，TCP API 已废弃
+- 读模型延迟应纳入 SLO：投影 lag 指标 + DLQ 重放
+- Serverless CQRS：DynamoDB Streams / EventBridge 触发 Lambda 更新读表，适合流量波动大、团队小的场景
+
+> 来源：[Kurrent Releases](https://www.kurrent.io/releases)、[Event-Driven Serverless Patterns](https://kindatechnical.com/serverless-architecture/event-driven-serverless-architecture-patterns.html)

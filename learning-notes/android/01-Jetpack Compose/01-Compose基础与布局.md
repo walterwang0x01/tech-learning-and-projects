@@ -371,3 +371,13 @@ plugins {
 | 2026.06.00 / 2026.06.01 | 持续保持；Material 3 Expressive 主题 token 已随 BOM 2026.06 GA |
 | Kotlin 2.3.x | 先升 AGP 8.5.2+，再升 Kotlin 2.4.0，最后升 BOM 2026.06.01 |
 | 不使用 Adaptive | 在折叠屏 / 平板 / Chromebook 项目中**强烈建议**引入 `material3-adaptive` 1.2.0 |
+
+> 更新于 2026-07-09
+
+**Android 17 stable + Kotlin 2.4.0 联调要点**（2026-07）：
+
+- `compileSdk = 37` 对齐 Android 17；`targetSdk` 升级需验证新权限模型
+- Compose BOM **2026.06.01** 与 Kotlin 2.4.0 编译器版本锁定，不可混用旧 BOM
+- K1 已移除：检查自定义 compiler plugin 是否支持 K2
+
+> 来源：[Kotlin 2.4.0 发布](https://blog.jetbrains.com/kotlin/2026/06/kotlin-2-4-0-released/)、[Compose BOM 2026.06](https://developer.android.com/jetpack/compose/bom)

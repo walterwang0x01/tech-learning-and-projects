@@ -490,3 +490,23 @@ Apache Polaris 在 1.4.1 安全补丁（修复 4 个协调披露 CVE）之后，
 **1.5.0 与 Iceberg V4 协同**：1.5.0 是 V4 spec 落地的 catalog 端铺垫，催化 catalog-managed metadata 成为可选模式。
 
 来源：[Apache Polaris 1.5.0 Deep-Dive (Dremio)](https://www.dremio.com/blog/apache-polaris-1-5-0-deep-dive-into-the-future-of-open-data-catalogs/)、[Apache Polaris and Lance — AI-Native Storage](https://polaris.incubator.apache.org/blog/2026/01/06/apache-polaris-and-lance-bringing-ai-native-storage-to-the-open-multimodal-lakehouse/)、[Polaris 在 2026-02-15 从 Apache 孵化器毕业为 TLP](https://incubator.apache.org/projects/polaris.html)
+
+> 更新于 2026-07-09
+
+## 16. Delta Lake 4.3.0 与 Iceberg 1.11.0 对齐（2026-06）
+
+| 项目 | 版本 | 关键变化 |
+| ---- | ---- | -------- |
+| **Apache Iceberg** | **1.11.0**（2026-05-19） | Server-side scan planning、内置表加密、默认构建目标 Spark 4.1 / Flink 2.1 |
+| **Delta Lake** | **4.3.0**（2026-06-18） | UniForm Iceberg 转换**原子化 + 增量**；IcebergCompatV3 实验性支持 Deletion Vectors 共存 |
+
+**架构影响**：
+
+- Delta UniForm 大提交可在同一 Delta 事务内原子生成 Iceberg 元数据，消除 bulk-commit 一致性窗口
+- UniForm 构建于 Iceberg-spark **1.11.0**，同时支持 Spark 4.0 / 4.1
+- Unity Catalog Delta APIs：catalog-managed 表成为 streaming、CDF、UniForm 的统一目标
+- Databricks Iceberg v3 GA：deletion vectors、row tracking、VARIANT 类型跨 managed/foreign/UniForm 表
+
+**选型更新**：跨引擎读 Delta 且已有 Iceberg 客户端 → 优先评估 Delta 4.3 UniForm；PB 级开放湖仓 + 多引擎 → Iceberg 1.11 + Polaris 1.5 联邦。
+
+> 来源：[Iceberg 1.11.0 发布公告](https://opensource.googleblog.com/2026/05/announcing-apache-iceberg-1110.html)、[Delta 4.3.0 Release](https://github.com/delta-io/delta/releases/tag/v4.3.0)、[Delta 4.3 博客](https://delta.io/blog/2026-06-22-delta-4-3-release/)、[Databricks Iceberg v3 GA](https://www.databricks.com/blog/unity-catalog-and-next-era-apache-icebergtm)

@@ -81,7 +81,8 @@ public class EventConsumer {
 
 > 🔄 更新于 2026-04-18
 
-<!-- version-check: Kafka 4.2.0, checked 2026-04-18 -->
+<!-- version-check: Kafka 4.3.1 (2026-06-25), checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: 4.2.0 → 4.3.1（最新 bugfix 版） -->
 
 ### Kafka 4.x 重大变化
 
@@ -92,7 +93,7 @@ Apache Kafka 4.0（2025 年底）是一次里程碑式的架构升级：
 | **ZooKeeper 完全移除** | KRaft 成为唯一的集群管理方式，不再依赖 ZooKeeper |
 | **KRaft 模式** | 基于 Raft 共识协议的原生元数据管理，简化部署和运维 |
 | **Queues for Kafka（KIP-932）** | Share Groups 支持队列语义，多消费者可并发消费同一分区 |
-| **Kafka 4.2.0**（2026-02） | 当前最新稳定版，Share Groups 生产就绪 |
+| **Kafka 4.3.1**（2026-06） | 当前最新稳定版，修复 Kafka Streams RocksDB 内存泄漏 |
 
 **KRaft 模式启动（无需 ZooKeeper）：**
 

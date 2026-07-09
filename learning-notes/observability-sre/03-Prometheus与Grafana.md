@@ -383,3 +383,13 @@ Grafana 12.x  →  Grafana 13.1
 ├─ AI 团队：试用 GCX CLI 把观测性接入 Coding Agent
 └─ 企业用户：若重视值班体验与 Mimir 一体化，可以直接评估 13.1；极保守团队仍可等待 13.x 更长维护窗口
 ```
+
+> 更新于 2026-07-09
+
+**Prometheus 3.13 LTS + OTel Collector v0.156**（2026-07）组合建议：
+
+- Prometheus 3.13 LTS 适合按季度规划升级；与 OTel Collector remote write 保持兼容
+- Collector v0.156.0（07-07）为当前最新；declarative config 1.0 可用 GitOps 管理采集管道
+- Grafana 13.1 Alert Activity 减少值班切页；与 Mimir Alertmanager auto-sync 适合多区域部署
+
+> 来源：[OTel Collector v0.156.0](https://github.com/open-telemetry/opentelemetry-collector/releases/tag/v0.156.0)、[Prometheus 3.13 LTS](https://github.com/prometheus/prometheus/releases)

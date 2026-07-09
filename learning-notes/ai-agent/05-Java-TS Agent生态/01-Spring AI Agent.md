@@ -4,7 +4,8 @@
 
 ## 1. 概述
 
-<!-- version-check: Spring AI 2.0.0-M8 (2026-05-27), 1.1.7 / 1.0.8, GA originally 2026-05-28, checked 2026-05-28 -->
+<!-- version-check: Spring AI 2.0.0 GA (2026-05-28), Spring Boot 4.1.0, checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: 2.0.0-M8 → 2.0.0 GA（与 java/01-框架 对齐） -->
 
 > 🔄 更新于 2026-04-18
 

@@ -200,11 +200,10 @@ const { data, loading } = useFetch('/api/users');
 
 > 🔄 更新于 2026-05-13
 
-<!-- version-check: Vue 3.5.33 (stable), Vue 3.6 (beta), checked 2026-05-13 -->
+<!-- version-check: Vue 3.5.39 (stable), Vue 3.6 (beta), checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: 3.5.33 → 3.5.39（npm 实测） -->
 
-<!-- 修复于 2026-05-13: Vue 3.5.28 → 3.5.33，eosl.date 确认 -->
-
-**Vue 3.5**（当前稳定版 3.5.33）：性能优化、SSR 兼容性修复、HMR 改进。
+**Vue 3.5**（当前稳定版 3.5.39）：性能优化、SSR 兼容性修复、HMR 改进。
 
 **Vue 3.6**（Beta）：两个革命性特性：
 

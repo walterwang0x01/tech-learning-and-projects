@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Platform Engineering 2026, Backstage 1.51, Argo CD 3.4.3, Flux 2.8 GA, Crossplane 2.3, checked 2026-05-31 -->
+<!-- version-check: Platform Engineering 2026, Backstage 1.51, Argo CD 3.4.3, Flux 2.8 GA, Crossplane 2.3, checked 2026-07-09 -->
 <!-- 修复于 2026-05-31: Backstage 1.50 → 1.51；Argo CD 2.14 → 3.4.3（2.x 全部 EOL）；补充 Flux 2.8 GA、Crossplane 2.3 -->
 
 > "Platform Engineering is the discipline of designing and building toolchains and workflows that enable self-service capabilities for software engineering organizations." — Team Topologies

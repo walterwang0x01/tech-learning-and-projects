@@ -221,6 +221,44 @@ docker-compose up -d
 | 多 Agent | Sub-Agents | 工作流 | Bot 嵌套 | AI Agent 节点 |
 | 定时任务 | Heartbeat | ❌ | 定时触发 | Cron 触发 |
 | 适用场景 | 个人/团队助手 | 企业 AI 应用 | 快速 Bot | 自动化流程 |
+
+> 更新于 2026-07-09
+
+### 2026 年 6 月 OpenClaw 浏览器与生产实践
+
+**OpenClaw 2026.6.x** 将浏览器自动化作为一等公民能力，通过 Gateway 内嵌 CDP 控制服务实现：
+
+| 模式 | Profile | 适用场景 |
+| ---- | ------- | -------- |
+| **Managed** | `openclaw`（默认） | 隔离用户数据目录，干净会话，适合大多数自动化 |
+| **Attached** | `user` | 附着已登录 Chrome（Gmail/GitHub/内网仪表盘） |
+| **Remote CDP** | 自定义 profile | Docker/Browserless/远程节点，Gateway 代理到 node host |
+
+**新增 `browser-automation` Skill**（随 2026.6 捆绑）：
+
+- 操作循环：check status/tabs → 标注任务 tab → snapshot → act → resnapshot
+- stale ref 恢复一次；登录/2FA/captcha 上报为 manual action 而非盲猜
+- CLI：`openclaw browser start`、`openclaw browser --browser-profile user tabs`
+
+**生产部署要点**（Context Studios 2026 实践）：
+
+- 多 Agent 分工：一个 Agent 写内容，另一个通过 `user` profile 操作 LinkedIn 企业页
+- 浏览器状态跨交互持久化，适合多步 dashboard 提取 → Slack 摘要工作流
+- 与 134+ MCP 工具组合：浏览器取证 + 文件系统 + 定时 Heartbeat
+
+```yaml
+# ~/.openclaw/openclaw.json 浏览器块示例
+browser:
+  defaultProfile: openclaw
+  profiles:
+    openclaw:
+      headless: true
+    user:
+      cdpUrl: "http://127.0.0.1:9222"  # 已开启 remote debugging 的 Chrome
+```
+
+> 来源：[OpenClaw Browser 文档](https://docs.openclaw.ai/cli/browser)、[unpkg openclaw@2026.6.9 browser.md](https://unpkg.com/openclaw@2026.6.9/docs/tools/browser.md)、[OpenClaw 生产指南](https://www.contextstudios.ai/blog/the-complete-openclaw-guide-how-we-run-an-ai-agent-in-production-2026)
+
 ## 🎬 推荐视频资源
 
 ### 📖 官方文档

@@ -4,13 +4,14 @@
 
 ## 1. 概述
 
-<!-- version-check: LlamaIndex 0.14.21+ (May 2026 multimodal synthesis), LlamaIndexTS archived 2026-04-30, checked 2026-05-22 -->
+<!-- version-check: LlamaIndex 0.14.23 (PyPI 2026-07), LlamaIndexTS archived 2026-04-30, checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: 0.14.21 → 0.14.23（PyPI 实测最新稳定版） -->
 
 > 🔄 更新于 2026-05-05
 
 LlamaIndex 提供事件驱动的 Workflow 引擎和多种 Agent 类型，专注于 RAG 和数据处理场景的 Agent 开发。截至 2026 年 5 月，LlamaIndex 已拥有 48K+ GitHub Stars、1500万+ PyPI 年下载量，被 40% 的 Fortune 500 公司采用。
 
-**版本跃升**：`llama-index-core` 从 0.12.x 升级至 **0.14.21**（2026-04-21），主要变化：
+**版本跃升**：`llama-index-core` 从 0.12.x 升级至 **0.14.23**（2026-07，PyPI 最新稳定版），主要变化：
 - 持久化层全面使用 UTF-8 编码
 - DocumentSummaryIndex 节点删除修复
 - 结构化输出失败的 ValueError/TypeError 处理改进
@@ -355,6 +356,47 @@ agent = ReActAgent.from_tools(
 | Agent 类型  | ReAct / FC       | 自定义            | 角色 Agent        |
 | 学习曲线     | 中               | 中高              | 低               |
 | 适用场景     | RAG/数据密集型    | 复杂自定义流程     | 团队协作任务       |
+
+> 更新于 2026-07-09
+
+### 2026 年 6–7 月 Workflows 引擎更新
+
+**版本线**：`llama-index-workflows` **2.22.2**（2026-06-30）、`llama-index-core` **0.14.23**（2026-06-24）
+
+| 版本 | 关键变化 |
+| ---- | -------- |
+| **2.22.0**（06-17） | `list[E]` fan-out/fan-in；多事件参数 step 一次触发；typed runtime step identities |
+| **2.22.1–2.22.2** | idle check 竞态修复；序列化 context resume 时保留 retry state；`ctx.store.get()` 对 `items`/`keys` 等保留字键修复 |
+| **0.14.23** | workflow `initial_state` 深拷贝，防止跨 run 状态突变泄漏（[#21780](https://github.com/run-llama/llama_index/pull/21780)） |
+
+**工程建议**：
+
+- 长时 Workflow 若需断点恢复，优先使用 2.22.x 的序列化 context + retry state 保留能力
+- 多分支并行编排可用 `list[E]` fan-out，避免手写事件队列
+- Workflows 已独立仓库（`run-llama/llama-agents`），可脱离 LlamaIndex 生态单独使用；可选 `llama-index-instrumentation` 接入 OpenTelemetry / Phoenix
+
+```python
+# pip install "llama-index-workflows>=2.22.2"
+# 2.22.x 多事件 fan-in 示例（一步等待多个事件各到达一次）
+from workflows import Workflow, step
+from workflows.events import Event, StartEvent, StopEvent
+
+class DataReady(Event): pass
+class ModelReady(Event): pass
+
+class FanInWorkflow(Workflow):
+    @step
+    async def start(self, ev: StartEvent) -> DataReady | ModelReady:
+        ...
+
+    @step
+    async def merge(self, ev: DataReady, ev2: ModelReady) -> StopEvent:
+        # 2.22.0+：多 single-event 参数 = 各事件各到一次后触发
+        return StopEvent(result="both ready")
+```
+
+> 来源：[llama-index-workflows 2.22.0 Release](https://github.com/run-llama/llama-agents/releases/tag/llama-index-workflows%402.22.0)、[llama-index-core 0.14.23](https://github.com/run-llama/llama_index/releases/tag/v0.14.23)、[PyPI llama-index-workflows](https://pypi.org/project/llama-index-workflows/)
+
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

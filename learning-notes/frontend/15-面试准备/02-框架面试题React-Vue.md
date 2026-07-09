@@ -127,8 +127,8 @@ A: React — 大型项目、灵活度高、生态丰富、函数式编程
 
 > 🔄 更新于 2026-05-02
 
-<!-- version-check: React 19.2.6, Vue 3.6 Vapor Mode, React Router 7.16.x, checked 2026-05-31 -->
-<!-- 修复于 2026-05-31: 跨文档同步——React 19.2.4 → 19.2.6、React Router 7.6.x → 7.16.x（npm 实测最新） -->
+<!-- version-check: React 19.2.7, Vue 3.6 Vapor Mode, React Router 8.2.0, checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: React 19.2.6 → 19.2.7（FormData 回归修复）；React Router 7.6.x → 8.2.0（npm 实测） -->
 
 ### React 19 与 React Compiler
 
@@ -201,8 +201,8 @@ A: 这是 iOS 的概念。Vue 中对应的是：
 
 ```
 Q: React Router v7 和 v6 有什么区别？
-A: v7（2024-11 GA，当前 7.6.x）从路由库变为全栈框架：
-   <!-- 修复于 2026-05-20: 7.9.x → 7.6.x（npm 确认） -->
+A: v7（2024-11 GA）从路由库变为全栈框架；**v8.2.0**（2026-07，npm 最新）延续 Framework Mode：
+   <!-- 修复于 2026-07-09: 7.6.x → 8.2.0（npm view react-router version 实测） -->
    - 统一包名（react-router 主包，react-router-dom 仅做转发）
    - Framework Mode：内置 SSR/RSC 支持（吸收了 Remix）
    - 三种使用模式：Declarative / Data / Framework
@@ -233,6 +233,30 @@ A: React Compiler 要求组件和 Hook 是纯函数：
    - 渲染期间不修改外部变量
    - 不在渲染期间读取可变的外部状态
    违反纯函数规则的代码，Compiler 会跳过优化。
+
+Q: React 19.2.7 面试应掌握哪些新 Hooks？
+A: （2026-07 高频）
+   - `use()`：渲染期读 Promise/Context，可条件调用（打破 Hooks 顺序限制）
+   - `useActionState`：Server Action 的 pending/error/result 状态机
+   - `useOptimistic`：异步提交期间的乐观 UI
+   - `useFormStatus`：子组件无 props 钻取读取父 form pending 状态
+   - React Compiler 自动化 memo 后，useMemo/useCallback 必要性下降，但需保证组件纯函数
+
+Q: React 19 Actions API 与 Server Actions 区别？
+A: Actions 是一等公民异步变更抽象；`use server` 标记服务端函数；表单可渐进增强（无 JS 也能提交）；错误可由 Server Action 直接返回给 `useActionState`。
+
+Q: forwardRef 在 React 19 还必要吗？
+A: 不必。`ref` 已成为普通 prop，forwardRef 标记为 deprecated。
 ```
+
+> 更新于 2026-07-09
+
+**React 19.2.7 跨文档同步要点**（与 `03-React/` 文档对齐）：
+
+- FormData 重复键修复（19.2.7 patch）——面试手写表单处理题需提及
+- Compiler + Actions 组合：减少手动 useMemo，但 Server/Client 边界仍是高级考点
+- 48.4% 日活 React 开发者已上 19.x（State of React 2025），面试默认按 19 出题
+
+> 来源：[React 19 面试题 MockExperts](https://www.mockexperts.com/blog/react-19-top-15-interview-questions-senior-devs)、[StackInterview React 19 Q26–30](https://stackinterview.abhijeetkushwaha.dev/guides/30-advanced-react-interview-questions-for-experienced-developers-2026-edition)、[React Hooks 2026 深度题](https://papersadda.com/article/react-hooks-interview-questions-2026/)
 
 > 来源：[React Interview Playbook 2026](https://bigdevsoon.me/guides/react-interview-playbook/)、[Vue 3.6 Vapor Mode](https://vueschool.io/articles/news/vn-talk-evan-you-preview-of-vue-3-6-vapor-mode/)

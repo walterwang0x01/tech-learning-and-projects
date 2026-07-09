@@ -4,7 +4,8 @@
 
 ## 1. 核心理念
 
-<!-- version-check: Tailwind CSS 4.2.x, checked 2026-05-13 -->
+<!-- version-check: Tailwind CSS 4.3.2, checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: 4.2.x → 4.3.2（npm 实测） -->
 <!-- 修复于 2026-05-13: 4.2.0 → 4.2.x（4.2.2 已发布） -->
 
 - 工具类优先（Utility-First）：直接在 HTML 中使用预定义的工具类

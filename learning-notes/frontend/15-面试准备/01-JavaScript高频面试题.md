@@ -256,4 +256,17 @@ A: Node.js 24 中：
    - package.json 的 exports 字段控制双格式发布
 ```
 
+> 更新于 2026-07-09
+
+```
+Q: ES2026 / TC39 2026 上半年有哪些面试常考点？
+A: - RegExp.escape() 已进入 Stage 4，用于安全转义用户输入构造正则
+   - Iterator Helpers 稳定化，与 for-of / 生成器组合题增多
+   - Temporal API 仍 Stage 3，但部分环境可 polyfill；时间处理题可能对比 Date vs Temporal
+
+Q: Promise.withResolvers() 解决什么问题？
+A: 在 Promise 构造器外部获取 resolve/reject 引用，避免回调地狱；
+   典型场景：事件监听转 Promise、可取消的异步流程。
+```
+
 > 来源：[ES2025 Features](https://tc39.es/ecma262/)、[TypeScript 5.9 Release](https://devblogs.microsoft.com/typescript/)

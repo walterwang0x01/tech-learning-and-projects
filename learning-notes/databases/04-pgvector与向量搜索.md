@@ -522,3 +522,15 @@ REINDEX INDEX CONCURRENTLY my_metadata_idx;
 | 多租户 + 极低延迟 | 任意 | **专用向量库（Qdrant/Milvus/Weaviate）** | pgvector 不适合 |
 
 来源：[AWS Blog — Aurora + S3 Vectors](https://aws.amazon.com/blogs/database/query-billion-scale-vectors-with-sql-integrating-amazon-s3-vectors-and-aurora-postgresql/)、[Timescale — pgvector 完整指南](https://www.timescale.com/learn/postgresql-extensions-pgvector)
+
+> 更新于 2026-07-09
+
+### 15.5 PG 19 Beta 对向量栈的影响（2026-07）
+
+PostgreSQL **19 Beta 1**（2026-06-04）发布时，pgvector 用户应关注：
+
+- 18.4 仍是生产基线（11 CVE 修复），向量索引无需因 19 beta 急于迁移
+- 异步 I/O（18.x）对大规模 HNSW 构建的 sequential scan 有间接收益
+- 选型表不变：单租户 RAG < 1000 万 → pgvector 0.8.4 + HNSW 仍是最简路径
+
+> 来源：[PostgreSQL 19 Beta 新闻](https://www.postgresql.org/docs/18/release-18.html)、[PG 18.4 安全发布](https://www.postgresql.org/about/news/postgresql-184-1710-1614-1518-and-1423-released-3297/)

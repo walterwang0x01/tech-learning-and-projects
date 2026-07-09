@@ -403,3 +403,31 @@ KotlinConf 2026 是 Kotlin 2.4 的发布舞台，超过 2,000 名 Kotlin 开发�
 | 2.0 / 2.1 / 2.2 | 直接升 2.3.21（无 Breaking） |
 | 2.3.x | 持续保持 2.3.21，等 2.4 GA + Compose 1.12 BOM 同步发布后再升 |
 | 实验项目 | 可以用 2.4.0-RC2，提前体验 stable context parameters / UUID / Java 26 |
+
+> 更新于 2026-07-09
+
+### Kotlin 2.4.0 GA 正式版（2026-06-03）
+
+**Kotlin 2.4.0** 已 GA，与 RC 相比无意外 Breaking，但需注意：
+
+| 变化 | 影响 |
+| ---- | ---- |
+| **`-language-version=1.9` 移除** | K1 编译器不可再选；必须 K2 |
+| **AGP 最低 8.5.2** | Android 项目需同步升级 Gradle Plugin |
+| **Context parameters 稳定** | Clean Architecture 依赖注入语法更简洁 |
+| **UUID API 稳定** | 标准库原生 UUID，减少 java.util 依赖 |
+| **Java 26 字节码** | `jvmTarget = 26`，annotations in metadata 默认开 |
+| **Gradle 9.5.0 兼容** | 构建脚本需验证插件矩阵 |
+
+```kotlin
+// build.gradle.kts
+plugins {
+    id("com.android.application") version "8.5.2"
+    kotlin("android") version "2.4.0"
+}
+// 检查并删除：languageVersion.set(KotlinVersion.KOTLIN_1_9)
+```
+
+**Android 17 + Kotlin 2.4 联调清单**：Compose Compiler 版本对齐、KSP/kapt 升级、移除 `kotlin.io.readLine()`（改用 `readln()`/`readlnOrNull()`）。
+
+> 来源：[Kotlin 2.4.0 发布公告](https://blog.jetbrains.com/kotlin/2026/06/kotlin-2-4-0-released/)、[GitHub Release v2.4.0](https://github.com/JetBrains/kotlin/releases/tag/v2.4.0)、[Kotlin 2.4.0 兼容指南](https://medium.com/@AlexanderObregon/what-to-know-about-the-kotlin-2-4-0-release-ec2f3a5a8d3e)

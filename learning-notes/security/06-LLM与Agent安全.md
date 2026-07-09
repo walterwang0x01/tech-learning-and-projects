@@ -346,3 +346,32 @@ promptfoo eval -c promptfooconfig.yaml
 - [Prompt Injection - Simon Willison](https://simonwillison.net/2023/Apr/14/worst-that-can-happen/)
 - [MCP Security Best Practices](https://modelcontextprotocol.io/docs/concepts/security)
 - 关联：[ai-agent/15-Agent安全与治理/](../ai-agent/15-Agent安全与治理/)
+
+> 更新于 2026-07-09
+
+## 12. OWASP Top 10 for Agentic Applications 2026
+
+2025-12 发布的 **ASI01–ASI10** 已成为 Agent 安全面试与合规检查基准：
+
+| ID | 类别 | 核心风险 |
+| -- | ---- | -------- |
+| ASI01 | Agent Goal Hijack | 注入/伪造消息篡改 Agent 目标 |
+| ASI02 | Tool Misuse | 过度权限工具被滥用 |
+| ASI03 | Identity & Privilege Abuse | Agent 身份冒用 |
+| ASI04 | Supply Chain | 恶意 MCP Server / Skill / 第三方 Agent |
+| ASI05 | Unexpected RCE | 非预期代码执行 |
+| ASI06 | Memory Poisoning | 长期记忆投毒 |
+| ASI07 | Insecure Inter-Agent Comm | Agent 间通信未加密/未鉴权 |
+| ASI08 | Cascading Failures | 单点故障级联 |
+| ASI09 | Human-Agent Trust Exploitation | 社工式诱导人工放行 |
+| ASI10 | Rogue Agents | 个体合法、系统有害 |
+
+**2026-06 配套资源**：
+
+- [State of Agentic AI Security 2.01](https://genai.owasp.org/resource/state-of-agentic-ai-security-and-governance/)（2026-06-01）
+- [AIUC-1 Crosswalks ASI Top 10](https://genai.owasp.org/resource/aiuc-1-crosswalks-owasp-top-10-for-agentic-applications/)（2026-05-25）
+- [OWASP AI Agent Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html)
+
+**防御优先级**：工具最小权限 → HITL 高影响操作 → Agent 非人类身份治理 → 沙箱执行 → 跨 Agent mTLS。
+
+> 来源：[OWASP ASI Top 10 2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/)、[DeepTeam ASI 框架](https://trydeepteam.com/docs/frameworks-owasp-top-10-for-agentic-applications)

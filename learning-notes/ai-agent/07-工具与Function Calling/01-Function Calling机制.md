@@ -91,7 +91,7 @@ tools = [
 ]
 
 response = client.messages.create(
-    model="claude-sonnet-4-6-20260217",  # <!-- 修复于 2026-05-13: claude-sonnet-4-20250514 过时 -->
+    model="claude-sonnet-4-6",  # <!-- 修复于 2026-07-09: 移除日期后缀 -->
     max_tokens=1024,
     tools=tools,
     messages=[{"role": "user", "content": "查询上月销售额最高的产品"}],
@@ -105,7 +105,7 @@ for block in response.content:
 
         # 返回结果
         response = client.messages.create(
-            model="claude-sonnet-4-6-20260217",
+            model="claude-sonnet-4-6",  # <!-- 修复于 2026-07-09: 移除日期后缀 -->
             max_tokens=1024,
             tools=tools,
             messages=[

@@ -407,6 +407,12 @@ FROM pg_replication_slots;
 └─ 1.x → 3.6（建议先升到 2.7 LTS 再到 3.x）
 ```
 
+> 更新于 2026-07-09
+
+**与 Delta 4.3 / Iceberg 1.11 协同**（2026-07）：CDC 管道输出的变更事件可直写 Iceberg 增量提交；Delta catalog-managed 表已支持 streaming + CDF，Debezium → Kafka → Spark Structured Streaming 是跨湖仓同步的主流模式。
+
+> 来源：[Delta 4.3.0 Release](https://github.com/delta-io/delta/releases/tag/v4.3.0)、[Debezium 文档](https://debezium.io/documentation/)
+
 ## 📖 参考资料
 
 - [Debezium 文档](https://debezium.io/documentation/)

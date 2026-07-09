@@ -1475,13 +1475,14 @@ node2成为主节点后，会检测集群监控状态，发现：shard-1、shard
 
 ## 7. Elasticsearch 9.x 版本演进
 
-<!-- version-check: Elasticsearch 9.3.3, checked 2026-04-24 -->
+<!-- version-check: Elasticsearch 9.4.3 (2026-06-30), checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: 9.3.3 → 9.4.3（含 ESA-2026-42 安全修复） -->
 
 > 🔄 更新于 2026-04-24
 
 ### 7.1 版本概览
 
-Elasticsearch 已从 7.x/8.x 时代进入 9.x 时代，当前最新稳定版为 **9.3.3**（2026-04-07）。
+Elasticsearch 已从 7.x/8.x 时代进入 9.x 时代，当前最新稳定版为 **9.4.3**（2026-06-30）。
 
 | 版本 | 发布日期 | 关键特性 |
 |------|---------|---------|
@@ -1489,7 +1490,7 @@ Elasticsearch 已从 7.x/8.x 时代进入 9.x 时代，当前最新稳定版为 
 | 9.1.0 | 2025-10 | 安全增强、聚合优化 |
 | 9.2.0 | 2025-12 | Agent Builder 预览、DiskBBQ |
 | 9.3.0 | 2026-02-03 | GPU 向量索引、Agent Builder GA、Elastic Workflows |
-| 9.3.3 | 2026-04-07 | 安全修复、稳定性改进 |
+| 9.4.3 | 2026-06-30 | 安全修复（ESA-2026-42）、稳定性改进 |
 
 来源：[Elastic 9.3 发布公告](https://www.elastic.co/blog/whats-new-elastic-9-3-0)、[InfoQ 报道](https://www.infoq.com/news/2026/03/elastic-9-3-gpu-vector-indexing/)
 
@@ -1520,7 +1521,7 @@ ES 9.0 Java 客户端引入 `Rest5Client` 作为 `RestClient` 的替代方案，
 
 ```java
 // ES 9.x Java 客户端（使用 Rest5Client）
-// 依赖：co.elastic.clients:elasticsearch-java:9.3.3
+// 依赖：co.elastic.clients:elasticsearch-java:9.4.3
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.transport.rest5_client.Rest5ClientTransport;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;

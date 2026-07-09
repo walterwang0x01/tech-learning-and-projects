@@ -4,9 +4,10 @@
 
 ## 1. Nuxt3（SSR/SSG）
 
-> 🔄 更新于 2026-05-13：Nuxt 4 已稳定发布（当前 v4.4.3），Nuxt 3 将于 2026-07-31 EOL。新项目应使用 Nuxt 4。
+> 🔄 更新于 2026-07-09：Nuxt 4 已稳定发布（当前 v4.4.8），Nuxt 3 将于 2026-07-31 EOL。新项目应使用 Nuxt 4。
 
-<!-- version-check: Nuxt 4.4.3, checked 2026-05-13 -->
+<!-- version-check: Nuxt 4.4.8, checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: 4.4.3 → 4.4.8（npm 实测） -->
 
 **Nuxt 4 核心变化**（相比 Nuxt 3）：
 - Vue Router 5 集成

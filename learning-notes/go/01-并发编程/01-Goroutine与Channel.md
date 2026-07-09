@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Go 1.26 concurrency primitives, checked 2026-05-10 -->
+<!-- version-check: Go 1.26.2 concurrency primitives, checked 2026-07-09 -->
 
 ## 1. Goroutine 基础
 

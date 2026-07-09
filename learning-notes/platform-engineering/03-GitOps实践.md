@@ -444,6 +444,18 @@ Flux 2.8 关键更新
 
 第 3 节的 Argo CD vs Flux 对比仍然成立，补充一条 2026 年观察：两者都已是 CNCF Graduated 项目，差异主要在「GUI 优先 vs CLI/K8s-native 优先」。Flux 2.8 的 Helm v4 原生支持让它在「以 Helm 为核心的平台」场景更有优势；Argo CD 3.x 的 ApplicationSet 仍是多集群/跨 Region 的首选。
 
+> 更新于 2026-07-09
+
+### 14.4 OTel Collector 声明式配置与 GitOps 联动（2026-07）
+
+可观测性管道配置正与 GitOps 收敛：
+
+- OTel Declarative Config **1.0 stable** 可用 YAML 定义 pipeline，纳入 Git 版本管理
+- Collector **v0.156.0** 与 contrib 同步发布，平台团队应在 IDP 中提供标准 Collector profile
+- 与 Flux 2.8 Server-Side Apply 默认行为一致：Collector 配置变更走 PR 审查 + 渐进 rollout
+
+> 来源：[OTel Declarative Config Stable](https://opentelemetry.io/blog/2026/stable-declarative-config/)、[Flux 2.8 GA](https://fluxcd.io/blog/)、[Collector v0.156.0](https://github.com/open-telemetry/opentelemetry-collector-releases/releases/tag/v0.156.0)
+
 ## 📖 参考资料
 
 - [Argo CD 官方文档](https://argo-cd.readthedocs.io/)

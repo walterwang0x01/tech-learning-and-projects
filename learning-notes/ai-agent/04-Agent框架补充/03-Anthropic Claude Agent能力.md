@@ -4,7 +4,8 @@
 
 ## 1. Claude 模型家族
 
-<!-- version-check: Claude Opus 4.7, checked 2026-04-18 -->
+<!-- version-check: Claude Opus 4.7, Sonnet 4.6 (claude-sonnet-4-6), checked 2026-07-09 -->
+<!-- 修复于 2026-07-09: claude-sonnet-4-6 → claude-sonnet-4-6（Anthropic 推荐无日期 ID） -->
 
 > 🔄 更新于 2026-04-18
 
@@ -25,7 +26,7 @@
 │   ├─ xhigh 推理层级（Extended Thinking 增强）
 │   ├─ 文件系统级记忆
 │   └─ 新 Tokenizer 2.0（同文本可能多 ~35% Token）
-├─ Claude Sonnet 4.6（claude-sonnet-4-6-20260217）— 通用性价比最优
+├─ Claude Sonnet 4.6（claude-sonnet-4-6）— 通用性价比最优
 ├─ Claude Haiku 3.5 — 高吞吐简单任务
 └─ Claude Mythos Preview — 最强但受限访问
 
@@ -48,7 +49,7 @@ from anthropic import Anthropic
 client = Anthropic()
 
 response = client.messages.create(
-    model="claude-sonnet-4-6-20260217",
+    model="claude-sonnet-4-6",
     max_tokens=16000,
     thinking={
         "type": "enabled",
@@ -112,7 +113,7 @@ def claude_agent(task: str, max_turns: int = 10) -> str:
 
     for _ in range(max_turns):
         response = client.messages.create(
-            model="claude-sonnet-4-6-20260217",
+            model="claude-sonnet-4-6",
             max_tokens=4096,
             tools=tools,
             messages=messages,
@@ -148,7 +149,7 @@ client = Anthropic()
 
 # Computer Use：Claude 操作桌面环境
 response = client.messages.create(
-    model="claude-sonnet-4-6-20260217",
+    model="claude-sonnet-4-6",
     max_tokens=4096,
     tools=[
         {
@@ -189,7 +190,7 @@ with open("architecture.png", "rb") as f:
     image_data = base64.standard_b64encode(f.read()).decode()
 
 response = client.messages.create(
-    model="claude-sonnet-4-6-20260217",
+    model="claude-sonnet-4-6",
     max_tokens=2048,
     messages=[{
         "role": "user",
@@ -208,7 +209,7 @@ response = client.messages.create(
 
 # PDF 文档分析
 response = client.messages.create(
-    model="claude-sonnet-4-6-20260217",
+    model="claude-sonnet-4-6",
     max_tokens=4096,
     messages=[{
         "role": "user",
@@ -236,7 +237,7 @@ batch = client.messages.batches.create(
         {
             "custom_id": f"task-{i}",
             "params": {
-                "model": "claude-sonnet-4-6-20260217",
+                "model": "claude-sonnet-4-6",
                 "max_tokens": 1024,
                 "messages": [{"role": "user", "content": f"分析数据点 {i}: {data}"}],
             },
@@ -289,7 +290,7 @@ def optimized_agent_call(task: str) -> str:
 
     # 1. 使用 system prompt 缓存（减少重复 Token）
     response = client.messages.create(
-        model="claude-sonnet-4-6-20260217",
+        model="claude-sonnet-4-6",
         max_tokens=4096,
         system=[{
             "type": "text",
@@ -301,7 +302,7 @@ def optimized_agent_call(task: str) -> str:
 
     # 2. 流式输出（减少等待时间）
     with client.messages.stream(
-        model="claude-sonnet-4-6-20260217",
+        model="claude-sonnet-4-6",
         max_tokens=4096,
         messages=[{"role": "user", "content": task}],
     ) as stream:
@@ -315,10 +316,10 @@ def select_model(task_complexity: str) -> str:
     """根据任务复杂度选择模型"""
     models = {
         "simple": "claude-haiku-3-5",       # 简单分类/提取
-        "medium": "claude-sonnet-4-6-20260217",  # 通用任务
+        "medium": "claude-sonnet-4-6",  # 通用任务
         "complex": "claude-opus-4-7",          # 复杂推理（2026-04-16 发布）
     }
-    return models.get(task_complexity, "claude-sonnet-4-6-20260217")
+    return models.get(task_complexity, "claude-sonnet-4-6")
 ```
 
 ## 9. 与其他模型对比（Agent 场景）
@@ -337,6 +338,49 @@ def select_model(task_complexity: str) -> str:
 | 指令遵循       | ★★★★★          | ★★★★           | ★★★★           |
 
 > 来源：[devtoolpicks.com 评测](https://devtoolpicks.com/blog/claude-opus-4-7-launch-review-2026)
+
+> 更新于 2026-07-09
+
+### Computer Use 与 Agent SDK 分工（2026-07）
+
+**重要区分**：Claude **Agent SDK**（`@anthropic-ai/claude-agent-sdk`）内置 Read/Write/Bash/WebSearch 等工具，但**不包含** Computer Use；桌面/浏览器自动化需用 **Anthropic Client SDK** 直接调 beta API。
+
+| 能力 | API / 工具版本 | 适用模型 |
+| ---- | ------------- | -------- |
+| **Computer Use 增强版** | `computer_20251124` + beta `computer-use-2025-11-24` | Opus 4.8/4.7/4.6、Sonnet 5/4.6、Opus 4.5 |
+| **Computer Use 经典版** | `computer_20250124` + beta `computer-use-2025-01-24` | Sonnet 4.5、Haiku 4.5 等 |
+| **新增 zoom 动作** | `enable_zoom: true`（仅 `computer_20251124`） | 全分辨率局部放大，适合密集 UI |
+
+**生产最佳实践**（Anthropic 2026-05 指南）：
+
+- 图像裁剪 + 历史截图剪枝，降低 token 成本
+- Prompt caching + server-side compaction 控制长会话开销
+- 沙箱 shell + 轨迹录制，便于审计与复现
+- Opus 4.7+ 用 **adaptive thinking**（模型自决推理深度）；4.6 族仍用 extended thinking
+
+```python
+# Computer Use 需 client.beta.messages.create，非 Agent SDK
+from anthropic import Anthropic
+
+client = Anthropic()
+response = client.beta.messages.create(
+    model="claude-opus-4-8",
+    betas=["computer-use-2025-11-24"],
+    max_tokens=4096,
+    tools=[{
+        "type": "computer_20251124",
+        "name": "computer",
+        "display_width_px": 1920,
+        "display_height_px": 1080,
+        "enable_zoom": True,
+    }],
+    messages=[{"role": "user", "content": "打开设置页面并截图"}],
+)
+# 应用层必须实现 screenshot/click/type 执行循环
+```
+
+> 来源：[Computer Use Tool 文档](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool)、[Computer Use 最佳实践](https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude)、[Agent SDK Overview](https://code.claude.com/docs/en/agent-sdk/overview)、[computer-use-demo](https://github.com/anthropics/claude-quickstarts/tree/main/computer-use-demo)
+
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

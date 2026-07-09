@@ -146,6 +146,22 @@ const title = await page.extract("提取文章标题");
 └─ 通用推荐 → Browser-Use（基准最高，生态最好）
 ```
 
+> 更新于 2026-07-09
+
+### OpenClaw 内置浏览器 vs 独立框架（2026-07）
+
+| 维度 | OpenClaw 内置 `browser` 工具 | Browser-Use / Playwright MCP |
+| ---- | --------------------------- | ---------------------------- |
+| 集成方式 | Gateway 内 CDP + bundled skill | 独立 MCP Server 或 Python 库 |
+| 会话隔离 | `openclaw` profile 独立数据目录 | 取决于部署（Browserbase 等云端隔离） |
+| 已登录态 | `user` profile 附着真实 Chrome | 需自行管理 cookie/profile |
+| 复杂选择器 | 内置 role-based snapshot；Playwright skill 补 CSS | Playwright 原生 selector 更强 |
+| 消息渠道 | 20+ IM 渠道直接触发 | 需自建 API 层 |
+
+**选型建议**：已在 OpenClaw 生态做个人/团队助手 → 优先内置 `browser` + `browser-automation` skill；需要大规模云端并发或独立评测基准 → Browser-Use + Browserbase；TypeScript MCP 栈 → Playwright MCP。
+
+> 来源：[OpenClaw Browser Automation 2026 指南](https://provision.ai/openclaw-browser-automation)、[OpenClaw Launch 博客](https://openclawlaunch.com/blog/openclaw-browser-automation-what-your-bot-can-do)
+
 ## 9. 安全注意事项
 
 ```
