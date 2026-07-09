@@ -1,0 +1,22 @@
+name: Trigger Portfolio Rebuild
+
+# 简报 push 后触发 portfolio 站点重新构建（需配置 PORTFOLIO_DISPATCH_PAT secret）
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'learning-notes/briefings/**/20*.md'
+      - 'learning-notes/briefings/.published-index.json'
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    if: ${{ secrets.PORTFOLIO_DISPATCH_PAT != '' }}
+    steps:
+      - name: Notify portfolio to rebuild
+        env:
+          GH_TOKEN: ${{ secrets.PORTFOLIO_DISPATCH_PAT }}
+        run: |
+          gh api repos/walterwang0x01/portfolio/dispatches \
+            -f event_type=briefing-updated \
+            -f client_payload[bref]=${{ github.sha }}

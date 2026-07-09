@@ -19,7 +19,7 @@ BLOG_SITE_URL = "https://walterwang0x01.github.io/portfolio"
 
 def briefing_github_url(topic: str, date_str: str | None = None) -> str:
     ds = date_str or today_str()
-    return f"{BLOG_SITE_URL}/briefing.html#{topic}/{ds}"
+    return f"{BLOG_SITE_URL}/briefing/#{topic}/{ds}"
 
 
 def get_bark_url() -> str | None:
