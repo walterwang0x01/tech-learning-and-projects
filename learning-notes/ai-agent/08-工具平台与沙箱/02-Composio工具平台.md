@@ -4,15 +4,16 @@
 
 ## 1. 概述
 
-> 🔄 更新于 2026-04-18
+> 🔄 更新于 2026-07-10
 
-<!-- version-check: Composio SDK TS 0.6.0+, Python 0.11.0+, 50000+ 工具, checked 2026-04-18 -->
+<!-- version-check: Composio SDK TS/Python 0.6.0+（核心包 @composio/core@0.13.0，2026-06-26），50000+ 工具/1000+ 应用, checked 2026-07-10 -->
 
 Composio 提供 **50,000+** 预构建工具集成（覆盖 **1,000+** 应用、**10,000+** API），让 AI Agent 能连接 GitHub、Slack、Jira、Gmail 等外部服务。核心价值：统一认证管理 + 元工具发现 + MCP Gateway + AI 反馈循环自动优化工具。
 
 > **2026 重大更新**（[来源](https://docs.composio.dev/changelog)）：
-> - **SDK 0.6.0+**（2026-01-29）：TypeScript 0.6.0+ / Python 0.11.0+，支持 **Cloudflare Workers**，Breaking Changes
-> - **50,000+ 工具**：从 1,000+ 增长到 50,000+ 工具，覆盖 1,000+ 应用（[来源](https://www.cognitiverevolution.ai/your-agent-s-self-improving-swiss-army-knife-composio-cto-karan-vaidya-on-building-smart-tools/)）
+> - **SDK 0.6.0+**（2026-01-29）：TypeScript 0.6.0+ / Python 0.11.0+，支持 **Cloudflare Workers**，Breaking Changes；<!-- 修复于 2026-07-10: 补充最新 SDK 版本 --> 目前最新版本为 `@composio/core@0.13.0`（2026-06-26）
+> - **50,000+ 工具**：覆盖 **1,000+** 应用（[toolkits 目录](https://composio.dev/toolkits) 显示 1,047 个），该数据经 2026-07 核实仍然有效
+> - **工具整理**（2026-03-28）：合并重叠工具、废弃 52 个高频重复项，并将 24 个 toolkit 下 1,545 个 enum 命名统一为 `APP_VERB_NOUN` 格式，Agent 匹配工具更准确
 > - **AI 反馈循环**：工具执行结果自动反馈，AI 驱动的工具质量持续优化
 > - **多账户支持**：Sessions 支持 `multiAccount` 配置，同一 toolkit 可连接多个账户（如工作和个人 Gmail）
 > - **废弃工具标记**：~230 个工具（70+ 应用）已标记 `deprecated = True`，通过交叉引用官方 API 文档识别
@@ -55,9 +56,9 @@ tools = toolset.get_tools(actions=[
 ])
 
 # 使用 OpenAI Function Calling
-# <!-- 修复于 2026-05-13: gpt-4o → gpt-5.2 -->
+# <!-- 修复于 2026-07-10: gpt-5.2 → gpt-5.6（GPT-5.6 于 2026-07-09 发布，gpt-5.6 别名路由到 gpt-5.6-sol） -->
 response = client.chat.completions.create(
-    model="gpt-5.2",
+    model="gpt-5.6",
     messages=[{"role": "user", "content": "在 my-org/my-repo 创建一个 bug issue，标题是'登录页面500错误'"}],
     tools=tools,
 )
@@ -108,7 +109,7 @@ devops_agent = Agent(
     role="DevOps 工程师",
     goal="管理代码仓库和团队通知",
     tools=github_tools + slack_tools,
-    llm="gpt-5.2",
+    llm="gpt-5.6",  # <!-- 修复于 2026-07-10: gpt-5.2 → gpt-5.6 -->
 )
 
 task = Task(
@@ -223,7 +224,7 @@ def devops_agent(instruction: str) -> str:
 
     while True:
         response = client.chat.completions.create(
-            model="gpt-5.2", messages=messages, tools=tools,
+            model="gpt-5.6", messages=messages, tools=tools,  # <!-- 修复于 2026-07-10: gpt-5.2 → gpt-5.6 -->
         )
         msg = response.choices[0].message
 

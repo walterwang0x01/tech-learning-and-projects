@@ -984,8 +984,9 @@ job.batch "pc-job" deleted
 
 CronJob的资源清单文件：
 
+<!-- 修复于 2026-07-10: batch/v1beta1 → batch/v1（v1beta1 已在 K8s 1.25 移除，当前必须用 batch/v1） -->
 ~~~yaml
-apiVersion: batch/v1beta1 # 版本号
+apiVersion: batch/v1 # 版本号
 kind: CronJob # 类型       
 metadata: # 元数据
   name: # rs名称 
@@ -1043,8 +1044,9 @@ concurrencyPolicy:
 
 创建pc-cronjob.yaml，内容如下：
 
+<!-- 修复于 2026-07-10: batch/v1beta1 → batch/v1 -->
 ~~~yaml
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: pc-cronjob
@@ -1650,8 +1652,9 @@ tomcat-service   ClusterIP   None         <none>        8080/TCP   48s
 
 创建ingress-http.yaml
 
+<!-- 修复于 2026-07-10: extensions/v1beta1 → networking.k8s.io/v1（v1beta1 已在 K8s 1.22 移除）；backend.serviceName/servicePort → backend.service.name/port.number，并补充 pathType 必填字段 -->
 ~~~yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-http
@@ -1662,22 +1665,28 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: nginx-service
-          servicePort: 80
+          service:
+            name: nginx-service
+            port:
+              number: 80
   - host: tomcat.itheima.com
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: tomcat-service
-          servicePort: 8080
+          service:
+            name: tomcat-service
+            port:
+              number: 8080
 ~~~
 
 ~~~powershell
 # 创建
 [root@master ~]# kubectl create -f ingress-http.yaml
-ingress.extensions/ingress-http created
+ingress.networking.k8s.io/ingress-http created
 
 # 查看
 [root@master ~]# kubectl get ing ingress-http -n dev
@@ -1712,8 +1721,9 @@ kubectl create secret tls tls-secret --key tls.key --cert tls.crt
 
 创建ingress-https.yaml
 
+<!-- 修复于 2026-07-10: extensions/v1beta1 → networking.k8s.io/v1，backend 字段结构同步更新 -->
 ~~~yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-https
@@ -1729,22 +1739,28 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: nginx-service
-          servicePort: 80
+          service:
+            name: nginx-service
+            port:
+              number: 80
   - host: tomcat.itheima.com
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: tomcat-service
-          servicePort: 8080
+          service:
+            name: tomcat-service
+            port:
+              number: 8080
 ~~~
 
 ~~~powershell
 # 创建
 [root@master ~]# kubectl create -f ingress-https.yaml
-ingress.extensions/ingress-https created
+ingress.networking.k8s.io/ingress-https created
 
 # 查看
 [root@master ~]# kubectl get ing ingress-https -n dev

@@ -127,7 +127,7 @@ A: React — 大型项目、灵活度高、生态丰富、函数式编程
 
 > 🔄 更新于 2026-05-02
 
-<!-- version-check: React 19.2.7, Vue 3.6 Vapor Mode, React Router 8.2.0, checked 2026-07-09 -->
+<!-- version-check: React 19.2.7, Vue 3.6.0-beta.17 (2026-06-24, Vapor Mode feature-complete but 仍为 beta), React Router 8.2.0, checked 2026-07-10 -->
 <!-- 修复于 2026-07-09: React 19.2.6 → 19.2.7（FormData 回归修复）；React Router 7.6.x → 8.2.0（npm 实测） -->
 
 ### React 19 与 React Compiler
@@ -172,14 +172,16 @@ A: React 18 引入了自动批处理（所有 setState 都批量更新）。
 
 ```
 Q: Vue 3.6 Vapor Mode 是什么？
-A: Vapor Mode 是 Vue 3.6 引入的新编译策略（2025-12 进入 beta，截至 2026-05 仍在 beta）：
+A: Vapor Mode 是 Vue 3.6 引入的新编译策略（2025-12 进入 beta，截至 2026-07 仍在 beta，最新 3.6.0-beta.17 于 2026-06-24 发布）：
    <!-- 修复于 2026-05-19: 标注 beta 状态，避免读者误以为已稳定 -->
+   <!-- 修复于 2026-07-10: 官方仓库确认仍是 beta（非部分社区文章宣称的"已 stable"），更新到 beta.17 -->
    - 跳过虚拟 DOM，直接编译为原生 DOM 操作
    - 性能接近 Solid.js 和 Svelte 5
    - 组件级别 opt-in（不是全局开关）
    - 不改变开发者写法，编译器自动处理
    - 适合性能敏感的组件（大列表、动画密集）
-   - 生产使用建议等待稳定版
+   - 独立 Vapor 组件不支持 Suspense，但可以嵌套在 VDOM 的 Suspense 内使用
+   - 生产使用建议等待稳定版（回答时注意区分"功能完整"和"稳定发布"，官方明确 feature-complete ≠ stable）
 
 Q: Vue 3 的 alien-signals 响应式引擎是什么？
 A: Vue 3.6 底层响应式系统从 @vue/reactivity 重构为

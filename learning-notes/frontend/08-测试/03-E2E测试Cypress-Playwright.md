@@ -53,10 +53,10 @@ test.describe('Login', () => {
   });
 });
 
-// API 拦截
+// API 拦截（handler 应为 async 并 await route.fulfill，避免响应未完全处理）
 test('mock API response', async ({ page }) => {
-  await page.route('/api/users', (route) => {
-    route.fulfill({
+  await page.route('/api/users', async (route) => {
+    await route.fulfill({
       status: 200,
       body: JSON.stringify([{ id: 1, name: '张三' }]),
     });
@@ -68,7 +68,7 @@ test('mock API response', async ({ page }) => {
 
 ## 2. Cypress
 
-<!-- version-check: Cypress 15.10+, checked 2026-05-13 -->
+<!-- version-check: Cypress 15.10+ (v16 尚未发布，env() 废弃状态不变), checked 2026-07-10 -->
 
 > 🔄 更新于 2026-05-13：补充 Cypress 15.10+ 环境变量 API 迁移
 
@@ -122,15 +122,16 @@ const flag = Cypress.expose('FEATURE_FLAG');
 
 迁移建议：敏感值（密钥/Token/密码）用 `cy.env()`，配置/特性开关用 `Cypress.expose()`。
 
-## 3. Playwright 1.59 新特性（2026-03）
+## 3. Playwright Screencast API（1.59 引入，1.61 增强）
 
-> 🔄 更新于 2026-04-22
+> 🔄 更新于 2026-07-10
 
-<!-- version-check: Playwright 1.59.x, checked 2026-04-22 -->
+<!-- version-check: Playwright 1.61.1（当前最新稳定版）, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: Playwright 已从 1.59.x 更新到 1.61.1，补充 1.61 新增的 showActions cursor 选项与 onFrame timestamp -->
 
 ### 3.1 Screencast API — Agentic 视频回执
 
-Playwright 1.59 新增 `page.screencast` API，为 AI Agent 工作流提供视频录制和注解能力。Agent 完成任务后可以录制验证视频作为"回执"，比文本日志更直观。来源：[Playwright Release Notes](https://playwright.dev/python/docs/release-notes)
+Playwright 1.59 新增 `page.screencast` API，为 AI Agent 工作流提供视频录制和注解能力，1.61 进一步增强（`showActions` 新增 `cursor` 光标动画选项，`onFrame` 回调新增帧时间戳）。Agent 完成任务后可以录制验证视频作为"回执"，比文本日志更直观。来源：[Playwright Release Notes](https://playwright.dev/docs/release-notes)
 
 ```javascript
 // 基础录制
@@ -194,5 +195,5 @@ const normalized = locator.normalize();
 | 并行执行 | 原生支持 | 需要付费 |
 | API 测试 | 支持 | 支持 |
 | 语言 | JS/TS/Python/Java/C# | JS/TS |
-| Screencast API | ✅（1.59+） | ❌ |
+| Screencast API | ✅（1.59+，1.61 增强） | ❌ |
 | Agent 集成 | ✅（视频回执） | ❌ |

@@ -38,11 +38,12 @@ AI Agent 需要从互联网获取实时信息，Web 数据工具是 Agent 的"�
 └────────────────────────────────────────────────┘
 ```
 
-## 2. Firecrawl（82K+ GitHub Stars）
+## 2. Firecrawl（148K+ GitHub Stars）
 
-> 🔄 更新于 2026-04-18
+> 🔄 更新于 2026-07-10
 
-<!-- version-check: Firecrawl v2.9.0, web-agent 框架, Fire-PDF, checked 2026-04-18 -->
+<!-- version-check: Firecrawl v2.11.0（2026-06-19）+ /monitor（2026-07-01），checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: v2.9.0 → v2.11.0；GitHub Stars 82K+ → 148K+；补充 /monitor、Research Index -->
 
 Web 抓取 API，将任意 URL 转换为干净的 Markdown/JSON，专为 AI Agent 和 RAG 设计。
 
@@ -52,25 +53,27 @@ Web 抓取 API，将任意 URL 转换为干净的 Markdown/JSON，专为 AI Agen
 ├─ Crawl：整站爬取（自动发现链接）
 ├─ Search：搜索 + 抓取（搜索引擎 + 内容提取）
 ├─ Extract：结构化数据提取（LLM 驱动）
-├─ /interact：浏览器交互端点（v2.9.0 新增）
-├─ Fire-PDF：Rust 引擎，PDF 解析速度提升 5x
-├─ web-agent：开源 AI Agent 框架（2026-04-16）
-├─ Query Format：自然语言查询，直接返回答案
+├─ /monitor：web-scale 全网监控，匹配即告警（v2026-07-01 新增）
+├─ /interact：浏览器交互端点
+├─ Research Index：3M+ arXiv 论文 + GitHub 代码专用索引（v2.11.0）
+├─ Keyless 访问：核心端点无需 API Key，每月 1000 免费额度（v2.11.0）
+├─ PII 自动脱敏、deterministicJson 固定结构提取（v2.11.0）
+├─ Fire-PDF：Rust 引擎，PDF 解析速度提升 5x，上限提升至 50MB
+├─ web-agent：开源 AI Agent 框架
 ├─ JS 渲染：自动执行 JavaScript（SPA 友好）
 ├─ 反爬处理：自动处理 Cloudflare 等反爬机制
 ├─ MCP Server：firecrawl-mcp，Agent 直接调用
-├─ 批量处理：异步批量抓取
-├─ SDK：Python、JS、Go、Rust、Java、Elixir
+├─ SDK：Python、JS、Go、Rust、Java、Elixir、Ruby、PHP、.NET
 └─ 自托管：开源，可自行部署
 ```
 
-> **v2.9.0 重大更新**（2026-04-10，[来源](https://www.firecrawl.dev/changelog)）：
-> - **/interact 端点**：抓取页面后进入实时浏览器会话，支持自然语言控制（点击、填表、导航）或 Playwright/Bash 代码，会话持久化 + 可复用浏览器 Profile
-> - **Query Format**：传入自然语言 prompt，直接在 `data.answer` 返回答案
-> - **Audio Format**：任意抓取可返回音频输出
-> - **Fire-PDF**（2026-04-14）：Rust 引擎 `pdf-inspector`，每页 <400ms，神经网络布局模型检测表格/公式/文本块
-> - **web-agent 框架**（2026-04-16）：开源 Agent 框架，支持任意模型，`firecrawl create agent` 一键创建，Skill playbooks 可教学
-> - **Java & Elixir SDK**：官方 SDK，加入 JS、Python、Go、Rust 行列
+> **v2.11.0 重大更新**（2026-06-19，[来源](https://www.firecrawl.dev/changelog)）：
+> - **Research Index**：专为 AI/ML 研究设计的索引，覆盖 3M+ arXiv 论文和 GitHub 代码
+> - **Keyless 访问**：核心端点（scrape/search）无需 API Key 即可调用，每月 1000 次免费额度
+> - **PII 自动脱敏**：抓取结果自动检测并遮蔽个人信息
+> - **deterministicJson**：可复用的固定结构提取格式，替代每次重新生成 Schema
+> - **视频发现**：任意页面自动识别嵌入视频
+> - **/monitor**（2026-07-01 新增）：定义搜索 query + goal，Firecrawl 持续监控全网变化，匹配时通过 Webhook/邮件告警
 
 ### Python SDK 示例
 
@@ -502,7 +505,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 | MCP 支持 | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ✅ |
 | 免费额度 | 500 页/月 | 1000 次/月 | 1000 次/月 | 有 | 2000 次/月 | 2500 次/月 | 有限 |
 | 自托管 | ✅ 开源 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| GitHub Stars | 82K+ | 15K+ | 7K+ | 25K+ | N/A | N/A | 15K+ |
+| GitHub Stars | 148K+ | 15K+ | 7K+ | 25K+ | N/A | N/A | 15K+ |
 | JS 渲染 | ✅ | N/A | N/A | ✅ | N/A | N/A | ✅ |
 | 整站爬取 | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
 | 结构化提取 | ✅ LLM | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
@@ -594,12 +597,13 @@ print(f"✅ 知识库构建完成，共 {len(chunks)} 个文档块")
 
 ## 12. 相关文档
 
-- Agent 工具生态 → `Agent工具生态总览.md`（本目录）
-- Composio 平台 → `Composio工具平台.md`（本目录，统一工具管理）
-- E2B 沙箱 → `E2B代码沙箱.md`（本目录，代码执行环境）
-- RAG 架构 → `06-RAG进阶/01-RAG架构与核心流程.md`
-- MCP Server → `07-工具与Function Calling/02-MCP Server开发.md`
-- 向量数据库 → `06-RAG进阶/02-向量数据库选型.md`
+<!-- 修复于 2026-07-10: 补全文件名中缺失的编号前缀，与实际目录文件名一致 -->
+- Agent 工具生态 → `01-Agent工具生态总览.md`（本目录）
+- Composio 平台 → `02-Composio工具平台.md`（本目录，统一工具管理）
+- E2B 沙箱 → `03-E2B代码沙箱.md`（本目录，代码执行环境）
+- RAG 架构 → `../06-RAG进阶/01-RAG架构与核心流程.md`
+- MCP Server → `../07-工具与Function Calling/02-MCP Server开发.md`
+- 向量数据库 → `../06-RAG进阶/02-向量数据库选型.md`
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

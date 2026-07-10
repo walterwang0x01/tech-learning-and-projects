@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: FinOps Foundation, KubeCost 2.x, OpenCost, checked 2026-05-10 -->
+<!-- version-check: FinOps Framework 2026（2026-03 更新，Technology Value + AI/ML 分类）, KubeCost 2.x, OpenCost（FOCUS 1.3 支持）, checked 2026-07-10 -->
 
 ## 1. 什么是 FinOps
 
@@ -273,6 +273,22 @@ LLM 成本特点：
 ├─ 罚性 KPI（导致团队隐瞒真实成本）
 └─ 一刀切要求降 20%（该花的也不花）
 ```
+
+## 11.5 FinOps Framework 2026 更新（2026-03）
+
+> 更新于 2026-07-10
+
+<!-- version-check: FinOps Framework 2026 (Executive Strategy Alignment + Technology Categories), checked 2026-07-10 -->
+
+FinOps Foundation 于 **2026-03** 发布了 Framework 的一次重大改版，核心是把 FinOps 的使命从"管理云的价值"扩展为**"管理技术的价值"**（[FinOps Framework 2026](https://www.finops.org/insights/2026-finops-framework/)）：
+
+- **新定义**：FinOps 是一种运营框架和文化实践，通过工程、财务、业务团队协作，最大化技术的业务价值、支持及时数据驱动决策、建立财务责任制——关键变化是从"cloud"改为"technology"
+- **新增 Capability：Executive Strategy Alignment**（归入"管理 FinOps 实践"域）：把技术支出决策和企业战略正式挂钩，包含四个方向——高管优先级对齐、多年投资策略、产品优先级排序支持、战略决策支持
+- **Technology Categories 分类法**：明确区分 Public Cloud / SaaS / Licensing / Data Center / **AI/ML**（基础模型 API、微调、推理、训练）/ 其他技术支出，每类下都有对应 Capability、Persona 和成功指标的定制指引
+- **能力改名**：Workload Optimization → **Usage Optimization**（不再局限于云工作负载）；DevOps Tools and Services → **Automation, Tools and Services**（自动化被提升为一级关注点）
+- **AI/ML 专属指引**：GPU/CPU 差异化定价、token 计价模式、build-vs-buy 经济性分析，作为 FinOps 实践新的重点方向
+
+对已落地 FinOps 实践的团队，建议评估现有 Capability 是否需要按新分类法重新归类，尤其是有大量 LLM/AI 支出（对应本文第 9 节）的团队应优先补齐 AI/ML Technology Category 的度量指标。来源：[FinOps Framework 2026 官方说明](https://www.finops.org/insights/2026-finops-framework/)、[State of FinOps 2026 Report](https://data.finops.org/)
 
 ## 12. 生产检查清单
 

@@ -909,19 +909,19 @@ kube-node-lease   Active   21h
 kube-public       Active   21h
 kube-system       Active   21h
 
-# 在此namespace下创建并运行一个nginx的Pod
+<!-- 修复于 2026-07-10: kubectl run 自 1.18 起 --generator 参数已彻底移除，run 命令现在只创建裸 Pod（不再是 Deployment），输出与旧版不同，已同步更新 -->
+# 在此namespace下创建并运行一个nginx的Pod（现代 kubectl：run 只创建裸 Pod，不再创建 Deployment）
 [root@master ~]# kubectl run pod --image=nginx -n dev
-kubectl run --generator=deployment/apps.v1 is DEPRECATED and will be removed in a future version. Use kubectl run --generator=run-pod/v1 or kubectl create instead.
-deployment.apps/pod created
+pod/pod created
 
 # 查看新创建的pod
 [root@master ~]# kubectl get pod -n dev
-NAME                   READY   STATUS    RESTARTS   AGE
-pod-864f9875b9-pcw7x   1/1     Running   0          21s
+NAME   READY   STATUS    RESTARTS   AGE
+pod    1/1     Running   0          21s
 
 # 删除指定的pod
-[root@master ~]# kubectl delete pod pod-864f9875b9-pcw7x
-pod "pod-864f9875b9-pcw7x" deleted
+[root@master ~]# kubectl delete pod pod
+pod "pod" deleted
 
 # 删除指定的namespace
 [root@master ~]# kubectl delete ns dev

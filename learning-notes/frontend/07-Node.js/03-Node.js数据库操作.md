@@ -2,8 +2,8 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
-<!-- version-check: Prisma 7.7.x, Mongoose 9.6.1, ioredis deprecated → node-redis, Drizzle ORM 0.44.x, checked 2026-05-13 -->
-<!-- 修复于 2026-05-13: Drizzle ORM 0.43.x → 0.44.x（npm 确认） -->
+<!-- version-check: Prisma 7.8.0, Mongoose 9.7.3, ioredis deprecated → node-redis, Drizzle ORM 0.44.x, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: Prisma 7.7.x → 7.8.0（2026-04-22）；Mongoose 9.6.1 → 9.7.3（2026-06-26） -->
 
 ## 1. Prisma ORM（推荐）
 
@@ -174,7 +174,7 @@ const usersWithPosts = await db.select()
 
 > 🔄 更新于 2026-05-02
 
-Prisma 7.0 是一个结构性版本，聚焦长期架构而非表面功能。当前稳定版为 7.7.x。来源：[Prisma 7 AMA](https://www.prisma.io/blog/prisma-7-ama-clearing-up-the-why-behind-the-changes)
+Prisma 7.0 是一个结构性版本，聚焦长期架构而非表面功能。当前稳定版为 **7.8.0**（2026-04-22 发布）。来源：[Prisma 7 AMA](https://www.prisma.io/blog/prisma-7-ama-clearing-up-the-why-behind-the-changes)
 
 ### 5.1 Prisma 7 核心变化
 
@@ -232,7 +232,7 @@ Prisma Next 时间线：
 
 > 🔄 更新于 2026-05-02
 
-Mongoose 9 于 2025-11-21 发布，当前稳定版为 9.6.1。来源：[Mongoose Version Support](https://mongoosejs.com/docs/version-support.html)
+Mongoose 9 于 2025-11-21 发布，当前稳定版为 **9.7.3**（2026-06-26 发布）。来源：[Mongoose Version Support](https://mongoosejs.com/docs/version-support.html)
 
 ### 6.1 Mongoose 9 Breaking Changes
 

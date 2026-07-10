@@ -215,3 +215,40 @@ navigationItem.scrollEdgeAppearance = appearance
 - Liquid Glass 在 iOS 27 进入"必须采用"阶段，opt-out 路径可能逐步关闭，新组件应优先按 Liquid Glass 设计
 
 来源：[ClassMethod - iOS 27 / Xcode 27 准备指南](https://dev.classmethod.jp/en/articles/ios27-xcode27-migration-preparation-guide/)
+
+## 9. WWDC26：UIKit Adaptivity 与新 API（2027 releases）
+
+> 更新于 2026-07-10
+
+<!-- version-check: UIKit iOS 27 adaptivity APIs (WWDC26), UIScene lifecycle mandatory, checked 2026-07-10 -->
+
+WWDC26 对 UIKit 的更新体量不大（无新的顶层范式），但集中在**强制 Adaptivity（自适应布局）**上，这是继 Liquid Glass 之后 UIKit 又一次面向"同一份代码适配多种运行环境"（iPhone Mirroring、iPad Split View、外接显示器）的推动（[Modernize your UIKit app - WWDC26](https://developer.apple.com/videos/play/wwdc2026/278/)）。
+
+**必须改的旧写法**（`UIScene` lifecycle 成为强制要求）：
+
+```swift
+// ❌ 过时：依赖 AppDelegate 生命周期、直接取 mainScreen
+let scale = UIScreen.main.scale
+if UIDevice.current.userInterfaceIdiom == .phone {
+    // 布局决策
+}
+
+// ✅ 新写法：通过 traitCollection / windowScene 动态获取
+let scale = traitCollection.displayScale
+let availableSpace = windowScene?.effectiveGeometry  // 而不是 UIScreen.main.bounds
+// 布局决策改用 size class，不再依赖 idiom 或方向
+```
+
+原因：iPhone Mirroring、Split View 等场景下，`UIScreen.main`、`UIUserInterfaceIdiom`、`Interface Orientation` 都不能可靠反映应用实际可用空间——即使 idiom 返回 `.phone`，应用也可能是被镜像投屏或以非全屏方式运行。`UIRequiresFullScreen` 在 iOS 27 起废弃。
+
+**新增 API**：
+
+- **Tab Bar → Sidebar**：`tabBarController.sidebar.preferredPlacement` 让 iPhone 应用也能在合适场景下（如横屏、外接显示器）自动切换为侧边栏
+- **导航栏最小化**：`barMinimizationBehavior`（配套新枚举 `UIBarMinimizeBehavior`）让导航栏在滚动时可以滑出收起，呼应 SwiftUI 侧的 `toolbarMinimizeBehavior`
+- **Apple Intelligence 集成**：菜单自动显示 "Ask Siri" 按钮；新的 View Annotations API 配合 `AppEntities` 为 Siri 提供页面上下文
+- **TextKit 2 增强**：`NSTextViewportRenderingSurface` 支持视口级渲染、`UITextAttachmentViewProviderReusePolicy` 让附件视图在滚动进出时可复用，避免反复创建销毁
+- **场景管理**：`UISceneAccessory` 挂载场景配件、`UISceneClosureConfirmation` 关闭场景前二次确认；`CADisplayLink` 改为 scene-scoped
+
+**迁移辅助**：Xcode 27 内置一个专门的"App Modernization"编码 Agent Skill，能理解上述 adaptivity 迁移任务，自动完成 `mainScreen` 引用替换、方向判断改 size class、迁移到 scene lifecycle 等改动；该 skill 也可导出给其他 Agent/工具使用。
+
+来源：[What's New in UIKit in iOS 27 - Kyle Howells](https://ikyle.me/blog/2026/whats-new-in-uikit-ios-27)、[WWDC26 for UIKit App Developers — Adaptivity](https://medium.com/@choiysapple/wwdc26-for-uikit-app-developers-adaptivity-ef4d23b0b95b)、[UIKit Full API Diff iOS 26.2 → iOS 27 beta](https://gist.github.com/kylehowells/32c7f7475698b5f74eeb183f8db9d186)

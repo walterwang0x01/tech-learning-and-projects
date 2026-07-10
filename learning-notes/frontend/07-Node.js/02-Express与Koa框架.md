@@ -127,8 +127,8 @@ export class UsersService {
 
 > 🔄 更新于 2026-04-30
 
-<!-- version-check: Express 5.1.0, NestJS 11.1.x, Koa 3.1.x, Fastify 5.6.x, Hono 4.12.x, checked 2026-05-13 -->
-<!-- 修复于 2026-05-13: Koa 2.15.x → 3.1.x, Fastify 5.3.x → 5.6.x, Hono 4.7.x → 4.12.x, NestJS 11.1.19 → 11.1.x -->
+<!-- version-check: Express 5.1.0, NestJS 11.1.28, Koa 3.1.x, Fastify 5.10.x, Hono 4.12.x, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: NestJS 11.1.19 → 11.1.28（2026-07-08）；Fastify 5.6.x → 5.10.x；补充 NestJS 12 预览已上线 @next 标签 -->
 
 ### 4.1 Express 5.1（npm 默认版本）
 
@@ -167,9 +167,9 @@ app.use((err, req, res, next) => {
 
 > 来源：[Express 5.1 Release](https://expressjs.com/2025/03/31/v5-1-latest-release.html)
 
-### 4.2 NestJS 11（当前 v11.1.19）
+### 4.2 NestJS 11（当前 v11.1.28）
 
-NestJS 11 于 2025-01 发布，v12 计划 2026 Q3 发布（ESM 原生支持）。
+NestJS 11 于 2025-01 发布，v12 计划 2026 Q3 发布（ESM 原生支持）。v12 预览包已于 2026-06 发布到 npm `next` 标签（`@nestjs/core@12.0.0-alpha.x`），可用 `npx @nestjs/cli@next new` 提前体验。
 
 **核心新特性**：
 
@@ -202,7 +202,7 @@ import KeyvRedis from '@keyv/redis';
 export class AppModule {}
 ```
 
-**NestJS 12 预览**（2026 Q3）：ESM 原生支持、更快的测试启动、重新设计的官网。
+**NestJS 12 预览**（2026 Q3 GA，预览包已上线）：全面迁移到 ESM（`nest new` 时可选择 CJS/ESM）、测试框架由 Jest 切换为 Vitest、ESLint 切换为 oxlint、Monorepo 默认构建工具切换为 Rspack（Webpack 已废弃）、路由装饰器支持 Standard Schema（可直接用 Zod/Valibot 替代 class-validator）。
 
 > 来源：[NestJS 11 Announcement](https://trilon.io/blog/announcing-nestjs-11-whats-new)、[NestJS v12 PR](https://github.com/nestjs/nest/pull/16391)
 
@@ -213,7 +213,7 @@ export class AppModule {}
 | Express 5.1 | 极简、灵活 | 小型 API、微服务、快速原型 | 5.1.0 |
 | Koa | 现代中间件 | 需要精细控制的中间件场景 | 3.1.x |
 | NestJS 11 | 企业级、装饰器 | 大型项目、团队协作、微服务 | 11.1.x |
-| Fastify | 高性能 | 高吞吐量 API、性能敏感场景 | 5.6.x |
+| Fastify | 高性能 | 高吞吐量 API、性能敏感场景 | 5.10.x |
 | Hono | 超轻量、多运行时 | Edge/Serverless、Cloudflare Workers | 4.12.x |
 
 ## 🎬 推荐视频资源

@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Cargo 1.96, crates.io, Edition 2024, checked 2026-05-30 -->
+<!-- version-check: Cargo 1.97 (2026-07-09), crates.io, Edition 2024, checked 2026-07-10 -->
 
 ## 1. Cargo 基础
 
@@ -82,6 +82,26 @@ panic = "abort"
 opt-level = 0           # 默认，编译快但运行慢
 debug = true
 ```
+
+> 更新于 2026-07-10
+>
+> **Cargo 1.97（随 Rust 1.97.0 于 2026-07-09 发布）新特性**：
+>
+> - `build.warnings` 配置项正式稳定：可在 `.cargo/config.toml` 或 `CARGO_BUILD_WARNINGS` 环境变量中设置 `allow` / `warn`（默认） / `deny`，替代 CI 里常见的 `RUSTFLAGS=-Dwarnings`。好处是**不会使构建缓存失效**，方便临时开关：
+>
+>   ```bash
+>   # 重构后临时静默警告，专注修错误
+>   CARGO_BUILD_WARNINGS=allow cargo check
+>   # CI 中改为 deny，配合 --keep-going 收集全部错误和警告
+>   CARGO_BUILD_WARNINGS=deny cargo build --keep-going
+>   ```
+>
+> - `resolver.lockfile-path` 配置稳定：可指定 `Cargo.lock` 的自定义路径，适合只读源码目录场景
+> - 新增 `-m` 作为 `--manifest-path` 的简写
+> - `cargo clean --target-dir` 若目标目录不像 Cargo target 目录会报错，防止误删
+> - 链接器输出默认不再隐藏（此前静默可能掩盖真实问题），可通过 lint 配置临时关闭
+>
+> 来源：[Rust Blog: Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)、[Cargo 1.97 Changelog](https://doc.rust-lang.org/stable/cargo/CHANGELOG.html)
 
 ## 3. Workspace：多 Crate 项目
 

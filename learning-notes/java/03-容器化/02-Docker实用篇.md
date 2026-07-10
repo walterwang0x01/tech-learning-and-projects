@@ -1012,7 +1012,7 @@ DockerCompose的详细语法参考官网：https://docs.docker.com/compose/compo
 
 ④ 将打包好的app.jar拷贝到cloud-demo中的每一个对应的子目录中
 
-⑤ 将cloud-demo上传至虚拟机，利用 docker-compose up -d 来部署
+⑤ 将cloud-demo上传至虚拟机，利用 `docker compose up -d`<!-- 修复于 2026-07-10: docker-compose → docker compose（v1 已 EOL，现为 docker CLI 内置 compose 子命令） --> 来部署
 
 
 
@@ -1024,9 +1024,8 @@ DockerCompose的详细语法参考官网：https://docs.docker.com/compose/compo
 
 内容如下：
 
+<!-- 修复于 2026-07-10: Compose V2 中顶层 version 字段已废弃（obsolete），保留不影响运行但建议移除 -->
 ```yaml
-version: "3.2"
-
 services:
   nacos:
     image: nacos/nacos-server
@@ -1161,7 +1160,8 @@ gateway：
 进入cloud-demo目录，然后运行下面的命令：
 
 ```sh
-docker-compose up -d
+# <!-- 修复于 2026-07-10: docker-compose（v1，已 EOL）→ docker compose（v2 内置子命令） -->
+docker compose up -d
 ```
 
 

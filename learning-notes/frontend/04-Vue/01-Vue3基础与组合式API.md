@@ -229,6 +229,30 @@ const count = ref(0);
 Vue 3.6 重构了响应式系统，采用 alien-signals 算法，响应式追踪和触发性能大幅提升。
 
 来源：[Vue.js 2025 回顾与 2026 展望](https://vueschool.io/articles/news/vue-js-2025-in-review-and-a-peek-into-2026/)、[State of Vue & Vite 2026](https://laurentcazanove.com/blog/state-of-vue-vite-2026-amsterdam-recap)
+
+### Vue 3.6 状态纠偏与 Vapor Mode 落地建议（2026-07 更新）
+
+> 更新于 2026-07-10
+
+<!-- version-check: Vue 3.6.0-beta.17 (2026-06-24, 官方 GitHub changelog 为准), Vapor Mode feature-complete but 仍标记 unstable, checked 2026-07-10 -->
+
+**状态纠偏**：部分社区文章（如 VueConf US 2026 相关报道）宣称"Vapor Mode 已 Stable"，但以 **Vue 核心仓库官方 CHANGELOG** 为准，截至 2026-07-10 最新版本是 **3.6.0-beta.17**（2026-06-24），仍处于 Beta 阶段。官方说明是："Vapor Mode 在 3.6 Beta 中已功能完整（feature-complete），与 Virtual DOM 模式功能对等，但仍被认为不稳定（unstable）"（[vuejs/core CHANGELOG](https://github.com/vuejs/core/blob/refs/heads/minor/CHANGELOG.md)）。引用第三方数据时请优先核对官方仓库，避免把会议宣传口径当成正式发布状态。
+
+**官方推荐的 Vapor Mode 落地场景**（3.6 Beta 阶段）：
+
+```
+适合现在就试用：
+├─ 现有应用中做局部试点（如一个性能敏感的子页面用 Vapor Mode 重写）
+└─ 全新的小型应用直接用 Vapor Mode 构建
+
+不建议：
+└─ 大规模、生产关键路径的整体迁移（等正式 stable 发布）
+```
+
+**技术要点**：Vapor Mode 不支持独立的 `Suspense`，但可以把 Vapor 组件渲染在 VDOM 的 `Suspense` 内部混用；性能基准显示已达到 Solid.js / Svelte 5 同级水平（[krausest/js-framework-benchmark](https://github.com/krausest/js-framework-benchmark)）。`@vue/reactivity` 底层已基于 [alien-signals](https://github.com/stackblitz/alien-signals) 重构，这部分优化对 Options API / Composition API 项目都生效，**无需启用 Vapor Mode 也能受益**。
+
+来源：[vuejs/core 3.6 CHANGELOG](https://github.com/vuejs/core/blob/refs/heads/minor/CHANGELOG.md)、[v3.6.0-beta.1 Release Notes](https://github.com/vuejs/core/releases/tag/v3.6.0-beta.1)
+
 ## 🎬 推荐视频资源
 
 - [freeCodeCamp - Vue 3 Full Course](https://www.youtube.com/watch?v=VeNfHj6MhgA) — Vue 3完整课程（6小时）

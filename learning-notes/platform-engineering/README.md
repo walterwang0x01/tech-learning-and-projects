@@ -2,12 +2,13 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Platform Engineering 2026, Backstage 1.51, Argo CD 3.4.3, Flux 2.8 GA, Crossplane 2.3, checked 2026-07-09 -->
+<!-- version-check: Platform Engineering 2026, Backstage 1.52.0 (2026-06-16), Argo CD 3.4.3, Argo Workflows 3.7.16, Flux 2.8 GA, Crossplane 2.3, FinOps Framework 2026, checked 2026-07-10 -->
 <!-- 修复于 2026-05-31: Backstage 1.50 → 1.51；Argo CD 2.14 → 3.4.3（2.x 全部 EOL）；补充 Flux 2.8 GA、Crossplane 2.3 -->
+<!-- 修复于 2026-07-10: Backstage 1.51 → 1.52.0（两个 Breaking Change）；补充 Argo Workflows 3.7.16、FinOps Framework 2026 -->
 
 > "Platform Engineering is the discipline of designing and building toolchains and workflows that enable self-service capabilities for software engineering organizations." — Team Topologies
 
-Gartner 预测 2026 年底 80% 的大型软件组织将拥有平台工程团队。
+Gartner 预测 2026 年底 80% 的大型软件组织将拥有平台工程团队。当前 CNCF Backstage 项目已有 3400+ 采用者，在已采用 IDP 的组织中市占率约 89%（[Roadie: Platform Engineering in 2026](https://roadie.io/blog/platform-engineering-in-2026-why-diy-is-dead/)）。
 
 ## 📁 目录结构
 

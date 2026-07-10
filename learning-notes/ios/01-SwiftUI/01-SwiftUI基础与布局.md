@@ -244,6 +244,44 @@ Swift Charts 新增 3D 图表支持，可以在三维空间中可视化数据。
 
 iOS 26 在用户滚动时自动为工具栏边缘添加模糊效果，确保工具栏内容在滚动内容上方保持可读性。
 
+## 7. WWDC26（2027 releases）工具栏与编译性能更新
+
+> 更新于 2026-07-10
+
+<!-- version-check: SwiftUI WWDC26 toolbar API + ContentBuilder, 2027 releases (iOS 27/Xcode 27), checked 2026-07-10 -->
+
+WWDC26 为 2027 releases（iOS 27 / Xcode 27）带来了新一批工具栏 API 和编译器性能改进（[WWDC26 SwiftUI guide](https://developer.apple.com/wwdc26/guides/swiftui/)）：
+
+```swift
+.toolbar {
+    ToolbarItemGroup {
+        Button("收藏", systemImage: "star") { }
+        Button("分享", systemImage: "square.and.arrow.up") { }
+    }
+    // 保持关键分组常驻可见，避免被折叠进溢出菜单
+    .visibilityPriority(.high)
+
+    // 低优先级项目固定放进溢出菜单，而不是动态显隐
+    ToolbarItem { Button("设置", systemImage: "gear") { } }
+        .toolbarOverflowMenu()
+
+    // 关键操作（如分享）始终固定在尾部边缘
+    ToolbarItem(placement: .topBarPinnedTrailing) {
+        Button("发布", systemImage: "paperplane") { }
+    }
+}
+// 滚动时自动收起导航栏，节省垂直空间
+.toolbarMinimizeBehavior(.automatic)
+```
+
+其他要点：
+
+- **`ContentBuilder` 取代/扩展 `ViewBuilder`**：Xcode 27 编译器改进大幅降低复杂视图的类型检查耗时，减少"The compiler is unable to type-check this expression in reasonable time"报错
+- **`AsyncImage` 默认支持标准 HTTP 缓存**：遵循服务端缓存头，滚动重复展示同一图片不再重复请求；仍可通过 `asyncImageURLSession` 修饰符自定义 `URLSession`/`URLCache`
+- **新增跨平台可拖拽排序容器 API**：List、Grid、Section 等统一支持拖拽重排，watchOS 也已适配，内置动画
+
+来源：[What's new in SwiftUI - WWDC26](https://developer.apple.com/videos/play/wwdc2026/269/)、[InfoQ: SwiftUI Adds New Document Protocol](https://www.infoq.com/news/2026/07/swiftui-wwdc26/)
+
 ## 🎬 推荐视频资源
 
 - [Swiftful Thinking - SwiftUI Bootcamp](https://www.youtube.com/playlist?list=PLwvDm4VfkdphqETTBf-DdjCoAvhai1QpO) — SwiftUI完整入门系列

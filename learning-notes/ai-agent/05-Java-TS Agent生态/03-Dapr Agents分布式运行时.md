@@ -4,7 +4,7 @@
 
 ## 1. 概述
 
-<!-- version-check: Dapr Agents v1.0 GA, checked 2026-04-18 -->
+<!-- version-check: Dapr Agents v1.0.5 (2026-06-15), checked 2026-07-10 -->
 
 > 🔄 更新于 2026-04-18
 
@@ -336,6 +336,25 @@ Dapr Agents v1.0 GA 最适合：
 ├─ 快速原型开发
 └─ 无 Kubernetes 环境
 ```
+
+## 9.5 GA 后的版本演进（2026-07 更新）
+
+> 更新于 2026-07-10
+
+<!-- version-check: Dapr Agents v1.0.5 (2026-06-15), checked 2026-07-10 -->
+
+v1.0 GA（2026-03-23）之后，项目保持稳定的补丁节奏，**当前最新版本为 v1.0.5**（2026-06-15），语言支持仍是 **Python only**（官方路线图显示"Other Languages"为 TBD，多语言支持尚未有明确排期，本文档中"多语言 Agent 协作（Python + Go + Java）"更多是通过 Dapr 底层 Sidecar 实现跨语言微服务集成，而非 Dapr Agents SDK 本身的多语言 API）。
+
+GA 后几个 minor 补丁中的重点变化：
+
+- **`agents as tools`**：一个 Agent 可以把另一个 Agent 包装成 Tool 调用，简化多 Agent 编排的组合方式
+- **`ToolExecutionMode`**：工具执行支持并行 / 串行两种模式显式配置
+- **`agent.workflow` start 方法**：简化以 workflow 方式启动 Agent 的 API
+- **MCP 支持增强**：`MCPServer` 通过 Dapr metadata API 自动发现 + workflow 编排集成
+- **HITL（Human-in-the-loop）审批**：状态存储层修复了审批流程的状态一致性问题
+
+来源：[dapr/dapr-agents GitHub Releases](https://github.com/dapr/dapr-agents/releases)、[Dapr Agents 官方文档](https://docs.dapr.io/developing-ai/dapr-agents/dapr-agents-introduction/)
+
 ## 🎬 推荐视频资源
 
 ### 🌐 YouTube

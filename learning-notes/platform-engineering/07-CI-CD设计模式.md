@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: GitHub Actions 2026, Argo Workflows 3.6, checked 2026-05-10 -->
+<!-- version-check: GitHub Actions 2026, Argo Workflows 3.7.16 (2026-07-07), checked 2026-07-10 -->
 
 ## 1. CI 和 CD 的边界
 
@@ -349,6 +349,30 @@ OIDC 示例（AWS）：
 ```
 
 专用工具：**Turborepo**、**Nx**、**Bazel**、**Moon**。
+
+## 9.5 Argo Workflows：K8s 原生工作流引擎
+
+> 更新于 2026-07-10
+
+<!-- version-check: Argo Workflows 3.7.16 (2026-07-07), checked 2026-07-10 -->
+
+**Argo Workflows 3.7.16**（2026-07-07）是当前维护线上的最新补丁版；项目仅维护最近两个 minor（当前是 3.7 和 4.0），每 6 个月出一个 minor、每两周出一个 patch（[endoflife.date: Argo Workflows](https://endoflife.date/argo-workflows)）。
+
+与 GitHub Actions 的定位区别：
+
+```
+GitHub Actions / GitLab CI：
+├─ 面向"代码变更 → 构建 → 部署"的 CI/CD 主线
+└─ 触发源是 Git 事件
+
+Argo Workflows：
+├─ 面向"编排 Kubernetes 资源"的平台自动化——建 Namespace、跑 Job、清理资源
+├─ 不是 CI/CD 主力工具，是**平台工程的编排引擎**
+├─ WorkflowTemplate / CronWorkflow 复用逻辑，Steps/DAG 两种编排方式
+└─ 常见用法：数据管道、批处理、按需环境的创建与回收
+```
+
+平台工程团队常见组合：GitHub Actions 负责应用 CI/CD 主线，Argo Workflows 负责集群内的资源编排（比如临时环境的创建、定时清理、跨团队共享的批处理任务）。
 
 ## 10. 典型反模式
 

@@ -221,6 +221,34 @@ struct ProfileView: View {
 
 > **迁移建议**：新项目最低支持 iOS 17 时，全面使用 `@Observable` 替代 `ObservableObject`。`@StateObject` / `@ObservedObject` / `@EnvironmentObject` 仅在需要兼容旧版本时使用。
 
+## 7. WWDC26：`@State` 变为宏 + `@Observable` 惰性初始化
+
+> 更新于 2026-07-10
+
+<!-- version-check: SwiftUI @State macro + lazy Observable init, WWDC26 2027 releases (back-ported to iOS 17/macOS 14), checked 2026-07-10 -->
+
+2027 releases 中 `@State` 从 Dynamic Property **转变为宏**，带来一个此前一直存在的性能陷阱的修复：存储在 `@State` 里的 `@Observable` 类实例，此前每次父视图重新初始化时都会创建一次新实例（哪怕最终会被 SwiftUI 丢弃），现在**整个视图生命周期内只初始化一次**。
+
+```swift
+struct StickerStoreView: View {
+    // 2027 releases 起：AppState() 只在视图生命周期内构造一次，
+    // 父视图反复 init 不再触发重复分配
+    @State private var appState = AppState()
+
+    var body: some View {
+        HomeView(appState: appState)
+    }
+}
+```
+
+**关键点**：
+
+- 这不是新 API，代码写法完全不变——纯粹是编译器/运行时层面的优化，**无需修改现有代码**即可受益
+- 官方明确**反向移植**到 `@Observable` 最早支持的版本：iOS 17、macOS 14 及对齐平台版本，不是 iOS 27 专属特性
+- 对高频重建的列表 / 容器视图（如 `List` 内每行都持有一个 `@Observable` 状态）收益最明显，减少了大量本可避免的对象分配
+
+来源：[WWDC26 SwiftUI guide](https://developer.apple.com/wwdc26/guides/swiftui/)、[What's new in SwiftUI - WWDC26 视频](https://developer.apple.com/videos/play/wwdc2026/269/)
+
 ## 🎬 推荐视频资源
 
 - [Swiftful Thinking - SwiftUI State Management](https://www.youtube.com/watch?v=KD4OAjQJYPc) — SwiftUI状态管理

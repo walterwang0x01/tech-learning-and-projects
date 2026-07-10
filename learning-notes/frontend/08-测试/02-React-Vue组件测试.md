@@ -4,7 +4,7 @@
 
 ## 1. React Testing Library
 
-<!-- version-check: @testing-library/react 16.x, @vue/test-utils 2.4.x, checked 2026-05-13 -->
+<!-- version-check: @testing-library/react 16.3.2, @vue/test-utils 2.4.11, checked 2026-07-10 -->
 
 ```jsx
 import { render, screen, waitFor } from '@testing-library/react';

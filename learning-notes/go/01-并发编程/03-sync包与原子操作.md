@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Go 1.26 sync, atomic 1.19+ generic, checked 2026-05-10 -->
+<!-- version-check: Go 1.26.5 sync, atomic 1.19+ generic, testing/synctest WaitGroup bubble 关联注意事项, checked 2026-07-10 -->
 
 ## 1. 并发安全的三种选择
 
@@ -106,6 +106,20 @@ go func() {
     // 缺 wg.Done()
 }()
 ```
+
+> 更新于 2026-07-10
+>
+> **写 `testing/synctest` 测试时的隐藏坑**：`sync.WaitGroup` 在第一次调用 `Add`/`Go` 时才会绑定到当前的 synctest bubble；**包级别变量形式**（`var wg sync.WaitGroup`）无法被正确关联，其上的 `Wait()` 可能不会被 synctest 识别为"durably blocking"，导致测试出现难以复现的 flaky 行为。用 `testing/synctest` 写并发测试时，把 `WaitGroup` 声明为指针：
+>
+> ```go
+> // 会在并发测试中随机出现调度问题
+> var wg sync.WaitGroup
+>
+> // synctest 能正确追踪其阻塞状态
+> var wg = new(sync.WaitGroup)
+> ```
+>
+> 来源：[testing/synctest 官方文档](https://pkg.go.dev/testing/synctest)，详见 [04-工程化/02-测试与基准.md](../04-工程化/02-测试与基准.md) 第 12 节
 
 ## 5. sync.Once
 

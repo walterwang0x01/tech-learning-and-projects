@@ -4,8 +4,9 @@
 
 ## 1. 概述
 
-<!-- version-check: Spring AI 2.0.0 GA (2026-05-28), Spring Boot 4.1.0, checked 2026-07-09 -->
+<!-- version-check: Spring AI 2.0.0 GA (实际发布 2026-06-12，非计划的 05-28), Spring Boot 4.1.0, MCP SDK 2.0.0, checked 2026-07-10 -->
 <!-- 修复于 2026-07-09: 2.0.0-M8 → 2.0.0 GA（与 java/01-框架 对齐） -->
+<!-- 修复于 2026-07-10: GA 实际日期纠偏 05-28 → 06-12 -->
 
 > 🔄 更新于 2026-04-18
 
@@ -59,6 +60,36 @@ ChatClient.builder(chatModel)
 - **MCP 传输层变化（M7 起）**：Streamable HTTP 成为默认服务端协议，SSE 传输被标记 deprecated。新项目应直接使用 Streamable HTTP；老项目保留 SSE 至少到 1.1.x EOL
 
 来源：[Spring AI 2.0.0-M6 发布公告](https://spring.io/blog/2026/05/08/spring-ai-1-0-7-1-1-6-2-0-0-M6-available-now)、[Spring AI 2.0.0-M7 发布公告](https://spring.io/blog/2026/05/23/spring-ai-1-0-8-1-1-7-2-0-0-M7-available-now)、[Spring AI 2.0.0-M8 发布公告](https://spring.io/blog/2026/05/27/spring-ai-2-0-0-M8-available-now)、[HeroDevs - Spring AI 2.0 GA Schedule](https://www.herodevs.com/blog-posts/spring-ai-2-0-is-coming-may-28-here-is-why-that-makes-the-june-30-deadline-more-urgent-not-less)
+
+### 1.2 GA 日期纠偏 + Composable Tool Calling 架构（2026-07-10 更新）
+
+> 更新于 2026-07-10
+
+<!-- version-check: Spring AI 2.0.0 GA 实际发布于 2026-06-12（非此前预计的 05-28）, MCP SDK 2.0.0, checked 2026-07-10 -->
+
+**日期纠偏**：**Spring AI 2.0.0 实际 GA 日期是 2026-06-12**，比 M8 阶段预计的 "2026-05-28" 晚了约两周（[Spring AI 2.0.0 GA Available Now](https://spring.io/blog/2026/06/12/spring-ai-2-0-0-GA-available-now/)）。GA 版本确认基线为 **Spring Boot 4.0/4.1 + Spring Framework 7.0**，硬性要求 Java 17+，仍在 Spring Boot 3.x 的团队必须先完成 Boot 4 迁移才能使用 2.0。
+
+**GA 版本的关键结构性变化**（超出 M6-M8 milestone 已记录的内容）：
+
+- **JSON 迁移到 Jackson 3**：新增 `JsonHelper` 类用于自定义序列化行为
+- **JSpecify null-safety 注解**全面覆盖代码库，配合 IDE/静态分析在编译期捕获可选值 vs 必填值的错误
+- **Composable Tool Calling 架构**：工具执行逻辑从各个 ChatModel 内部抽出，成为独立的 **`ToolCallingAdvisor`**。循环机制：收集 `@Tool` 注解方法 / `java.util.Function` 实现 / `ToolCallback` bean → 把完整对话历史发给 LLM → 通过 `ToolCallingManager` 执行模型请求的工具 → 结果追加进对话历史 → 重新进入循环。阻塞式 `.call()` 和流式 `.stream()` 均完整支持，也为需要审批网关（human-in-the-loop）的场景提供了介入点
+- **MCP Java SDK 升级到 2.0.0**，新增 `@McpTool`、`@McpResource`、`@McpPrompt` 注解驱动的 Server 开发方式；Streamable HTTP 保持默认传输（与 M7 一致）
+
+```java
+// GA 版本：ToolCallingAdvisor 作为独立组件注入，而非绑定在具体 ChatModel 内部
+ChatClient.builder(chatModel)
+    .defaultAdvisors(
+        ToolCallingAdvisor.builder()
+            .toolCallingManager(toolCallingManager)
+            .build(),
+        MessageChatMemoryAdvisor.builder(chatMemory)
+            .conversationId(userSessionId)
+            .build())
+    .build();
+```
+
+来源：[Spring AI 2.0.0 GA Available Now](https://spring.io/blog/2026/06/12/spring-ai-2-0-0-GA-available-now/)、[JavaRubberDuck: Spring AI 2.0 GA and Composable Tool Calling](https://javarubberduck.com/java/news-2026-06-29-spring/)
 
 ```
 ┌─────────────────────────────────────────────┐

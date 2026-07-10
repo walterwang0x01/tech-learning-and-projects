@@ -554,8 +554,9 @@ tomcat-service   ClusterIP   None         <none>        8080/TCP   48s
 
 创建ingress-http.yaml
 
+<!-- 修复于 2026-07-10: extensions/v1beta1 → networking.k8s.io/v1（v1beta1 已在 K8s 1.22 移除）；backend 字段结构同步更新 -->
 ~~~yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-http
@@ -566,22 +567,28 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: nginx-service
-          servicePort: 80
+          service:
+            name: nginx-service
+            port:
+              number: 80
   - host: tomcat.itheima.com
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: tomcat-service
-          servicePort: 8080
+          service:
+            name: tomcat-service
+            port:
+              number: 8080
 ~~~
 
 ~~~powershell
 # 创建
 [root@master ~]# kubectl create -f ingress-http.yaml
-ingress.extensions/ingress-http created
+ingress.networking.k8s.io/ingress-http created
 
 # 查看
 [root@master ~]# kubectl get ing ingress-http -n dev
@@ -616,8 +623,9 @@ kubectl create secret tls tls-secret --key tls.key --cert tls.crt
 
 创建ingress-https.yaml
 
+<!-- 修复于 2026-07-10: extensions/v1beta1 → networking.k8s.io/v1，backend 字段结构同步更新 -->
 ~~~yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-https
@@ -633,22 +641,28 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: nginx-service
-          servicePort: 80
+          service:
+            name: nginx-service
+            port:
+              number: 80
   - host: tomcat.itheima.com
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: tomcat-service
-          servicePort: 8080
+          service:
+            name: tomcat-service
+            port:
+              number: 8080
 ~~~
 
 ~~~powershell
 # 创建
 [root@master ~]# kubectl create -f ingress-https.yaml
-ingress.extensions/ingress-https created
+ingress.networking.k8s.io/ingress-https created
 
 # 查看
 [root@master ~]# kubectl get ing ingress-https -n dev
@@ -1780,8 +1794,10 @@ Switched to context "kubernetes-admin@kubernetes".
 
 准入控制是一个可配置的控制器列表，可以通过在Api-Server上通过命令行设置选择执行哪些准入控制器：
 
+<!-- 修复于 2026-07-10: --admission-control 是已移除的旧版参数名，现在需要用 --enable-admission-plugins -->
 ~~~powershell
---admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,
+# 现代 kube-apiserver 使用 --enable-admission-plugins（--admission-control 已废弃并移除）
+--enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,
                       DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds
 ~~~
 
@@ -1802,7 +1818,7 @@ Switched to context "kubernetes-admin@kubernetes".
 - NamespaceLifecycle：如果尝试在一个不存在的namespace中创建资源对象，则该创建请求将被拒绝。当删除一个namespace时，系统将会删除该namespace中所有对象。
 - DefaultStorageClass：为了实现共享存储的动态供应，为未指定StorageClass或PV的PVC尝试匹配默认的StorageClass，尽可能减少用户在申请PVC时所需了解的后端存储细节
 - DefaultTolerationSeconds：这个插件为那些没有设置forgiveness tolerations并具有notready:NoExecute和unreachable:NoExecute两种taints的Pod设置默认的“容忍”时间，为5min
-- PodSecurityPolicy：这个插件用于在创建或修改Pod时决定是否根据Pod的security context和可用的PodSecurityPolicy对Pod的安全策略进行控制
+- PodSecurityPolicy（⚠️ 已在 K8s 1.25 彻底移除，<!-- 修复于 2026-07-10: 补充替代方案 -->现使用内置的 **Pod Security Admission**（`PodSecurity` 插件 + `pod-security.kubernetes.io/enforce` 命名空间标签）或第三方方案如 Kyverno/OPA Gatekeeper 实现同等能力）：这个插件用于在创建或修改Pod时决定是否根据Pod的security context对Pod的安全策略进行控制
 
 # 第十章 DashBoard
 

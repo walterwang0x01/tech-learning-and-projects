@@ -89,7 +89,7 @@ describe('Database tests', () => {
 
 ## 5. Vitest（Vite 项目推荐）
 
-<!-- version-check: Vitest 4.1, Jest 30, checked 2026-05-13 -->
+<!-- version-check: Vitest 4.1.10, Jest 30, checked 2026-07-10 -->
 
 > 🔄 更新于 2026-05-13：补充 Vitest 4.x 与 Jest 30 重大版本更新
 

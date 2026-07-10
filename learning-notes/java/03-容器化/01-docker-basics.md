@@ -50,10 +50,11 @@ docker run <image>         # 运行容器
 docker stop <container>    # 停止容器
 docker rm <container>      # 删除容器
 
-# Docker Compose
-docker-compose up          # 启动服务
-docker-compose down        # 停止服务
-docker-compose ps          # 查看服务状态
+# Docker Compose（v2 插件语法，无短横线；docker-compose v1 已于 2023-07 EOL）
+# <!-- 修复于 2026-07-10: docker-compose → docker compose -->
+docker compose up          # 启动服务
+docker compose down        # 停止服务
+docker compose ps          # 查看服务状态
 ```
 
 ## Dockerfile 示例
@@ -83,9 +84,10 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 ## Docker 版本演进（2025-2026）
 
-<!-- version-check: Docker Engine 29.x, Docker Desktop 4.50+ Sandboxes (April 2026), checked 2026-05-04 -->
+<!-- version-check: Docker Engine 29.6.1（2026-06-26）, Docker Desktop 4.81.0（2026-07-06）, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: 补充当前具体补丁版本号，内容结论未变 -->
 
-> 🔄 更新于 2026-04-27
+> 🔄 更新于 2026-07-10
 
 ### Docker Engine 28（2025-02）
 

@@ -41,7 +41,8 @@ th = Toolhouse(api_key="th_xxx")
 tools = th.get_tools()  # 获取所有可用工具
 
 response = client.chat.completions.create(
-    model="gpt-5.2", messages=messages, tools=tools,
+    # <!-- 修复于 2026-07-10: gpt-5.2 → gpt-5.6（OpenAI 于 2026-07-09 发布 GPT-5.6 系列，gpt-5.6 别名默认路由到 gpt-5.6-sol） -->
+    model="gpt-5.6", messages=messages, tools=tools,
 )
 result = th.run_tools(response)  # 自动执行工具调用
 ```

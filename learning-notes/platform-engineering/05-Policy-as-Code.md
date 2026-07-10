@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: OPA 0.71, Kyverno 1.13, Conftest 0.56, Cedar 4.x, checked 2026-05-10 -->
+<!-- version-check: OPA 0.71, Kyverno 1.17.2 (2026-04-23，1.13/1.14 已 EOL), Conftest 0.56, Cedar 4.x, checked 2026-07-10 -->
 
 ## 1. 为什么要 Policy as Code
 
@@ -222,6 +222,12 @@ OPA：
 ├─ Rego 学习曲线陡
 └─ 跨多个系统统一策略时用
 ```
+
+> 更新于 2026-07-10
+>
+> **Kyverno 版本纠偏**：文档标注的 1.13 已 EOL（2025-11-10 停止支持）。当前处于活跃支持期的是 **1.15 / 1.16 / 1.17**（三个 minor 同时在维），**1.17.2（2026-04-23）为最新版**；1.14 也已于 2026-02-02 EOL。生产集群若还在 1.13/1.14，应尽快规划升级路径（[Kyverno EOL 日期](https://eosl.date/eol/product/kyverno/)）。
+>
+> Kyverno 1.12+ 起策略类型已收敛为稳定版：`ValidatingPolicy`、`MutatingPolicy`、`GeneratingPolicy`、`DeletingPolicy`（按计划自动清理资源，如定时清理已完成 Job 的 Pod）、`ImageValidatingPolicy`（校验镜像签名，配合 Cosign/Notary），迁移旧版 `ClusterPolicy` 时建议对照新的稳定策略类型文档。
 
 ## 5. Conftest：配置文件通用检查
 

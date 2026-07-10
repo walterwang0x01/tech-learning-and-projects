@@ -137,7 +137,8 @@ func loadImages() {
 
 ## 7. Xcode 26 Instruments 新工具
 
-<!-- version-check: Xcode 26.4, Instruments 2026, checked 2026-04-27 -->
+<!-- version-check: Xcode 26.6（当前稳定版，Xcode 27 beta 3 开发中）, Instruments 2026, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: Xcode 稳定版已从 26.4 更新到 26.6（2026-06-25），Xcode 27 beta 处于开发预览阶段 -->
 
 > 🔄 更新于 2026-04-27
 

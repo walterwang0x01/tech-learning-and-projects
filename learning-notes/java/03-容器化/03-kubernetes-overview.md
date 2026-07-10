@@ -77,9 +77,9 @@ kubectl exec -it <pod-name> -- /bin/bash
 
 ## Kubernetes 版本演进（2025-2026）
 
-<!-- version-check: Kubernetes 1.36 Haru (April 2026), checked 2026-05-04 -->
+<!-- version-check: Kubernetes 1.36 Haru（当前稳定版）, 1.37 计划 2026-08-26 发布, checked 2026-07-10 -->
 
-> 🔄 更新于 2026-04-27
+> 🔄 更新于 2026-07-10
 
 ### K8s 1.33 "Octarine"（2025-04-23）
 
@@ -203,6 +203,9 @@ spec:
 ```
 
 > 来源：[Kubernetes v1.36: ハル (Haru)](https://kubernetes.io/blog/2026/04/22/kubernetes-v1-36-release) | [K8s 1.36 Features](https://cloudraft.io/blog/kubernetes-v1-36-haru-features-upgrade-guide)
+
+<!-- 修复于 2026-07-10: 补充 1.37 进度提示 -->
+> 📌 Kubernetes 1.37 已于 2026-06-17 完成增强特性冻结（Enhancements Freeze），2026-07-22~23 代码冻结，正式发布计划为 **2026-08-26**，当前仍处于 1.37.0-alpha 阶段，生产环境暂无需关注。
 
 ### 版本选择建议（2026 更新）
 

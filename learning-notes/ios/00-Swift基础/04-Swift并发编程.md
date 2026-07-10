@@ -223,6 +223,54 @@ class DataManager {
 
 > **注意**：Swift 6 严格并发检查将数据竞争从警告升级为编译器错误。所有主流框架在 2026 年已完成 Swift 6 适配。来源：[Swift Concurrency Safety in 2026](https://vocal.media/01/swift-concurrency-safety-navigating-xcode-checks-in-2026)
 
+## 7. Swift 6.4（WWDC26）并发新特性
+
+> 更新于 2026-07-10
+
+<!-- version-check: Swift 6.4 concurrency (SE-0493/0504/0518/0520), WWDC26, checked 2026-07-10 -->
+
+Swift 6.4 随 WWDC26 发布，带来一批解决实际痛点的并发改进（来源：[SwiftLee: Swift 6.4 What's New in Concurrency](https://www.avanderlee.com/concurrency/swift-6-4-whats-new-in-concurrency/)）：
+
+**SE-0493：`defer` 中支持 async 调用**——此前 `defer` 块内不能调用异步函数，异步清理逻辑必须用别的方式绕过；6.4 起限制解除：
+
+```swift
+func processFile() async throws {
+    let handle = try openFile()
+    defer {
+        Task { await handle.close() }  // Swift 6.4 之前的变通写法
+    }
+    // Swift 6.4：defer 内可直接 await
+    defer { await handle.closeAsync() }
+    try await handle.write(data)
+}
+```
+
+**SE-0504：Task Cancellation Shields**——`withTaskCancellationShield { ... }` 让作用域内的代码暂时"看不到"取消信号，适合数据库写入、文件落盘等必须完整执行的清理逻辑：
+
+```swift
+await withTaskCancellationShield {
+    // 即使外部 Task 已被取消，这段关键收尾逻辑也会完整执行完
+    await database.commitPendingWrites()
+}
+
+// 调试用：检查当前是否处于 shield 保护中
+if Task.hasActiveCancellationShield {
+    logger.debug("running inside a cancellation shield")
+}
+```
+
+注意：shield 不会被子任务自动继承，每个子任务需要自己单独包裹。
+
+**SE-0520：忽略抛错 Task 的诊断警告**——创建一个会抛错的 unstructured `Task` 却不保存其句柄时，编译器现在会发出警告，提醒你要么在任务内处理错误，要么保存任务后续检查。
+
+**Sendable 相关改进**：
+
+- `weak let`（Swift 6.3 引入的 SE-0481）+ Swift 6.4：只因为 `weak var` 而被迫用 `@unchecked Sendable` 的类型，改成 `weak let` 即可参与正规的 Sendable 检查
+- **SE-0518：`~Sendable`**：显式声明"这个类型不应该是 Sendable"，且不会阻止其子类被判定为 Sendable
+- **`@Diagnose` 属性**：可在函数粒度控制特定警告的行为（如临时忽略 deprecated 警告、或反过来在安全敏感函数内提升为 strict memory safety / strict concurrency 检查），便于渐进式迁移到 Swift 6 语言模式
+
+来源：[SwiftLee: Swift 6.4 Concurrency](https://www.avanderlee.com/concurrency/swift-6-4-whats-new-in-concurrency/)、[SE-0504 Task Cancellation Shields](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0504-task-cancellation-shields.md)、[What's New in Swift 2026](https://blakecrosley.com/blog/whats-new-swift-2026)
+
 ## 🎬 推荐视频资源
 
 - [Sean Allen - Swift Concurrency](https://www.youtube.com/watch?v=U6lQOo5aGmE) — Swift并发编程教程

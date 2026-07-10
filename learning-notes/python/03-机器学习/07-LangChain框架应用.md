@@ -39,13 +39,15 @@ pip install langchain-community  # 社区集成
 
 ### 3.1 LLM 调用
 
+<!-- 修复于 2026-07-10: 全文 gpt-5.2/gpt-5-mini 已过时，批量更新为 GPT-5.6 家族（gpt-5.6 别名路由到旗舰 Sol，gpt-5.6-luna 为高性价比层级），GPT-5.6 已于 2026-07-09 GA -->
+
 ```python
 from langchain_openai import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
 
 # 初始化模型
 llm = ChatOpenAI(
-    model_name="gpt-5.2",
+    model_name="gpt-5.6",
     temperature=0.7,
     api_key="your-api-key"
 )
@@ -95,7 +97,7 @@ prompt = PromptTemplate(
 )
 
 # LCEL 方式（推荐）
-llm = ChatOpenAI(model_name="gpt-5.2")
+llm = ChatOpenAI(model_name="gpt-5.6")
 chain = prompt | llm
 
 # 运行链
@@ -166,7 +168,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
 # 初始化组件
-llm = ChatOpenAI(model_name="gpt-5.2")
+llm = ChatOpenAI(model_name="gpt-5.6")
 embeddings = OpenAIEmbeddings()
 
 # 假设 vectorstore 已创建（参见第 4 节）
@@ -306,7 +308,7 @@ from langgraph.prebuilt import create_react_agent
 from langchain_openai import ChatOpenAI
 
 # LangGraph 预构建的 ReAct Agent（推荐方式）
-llm = ChatOpenAI(model_name="gpt-5.2")
+llm = ChatOpenAI(model_name="gpt-5.6")
 agent = create_react_agent(llm, tools)
 
 # 运行 Agent
@@ -402,7 +404,7 @@ class ChatState(TypedDict):
     messages: Annotated[list, add_messages]
 
 # 定义聊天节点
-llm = ChatOpenAI(model_name="gpt-5.2")
+llm = ChatOpenAI(model_name="gpt-5.6")
 
 def chat(state: ChatState) -> ChatState:
     system = SystemMessage(content="你是一个有用的AI助手")
@@ -512,7 +514,7 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-llm = ChatOpenAI(model_name="gpt-5.2")
+llm = ChatOpenAI(model_name="gpt-5.6")
 
 # 第一步：生成大纲
 outline_prompt = ChatPromptTemplate.from_messages([
@@ -614,8 +616,8 @@ print(answer)
 from langchain_core.runnables import RunnableWithFallbacks
 
 # 主模型 + 回退模型
-main_llm = ChatOpenAI(model_name="gpt-5.2", temperature=0)
-fallback_llm = ChatOpenAI(model_name="gpt-5-mini", temperature=0)
+main_llm = ChatOpenAI(model_name="gpt-5.6", temperature=0)
+fallback_llm = ChatOpenAI(model_name="gpt-5.6-luna", temperature=0)
 
 # 如果主模型失败，自动切换到回退模型
 prompt = ChatPromptTemplate.from_messages([("human", "{question}")])
@@ -680,13 +682,13 @@ set_llm_cache(InMemoryCache())
 ```python
 # 限制 token 数量
 llm = ChatOpenAI(
-    model_name="gpt-5.2",
+    model_name="gpt-5.6",
     max_tokens=100,
     temperature=0
 )
 
 # 使用更便宜的模型处理简单任务
-cheap_llm = ChatOpenAI(model_name="gpt-5-mini")
+cheap_llm = ChatOpenAI(model_name="gpt-5.6-luna")
 
 # 通过 with_fallbacks 实现成本分级
 chain = prompt | cheap_llm.with_fallbacks([llm]) | StrOutputParser()
@@ -719,7 +721,7 @@ vectorstore = FAISS.from_documents(chunks, embeddings)
 retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 
 # 4. 构建 RAG 链
-llm = ChatOpenAI(model_name="gpt-5.2")
+llm = ChatOpenAI(model_name="gpt-5.6")
 
 prompt = ChatPromptTemplate.from_messages([
     ("system", "你是一个文档问答助手。根据以下上下文回答问题，如果不确定请说明。\n\n{context}"),
@@ -758,7 +760,7 @@ def run_python(code: str) -> str:
     return python_repl.run(code)
 
 # 创建代码助手 Agent
-llm = ChatOpenAI(model_name="gpt-5.2")
+llm = ChatOpenAI(model_name="gpt-5.6")
 code_agent = create_react_agent(
     llm,
     tools=[run_python],
@@ -794,7 +796,8 @@ langchain-community → 社区集成（向量数据库、文档加载器等）
 - [DeepLearning.AI - LangChain for LLM Application Development](https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/) — LangChain入门（免费）
 - [freeCodeCamp - LangChain Tutorial](https://www.youtube.com/watch?v=lG7Uxts9SXs) — LangChain完整教程
 
-<!-- version-check: LangChain 1.2.18, LangGraph 1.1.9, checked 2026-05-21 -->
+<!-- version-check: LangChain 1.3.12（当前最新稳定版）, LangGraph 1.2.8, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: LangChain 1.2.18 → 1.3.12，LangGraph 1.1.9 → 1.2.8（均为同一 1.x LTS 主线内的次要版本升级，无 Breaking Change） -->
 
 > 🔄 更新于 2026-05-21
 
@@ -802,7 +805,7 @@ langchain-community → 社区集成（向量数据库、文档加载器等）
 
 ### 13.1 LangChain 1.0 正式发布
 
-LangChain 和 LangGraph 在 2025 年底同时发布了 **1.0 正式版**，标志着从实验性框架到生产级工具的转变。当前稳定版为 **1.2.x**，1.3.0 alpha 已在测试中。
+LangChain 和 LangGraph 在 2025 年底同时发布了 **1.0 正式版**，标志着从实验性框架到生产级工具的转变。当前稳定版为 **1.3.x**（1.3.0 已于 2026-05-12 正式发布，取代此前的 alpha 阶段）。
 
 核心变化：
 - **聚焦 Agent 循环**：langchain 核心包专注于 Agent 构建
@@ -814,11 +817,11 @@ LangChain 和 LangGraph 在 2025 年底同时发布了 **1.0 正式版**，标�
 
 ```bash
 # 2026 年推荐安装方式
-uv add langchain              # 核心包（1.2.x）
+uv add langchain              # 核心包（1.3.x）
 uv add langchain-openai       # OpenAI 集成
 uv add langchain-anthropic    # Anthropic 集成
 uv add langchain-community    # 社区集成
-uv add langgraph              # Agent 工作流编排（1.x）
+uv add langgraph              # Agent 工作流编排（1.2.x）
 ```
 
 ### 13.3 新版 Agent 创建方式
@@ -834,7 +837,7 @@ def search(query: str) -> str:
     return f"搜索结果: {query}"
 
 # 1.x 新版 create_agent API
-llm = ChatOpenAI(model="gpt-5.2")
+llm = ChatOpenAI(model="gpt-5.6")
 agent = create_agent(
     llm=llm,
     tools=[search],
@@ -864,7 +867,7 @@ LangSmith 从可观测性平台升级为 **Agent 管理平台**（2026-03 更名
 
 LangChain 在 **Interrupt 2026 大会**（2026-05-13/14 旧金山，1000+ 开发者参加）期间发布了一系列重要更新，标志着 LangChain 从"框架"全面转向"Agent 平台"。来源：[Everything we shipped at Interrupt](https://www.langchain.com/blog/interrupt-2026-overview)
 
-### 14.1 LangChain 1.2.18（2026-05-13）
+### 14.1 LangChain 1.2.18（2026-05-13，历史版本，现已升级到 1.3.12）
 
 ```bash
 # Interrupt 2026 同步发布的版本

@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Backstage 1.51, Port 2024, Cortex, OpsLevel, AIContext RFC, checked 2026-05-31 -->
+<!-- version-check: Backstage 1.52.0 (2026-06-16, 1.53.0-next 预发布中), Port 2024, Cortex, OpsLevel, AIContext RFC, checked 2026-07-10 -->
 <!-- 修复于 2026-05-31: Backstage 1.50 → 1.51（2026-05 稳定发布） -->
 
 ## 1. Portal 的核心价值
@@ -392,6 +392,37 @@ v1.51.0 关键变化
 来源：[Backstage v1.51.0 Release Notes](https://backstage.io/docs/releases/v1.51.0)、[Spotify for Backstage Release Notes](https://backstage.spotify.com/release-notes/)
 
 升级提示：v1.51 延续 New Frontend System 默认化的方向（v1.49 起），仍在用旧 Frontend System 的应用建议参考官方迁移指南逐步切换。`BackendStartupResult` 是新增返回值，不影响现有 `Backend.start()` 调用，属于向后兼容的增强。
+
+### 10.6 Backstage 1.52（2026-06-16）—— 两个 Breaking Change
+
+> 更新于 2026-07-10
+
+<!-- version-check: Backstage 1.52.0 (2026-06-16), 1.53.0-next.2 (2026-07-07), checked 2026-07-10 -->
+
+**v1.52.0**（2026-06-16）带来两个需要主动处理的 Breaking Change，升级前务必检查：
+
+```
+Breaking Change 1：discovery API 默认值变更
+├─ 默认 discovery API 改为 FrontendHostDiscovery
+├─ 会遵循 discovery.endpoints 里每个插件的 endpoint override
+└─ 如果内部/外部流量走不同 URL，必须在配置里加 target.internal 字段
+    否则所有流量都会被路由到外部 target
+
+Breaking Change 2：移除 immediate-mode catalog stitching
+└─ 检查 catalog 配置，删除 stitchingStrategy: 'immediate'（如果还在用）
+```
+
+新增实验特性 **`@backstage/connections`**（BEP-0014）：插件声明和访问外部服务凭据的集中式系统，运行时会阻止插件访问未声明的连接类型——相当于给插件的"出网权限"加了一层显式声明 + 强制校验。
+
+截至 2026-07-07，**v1.53.0-next.2** 处于 next 预发布阶段，稳定版尚未发布。
+
+来源：[Backstage Weekly #138 - v1.52.0](https://roadie.io/backstage-weekly/138-v1-52-0-connections-ai-squads/)、[v1.53.0-next.2 Release](https://github.com/backstage/backstage/releases/tag/v1.53.0-next.2)
+
+### 10.7 行业争论：Backstage 是否已经"过时"？
+
+一篇引发讨论的文章 *"Backstage Is Dead. The Platform Engineering World Moved On"* 提出：Backstage 的架构以 UI 为中心，一切服务于门户界面；而"Agentic Engineering Platform"应该以 **context lake**（灵活数据模型 + 关系图 + 策略引擎）为中心，UI 只是众多消费者之一，Agent 原生接口是另一个一等公民。该文章也承认 Backstage 本身在往这个方向演进——v1.40 的 Actions Registry + `@backstage/plugin-mcp-actions-backend` 已经能把插件 action 暴露为 MCP 工具，供 Cursor/Claude 里的 Agent 发现和调用。
+
+**给团队的建议**：不必因为这类"XX已死"式标题恐慌性迁移，但选型 IDP 时应额外评估：catalog 是否能通过实时 API 暴露给 Agent 消费、MCP 是否是一等接口（而非实验性插件）、Agent 身份是否能纳入现有权限模型。来源：[Backstage Is Dead - port.io](https://www.port.io/blog/backstage-is-dead)
 
 ## 📖 参考资料
 

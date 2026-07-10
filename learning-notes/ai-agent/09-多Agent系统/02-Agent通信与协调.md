@@ -121,13 +121,14 @@ final = await resolver.resolve_by_synthesis({
 
 ## 5. A2A 协议实践
 
-> 🔄 更新于 2026-04-18
+> 🔄 更新于 2026-07-10
 
-<!-- version-check: A2A v1.0 (Draft), spec v0.3.0, 150+ 组织, Linux Foundation 托管, checked 2026-04-18 -->
+<!-- version-check: A2A v1.0.0（正式稳定版，已取代 v0.3.0 Draft）, 150+ 组织, Linux Foundation 托管, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: A2A 已从 v0.3.0 Draft 正式升级到 v1.0.0 稳定版；JSON-RPC 方法名从旧版 tasks/send、tasks/get 更新为 v1.0 规范方法名 SendMessage、GetTask -->
 
 ```python
 # Google A2A 协议：Agent 间标准化通信
-# A2A v1.0 稳定版，Linux Foundation 托管，150+ 组织支持
+# A2A v1.0.0 稳定版，Linux Foundation 托管，150+ 组织支持
 import httpx
 
 # Agent Card（能力描述）
@@ -148,33 +149,34 @@ agent_card = {
     },
 }
 
-# 发送任务
+# 发送任务（v1.0 JSON-RPC 绑定：方法名为 SendMessage，旧版别名 message/send、tasks/send 已废弃）
 async def send_a2a_task(agent_url: str, task: dict):
     async with httpx.AsyncClient() as client:
-        # 创建任务
         response = await client.post(
-            f"{agent_url}/tasks",
+            agent_url,  # v1.0 JSON-RPC 绑定为单一端点，不再是 /tasks
             json={
                 "jsonrpc": "2.0",
-                "method": "tasks/send",
+                "id": "req-001",
+                "method": "SendMessage",
                 "params": {
                     "message": {
                         "role": "user",
-                        "parts": [{"type": "text", "text": task["description"]}],
+                        "parts": [{"kind": "text", "text": task["description"]}],
                     }
                 },
             },
         )
         return response.json()
 
-# 查询任务状态
+# 查询任务状态（v1.0 方法名为 GetTask，旧版别名 tasks/get 已废弃）
 async def check_task_status(agent_url: str, task_id: str):
     async with httpx.AsyncClient() as client:
         response = await client.post(
-            f"{agent_url}/tasks",
+            agent_url,
             json={
                 "jsonrpc": "2.0",
-                "method": "tasks/get",
+                "id": "req-002",
+                "method": "GetTask",
                 "params": {"id": task_id},
             },
         )
@@ -182,8 +184,8 @@ async def check_task_status(agent_url: str, task_id: str):
 ```
 
 > **A2A 2026 生态现状**：
-> - **v1.0 稳定版**：Linux Foundation 托管，150+ 组织支持（AWS、Cisco、Microsoft、Salesforce、SAP 等）（[来源](https://letsdatascience.com/blog/a2a-protocol-agent-to-agent)）
-> - **spec v0.3.0**：新增 gRPC 支持、签名安全卡（Signed Security Cards）、扩展 Python SDK（[来源](https://reptile.haus/journal/a2a-protocol-agent-to-agent-communication-ai-strategy-2026/)）
+> - **v1.0.0 正式稳定版**（已取代此前 v0.3.0 Draft）：Linux Foundation 托管，150+ 组织支持（AWS、Cisco、Microsoft、Salesforce、SAP 等）（[来源](https://letsdatascience.com/blog/a2a-protocol-agent-to-agent)）
+> - **三种协议绑定**：JSON-RPC 2.0（方法名如 `SendMessage`/`GetTask`）、gRPC、HTTP+JSON/REST（如 `POST /message:send`），能力在 Agent Card 的 `supportedInterfaces[]` 中声明
 > - **官方 SDK**：Python、Go、JavaScript、Java、.NET 五种语言
 > - **MCP + A2A 互补**：MCP 处理 Agent→工具连接，A2A 处理 Agent→Agent 委派和跨组织协作
 > - **JetBrains Central**（2026-03）：首个以多 Agent 互操作为核心的编排平台

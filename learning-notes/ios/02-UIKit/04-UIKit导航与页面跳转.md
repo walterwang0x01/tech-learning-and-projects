@@ -48,6 +48,25 @@ class MainTabBarController: UITabBarController {
 }
 ```
 
+> 更新于 2026-07-10
+
+<!-- version-check: UITabBarController sidebar API + UIBarMinimizeBehavior (WWDC26, 2027 releases), checked 2026-07-10 -->
+
+**WWDC26 新增**：`UITabBarController` 支持在合适场景（横屏、外接显示器、iPad）自动切换为侧边栏形式，无需维护两套控件：
+
+```swift
+// 让 Tab Bar 在空间充足时自动切换为 Sidebar 形式
+tabBarController.sidebar.preferredPlacement = .automatic
+```
+
+配套的导航栏收起行为，让导航栏在滚动时可以滑出（呼应 SwiftUI 的 `toolbarMinimizeBehavior`）：
+
+```swift
+navigationController?.navigationBar.barMinimizationBehavior = .automatic  // UIBarMinimizeBehavior
+```
+
+来源：[What's New in UIKit in iOS 27 - Kyle Howells](https://ikyle.me/blog/2026/whats-new-in-uikit-ios-27)
+
 ## 3. Present / Dismiss
 
 ```swift

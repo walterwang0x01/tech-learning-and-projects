@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: client-go v0.36 (K8s 1.36), Kubernetes 1.36.1 (patch 2026-05-22), controller-runtime v0.22+ (latest v0.23.x), checked 2026-05-28 -->
+<!-- version-check: client-go v0.36 (K8s 1.36, 生产) / v0.37.0-alpha (K8s 1.37, 预览), Kubernetes 1.36.1 (patch 2026-05-22), K8s 1.37 GA 计划 2026-08-26, controller-runtime v0.22+ (latest v0.23.x), checked 2026-07-10 -->
 
 ## 1. 为什么要用 client-go
 
@@ -410,6 +410,29 @@ controller-gen crd paths=./api/... output:crd:dir=./config/crd
 ```
 
 来源：[K8s 1.36 Declarative Validation GA](https://kubernetes.io/blog/2026/05/05/kubernetes-v1-36-declarative-validation-ga/)、[K8s 1.36 Release Notes](https://kubernetes.io/blog/2026/04/22/kubernetes-v1-36-release/)、[ScaleOps K8s 1.36 摘要](https://scaleops.com/blog/kubernetes-1-36/)
+
+### 9.5 K8s 1.37 Alpha 进展（2026-07 更新）
+
+> 🔄 更新于 2026-07-10
+
+Kubernetes v1.37 发布周期已于 **2026-05-18** 启动，节奏：
+
+| 里程碑 | 日期 |
+| ---- | ---- |
+| Enhancements Freeze | 2026-06-17 |
+| Production Readiness Freeze | 2026-06-10 |
+| Code Freeze / Test Freeze | 2026-07-22 ~ 23 |
+| Docs Freeze | 2026-08-06 |
+| **v1.37.0 GA** | **2026-08-26** |
+
+对应的 `client-go` 已发布 `v0.37.0-alpha.x` 预发布版，可用于提前验证 CRD/Informer 兼容性：
+
+```bash
+# 仅用于 alpha 阶段兼容性验证，不要用于生产依赖
+go get k8s.io/client-go@v0.37.0-alpha.3
+```
+
+生产 Operator 目前应继续锁定 `client-go v0.36.x` + `controller-runtime v0.22.x`，等 8 月底 1.37 GA 及 client-go v0.37.0 稳定版发布后再规划升级窗口。来源：[Kubernetes v1.37 Release Cycle Sneak Peek](https://groups.google.com/a/kubernetes.io/g/dev/c/xKsK4YGjw6M)、[sig-release release-1.37 schedule](https://github.com/kubernetes/sig-release/tree/master/releases/release-1.37)
 
 ## 10. 生产检查清单
 

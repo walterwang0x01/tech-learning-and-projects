@@ -2,7 +2,7 @@
 
 > Author: Walter Wang
 
-<!-- version-check: golangci-lint v2.12.2 (2026-05-06), goreleaser 2.5, delve 1.24, checked 2026-05-30 -->
+<!-- version-check: golangci-lint v2.12.2 (2026-05-06，近 30 天内无新版本), goreleaser 2.5, delve 1.24, checked 2026-07-10 -->
 
 ## 1. 必装工具（2026 年推荐）
 
@@ -47,6 +47,8 @@ go install github.com/air-verse/air@latest
 > | 链接器 `gomodguard` | v1 版本 | 推荐迁移到 `gomodguard_v2` |
 >
 > 迁移命令：`golangci-lint migrate`（自动转换 v1 配置）。
+>
+> 更新于 2026-07-10：复查确认 **v2.12.2（2026-05-06）仍是当前最新稳定版**，近 30 天官方未发布新的 minor/patch，上述迁移建议保持有效（[golangci-lint Changelog](https://golangci-lint.run/docs/product/changelog/)）。
 >
 > 参考：[golangci-lint Migration Guide](https://golangci-lint.run/product/migration-guide/)、[Changelog v2.x](https://golangci-lint.run/docs/product/changelog/)
 
