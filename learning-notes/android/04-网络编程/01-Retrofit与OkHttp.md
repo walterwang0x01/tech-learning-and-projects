@@ -147,11 +147,12 @@ val client = OkHttpClient.Builder()
 
 ## 6. OkHttp 5.x 与 Retrofit 3.0 版本演进
 
-<!-- version-check: OkHttp 5.3.2, Retrofit 3.0.0, checked 2026-04-22 -->
+<!-- version-check: OkHttp 5.4.0, Retrofit 3.0.0, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: OkHttp 5.3.2 → 5.4.0（2026-06-08 发布，新增拦截器可覆盖 client 配置能力） -->
 
 > 🔄 更新于 2026-04-22
 
-OkHttp 5.0 于 2025-07-02 发布首个稳定版，当前最新为 5.3.2（2025-11-18）。Retrofit 3.0 同步升级，采用 Kotlin 原生设计。来源：[OkHttp Changelog](https://square.github.io/okhttp/changelogs/changelog/)
+OkHttp 5.0 于 2025-07-02 发布首个稳定版，当前最新为 5.4.0（2026-06-08）。Retrofit 3.0 同步升级，采用 Kotlin 原生设计。来源：[OkHttp Changelog](https://square.github.io/okhttp/changelogs/changelog/)
 
 ### 6.1 OkHttp 5.x 核心变化
 
@@ -205,8 +206,8 @@ val curlCommand = request.toCurl()
 dependencies {
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-kotlinx-serialization:3.0.0")
-    implementation("com.squareup.okhttp3:okhttp:5.3.2")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.3.2")
+    implementation("com.squareup.okhttp3:okhttp:5.4.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.4.0")
 }
 
 // 配置（与 2.x 基本兼容）
@@ -222,7 +223,7 @@ val retrofit = Retrofit.Builder()
 ```
 场景                    推荐版本
 ──────────────────────────────────────────
-新项目                  OkHttp 5.3.x + Retrofit 3.0
+新项目                  OkHttp 5.4.x + Retrofit 3.0
 已有项目（OkHttp 4.x）  按需升级，API 基本兼容
 需要 Zstd 压缩          OkHttp 5.2+
 需要 JPMS              OkHttp 5.2+

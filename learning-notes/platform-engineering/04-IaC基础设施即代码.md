@@ -2,8 +2,9 @@
 
 > Author: Walter Wang
 
-<!-- version-check: Terraform 1.11, OpenTofu 1.11, Pulumi 3.150, Crossplane 2.3, checked 2026-05-31 -->
+<!-- version-check: Terraform 1.15.7, OpenTofu 1.12.3, Pulumi 3.249.0, Crossplane 2.3, checked 2026-07-10 -->
 <!-- 修复于 2026-05-31: Crossplane 2.x → 2.3（2.2 季度发布后续到 2.3），补充 v2 升级路径 -->
+<!-- 修复于 2026-07-10: Terraform 1.11 → 1.15.7、OpenTofu 1.11 → 1.12.3、Pulumi 3.150 → 3.249.0（均为常规迭代升级，正文命令/HCL 语法示例无需改动） -->
 
 ## 1. 为什么 IaC
 

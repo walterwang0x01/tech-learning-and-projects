@@ -289,9 +289,7 @@ Grafana 的 Explore 和 Correlations 功能专门优化这个跳转链路。
 
 > 🔄 更新于 2026-07-08：**Loki 4.0 截至 2026-07 尚未正式发布**，生产环境仍以 **3.7.x stable** 为主；4.0 方向是 Kafka 摄取 + DataObject 列存 + 新查询引擎，且 **SSD 模式将在 4.0 移除**。
 
-> 🔄 更新于 2026-05-20
-
-<!-- version-check: Loki 4.0 architecture (Kafka-backed, DataObject columnar storage), Grafana 13 GrafanaCON 2026 (2026-04-21 Barcelona), checked 2026-05-20 -->
+<!-- 修复于 2026-07-10: 删除本节遗留的旧 version-check（checked 2026-05-20），内容已由上方 2026-07-08 的更新覆盖，避免同一文件出现两个矛盾的核对日期 -->
 
 GrafanaCON 2026（2026-04-21 巴塞罗那）发布的 Grafana 13 把 Loki 推向 4.0 架构方向，**核心变化是从单层"标签索引 + 对象存储"演进为"Kafka 摄取 + 列式 DataObject 存储 + 重写查询引擎"**。这是 Loki 自 3.0（2024）以来最大的架构重写。来源：[Inside Loki's new architecture for faster logging at petabyte scale](https://www.grafana.com/events/grafanacon/agenda/loki-petabyte-scale-logging-architecture/)、[InfoQ: Grafana Rearchitects Loki with Kafka and Ships a CLI](https://www.infoq.com/news/2026/04/grafana-loki-ai-agents/)、[The Road to Loki 4.0 — Loki Community Call June 2025](https://nicolevanderhoeven.com/blog/20250624-lcc-the-road-to-loki-4_0/)
 

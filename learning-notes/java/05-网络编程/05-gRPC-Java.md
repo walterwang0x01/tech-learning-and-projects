@@ -318,13 +318,14 @@ d:/TestCode/protoc.exe --plugin=protoc-gen-grpc-java=d:/TestCode/protoc-grpc.exe
 
 ## 2. gRPC-Java 2026 版本演进
 
-> 🔄 更新于 2026-05-02
+> 🔄 更新于 2026-07-10
 
-<!-- version-check: gRPC-Java 1.80.0, Netty 4.2.12, Spring gRPC 1.0.x, Protobuf 29.x, checked 2026-05-02 -->
+<!-- version-check: gRPC-Java 1.82.1, Netty 4.2.16 / 4.1.136（安全修复版）, Spring gRPC 1.0.x, Protobuf 29.x, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10（P0，安全相关）: gRPC-Java 1.78.0/1.80.0（文本与代码版本号原不一致）统一更新为最新稳定版 1.82.1；Netty 4.1.132/4.2.12 存在已知 CVE，升级到修复版 4.1.136/4.2.16 -->
 
 ### 2.1 gRPC-Java 版本跃升
 
-gRPC-Java 当前稳定版为 **1.80.0**（Javadoc 已发布），相比本文档中使用的 1.22.1 有巨大变化。来源：[gRPC-Java API](https://grpc.github.io/grpc-java/javadoc/)
+gRPC-Java 当前稳定版为 **1.82.1**（2026-06-23 发布），相比本文档中使用的 1.22.1 有巨大变化。来源：[gRPC-Java Releases](https://github.com/grpc/grpc-java/releases)
 
 **关键版本里程碑：**
 
@@ -333,15 +334,15 @@ gRPC-Java 当前稳定版为 **1.80.0**（Javadoc 已发布），相比本文档
 | 1.22→1.40 | xDS 负载均衡、Binder Transport（Android） |
 | 1.40→1.55 | OpenTelemetry 集成、Rls（路由查找服务） |
 | 1.55→1.70 | Java 11 最低要求、Protobuf 4.x 支持 |
-| 1.70→1.80 | Java 17 推荐、Virtual Threads 支持、性能优化 |
+| 1.70→1.82 | Java 17 推荐、Virtual Threads 支持、性能优化 |
 
 **2026 年推荐依赖版本：**
 
 ```xml
 <properties>
-    <grpc.version>1.78.0</grpc.version>
+    <grpc.version>1.82.1</grpc.version>
     <protobuf.version>4.29.3</protobuf.version>
-    <netty.version>4.1.132.Final</netty.version>
+    <netty.version>4.1.136.Final</netty.version>
 </properties>
 
 <dependencies>
@@ -369,9 +370,11 @@ Netty 当前有两个活跃分支。来源：[Netty Downloads](https://netty.io/
 
 | 分支 | 最新版本 | 状态 | JDK 要求 |
 |------|---------|------|---------|
-| 4.1.x | 4.1.132.Final（2026-03-24） | 稳定，推荐 | JDK 6+ |
-| 4.2.x | 4.2.12.Final（2026-03-25） | 稳定，推荐 | JDK 11+ |
+| 4.1.x | 4.1.136.Final（2026-07-08，安全修复版） | 稳定，推荐 | JDK 6+ |
+| 4.2.x | 4.2.16.Final（2026-07-07，安全修复版） | 稳定，推荐 | JDK 11+ |
 | 5.0.x | 5.0.0.Alpha5 | 开发中 | JDK 11+ |
+
+> ⚠️ 4.1.132.Final / 4.2.12.Final 及更早版本存在已披露安全漏洞，生产环境应升级到上表最新修复版本。
 
 **Netty 4.2 核心变化：**
 - 最低 JDK 11（4.1.x 仍支持 JDK 6）

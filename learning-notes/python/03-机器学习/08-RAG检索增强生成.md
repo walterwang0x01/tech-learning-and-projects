@@ -2,7 +2,8 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
-<!-- version-check: LlamaIndex 0.12.x, text-embedding-3-small, checked 2026-05-21 -->
+<!-- version-check: LlamaIndex 0.14.x（当前最新 0.14.23）, text-embedding-3-small, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: LlamaIndex 0.12.x → 0.14.x（核心 API 用法无变化） -->
 
 > 从 private-notes 提取的技术学习笔记
 

@@ -2,6 +2,9 @@
 ‍‍​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌‌​‌​​​​​​​​​​​‌‌​​‌​‌​​​​​​​​​‌‌‌​​‌​​​​​​​​​​​‌​​​​​​​​​​​​​​‌​‌​‌‌‌​​​​​​​​​‌‌​​​​‌​​​​​​​​​‌‌​‌‌‌​​​​​​​​​​‌‌​​‌‌‌‍‍
 > Author: Walter Wang
 
+<!-- 修复于 2026-07-10: runs-on 从 macos-14（2026-07-06 起开始弃用，2026-11-02 起完全不支持）更新为当前 GA 的 macos-26；Xcode 从 15.2 更新为 macos-26 镜像默认版本 26.4.1（即将于 2026-07-21 升级为 26.6） -->
+<!-- version-check: GitHub Actions macos-26 (GA since 2026-02-26, macos-latest 已迁移至此), Xcode 26.4.1 default (→26.6 on 2026-07-21), checked 2026-07-10 -->
+
 ## 1. Fastlane 基础配置
 
 ```ruby
@@ -74,12 +77,12 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: macos-14
+    runs-on: macos-26  # macos-14 已于 2026-07-06 起弃用（2026-11-02 起完全不支持）
     steps:
       - uses: actions/checkout@v4
 
       - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+        run: sudo xcode-select -s /Applications/Xcode_26.4.app  # macos-26 镜像默认 Xcode 版本，2026-07-21 起默认升级为 26.6
 
       - name: Install dependencies
         run: |
@@ -116,7 +119,7 @@ jobs:
 ```yaml
   deploy-testflight:
     needs: build-and-test
-    runs-on: macos-14
+    runs-on: macos-26
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4

@@ -4,7 +4,8 @@
 
 ## 1. Zep：时序知识图谱记忆
 
-<!-- version-check: Zep Cloud V3 SDK + Graphiti v0.29.x OSS, checked 2026-05-13 -->
+<!-- version-check: Zep Cloud V3 SDK + Graphiti v0.29.x OSS, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: 3 处 gpt-5.2 已过时，更新为 gpt-5.6（GPT-5.6 已于 2026-07-09 GA） -->
 
 Zep 为 AI Agent 提供基于时序知识图谱的记忆服务，自动从对话中提取事实、构建实体图谱、追踪时间变化。核心引擎 Graphiti 开源。
 
@@ -102,7 +103,7 @@ memory = ZepMemory(
 )
 
 chain = ConversationChain(
-    llm=ChatOpenAI(model="gpt-5.2"),
+    llm=ChatOpenAI(model="gpt-5.6"),
     memory=memory,
 )
 
@@ -131,7 +132,7 @@ from langmem import create_memory_store_manager
 
 # 创建记忆管理器
 memory_manager = create_memory_store_manager(
-    "openai:gpt-5.2",
+    "openai:gpt-5.6",
     memory_types=[
         {
             "name": "semantic",
@@ -164,7 +165,7 @@ store = InMemoryStore()
 
 # 方式1：后台自动提取记忆
 memory_manager = create_memory_store_manager(
-    "openai:gpt-5.2",
+    "openai:gpt-5.6",
     namespace=("memories", "{user_id}"),
 )
 

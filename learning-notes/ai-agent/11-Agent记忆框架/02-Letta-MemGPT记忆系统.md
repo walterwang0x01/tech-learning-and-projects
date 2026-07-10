@@ -4,7 +4,8 @@
 
 ## 1. 概述
 
-<!-- version-check: Letta SDK v1.0+, checked 2026-05-13 -->
+<!-- version-check: Letta SDK v1.0+, checked 2026-07-10 -->
+<!-- 修复于 2026-07-10: 全文 4 处 gpt-5.2 已过时，更新为 gpt-5.6（GPT-5.6 已于 2026-07-09 GA） -->
 
 Letta（前身 MemGPT）是 UC Berkeley 研究团队开发的有状态 Agent 运行时，采用操作系统启发的分层记忆架构，让 Agent 能自主管理自己的记忆。GitHub 21K+ Stars。
 
@@ -82,7 +83,7 @@ client = Letta(base_url="http://localhost:8283")
 # 创建有状态 Agent
 agent = client.agents.create(
     name="personal-assistant",
-    model="openai/gpt-5.2",
+    model="openai/gpt-5.6",
     embedding="openai/text-embedding-3-small",
     block_ids=[],  # 或传入已创建的 block ID
     include_base_tools=True,
@@ -193,7 +194,7 @@ tool = client.tools.create(func=query_database)
 # 创建带自定义工具的 Agent
 agent = client.agents.create(
     name="db-assistant",
-    model="openai/gpt-5.2",
+    model="openai/gpt-5.6",
     tool_ids=[tool.id],
     include_base_tools=True,
 )
@@ -236,7 +237,7 @@ Letta ADE 提供可视化界面：
 # 创建多个专业 Agent（SDK v1.0 API）
 researcher = client.agents.create(
     name="researcher",
-    model="openai/gpt-5.2",
+    model="openai/gpt-5.6",
     include_base_tools=True,
 )
 # 附加记忆块
@@ -247,7 +248,7 @@ client.agents.blocks.attach(r_shared.id, agent_id=researcher.id)
 
 writer = client.agents.create(
     name="writer",
-    model="openai/gpt-5.2",
+    model="openai/gpt-5.6",
     include_base_tools=True,
 )
 w_persona = client.blocks.create(label="persona", value="你是技术作者，负责撰写报告")

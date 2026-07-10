@@ -5,6 +5,9 @@
 > AI Agent 系统的测试远比传统软件复杂——输出不确定、推理链路长、工具调用多变、每次测试都在烧钱。
 > 本文从测试金字塔出发，覆盖单元测试到生产监控的完整实践，所有代码示例均基于 Python + pytest。
 
+<!-- 修复于 2026-07-10: 全文示例统一将 gpt-5.2 → gpt-5.6、gpt-5-mini → gpt-5.6-luna（GPT-5.6 家族已于 2026-07-09 GA，与其他文档保持跨文档模型 ID 一致），共 18 处 -->
+<!-- version-check: gpt-5.6 / gpt-5.6-luna model IDs, checked 2026-07-10 -->
+
 ---
 
 ## 1. Agent 测试的独特挑战
@@ -326,8 +329,8 @@ class ModelPricing:
 PRICING = {
     "claude-sonnet-4": ModelPricing(0.003, 0.015, 0.0003),
     "claude-haiku-3.5": ModelPricing(0.0008, 0.004, 0.00008),
-    "gpt-5.2": ModelPricing(0.00175, 0.014, 0.000875),
-    "gpt-5-mini": ModelPricing(0.00025, 0.002, 0.000125),
+    "gpt-5.6": ModelPricing(0.00175, 0.014, 0.000875),
+    "gpt-5.6-luna": ModelPricing(0.00025, 0.002, 0.000125),
 }
 
 def calculate_cost(
@@ -354,7 +357,7 @@ from billing.cost_calculator import calculate_cost
 class TestCostCalculator:
 
     def test_basic_cost(self):
-        cost = calculate_cost("gpt-5.2", input_tokens=1000, output_tokens=500)
+        cost = calculate_cost("gpt-5.6", input_tokens=1000, output_tokens=500)
         assert cost == pytest.approx(0.00875, abs=1e-6)
 
     def test_cached_tokens_reduce_cost(self):
@@ -369,7 +372,7 @@ class TestCostCalculator:
             calculate_cost("gpt-5-ultra", 1000, 500)
 
     def test_zero_tokens(self):
-        cost = calculate_cost("gpt-5-mini", 0, 0)
+        cost = calculate_cost("gpt-5.6-luna", 0, 0)
         assert cost == 0.0
 ```
 
@@ -642,7 +645,7 @@ class TestIntegrationWithRealLLM:
     async def test_data_analysis_task(self, mock_database):
         """真实 LLM + Mock 数据库：数据分析任务"""
         agent = AgentExecutor(
-            model="gpt-5-mini",  # 集成测试用便宜模型
+            model="gpt-5.6-luna",  # 集成测试用便宜模型
             tools={"db_query": mock_database.query},
         )
         result = await agent.run("查询销售数据并告诉我哪个产品卖得最好")
@@ -657,7 +660,7 @@ class TestIntegrationWithRealLLM:
     @pytest.mark.asyncio
     async def test_multi_turn_conversation(self):
         """测试多轮对话的上下文保持"""
-        agent = AgentExecutor(model="gpt-5-mini")
+        agent = AgentExecutor(model="gpt-5.6-luna")
 
         # 第一轮
         r1 = await agent.run("我叫张三，我是一名工程师")
@@ -673,7 +676,7 @@ class TestIntegrationWithRealLLM:
     async def test_tool_selection_accuracy(self, mock_database, mock_email_service):
         """验证 Agent 在复杂场景下选择正确的工具"""
         agent = AgentExecutor(
-            model="gpt-5-mini",
+            model="gpt-5.6-luna",
             tools={
                 "db_query": mock_database.query,
                 "send_email": mock_email_service.send,
@@ -717,7 +720,7 @@ async def assert_with_majority(
 @requires_api
 @pytest.mark.asyncio
 async def test_tool_routing_statistical():
-    agent = AgentExecutor(model="gpt-5-mini", tools=["search", "calculator"])
+    agent = AgentExecutor(model="gpt-5.6-luna", tools=["search", "calculator"])
 
     await assert_with_majority(
         agent_fn=agent.run,
@@ -1024,8 +1027,8 @@ EVAL_TASKS = [
 
 async def main():
     framework = EvalFramework(
-        agent_factory=lambda: create_agent(model="gpt-5-mini"),
-        judge_llm=create_judge_llm(model="gpt-5.2"),
+        agent_factory=lambda: create_agent(model="gpt-5.6-luna"),
+        judge_llm=create_judge_llm(model="gpt-5.6"),
     )
     results = await framework.run_suite(EVAL_TASKS, concurrency=2)
     print(json.dumps(results, ensure_ascii=False, indent=2))
@@ -1783,10 +1786,10 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
 模型分层策略：大部分测试用便宜模型，关键测试用强模型
 
   ┌─────────────────────────────────────┐
-  │  Tier 1: claude-haiku / gpt-5-mini  │  ← 80% 的测试
+  │  Tier 1: claude-haiku / gpt-5.6-luna  │  ← 80% 的测试
   │  成本: ~$0.001/次                    │
   ├─────────────────────────────────────┤
-  │  Tier 2: claude-sonnet / gpt-5.2    │  ← 15% 的测试
+  │  Tier 2: claude-sonnet / gpt-5.6    │  ← 15% 的测试
   │  成本: ~$0.01/次                     │
   ├─────────────────────────────────────┤
   │  Tier 3: claude-opus / o1           │  ← 5% 的测试（仅 nightly）
@@ -1798,8 +1801,8 @@ import os
 def get_test_model(tier: str = "fast") -> str:
     """根据测试层级选择模型"""
     models = {
-        "fast": os.getenv("TEST_MODEL_FAST", "gpt-5-mini"),
-        "standard": os.getenv("TEST_MODEL_STANDARD", "gpt-5.2"),
+        "fast": os.getenv("TEST_MODEL_FAST", "gpt-5.6-luna"),
+        "standard": os.getenv("TEST_MODEL_STANDARD", "gpt-5.6"),
         "premium": os.getenv("TEST_MODEL_PREMIUM", "claude-sonnet-4"),
     }
     return models.get(tier, models["fast"])
@@ -1900,7 +1903,7 @@ jobs:
       - name: Run integration tests (core only)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          TEST_MODEL_FAST: "gpt-5-mini"
+          TEST_MODEL_FAST: "gpt-5.6-luna"
           COST_BUDGET: ${{ env.PR_COST_BUDGET }}
         run: |
           pytest tests/integration/ -v \
@@ -1928,7 +1931,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          TEST_MODEL_STANDARD: "gpt-5.2"
+          TEST_MODEL_STANDARD: "gpt-5.6"
           TEST_MODEL_PREMIUM: "claude-sonnet-4"
         run: |
           python eval/run_eval.py \
@@ -2143,8 +2146,8 @@ class ProductionABTest:
     def __init__(self, variants: dict[str, dict]):
         """
         variants: {
-            "control": {"model": "gpt-5-mini", "prompt_version": "v1"},
-            "treatment": {"model": "gpt-5.2", "prompt_version": "v2"},
+            "control": {"model": "gpt-5.6-luna", "prompt_version": "v1"},
+            "treatment": {"model": "gpt-5.6", "prompt_version": "v2"},
         }
         """
         self.variants = variants

@@ -112,11 +112,31 @@ carthage update --platform iOS --use-xcframeworks
 推荐场景        老项目兼容       新项目首选        需要预编译
 ```
 
+## 5. SPM 本地包开发
+
+```swift
+// 项目中创建本地包用于模块化
+// File → New → Package
+
+// 主项目引用本地包
+// 将包文件夹拖入 Xcode 项目
+// Target → General → Frameworks → 添加本地包
+
+// 本地包之间的依赖
+.target(
+    name: "Feature",
+    dependencies: [
+        .product(name: "Core", package: "CoreModule"),
+    ]
+)
+```
+
 ## 6. Swift 6.3 与 SPM 新特性
 
-<!-- version-check: Swift 6.3, SPM with Swift Build preview, checked 2026-04-22 -->
+<!-- 修复于 2026-07-10: 补充 Swift 6.4 当前状态（WWDC26 已发布但仍是 Xcode 27 beta，未出正式 toolchain），修正本节与"5. SPM 本地包开发"顺序颠倒问题（原文件中 6 排在 5 之前） -->
+<!-- version-check: Swift 6.3.3 (stable, 2026-06-30), Swift 6.4 (WWDC26 announced, Xcode 27 beta, 尚未出正式 toolchain release), SPM with Swift Build preview, checked 2026-07-10 -->
 
-> 🔄 更新于 2026-04-22
+> 🔄 更新于 2026-07-10：Swift 6.4 已在 WWDC26（2026-06-09）随 Xcode 27 beta 发布预览（async defer、更少并发样板代码、URL 解析提速 4x 等），但截至 2026-07 尚未在 swift.org 出正式 toolchain release，服务端 Swift / Linux CI 场景仍应使用 **Swift 6.3.3**（stable，2026-06-30）。App 开发可用 Xcode 27 beta 提前验证 Swift 6.4。
 
 Swift 6.3（2026-03-24）为 SPM 带来了重要改进，包括 Swift Build 集成预览和预编译 Swift Syntax 支持。同时 Swift 6.3 新增 `@c` 属性实现 Swift→C 互操作，以及官方 Android SDK。来源：[Swift 6.3 Released](https://www.swift.org/blog/swift-6.3-released/)
 
@@ -216,22 +236,3 @@ Android 支持        ❌                 ✅ 官方 SDK
 ```
 
 > **建议**：新项目使用 `swift-tools-version: 6.3`，利用预编译 swift-syntax 加速宏编译。Swift Build 集成仍在预览阶段，生产项目暂时使用默认构建系统。
-
-## 5. SPM 本地包开发
-
-```swift
-// 项目中创建本地包用于模块化
-// File → New → Package
-
-// 主项目引用本地包
-// 将包文件夹拖入 Xcode 项目
-// Target → General → Frameworks → 添加本地包
-
-// 本地包之间的依赖
-.target(
-    name: "Feature",
-    dependencies: [
-        .product(name: "Core", package: "CoreModule"),
-    ]
-)
-```

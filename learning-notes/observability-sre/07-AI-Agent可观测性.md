@@ -3,7 +3,8 @@
 > Author: Walter Wang
 
 <!-- 修复于 2026-05-22: LangSmith / LangSmith Fleet / LangSmith Engine 定位区分清晰 -->
-<!-- version-check: LangSmith (observability), LangSmith Fleet (Agent management, 2026-03), LangSmith Engine, Langfuse platform v3.206 / Python SDK v4.12, Phoenix 6.x, OTel GenAI semconv, checked 2026-07-08 -->
+<!-- 修复于 2026-07-10: 全文示例统一将 gpt-5.5 → gpt-5.6（GPT-5.6 家族已于 2026-07-09 GA，与其他文档保持跨文档模型 ID 一致） -->
+<!-- version-check: LangSmith (observability), LangSmith Fleet (Agent management, 2026-03), LangSmith Engine, Langfuse platform v3.206 / Python SDK v4.12, Phoenix 6.x, OTel GenAI semconv, gpt-5.6, checked 2026-07-10 -->
 
 ## 1. 为什么 LLM 系统需要独立的可观测性
 
@@ -82,7 +83,7 @@ LLM 观测三层：
 核心属性（Span Attributes）：
 
 gen_ai.system              openai / anthropic / google / ...
-gen_ai.request.model       gpt-5.5 / claude-opus-4-7 / gemini-3-flash
+gen_ai.request.model       gpt-5.6 / claude-opus-4-7 / gemini-3-flash
 gen_ai.request.temperature 0.0 - 2.0
 gen_ai.request.max_tokens  1024
 gen_ai.request.top_p       0.9
@@ -108,9 +109,9 @@ from opentelemetry import trace
 
 tracer = trace.get_tracer("my-agent")
 
-with tracer.start_as_current_span("chat gpt-5.5") as span:
+with tracer.start_as_current_span("chat gpt-5.6") as span:
     span.set_attribute("gen_ai.system", "openai")
-    span.set_attribute("gen_ai.request.model", "gpt-5.5")
+    span.set_attribute("gen_ai.request.model", "gpt-5.6")
     span.set_attribute("gen_ai.request.temperature", 0.7)
     span.set_attribute("gen_ai.operation.name", "chat")
 
@@ -120,7 +121,7 @@ with tracer.start_as_current_span("chat gpt-5.5") as span:
     })
 
     response = client.chat.completions.create(
-        model="gpt-5.5",
+        model="gpt-5.6",
         messages=messages,
         temperature=0.7,
     )
@@ -163,7 +164,7 @@ langfuse = Langfuse(
 def call_llm(messages, user_id: str):
     """自动生成 trace，记录 prompt/completion。"""
     response = openai.chat.completions.create(
-        model="gpt-5.5",
+        model="gpt-5.6",
         messages=messages,
     )
 
@@ -175,7 +176,7 @@ def call_llm(messages, user_id: str):
             "input": response.usage.prompt_tokens,
             "output": response.usage.completion_tokens,
         },
-        model="gpt-5.5",
+        model="gpt-5.6",
         metadata={"user_id": user_id},
     )
 
@@ -213,11 +214,11 @@ Trace: order_query_agent
 ├── Span: retrieve_context        (RAG)
 │   ├── Span: embed_query         (embedding call)
 │   └── Span: vector_search       (Qdrant/Pinecone)
-├── Span: chat gpt-5.5            (第一次推理)
+├── Span: chat gpt-5.6            (第一次推理)
 │   └── Event: gen_ai.content.prompt
 ├── Span: tool.get_order          (工具调用)
 │   └── Span: http POST /orders/:id
-├── Span: chat gpt-5.5            (第二次推理，融合工具结果)
+├── Span: chat gpt-5.6            (第二次推理，融合工具结果)
 └── Span: guardrail.check         (输出安全检查)
 ```
 
@@ -314,7 +315,7 @@ def record_usage(response, user_tier: str):
 问题："RAG 有时检索不到相关文档怎么发现？"
 方案：Phoenix 的 retrieval evaluation，自动跑 "precision@k"、"recall@k"
 
-问题："如何对比 GPT-5.5 和 Claude Opus 4.7 在我场景下的表现？"
+问题："如何对比 GPT-5.6 和 Claude Opus 4.7 在我场景下的表现？"
 方案：
   ├─ 生产流量同时路由到两个模型（A/B）
   ├─ 用户反馈关联到 Trace
@@ -360,7 +361,7 @@ OpenTelemetry 新增了专门针对 AI Agent 框架的 span 语义约定（Devel
 Agent Run (root span)
 ├── LLM Call (gen_ai.chat span)
 │   ├── gen_ai.system = "openai"
-│   ├── gen_ai.request.model = "gpt-5.5"
+│   ├── gen_ai.request.model = "gpt-5.6"
 │   ├── gen_ai.usage.input_tokens = 1234
 │   └── gen_ai.usage.output_tokens = 567
 ├── Tool Call (gen_ai.tool span)

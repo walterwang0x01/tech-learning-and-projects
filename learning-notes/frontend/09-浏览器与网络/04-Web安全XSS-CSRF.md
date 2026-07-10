@@ -152,7 +152,7 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 来源：[W3C CSP Level 3](https://www.w3.org/TR/CSP/)
 > 🔄 更新于 2026-05-21
 
-<!-- version-check: React 19.x.6/19.1.7/19.2.6 (CVE-2026-23870 fix), Next.js 16.2.5/15.5.16, checked 2026-05-22 -->
+<!-- version-check: React 19.0.6/19.1.7/19.2.6 (CVE-2026-23870 fix), Next.js 15.5.18/16.2.6（累计修复版，checked 2026-07-10）-->
 
 ## 5. React Server Components RCE 漏洞（CVE-2025-55182）
 
@@ -160,7 +160,7 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 
 **受影响版本**：React 19.0.0、19.1.0、19.1.1、19.2.0（包含 react-server-dom-webpack、react-server-dom-turbopack、react-server-dom-parcel）
 
-**修复版本**：19.0.1、19.1.2、19.2.1（RCE 修复）→ 19.0.4、19.1.5、19.2.4（后续 DoS + 源码泄露修复）→ **19.x.6**（最新安全版本）
+**修复版本**：19.0.1、19.1.2、19.2.1（RCE 修复）→ 19.0.4、19.1.5、19.2.4（后续 DoS + 源码泄露修复）→ <!-- 修复于 2026-07-10: 19.x.6 为占位写法，按分支明确为对应最新安全版本 --> **19.0.6 / 19.1.7 / 19.2.6**（对应分支最新安全版本，见下方 CVE-2026-23870）
 
 来源：[React 官方安全公告](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)、[AWS 安全公告](https://aws.amazon.com/security/security-bulletins/rss/aws-2025-030/)
 
@@ -182,7 +182,8 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 
 Vercel 于 2026-05-07 发布协调安全更新，修复 **13 个安全公告**，覆盖 DoS、中间件绕过、SSRF、缓存投毒、XSS 等多种攻击面。
 
-**修复版本**：Next.js 15.5.16 / 16.2.5
+<!-- 修复于 2026-07-10: Next.js 15.5.16/16.2.5 是该批次部分公告的最初修复版本，但后续验证发现部分公告（含 CVE-2026-23870 相关的完整修复）需累计到 15.5.18/16.2.6 才算完全修复，早期两个补丁版本仍有残留风险，此处更新为当前推荐的累计安全版本 -->
+**修复版本**：Next.js 15.5.18 / 16.2.6（累计安全版本，覆盖全部 13 个公告）
 
 **三个高危漏洞**：
 
