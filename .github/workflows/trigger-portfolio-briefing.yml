@@ -7,16 +7,24 @@ on:
     paths:
       - 'learning-notes/briefings/**/20*.md'
       - 'learning-notes/briefings/.published-index.json'
+  workflow_dispatch:
 
 jobs:
   dispatch:
     runs-on: ubuntu-latest
-    if: ${{ secrets.PORTFOLIO_DISPATCH_PAT != '' }}
+    # secrets 不能直接写在 job/step 的 if 里；先落到 env 再判断
+    env:
+      PORTFOLIO_DISPATCH_PAT: ${{ secrets.PORTFOLIO_DISPATCH_PAT }}
     steps:
       - name: Notify portfolio to rebuild
+        if: ${{ env.PORTFOLIO_DISPATCH_PAT != '' }}
         env:
-          GH_TOKEN: ${{ secrets.PORTFOLIO_DISPATCH_PAT }}
+          GH_TOKEN: ${{ env.PORTFOLIO_DISPATCH_PAT }}
         run: |
           gh api repos/walterwang0x01/portfolio/dispatches \
             -f event_type=briefing-updated \
             -f client_payload[bref]=${{ github.sha }}
+
+      - name: Skip when PORTFOLIO_DISPATCH_PAT unset
+        if: ${{ env.PORTFOLIO_DISPATCH_PAT == '' }}
+        run: echo "PORTFOLIO_DISPATCH_PAT not configured; skip portfolio dispatch"
