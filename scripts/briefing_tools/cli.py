@@ -436,8 +436,39 @@ def cmd_curate_status(args):
         }, ensure_ascii=False, indent=2))
 
 
+def _warn_stale_index(max_show: int = 5) -> None:
+    """finalize 收尾时只读扫一遍全量索引一致性。
+
+    finalize 只 register 本次 topic/date，历史遗漏（subagent 中断没跑
+    register、手动改过 md）不会被发现，一直累积到跨天去重开始漏判。
+    这里只提醒不自动修：批量改写历史索引应当由人确认后跑 `doctor --fix`。
+    """
+    cfg = load_config()
+    issues = doctor_check_index_consistency(
+        auto_fix=False,
+        retention_days=cfg.published_index_retention_days,
+    )
+    miss, drift, orph = issues["missing"], issues["hash_drift"], issues["orphan"]
+    if not (miss or drift or orph):
+        return
+
+    print(
+        f"\n⚠️  索引一致性（历史遗留）：缺失登记 {len(miss)} / "
+        f"hash 漂移 {len(drift)} / 孤儿记录 {len(orph)}"
+    )
+    fixable = miss + drift
+    for p in fixable[:max_show]:
+        print(f"     - {p['key']}")
+    if len(fixable) > max_show:
+        print(f"     …另有 {len(fixable) - max_show} 条")
+    if fixable:
+        print("     修复: python3 scripts/briefing-tools.py doctor --fix")
+    if orph:
+        print(f"     孤儿记录需手动确认: python3 scripts/briefing-tools.py doctor")
+
+
 def cmd_finalize(args):
-    """curate 完成后统一收尾：register → index → notify（避免 subagent 重复执行）"""
+    """curate 完成后统一收尾：register → 索引一致性提醒 → index → notify"""
     date = args.date or today_str()
     topics = [args.topic] if args.topic != "all" else TOPICS
 
@@ -451,6 +482,8 @@ def cmd_finalize(args):
             print(f"⚠️  register {t}: {result['error']}")
         else:
             print(f"📋 register {t}: 新增 {result['registered']}/{result['total_urls']} URLs")
+
+    _warn_stale_index()
 
     cmd_index(args)
     if not args.skip_notify:
