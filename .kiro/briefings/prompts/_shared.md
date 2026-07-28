@@ -94,6 +94,23 @@ cat .kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.{topic}.jsonl
 - 所有内容使用中文，技术术语可用英文
 - 关注 Walter 的技术栈偏好：LangGraph、MCP、CrewAI、Python、TypeScript
 
+**事实与推断必须分开写（硬约束）：**
+
+只把来源里**明确写了**的内容当事实陈述。从名称、缩写、惯例推测出来的含义属于推断，必须带上不确定语气，或干脆不写。
+
+```markdown
+❌ 同时开源了 MoonEP（专家并行通信）、FlashKDA（注意力算子实现）和 AgentEnv（Agent 训练环境）
+   ——官方只公布了名称，三个解释全是猜的，但读者会当成事实
+
+✅ 同时开源了 MoonEP、FlashKDA 和 AgentEnv。官方公告只给了名称没有展开，
+   从命名推测分别对应专家并行、KDA 算子实现和 Agent 训练环境，具体边界要等技术报告细读
+```
+
+- 多个来源数字冲突时，以官方 / 一手来源为准，并在正文写清口径（例：「数百 GB 到 1.4TB，取决于量化方案」而不是挑一个数字）
+- 单一来源的关键结论（尤其是融资额、罚款、benchmark 分数）附上该来源链接，不要写成公认事实
+- arXiv 条目注意 ID 前缀就是提交年月（`2601.x` = 2026 年 1 月）。老论文修订后会被 RSS 重新推送，**不要把它描述成新研究**
+- 立场性内容、无独立来源佐证的爆料，宁可不收
+
 **文件格式硬约束（违反会被 validate 拒绝）：**
 - ❌ **不要加 YAML frontmatter**（不要写 `---\ntitle: ...\n---`）
 - ✅ **第一行必须是** `# {标题}`，紧接着第二行 `> Author: Walter Wang`
@@ -243,7 +260,16 @@ python3 scripts/briefing-tools.py finalize --topic all
 ```
 
 **顺序重要**：validate / compare-skeleton 先于 register。前置校验让 subagent 在失败时直接停手而不是污染索引。
-**事后改 md**：register 后改 md 内容会触发 file_hash 不一致告警，提示重新跑 index。
+
+**事后改 md 不是禁区**：register 之后仍然可以修正内容。改完按这个顺序收尾即可，成本很低：
+
+```bash
+python3 scripts/briefing-tools.py validate learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
+python3 scripts/briefing-tools.py doctor --fix   # 自动为 hash_drift / missing 重跑 register
+```
+
+`register` 报的 file_hash 告警只是提示同步 README，**不是错误、不会阻塞、也不需要人工介入**。
+⚠️ 因此：发现自己写错了事实就直接改，**不要因为「已经 register 过」而把已知错误留在正文里**。
 
 ---
 
