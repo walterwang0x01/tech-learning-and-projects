@@ -487,43 +487,26 @@ def cmd_curate_status(args):
         }, ensure_ascii=False, indent=2))
 
 
-def _warn_stale_index(max_show: int = 5) -> None:
-    """finalize 收尾时只读扫一遍全量索引一致性。
+def _collect_stale_index() -> dict:
+    """扫一遍全量索引一致性，返回问题清单（不打印）。
 
     finalize 只 register 本次 topic/date，历史遗漏（subagent 中断没跑
     register、手动改过 md）不会被发现，一直累积到跨天去重开始漏判。
-    这里只提醒不自动修：批量改写历史索引应当由人确认后跑 `doctor --fix`。
+    只检查不自动修：批量改写历史索引应当由人确认后跑 `doctor --fix`。
     """
     cfg = load_config()
-    issues = doctor_check_index_consistency(
+    return doctor_check_index_consistency(
         auto_fix=False,
         retention_days=cfg.published_index_retention_days,
     )
-    miss, drift, orph = issues["missing"], issues["hash_drift"], issues["orphan"]
-    if not (miss or drift or orph):
-        return
-
-    print(
-        f"\n⚠️  索引一致性（历史遗留）：缺失登记 {len(miss)} / "
-        f"hash 漂移 {len(drift)} / 孤儿记录 {len(orph)}"
-    )
-    fixable = miss + drift
-    for p in fixable[:max_show]:
-        print(f"     - {p['key']}")
-    if len(fixable) > max_show:
-        print(f"     …另有 {len(fixable) - max_show} 条")
-    if fixable:
-        print("     修复: python3 scripts/briefing-tools.py doctor --fix")
-    if orph:
-        print(f"     孤儿记录需手动确认: python3 scripts/briefing-tools.py doctor")
 
 
-def _warn_url_reuse(topics: list[str], date: str) -> None:
-    """finalize 收尾时汇总 URL 复用情况。
+def _collect_url_reuse(topics: list[str], date: str) -> list[tuple[str, dict]]:
+    """汇总 URL 复用情况，返回 [(topic, finding)]（不打印）。
 
     render 阶段的同一检查在并行 curate 下只能部分命中跨主题重复——先 render 的
     那份看不到还没写出来的其他主题。finalize 只跑一次且三份 md 都已落盘，
-    这里才是完整视图。只报告不阻断，让人决定改不改。
+    这里才是完整视图。
     """
     seen: set[tuple[str, str]] = set()
     rows: list[tuple[str, dict]] = []
@@ -536,21 +519,72 @@ def _warn_url_reuse(topics: list[str], date: str) -> None:
                 continue
             seen.add(dedup_key)
             rows.append((t, r))
-    if not rows:
-        return
+    return rows
 
-    cross_topic = [(t, r) for t, r in rows if r["kind"] == "cross_topic"]
-    cross_day = [(t, r) for t, r in rows if r["kind"] == "cross_day"]
-    print(f"\n⚠️  URL 复用：跨主题 {len(cross_topic)} 条 / 跨天 {len(cross_day)} 条")
-    for t, r in cross_topic:
-        print(f"     [跨主题] {r['url']}")
-        print(f"              {t} 与 {r['where']} 同时收录")
-    for t, r in cross_day[:5]:
-        print(f"     [跨天]   {r['url']}")
-        print(f"              今日 {t}，此前 {r['where']}")
-    if len(cross_day) > 5:
-        print(f"     …另有 {len(cross_day) - 5} 条跨天复用")
-    print("     这些链接来自 curate 阶段的 web search 补充，不经候选集过滤。")
+
+def _print_action_items(
+    reuse_rows: list[tuple[str, dict]],
+    index_issues: dict,
+    baselines: list[dict],
+    max_show: int = 5,
+) -> None:
+    """finalize 最后统一输出待人工确认的事项。
+
+    这些信号原先散落在 register 与 index 之间，被后面三十行状态面板盖住，
+    出问题时容易整段滑过去。收拢到最后一屏，让「要不要动手」一眼可判。
+    """
+    print("\n" + "=" * 56)
+    blocks: list[str] = []
+
+    cross_topic = [(t, r) for t, r in reuse_rows if r["kind"] == "cross_topic"]
+    cross_day = [(t, r) for t, r in reuse_rows if r["kind"] == "cross_day"]
+    if cross_topic or cross_day:
+        blocks.append("url_reuse")
+        print(f"\n⚠️  URL 复用：跨主题 {len(cross_topic)} 条 / 跨天 {len(cross_day)} 条")
+        print("     来自 curate 的 web search 补充，不经候选集过滤，需逐条判断。")
+        for t, r in cross_topic:
+            print(f"     [跨主题] {r['url']}")
+            print(f"              {t} 与 {r['where']} 同时收录 → 建议删掉一边")
+        for t, r in cross_day[:max_show]:
+            print(f"     [跨天]   {r['url']}")
+            print(f"              今日 {t}，此前 {r['where']}")
+        if len(cross_day) > max_show:
+            print(f"     …另有 {len(cross_day) - max_show} 条跨天复用")
+        if cross_day:
+            print("     跨天：有实质新进展可留（正文写明新增什么），只是换说法则改选来源。")
+            print("     同主题跨天命中往往是把旧文当新闻，先核对原文发布日期。")
+
+    miss, drift, orph = (
+        index_issues.get("missing", []),
+        index_issues.get("hash_drift", []),
+        index_issues.get("orphan", []),
+    )
+    if miss or drift or orph:
+        blocks.append("index")
+        print(
+            f"\n⚠️  索引一致性（历史遗留）：缺失登记 {len(miss)} / "
+            f"hash 漂移 {len(drift)} / 孤儿记录 {len(orph)}"
+        )
+        fixable = miss + drift
+        for p in fixable[:max_show]:
+            print(f"     - {p['key']}")
+        if len(fixable) > max_show:
+            print(f"     …另有 {len(fixable) - max_show} 条")
+        if fixable:
+            print("     修复: python3 scripts/briefing-tools.py doctor --fix")
+        if orph:
+            print("     孤儿记录需手动确认: python3 scripts/briefing-tools.py doctor")
+
+    anomalies = [b for b in baselines if b.get("anomaly")]
+    if anomalies:
+        blocks.append("baseline")
+        print("\n⚠️  基线异常（候选数偏离近 7 天均值）")
+        for b in anomalies:
+            print(f"     - {TOPIC_NAMES.get(b['topic'], b['topic'])}：{b['message']}")
+
+    if not blocks:
+        print("\n✅ 无需人工介入：URL 无复用、索引一致、基线正常")
+    print("=" * 56)
 
 
 def cmd_finalize(args):
@@ -569,13 +603,16 @@ def cmd_finalize(args):
         else:
             print(f"📋 register {t}: 新增 {result['registered']}/{result['total_urls']} URLs")
 
-    _warn_stale_index()
-    _warn_url_reuse(topics, date)
+    # 先收集待办，但等状态面板输出完再打印——最后一屏才是人真正会看的地方
+    reuse_rows = _collect_url_reuse(topics, date)
+    index_issues = _collect_stale_index()
 
     cmd_index(args)
     if not args.skip_notify:
         cmd_notify(args)
-    cmd_status(argparse.Namespace(json=False, check_sources=False))
+    report = _collect_status()
+    print(_format_status(report))
+    _print_action_items(reuse_rows, index_issues, report.get("baselines", []))
     print("\n✅ finalize 完成")
 
 
@@ -661,6 +698,16 @@ def _collect_status() -> dict:
                     lines = 0
                 report["run"]["stages"].append({"file": p.name, "items": lines})
 
+    # 今日简报条目数：curate agent 自报的数字屡次对不上（少算自由块、算错区块），
+    # 这里一律按结构脚本数，省掉每次人工核对
+    report["item_counts"] = {}
+    for topic in TOPICS:
+        f = briefing_file(topic, report["date"])
+        if f.exists():
+            report["item_counts"][topic] = count_briefing_items(
+                f.read_text(encoding="utf-8")
+            )
+
     # 熔断源（排除主动停用的，它们永远失败，报了也无从处理）
     cfg = load_config()
     _disabled = _disabled_source_names(cfg)
@@ -696,6 +743,13 @@ def _format_status(report: dict) -> str:
             "`python3 scripts/briefing-tools.py health-reset \"源名称\"`"
         )
 
+    counts = report.get("item_counts") or {}
+    if counts:
+        detail = " / ".join(
+            f"{TOPIC_NAMES.get(t, t)} {counts[t]}" for t in TOPICS if t in counts
+        )
+        lines.append(f"\n📝 今日简报条目: {detail}（共 {sum(counts.values())} 条）")
+
     if report.get("run", {}).get("exists"):
         lines.append(f"\n### 🏃 今日运行状态 ({report['run']['dir']})")
         for stage in report["run"]["stages"]:
@@ -717,13 +771,17 @@ def _format_status(report: dict) -> str:
                 n = TOPIC_NAMES.get(b["topic"], b["topic"])
                 lines.append(f"- {n}：{b['message']}")
 
-    lines.append("\n### 💡 建议")
+    # 只在真有待办时输出「建议」区，否则留个空标题反而让人以为漏了内容
+    suggestions = []
     for topic, info in report["topics"].items():
         n = TOPIC_NAMES.get(topic, topic)
         if info["status"] in ("❌", "🆕"):
-            lines.append(f"- 🔴 **{n}** 需要采集")
+            suggestions.append(f"- 🔴 **{n}** 需要采集")
         elif info["status"] == "⚠️":
-            lines.append(f"- 🟡 **{n}** 建议今天更新")
+            suggestions.append(f"- 🟡 **{n}** 建议今天更新")
+    if suggestions:
+        lines.append("\n### 💡 建议")
+        lines.extend(suggestions)
     return "\n".join(lines)
 
 
