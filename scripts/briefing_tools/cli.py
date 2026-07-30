@@ -25,7 +25,13 @@ from .config import (
     load_config,
     get_llm_classify_model,
 )
-from .health import is_source_tripped, load_health, reset_source, tripped_sources
+from .health import (
+    is_source_tripped,
+    load_health,
+    reset_source,
+    should_probe,
+    tripped_sources,
+)
 from .http import http_get
 from .ingest import run_ingest
 from .notify import (
@@ -151,13 +157,19 @@ def cmd_candidates(args):
             print(f"  ⚠️  跳过损坏条目: {e}", file=sys.stderr)
 
     topics = [args.topic] if args.topic != "all" else TOPICS
+    # CLI 显式传 --require-main-topic / --no-require-main-topic 时覆盖配置，否则按 config 走
+    require_main = (
+        cfg.candidates_require_main_topic
+        if getattr(args, "require_main_topic", None) is None
+        else args.require_main_topic
+    )
     for t in topics:
         # CLI --top-n 显式传值覆盖配置；否则按 per-topic 配置取
         topic_top_n = args.top_n if args.top_n is not None else cfg.resolve_top_n(t)
         result = build_candidates(
             classified, t, today_str(), cfg,
             min_score=args.min_score,
-            require_main_topic=args.require_main_topic,
+            require_main_topic=require_main,
             top_n=topic_top_n,
         )
         out_path = rd / f"candidates.{t}.jsonl"
@@ -352,7 +364,8 @@ def cmd_run_all(args):
     print("=" * 60)
     args.topic = "all"
     args.min_score = getattr(args, "min_score", 12)
-    args.require_main_topic = getattr(args, "require_main_topic", False)
+    # None = 交给 cmd_candidates 读 config.candidates_require_main_topic
+    args.require_main_topic = getattr(args, "require_main_topic", None)
     # None = 按 config.candidates_top_n 的 per-topic 配置走，cmd_candidates 内部解析
     args.top_n = getattr(args, "top_n", None)
     cmd_candidates(args)
@@ -366,18 +379,45 @@ def cmd_run_all(args):
     print("✅ 流水线完成")
 
 
+def _probe_hint(src: dict, retry_after_days: int) -> str:
+    """熔断源的 half-open 试探提示。让自愈机制对用户可见，
+    否则看到熔断告警会以为必须人工 health-reset。"""
+    if retry_after_days <= 0:
+        return "，自愈试探已关闭，需人工 health-reset"
+    if should_probe(src["name"], retry_after_days):
+        return " → 下次采集会 half-open 试探"
+    last_fail = src.get("last_fail_date", "")
+    try:
+        elapsed = (datetime.now() - datetime.strptime(last_fail, "%Y-%m-%d")).days
+    except ValueError:
+        return ""
+    return f" → {max(retry_after_days - elapsed, 0)} 天后自动试探"
+
+
+def _disabled_source_names(cfg) -> set[str]:
+    """config 里 enabled=false 的源。这些源不参与采集，也不该出现在熔断告警里
+    （它们永远"连续失败"，反复提醒等于噪音）。"""
+    return {s["name"] for s in cfg.rss_sources if not s.get("enabled", True)}
+
+
 def cmd_health(args):
     """查看源健康状态"""
     cfg = load_config()
     threshold = cfg.circuit_breaker.fail_threshold_days
     data = load_health()
     sources = data.get("sources", {})
+    disabled = _disabled_source_names(cfg)
 
-    tripped = tripped_sources(threshold)
+    if disabled:
+        print(f"## ⏸  已停用源（config enabled=false，不参与采集）: {', '.join(sorted(disabled))}\n")
+
+    retry_after = cfg.circuit_breaker.retry_after_days
+    tripped = [s for s in tripped_sources(threshold) if s["name"] not in disabled]
     if tripped:
         print(f"## 🚨 熔断源（连续失败 ≥ {threshold} 天）")
         for s in tripped:
-            print(f"  - {s['name']}: {s['consecutive_failures']} 天连续失败（最后失败于 {s.get('last_fail_date', '?')}）")
+            print(f"  - {s['name']}: {s['consecutive_failures']} 天连续失败（最后失败于 {s.get('last_fail_date', '?')}）"
+                  f"{_probe_hint(s, retry_after)}")
     else:
         print(f"## ✅ 暂无熔断源（阈值: {threshold} 天）")
 
@@ -574,9 +614,14 @@ def _collect_status() -> dict:
                     lines = 0
                 report["run"]["stages"].append({"file": p.name, "items": lines})
 
-    # 熔断源
+    # 熔断源（排除主动停用的，它们永远失败，报了也无从处理）
     cfg = load_config()
-    report["tripped_sources"] = [s["name"] for s in tripped_sources(cfg.circuit_breaker.fail_threshold_days)]
+    _disabled = _disabled_source_names(cfg)
+    report["disabled_sources"] = sorted(_disabled)
+    report["tripped_sources"] = [
+        s["name"] for s in tripped_sources(cfg.circuit_breaker.fail_threshold_days)
+        if s["name"] not in _disabled
+    ]
 
     # 基线对比（近 7 天均值）
     from .baseline import check_all_baselines
@@ -876,7 +921,7 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("candidates", help="按主题分流候选集")
     p.add_argument("--topic", default="all", choices=TOPICS + ["all"])
     p.add_argument("--min-score", type=int, default=12)
-    p.add_argument("--require-main-topic", action="store_true",
+    p.add_argument("--require-main-topic", action=argparse.BooleanOptionalAction, default=None,
                    help="只保留 main_topic 等于本主题的条目")
     p.add_argument("--top-n", type=int, default=None,
                    help="按 score 降序最多保留 N 条（0=不截断）。"

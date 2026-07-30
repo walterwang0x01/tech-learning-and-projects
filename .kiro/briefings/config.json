@@ -4,9 +4,13 @@
   "published_index_retention_days": 60,
   "run_retention_days": 30,
   "source_circuit_breaker": {
+    "_comment": "fail_threshold_days 连续失败几天后熔断；retry_after_days 是 half-open 试探间隔——熔断源距最后一次失败满这么多天就放行一次抓取，成功即自动恢复，失败则重新计时。设 0 关闭试探（退回纯人工 health-reset）。没有试探机制时源一旦熔断就永久熔断：跳过时不会调用 record_source_result，consecutive_failures 冻结在阈值上，上游恢复了也无人知道。",
     "fail_threshold_days": 2,
-    "skip_when_tripped": true
+    "skip_when_tripped": true,
+    "retry_after_days": 7
   },
+  "candidates_require_main_topic": true,
+  "_candidates_require_main_topic_comment": "true = 一条内容只进入 main_topic 对应主题的候选集，三个主题的候选集互斥。三主题并行 curate 时 candidates.py 的 cross_topic_dup（判据是「其他主题今日已写 md」）必然失效，因为 subagent 同时写、互相看不见；只有在候选集生成阶段切分才拦得住重复。代价：跨主题条目按 main_topic_rules.priority 归属，优先级低的主题会少拿到这类内容。改回 false 需同时把 curate 改为串行。",
   "main_topic_rules": {
     "_comment": "一条内容同时命中多个 tag 时，决定它的 primary topic。curate 阶段优先给 main topic 收录。",
     "priority": ["ai-agent", "china-tech", "global-tech"]
@@ -22,7 +26,7 @@
     {"name": "LangChain Blog", "url": "https://blog.langchain.com/rss.xml", "topic_hints": ["ai-agent"]},
     {"name": "Anthropic Research", "url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_research.xml", "topic_hints": ["ai-agent"], "timeout": 30},
     {"name": "Anthropic News", "url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_news.xml", "topic_hints": ["ai-agent"], "timeout": 30},
-    {"name": "OpenAI Blog", "url": "https://openai.com/blog/rss.xml", "topic_hints": ["ai-agent"], "max_items": 80},
+    {"name": "OpenAI Blog", "url": "https://openai.com/blog/rss.xml", "topic_hints": ["ai-agent"], "max_items": 80, "enabled": false, "_disabled_reason": "2026-07-30 停用：openai.com 当前连接超时（curl --max-time 20 返回 000）。注意本源在 2026-07-22 仍采集成功，07-27/28 连续失败两次后触发熔断，属近期才出现的网络不可达，未必永久失效——值得定期复查。已排查的替代源当时均不可用：Olshansk/rss-feeds 无 openai_blog（feed_openai_research.xml 存在但自带 no longer maintained 标记，最新条目 2026-04-18）、rsshub.app 返回 403、rsshub.rssforever.com 返回 503。复查方法：curl -sS -o /dev/null -w '%{http_code}' --max-time 20 https://openai.com/blog/rss.xml，返回 200 则删掉 enabled/_disabled_reason 两个字段并 health-reset 'OpenAI Blog'。"},
     {"name": "Google AI Blog", "url": "https://blog.google/technology/ai/rss/", "topic_hints": ["ai-agent"]},
     {"name": "Hugging Face Blog", "url": "https://huggingface.co/blog/feed.xml", "fallback_url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_huggingface_blog.xml", "topic_hints": ["ai-agent"], "timeout": 25, "retries": 4},
     {"name": "Wired AI", "url": "https://www.wired.com/feed/tag/ai/latest/rss", "topic_hints": ["ai-agent"]},

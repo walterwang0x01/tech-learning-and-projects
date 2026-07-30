@@ -26,6 +26,9 @@ TOPIC_ICONS = {"ai-agent": "🤖", "china-tech": "🇨🇳", "global-tech": "�
 class CircuitBreakerCfg:
     fail_threshold_days: int = 3
     skip_when_tripped: bool = True
+    # half-open 试探间隔（天）。熔断源距最后一次失败满这么多天后，放行一次抓取试探：
+    # 成功即自动恢复，失败则继续熔断并重新计时。0 = 关闭试探，只能人工 health-reset。
+    retry_after_days: int = 7
 
 
 @dataclass
@@ -73,6 +76,11 @@ class Config:
     # 不同 topic 的候选池规模差距很大（ai-agent 通常远多于 china/global-tech），
     # 一刀切会让信息密集主题损失太多候选。CLI --top-n 显式指定时覆盖此配置。
     candidates_top_n: dict[str, int] = field(default_factory=lambda: {"_default": 60})
+    # candidates 阶段是否只保留 main_topic == 本主题的条目。
+    # 三个主题并行 curate 时，candidates.py 里「其他主题今日已写 md」这层跨主题去重
+    # 必然失效（subagent 同时写，互相看不见），只有在候选集生成阶段做互斥切分才拦得住重复。
+    # CLI --require-main-topic / --no-require-main-topic 显式指定时覆盖此配置。
+    candidates_require_main_topic: bool = False
     raw: dict = field(default_factory=dict, repr=False)
 
     def resolve_top_n(self, topic: str) -> int:
@@ -121,6 +129,7 @@ def load_config(path: Path | None = None, force_reload: bool = False) -> Config:
         circuit_breaker=CircuitBreakerCfg(
             fail_threshold_days=int(cb.get("fail_threshold_days", 3)),
             skip_when_tripped=bool(cb.get("skip_when_tripped", True)),
+            retry_after_days=int(cb.get("retry_after_days", 7)),
         ),
         main_topic_priority=list(raw.get("main_topic_rules", {}).get("priority", TOPICS)),
         rss_sources=list(raw.get("rss_sources", [])),
@@ -151,6 +160,7 @@ def load_config(path: Path | None = None, force_reload: bool = False) -> Config:
             podcast_description_chars=int(fb.get("podcast_description_chars", 800)),
         ),
         candidates_top_n=top_n_cfg,
+        candidates_require_main_topic=bool(raw.get("candidates_require_main_topic", False)),
         raw=raw,
     )
     if path is None:

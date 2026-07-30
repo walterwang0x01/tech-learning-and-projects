@@ -57,6 +57,33 @@ def is_source_tripped(source_name: str, threshold_days: int) -> bool:
     return src.get("consecutive_failures", 0) >= threshold_days
 
 
+def should_probe(source_name: str, retry_after_days: int) -> bool:
+    """熔断源是否到了 half-open 试探时机。
+
+    熔断源被跳过时不会调用 record_source_result，consecutive_failures 会冻结在
+    触发阈值那一刻——既不增加也不归零。没有试探机制的话，源一旦熔断就永久熔断，
+    哪怕上游早已恢复，也只能靠人工 health-reset 发现。
+
+    这里按 last_fail_date 计时：距最后一次失败满 retry_after_days 就放行一次抓取。
+    试探成功 → consecutive_failures 归零，自动恢复；
+    试探失败 → last_fail_date 刷新为今天，于是自然形成每 retry_after_days 试一次的节奏。
+
+    retry_after_days <= 0 表示关闭自愈试探（退回纯人工 health-reset）。
+    """
+    if retry_after_days <= 0:
+        return False
+    data = load_health()
+    src = data["sources"].get(source_name, {})
+    last_fail = src.get("last_fail_date", "")
+    if not last_fail:
+        return False
+    try:
+        last_fail_dt = datetime.strptime(last_fail, "%Y-%m-%d")
+    except ValueError:
+        return False
+    return (datetime.now() - last_fail_dt).days >= retry_after_days
+
+
 def reset_source(source_name: str) -> None:
     data = load_health()
     if source_name in data["sources"]:

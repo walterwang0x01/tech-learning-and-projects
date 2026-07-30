@@ -102,5 +102,57 @@ class TestCandidatesTopN(unittest.TestCase):
         self.assertEqual(cfg.resolve_top_n("ai-agent"), 60)
 
 
+class TestRequireMainTopic(unittest.TestCase):
+    """candidates_require_main_topic：并行 curate 下靠它做候选集互斥切分"""
+
+    def test_default_false_when_missing(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = _write_config(td, {})
+            cfg = load_config(path=p, force_reload=True)
+        self.assertFalse(cfg.candidates_require_main_topic)
+
+    def test_read_from_config(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = _write_config(td, {"candidates_require_main_topic": True})
+            cfg = load_config(path=p, force_reload=True)
+        self.assertTrue(cfg.candidates_require_main_topic)
+
+    def test_explicit_false(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = _write_config(td, {"candidates_require_main_topic": False})
+            cfg = load_config(path=p, force_reload=True)
+        self.assertFalse(cfg.candidates_require_main_topic)
+
+
+class TestCircuitBreakerCfg(unittest.TestCase):
+    """熔断配置，含 half-open 试探间隔"""
+
+    def test_defaults_when_missing(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = _write_config(td, {})
+            cfg = load_config(path=p, force_reload=True)
+        self.assertEqual(cfg.circuit_breaker.fail_threshold_days, 3)
+        self.assertTrue(cfg.circuit_breaker.skip_when_tripped)
+        self.assertEqual(cfg.circuit_breaker.retry_after_days, 7)
+
+    def test_read_from_config(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = _write_config(td, {"source_circuit_breaker": {
+                "fail_threshold_days": 2,
+                "skip_when_tripped": True,
+                "retry_after_days": 3,
+            }})
+            cfg = load_config(path=p, force_reload=True)
+        self.assertEqual(cfg.circuit_breaker.fail_threshold_days, 2)
+        self.assertEqual(cfg.circuit_breaker.retry_after_days, 3)
+
+    def test_probe_can_be_disabled(self):
+        """retry_after_days=0 关闭自愈试探"""
+        with tempfile.TemporaryDirectory() as td:
+            p = _write_config(td, {"source_circuit_breaker": {"retry_after_days": 0}})
+            cfg = load_config(path=p, force_reload=True)
+        self.assertEqual(cfg.circuit_breaker.retry_after_days, 0)
+
+
 if __name__ == "__main__":
     unittest.main()

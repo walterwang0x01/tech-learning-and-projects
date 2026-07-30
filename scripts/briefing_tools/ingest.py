@@ -8,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from .config import Config
 from .follow_builders import fetch_follow_builders
-from .health import is_source_tripped, record_source_result
+from .health import is_source_tripped, record_source_result, should_probe
 from .hn_algolia import fetch_hn_algolia
 from .http import filter_by_freshness, http_get, parse_rss
 from .supplements import run_supplements
@@ -72,26 +72,66 @@ def _fetch_one(src: dict) -> tuple[dict, list[dict], float, bool]:
     return src, [], elapsed, False
 
 
+def partition_sources(
+    sources: list[dict],
+    skip_tripped: bool,
+    threshold: int,
+    retry_after_days: int,
+) -> tuple[list[dict], list[str], list[str], list[str]]:
+    """把源分成 (active, tripped, disabled, probing)。
+
+    - disabled: config 里 enabled=false，已知长期不可达，完全不采
+    - tripped:  熔断中且未到 half-open 试探时机，本次跳过
+    - probing:  熔断中但已到试探时机，本次放行（同时出现在 active 里）
+    - active:   本次实际要抓的源
+
+    单独拆出来是为了让这段筛选决策可以脱离网络栈单测。
+    """
+    active: list[dict] = []
+    tripped: list[str] = []
+    disabled: list[str] = []
+    probing: list[str] = []
+    for src in sources:
+        if not src.get("enabled", True):
+            disabled.append(src["name"])
+            continue
+        if skip_tripped and is_source_tripped(src["name"], threshold):
+            # half-open：距最后一次失败够久了，放行一次试探，成功则自动恢复
+            if should_probe(src["name"], retry_after_days):
+                probing.append(src["name"])
+                active.append(src)
+            else:
+                tripped.append(src["name"])
+            continue
+        active.append(src)
+    return active, tripped, disabled, probing
+
+
 def run_ingest(cfg: Config) -> tuple[list[dict], list[dict], list[str]]:
     """
     返回 (items, per_source_metrics, tripped_source_names)
-    - 熔断的源会被跳过
+    - enabled=false 的源直接不采
+    - 熔断的源会被跳过；但距最后一次失败满 retry_after_days 的会放行一次
+      half-open 试探（成功则自动恢复），此时它算在 active 里，不计入返回的 tripped
     - 每次抓取结果记入 health
     """
     sources = cfg.rss_sources
     skip_tripped = cfg.circuit_breaker.skip_when_tripped
     threshold = cfg.circuit_breaker.fail_threshold_days
 
-    active: list[dict] = []
-    tripped: list[str] = []
-    for src in sources:
-        if skip_tripped and is_source_tripped(src["name"], threshold):
-            tripped.append(src["name"])
-            continue
-        active.append(src)
+    retry_after = cfg.circuit_breaker.retry_after_days
 
+    active, tripped, disabled, probing = partition_sources(
+        sources, skip_tripped=skip_tripped,
+        threshold=threshold, retry_after_days=retry_after,
+    )
+
+    if disabled:
+        print(f"  ⏸  已停用 {len(disabled)} 个源: {', '.join(disabled)}")
     if tripped:
         print(f"  🚨 熔断跳过 {len(tripped)} 个源: {', '.join(tripped)}")
+    if probing:
+        print(f"  🔓 half-open 试探 {len(probing)} 个熔断源: {', '.join(probing)}")
 
     metrics: list[dict] = []
     all_items: list[dict] = []

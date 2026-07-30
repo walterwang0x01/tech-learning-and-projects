@@ -117,6 +117,10 @@ def count_briefing_items(content: str) -> int:
             in_table = False
         if re.match(r"^-\s+\*\*", stripped):
             count += 1
+            continue
+        # 自由块条目：**标题** — 描述（论文、延伸阅读等不走列表/表格的区块）
+        if re.match(r"^\*\*[^*]+\*\*\s*[—–-]\s*\S", stripped):
+            count += 1
     return count
 
 
