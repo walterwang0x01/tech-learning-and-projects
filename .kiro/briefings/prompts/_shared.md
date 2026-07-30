@@ -195,9 +195,24 @@ cat .kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.{topic}.jsonl
 
 ```bash
 # 1. 写 JSON 到临时文件，例如 .kiro_tmp/briefings/runs/YYYY-MM-DD/draft.{topic}.json
-# 2. render 命令自动产出 md + 跑 validate + 跑 skeleton 对比
+# 2. render 命令自动产出 md + 跑 validate + 跑 skeleton 对比 + 查 URL 复用
 python3 scripts/briefing-tools.py render --json .kiro_tmp/briefings/runs/YYYY-MM-DD/draft.{topic}.json
 ```
+
+### ⚠️ 必须处理 render 的「URL 复用」警告
+
+render 结尾会检查你用的链接是否此前已被收录，命中就打印 `⚠️ N 条 URL 此前已收录`。
+**这不是可以忽略的提示**——候选集已经做过跨天与跨主题去重，但你 web search 补充进来的
+链接从未进过候选集，是唯一能漏进重复内容的口子。
+
+逐条判断，二选一，不要放着不管：
+
+- **有实质新进展** → 保留，但正文必须写出新增的是什么（原文更新了、事件有后续、
+  你的切入角度不同）。不要把昨天讲过的事换个说法再讲一遍。
+- **只是同一件事换个说法** → 换掉这条，重新选来源或直接弃收该条目。
+
+判断完改 JSON 重跑 render。**特别注意 `[跨天]` 命中同一主题的情况**：这往往说明你把
+一篇旧文当成了今天的新闻，先核对原文发布日期再决定。
 
 JSON 结构：
 ```json

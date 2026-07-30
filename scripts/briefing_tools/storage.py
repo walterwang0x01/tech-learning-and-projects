@@ -149,6 +149,52 @@ def validate_briefing_md(path: Path, strict: bool = True) -> tuple[bool, str]:
 
 
 # ============================================
+# URL 复用检查
+# ============================================
+
+def check_url_reuse(topic: str, date_str: str, path: Path | None = None) -> list[dict]:
+    """检查一份简报 md 里的 URL 有没有被收录过。
+
+    candidates 阶段的 published_before / not_main_topic 两层过滤只作用于候选集，
+    而 curate 时 web search 补充进来的链接从未进过候选集，因此完全绕过去重。
+    这个函数补上那条路径，在 render / finalize 阶段查。
+
+    只报告不阻断：跨天引用同一篇原文有时是合理的（原文有更新、换视角展开），
+    硬拦会逼着去找次优来源。判断留给人或 curate agent。
+
+    返回 [{"url", "kind", "where"}]，kind 为 cross_day 或 cross_topic。
+    """
+    p = path or briefing_file(topic, date_str)
+    urls = extract_urls_from_md(p)
+    if not urls:
+        return []
+
+    findings: list[dict] = []
+    published = load_published_index()["items"]
+    for u in sorted(urls):
+        rec = published.get(url_hash(u))
+        # 同日期的记录跳过：可能是自己上次 register 留下的，也可能是今日其他主题
+        # 已登记（此时 index 里只留一条），后者由下面的跨主题检查负责，不重复报
+        if rec and rec.get("date") != date_str:
+            findings.append({
+                "url": u,
+                "kind": "cross_day",
+                "where": f"{rec.get('topic', '?')} {rec.get('date', '?')}",
+            })
+
+    # 今日其他主题。并行 curate 时先 render 的看不到后 render 的，
+    # 所以这层在 render 阶段只能部分命中，finalize 阶段才是完整的。
+    for other in TOPICS:
+        if other == topic:
+            continue
+        other_urls = extract_urls_from_md(briefing_file(other, date_str))
+        for u in sorted(urls & other_urls):
+            findings.append({"url": u, "kind": "cross_topic", "where": f"{other} {date_str}"})
+
+    return findings
+
+
+# ============================================
 # Register：把 md 里的 URL 登记到 published-index
 # ============================================
 

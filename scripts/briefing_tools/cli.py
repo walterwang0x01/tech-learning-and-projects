@@ -48,6 +48,7 @@ from .storage import (
     atomic_write_json,
     atomic_write_jsonl,
     briefing_file,
+    check_url_reuse,
     doctor_check_index_consistency,
     load_published_index,
     now_str,
@@ -339,6 +340,16 @@ def cmd_render(args):
 
     print("✅ validate + skeleton 全部通过")
 
+    # URL 复用检查：web search 补充的链接不经候选集，绕过了所有去重
+    reuse = check_url_reuse(doc.topic, doc.date, path=out)
+    if reuse:
+        print(f"\n⚠️  {len(reuse)} 条 URL 此前已收录，请判断是否换掉：")
+        for r in reuse:
+            tag = "跨天" if r["kind"] == "cross_day" else "跨主题"
+            print(f"     [{tag}] {r['url']}")
+            print(f"            已用于 {r['where']}")
+        print("     同一原文若有实质新进展可保留，仅换个说法则应改选来源。")
+
 
 def cmd_cleanup(args):
     cfg = load_config()
@@ -507,6 +518,41 @@ def _warn_stale_index(max_show: int = 5) -> None:
         print(f"     孤儿记录需手动确认: python3 scripts/briefing-tools.py doctor")
 
 
+def _warn_url_reuse(topics: list[str], date: str) -> None:
+    """finalize 收尾时汇总 URL 复用情况。
+
+    render 阶段的同一检查在并行 curate 下只能部分命中跨主题重复——先 render 的
+    那份看不到还没写出来的其他主题。finalize 只跑一次且三份 md 都已落盘，
+    这里才是完整视图。只报告不阻断，让人决定改不改。
+    """
+    seen: set[tuple[str, str]] = set()
+    rows: list[tuple[str, dict]] = []
+    for t in topics:
+        for r in check_url_reuse(t, date):
+            # 跨主题重复会在两个 topic 各报一次，去重成一条
+            key = tuple(sorted([t, r["where"].split()[0]])) if r["kind"] == "cross_topic" else (t, "")
+            dedup_key = (r["url"], "|".join(key))
+            if dedup_key in seen:
+                continue
+            seen.add(dedup_key)
+            rows.append((t, r))
+    if not rows:
+        return
+
+    cross_topic = [(t, r) for t, r in rows if r["kind"] == "cross_topic"]
+    cross_day = [(t, r) for t, r in rows if r["kind"] == "cross_day"]
+    print(f"\n⚠️  URL 复用：跨主题 {len(cross_topic)} 条 / 跨天 {len(cross_day)} 条")
+    for t, r in cross_topic:
+        print(f"     [跨主题] {r['url']}")
+        print(f"              {t} 与 {r['where']} 同时收录")
+    for t, r in cross_day[:5]:
+        print(f"     [跨天]   {r['url']}")
+        print(f"              今日 {t}，此前 {r['where']}")
+    if len(cross_day) > 5:
+        print(f"     …另有 {len(cross_day) - 5} 条跨天复用")
+    print("     这些链接来自 curate 阶段的 web search 补充，不经候选集过滤。")
+
+
 def cmd_finalize(args):
     """curate 完成后统一收尾：register → 索引一致性提醒 → index → notify"""
     date = args.date or today_str()
@@ -524,6 +570,7 @@ def cmd_finalize(args):
             print(f"📋 register {t}: 新增 {result['registered']}/{result['total_urls']} URLs")
 
     _warn_stale_index()
+    _warn_url_reuse(topics, date)
 
     cmd_index(args)
     if not args.skip_notify:
