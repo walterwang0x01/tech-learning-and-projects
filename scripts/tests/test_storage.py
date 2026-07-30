@@ -169,11 +169,14 @@ class TestRegisterPublished(unittest.TestCase):
         topic_dir.mkdir(parents=True)
         (topic_dir / "2026-05-10.md").write_text(VALID_MD, encoding="utf-8")
 
-        r1 = register_published("ai-agent", "2026-05-10", retention_days=60)
-        self.assertEqual(r1["registered"], 5)
-        self.assertNotIn("warning", r1)
+        # 冻结时间：否则 fixture 日期一旦超出 retention_days 窗口，
+        # 第一次登记的记录会被 cleanup_published_index 立刻清掉，幂等断言失效
+        with frozen_now(storage, "2026-05-10"):
+            r1 = register_published("ai-agent", "2026-05-10", retention_days=60)
+            self.assertEqual(r1["registered"], 5)
+            self.assertNotIn("warning", r1)
 
-        r2 = register_published("ai-agent", "2026-05-10", retention_days=60)
+            r2 = register_published("ai-agent", "2026-05-10", retention_days=60)
         # 已注册的 URL 跳过
         self.assertEqual(r2["registered"], 0)
         self.assertNotIn("warning", r2)

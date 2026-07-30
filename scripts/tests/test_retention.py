@@ -33,12 +33,13 @@ class TestCleanupRuns(unittest.TestCase):
         return d
 
     def test_remove_old(self):
-        # 2026-05-10 是"今天"，30 天前是 2026-04-10
+        # 冻结到 2026-05-10，30 天前是 2026-04-10
         self._mkday("2026-01-01")  # 很老
         self._mkday("2026-05-09")  # 最近
         self._mkday("2026-03-01")  # 中间（会被清）
 
-        result = cleanup_runs(days=30)
+        with frozen_now(retention, "2026-05-10"):
+            result = cleanup_runs(days=30)
         self.assertEqual(result["removed"], 2)
         self.assertEqual(result["kept"], 1)
 
