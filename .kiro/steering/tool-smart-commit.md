@@ -20,6 +20,7 @@ description: "基于当前 Git diff 生成结构化的 commit message 并提交�
 ```
 
 type 选择：
+
 - `docs`: 文档更新（learning-notes 下的改动）
 - `feat`: 新功能
 - `fix`: 修复

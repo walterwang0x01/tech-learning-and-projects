@@ -10,6 +10,7 @@ description: "流水线式采集：ingest → classify → candidates → agent 
 3. 严格按 Phase 0-5 执行
 
 关键命令参考（在 `_shared.md` 中有完整说明）：
+
 - 确认 / 触发流水线：`python3 scripts/briefing-tools.py run-all`
 - 读本主题候选集：`.kiro_tmp/briefings/runs/今天日期/candidates.ai-agent.jsonl`
 - 写文件 → register → index → notify

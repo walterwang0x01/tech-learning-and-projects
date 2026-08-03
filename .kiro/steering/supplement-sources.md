@@ -27,7 +27,7 @@ ingest
 `.kiro/briefings/config.json` → `supplement_sources`：
 
 | 源 | 默认 | 说明 |
-|----|------|------|
+| --- | --- | --- |
 | bilibili | on | 国内科技/AI 视频；服务器 412 时装 `bili-cli` |
 | v2ex | on | 开发者社区热点；hot + programmer/cloud/create |
 

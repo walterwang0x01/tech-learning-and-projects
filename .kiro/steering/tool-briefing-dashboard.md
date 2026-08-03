@@ -17,12 +17,13 @@ python3 scripts/briefing-tools.py status
 ## 2. 文档维护状态
 
 读取以下文件（如果存在）：
+
 - `learning-notes/.audit-progress.md` — 提取上次审查的技术栈、日期
 - `learning-notes/.update-log.md` — 提取上次知识追踪的技术栈和日期
 
 输出表格：
 | 项目 | 上次执行 | 覆盖技术栈 | 下次建议 |
-|------|----------|------------|----------|
+| --- | --- | --- | --- |
 
 ## 3. 错误日志与采集源健康检查
 

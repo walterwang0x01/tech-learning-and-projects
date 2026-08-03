@@ -13,7 +13,7 @@ inclusion: manual
 Kiro 的两类扩展能力各司其职：
 
 | 能力 | 生效时机 | 成本 | 典型用途 |
-|------|---------|------|----------|
+| --- | --- | --- | --- |
 | **steering** | 每轮对话的系统提示词 | 0 token（进入上下文一次） | 让 agent "天生"按规则生成 |
 | **hook (runCommand)** | 事件触发 | 0 token（纯脚本） | 确定性规则兜底（格式、路径、危险命令） |
 | **hook (askAgent)** | 事件触发 | 每次一轮 LLM | 需要语义判断才能决定的事 |
@@ -52,7 +52,7 @@ Kiro 的两类扩展能力各司其职：
 ## 三层命名契约（hook）
 
 | 前缀 | 作用域 | 位置 | 路径短路 |
-|------|--------|------|----------|
+| --- | --- | --- | --- |
 | `guard-` | 跨项目通用 | `~/.kiro/hooks/` | 不需要 |
 | `project-` | 项目专属 | `<project>/.kiro/hooks/` | **必须** |
 | `tool-` | 手动触发工具 | `<project>/.kiro/hooks/` | 不需要 |
@@ -107,7 +107,7 @@ User 级 `runCommand` 从任意工作区 cwd 执行：
 ### 当前实际部署
 
 | 层级 | 策略 | 范围 | 实现 |
-|------|------|------|------|
+| --- | --- | --- | --- |
 | user 级 | WARNING 非阻断 | 所有工作区 | `~/.kiro/hooks/guard-sensitive-files` + `guard-shell-safety`，打印警告，返回 0 |
 | project 级 | 无 | — | 暂未部署 BLOCKED 层，以 user 级 WARNING + agent `safety_guardrails` + 用户确认三重兜底 |
 

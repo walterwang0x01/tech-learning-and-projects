@@ -73,6 +73,7 @@ python3 scripts/briefing-tools.py run-all
 ```
 
 串行跑 ingest → classify → candidates → cleanup。产出：
+
 - `.kiro_tmp/briefings/runs/YYYY-MM-DD/pool.jsonl`
 - `.kiro_tmp/briefings/runs/YYYY-MM-DD/classified.jsonl`
 - `.kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.{topic}.jsonl` × 3
@@ -92,6 +93,7 @@ python3 scripts/briefing-tools.py run-all
 **优先**：candidates.{topic}.jsonl 中 score.total ≥ 15 的条目（已打分）
 **其次**：web search 结果按人工判断
 **评分维度（脚本自动）**：
+
 - 时效性：48h 内 5 / 一周内 3 / 更早 1
 - 一手性：官博/研究 5 / 垂媒 4 / 转载 3（可被 `score_overrides` per-topic 覆盖）
 - 相关性：命中 Walter 偏好栈（LangGraph/MCP/CrewAI/RAG 等）+2
@@ -140,7 +142,7 @@ python3 scripts/briefing-tools.py finalize --topic all   # 或 --topic {topic}
 `.kiro/briefings/config.json` — 所有可调配置：
 
 | 字段 | 含义 |
-|------|------|
+| --- | --- |
 | `freshness_hours` | 采集时效过滤窗口 |
 | `rss_sources[]` | RSS 源（name / url / topic_hints / 可选 timeout / fallback_url） |
 | `rss_sources[].enabled` | `false` = 已知长期不可达，不采也不进熔断告警。**与熔断是两种语义**：熔断表示「临时故障待恢复」，停用表示「别再提醒我」。优先级高于 half-open 试探 |
@@ -164,7 +166,7 @@ python3 scripts/briefing-tools.py finalize --topic all   # 或 --topic {topic}
 ## 索引与事实来源
 
 | 文件 | 含义 | 维护者 |
-|------|------|--------|
+| --- | --- | --- |
 | `.published-index.json` | 已写入简报 md 的 URL，跨天去重真值 | `register` + `rebuild-index` |
 | `.kiro_tmp/briefings/source-health.json` | 源健康记录（连续失败天数等） | `ingest` 自动 |
 | `.kiro_tmp/briefings/runs/YYYY-MM-DD/` | 当日流水线产物 | `ingest` / `classify` / `candidates` |

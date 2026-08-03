@@ -13,6 +13,7 @@ python3 scripts/briefing-tools.py status --json
 ```
 
 然后扫描 `learning-notes/briefings/` 下三个主题目录：
+
 - 统计文件总数、本月文件数、本周文件数
 - 找出最早和最近的文件日期
 - 标记超过 30 天的文件为「可归档」
@@ -28,6 +29,7 @@ python3 scripts/briefing-tools.py index --topic all
 ## 3. 孤儿文件检查
 
 扫描 `learning-notes/` 下所有子目录：
+
 - 空目录（没有任何文件）
 - 孤立的 .md 文件（不在任何技术栈目录结构中）
 - 临时文件（如 .DS_Store、*.tmp、*~）
@@ -37,6 +39,7 @@ python3 scripts/briefing-tools.py index --topic all
 ## 4. 进度文件健康检查
 
 检查以下状态文件是否存在且格式正确：
+
 - `learning-notes/.audit-progress.md`
 - `learning-notes/.update-log.md`
 - `learning-notes/briefings/.errors.log`
