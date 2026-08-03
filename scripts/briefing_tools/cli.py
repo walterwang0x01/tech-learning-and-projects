@@ -522,10 +522,67 @@ def _collect_url_reuse(topics: list[str], date: str) -> list[tuple[str, dict]]:
     return rows
 
 
+def _collect_zero_yield(date: str, lookback: int = 7) -> list[dict]:
+    """今日抓取成功但零产出的源，附「最近一次有产出是几天前」。
+
+    这类源全链路都不算失败：HTTP 200、XML 合法、health 记 ok，只有下游候选数少一截。
+    基线又只看聚合后的候选数，arXiv 丢掉 282 条时它仍判「66% 正常」。
+
+    可预期（arXiv 周末不发论文）与真故障（feed 改版导致解析全失败）在单日数据上无法
+    区分，所以给出「上次有产出」让人判断：隔 1 天大概率正常，连续多天就是坏了。
+    """
+    mpath = RUNS_DIR / date / "metrics.json"
+    if not mpath.exists():
+        return []
+    try:
+        sources = json.loads(mpath.read_text(encoding="utf-8")).get("sources") or []
+    except (json.JSONDecodeError, OSError):
+        return []
+
+    zero = [s["name"] for s in sources if s.get("ok") and s.get("count", 0) == 0]
+    if not zero:
+        return []
+
+    try:
+        today = datetime.strptime(date, "%Y-%m-%d")
+    except ValueError:
+        return [{"name": n, "days_since_yield": None} for n in zero]
+
+    out: list[dict] = []
+    for name in zero:
+        last_date, days_ago, zero_runs = None, None, 0
+        for i in range(1, lookback + 1):
+            d = (today - timedelta(days=i)).strftime("%Y-%m-%d")
+            prev = RUNS_DIR / d / "metrics.json"
+            if not prev.exists():
+                continue  # 那天没采集，不能算作「零产出」
+            try:
+                prev_srcs = json.loads(prev.read_text(encoding="utf-8")).get("sources") or []
+            except (json.JSONDecodeError, OSError):
+                continue
+            hit = next((s for s in prev_srcs if s.get("name") == name), None)
+            if hit is None:
+                continue
+            if hit.get("count", 0) > 0:
+                last_date, days_ago = d, i
+                break
+            zero_runs += 1
+        out.append({
+            "name": name,
+            "last_yield_date": last_date,
+            "days_ago": days_ago,
+            # 回溯窗口内「确实采集过但该源零产出」的次数，区别于「那天压根没跑」
+            "zero_runs": zero_runs,
+            "lookback": lookback,
+        })
+    return out
+
+
 def _print_action_items(
     reuse_rows: list[tuple[str, dict]],
     index_issues: dict,
     baselines: list[dict],
+    zero_yield: list[dict] | None = None,
     max_show: int = 5,
 ) -> None:
     """finalize 最后统一输出待人工确认的事项。
@@ -582,8 +639,24 @@ def _print_action_items(
         for b in anomalies:
             print(f"     - {TOPIC_NAMES.get(b['topic'], b['topic'])}：{b['message']}")
 
+    for z in zero_yield or []:
+        if "zero_yield" not in blocks:
+            blocks.append("zero_yield")
+            print(f"\n⚠️  抓取成功但零产出 {len(zero_yield)} 个源")
+            print("     HTTP 与解析都没报错，所以不计失败、不进熔断，基线也只看到下游少一截。")
+        last, ago, zr, look = (
+            z["last_yield_date"], z["days_ago"], z["zero_runs"], z.get("lookback", 7),
+        )
+        if last is None:
+            hint = f"近 {look} 天的采集里一次都没产出过 → 大概率 feed 已失效，去查"
+        else:
+            hint = f"上次有产出 {last}（{ago} 天前）"
+            # zero_runs 才是真信号：中间没采集的日子（周末）不该算进「连续失败」
+            hint += f"，期间已零产出 {zr} 次 → 值得查" if zr >= 2 else "，期间无其他零产出记录"
+        print(f"     - {z['name']}：{hint}")
+
     if not blocks:
-        print("\n✅ 无需人工介入：URL 无复用、索引一致、基线正常")
+        print("\n✅ 无需人工介入：URL 无复用、索引一致、基线正常、无源零产出")
     print("=" * 56)
 
 
@@ -606,13 +679,16 @@ def cmd_finalize(args):
     # 先收集待办，但等状态面板输出完再打印——最后一屏才是人真正会看的地方
     reuse_rows = _collect_url_reuse(topics, date)
     index_issues = _collect_stale_index()
+    zero_yield = _collect_zero_yield(date)
 
     cmd_index(args)
     if not args.skip_notify:
         cmd_notify(args)
     report = _collect_status()
     print(_format_status(report))
-    _print_action_items(reuse_rows, index_issues, report.get("baselines", []))
+    _print_action_items(
+        reuse_rows, index_issues, report.get("baselines", []), zero_yield=zero_yield
+    )
     print("\n✅ finalize 完成")
 
 

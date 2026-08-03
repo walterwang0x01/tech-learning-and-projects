@@ -6,6 +6,7 @@
 
 from conftest import *  # noqa
 import io
+import json
 import tempfile
 import unittest
 from contextlib import redirect_stdout
@@ -100,6 +101,90 @@ class TestPrintActionItems(unittest.TestCase):
         self.assertIn("基线异常", out)
         self.assertIn("偏低", out)
         self.assertNotIn("china-tech", out)
+
+
+class TestZeroYield(unittest.TestCase):
+    """抓取成功但零产出：HTTP/解析都不报错，全链路唯一能看见它的地方"""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.runs = Path(self.tmp.name) / "runs"
+        self.runs.mkdir()
+        self.patches = [
+            patch.object(cfg_mod, "RUNS_DIR", self.runs),
+            patch.object(cli, "RUNS_DIR", self.runs),
+        ]
+        for p in self.patches:
+            p.start()
+
+    def tearDown(self):
+        for p in self.patches:
+            p.stop()
+        self.tmp.cleanup()
+
+    def _metrics(self, date: str, sources: list[tuple[str, bool, int]]):
+        d = self.runs / date
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "metrics.json").write_text(json.dumps({
+            "sources": [
+                {"name": n, "ok": ok, "count": c} for n, ok, c in sources
+            ]
+        }), encoding="utf-8")
+
+    def test_no_zero_yield(self):
+        self._metrics("2026-08-03", [("A", True, 10), ("B", True, 5)])
+        self.assertEqual(cli._collect_zero_yield("2026-08-03"), [])
+
+    def test_failed_source_not_counted(self):
+        """抓取失败的源走熔断那条路，不算零产出"""
+        self._metrics("2026-08-03", [("A", False, 0)])
+        self.assertEqual(cli._collect_zero_yield("2026-08-03"), [])
+
+    def test_missing_metrics(self):
+        self.assertEqual(cli._collect_zero_yield("2026-08-03"), [])
+
+    def test_gap_days_not_counted_as_zero_runs(self):
+        """中间没采集的日子（周末）不该算进零产出次数 —— 否则会误报成源坏了"""
+        self._metrics("2026-08-03", [("arXiv", True, 0)])
+        self._metrics("2026-07-31", [("arXiv", True, 282)])  # 08-01/02 无 run 目录
+        got = cli._collect_zero_yield("2026-08-03")
+        self.assertEqual(len(got), 1)
+        self.assertEqual(got[0]["last_yield_date"], "2026-07-31")
+        self.assertEqual(got[0]["days_ago"], 3)
+        self.assertEqual(got[0]["zero_runs"], 0)
+
+    def test_consecutive_zero_runs_counted(self):
+        self._metrics("2026-08-03", [("X", True, 0)])
+        self._metrics("2026-08-02", [("X", True, 0)])
+        self._metrics("2026-08-01", [("X", True, 0)])
+        self._metrics("2026-07-31", [("X", True, 40)])
+        got = cli._collect_zero_yield("2026-08-03")
+        self.assertEqual(got[0]["zero_runs"], 2)
+        self.assertEqual(got[0]["days_ago"], 3)
+
+    def test_never_yielded_in_window(self):
+        self._metrics("2026-08-03", [("Dead", True, 0)])
+        self._metrics("2026-08-02", [("Dead", True, 0)])
+        got = cli._collect_zero_yield("2026-08-03")
+        self.assertIsNone(got[0]["last_yield_date"])
+
+    def test_printed_hint_distinguishes_gap_from_failure(self):
+        gap = [{"name": "arXiv", "last_yield_date": "2026-07-31", "days_ago": 3,
+                "zero_runs": 0, "lookback": 7}]
+        out = _capture(cli._print_action_items, [], {}, [], zero_yield=gap)
+        self.assertIn("上次有产出 2026-07-31", out)
+        self.assertIn("无其他零产出记录", out)
+        self.assertNotIn("值得查", out)
+
+        broken = [{"name": "X", "last_yield_date": "2026-07-31", "days_ago": 3,
+                   "zero_runs": 2, "lookback": 7}]
+        out2 = _capture(cli._print_action_items, [], {}, [], zero_yield=broken)
+        self.assertIn("已零产出 2 次", out2)
+        self.assertIn("值得查", out2)
+
+    def test_all_clear_message_mentions_zero_yield(self):
+        out = _capture(cli._print_action_items, [], {}, [], zero_yield=[])
+        self.assertIn("无源零产出", out)
 
 
 class TestFormatStatus(unittest.TestCase):

@@ -203,6 +203,9 @@ python3 scripts/briefing-tools.py health-reset "源名称"
 
 - web search / web_fetch / 文件写入失败 → 追加到 `learning-notes/briefings/.errors.log`
 - RSS 源失败 → 自动记录到 `source-health.json`，连续 `fail_threshold_days` 天失败自动熔断
+- **「抓取成功但零产出」是熔断管不到的盲区**：HTTP 200 + XML 合法 + 零 item 时，health 记 ok、不进熔断，基线又只看下游候选数（arXiv 丢掉 282 条时基线仍判「66% 正常」）。`ingest` 与 `finalize` 会单独报这类源，并给出「上次有产出是哪天、期间零产出几次」。
+  判据：**看 `zero_runs` 不看天数差** —— 中间没采集的日子（周末不跑）不算连续失败。`zero_runs: 0` 说明只是隔了没跑的日子，`zero_runs >= 2` 才是真出问题。
+  已知的正常情形：arXiv 的 feed 自己声明 `skipDays: Saturday/Sunday`，周一凌晨构建时新论文还没发布，当天会是空 feed
 - **熔断会自愈**：熔断源距最后一次失败满 `retry_after_days` 后放行一次 half-open 试探，成功则 `consecutive_failures` 归零、源自动恢复；失败则刷新 `last_fail_date` 重新计时。`health` 命令会显示「N 天后自动试探」。
   ⚠️ 熔断源被跳过时不会调用 `record_source_result`，所以在没有试探机制的旧版里 `consecutive_failures` 会永久冻结在阈值上——**看到熔断告警不要默认它需要人工干预，先看试探提示**
 - **判断熔断源是否值得救**：先 `curl -sS -o /dev/null -w "%{http_code}" --max-time 20 <源URL>`。返回 `000`（连接超时）说明网络层不可达，`health-reset` 无用，考虑改用镜像源或设 `enabled: false`；返回 `404` / `301` 是 RSS 路径变了，改 `url` 后再 reset；返回 `200` 才是真临时故障
@@ -217,7 +220,7 @@ python3 scripts/briefing-tools.py health-reset "源名称"
 python3 -m unittest discover scripts/tests -v
 ```
 
-224 个单元测试覆盖：分类、评分、去重、候选集过滤、源健康熔断与 half-open 自愈、源筛选三分支、URL 复用检查、条目计数、收尾报告、原子写入、md 校验、retention、end-to-end 集成。
+232 个单元测试覆盖：分类、评分、去重、候选集过滤、源健康熔断与 half-open 自愈、源筛选三分支、零产出源检测、URL 复用检查、条目计数、收尾报告、原子写入、md 校验、retention、end-to-end 集成。
 
 **改了逻辑就补测试。** 已经出现过「改了 4 处逻辑只有 1 处有覆盖」的情况，其中推送计数那处的 bug 正是因为 `count_briefing_items` 原本零测试才漏到线上。
 

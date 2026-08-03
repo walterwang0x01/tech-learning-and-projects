@@ -179,6 +179,15 @@ def run_ingest(cfg: Config) -> tuple[list[dict], list[dict], list[str]]:
         breakdown = ", ".join(f"{m['name']}={m['count']}" for m in sup_metrics)
         print(f"  📎 supplement: {len(sup_items)} 条 ({breakdown})")
 
+    # 抓取成功但解析出 0 条：HTTP 200 + 合法 XML + 零 item，全链路都不算失败，
+    # health 记为 ok、基线只看到下游候选数少了一截。arXiv 丢掉 282 条（占当日
+    # 去重前产出的 16%）时基线仍判「66% 正常」，就是这么漏掉的。
+    # 可预期（arXiv 周末不发论文）和真故障（feed 改版导致解析全失败）在数据上
+    # 无法区分，所以只报告不判定。
+    zero_yield = [m["name"] for m in metrics if m["ok"] and m["count"] == 0]
+    if zero_yield:
+        print(f"  ⚠️  抓取成功但零产出 {len(zero_yield)} 个源: {', '.join(zero_yield)}")
+
     # 本 run 内按 URL/title 去重
     seen = set()
     deduped: list[dict] = []
