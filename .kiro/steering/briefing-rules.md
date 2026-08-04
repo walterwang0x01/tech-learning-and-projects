@@ -1,13 +1,13 @@
 ---
 inclusion: fileMatch
-fileMatchPattern: 'learning-notes/briefings/**'
+fileMatchPattern: 'learning-notes/_briefings/**'
 ---
 
 # 📰 简报通用规则（v3.1 流水线架构）
 
 本文件定义三个简报 hook（AI Agent / 国内科技 / 国际科技）共享的流程和规范。
 
-**自动加载**：通过 `fileMatch` 自动绑定 `learning-notes/briefings/**` 下的所有文件。
+**自动加载**：通过 `fileMatch` 自动绑定 `learning-notes/_briefings/**` 下的所有文件。
 **未命中 fileMatch 时**：运行 `python3 scripts/briefing-tools.py show-rules` 显式拉取。
 
 ---
@@ -61,7 +61,7 @@ fileMatchPattern: 'learning-notes/briefings/**'
 多 workspace 环境中容易混淆——**每次执行前先确认 cwd**。
 
 1. 确认今天日期
-2. 在 **tech-learning-and-projects** 项目下检查 `learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`：
+2. 在 **tech-learning-and-projects** 项目下检查 `learning-notes/_briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`：
    - **已存在** → 告知用户"✅ {主题} 今日已完成，跳过"并结束
    - **不存在** → 继续
 3. 三个主题都已存在 → 输出汇总后终止，**不执行 run-all**
@@ -201,7 +201,7 @@ python3 scripts/briefing-tools.py health-reset "源名称"
 
 ## 异常处理
 
-- web search / web_fetch / 文件写入失败 → 追加到 `learning-notes/briefings/.errors.log`
+- web search / web_fetch / 文件写入失败 → 追加到 `learning-notes/_briefings/.errors.log`
 - RSS 源失败 → 自动记录到 `source-health.json`，连续 `fail_threshold_days` 天失败自动熔断
 - **「抓取成功但零产出」是熔断管不到的盲区**：HTTP 200 + XML 合法 + 零 item 时，health 记 ok、不进熔断，基线又只看下游候选数（arXiv 丢掉 282 条时基线仍判「66% 正常」）。`ingest` 与 `finalize` 会单独报这类源，并给出「上次有产出是哪天、期间零产出几次」。
   判据：**看 `zero_runs` 不看天数差** —— 中间没采集的日子（周末不跑）不算连续失败。`zero_runs: 0` 说明只是隔了没跑的日子，`zero_runs >= 2` 才是真出问题。

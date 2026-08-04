@@ -6,7 +6,7 @@
 ## 主题参数
 
 - topic：`ai-agent`
-- 输出路径：`learning-notes/briefings/ai-agent/YYYY/MM/YYYY-MM-DD.md`
+- 输出路径：`learning-notes/_briefings/ai-agent/YYYY/MM/YYYY-MM-DD.md`
 - 候选集：`.kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.ai-agent.jsonl`
 - H1 模板：`# AI Agent 简报 — YYYY-MM-DD`
 - 副标题：`> 每日精选 AI Agent 领域最值得关注的动态。5 分钟读完。`
@@ -40,5 +40,5 @@
 
 ## 周报（周日额外生成）
 
-文件：`learning-notes/briefings/ai-agent/YYYY/MM/YYYY-WXX-weekly.md`
+文件：`learning-notes/_briefings/ai-agent/YYYY/MM/YYYY-WXX-weekly.md`
 包含：本周 Top 5（≥3 段描述）、趋势总结（🔺/🆕/🔻 各 3-4 条）、论文精选表、热门项目表、下周预测。

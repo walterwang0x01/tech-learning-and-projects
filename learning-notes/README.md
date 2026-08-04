@@ -21,163 +21,45 @@
 
 ```
 learning-notes/
-├── frontend/                      # 前端技术栈（按类别组织）
-│   ├── 00-HTML与CSS基础/           # HTML5、CSS3、布局、响应式
-│   ├── 01-JavaScript基础/          # 数据类型、函数、原型链、异步、ES6+、DOM
-│   ├── 02-TypeScript/              # 基础类型、高级类型、工程化
-│   ├── 03-React/                   # 基础、Hooks、状态管理、Router、性能优化
-│   ├── 04-Vue/                     # Vue3、组合式API、Pinia、Nuxt3
-│   ├── 05-工程化与构建/             # Webpack、Vite、包管理、ESLint、Monorepo
-│   ├── 06-CSS进阶/                 # Sass/Less、CSS-in-JS、Tailwind、动画
-│   ├── 07-Node.js/                 # 基础、Express/Koa、数据库、性能优化
-│   ├── 08-测试/                    # Jest、组件测试、E2E、测试策略
-│   ├── 09-浏览器与网络/             # 渲染原理、HTTP、安全、存储
-│   ├── 10-性能优化/                 # 指标、加载优化、运行时优化、资源优化
-│   ├── 11-跨平台开发/              # React Native、Electron、小程序、Flutter
-│   ├── 12-可视化与图形/             # Canvas/SVG、ECharts、D3.js、Three.js
-│   ├── 13-微前端与架构/             # 微前端、设计模式、大型项目架构
-│   ├── 14-DevOps与部署/            # CI/CD、Nginx、Docker、CDN
-│   └── 15-面试准备/                # JS面试题、框架面试题、综合面试题
+├── 00-ai/                         # AI 技术（Agent + 机器学习 + 大模型）
+│   ├── ai-agent/                  # AI Agent 技术栈（24个分类，100+篇）
+│   ├── machine-learning/          # 经典机器学习 + 深度学习原理（8个子目录）
+│   └── llm/                       # 大语言模型原理与工程（6个子目录）
 │
-├── ios/                           # iOS 技术栈（按类别组织）
-│   ├── 00-Swift基础/              # Swift 语法、OOP、协议与泛型、并发、ARC
-│   ├── 01-SwiftUI/                # 基础布局、状态管理、导航、动画
-│   ├── 02-UIKit/                  # 核心组件、AutoLayout、TableView/CollectionView
-│   ├── 03-数据持久化/              # UserDefaults、Core Data、SwiftData、文件系统
-│   ├── 04-网络编程/                # URLSession、Alamofire/Moya、Codable
-│   ├── 05-架构模式/                # MVC/MVVM、Combine、Clean Architecture
-│   ├── 06-系统框架/                # 推送通知、地图、多媒体、Core Animation
-│   ├── 07-性能优化/                # Instruments、内存优化、启动优化
-│   ├── 08-工程化/                  # Xcode、SPM/CocoaPods、测试、CI/CD
-│   ├── 09-跨平台/                  # Flutter/RN集成、SwiftUI与UIKit混合
-│   └── 10-面试准备/                # Swift面试题、iOS系统面试题、架构面试题
+├── 01-languages/                  # 编程语言
+│   ├── python/                    # Python 全栈（16个子目录）
+│   ├── java/                      # Java 后端（12个子目录）
+│   ├── go/                        # Go 云原生（6个子目录）
+│   └── rust/                      # Rust 系统编程
 │
-├── android/                       # Android 技术栈（按类别组织）
-│   ├── 00-Kotlin基础/             # Kotlin 语法、OOP、函数式、协程、Java互操作
-│   ├── 01-Jetpack Compose/        # 基础布局、状态管理、导航、动画
-│   ├── 02-传统View体系/            # View基础、RecyclerView、ConstraintLayout
-│   ├── 03-Jetpack组件/            # ViewModel、Room、Navigation、WorkManager
-│   ├── 04-网络编程/                # Retrofit/OkHttp、序列化、缓存策略
-│   ├── 05-架构模式/                # MVVM/MVI、Clean Architecture、Hilt/Koin
-│   ├── 06-系统能力/                # 四大组件、通知、多媒体、权限
-│   ├── 07-性能优化/                # 内存优化、启动优化、布局优化
-│   ├── 08-工程化/                  # Gradle、多渠道打包、测试、CI/CD
-│   ├── 09-跨平台/                  # Flutter集成、KMM、Compose与View混合
-│   └── 10-面试准备/                # Kotlin面试题、Android系统面试题、架构面试题
+├── 02-frontend/                   # 前端技术
+│   └── frontend/                  # 前端全栈（16个子目录）
 │
-├── ai-agent/                      # AI Agent 技术栈（24个分类，90个文档）
-│   ├── 00-基础概念/                # Agent概述、大语言模型、Prompt Engineering
-│   ├── 01-Agentic设计模式/        # Anthropic模式、15+设计模式、工作流编排
-│   ├── 02-Agent协议/              # MCP/A2A/ACP/ANP/AG-UI + 协议转换工具
-│   ├── 03-Agent框架/              # LangGraph、CrewAI、OpenAI SDK、ADK、Strands
-│   ├── 04-Agent框架补充/          # LlamaIndex、Claude能力、框架选型指南
-│   ├── 05-Java-TS Agent生态/      # Spring AI、Vercel AI SDK、Dapr Agents
-│   ├── 06-RAG进阶/                # RAG架构、向量数据库、高级RAG、GraphRAG
-│   ├── 07-工具与Function Calling/  # Function Calling、MCP Server开发、工具安全
-│   ├── 08-工具平台与沙箱/          # Composio、E2B、工具生态总览
-│   ├── 09-多Agent系统/            # 架构模式、通信协调、人机协作
-│   ├── 10-记忆与状态/              # 短期/长期记忆、对话管理、知识库
-│   ├── 11-Agent记忆框架/          # Mem0、Letta/MemGPT、Zep/LangMem
-│   ├── 12-模型服务/                # API接入、开源模型部署、模型路由
-│   ├── 13-AI网关与路由/            # LiteLLM、Vercel AI SDK、Portkey
-│   ├── 14-可观测与评估/            # 可观测性平台、评估基准、安全对齐
-│   ├── 15-Agent安全与治理/         # 身份权限、治理框架
-│   ├── 16-Harness Engineering/    # 完整指南、Context Eng、Kiro配置、CI/CD集成
-│   ├── 17-Coding Agent/           # Claude Code、IDE Agent、Devin/OpenHands
-│   ├── 18-OpenClaw与Agent生态/     # 浏览器自动化、AgentOS、Skills生态
-│   ├── 19-Voice Agent/            # 语音Agent、实时交互
-│   ├── 20-Agent支付/              # 支付基础、术语字典、行业全景、AgentToken分析
-│   ├── 21-云厂商Agent方案/         # AWS/Azure/GCP/阿里云 + 全面对比
-│   ├── 22-低代码平台/              # Dify、Coze/FastGPT、n8n/Flowise
-│   └── 23-实战案例/                # 客服/代码/数据/研究/运维/内容创作 Agent
+├── 03-mobile/                     # 移动开发
+│   ├── ios/                       # iOS / Swift / SwiftUI（11个子目录）
+│   └── android/                   # Android / Kotlin / Compose（11个子目录）
 │
-├── java/                          # Java 技术栈（按类别组织）
-│   ├── 00-Java基础/               # 新特性、字符串、泛型、集合、并发、IO、JVM
-│   ├── 01-框架/                   # Spring/SpringBoot/SpringMVC/SpringCloud/MyBatis
-│   ├── 02-中间件/                 # Redis、RabbitMQ、Kafka、Elasticsearch、Nginx
-│   ├── 03-容器化/                 # Docker、Kubernetes
-│   ├── 04-设计模式/               # 23种设计模式
-│   ├── 05-网络编程/               # Netty、gRPC
-│   ├── 06-构建工具/               # Maven、Gradle
-│   ├── 07-数据库/                 # MySQL基础/中级/高级
-│   ├── 08-部署与运维/             # Nacos、RabbitMQ、ES、Redis集群部署
-│   ├── 09-源码分析/               # Nacos、Sentinel源码
-│   ├── 10-工具与测试/             # Jmeter
-│   └── 11-面试准备/               # 微服务面试题
+├── 04-backend-infra/              # 后端 & 基础设施
+│   ├── architecture/              # 架构设计（事件驱动、微服务、DDD、CQRS）
+│   ├── databases/                 # 数据库（PostgreSQL、向量搜索、ClickHouse）
+│   ├── data-engineering/          # 数据工程（Airflow、dbt、Iceberg、Flink）
+│   ├── observability-sre/         # 可观测性 & SRE（OTel、Prometheus、SLO）
+│   ├── platform-engineering/      # 平台工程（GitOps、IaC、CI/CD、FinOps）
+│   └── security/                  # 安全（OWASP、零信任、容器安全、Secrets）
 │
-├── python/                        # Python 技术栈（按类别组织）
-│   ├── 00-Python基础/             # 语法、数据类型、数据结构、函数、OOP、高级特性
-│   ├── 01-Web开发/                # Flask、Django、FastAPI、WebSocket、GraphQL
-│   ├── 02-数据分析/               # NumPy、Pandas、可视化、统计分析
-│   ├── 03-机器学习/               # ML基础、深度学习、LangChain、RAG、Agent
-│   ├── 04-并发编程/               # 多线程、进程池、协程、异步
-│   ├── 05-网络编程/               # Socket、HTTP、gRPC
-│   ├── 06-爬虫/                   # Scrapy、反爬虫、分布式爬虫
-│   ├── 07-数据库操作/             # SQLAlchemy、NoSQL、连接池
-│   ├── 08-测试/                   # pytest、Mock、TDD
-│   ├── 09-工具与规范/             # 虚拟环境、代码质量、日志
-│   ├── 10-设计模式/               # Python设计模式
-│   ├── 11-部署与运维/             # CI/CD、K8s、监控
-│   ├── 12-性能优化/               # 性能分析、内存优化、缓存
-│   ├── 13-安全编程/               # 漏洞防护、加密认证
-│   ├── 14-算法与数据结构/         # 经典算法、高级数据结构
-│   └── 15-消息队列/               # RabbitMQ、Kafka、Celery
+├── _briefings/                    # 每日技术资讯简报（AI Agent / 国内 / 国际）
 │
-├── architecture/                  # 架构设计
-│   ├── 01-事件驱动架构.md
-│   ├── 02-微服务架构模式.md
-│   ├── 03-DDD领域驱动设计.md
-│   ├── 04-CQRS与事件溯源.md
-│   └── 05-系统设计核心概念.md
-│
-├── observability-sre/             # 可观测性与 SRE
-│   ├── 01-可观测性基础.md
-│   ├── 02-OpenTelemetry完全指南.md
-│   ├── 03-Prometheus与Grafana.md
-│   ├── 04-日志聚合Loki-ELK.md
-│   ├── 05-SLO-SLI实践.md
-│   ├── 06-分布式追踪实战.md
-│   ├── 07-AI-Agent可观测性.md
-│   └── 08-事件响应与Postmortem.md
-│
-├── go/                            # Go 语言（云原生主力）
-│   ├── 00-Go基础/
-│   ├── 01-并发编程/
-│   ├── 02-Web开发/
-│   ├── 03-云原生/                 # Kubernetes client-go、Operator
-│   └── 04-工程化/
-│
-├── rust/                          # Rust（工具链/性能扩展）
-│   ├── 01-语法与所有权.md
-│   ├── 03-异步编程.md              # Tokio、Axum
-│   └── 05-高性能工具开发.md        # PyO3、napi-rs、Wasm
-│
-├── databases/                     # 数据库（PG 为核心）
-│   ├── 02-PostgreSQL高级特性.md   # PG 18 async I/O、UUIDv7、JSONB
-│   ├── 03-PostgreSQL性能优化.md
-│   ├── 04-pgvector与向量搜索.md   # AI 时代的向量基础设施
-│   ├── 06-ClickHouse分析数据库.md
-│   ├── 07-数据库选型指南.md
-│   └── 08-SQL进阶.md               # 窗口函数、递归、LATERAL
-│
-├── data-engineering/              # 数据工程
-│   ├── 01-现代数据栈概览.md       # Lakehouse、ELT、Data Mesh
-│   ├── 03-dbt数据建模.md
-│   ├── 04-Iceberg-Delta-Hudi对比.md
-│   └── 05-CDC与Debezium.md
-│
-├── security/                      # 安全与合规
-│   ├── 02-认证与授权体系.md       # OAuth 2.1、OIDC、Passkey
-│   ├── 04-零信任架构.md            # SPIFFE、mTLS、Service Mesh
-│   ├── 05-供应链安全.md            # SLSA、Sigstore、SBOM
-│   └── 06-LLM与Agent安全.md
-│
-└── platform-engineering/          # 平台工程
-    ├── 01-平台工程概览.md         # Team Topologies、IDP、Golden Path
-    ├── 03-GitOps实践.md            # Argo CD、Flux、Rollouts
-    ├── 04-IaC基础设施即代码.md
-    └── 06-FinOps成本治理.md
+├── README.md                      # 本文件
+├── ai-roadmap.md                  # AI 知识体系审计与学习路线
+└── ai-learning-progress.md        # AI 学习进度跟踪
 ```
+
+详细子目录见各分组内的 README.md：
+- [AI 技术](00-ai/ai-agent/README.md) | [机器学习](00-ai/machine-learning/README.md) | [大模型](00-ai/llm/README.md)
+- [Python](01-languages/python/README.md) | [Java](01-languages/java/README.md) | [Go](01-languages/go/README.md) | [Rust](01-languages/rust/README.md)
+- [前端](02-frontend/frontend/README.md)
+- [iOS](03-mobile/ios/README.md) | [Android](03-mobile/android/README.md)
+- [数据库](04-backend-infra/databases/README.md) | [可观测性](04-backend-infra/observability-sre/README.md) | [平台工程](04-backend-infra/platform-engineering/README.md) | [安全](04-backend-infra/security/README.md)
 
 ## 🎯 内容分类
 
@@ -415,7 +297,7 @@ learning-notes/
 
 ### 机器学习与深度学习原理
 
-> 详细索引 → [machine-learning/README.md](machine-learning/README.md)
+> 详细索引 → [machine-learning/README.md](00-ai/machine-learning/README.md)
 
 - **机器学习基础**：学习范式、经验风险与结构风险、泛化误差、归纳偏置、数据泄露、交叉验证
 - **经典算法**：线性/逻辑回归推导、决策树、集成学习（RF/GBDT/XGBoost/LightGBM）、SVM 与核方法、朴素贝叶斯、聚类、降维
@@ -428,7 +310,7 @@ learning-notes/
 
 ### 大模型原理与工程
 
-> 详细索引 → [llm/README.md](llm/README.md)
+> 详细索引 → [llm/README.md](00-ai/llm/README.md)
 
 - **Transformer原理**：注意力机制推导（含 sqrt(d_k) 方差分析）、位置编码（正弦式/RoPE/ALiBi）、架构组件与训练稳定性
 - **分词与表示**：BPE/WordPiece/Unigram/SentencePiece、词向量演进（word2vec/GloVe/FastText）

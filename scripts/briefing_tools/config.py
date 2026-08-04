@@ -11,7 +11,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent.parent
 REPO_ROOT = SCRIPT_DIR.parent
 DEFAULT_CONFIG = REPO_ROOT / ".kiro" / "briefings" / "config.json"
 
-BASE_DIR = REPO_ROOT / "learning-notes" / "briefings"
+BASE_DIR = REPO_ROOT / "learning-notes" / "_briefings"
 PUBLISHED_INDEX = BASE_DIR / ".published-index.json"
 LEGACY_INDEX = BASE_DIR / ".dedup-index.json"
 SOURCE_HEALTH_FILE = REPO_ROOT / ".kiro_tmp" / "briefings" / "source-health.json"

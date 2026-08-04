@@ -6,7 +6,7 @@
 ## 主题参数
 
 - topic：`china-tech`
-- 输出路径：`learning-notes/briefings/china-tech/YYYY/MM/YYYY-MM-DD.md`
+- 输出路径：`learning-notes/_briefings/china-tech/YYYY/MM/YYYY-MM-DD.md`
 - 候选集：`.kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.china-tech.jsonl`
 - H1 模板：`# 🇨🇳 国内科技简报 — YYYY-MM-DD`
 - 副标题：`> 每日精选国内科技领域最值得关注的动态。5 分钟读完。`

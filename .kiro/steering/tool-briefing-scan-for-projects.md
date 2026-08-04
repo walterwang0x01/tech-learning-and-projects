@@ -13,5 +13,5 @@ description: "按项目维度扫描简报，输出对每个项目有直接影响
 
 - 主题开关由 yaml 控制，不要扫被关闭的主题
 - 首次运行（last_scanned_date 为空）扫全部历史，之后增量
-- 输出文件：`learning-notes/briefings/_summaries/YYYY-MM-DD_review.md`
+- 输出文件：`learning-notes/_briefings/_summaries/YYYY-MM-DD_review.md`
 - 完成后必须更新 yaml 中的 `last_scanned_date`

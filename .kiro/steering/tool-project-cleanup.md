@@ -12,7 +12,7 @@ description: "扫描产出物目录，检查索引一致性，标记可归档内
 python3 scripts/briefing-tools.py status --json
 ```
 
-然后扫描 `learning-notes/briefings/` 下三个主题目录：
+然后扫描 `learning-notes/_briefings/` 下三个主题目录：
 
 - 统计文件总数、本月文件数、本周文件数
 - 找出最早和最近的文件日期
@@ -42,8 +42,8 @@ python3 scripts/briefing-tools.py index --topic all
 
 - `learning-notes/.audit-progress.md`
 - `learning-notes/.update-log.md`
-- `learning-notes/briefings/.errors.log`
-- `learning-notes/briefings/.dedup-index.json`（去重索引）
+- `learning-notes/_briefings/.errors.log`
+- `learning-notes/_briefings/.dedup-index.json`（去重索引）
 
 如果错误日志超过 100 行，建议截断保留最近 50 行。
 如果去重索引超过 30 天的条目过多，执行清理。

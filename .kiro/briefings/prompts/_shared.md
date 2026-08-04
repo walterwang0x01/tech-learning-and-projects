@@ -8,7 +8,7 @@
 ## 工作目录
 
 `/Users/administrator/PycharmProjects/tech-learning-and-projects/`
-所有相对路径以此为基准。通用规则见 `.kiro/steering/briefing-rules.md`（命中 `learning-notes/briefings/**` 自动加载）。
+所有相对路径以此为基准。通用规则见 `.kiro/steering/briefing-rules.md`（命中 `learning-notes/_briefings/**` 自动加载）。
 
 ---
 
@@ -18,7 +18,7 @@
 多 workspace 环境中严禁在 agenzo 或其他项目目录下做文件存在性检查。
 
 1. 今天日期已由工作区注入，动态计算年（YYYY）/ 月（MM）
-2. 在 **tech-learning-and-projects** 项目下检查 `learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`：
+2. 在 **tech-learning-and-projects** 项目下检查 `learning-notes/_briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`：
    - 已存在 → 告知用户「✅ {主题} 今日已完成，跳过」并结束
    - 不存在 → 继续
 3. 三个主题都已存在 → 输出汇总后终止，**不执行 run-all 或任何后续步骤**
@@ -248,13 +248,13 @@ JSON 结构：
 ### 路径 B（手写 markdown，仅用于路径 A 不可用时）
 
 ```bash
-# 1. fs_write 到 learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
+# 1. fs_write 到 learning-notes/_briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
 
 # 2. 严格校验（缺 H1 / 头条少 --- / 快讯不足都会 fail）
-python3 scripts/briefing-tools.py validate learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
+python3 scripts/briefing-tools.py validate learning-notes/_briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
 
 # 3. 跟金标准 fixture 对比章节骨架
-python3 scripts/briefing-tools.py compare-skeleton --topic {topic} learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
+python3 scripts/briefing-tools.py compare-skeleton --topic {topic} learning-notes/_briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
 ```
 
 ### 两条路径汇合处
@@ -279,7 +279,7 @@ python3 scripts/briefing-tools.py finalize --topic all
 **事后改 md 不是禁区**：register 之后仍然可以修正内容。改完按这个顺序收尾即可，成本很低：
 
 ```bash
-python3 scripts/briefing-tools.py validate learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
+python3 scripts/briefing-tools.py validate learning-notes/_briefings/{topic}/YYYY/MM/YYYY-MM-DD.md
 python3 scripts/briefing-tools.py doctor --fix   # 自动为 hash_drift / missing 重跑 register
 ```
 

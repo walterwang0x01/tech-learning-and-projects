@@ -69,4 +69,4 @@ projects:
       - Python 工具链（uv / Ruff / pytest）
 
 # ---- 输出 ----
-output_dir: learning-notes/briefings/_summaries
+output_dir: learning-notes/_briefings/_summaries

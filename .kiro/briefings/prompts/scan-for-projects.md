@@ -5,7 +5,7 @@
 ## 输入
 
 - 配置：`.kiro/briefings/scan-config.yaml`
-- 简报源：`learning-notes/briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`
+- 简报源：`learning-notes/_briefings/{topic}/YYYY/MM/YYYY-MM-DD.md`
 
 ## 流程
 
@@ -139,4 +139,4 @@
 
 - 配置文件缺失 → 告诉用户先建 `scan-config.yaml`
 - 简报目录为空 → 提示先跑简报采集 hook
-- 文件写入失败 → 追加到 `learning-notes/briefings/.errors.log`
+- 文件写入失败 → 追加到 `learning-notes/_briefings/.errors.log`

@@ -6,7 +6,7 @@
 ## 主题参数
 
 - topic：`global-tech`
-- 输出路径：`learning-notes/briefings/global-tech/YYYY/MM/YYYY-MM-DD.md`
+- 输出路径：`learning-notes/_briefings/global-tech/YYYY/MM/YYYY-MM-DD.md`
 - 候选集：`.kiro_tmp/briefings/runs/YYYY-MM-DD/candidates.global-tech.jsonl`
 - H1 模板：`# 🌍 国际科技简报 — YYYY-MM-DD`
 - 副标题：`> 每日精选国际科技领域最值得关注的动态。5 分钟读完。`

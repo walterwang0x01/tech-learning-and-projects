@@ -5,8 +5,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'learning-notes/briefings/**/20*.md'
-      - 'learning-notes/briefings/.published-index.json'
+      - 'learning-notes/_briefings/**/20*.md'
+      - 'learning-notes/_briefings/.published-index.json'
   workflow_dispatch:
 
 jobs:

@@ -27,7 +27,7 @@ python3 scripts/briefing-tools.py status
 
 ## 3. 错误日志与采集源健康检查
 
-检查 `learning-notes/briefings/.errors.log`，如果有则：
+检查 `learning-notes/_briefings/.errors.log`，如果有则：
 1. 展示最近 10 行
 2. **连续失败源检测**：统计最近 7 天内同一 URL 出现 `HTTP GET 失败` 的次数。如果同一源连续 3 天以上失败，高亮警告：
    - `🚨 {源名称} 已连续 {N} 天失败，建议检查 scripts/briefing-tools.py 中的 RSS_SOURCES 配置是否需要更新`
