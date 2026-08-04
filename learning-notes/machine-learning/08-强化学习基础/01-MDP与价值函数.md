@@ -251,3 +251,17 @@ if __name__ == "__main__":
 - 反向传播中梯度连乘与本篇贝尔曼方程递归结构的类比 → [反向传播推导](../04-神经网络原理/02-反向传播推导.md)
 - 下一篇：策略梯度如何在模型未知、动作连续时求解最优策略 → [策略梯度与PPO](02-策略梯度与PPO.md)
 - 价值函数与动作价值函数在 RLHF 中如何被 Critic 模型估计 → [RLHF全链路](../../llm/04-微调与对齐/03-RLHF全链路.md)
+
+## 🎬 推荐视频资源
+
+> 以下资源均为频道 / 课程 / 官网入口级链接（已于 2026-08-04 实测可访问）。刻意不收录单个视频 ID——那类链接失效率高，且难以核实归属。
+> 从入口进去按本篇主题检索，命中率比一条可能失效的直链更高。
+
+### 📺 视频频道与课时
+
+- [StatQuest YouTube](https://www.youtube.com/@statquest)
+
+### 🎓 系统课程与教材
+
+- [OpenAI Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/)
+- [Dive into Deep Learning（英文版）](https://d2l.ai/)

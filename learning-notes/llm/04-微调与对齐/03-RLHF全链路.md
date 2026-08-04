@@ -220,3 +220,21 @@ if __name__ == "__main__":
 - 绕开显式奖励模型和强化学习的对齐方法 → [DPO与免RL对齐](04-DPO与免RL对齐.md)
 - 用更少参数完成策略模型的更新 → [PEFT参数高效微调](02-PEFT参数高效微调.md)
 - 大模型的使用视角基础概念 → [大语言模型基础](../../ai-agent/00-基础概念/02-大语言模型基础.md)
+
+## 🎬 推荐视频资源
+
+> 以下资源均为频道 / 课程 / 官网入口级链接（已于 2026-08-04 实测可访问）。刻意不收录单个视频 ID——那类链接失效率高，且难以核实归属。
+> 从入口进去按本篇主题检索，命中率比一条可能失效的直链更高。
+
+### 📺 视频频道与课时
+
+- [Andrej Karpathy YouTube](https://www.youtube.com/@AndrejKarpathy)
+
+### 🎓 系统课程与教材
+
+- [OpenAI Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/)
+
+### 📖 专题图文
+
+- [Hugging Face - RLHF 图解](https://huggingface.co/blog/rlhf)
+- [RLHF Book（在线书）](https://rlhfbook.com/)

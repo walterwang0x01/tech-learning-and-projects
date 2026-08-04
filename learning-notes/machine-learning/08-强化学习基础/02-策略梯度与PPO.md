@@ -205,3 +205,20 @@ A>0 时，r=0.90（未超出范围）梯度=1.0000（应等于A=1.0，正常更�
 - 策略梯度与 PPO 如何在 RLHF 中训练语言模型对齐人类偏好 → [RLHF全链路](../../llm/04-微调与对齐/03-RLHF全链路.md)
 - 不依赖强化学习、直接用偏好数据优化策略的替代方案 → [DPO与免RL对齐](../../llm/04-微调与对齐/04-DPO与免RL对齐.md)
 - 梯度下降与优化器的一般性原理 → [梯度下降与优化器](../04-神经网络原理/03-梯度下降与优化器.md)
+
+## 🎬 推荐视频资源
+
+> 以下资源均为频道 / 课程 / 官网入口级链接（已于 2026-08-04 实测可访问）。刻意不收录单个视频 ID——那类链接失效率高，且难以核实归属。
+> 从入口进去按本篇主题检索，命中率比一条可能失效的直链更高。
+
+### 📺 视频频道与课时
+
+- [StatQuest YouTube](https://www.youtube.com/@statquest)
+
+### 🎓 系统课程与教材
+
+- [OpenAI Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/)
+
+### 📖 专题图文
+
+- [Hugging Face - RLHF 图解](https://huggingface.co/blog/rlhf)

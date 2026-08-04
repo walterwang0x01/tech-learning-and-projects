@@ -195,3 +195,22 @@ if __name__ == "__main__":
 - 自注意力和缩放点积注意力的完整推导 → [注意力机制推导](../../llm/01-Transformer原理/01-注意力机制推导.md)
 - Transformer 的位置编码如何替代 RNN 隐式的顺序信息 → [位置编码](../../llm/01-Transformer原理/02-位置编码.md)
 - Transformer 编码器解码器架构中的残差与归一化设计 → [架构组件与训练稳定性](../../llm/01-Transformer原理/03-架构组件与训练稳定性.md)
+
+## 🎬 推荐视频资源
+
+> 以下资源均为频道 / 课程 / 官网入口级链接（已于 2026-08-04 实测可访问）。刻意不收录单个视频 ID——那类链接失效率高，且难以核实归属。
+> 从入口进去按本篇主题检索，命中率比一条可能失效的直链更高。
+
+### 📺 视频频道与课时
+
+- [跟李沐学AI（B 站）](https://space.bilibili.com/1567748478)
+- [3Blue1Brown - 注意力机制](https://www.3blue1brown.com/lessons/attention)
+
+### 🎓 系统课程与教材
+
+- [动手学深度学习（中文版）](https://zh.d2l.ai/)
+- [Stanford CS224n 深度学习与自然语言处理](https://web.stanford.edu/class/cs224n/)
+
+### 📖 专题图文
+
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)

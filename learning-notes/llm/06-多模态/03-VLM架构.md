@@ -274,3 +274,21 @@ for image_size, tiles in [(336, 1), (336, 1), (672, 4), (1008, 9)]:
 - 注意力机制与 cross-attention 基础 → [../01-Transformer原理/01-注意力机制推导.md](../01-Transformer原理/01-注意力机制推导.md)
 - 视觉 token 序列长度对 KV Cache 和显存的影响 → [../05-推理优化/01-KV-Cache与显存分析.md](../05-推理优化/01-KV-Cache与显存分析.md)
 - ViT 如何把图像切成 patch token → [../../machine-learning/06-CNN与视觉/03-ViT与视觉Transformer.md](../../machine-learning/06-CNN与视觉/03-ViT与视觉Transformer.md)
+
+## 🎬 推荐视频资源
+
+> 以下资源均为频道 / 课程 / 官网入口级链接（已于 2026-08-04 实测可访问）。刻意不收录单个视频 ID——那类链接失效率高，且难以核实归属。
+> 从入口进去按本篇主题检索，命中率比一条可能失效的直链更高。
+
+### 📺 视频频道与课时
+
+- [跟李沐学AI（B 站）](https://space.bilibili.com/1567748478)
+
+### 🎓 系统课程与教材
+
+- [Hugging Face 扩散模型课程](https://huggingface.co/learn/diffusion-course)
+- [Stanford CS231n 视觉识别中的卷积网络](https://cs231n.stanford.edu/)
+
+### 📖 专题图文
+
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)

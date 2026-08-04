@@ -232,3 +232,22 @@ if __name__ == "__main__":
 - ResNet 恒等跳连与本篇加法更新路径的同构关系 → [经典网络演进](../06-CNN与视觉/02-经典网络演进.md)
 - 下一篇：seq2seq 结构与注意力机制如何从 RNN 框架内部萌芽 → [seq2seq与注意力起源](02-seq2seq与注意力起源.md)
 - 自注意力如何彻底摆脱递推、实现并行计算 → [注意力机制推导](../../llm/01-Transformer原理/01-注意力机制推导.md)
+
+## 🎬 推荐视频资源
+
+> 以下资源均为频道 / 课程 / 官网入口级链接（已于 2026-08-04 实测可访问）。刻意不收录单个视频 ID——那类链接失效率高，且难以核实归属。
+> 从入口进去按本篇主题检索，命中率比一条可能失效的直链更高。
+
+### 📺 视频频道与课时
+
+- [跟李沐学AI（B 站）](https://space.bilibili.com/1567748478)
+- [StatQuest YouTube](https://www.youtube.com/@statquest)
+
+### 🎓 系统课程与教材
+
+- [动手学深度学习（中文版）](https://zh.d2l.ai/)
+- [Stanford CS224n 深度学习与自然语言处理](https://web.stanford.edu/class/cs224n/)
+
+### 📖 专题图文
+
+- [Karpathy - RNN 的惊人有效性](https://karpathy.github.io/2015/05/21/rnn-effectiveness/)

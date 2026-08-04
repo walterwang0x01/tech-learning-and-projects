@@ -250,3 +250,21 @@ for extra_len in [32, 64, 128]:
 - 量化如何进一步压缩 KV Cache 与权重显存 → [02-量化.md](02-量化.md)
 - 投机解码如何缓解 Decode 阶段的带宽瓶颈 → [04-投机解码与推理引擎.md](04-投机解码与推理引擎.md)
 - self-attention 的完整推导 → [../01-Transformer原理/](../01-Transformer原理/)
+
+## 🎬 推荐视频资源
+
+> 以下资源均为频道 / 课程 / 官网入口级链接（已于 2026-08-04 实测可访问）。刻意不收录单个视频 ID——那类链接失效率高，且难以核实归属。
+> 从入口进去按本篇主题检索，命中率比一条可能失效的直链更高。
+
+### 📺 视频频道与课时
+
+- [Andrej Karpathy YouTube](https://www.youtube.com/@AndrejKarpathy)
+- [跟李沐学AI（B 站）](https://space.bilibili.com/1567748478)
+
+### 🎓 系统课程与教材
+
+- [Dive into Deep Learning（英文版）](https://d2l.ai/)
+
+### 📖 专题图文
+
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)

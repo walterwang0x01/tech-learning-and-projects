@@ -194,3 +194,21 @@ if __name__ == "__main__":
 - 位置编码的具体形式（正弦编码、旋转位置编码等） → [位置编码](../../llm/01-Transformer原理/02-位置编码.md)
 - BERT 的掩码语言建模与 MAE 思路的对应关系 → [BERT与自编码路线](../../llm/03-预训练范式/01-BERT与自编码路线.md)
 - 预训练+微调范式在 NLP 中的完整流程 → [三阶段范式与数据构造](../../llm/04-微调与对齐/01-三阶段范式与数据构造.md)
+
+## 🎬 推荐视频资源
+
+> 以下资源均为频道 / 课程 / 官网入口级链接（已于 2026-08-04 实测可访问）。刻意不收录单个视频 ID——那类链接失效率高，且难以核实归属。
+> 从入口进去按本篇主题检索，命中率比一条可能失效的直链更高。
+
+### 📺 视频频道与课时
+
+- [跟李沐学AI（B 站）](https://space.bilibili.com/1567748478)
+
+### 🎓 系统课程与教材
+
+- [Stanford CS231n 视觉识别中的卷积网络](https://cs231n.stanford.edu/)
+- [Dive into Deep Learning（英文版）](https://d2l.ai/)
+
+### 📖 专题图文
+
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
