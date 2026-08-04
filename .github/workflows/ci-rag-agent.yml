@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main, develop ]
     paths:
-      - 'rag-llm-agent-platform/**'
+      - 'projects/rag-llm-agent-platform/**'
   pull_request:
     branches: [ main, develop ]
     paths:
-      - 'rag-llm-agent-platform/**'
+      - 'projects/rag-llm-agent-platform/**'
 
 jobs:
   test:
@@ -39,14 +39,14 @@ jobs:
         cache: 'pip'
     
     - name: Install dependencies
-      working-directory: ./rag-llm-agent-platform
+      working-directory: ./projects/rag-llm-agent-platform
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pytest pytest-asyncio pytest-cov
     
     - name: Run tests
-      working-directory: ./rag-llm-agent-platform
+      working-directory: ./projects/rag-llm-agent-platform
       run: |
         pytest tests/ -v --cov=app --cov-report=xml --cov-report=term
     
@@ -54,12 +54,12 @@ jobs:
       if: always()
       uses: codecov/codecov-action@v3
       with:
-        file: ./rag-llm-agent-platform/coverage.xml
+        file: ./projects/rag-llm-agent-platform/coverage.xml
         flags: rag-agent
         name: rag-agent-coverage
     
     - name: Lint with flake8
-      working-directory: ./rag-llm-agent-platform
+      working-directory: ./projects/rag-llm-agent-platform
       run: |
         pip install flake8
         flake8 app/ --count --select=E9,F63,F7,F82 --show-source --statistics
@@ -67,7 +67,7 @@ jobs:
     
     - name: Build Docker image
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      working-directory: ./rag-llm-agent-platform
+      working-directory: ./projects/rag-llm-agent-platform
       run: |
         docker build -t rag-agent-platform:latest -f Dockerfile .
 

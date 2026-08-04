@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main, develop ]
     paths:
-      - 'spring-boot-microservice-demo/**'
+      - 'projects/spring-boot-microservice-demo/**'
   pull_request:
     branches: [ main, develop ]
     paths:
-      - 'spring-boot-microservice-demo/**'
+      - 'projects/spring-boot-microservice-demo/**'
 
 jobs:
   test:
@@ -47,7 +47,7 @@ jobs:
         cache: maven
     
     - name: Run tests
-      working-directory: ./spring-boot-microservice-demo
+      working-directory: ./projects/spring-boot-microservice-demo
       run: mvn clean test
     
     - name: Generate test report
@@ -55,21 +55,21 @@ jobs:
       uses: dorny/test-reporter@v1
       with:
         name: Maven Tests
-        path: spring-boot-microservice-demo/**/target/surefire-reports/*.xml
+        path: projects/spring-boot-microservice-demo/**/target/surefire-reports/*.xml
         reporter: java-junit
     
     - name: Build
-      working-directory: ./spring-boot-microservice-demo
+      working-directory: ./projects/spring-boot-microservice-demo
       run: mvn clean package -DskipTests
     
     - name: Build Docker image
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      working-directory: ./spring-boot-microservice-demo
+      working-directory: ./projects/spring-boot-microservice-demo
       run: |
         docker build -t user-service:latest -f Dockerfile .
     
     - name: Check code coverage
-      working-directory: ./spring-boot-microservice-demo
+      working-directory: ./projects/spring-boot-microservice-demo
       run: |
         mvn jacoco:report
         # 可以添加覆盖率检查逻辑
