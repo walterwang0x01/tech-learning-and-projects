@@ -1,0 +1,246 @@
+# AI 知识体系审计与学习路线
+
+> Author: Walter Wang
+
+> 审计时间：2026-08-03
+> 审计范围：`learning-notes/` 全目录，重点为 `python/03-机器学习/` 与 `ai-agent/`
+> 审计方法：目录遍历 + 章节结构提取 + 关键概念全库检索（命中文件数统计 + 上下文抽样核实）
+
+## 1. 一句话结论
+
+本仓库的 **AI 应用层（Agent 工程）已接近生产级完整度**，真正的缺口在 **模型原理层**：
+经典机器学习算法、神经网络与深度学习原理、NLP 经典范式、多模态原理、微调理论。
+
+换个说法：**"怎么用模型造系统"写得很透，"模型内部为什么这样运作"基本是空的。**
+
+## 2. 现状盘点：已覆盖且扎实的部分
+
+### 2.1 `ai-agent/` — 24 个子目录，100+ 篇
+
+这是本仓库最完整的部分，覆盖度远超一般学习笔记：
+
+| 子目录 | 内容 | 评价 |
+| --- | --- | --- |
+| `00-基础概念/` | LLM 基础（Transformer/注意力/Token/上下文窗口/采样/Prompt Caching/Structured Output/Extended Thinking/Batch API/选型/趋势） | 30KB 单篇，**使用视角极完整** |
+| `01-Agentic设计模式/` | Anthropic 设计模式、模式大全、工作流编排模式 | 完整 |
+| `02-Agent协议/` | MCP、A2A、ACP、支付协议、协议转换 | 完整 |
+| `03-Agent框架/` + `04-框架补充/` + `05-Java-TS生态/` | LangGraph、CrewAI、Google ADK、AWS Strands、OpenAI SDK、MS Agent Framework、LlamaIndex、Spring AI、Vercel AI SDK、Dapr | 覆盖面很广 |
+| `06-RAG进阶/` | 架构与核心流程、向量库选型、高级策略、GraphRAG | 完整 |
+| `07-工具与Function Calling/` + `08-工具平台与沙箱/` | Function Calling 机制、MCP Server 开发、工具编排与安全、E2B、Composio | 完整 |
+| `09-多Agent系统/` + `10-记忆与状态/` + `11-Agent记忆框架/` | 多 Agent 架构、通信协调、人机协作、Mem0、Letta/MemGPT、Zep/LangMem | 完整 |
+| `12-模型服务/` + `13-AI网关与路由/` | OpenAI/Claude API、开源模型部署、LiteLLM、Portkey | 完整 |
+| `14-可观测与评估/` | LLM 可观测性、评估基准、Agent 测试工程（77KB）、成本优化 | 完整 |
+| `15-Agent安全与治理/` | Agent 身份与权限（58KB）、Prompt 注入与记忆投毒（40KB）、MCP 供应链攻击、纵深防御 | **深度突出** |
+| `16-Harness Engineering/` | 完整指南、Context Engineering、Kiro 实战配置、开源项目、CI-CD 集成 | 已有 5 篇 |
+| `17-Coding Agent/` | Claude Code 架构深度解析（41KB）、Cursor/Kiro/Windsurf、Devin、Vibe Coding | **深度突出** |
+| `18` ~ `24` | OpenClaw 生态、Voice Agent、Agent 支付、云厂商方案、低代码平台、8 篇实战案例、2026 技术更新 | 完整 |
+
+### 2.2 `python/03-机器学习/` — 9 篇
+
+| 文件 | 实际内容 | 层次 |
+| --- | --- | --- |
+| `01-浅谈机器学习.md`（36KB） | AI 发展史、ML 定义、应用领域、分类（学习方式/复杂度/结构）、ML 步骤、kNN 与回归实操 | **入门导论**，非算法教材 |
+| `02-深度学习框架应用.md`（19KB） | TensorFlow 张量与建模、PyTorch 张量与 GPU | **框架 API 教程**，非原理 |
+| `03-模型评估与验证.md` | 准确率/精确率/召回率/F1/混淆矩阵/MSE/RMSE/MAE/R² | 够用 |
+| `04-超参数调优.md` | 网格搜索、随机搜索、贝叶斯优化、早停 | 够用 |
+| `05-模型部署与服务化.md` | FastAPI、TF Serving、TorchServe | 工程视角 |
+| `06-大模型微调实践.md`（12KB） | LoRA、BitsAndBytesConfig、Llama 3.1 实操 | **仅实操，缺理论** |
+| `07-LangChain框架应用.md`（30KB） | LangChain 全套 | 与 `ai-agent/03` 有重叠 |
+| `08-RAG检索增强生成.md`（2.7KB） | 简版 RAG | **与 `ai-agent/06-RAG进阶/` 重复且更浅** |
+| `09-AI Agent开发实践.md`（19KB） | ReAct、Plan-and-Execute、记忆、工具 | **与 `ai-agent/01`、`03` 重叠** |
+
+## 3. 关键概念覆盖检测（客观数据）
+
+全库 `*.md` 检索命中文件数（2026-08-03 实测）：
+
+| 概念 | 命中 | 判定 |
+| --- | --- | --- |
+| Transformer | 14 | ✅ 有（使用视角） |
+| 注意力机制 | 5 | ✅ 有 |
+| Embedding | 22 | ✅ 有 |
+| 预训练 | 11 | ✅ 有 |
+| 强化学习 | 20 | ✅ 有（多为泛指） |
+| 反向传播 | 3 | ⚠️ 仅提及，无推导 |
+| 卷积 / CNN | 2 / 4 | ⚠️ 仅提及 |
+| RNN / LSTM | 2 / 4 | ⚠️ 仅提及 |
+| SFT | 6 | ⚠️ 偏实操 |
+| LoRA | 4 | ⚠️ 偏实操 |
+| 扩散模型 / Diffusion | 2 / 3 | ❌ 近乎空白 |
+| VLM | 3 | ❌ 近乎空白 |
+| RLHF | 2 | ❌ 近乎空白 |
+| DPO | 1 | ❌ 近乎空白 |
+| **梯度下降** | **0** | ❌ 空白 |
+| **词向量** | **0** | ❌ 空白 |
+| **CLIP** | **0** | ❌ 空白 |
+
+误命中已核实排除：
+
+- `量化` 68 次命中中，大量为"量化指标/量化分析"，真正模型量化仅零星几处
+- `决策树` 28 次命中中，**没有一处**是 ML 算法语境（无 `DecisionTree`/基尼/信息增益/剪枝），全为"决策流程"泛指
+- `多模态` 85 次命中几乎全部是 API 调用视角（"支持多模态输入"），非原理
+- `蒸馏` 24 次命中多为简报中的模型发布描述
+
+## 4. 真实缺口清单（按优先级）
+
+### P0 — 完全空白，且是理解一切的地基
+
+| 缺口 | 应包含 |
+| --- | --- |
+| **神经网络原理** | 感知机 → MLP、前向传播、**反向传播推导**、**梯度下降与优化器**（SGD/Momentum/Adam/AdamW）、激活函数对比、损失函数设计、权重初始化 |
+| **训练工程原理** | 过拟合与欠拟合、偏差-方差分解、**正则化**（L1/L2/Dropout/权重衰减）、批归一化与层归一化、学习率调度、梯度裁剪、混合精度 |
+| **NLP 经典范式** | 文本预处理、**分词算法**（BPE / WordPiece / SentencePiece 原理与差异）、**词向量**（word2vec CBOW/Skip-gram、GloVe、FastText）、seq2seq 与 Encoder-Decoder、Attention 起源（Bahdanau/Luong）、**BERT 系列**（MLM/NSP、RoBERTa/ALBERT/DeBERTa）、经典任务（分类/NER/摘要/QA） |
+
+### P1 — 有实操无理论，需要补原理层
+
+| 缺口 | 应包含 |
+| --- | --- |
+| **经典 ML 算法系统化** | 线性/逻辑回归推导、**决策树**（ID3/C4.5/CART、信息增益、剪枝）、**集成学习**（Bagging/Boosting、随机森林、XGBoost/LightGBM/CatBoost）、SVM 与核方法、朴素贝叶斯、**聚类**（K-Means/DBSCAN/层次）、**降维**（PCA/t-SNE/UMAP）、特征工程系统方法 |
+| **微调理论** | 预训练-SFT-对齐三阶段范式、指令数据构造与配比、PEFT 家族对比（LoRA/QLoRA/Adapter/Prefix/P-Tuning）、**RLHF 全链路**（奖励模型 + PPO）、**DPO / KTO / ORPO** 等免 RL 对齐、灾难性遗忘与缓解、微调效果评估 |
+| **推理优化** | KV Cache 原理、量化（GPTQ/AWQ/INT4/FP8）、剪枝、知识蒸馏、投机解码、PagedAttention/vLLM、Flash Attention |
+
+### P2 — 方向性缺口
+
+| 缺口 | 应包含 |
+| --- | --- |
+| **多模态原理** | 对比学习与 **CLIP**、ViT 与图像 Patch 化、**扩散模型原理**（DDPM/DDIM、Latent Diffusion、Stable Diffusion 架构）、**VLM 架构**（LLaVA/Qwen-VL/InternVL 的连接器设计）、图文生成与编辑、语音（Whisper 架构、TTS 范式）、视频生成 |
+| **强化学习基础** | MDP、价值函数与策略梯度、Q-Learning/DQN、PPO 原理（为读懂 RLHF 服务） |
+
+### P3 — 飞书 Harness 101 对照（你已有 5 篇，以下是真正新增的）
+
+对照 `https://my.feishu.cn/wiki/L082wubkdie8uMkRUjgceKYQnIe` 的 15 篇子文档：
+
+| 飞书主题 | 本库命中 | 判定 |
+| --- | --- | --- |
+| 从 ReAct Loop 讲起 | ReAct 12 处 | ✅ 已覆盖 |
+| Loop Engineering（从零 / 到 Orchestration） | 2 处 | ⚠️ 概念提及，缺系统化 |
+| 复刻 Dynamic Workflow（含代码） | 4 处 | ⚠️ 缺完整实现 |
+| 三种上下文压缩与 Microcompact | Microcompact 4 处 | ⚠️ 有零散提及 |
+| 工具的真相 | 工具类笔记完整 | ✅ 已覆盖 |
+| Claude Code 常用工具一览 / 提示词与记忆结构 | `17-Coding Agent/02`（41KB） | ✅ 已覆盖 |
+| 写给 Agent 的虚拟文件系统 | 1 处 | ⚠️ 缺 |
+| **Context Offloading 机制** | **0** | ❌ 新增 |
+| **Agent Version Drifting** | **0** | ❌ 新增 |
+| **Company Brain** | **0** | ❌ 新增 |
+| **专为 Agent 设计的 Install.md** | **0** | ❌ 新增 |
+| **从 for 循环到自治系统的进化之路** | **0** | ❌ 新增 |
+
+## 5. 建议的目录骨架
+
+保留仓库现有的**按技术领域分类**惯例，不引入来源不明的"第 N 阶段"编号。新增两个顶层领域目录，并收敛现有重复内容。
+
+```
+learning-notes/
+├── machine-learning/                    # 新增：经典 ML + 深度学习原理
+│   ├── 00-数学基础/                     # 线代/概率/最优化（按需，够用即可）
+│   ├── 01-机器学习基础/                 # 学习范式、泛化、偏差-方差、评估
+│   ├── 02-经典算法/                     # 回归/决策树/集成/SVM/贝叶斯/聚类/降维
+│   ├── 03-特征工程/
+│   ├── 04-神经网络原理/                 # 感知机→MLP→反向传播→优化器→激活/损失
+│   ├── 05-训练工程/                     # 正则化/归一化/调度/混合精度/分布式
+│   ├── 06-CNN与视觉/                    # 卷积原理、经典网络、ViT
+│   ├── 07-RNN与序列/                    # RNN/LSTM/GRU、seq2seq、Attention 起源
+│   └── 08-框架实践/                     # ← 迁移 python/03-机器学习/02
+│
+├── llm/                                 # 新增：大模型原理与工程
+│   ├── 01-Transformer原理/              # 逐组件推导（区别于 ai-agent/00 的使用视角）
+│   ├── 02-分词与表示/                   # BPE/WordPiece/SentencePiece、词向量演进
+│   ├── 03-预训练范式/                   # BERT 系列、GPT 系列、T5、MoE
+│   ├── 04-微调与对齐/                   # SFT、PEFT 家族、RLHF、DPO/KTO/ORPO
+│   ├── 05-推理优化/                     # KV Cache、量化、蒸馏、投机解码、vLLM
+│   ├── 06-评测/                         # 基准、污染、人工评估
+│   └── 07-多模态/                       # CLIP、扩散模型、VLM、语音、视频
+│
+├── ai-agent/                            # 保持不动（已完整）
+│   └── 16-Harness Engineering/          # 补 5 篇：Context Offloading、Version
+│                                        #   Drifting、Company Brain、Install.md、
+│                                        #   自治系统演进
+└── python/03-机器学习/                  # 收敛：去重后仅保留 Python 生态实操
+```
+
+### 需要处理的重复与错位
+
+| 文件 | 问题 | 建议 |
+| --- | --- | --- |
+| `python/03-机器学习/08-RAG检索增强生成.md`（2.7KB） | 与 `ai-agent/06-RAG进阶/`（4 篇）重复且更浅 | 改为指向 `ai-agent/06-RAG进阶/` 的索引页 |
+| `python/03-机器学习/09-AI Agent开发实践.md`（19KB） | 与 `ai-agent/01`、`03` 重叠 | 保留 Python 代码实操部分，概念部分改为链接 |
+| `python/03-机器学习/07-LangChain框架应用.md`（30KB） | 与 `ai-agent/03-Agent框架/` 部分重叠 | 定位为"LangChain 单框架深度"，其余交叉链接 |
+| `python/03-机器学习/02-深度学习框架应用.md` | 位置错位（框架教程混在 ML 目录） | 迁移到 `machine-learning/08-框架实践/` |
+| `python/03-机器学习/06-大模型微调实践.md` | 位置错位（属大模型而非通用 ML） | 迁移到 `llm/04-微调与对齐/` 作实操篇 |
+
+## 6. 分阶段学习路线
+
+不按"第 N 阶段"线性刷，按**依赖关系 + 你的实际用途**排序。你的 Agent 工程已很强，因此路线设计为**从最能立刻提升判断力的地方切入**，而非从数学从头补。
+
+### 第一优先：让你读懂模型行为（2~3 周）
+
+1. `machine-learning/04-神经网络原理/` — 反向传播 + 梯度下降 + 优化器
+2. `machine-learning/05-训练工程/` — 正则化、归一化、学习率调度
+3. `llm/01-Transformer原理/` — 逐组件推导（补齐 `ai-agent/00` 的使用视角）
+
+**为什么先这里**：这三块决定你能否判断"模型为什么会这样输出""微调为什么没效果"，是当前最短的板。
+
+### 第二优先：微调与推理（2~3 周）
+
+4. `llm/02-分词与表示/` — BPE 原理（直接关系到 Token 成本与多语言表现）
+5. `llm/04-微调与对齐/` — SFT → RLHF → DPO 全链路理论，把现有 LoRA 实操接上理论
+6. `llm/05-推理优化/` — KV Cache、量化、投机解码（直接关系到你关心的成本）
+
+**为什么**：你已有 LoRA 实操但缺理论，补上后能自己设计微调方案而非照抄脚本。
+
+### 第三优先：经典 ML 补齐（3~4 周，可并行）
+
+7. `machine-learning/01-机器学习基础/` + `02-经典算法/` — 系统化补齐树模型与集成学习
+8. `machine-learning/03-特征工程/`
+
+**为什么排第三**：对做 Agent 帮助较间接，但面试、数据类任务、以及理解"为什么大模型不是万能解"需要它。
+
+### 第四优先：多模态与视觉序列（3~4 周）
+
+9. `machine-learning/06-CNN与视觉/` + `07-RNN与序列/`
+10. `llm/07-多模态/` — CLIP → 扩散模型 → VLM
+
+### 随时插入：Harness Engineering 补 5 篇
+
+11. `ai-agent/16-Harness Engineering/` 新增 Context Offloading、Agent Version Drifting、Company Brain、Install.md for Agent、自治系统演进
+
+**为什么随时**：这块你已有基础，5 篇是增量，且与日常用 Kiro/Claude Code 直接相关，见效最快。
+
+## 7. 关于"读文档没耐心"的实际建议
+
+审计过程中发现一个现象值得说明：**你已有的笔记里，多篇是 30~77KB 的巨型单文件**（如 `Agent测试工程实战.md` 77KB、`从Claude Code学构建生产级Agent.md` 64KB、`Agent身份与权限.md` 58KB）。
+
+这类文件的问题不在内容质量，而在**单次阅读负荷**——打开就是几万字，没有明确的"读到哪算完成一个单元"的切分，容易读几屏就疲劳放弃。
+
+补新笔记时建议的约束：
+
+- 单篇控制在 **8~15KB**（约 15~25 分钟可读完一轮）
+- 每篇开头写 **"读完你能回答的 3 个问题"**，作为自测锚点
+- 原理篇必须配 **一个最小可运行示例**，避免纯理论空转
+- 超过 20KB 的主题拆成 `01-`、`02-` 多篇，而不是塞进一个文件
+
+## 8. 执行状态
+
+> 🔄 更新于 2026-08-03：本审计识别的全部缺口已完成补写。
+
+| 批次 | 内容 | 状态 |
+| --- | --- | --- |
+| P0 | 神经网络原理 5 篇、训练工程 4 篇、分词与词向量 2 篇、Transformer 原理 3 篇 | ✅ 14 篇 |
+| P1 | 机器学习基础 1 篇、经典算法 7 篇、特征工程 1 篇、预训练范式 3 篇、微调与对齐 4 篇、推理优化 4 篇 | ✅ 20 篇 |
+| P2 | CNN与视觉 3 篇、RNN与序列 2 篇、强化学习 2 篇、多模态 4 篇 | ✅ 11 篇 |
+| P3 | Harness Engineering 新增 5 篇 | ✅ 5 篇 |
+| 索引 | `machine-learning/README.md`、`llm/README.md`、总索引更新 | ✅ |
+| 去重 | 4 篇重复/错位文件加交叉引用横幅（未删除原内容） | ✅ |
+
+合计新增 **50 篇**笔记。目录索引见 → [machine-learning/](machine-learning/README.md) 与 [llm/](llm/README.md)
+
+验证结果：49 段 numpy 代码全部实测可运行；254 条内部链接全部有效；文件头规范 100% 合规。
+
+**已知偏差**：`llm/06-多模态/03-VLM架构.md`（18.7KB）与 `04-语音与视频模型.md`（18.4KB）超出本文第 7 节建议的 8~15KB 上限，另有 5 篇在 15.5~16.9KB。原因是这些主题的必要知识点密度较高，进一步压缩会损失技术完整性。如遇阅读疲劳，可从各篇的「小结」表格倒推需要精读的小节。
+
+## 9. 下一步
+
+原理层骨架已建立，后续维护建议：
+
+- 笔记不是读一遍就完，建议按各篇开头的「读完你能回答的 3 个问题」做自测，答不上的回去精读对应小节
+- 新增笔记继续遵守本文第 7 节的约束（单篇 8~15KB、三问题开头、配最小可运行示例）
+- 原理层与实操层的分工：原理写在 `machine-learning/`、`llm/`，Python 生态实操留在 `python/03-机器学习/`，Agent 应用留在 `ai-agent/`

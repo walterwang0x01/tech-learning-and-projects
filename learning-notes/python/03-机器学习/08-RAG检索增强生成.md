@@ -7,6 +7,11 @@
 
 > 从 private-notes 提取的技术学习笔记
 
+> 🔄 更新于 2026-08-03
+>
+> **本篇是 Python/LlamaIndex 实操简版。** RAG 的架构原理、向量库选型、高级检索策略、GraphRAG
+> 已有更完整的体系化笔记，建议优先读 → [ai-agent/06-RAG进阶/](../../ai-agent/06-RAG进阶/01-RAG架构与核心流程.md)
+
 ## RAG 概述
 
 RAG（Retrieval-Augmented Generation）是一种结合检索和生成的 AI 技术，通过检索相关文档来增强 LLM 的生成能力。

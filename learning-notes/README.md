@@ -413,11 +413,38 @@ learning-notes/
 - **CQRS与事件溯源**：命令查询分离、事件存储、最终一致性
 - **系统设计核心概念**：CAP 定理、缓存策略、限流、分库分表
 
+### 机器学习与深度学习原理
+
+> 详细索引 → [machine-learning/README.md](machine-learning/README.md)
+
+- **机器学习基础**：学习范式、经验风险与结构风险、泛化误差、归纳偏置、数据泄露、交叉验证
+- **经典算法**：线性/逻辑回归推导、决策树、集成学习（RF/GBDT/XGBoost/LightGBM）、SVM 与核方法、朴素贝叶斯、聚类、降维
+- **特征工程**：缺失值、类别编码与泄露、数值变换、特征交叉、特征选择、特征漂移
+- **神经网络原理**：感知机与 MLP、反向传播推导、梯度下降与优化器（含 Adam/AdamW 差异）、激活函数、损失函数
+- **训练工程**：过拟合与偏差方差（含双下降）、正则化、归一化（BN/LN/RMSNorm、Pre-LN vs Post-LN）、学习率调度与混合精度
+- **CNN与视觉**：卷积原理、经典网络演进（ResNet 残差机制）、ViT 与视觉 Transformer
+- **RNN与序列**：RNN/LSTM/GRU、BPTT 梯度问题、seq2seq 与注意力起源
+- **强化学习基础**：MDP 与价值函数、策略梯度与 PPO（为读懂 RLHF 服务）
+
+### 大模型原理与工程
+
+> 详细索引 → [llm/README.md](llm/README.md)
+
+- **Transformer原理**：注意力机制推导（含 sqrt(d_k) 方差分析）、位置编码（正弦式/RoPE/ALiBi）、架构组件与训练稳定性
+- **分词与表示**：BPE/WordPiece/Unigram/SentencePiece、词向量演进（word2vec/GloVe/FastText）
+- **预训练范式**：BERT 与自编码路线、GPT 与自回归路线、MoE 混合专家
+- **微调与对齐**：三阶段范式与数据构造、PEFT（LoRA/QLoRA/Adapter）、RLHF 全链路、DPO 与免 RL 对齐
+- **推理优化**：KV Cache 与显存分析、量化（GPTQ/AWQ/离群值问题）、蒸馏与剪枝、投机解码与推理引擎
+- **多模态**：CLIP 与对比学习、扩散模型原理、VLM 架构、语音与视频模型
+
 ## 📖 如何使用
 
 1. **按需阅读**：根据技术栈选择相关内容
 2. **实践应用**：结合项目实践应用所学
 3. **持续更新**：根据学习进度更新内容
+
+> **AI 方向学习路线**：应用层（`ai-agent/`）与原理层（`machine-learning/`、`llm/`）分工与推荐阅读顺序，
+> 详见 → [AI 知识体系审计与学习路线](ai-roadmap.md)
 
 ## 🔄 更新说明
 

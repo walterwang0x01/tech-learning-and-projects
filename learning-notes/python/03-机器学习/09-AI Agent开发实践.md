@@ -4,6 +4,11 @@
 
 > 构建能够自主决策和执行任务的智能代理系统
 
+> 🔄 更新于 2026-08-03
+>
+> **本篇是 Python/LangChain 代码实操。** Agent 的设计模式、框架选型、多 Agent 架构、
+> 记忆系统等体系化内容见 → [ai-agent/](../../ai-agent/README.md)
+
 <!-- version-check: LangChain 1.x（create_agent 标准 API）, langchain-openai 1.x, checked 2026-05-22 -->
 
 > 🔄 更新于 2026-05-22：本文档已迁移到 LangChain 1.0+ 推荐 API（`create_agent` 替代废弃的 `initialize_agent` 和 `create_openai_tools_agent`）。
