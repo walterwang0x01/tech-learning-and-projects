@@ -20,3 +20,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+================================================================================
+THIRD-PARTY CONTENT EXCEPTION / 第三方内容排除条款
+
+The MIT License above applies ONLY to content authored by the repository owner.
+
+It does NOT apply to third-party content under the `reading/` directory.
+Each subdirectory under `reading/` contains its own COPYRIGHT.md stating the
+applicable copyright holder and license terms. Refer to those files before any use.
+
+以上 MIT License 仅适用于本仓库作者的原创内容。
+
+`reading/` 目录下的第三方内容不适用本协议。该目录各子目录均有独立的
+COPYRIGHT.md 声明其著作权人与授权条款，使用前请查阅对应文件。
+================================================================================
