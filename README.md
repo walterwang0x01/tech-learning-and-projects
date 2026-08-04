@@ -167,4 +167,4 @@ AI Agent 之外，这里还有覆盖后端、前端、移动端的完整学习�
 
 ## License
 
-MIT License - 详见 [LICENSE](./LICENSE)
+免费阅读与非商业分享，商业用途须获作者书面许可 - 详见 [LICENSE](./LICENSE)

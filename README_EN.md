@@ -165,4 +165,4 @@ Questions or suggestions? Feel free to open an [Issue](../../issues).
 
 ## License
 
-MIT License - See [LICENSE](./LICENSE)
+Free to read and share non-commercially (with attribution). Commercial use requires written permission - See [LICENSE](./LICENSE)
