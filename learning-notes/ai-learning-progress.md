@@ -3,7 +3,7 @@
 > Author: Walter Wang
 
 > 本文件用于追踪 `machine-learning/`、`llm/` 与 `ai-agent/16-Harness Engineering/`
-> 增量部分共 64 篇笔记的学习状态。
+> 增量部分共 64 篇原理笔记 + 11 篇 Python 基础的学习状态。
 >
 > 配套文档：[AI 知识体系审计与学习路线](ai-roadmap.md)
 
@@ -65,6 +65,31 @@
 | ☐ | [02-线性代数够用篇](00-ai/01-machine-learning/00-数学基础/02-线性代数够用篇.md) | ☐☐☐ | 点积那节是注意力的前置 |
 | ☐ | [03-概率统计够用篇](00-ai/01-machine-learning/00-数学基础/03-概率统计够用篇.md) | ☐☐☐ |  |
 | ☐ | [04-信息论够用篇](00-ai/01-machine-learning/00-数学基础/04-信息论够用篇.md) | ☐☐☐ | KL 散度是 RLHF/DPO 的前置 |
+
+### 阶段 0.3：Python + NumPy（如果不熟就走这步）
+
+> 已经会 Python 的直接跳过。判断标准：能写一个接收 numpy 数组的函数、做矩阵乘法、算均值方差。
+
+**`01-languages/python/00-Python基础/`**（选 8 篇）
+
+| 状态 | 笔记 | 自测 | 卡点 / 备注 |
+| :-: | --- | :-: | --- |
+| ☐ | [01-Python简介与安装](01-languages/python/00-Python基础/01-Python简介与安装.md) | ☐☐☐ |  |
+| ☐ | [02-变量与数据类型](01-languages/python/00-Python基础/02-Python变量与数据类型.md) | ☐☐☐ |  |
+| ☐ | [04-分支结构](01-languages/python/00-Python基础/04-Python分支结构.md) | ☐☐☐ |  |
+| ☐ | [05-循环结构](01-languages/python/00-Python基础/05-Python循环结构.md) | ☐☐☐ |  |
+| ☐ | [07-列表](01-languages/python/00-Python基础/07-Python数据结构-列表.md) | ☐☐☐ |  |
+| ☐ | [09-字典](01-languages/python/00-Python基础/09-Python数据结构-字典.md) | ☐☐☐ |  |
+| ☐ | [11-函数](01-languages/python/00-Python基础/11-Python函数.md) | ☐☐☐ |  |
+| ☐ | [12-面向对象](01-languages/python/00-Python基础/12-Python面向对象编程.md) | ☐☐☐ | 阶段 2 PyTorch 前需要 |
+
+**`01-languages/python/02-数据分析/`**（选 3 篇）
+
+| 状态 | 笔记 | 自测 | 卡点 / 备注 |
+| :-: | --- | :-: | --- |
+| ☐ | [02-NumPy应用](01-languages/python/02-数据分析/02-NumPy应用.md) | ☐☐☐ | ★ 最重要 |
+| ☐ | [03-Pandas应用](01-languages/python/02-数据分析/03-Pandas应用.md) | ☐☐☐ |  |
+| ☐ | [06-统计分析](01-languages/python/02-数据分析/06-统计分析.md) | ☐☐☐ |  |
 
 ### 阶段 0.5：动手（读完阶段 1 后再看）
 
