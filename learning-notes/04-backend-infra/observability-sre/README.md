@@ -30,7 +30,7 @@ observability-sre/
 
 ## 🔗 关联内容
 
-- **AI 侧可观测性** → [ai-agent/14-可观测与评估/](../../00-ai/ai-agent/14-可观测与评估/)
+- **AI 侧可观测性** → [ai-agent/14-可观测与评估/](../../00-ai/04-ai-agent/14-可观测与评估/)
 - **K8s 运维** → [java/03-容器化/03-kubernetes-overview.md](../../01-languages/java/03-容器化/03-kubernetes-overview.md)
 - **事件驱动架构** → [architecture/01-事件驱动架构.md](../architecture/01-事件驱动架构.md)
 - **安全侧** → [security/](../security/)

@@ -231,7 +231,7 @@ learning-notes/
 | 索引 | `machine-learning/README.md`、`llm/README.md`、总索引更新 | ✅ |
 | 去重 | 4 篇重复/错位文件加交叉引用横幅（未删除原内容） | ✅ |
 
-合计新增 **50 篇**笔记。目录索引见 → [machine-learning/](00-ai/machine-learning/README.md) 与 [llm/](00-ai/llm/README.md)
+合计新增 **50 篇**笔记。目录索引见 → [machine-learning/](00-ai/01-machine-learning/README.md) 与 [llm/](00-ai/02-llm/README.md)
 
 验证结果：49 段 numpy 代码全部实测可运行；254 条内部链接全部有效；文件头规范 100% 合规。
 
@@ -248,7 +248,7 @@ learning-notes/
 | 目录 | 篇数 | 补的是什么 |
 | --- | :-: | --- |
 | `00-ai/00-入门准备/` | 4 | 概念地图、开发环境与算力、学习路线与误区、如何读论文与跟进前沿 |
-| `00-ai/machine-learning/00-数学基础/` | 4 | 微积分、线性代数、概率统计、信息论（均为「够用篇」定位） |
+| `00-ai/01-machine-learning/00-数学基础/` | 4 | 微积分、线性代数、概率统计、信息论（均为「够用篇」定位） |
 | `00-ai/09-实战项目/` | 2 | PyTorch 训练实战、端到端项目实战 |
 
 ### 本轮发现的实测事实
@@ -289,7 +289,7 @@ learning-notes/
         ↓
 00-ai/00-入门准备/03-学习路线与常见误区        ← 知道怎么走
         ↓
-00-ai/machine-learning/04-神经网络原理/02-反向传播推导   ← 正式起点
+00-ai/01-machine-learning/04-神经网络原理/02-反向传播推导   ← 正式起点
 （卡住就查 00-数学基础/，不要先补完数学）
 ```
 

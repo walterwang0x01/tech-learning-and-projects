@@ -7,7 +7,7 @@
 > 🔄 更新于 2026-08-03
 >
 > **本篇是 Python/LangChain 代码实操。** Agent 的设计模式、框架选型、多 Agent 架构、
-> 记忆系统等体系化内容见 → [ai-agent/](../../../00-ai/ai-agent/README.md)
+> 记忆系统等体系化内容见 → [ai-agent/](../../../00-ai/04-ai-agent/README.md)
 
 <!-- version-check: LangChain 1.x（create_agent 标准 API）, langchain-openai 1.x, checked 2026-05-22 -->
 
@@ -120,7 +120,7 @@ class CalculatorTool(BaseTool):
 tools = [WeatherTool(), CalculatorTool()]
 ```
 
-> 推荐用 `@tool` 装饰器：LangChain 1.x 中创建工具的更简洁做法是使用 `from langchain_core.tools import tool` 装饰器，配合 docstring 自动提取 description。详见 → [Function Calling机制](../../../00-ai/ai-agent/07-工具与Function Calling/01-Function Calling机制.md)。
+> 推荐用 `@tool` 装饰器：LangChain 1.x 中创建工具的更简洁做法是使用 `from langchain_core.tools import tool` 装饰器，配合 docstring 自动提取 description。详见 → [Function Calling机制](../../../00-ai/04-ai-agent/07-工具与Function Calling/01-Function Calling机制.md)。
 
 ## 4. ReAct Agent 实现
 

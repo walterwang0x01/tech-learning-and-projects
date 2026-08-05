@@ -33,7 +33,7 @@ security/
 
 - **Python 安全** → [python/13-安全编程/](../python/13-安全编程/)
 - **Web 安全** → [frontend/09-浏览器与网络/04-Web安全XSS-CSRF.md](../../02-frontend/frontend/09-浏览器与网络/04-Web安全XSS-CSRF.md)
-- **Agent 安全** → [ai-agent/15-Agent安全与治理/](../../00-ai/ai-agent/15-Agent安全与治理/)
+- **Agent 安全** → [ai-agent/15-Agent安全与治理/](../../00-ai/04-ai-agent/15-Agent安全与治理/)
 - **可观测性** → [observability-sre/](../observability-sre/)
 
 ## 📚 权威参考

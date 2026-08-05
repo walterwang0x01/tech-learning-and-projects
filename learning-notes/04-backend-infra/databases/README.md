@@ -31,7 +31,7 @@ databases/
 
 - **MySQL 深入** → [java/07-数据库/](../../01-languages/java/07-数据库/)
 - **Python ORM** → [python/07-数据库操作/](../python/07-数据库操作/)
-- **向量检索架构** → [ai-agent/06-RAG进阶/02-向量数据库选型.md](../../00-ai/ai-agent/06-RAG进阶/02-向量数据库选型.md)
+- **向量检索架构** → [ai-agent/06-RAG进阶/02-向量数据库选型.md](../../00-ai/04-ai-agent/06-RAG进阶/02-向量数据库选型.md)
 - **事件溯源** → [architecture/04-CQRS与事件溯源.md](../architecture/04-CQRS与事件溯源.md)
 
 ## 📚 权威参考

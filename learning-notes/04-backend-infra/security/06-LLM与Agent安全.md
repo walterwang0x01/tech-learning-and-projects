@@ -219,7 +219,7 @@ HTTP/Streamable-HTTP transport（远程）：
 ☐ 所有工具调用记入审计日志
 ```
 
-详见 [ai-agent/15-Agent安全与治理/05-MCP安全漏洞与Agent供应链攻击.md](../../00-ai/ai-agent/15-Agent安全与治理/05-MCP安全漏洞与Agent供应链攻击.md)。
+详见 [ai-agent/15-Agent安全与治理/05-MCP安全漏洞与Agent供应链攻击.md](../../00-ai/04-ai-agent/15-Agent安全与治理/05-MCP安全漏洞与Agent供应链攻击.md)。
 
 ## 6. Agent 权限设计（Least Privilege）
 
@@ -345,7 +345,7 @@ promptfoo eval -c promptfooconfig.yaml
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 - [Prompt Injection - Simon Willison](https://simonwillison.net/2023/Apr/14/worst-that-can-happen/)
 - [MCP Security Best Practices](https://modelcontextprotocol.io/docs/concepts/security)
-- 关联：[ai-agent/15-Agent安全与治理/](../../00-ai/ai-agent/15-Agent安全与治理/)
+- 关联：[ai-agent/15-Agent安全与治理/](../../00-ai/04-ai-agent/15-Agent安全与治理/)
 
 > 更新于 2026-07-09
 

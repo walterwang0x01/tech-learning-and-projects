@@ -60,240 +60,240 @@ A_RLHF_BOOK = "[RLHF Book（在线书）](https://rlhfbook.com/)"
 
 M: dict[str, tuple[list[str], list[str], list[str]]] = {
     # ═══ machine-learning/01-机器学习基础 ═══
-    "machine-learning/01-机器学习基础/01-学习范式与泛化.md": (
+    "01-machine-learning/01-机器学习基础/01-学习范式与泛化.md": (
         [CH_STATQUEST, CH_LIMU],
         [C_CS229, C_CS229_SHEET, C_DLAI],
         [],
     ),
     # ═══ machine-learning/02-经典算法 ═══
-    "machine-learning/02-经典算法/01-线性回归与逻辑回归推导.md": (
+    "01-machine-learning/02-经典算法/01-线性回归与逻辑回归推导.md": (
         [CH_STATQUEST],
         [C_CS229, C_CS229_SHEET, C_SKLEARN],
         [],
     ),
-    "machine-learning/02-经典算法/02-决策树.md": (
+    "01-machine-learning/02-经典算法/02-决策树.md": (
         [CH_STATQUEST],
         [C_CS229, C_SKLEARN],
         [],
     ),
-    "machine-learning/02-经典算法/03-集成学习.md": (
+    "01-machine-learning/02-经典算法/03-集成学习.md": (
         [CH_STATQUEST],
         [C_CS229, C_SKLEARN],
         [],
     ),
-    "machine-learning/02-经典算法/04-SVM与核方法.md": (
+    "01-machine-learning/02-经典算法/04-SVM与核方法.md": (
         [CH_STATQUEST],
         [C_CS229, C_CS229_SHEET],
         [],
     ),
-    "machine-learning/02-经典算法/05-朴素贝叶斯.md": (
+    "01-machine-learning/02-经典算法/05-朴素贝叶斯.md": (
         [CH_STATQUEST],
         [C_CS229, C_SKLEARN],
         [],
     ),
-    "machine-learning/02-经典算法/06-聚类.md": (
+    "01-machine-learning/02-经典算法/06-聚类.md": (
         [CH_STATQUEST],
         [C_CS229, C_SKLEARN],
         [],
     ),
-    "machine-learning/02-经典算法/07-降维.md": (
+    "01-machine-learning/02-经典算法/07-降维.md": (
         [CH_STATQUEST, CH_3B1B_BILI],
         [C_CS229, C_SKLEARN],
         [],
     ),
     # ═══ machine-learning/03-特征工程 ═══
-    "machine-learning/03-特征工程/01-特征工程方法论.md": (
+    "01-machine-learning/03-特征工程/01-特征工程方法论.md": (
         [CH_STATQUEST],
         [C_SKLEARN, C_CS229],
         [],
     ),
     # ═══ machine-learning/04-神经网络原理 ═══
-    "machine-learning/04-神经网络原理/01-感知机与多层感知机.md": (
+    "01-machine-learning/04-神经网络原理/01-感知机与多层感知机.md": (
         [L_NN, L_MLP, CH_LIMU],
         [C_D2L, C_DLAI],
         [],
     ),
-    "machine-learning/04-神经网络原理/02-反向传播推导.md": (
+    "01-machine-learning/04-神经网络原理/02-反向传播推导.md": (
         [L_BP, L_GD, CH_KARPATHY],
         [C_D2L, C_DLAI, C_DLBOOK],
         [],
     ),
-    "machine-learning/04-神经网络原理/03-梯度下降与优化器.md": (
+    "01-machine-learning/04-神经网络原理/03-梯度下降与优化器.md": (
         [L_GD, CH_LIMU],
         [C_D2L, C_DLBOOK],
         [],
     ),
-    "machine-learning/04-神经网络原理/04-激活函数.md": (
+    "01-machine-learning/04-神经网络原理/04-激活函数.md": (
         [CH_LIMU],
         [C_D2L, C_DLBOOK],
         [],
     ),
-    "machine-learning/04-神经网络原理/05-损失函数.md": (
+    "01-machine-learning/04-神经网络原理/05-损失函数.md": (
         [CH_STATQUEST, CH_LIMU],
         [C_D2L, C_DLBOOK],
         [],
     ),
     # ═══ machine-learning/05-训练工程 ═══
-    "machine-learning/05-训练工程/01-过拟合与偏差方差.md": (
+    "01-machine-learning/05-训练工程/01-过拟合与偏差方差.md": (
         [CH_STATQUEST],
         [C_CS229, C_DLBOOK, C_D2L],
         [],
     ),
-    "machine-learning/05-训练工程/02-正则化技术.md": (
+    "01-machine-learning/05-训练工程/02-正则化技术.md": (
         [CH_STATQUEST, CH_LIMU],
         [C_D2L, C_DLBOOK],
         [],
     ),
-    "machine-learning/05-训练工程/03-归一化技术.md": (
+    "01-machine-learning/05-训练工程/03-归一化技术.md": (
         [CH_LIMU],
         [C_D2L, C_CS231N],
         [],
     ),
-    "machine-learning/05-训练工程/04-学习率调度与训练技巧.md": (
+    "01-machine-learning/05-训练工程/04-学习率调度与训练技巧.md": (
         [CH_LIMU],
         [C_D2L, C_CS231N],
         [],
     ),
     # ═══ machine-learning/06-CNN与视觉 ═══
-    "machine-learning/06-CNN与视觉/01-卷积原理.md": (
+    "01-machine-learning/06-CNN与视觉/01-卷积原理.md": (
         [CH_LIMU, CH_3B1B_BILI],
         [C_CS231N, C_D2L, C_DLAI],
         [],
     ),
-    "machine-learning/06-CNN与视觉/02-经典网络演进.md": (
+    "01-machine-learning/06-CNN与视觉/02-经典网络演进.md": (
         [CH_LIMU],
         [C_CS231N, C_D2L],
         [],
     ),
-    "machine-learning/06-CNN与视觉/03-ViT与视觉Transformer.md": (
+    "01-machine-learning/06-CNN与视觉/03-ViT与视觉Transformer.md": (
         [CH_LIMU],
         [C_CS231N, C_D2L_EN],
         [A_ILL_TRANS],
     ),
     # ═══ machine-learning/07-RNN与序列 ═══
-    "machine-learning/07-RNN与序列/01-RNN-LSTM-GRU.md": (
+    "01-machine-learning/07-RNN与序列/01-RNN-LSTM-GRU.md": (
         [CH_LIMU, CH_STATQUEST],
         [C_D2L, C_CS224N],
         [A_RNN],
     ),
-    "machine-learning/07-RNN与序列/02-seq2seq与注意力起源.md": (
+    "01-machine-learning/07-RNN与序列/02-seq2seq与注意力起源.md": (
         [CH_LIMU, L_ATTN],
         [C_D2L, C_CS224N],
         [A_ILL_TRANS],
     ),
     # ═══ machine-learning/08-强化学习基础 ═══
-    "machine-learning/08-强化学习基础/01-MDP与价值函数.md": (
+    "01-machine-learning/08-强化学习基础/01-MDP与价值函数.md": (
         [CH_STATQUEST],
         [C_SPINUP, C_D2L_EN],
         [],
     ),
-    "machine-learning/08-强化学习基础/02-策略梯度与PPO.md": (
+    "01-machine-learning/08-强化学习基础/02-策略梯度与PPO.md": (
         [CH_STATQUEST],
         [C_SPINUP],
         [A_RLHF],
     ),
     # ═══ llm/01-Transformer原理 ═══
-    "llm/01-Transformer原理/01-注意力机制推导.md": (
+    "02-llm/01-Transformer原理/01-注意力机制推导.md": (
         [L_ATTN, L_GPT, CH_KARPATHY, CH_LIMU],
         [C_CS224N, C_D2L],
         [A_ILL_TRANS],
     ),
-    "llm/01-Transformer原理/02-位置编码.md": (
+    "02-llm/01-Transformer原理/02-位置编码.md": (
         [CH_LIMU],
         [C_CS224N, C_D2L],
         [A_ILL_TRANS],
     ),
-    "llm/01-Transformer原理/03-架构组件与训练稳定性.md": (
+    "02-llm/01-Transformer原理/03-架构组件与训练稳定性.md": (
         [L_GPT, CH_LIMU],
         [C_CS224N, C_D2L],
         [A_ILL_TRANS],
     ),
     # ═══ llm/02-分词与表示 ═══
-    "llm/02-分词与表示/01-分词算法.md": (
+    "02-llm/02-分词与表示/01-分词算法.md": (
         [CH_LIMU],
         [C_HF_NLP, C_CS224N],
         [],
     ),
-    "llm/02-分词与表示/02-词向量演进.md": (
+    "02-llm/02-分词与表示/02-词向量演进.md": (
         [CH_STATQUEST, CH_LIMU],
         [C_CS224N, C_HF_NLP],
         [],
     ),
     # ═══ llm/03-预训练范式 ═══
-    "llm/03-预训练范式/01-BERT与自编码路线.md": (
+    "02-llm/03-预训练范式/01-BERT与自编码路线.md": (
         [CH_LIMU],
         [C_HF_NLP, C_CS224N],
         [],
     ),
-    "llm/03-预训练范式/02-GPT与自回归路线.md": (
+    "02-llm/03-预训练范式/02-GPT与自回归路线.md": (
         [L_GPT, CH_KARPATHY, CH_LIMU],
         [C_CS224N, C_HF_NLP],
         [],
     ),
-    "llm/03-预训练范式/03-MoE混合专家.md": (
+    "02-llm/03-预训练范式/03-MoE混合专家.md": (
         [CH_LIMU],
         [C_CS224N],
         [],
     ),
     # ═══ llm/04-微调与对齐 ═══
-    "llm/04-微调与对齐/01-三阶段范式与数据构造.md": (
+    "02-llm/04-微调与对齐/01-三阶段范式与数据构造.md": (
         [CH_KARPATHY],
         [C_HF_NLP],
         [A_RLHF, A_RLHF_BOOK],
     ),
-    "llm/04-微调与对齐/02-PEFT参数高效微调.md": (
+    "02-llm/04-微调与对齐/02-PEFT参数高效微调.md": (
         [CH_LIMU],
         [C_HF_NLP],
         [],
     ),
-    "llm/04-微调与对齐/03-RLHF全链路.md": (
+    "02-llm/04-微调与对齐/03-RLHF全链路.md": (
         [CH_KARPATHY],
         [C_SPINUP],
         [A_RLHF, A_RLHF_BOOK],
     ),
-    "llm/04-微调与对齐/04-DPO与免RL对齐.md": (
+    "02-llm/04-微调与对齐/04-DPO与免RL对齐.md": (
         [],
         [C_SPINUP],
         [A_RLHF_BOOK, A_RLHF],
     ),
     # ═══ llm/05-推理优化 ═══
-    "llm/05-推理优化/01-KV-Cache与显存分析.md": (
+    "02-llm/05-推理优化/01-KV-Cache与显存分析.md": (
         [CH_KARPATHY, CH_LIMU],
         [C_D2L_EN],
         [A_ILL_TRANS],
     ),
-    "llm/05-推理优化/02-量化.md": (
+    "02-llm/05-推理优化/02-量化.md": (
         [CH_LIMU],
         [C_HF_NLP],
         [],
     ),
-    "llm/05-推理优化/03-蒸馏与剪枝.md": (
+    "02-llm/05-推理优化/03-蒸馏与剪枝.md": (
         [CH_LIMU],
         [C_DLBOOK],
         [],
     ),
-    "llm/05-推理优化/04-投机解码与推理引擎.md": (
+    "02-llm/05-推理优化/04-投机解码与推理引擎.md": (
         [CH_KARPATHY],
         [],
         [A_ILL_TRANS],
     ),
     # ═══ llm/06-多模态 ═══
-    "llm/06-多模态/01-CLIP与对比学习.md": (
+    "02-llm/06-多模态/01-CLIP与对比学习.md": (
         [CH_LIMU],
         [C_CS231N, C_HF_DIFF],
         [],
     ),
-    "llm/06-多模态/02-扩散模型原理.md": (
+    "02-llm/06-多模态/02-扩散模型原理.md": (
         [CH_LIMU],
         [C_HF_DIFF],
         [A_DIFFUSION],
     ),
-    "llm/06-多模态/03-VLM架构.md": (
+    "02-llm/06-多模态/03-VLM架构.md": (
         [CH_LIMU],
         [C_HF_DIFF, C_CS231N],
         [A_ILL_TRANS],
     ),
-    "llm/06-多模态/04-语音与视频模型.md": (
+    "02-llm/06-多模态/04-语音与视频模型.md": (
         [CH_LIMU],
         [C_HF_DIFF],
         [],

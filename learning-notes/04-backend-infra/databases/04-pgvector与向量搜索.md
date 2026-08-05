@@ -448,7 +448,7 @@ pgvector 0.8.0（2024-11）→ 0.8.4（2026-06）的关键改进：
 - [Neon pgvector 实战](https://neon.tech/blog/pgvector-best-practices)
 - [Hybrid Search with pgvector](https://jkatz05.com/post/postgres/hybrid-search-postgres-pgvector/)
 - [dbi-services pgvector 索引对比（2026-03）](https://www.dbi-services.com/blog/pgvector-a-guide-for-dba-part-2-indexes-update-march-2026/)
-- 关联：[ai-agent/06-RAG进阶/02-向量数据库选型.md](../../00-ai/ai-agent/06-RAG进阶/02-向量数据库选型.md)
+- 关联：[ai-agent/06-RAG进阶/02-向量数据库选型.md](../../00-ai/04-ai-agent/06-RAG进阶/02-向量数据库选型.md)
 
 ## 15. pgvector 0.8.4 与 PG 18.4 协同
 

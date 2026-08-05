@@ -345,7 +345,7 @@ def record_usage(response, user_tier: str):
 - [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet)（Agent 管理，2026-03 重命名自 Agent Builder）
 - [Arize Phoenix](https://phoenix.arize.com/)
 - [LLM Observability Guide (Martin Fowler)](https://martinfowler.com/articles/llm-observability.html)
-- 关联：[ai-agent/14-可观测与评估/](../../00-ai/ai-agent/14-可观测与评估/)
+- 关联：[ai-agent/14-可观测与评估/](../../00-ai/04-ai-agent/14-可观测与评估/)
 
 ## 8. 2026 年 OTel GenAI Agent Spans 标准化
 

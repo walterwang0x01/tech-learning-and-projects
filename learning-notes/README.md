@@ -55,7 +55,7 @@ learning-notes/
 ```
 
 详细子目录见各分组内的 README.md：
-- [AI 技术](00-ai/ai-agent/README.md) | [机器学习](00-ai/machine-learning/README.md) | [大模型](00-ai/llm/README.md)
+- [AI 技术](00-ai/04-ai-agent/README.md) | [机器学习](00-ai/01-machine-learning/README.md) | [大模型](00-ai/02-llm/README.md)
 - [Python](01-languages/python/README.md) | [Java](01-languages/java/README.md) | [Go](01-languages/go/README.md) | [Rust](01-languages/rust/README.md)
 - [前端](02-frontend/frontend/README.md)
 - [iOS](03-mobile/ios/README.md) | [Android](03-mobile/android/README.md)
@@ -297,7 +297,7 @@ learning-notes/
 
 ### 机器学习与深度学习原理
 
-> 详细索引 → [machine-learning/README.md](00-ai/machine-learning/README.md)
+> 详细索引 → [machine-learning/README.md](00-ai/01-machine-learning/README.md)
 
 - **机器学习基础**：学习范式、经验风险与结构风险、泛化误差、归纳偏置、数据泄露、交叉验证
 - **经典算法**：线性/逻辑回归推导、决策树、集成学习（RF/GBDT/XGBoost/LightGBM）、SVM 与核方法、朴素贝叶斯、聚类、降维
@@ -310,7 +310,7 @@ learning-notes/
 
 ### 大模型原理与工程
 
-> 详细索引 → [llm/README.md](00-ai/llm/README.md)
+> 详细索引 → [llm/README.md](00-ai/02-llm/README.md)
 
 - **Transformer原理**：注意力机制推导（含 sqrt(d_k) 方差分析）、位置编码（正弦式/RoPE/ALiBi）、架构组件与训练稳定性
 - **分词与表示**：BPE/WordPiece/Unigram/SentencePiece、词向量演进（word2vec/GloVe/FastText）

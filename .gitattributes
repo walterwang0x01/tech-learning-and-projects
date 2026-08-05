@@ -1,14 +1,14 @@
 # git-crypt 加密配置：以下文件在 GitHub 上显示为乱码，本地正常读写
 # Agent 支付入门（支付基础、术语、区块链知识）
-learning-notes/00-ai/ai-agent/20-Agent支付/01-入门/** filter=git-crypt diff=git-crypt
+learning-notes/00-ai/04-ai-agent/20-Agent支付/01-入门/** filter=git-crypt diff=git-crypt
 # Agent 支付行业知识（协议、全景图、竞品、案例、风控）
-learning-notes/00-ai/ai-agent/20-Agent支付/02-行业知识/** filter=git-crypt diff=git-crypt
+learning-notes/00-ai/04-ai-agent/20-Agent支付/02-行业知识/** filter=git-crypt diff=git-crypt
 # 工程实现（公司工程方案、产品设计、安全架构）
-learning-notes/00-ai/ai-agent/20-Agent支付/03-工程实现/** filter=git-crypt diff=git-crypt
+learning-notes/00-ai/04-ai-agent/20-Agent支付/03-工程实现/** filter=git-crypt diff=git-crypt
 # 项目需求（公司内部需求方案）
-learning-notes/00-ai/ai-agent/20-Agent支付/04-项目需求/** filter=git-crypt diff=git-crypt
+learning-notes/00-ai/04-ai-agent/20-Agent支付/04-项目需求/** filter=git-crypt diff=git-crypt
 # 架构图和流程图（公司内部设计资产）
-learning-notes/00-ai/ai-agent/20-Agent支付/assets/** filter=git-crypt diff=git-crypt
+learning-notes/00-ai/04-ai-agent/20-Agent支付/assets/** filter=git-crypt diff=git-crypt
 
 # ============================================
 # 隐形水印工具（核心算法，暴露后可被绕过）
@@ -37,7 +37,7 @@ scripts/doc-lint.sh filter=git-crypt diff=git-crypt
 # ============================================
 # 2026 技术更新研究文档
 # ============================================
-learning-notes/00-ai/ai-agent/24-2026技术更新/*.md filter=git-crypt diff=git-crypt
+learning-notes/00-ai/04-ai-agent/24-2026技术更新/*.md filter=git-crypt diff=git-crypt
 
 # ============================================
 # 文档审查日志（直接描述 20-Agent支付加密目录的元数据）
