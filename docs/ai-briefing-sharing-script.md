@@ -311,7 +311,7 @@ Kiro 会帮你创建文件。之后在 Agent Hooks 面板里就能看到按钮�
 
 ## 演示前检查清单
 
-- [ ] 今天的简报已生成（learning-notes/briefings/ai-agent/2026/05/当天日期.md）
+- [ ] 今天的简报已生成（learning-notes/_briefings/ai-agent/2026/05/当天日期.md）
 - [ ] 浏览器提前打开简报文件，字体放大到合适大小
 - [ ] agenzo 项目的 Kiro 窗口已打开，能看到"竞品日报" hook 按钮
 - [ ] 提前测试过一次 hook 触发，确认能正常生成

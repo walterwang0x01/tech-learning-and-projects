@@ -247,7 +247,7 @@ def register_published(topic: str, date_str: str | None = None, retention_days: 
 def doctor_check_index_consistency(auto_fix: bool = False, retention_days: int = 60) -> dict:
     """检查 md 与 published-index 的一致性。
 
-    扫描 `learning-notes/briefings/{topic}/YYYY/MM/*.md`，对比
+    扫描 `learning-notes/_briefings/{topic}/YYYY/MM/*.md`，对比
     `.published-index.json` 的 `file_hashes`，找出三类不一致：
 
     - missing: md 在文件系统但 file_hashes 没记录（最常见，subagent 中断造成）
