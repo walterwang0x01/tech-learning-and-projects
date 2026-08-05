@@ -231,7 +231,7 @@ learning-notes/
 | 索引 | `machine-learning/README.md`、`llm/README.md`、总索引更新 | ✅ |
 | 去重 | 4 篇重复/错位文件加交叉引用横幅（未删除原内容） | ✅ |
 
-合计新增 **50 篇**笔记。目录索引见 → [machine-learning/](00-ai/01-machine-learning/README.md) 与 [llm/](00-ai/02-llm/README.md)
+合计新增 **50 篇**笔记。目录索引见 → [machine-learning/](01-machine-learning/README.md) 与 [llm/](02-llm/README.md)
 
 验证结果：49 段 numpy 代码全部实测可运行；254 条内部链接全部有效；文件头规范 100% 合规。
 

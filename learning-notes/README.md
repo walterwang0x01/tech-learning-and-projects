@@ -50,8 +50,8 @@ learning-notes/
 ├── _briefings/                    # 每日技术资讯简报（AI Agent / 国内 / 国际）
 │
 ├── README.md                      # 本文件
-├── ai-roadmap.md                  # AI 知识体系审计与学习路线
-└── ai-learning-progress.md        # AI 学习进度跟踪
+├── 00-ai/ai-roadmap.md                  # AI 知识体系审计与学习路线
+└── 00-ai/ai-learning-progress.md        # AI 学习进度跟踪
 ```
 
 详细子目录见各分组内的 README.md：
@@ -326,7 +326,7 @@ learning-notes/
 3. **持续更新**：根据学习进度更新内容
 
 > **AI 方向学习路线**：应用层（`ai-agent/`）与原理层（`machine-learning/`、`llm/`）分工与推荐阅读顺序，
-> 详见 → [AI 知识体系审计与学习路线](ai-roadmap.md)
+> 详见 → [AI 知识体系审计与学习路线](00-ai/ai-roadmap.md)
 
 ## 🔄 更新说明
 

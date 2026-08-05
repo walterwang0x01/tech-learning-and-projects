@@ -47,8 +47,8 @@
 
 ## 相关文档
 
-- [AI 知识体系审计与学习路线](../ai-roadmap.md) — 全面的缺口分析与学习优先级
-- [AI 学习进度跟踪](../ai-learning-progress.md) — 逐篇完成状态
+- [AI 知识体系审计与学习路线](ai-roadmap.md) — 全面的缺口分析与学习优先级
+- [AI 学习进度跟踪](ai-learning-progress.md) — 逐篇完成状态
 
 ## 各子库入口
 
