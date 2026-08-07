@@ -14,7 +14,17 @@ Not just a pile of markdown. The site offers three modes:
 | 📖 **Read** | Tree navigation + full-text rendering, mark as read |
 | ✍️ **Self-check** | 198 questions. Answer first, then reveal the source. **Can't answer = signal to re-read** |
 
+### 🔬 [Interactive Visualizations →](https://walterwang0x01.github.io/portfolio/demos/)
+
+Turn formulas into things you can drag. Pure frontend, no API calls:
+
+- **Attention heatmap** — type a sentence, see the `softmax(QKᵀ/√d)` matrix. Toggle causal mask to compare GPT vs BERT, adjust temperature to see attention concentrate/spread
+- **Backpropagation** — step through the chain rule layer by layer. Set x negative to reproduce "dying ReLU" (gradient cut off)
+- **KV Cache calculator** — 5 real model presets, live comparison of MHA / GQA / MQA, plus "how many concurrent requests fit on one GPU"
+- **TIES model merging** — visualize sign election, see how naive averaging cancels +0.8 and -0.7 into +0.05
+
 [![Interactive Site](https://img.shields.io/badge/Read-Interactive_Site-blue)](https://walterwang0x01.github.io/portfolio/notes/)
+[![Visualizations](https://img.shields.io/badge/Visualizations-4_demos-red)](https://walterwang0x01.github.io/portfolio/demos/)
 [![AI Notes](https://img.shields.io/badge/AI_Engineering-191_notes-orange)](./learning-notes/00-ai/)
 [![All Notes](https://img.shields.io/badge/All_Notes-571-green)](./learning-notes/)
 [![Quiz](https://img.shields.io/badge/Self--check-198_questions-purple)](https://walterwang0x01.github.io/portfolio/notes/#quiz)

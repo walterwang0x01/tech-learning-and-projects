@@ -14,7 +14,17 @@
 | 📖 **阅读** | 目录树导航 + 全文渲染，可标记已读 |
 | ✍️ **自测** | 198 道题，先自己答再对照原文，三档自评。**答不上就是需要精读的信号** |
 
+### 🔬 [原理可视化演示 →](https://walterwang0x01.github.io/portfolio/demos/)
+
+把公式变成能拖动的东西，纯前端计算无 API 依赖：
+
+- **注意力热力图** — 输入句子看 `softmax(QKᵀ/√d)` 矩阵，切换 causal mask 对比 GPT 与 BERT，调 temperature 看注意力集中/分散
+- **反向传播** — 逐层展示链式法则的梯度回传，把 x 调成负数可复现「死亡 ReLU」（梯度被截断）
+- **KV Cache 显存计算器** — 5 个真实模型预设，实时对比 MHA / GQA / MQA，附「单卡还能放几条并发」
+- **TIES 模型合并** — 可视化符号选举，直接看到朴素平均如何把 +0.8 和 -0.7 抵消成 +0.05
+
 [![交互式学习站](https://img.shields.io/badge/在线阅读-交互式学习站-blue)](https://walterwang0x01.github.io/portfolio/notes/)
+[![可视化演示](https://img.shields.io/badge/可视化-4_个交互_demo-red)](https://walterwang0x01.github.io/portfolio/demos/)
 [![AI 笔记](https://img.shields.io/badge/AI_工程-191_篇-orange)](./learning-notes/00-ai/)
 [![全部笔记](https://img.shields.io/badge/全部笔记-571_篇-green)](./learning-notes/)
 [![自测题](https://img.shields.io/badge/自测题-198_道-purple)](https://walterwang0x01.github.io/portfolio/notes/#quiz)
