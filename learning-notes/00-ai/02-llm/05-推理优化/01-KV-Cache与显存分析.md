@@ -79,6 +79,8 @@ Cache_bytes = n_layers × d_model × seq_len × batch_size × 2 × dtype_bytes
 
 > ⚠️ 待确认：具体模型的层数、头数、隐藏维度等结构参数因模型而异，这里不给具体数字，只讲公式结构。
 
+<!-- demo:kvcache -->
+
 ## 4. Prefill 与 Decode：两种完全不同的计算特性
 
 自回归生成分两个阶段，计算特性截然不同：
