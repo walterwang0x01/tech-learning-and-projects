@@ -1,168 +1,179 @@
-# AI Agent Learning Roadmap & Projects
+# AI Engineering Knowledge Base
 
 > [🇨🇳 中文](./README.md) | 🇬🇧 English
->
-> A systematic learning path for AI Agent development: 101 structured notes + 2 runnable projects covering protocols, frameworks, RAG, memory, security, and payments.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-[![AI Agent Notes](https://img.shields.io/badge/AI_Agent-101_Notes-orange)](./learning-notes/00-ai/ai-agent/)
-[![Total Notes](https://img.shields.io/badge/Total-422_Notes-green)](./learning-notes/)
+**571 original technical notes + 198 self-check questions + 6 runnable projects**, covering the full path from backpropagation derivation to production-grade Agent systems.
 
-## Who Is This For
+### 👉 [Read online (interactive) →](https://walterwang0x01.github.io/portfolio/notes/)
 
-- 🚀 New to AI Agents and overwhelmed by the number of frameworks and protocols
-- 🔍 Evaluating tech stacks and need side-by-side comparisons of LangGraph vs CrewAI vs OpenAI SDK
-- 🛠️ Building Agent projects and need implementation details on RAG, memory, security, or payments
+Not just a pile of markdown. The site offers three modes:
 
-## What You Get
+| | What it does |
+| --- | --- |
+| 🗺️ **Learning Path** | 5 stages ordered by dependency, each labeled with note count, estimated time, and **why you should learn it first**. Tracks reading progress |
+| 📖 **Read** | Tree navigation + full-text rendering, mark as read |
+| ✍️ **Self-check** | 198 questions. Answer first, then reveal the source. **Can't answer = signal to re-read** |
 
-A complete learning path from zero to production-ready AI Agents:
+[![Interactive Site](https://img.shields.io/badge/Read-Interactive_Site-blue)](https://walterwang0x01.github.io/portfolio/notes/)
+[![AI Notes](https://img.shields.io/badge/AI_Engineering-191_notes-orange)](./learning-notes/00-ai/)
+[![All Notes](https://img.shields.io/badge/All_Notes-571-green)](./learning-notes/)
+[![Quiz](https://img.shields.io/badge/Self--check-198_questions-purple)](https://walterwang0x01.github.io/portfolio/notes/#quiz)
 
-```text
-Fundamentals → Design Patterns → Protocols → Frameworks → RAG/Memory/Tools → Security → Real-world Cases
+---
+
+## What makes this different
+
+**1. Both fundamentals and applications — not just half**
+
+Most AI learning resources either only cover "how to call APIs to build Agents" or only "Transformer math derivations". This covers both, clearly separated:
+
+```
+01-machine-learning  backprop / optimizers / regularization / CNN / RNN / RL      34 notes
+02-llm               attention derivation / tokenization / MoE / RLHF / quant     23 notes
+04-ai-agent          frameworks / protocols / RAG / tools / memory / security    128 notes
 ```
 
-Every note includes:
+Understanding "why fine-tuning didn't work" requires the first two layers. Understanding "why the Agent went rogue" requires the third.
 
-- 📊 ASCII architecture diagrams — complex concepts at a glance
-- 💻 Runnable code — real examples, not pseudocode
-- 📋 Comparison tables — side-by-side framework/protocol evaluations
-- 🔗 Cross-references — notes link to each other, forming a knowledge graph
+**2. Three questions at the top of every note**
 
-## ⚡ Quick Start
+Not a summary — a **verification standard**. Example from [Model Merging](./learning-notes/00-ai/02-llm/04-微调与对齐/05-模型合并.md):
 
-| Your Situation | Recommended Path |
-| -------------- | ---------------- |
-| Complete beginner | [Fundamentals](./learning-notes/00-ai/ai-agent/00-基础概念/) → [Design Patterns](./learning-notes/00-ai/ai-agent/01-Agentic设计模式/) → [Protocols](./learning-notes/00-ai/ai-agent/02-Agent协议/) → [Frameworks](./learning-notes/00-ai/ai-agent/03-Agent框架/) |
-| Choosing a framework | [Frameworks (8 compared)](./learning-notes/00-ai/ai-agent/03-Agent框架/) → [Selection Guide](./learning-notes/00-ai/ai-agent/04-Agent框架补充/) → [Case Studies](./learning-notes/00-ai/ai-agent/23-实战案例/) |
-| Working on RAG / Memory | [Advanced RAG](./learning-notes/00-ai/ai-agent/06-RAG进阶/) → [Memory & State](./learning-notes/00-ai/ai-agent/10-记忆与状态/) → [Memory Frameworks](./learning-notes/00-ai/ai-agent/11-Agent记忆框架/) |
-| Interested in security & protocols | [Protocols](./learning-notes/00-ai/ai-agent/02-Agent协议/) → [Security & Governance](./learning-notes/00-ai/ai-agent/15-Agent安全与治理/) → [Agent Payments](./learning-notes/00-ai/ai-agent/20-Agent支付/) |
+> 1. Why can two independently fine-tuned models be added/subtracted in parameter space, and what does this operation assume?
+> 2. What problems do TIES and DARE each solve in naive weight averaging, and how do their approaches differ?
+> 3. Under what conditions does model merging fail, and how do you assess feasibility beforehand?
 
-## 🤖 AI Agent Learning Roadmap (101 Notes)
+Can't answer? Go back and read that section. These 198 questions are [interactive on the site](https://walterwang0x01.github.io/portfolio/notes/#quiz).
 
-> Note: All notes are written in Chinese with English code examples.
+**3. Runnable code with actually-measured output**
 
-<details open>
-<summary>Phase 1: Fundamentals (6 notes)</summary>
+Not pseudocode. Every NumPy implementation was executed, and the pasted output is the real result. During writing, there were multiple cases of "expected output ≠ actual output" — e.g. the model-collapse note initially used an unbiased variance estimator and couldn't reproduce the decay at all; switching to MLE (biased) revealed sigma dropping from 0.95 to 0.35. **Those corrections are kept in the notes, because the debugging path itself carries information.**
 
-| # | Topic | Notes | What You'll Learn |
-| - | ----- | ----- | ----------------- |
-| 00 | [Fundamentals](./learning-notes/00-ai/ai-agent/00-基础概念/) | 3 | What is AI Agent, LLM basics, Prompt Engineering |
-| 01 | [Agentic Design Patterns](./learning-notes/00-ai/ai-agent/01-Agentic设计模式/) | 3 | Anthropic patterns, workflow orchestration |
+**4. Explicit "when NOT to use this"**
 
-</details>
+Technology selection notes don't just list advantages. [Model Merging](./learning-notes/00-ai/02-llm/04-微调与对齐/05-模型合并.md) §9 lists six failure scenarios with detection methods; [From for-loops to autonomous systems](./learning-notes/00-ai/04-ai-agent/16-Harness%20Engineering/10-从for循环到自治系统.md) has a dedicated section on "when you should not go autonomous".
 
-<details>
-<summary>Phase 2: Protocols & Frameworks (20 notes)</summary>
+---
 
-| # | Topic | Notes | What You'll Learn |
-| - | ----- | ----- | ----------------- |
-| 02 | [Agent Protocols](./learning-notes/00-ai/ai-agent/02-Agent协议/) | 6 | MCP / A2A / ACP / ANP / AG-UI overview + protocol bridges |
-| 03 | [Agent Frameworks](./learning-notes/00-ai/ai-agent/03-Agent框架/) | 8 | LangGraph / CrewAI / OpenAI SDK / Google ADK / AWS Strands and more |
-| 04 | [Framework Extras](./learning-notes/00-ai/ai-agent/04-Agent框架补充/) | 3 | Selection guide, LlamaIndex, Anthropic Claude Agent |
-| 05 | [Java/TS Ecosystem](./learning-notes/00-ai/ai-agent/05-Java-TS%20Agent生态/) | 3 | Spring AI / Vercel AI SDK / Dapr Agents |
+## Content Map
 
-</details>
+### 🧠 AI Engineering (191 notes) — [Full navigation](./learning-notes/00-ai/README.md)
 
-<details>
-<summary>Phase 3: Core Capabilities (21 notes)</summary>
+Numbered by learning dependency, not alphabetically:
 
-| # | Topic | Notes | What You'll Learn |
-| - | ----- | ----- | ----------------- |
-| 06 | [Advanced RAG](./learning-notes/00-ai/ai-agent/06-RAG进阶/) | 4 | RAG architecture → Vector DBs → Advanced RAG → GraphRAG |
-| 07 | [Tools & Function Calling](./learning-notes/00-ai/ai-agent/07-工具与Function%20Calling/) | 4 | Function Calling, MCP Server development, tool orchestration |
-| 08 | [Tool Platforms & Sandboxes](./learning-notes/00-ai/ai-agent/08-工具平台与沙箱/) | 4 | Composio / E2B sandbox / Web data tools |
-| 09 | [Multi-Agent Systems](./learning-notes/00-ai/ai-agent/09-多Agent系统/) | 3 | Multi-Agent patterns, communication, human-in-the-loop |
-| 10 | [Memory & State](./learning-notes/00-ai/ai-agent/10-记忆与状态/) | 3 | Short/long-term memory, conversation management |
-| 11 | [Memory Frameworks](./learning-notes/00-ai/ai-agent/11-Agent记忆框架/) | 3 | Mem0 / Letta(MemGPT) / Zep / LangMem |
+| Stage | Content | Notes |
+| --- | --- | --- |
+| [00-Getting Started](./learning-notes/00-ai/00-入门准备/) | AI landscape, dev environment & compute, learning path & pitfalls, how to read papers | 4 |
+| [01-machine-learning](./learning-notes/00-ai/01-machine-learning/README.md) | Math essentials → classic algorithms → feature engineering → **backprop derivation** → training engineering → CNN/RNN → RL | 34 |
+| [02-llm](./learning-notes/00-ai/02-llm/README.md) | **Attention derivation** → tokenization → BERT/GPT/MoE → SFT/LoRA/RLHF/DPO → KV Cache/quantization/speculative decoding → CLIP/diffusion/VLM | 23 |
+| [03-Hands-on](./learning-notes/00-ai/03-实战项目/) | PyTorch training, end-to-end project | 2 |
+| [04-ai-agent](./learning-notes/00-ai/04-ai-agent/README.md) | 25 subdirectories | 128 |
 
-</details>
+**Highlights in 04-ai-agent**: Claude Code architecture deep-dive (44KB), Agent identity & permissions (60KB), Agent testing engineering (76KB), MCP supply-chain attacks, Prompt injection & memory poisoning, Harness Engineering (10 notes incl. Context Offloading / Version Drifting / Company Brain).
 
-<details>
-<summary>Phase 4: Production Engineering (21 notes)</summary>
+### 💻 Other Stacks (380 notes)
 
-| # | Topic | Notes | What You'll Learn |
-| - | ----- | ----- | ----------------- |
-| 12 | [Model Serving](./learning-notes/00-ai/ai-agent/12-模型服务/) | 3 | OpenAI/Claude API, open-source model deployment, model routing |
-| 13 | [AI Gateway & Routing](./learning-notes/00-ai/ai-agent/13-AI网关与路由/) | 3 | LiteLLM / Vercel AI Gateway / Portkey |
-| 14 | [Observability & Evaluation](./learning-notes/00-ai/ai-agent/14-可观测与评估/) | 6 | LLM observability, benchmarks, testing, cost optimization |
-| 15 | [Security & Governance](./learning-notes/00-ai/ai-agent/15-Agent安全与治理/) | 6 | Identity, governance frameworks, defense in depth, Affinidi Trust Fabric, MCP security vulnerabilities, prompt injection & memory poisoning |
-| 16 | [Harness Engineering](./learning-notes/00-ai/ai-agent/16-Harness%20Engineering/) | 5 | Complete guide, Context Engineering, CI/CD integration |
+| Domain | Content | Notes |
+| --- | --- | --- |
+| [01-languages](./learning-notes/01-languages/) | Python / Java / Go / Rust | 181 |
+| [02-frontend](./learning-notes/02-frontend/frontend/README.md) | React / Vue3 / TypeScript / build tooling / performance | 66 |
+| [03-mobile](./learning-notes/03-mobile/) | iOS (Swift/SwiftUI), Android (Kotlin/Compose) | 90 |
+| [04-backend-infra](./learning-notes/04-backend-infra/) | Architecture / databases / data engineering / observability / platform engineering / security | 43 |
 
-</details>
+### 📰 Daily Tech Briefings (304 issues)
 
-<details>
-<summary>Phase 5: Verticals & Case Studies (31 notes)</summary>
+[AI Agent / China Tech / Global Tech](./learning-notes/_briefings/) — automated pipeline (RSS + HN API + web search, with dedup, scoring, circuit-breaker self-healing).
 
-| # | Topic | Notes | What You'll Learn |
-| - | ----- | ----- | ----------------- |
-| 17 | [Coding Agents](./learning-notes/00-ai/ai-agent/17-Coding%20Agent/) | 6 | Claude Code / Cursor / Kiro / Devin / Vibe Coding |
-| 18 | [Browser & Agent Ecosystem](./learning-notes/00-ai/ai-agent/18-OpenClaw与Agent生态/) | 6 | Browser automation, Computer Use, Agent Skills, AgentOS |
-| 19 | [Voice Agents](./learning-notes/00-ai/ai-agent/19-Voice%20Agent/) | 2 | Voice agents & real-time interaction |
-| 20 | [Agent Payments](./learning-notes/00-ai/ai-agent/20-Agent支付/) | 4 | ACP / AP2 / Mastercard Agent Pay / x402 + industry landscape |
-| 21 | [Cloud Provider Solutions](./learning-notes/00-ai/ai-agent/21-云厂商Agent方案/) | 2 | Alibaba Cloud, cloud provider comparison |
-| 22 | [Low-Code Platforms](./learning-notes/00-ai/ai-agent/22-低代码平台/) | 3 | Dify / Coze / FastGPT / n8n / Flowise |
-| 23 | [Case Studies](./learning-notes/00-ai/ai-agent/23-实战案例/) | 8 | Customer service / Code / Data / Research / DevOps / Content / Enterprise |
+**[Read briefings online →](https://walterwang0x01.github.io/portfolio/briefing/)**
 
-</details>
+### 📖 Reading Collection
+
+[reading/](./reading/) — third-party technical books + my reading notes (separate copyright declarations, see each subdirectory's COPYRIGHT.md).
+
+**[Read online →](https://walterwang0x01.github.io/portfolio/reading/)**
+
+---
 
 ## 🎯 Projects
 
-### LangGraph + MCP Intelligent Agent
+### LangGraph + MCP Agent
 
-`Python` `LangGraph` `MCP` `ChromaDB` `FastAPI`
-
-Production-grade Agent: workflow orchestration + tool protocol + RAG retrieval + memory management + human-in-the-loop.
-
-```text
-User Request → Intent Router → RAG / MCP Tools / Human Approval → LLM → Response
-```
+Production-grade Agent skeleton: intent routing → RAG retrieval / tool calling / human approval → response generation.
 
 ```bash
 cd projects/langgraph-mcp-agent-demo
-cp env.example .env          # Add your API Key
-docker-compose up
+cp env.example .env   # add your API keys
+docker-compose up -d  # PostgreSQL + ChromaDB
+uvicorn app.main:app --reload
 ```
 
-→ [View project](./projects/langgraph-mcp-agent-demo/)
+Covers: LangGraph state graph with checkpointing, MCP Servers (file + database), ChromaDB RAG, Mem0 long-term memory, human-in-the-loop for sensitive operations.
 
-### CrewAI Multi-Agent Collaboration
+→ [Docs](./projects/langgraph-mcp-agent-demo/)
 
-`Python` `CrewAI` `GPT-4o` `FastAPI`
+### CrewAI Multi-Agent
 
-Four-role Agent team for content creation pipeline.
-
-```text
-Topic → 🔍Researcher → ✍️Writer → 📝Editor → 📈SEO Optimizer → Published Article
-```
+Content pipeline: Researcher → Writer → Editor → SEO Optimizer, four Agents in sequence.
 
 ```bash
 cd projects/crewai-multi-agent-demo
-cp env.example .env          # Add your API Key
-make run
+cp env.example .env
+python -m app.main --topic "AI Agent trends"
 ```
 
-→ [View project](./projects/crewai-multi-agent-demo/)
+→ [Docs](./projects/crewai-multi-agent-demo/)
 
-## 📚 Full-Stack Tech Notes (323 notes)
+### Others
 
-Beyond AI Agents, this repo includes full-stack development notes with the same style — diagrams + code + comparison tables:
+- [rag-llm-agent-platform](./projects/rag-llm-agent-platform/) — RAG + tool calling platform (FastAPI + pgvector)
+- [spring-boot-microservice-demo](./projects/spring-boot-microservice-demo/) — Spring Cloud microservices (user/order + Kafka)
+- [x402-demo](./projects/x402-demo/) / [x402-python-demo](./projects/x402-python-demo/) — x402 HTTP-native micropayment experiments
 
-| Area | Topics |
-| ---- | ------ |
-| [Java](./learning-notes/01-languages/java/) | Spring Boot / Spring Cloud / Microservices / Middleware / JVM / Design Patterns |
-| [Python](./learning-notes/01-languages/python/) | FastAPI / Data Analysis / ML / Concurrency / Web Scraping |
-| [Frontend](./learning-notes/02-frontend/frontend/) | React / Vue3 / TypeScript / Next.js / Build Tools / Performance |
-| [iOS](./learning-notes/03-mobile/ios/) | Swift / SwiftUI / UIKit / Architecture Patterns |
-| [Android](./learning-notes/03-mobile/android/) | Kotlin / Jetpack Compose / Architecture Patterns |
-| [Architecture](./learning-notes/04-backend-infra/architecture/) | Event-Driven / Microservices / DDD / CQRS & Event Sourcing / System Design |
+---
+
+## How to use this repo
+
+**New to AI**: Start from the [learning path](https://walterwang0x01.github.io/portfolio/notes/), follow 00 → 01 → 02 → 03 → 04. Don't skip `01-machine-learning/04-神经网络原理` — that's where judgment comes from.
+
+**Already building Agents**: Jump to the relevant subdirectory under `04-ai-agent/`. For selection, see `04-Agent框架补充/01-Agent框架选型指南`. For pitfalls, see `15-Agent安全与治理` and `14-可观测与评估`.
+
+**Want to test yourself**: Go straight to the [self-check page](https://walterwang0x01.github.io/portfolio/notes/#quiz). Pick a module from the 198 questions, and only read the notes for what you can't answer. More efficient than reading front to back.
+
+---
+
+## Maintenance
+
+This repo isn't write-once-and-forget. It has automated maintenance:
+
+- **Docs quality CI**: broken link checks, file header conventions, version-staleness checks ([ci-docs.yml](./.github/workflows/ci-docs.yml))
+- **Internal link validation**: 841 internal links, verified zero-broken after every change
+- **Briefing pipeline**: 232 unit tests in `scripts/briefing_tools/` covering classification, scoring, dedup, source circuit-breaker
+- **Version markers**: content tagged `<!-- version-check -->` gets periodically re-verified
+
+Writing conventions: 8–15KB per note, three self-check questions at the top, runnable example required for principle notes, split anything over 20KB.
+
+---
 
 ## Star History
 
-If you find this repo helpful, a Star ⭐ would be appreciated.
+[![Star History Chart](https://api.star-history.com/svg?repos=walterwang0x01/tech-learning-and-projects&type=Date)](https://star-history.com/#walterwang0x01/tech-learning-and-projects&Date)
 
-Questions or suggestions? Feel free to open an [Issue](../../issues).
+---
 
 ## License
 
-Free to read and share non-commercially (with attribution). Commercial use requires written permission - See [LICENSE](./LICENSE)
+**Free to read and share non-commercially**, with attribution required. Any commercial use (publishing, training courses, paid content adaptation) requires prior written permission.
+
+Content under `reading/` is third-party; copyright belongs to the original authors — see each subdirectory's `COPYRIGHT.md`.
+
+See [LICENSE](./LICENSE) for details.
+
+---
+
+<div align="center">
+
+**If this repo helps you, a ⭐ Star is appreciated**
+
+Author: Walter Wang
+
+</div>
