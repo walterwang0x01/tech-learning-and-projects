@@ -34,7 +34,7 @@
     {"name": "HN AI 关键词 A", "url": "https://hnrss.org/newest?q=AI+agent+OR+MCP+OR+LLM&points=30", "topic_hints": ["ai-agent"], "timeout": 25, "retries": 4, "algolia_fallback": {"queries": ["AI agent", "MCP", "LLM"], "tags": "story", "points_min": 30, "hits_per_page": 30, "freshness_hours": 168, "max_pages_per_query": 2}},
     {"name": "HN AI 关键词 B", "url": "https://hnrss.org/newest?q=LangGraph+OR+CrewAI+OR+Claude+OR+RAG+OR+function+calling+OR+context+engineering&points=20", "topic_hints": ["ai-agent"], "timeout": 25, "retries": 4, "algolia_fallback": {"queries": ["LangGraph", "CrewAI", "Claude", "RAG", "function calling", "context engineering"], "tags": "story", "points_min": 20, "hits_per_page": 25, "freshness_hours": 168, "max_pages_per_query": 2}},
 
-    {"name": "36氪", "url": "https://36kr.com/feed", "topic_hints": ["china-tech"]},
+    {"name": "36氪", "url": "https://rsshub.rssforever.com/36kr/newsflashes", "topic_hints": ["china-tech"]},
     {"name": "InfoQ CN", "url": "https://www.infoq.cn/feed", "topic_hints": ["china-tech"]},
     {"name": "量子位", "url": "https://www.qbitai.com/feed", "topic_hints": ["china-tech"]},
     {"name": "开源中国", "url": "https://www.oschina.net/news/rss", "topic_hints": []},
