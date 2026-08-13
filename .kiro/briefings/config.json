@@ -42,6 +42,11 @@
     {"name": "IT之家", "url": "https://www.ithome.com/rss/", "topic_hints": ["china-tech"]},
     {"name": "HN 中国科技", "url": "https://hnrss.org/newest?q=DeepSeek+OR+Qwen+OR+Baidu+AI+OR+China+AI&points=10", "topic_hints": ["china-tech"], "timeout": 25, "retries": 4, "algolia_fallback": {"queries": ["DeepSeek", "Qwen", "China AI", "Baidu AI"], "tags": "story", "points_min": 10, "hits_per_page": 20, "freshness_hours": 168, "max_pages_per_query": 2}},
 
+    {"name": "Qwen Blog", "url": "https://qwenlm.github.io/blog/index.xml", "topic_hints": ["ai-agent", "china-tech"], "_comment": "2026-08-13 新增，国产大模型覆盖层。起因是当日 china-tech 候选集 80 条几乎全是消费电子与财报，大模型动态只能靠 curate 阶段 web search 现补。实测结论：七家厂商里只有 Qwen 提供官方 RSS（Hugo index.xml，44 条），智谱(z.ai)/Moonshot/百川/零一万物/MiniMax/文心一言 的 rss.xml、feed 路径均返回 404 或 HTML——它们只发公众号和 X，因此这些厂商靠下面的 'HN 国产大模型' 英文讨论 + supplement/bilibili 中文视频兜底。已排除的候选：GitHub releases.atom 类（sglang/ms-swift/FastDeploy/Qwen-Agent/ModelScope 标题多为裸版本号，RAGFlow 每天产出 dev-YYYYMMDD nightly tag，会挤掉真新闻——china-tech 池当日已 121 条截断到 80）、commits.atom 类（噪声如 'minor README changes'）、rsshub.app(403)、机器之心/ByteDance Seed/百度研究院(返回 HTML 非 XML)、wechat2rss 公共实例(404，需自建)。"},
+    {"name": "HN 国产大模型", "url": "https://hnrss.org/newest?q=Zhipu+OR+GLM+OR+Kimi+OR+Moonshot+OR+MiniMax+OR+Baichuan+OR+ERNIE+OR+Hunyuan&points=5", "topic_hints": ["china-tech", "ai-agent"], "timeout": 25, "retries": 4, "algolia_fallback": {"queries": ["Zhipu", "GLM", "Kimi", "MiniMax", "Baichuan", "ERNIE", "Hunyuan"], "tags": "story", "points_min": 5, "hits_per_page": 20, "freshness_hours": 168, "max_pages_per_query": 2}},
+    {"name": "雷峰网", "url": "https://www.leiphone.com/feed", "topic_hints": ["china-tech"]},
+    {"name": "钛媒体", "url": "https://www.tmtpost.com/rss", "topic_hints": ["china-tech"]},
+
     {"name": "HN Top", "url": "https://hnrss.org/frontpage?count=30", "topic_hints": ["global-tech"]},
     {"name": "TechCrunch", "url": "https://techcrunch.com/feed/", "topic_hints": ["global-tech"]},
     {"name": "The Verge", "url": "https://www.theverge.com/rss/index.xml", "topic_hints": ["global-tech"]},
@@ -62,6 +67,8 @@
         "fine-tuning", "fine tuning", "prompt engineering", "context engineering",
         "function calling", "tool use", "tool calling", "agentic",
         "deepseek", "qwen", "通义", "文心", "豆包", "kimi", "智谱", "glm",
+        "千问", "ernie", "hunyuan", "混元", "internlm", "书生", "百川", "baichuan",
+        "零一万物", "01.ai", "minimax", "moonshot", "盘古", "星火", "大模型",
         "huggingface", "hugging face", "transformers",
         "arxiv", "benchmark", "eval",
         "inference", "vllm", "ollama"
@@ -75,6 +82,8 @@
         "vivo", "oppo", "荣耀", "中兴", "联想",
         "baidu", "alibaba", "tencent", "bytedance",
         "moonshot", "月之暗面", "智谱", "面壁", "minimax", "阶跃星辰",
+        "百川", "baichuan", "零一万物", "01.ai", "讯飞", "深度求索",
+        "硅基流动", "魔搭", "modelscope", "昇腾", "ascend", "寒武纪", "摩尔线程",
         "米哈游", "鸿蒙", "余承东", "雷军",
         "中国", "国内", "国产", "大陆", "出海", "信创",
         "国产算力", "国产 gpu", "国产芯片", "国产模型",
@@ -109,6 +118,9 @@
         "量子位": 4,
         "IT之家": 3,
         "少数派": 3,
+        "Qwen Blog": 5,
+        "雷峰网": 4,
+        "钛媒体": 3,
         "supplement/bilibili": 3,
         "supplement/v2ex": 3
       }
@@ -149,7 +161,8 @@
       "enabled": true,
       "queries": [
         "DeepSeek 大模型",
-        "AI Agent 教程"
+        "AI Agent 教程",
+        "国产大模型"
       ],
       "max_per_query": 5,
       "topic_hints": ["china-tech", "ai-agent"]
