@@ -1,227 +1,5 @@
 {
   "items": {
-    "7cdc039e735a": {
-      "url": "https://www.wsj.com/tech/ai/amazon-ceos-talks-with-u-s-officials-triggered-crackdown-on-anthropic-models-dcc90578",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "a41a15b45a2c": {
-      "url": "https://x.com/rauchg/status/2065520041894756480",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "16def48437bf": {
-      "url": "https://x.com/thsottiaux/status/2065468501750649006",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "bc7fc883d0fe": {
-      "url": "https://www.theverge.com/ai-artificial-intelligence/949553/anthropic-fable-5-mythos-5-government-national-security",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "0c67b3c5b044": {
-      "url": "https://9to5google.com/2026/06/12/google-information-agents",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "539d4ea171d2": {
-      "url": "https://www.infoq.cn/article/x99GEFjWQ8Ipb4pcDq2P",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "082cd1074156": {
-      "url": "https://www.producthunt.com/products/kimi-ai-assistant",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "446830a5c044": {
-      "url": "https://huggingface.co/blog/allenai/olmo-eval",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "5b0850a93ebc": {
-      "url": "https://www.ithome.com/0/963/985.htm",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "fcc4b75ca77b": {
-      "url": "https://vercel.com/changelog/program-agent-harnesses-with-ai-sdk",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "6c72217d105a": {
-      "url": "https://github.com/HKUDS/OpenHarness",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "87901703b771": {
-      "url": "https://techcrunch.com/2026/06/12/anthropics-safety-warnings-may-have-just-backfired-the-government-has-pulled-the-plug-on-its-most-powerful-ai",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "977bf39ae51c": {
-      "url": "https://www.infoq.cn/article/FuhAEYbk8T0b0GQZyq4c",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-06-14"
-    },
-    "2f6a9f3ad00b": {
-      "url": "https://www.ithome.com/0/963/988.htm",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-06-14"
-    },
-    "f2fe43a68e21": {
-      "url": "https://www.ithome.com/0/964/029.htm",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-06-14"
-    },
-    "2f693d20368d": {
-      "url": "https://36kr.com/p/3851572421432324?f=rss",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-06-14"
-    },
-    "688412783268": {
-      "url": "https://36kr.com/newsflashes/3851331950728194?f=rss",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-06-14"
-    },
-    "8271d8eeefdd": {
-      "url": "https://news.aibase.com/news/28884",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-06-14"
-    },
-    "f8c04f187b92": {
-      "url": "https://www.ithome.com/0/963/987.htm",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-06-14"
-    },
-    "d98bcec099ff": {
-      "url": "https://www.qbitai.com/2026/06/435394.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-06-14"
-    },
-    "73b72e6d9659": {
-      "url": "https://handyai.substack.com/p/model-drop-kimi-k27-code",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-06-14"
-    },
-    "08147283d222": {
-      "url": "https://www.infoq.cn/article/sMxf71RUtLYgI0BsQhKw",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-06-14"
-    },
-    "e1f4bf4c0900": {
-      "url": "https://www.phoronix.com/news/ReactOS-Running-Half-Life",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "67ac6d9c2f14": {
-      "url": "https://github.blog/ai-and-ml/how-we-made-github-copilot-cli-more-selective-about-delegation",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "c500093d8a84": {
-      "url": "https://research.google/blog/a-low-carbon-computing-platform-from-your-retired-phones",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "cc453e0a0a0f": {
-      "url": "https://www.oschina.net/news/457352/openssl-4-0-1-released",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "be818d18e2f0": {
-      "url": "https://www.oschina.net/news/457093/virtualenv-21-4-3-released",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "bf334f43fb9f": {
-      "url": "https://sspai.com/post/110967",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "4bc83ae73cff": {
-      "url": "https://tonsky.me/blog/every-frame-perfect",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "860368e69463": {
-      "url": "https://techcrunch.com/2026/06/13/meta-reportedly-moves-to-unwind-2b-manus-deal-after-beijings-demand",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "a6b8bd68ce4e": {
-      "url": "https://techcrunch.com/2026/06/12/mistral-is-rumored-to-be-raising-e3b-at-e20-valuation",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "6788ba6d9041": {
-      "url": "https://darkreading.com/vulnerabilities-threats/shinyhunters-oracle-zero-day-higher-ed",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "03ef97ac41dc": {
-      "url": "https://arstechnica.com/security/2026/06/peoplesoft-0-day-affecting-hundreds-of-organizations-steals-gigabytes-of-data",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "3e13d8993b34": {
-      "url": "https://github.com/tensorzero/tensorzero",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "1e8b0cbeeb02": {
-      "url": "https://arstechnica.com/google/2026/06/google-sues-chinese-cybercrime-network-that-used-gemini-to-automate-scams",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "32a09a489ecb": {
-      "url": "https://www.theverge.com/tech/949502/apple-macos-27-golden-gate-siri-ai-apple-intelligence",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
-    "172b731f222e": {
-      "url": "https://www.reuters.com/business/microsoft-has-considered-spinning-out-xbox-information-reports-2026-06-12",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-06-14"
-    },
     "ab965ee89be9": {
       "url": "https://36kr.com/newsflashes/3853769391887362?f=rss",
       "title": "",
@@ -12935,9 +12713,399 @@
       "title": "",
       "topic": "ai-agent",
       "date": "2026-08-13"
+    },
+    "63324e94c3d3": {
+      "url": "https://arxiv.org/abs/2608.11224",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "e176415c25cf": {
+      "url": "https://github.com/deepseek-ai/deepseek-harness",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "3e74f9fd3327": {
+      "url": "https://api-docs.deepseek.com/news/news260813",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "c8b6a8da30e0": {
+      "url": "https://www.oschina.net/news/501918",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "d7a5e85c213d": {
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "a67f3eaa80ec": {
+      "url": "https://huggingface.co/blog/icml-2026-open-reproductions",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "6d6bc04ff08c": {
+      "url": "https://www.oschina.net/news/501917/grok-4-6",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "1aead5e4e740": {
+      "url": "https://github.com/tenet-security/agent-jackstop",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "c9790f010543": {
+      "url": "https://deepseek-harness.github.io/deepseek-harness/en/guide/quickstart",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "0e08196e2a84": {
+      "url": "https://arxiv.org/abs/2608.11434",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "ebb86c55221a": {
+      "url": "https://arxiv.org/abs/2608.11241",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "b3ba482495c9": {
+      "url": "https://www.leiphone.com/category/ai/rbIV873aEJjUGpyU.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "b16a91c61bd8": {
+      "url": "https://deepseek.com/harness/en",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "4b78ca53ee36": {
+      "url": "https://github.com/fellowgeek/mcp-memory",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "0b33f23367eb": {
+      "url": "https://x.com/garrytan/status/2087597829065945249",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "923cacfeb127": {
+      "url": "https://arxiv.org/abs/2608.11344",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "dd4cf8a01416": {
+      "url": "https://x.com/garrytan/status/2087594114372259890",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "1ef2b55e9a4a": {
+      "url": "https://developer.nvidia.com/blog/serve-qwen3-8-2-4t-a95b-a-2-4t-parameter-model-with-configurable-reasoning-on-nvidia-gb300-nvl72",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "af4602932aef": {
+      "url": "https://github.com/cordiverse/cordis",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "24013c064501": {
+      "url": "https://huggingface.co/blog/amazon/strands-lerobot-streaming-data-loop",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "c66ceb94dd6e": {
+      "url": "https://github.com/StamManif/mcp-stama",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "4b3c0e16bb3f": {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "6b776e31632a": {
+      "url": "https://www.oschina.net/news/501925/deepseek-harness-developer-preview",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "e04157bb953c": {
+      "url": "https://www.scworld.com/news/ghostjacking-attack-turns-error-logs-into-indirect-prompt-injections",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-14"
+    },
+    "233a7f03f490": {
+      "url": "https://github.com/systemd/systemd/issues/40262",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "a7f2e9eea50b": {
+      "url": "https://www.ithome.com/0/989/486.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "0f1dc2521dd5": {
+      "url": "https://knownagents.com/insights",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "c58049adee2b": {
+      "url": "https://techcrunch.com/2026/08/13/if-apple-sends-you-a-push-notification-alerting-you-to-a-spyware-attack-take-it-seriously",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "f716839bc2fe": {
+      "url": "https://techcrunch.com/2026/08/13/apple-in-talks-to-pay-publishers-to-provide-siri-with-current-news-report",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "5e2c9b4b0654": {
+      "url": "https://techcrunch.com/2026/08/13/in-a-first-us-will-allow-some-private-firms-to-carry-out-cyberattacks",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "a202a998008f": {
+      "url": "https://www.theverge.com/tech/979871/microsoft-copilot-mico-retired",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "b73302467c4b": {
+      "url": "https://techcrunch.com/2026/08/13/databricks-wanted-to-raise-1b-investors-wanted-15b-it-settled-on-5b-at-a-190b-valuation",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "bbc423943765": {
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/08/expanding-capabilities-to-combat-transnational-cyber-enabled-crime",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "85dc4701d339": {
+      "url": "https://www.ithome.com/0/989/551.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "49b6ab3283f0": {
+      "url": "https://github.blog/news-insights/company-news/github-availability-report-july-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "227e22824c63": {
+      "url": "https://arstechnica.com/security/2026/08/white-house-recruits-security-firms-to-hack-overseas-cybercriminals",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "527865400049": {
+      "url": "https://atproto.com/blog/introducing-bluesky-protocol-services",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "f18999084b87": {
+      "url": "https://www.theverge.com/policy/979852/that-is-not-acceptable-judge-orders-google-to-make-rival-app-store-installs-easier",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "7617f6c4c608": {
+      "url": "https://0.mk/blog/link-rot",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "c59217d80d93": {
+      "url": "https://www.reuters.com/legal/government/german-advocacy-group-lodges-criminal-complaint-over-meta-ai-glasses-2026-08-12",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "b04b90b9b661": {
+      "url": "https://oxide.computer/blog/kubernetes-on-oxide",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "a864f7ed2ba9": {
+      "url": "https://docs.mistral.ai/models/ocr-4-1",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "0abe62ce0ddd": {
+      "url": "https://www.oschina.net/news/501924",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "08a71a96d117": {
+      "url": "https://techcrunch.com/2026/08/13/microsoft-kills-off-unsuccessful-ai-features-while-merging-its-separate-copilot-apps",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "4c5b4fcdb0bd": {
+      "url": "https://techcrunch.com/2026/08/13/x-open-sources-its-ranking-algorithm-letting-users-see-if-theyve-been-shadowbanned",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "a8da3117b9f9": {
+      "url": "https://www.engadget.com/2236672/x-is-testing-a-tool-that-will-let-users-see-if-their-posts-have-been-shadowbanned",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "e923957cb2fe": {
+      "url": "https://blog.cloudflare.com/certificate-transparency-monitoring-ga",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-14"
+    },
+    "0c01ae6745b6": {
+      "url": "https://www.qbitai.com/2026/08/471884.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "f30ad7d7b793": {
+      "url": "https://www.leiphone.com/category/private/yXsTeayhNBwW2ZUH.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "b9f216ce800b": {
+      "url": "https://www.qbitai.com/2026/08/472208.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "f1c284c8d27f": {
+      "url": "https://www.ithome.com/0/989/532.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "d22baa8c9de9": {
+      "url": "https://www.leiphone.com/category/industrynews/5sFrL8UuJpyLrJ6B.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "8e4226848308": {
+      "url": "https://the-decoder.com/deepseek-launches-an-improved-v4-pro-model-raises-api-prices-and-makes-its-agent-software-open-source",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "634108b5b5d0": {
+      "url": "https://my.oschina.net/u/4559794/blog/19738539",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "20bc71eeb7a3": {
+      "url": "https://www.leiphone.com/category/transportation/aCpxFOdunbeBESUD.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "41e82a2d1797": {
+      "url": "https://www.infoq.cn/article/9d9Oik3uZpqfjbfElZaq",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "d5d3d8390c8e": {
+      "url": "https://www.deepseek.com/harness/en",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "91964bed0c30": {
+      "url": "https://www.leiphone.com/category/industrynews/HvM51v44hA6xaezw.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "bfe732b2733a": {
+      "url": "https://www.ithome.com/0/989/529.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "872eecf9da26": {
+      "url": "https://www.ithome.com/0/989/534.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "435e8975c0c3": {
+      "url": "https://www.ithome.com/0/989/514.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "c48dbe237e5a": {
+      "url": "https://www.odaily.news/en/newsflash/509240",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "fd9bf01c142f": {
+      "url": "https://www.ithome.com/0/989/513.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "a43356b5517a": {
+      "url": "https://www.ithome.com/0/989/524.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
+    },
+    "631f4e770f7b": {
+      "url": "https://www.ithome.com/0/989/504.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-14"
     }
   },
-  "updated": "2026-08-13 15:32",
+  "updated": "2026-08-14 10:32",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -13238,6 +13406,9 @@
     "global-tech/2026-08-10": "ce5eccb79bbd3f3a",
     "global-tech/2026-08-13": "13a1a4030e4e9b4c",
     "china-tech/2026-08-13": "d388b4d01edc246a",
-    "ai-agent/2026-08-13": "57b7b5539c6ab5e8"
+    "ai-agent/2026-08-13": "57b7b5539c6ab5e8",
+    "ai-agent/2026-08-14": "5e2da48c7bb72dc7",
+    "global-tech/2026-08-14": "ee262231560a016b",
+    "china-tech/2026-08-14": "fdedb72baffa8d9a"
   }
 }
