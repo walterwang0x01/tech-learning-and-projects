@@ -19,7 +19,7 @@
 [extend]
 useDefault = true
 
-[allowlist]
+[[allowlists]]
 description = "git-crypt 加密路径与本地工具产物"
 paths = [
   # git-crypt 加密的文件在 CI 检出里是二进制块（文件头 GITCRYPT）。
@@ -36,4 +36,40 @@ paths = [
   # 本地工具产物，已被 .gitignore 挡住；列在此处是为了让本地
   # `gitleaks dir .` 的输出也可读（否则 76 处缓存噪声淹没真信号）。
   '''^\.gitnexus/''',
+]
+
+# 历史文档示例的 commit 级豁免。
+#
+# 为什么需要：`gitleaks git` 扫的是历史 patch。当前文件里的类密钥示例值已在
+# 2026-08-17 逐条改成明显假值（sk_test_EXAMPLE_DO_NOT_USE / EXAMPLE_JWT_DO_NOT_USE
+# / $LITELLM_MASTER_KEY 等，改后当前树受控文件命中为 0），但旧 commit 里的原值
+# 仍在历史中。不改写历史就无法让全历史扫描归零。
+#
+# 为什么用 commit 而不是 path 或 regex：commit 级豁免只赦免这 8 个具名提交，
+# 其余任何历史提交与所有未来提交照常全量扫描——不会在正文或文件上留下永久盲区。
+# 也不用 .gitleaksignore 指纹：指纹含 file+line，文件一改就漂移。
+#
+# 逐条核对结论（全部为学习笔记中的文档示例，非真实凭据）：
+#   0800a249 2026-04-15  5 处  Markdown CLI interface 临时文件
+#   f830c9c1 2026-04-09  1 处  did:key 示例（按定义是公钥，真假阳性）
+#   247179f0 2026-04-09  1 处  AgentToken CLI 设计规范示例
+#   40a11ae1 2026-04-10  1 处  sk_ 前缀示例值撞 stripe-access-token 规则
+#   de43842c 2026-03-27  1 处  iOS 日志规范里的反面示例
+#   cc4ccbd7 2026-03-27  1 处  Agent 支付协议 JSON 示例中的截断 JWT
+#   4e97bd77 2026-03-26  1 处  curl -H "Authorization: Bearer ..." 教学示例
+#   bc8d289b 2025-12-17  1 处  kubectl describe secret 输出（本地教学集群）
+#
+# 新增条目前请先确认命中确为示例值，并在此登记理由——这份清单是审计线索，
+# 不是消除告警的开关。
+[[allowlists]]
+description = "已核实为文档示例的历史提交（当前文件已改为明显假值）"
+commits = [
+  "0800a24916d6ababdc15a698bc60fe7b3a699b5a",
+  "f830c9c1f4c3c8f4e6ea8a2d8feaaa1bc029d861",
+  "247179f0070d40795a1d57f5be8cf226d9ca16d2",
+  "40a11ae183810fbbc595f92484eb45dfd0fe7666",
+  "de43842c1df0cf964291ecd015a50db08bacfad7",
+  "cc4ccbd74fb5b70a422c34ce82769a0a13314757",
+  "4e97bd778959ab27ac5c018f25bda57950131467",
+  "bc8d289b0b8f7fcec13eb1b391dc749446baeaa9",
 ]

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# 提交前用 gitleaks 扫暂存内容，把凭据拦在入库之前。
+# CI 侧的 gate（.github/workflows/gitleaks.yml）是第二道；这一道的价值在于
+# 凭据一旦进了本地历史就洗不掉，越早拦越便宜。
+#
+# 装法（新克隆后执行一次）：
+#   ln -sf ../../scripts/hooks/pre-commit .git/hooks/pre-commit
+#
+# 紧急绕过（会跳过全部 hook，确认无误再用）：
+#   git commit --no-verify
+
+set -uo pipefail
+
+REPO_ROOT=$(git rev-parse --show-toplevel) || exit 1
+cd "$REPO_ROOT" || exit 1
+
+# PATH 在不同调用方（终端 / GUI 客户端 / agent / cron）下并不一致——
+# 本机就踩过 node 装在 /usr/local/bin 但不在 agent PATH 里的坑，故逐个兜底探测。
+GITLEAKS=""
+for cand in gitleaks /opt/homebrew/bin/gitleaks /usr/local/bin/gitleaks; do
+  if command -v "$cand" >/dev/null 2>&1; then GITLEAKS="$cand"; break; fi
+done
+
+if [ -z "$GITLEAKS" ]; then
+  cat >&2 <<'MSG'
+✗ pre-commit: 找不到 gitleaks，提交被拦下。
+  这是密钥扫描层，缺扫描器等于没防护，所以 fail-closed 而不是放行。
+  安装：brew install gitleaks
+  确认无误要强提：git commit --no-verify
+MSG
+  exit 1
+fi
+
+if ! "$GITLEAKS" git --staged --config .gitleaks.toml --redact --no-banner; then
+  cat >&2 <<'MSG'
+
+✗ pre-commit: 暂存内容里检出疑似凭据，提交已拦下。
+  · 确属真凭据 → 从暂存区移除，并轮换该凭据（入库后再删也洗不掉历史）
+  · 确属文档示例 → 改成明显假值，如 sk_test_EXAMPLE_DO_NOT_USE
+  · 确属误报 → 在 .gitleaks.toml 登记豁免并写清理由
+MSG
+  exit 1
+fi

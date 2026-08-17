@@ -38,7 +38,7 @@ logger.fault("数据库损坏，无法恢复")
 ## 3. 隐私保护
 
 ```swift
-let token = "sk-abc123secret"
+let token = "sk_test_EXAMPLE_DO_NOT_USE"
 
 // .public：明文显示
 logger.info("用户: \(userId, privacy: .public)")

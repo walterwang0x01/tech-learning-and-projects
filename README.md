@@ -189,6 +189,7 @@ python -m app.main --topic "AI Agent 技术趋势"
 这个仓库不是写完就放着的。有一套自动化维护机制：
 
 - **文档质量 CI**：断裂链接检查、文件头规范、版本标记时效性（[ci-docs.yml](./.github/workflows/ci-docs.yml)）
+- **密钥扫描**：gitleaks 双层防护——本地 pre-commit 拦暂存内容，CI 侧作为 main 快进的前置 gate（[gitleaks.yml](./.github/workflows/gitleaks.yml)）。新克隆后装一次本地钩子：`ln -sf ../../scripts/hooks/pre-commit .git/hooks/pre-commit`
 - **内链验证**：841 条内部链接，每次改动后验证零失效
 - **简报流水线**：`scripts/briefing_tools/` 232 个单元测试覆盖分类、评分、去重、源健康熔断
 - **版本时效标记**：`<!-- version-check -->` 标记的内容会被定期复查更新

@@ -302,7 +302,7 @@ DID（Decentralized Identifier）+ VC（Verifiable Credential）：
 
   DID 格式：did:method:specific-identifier
   例如：did:web:agent.company.com:data-analyst-001
-        did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK
+        did:key:z6MkEXAMPLE_DO_NOT_USE
 
   Agent 的 DID Document：
   {

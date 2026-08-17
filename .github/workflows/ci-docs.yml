@@ -30,6 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       files: ${{ steps.resolve.outputs.files }}
+      added: ${{ steps.resolve.outputs.added }}
       scope: ${{ steps.resolve.outputs.scope }}
     steps:
       - uses: actions/checkout@v4
@@ -42,13 +43,17 @@ jobs:
           set -u
           ZERO=0000000000000000000000000000000000000000
 
-          emit() {   # emit <scope> [file-list]
+          emit() {   # emit <scope> [all-changed] [added-only]
             {
               echo "scope=$1"
               echo "files<<__FILES_EOF__"
               [ "$#" -ge 2 ] && printf '%s' "$2"
               echo ""
               echo "__FILES_EOF__"
+              echo "added<<__ADDED_EOF__"
+              [ "$#" -ge 3 ] && printf '%s' "$3"
+              echo ""
+              echo "__ADDED_EOF__"
             } >> "$GITHUB_OUTPUT"
           }
 
@@ -63,7 +68,7 @@ jobs:
           esac
 
           if [ "$BASE" = "__ALL__" ]; then
-            emit all "learning-notes/**/*.md"
+            emit all "learning-notes/**/*.md" "learning-notes/**/*.md"
             echo "基线：全量扫描（schedule）"
             exit 0
           fi
@@ -82,15 +87,25 @@ jobs:
             fi
           fi
 
-          # 两个要点：
-          # 1. 用目录 pathspec + 后缀过滤，避免 'learning-notes/**/*.md' 这类 glob
+          # 三个要点：
+          # 1. `-c core.quotepath=false` 必须加：本仓大量中文路径，git 默认会把
+          #    非 ASCII 路径输出成 "learning-notes/...\345\215\217..." 这种八进制转义带引号
+          #    形式。那样 markdownlint 拿到的是无效路径（静默 lint 零个文件却报 pass），
+          #    而 doc-quality 的成员判定也永不匹配（阻断 gate 静默退化成告警）。
+          # 2. 用目录 pathspec + 后缀过滤，避免 'learning-notes/**/*.md' 这类 glob
           #    在 git pathspec 下对层级的歧义，确保任意深度的 .md 都算进来。
-          # 2. 输出用换行分隔而非空格——仓库里有 69 个文件名带空格，
+          # 3. 输出用换行分隔而非空格——仓库里有 69 个文件名带空格，
           #    空格分隔会把 'a b.md' 拆成两个无效 glob，造成静默漏检。
-          FILES=$(git diff --name-only "$BASE" HEAD -- learning-notes/ | grep -E '\.md$' || true)
-          emit diff "$FILES"
+          GD=(git -c core.quotepath=false diff --name-only)
+          FILES=$("${GD[@]}" "$BASE" HEAD -- learning-notes/ | grep -E '\.md$' || true)
+          # 阻断性 lint 只针对**新增**文件：修改既有笔记会翻出它自带的历史违规
+          # （实测触碰 5 个旧文件即翻出 86 条），拿那个阻断发布只会训练出绕过习惯。
+          # 每日简报每天都是新文件，因此这条 gate 完整覆盖发布内容。
+          # 既有文件的违规由每周全量扫描以告警形式呈现。
+          ADDED=$("${GD[@]}" --diff-filter=A "$BASE" HEAD -- learning-notes/ | grep -E '\.md$' || true)
+          emit diff "$FILES" "$ADDED"
           echo "基线 $BASE → HEAD"
-          echo "变更 .md 文件 $(printf '%s' "$FILES" | grep -c . || true) 个:"
+          echo "变更 .md $(printf '%s' "$FILES" | grep -c . || true) 个 / 其中新增 $(printf '%s' "$ADDED" | grep -c . || true) 个"
           printf '%s\n' "$FILES" | sed 's/^/   /'
 
   # ============================================
@@ -103,13 +118,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: markdownlint（变更文件）
-        if: needs.changes.outputs.files != ''
+      - name: markdownlint（新增文件）
+        if: needs.changes.outputs.added != ''
         uses: DavidAnson/markdownlint-cli2-action@v19
         with:
-          globs: ${{ needs.changes.outputs.files }}
+          globs: ${{ needs.changes.outputs.added }}
           config: '.markdownlint.jsonc'
-        # 变更文件语境下阻断（作为 ff gate 的一部分）；
+        # 新增文件语境下阻断（作为 ff gate 的一部分）；
         # schedule 是全量扫描，历史遗留违规不该每周把工作流刷红，故仅告警。
         continue-on-error: ${{ github.event_name == 'schedule' }}
 

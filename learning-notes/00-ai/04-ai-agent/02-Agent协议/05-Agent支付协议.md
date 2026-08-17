@@ -318,7 +318,7 @@ payment_task = {
     "payment_methods": ["card", "paypal"],  # 可选支付方式
     "verification": {
         "type": "verifiable_credential",
-        "credential": "eyJhbGciOiJFZDI1NTE5...",  # JWT 格式凭证
+        "credential": "EXAMPLE_JWT_DO_NOT_USE",  # JWT 格式凭证（示例占位，非真实凭证）
     }
 }
 ```
