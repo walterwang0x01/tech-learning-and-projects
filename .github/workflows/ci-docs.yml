@@ -51,15 +51,26 @@ jobs:
         continue-on-error: true
 
   # ============================================
-  # Job 2: 内部链接检查
+  # Job 2: 外部链接检查（仅 schedule，咨询性质不阻断）
   # ============================================
+  # 注意：本 job 实际校验的是「外部 URL 可达性」，不是内部链接——
+  # 内部相对链接已由下面的 doc-quality job 用纯 shell 覆盖（16 秒，只查 .md 相对路径）。
+  #
+  # 为什么不在 push 上跑：917 个 md 文件逐个发 HTTP 请求要 1h+，且简报每天新增 3 个文件，
+  # 成本只增不减。外链失效是渐变的，每周查一次足够。
+  # 为什么 continue-on-error 在 job 级：外链校验有不可消除的假阳性
+  # （如 gartner.com 对 CI 出口 IP 返 403），且 step 级 continue-on-error
+  # 管不住 action 的 post 清理步骤失败，工作流仍会变红。
   link-check:
     name: Link Check
     runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    continue-on-error: true
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
-      - name: 检查内部 Markdown 链接
+      - name: 检查外部链接可达性
         uses: tcort/github-action-markdown-link-check@v1
         with:
           folder-path: 'learning-notes/'
