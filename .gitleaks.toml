@@ -1,0 +1,39 @@
+# gitleaks 配置
+# 文档: https://github.com/gitleaks/gitleaks#configuration
+#
+# 设计前提（均为实测结论，2026-08-17 gitleaks 8.30.1）：
+#
+# 1. 受版本控制的文件里共 9 处命中，全部是 learning-notes 下 markdown 的
+#    **文档示例**（curl -H "Authorization: Bearer ..."、示例 JWT、示例 sk_ 值等）。
+#    另有 79 处命中在 .env(×3) 与 .gitnexus/*（本地索引缓存）里——这些都已被
+#    .gitignore 挡住，CI 检出里不存在，属 `gitleaks dir` 扫本地文件系统的过度报告。
+#
+# 2. 因此**没有为这 9 处配置值级白名单**：那会在正文里留下盲区，而且
+#    20-Agent支付 子树是 git-crypt 加密的，把它的明文片段抄进这个明文配置
+#    等于绕过加密。真正的防护交给 CI 的区间扫描（只扫将要合入 main 的新提交），
+#    历史基线由每周全量扫描以「咨询性报告」形式呈现。
+#
+# 3. 不使用 .gitleaksignore 指纹：指纹含 commit SHA，浅克隆下同一内容会被
+#    归到不同 commit，豁免因此不可复现（在姊妹仓踩过）。CI 用 fetch-depth: 0。
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "git-crypt 加密路径与本地工具产物"
+paths = [
+  # git-crypt 加密的文件在 CI 检出里是二进制块（文件头 GITCRYPT）。
+  # 实测对加密态扫描 0 命中，扫它没有意义；而本地扫描看到的是明文，
+  # 那些内容你本来就有权限读，交由本地流程负责。
+  '''^\.kiro/hooks/.*\.kiro\.hook$''',
+  '''^\.kiro/steering/(doc-maintenance|project-conventions)\.md$''',
+  '''^learning-notes/\.audit-progress\.md$''',
+  '''^learning-notes/00-ai/04-ai-agent/20-Agent支付/''',
+  '''^learning-notes/00-ai/04-ai-agent/24-2026技术更新/.*\.md$''',
+  '''^scripts/doc-lint\.sh$''',
+  '''^shared/watermark(_cli)?\.py$''',
+
+  # 本地工具产物，已被 .gitignore 挡住；列在此处是为了让本地
+  # `gitleaks dir .` 的输出也可读（否则 76 处缓存噪声淹没真信号）。
+  '''^\.gitnexus/''',
+]

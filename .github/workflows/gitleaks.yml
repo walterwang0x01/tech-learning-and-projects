@@ -1,0 +1,96 @@
+name: Secret Scan
+
+# 用 gitleaks 拦「新提交里的凭据」。这个仓库是公开的，笔记里可能贴到真 key，
+# 而 .gitignore 只拦手滑 git add，不是安全边界——这一层才是。
+#
+# 两种模式，由 inputs.mode 显式区分（**不能用 github.event_name 判别**：
+# 复用工作流继承的是调用方的 event，被 ff workflow 调用时 event_name 是 push，
+# 不是 workflow_call，实测确认过）：
+#
+# - mode=gate（ff-main-from-briefings.yml 作为快进前置调用）：
+#   只扫 origin/main..HEAD，即「本次将要合入 main 的新提交」。**阻断**。
+#   用区间而非 event.before，好处是不需要基线兜底逻辑：即使前一天因失败没合成，
+#   今天这次 gate 仍会覆盖累积的全部提交。
+#
+# - mode=full（schedule / push / 手动）：全历史扫描，**咨询性质不阻断**。
+#   已知基线 9-12 处，全部是 learning-notes 里的文档示例（详见 .gitleaks.toml）。
+#   这里不假装绿：报告作为 artifact 留存，数字明显超基线才需要查。
+#   刻意不用值级白名单粉饰，那会在正文里留下真盲区。
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      mode:
+        description: 'gate = 只扫 origin/main..HEAD 且阻断；full = 全历史且不阻断'
+        type: string
+        default: full
+
+permissions:
+  contents: read
+
+jobs:
+  gitleaks:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    # 只有 gate 模式阻断；全量模式是咨询性的，不该把工作流刷红。
+    continue-on-error: ${{ (inputs.mode || 'full') != 'gate' }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # 必须取全历史：区间扫描需要 origin/main，且浅克隆会让 gitleaks 的
+          # 指纹随 commit 归属漂移（在姊妹仓用对照实验确证过）。
+          fetch-depth: 0
+
+      - name: 安装 gitleaks
+        env:
+          GITLEAKS_VERSION: 8.30.1
+        run: |
+          set -euo pipefail
+          curl -sSfL -o /tmp/gitleaks.tar.gz \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+          install -m 0755 /tmp/gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+
+      # 不做 rc 捕获：GitHub 的 run 默认 shell 是 `bash -e`，gitleaks 命中时
+      # 非零退出会当场中止，`rc=$?` 是取不到的死代码。直接让退出码决定步骤成败，
+      # 咨询模式由 job 级 continue-on-error 兜住，报告由 if: always() 上传。
+      - name: 扫描（gate 区间）
+        if: ${{ (inputs.mode || 'full') == 'gate' }}
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin main
+          RANGE="origin/main..HEAD"
+          N=$(git rev-list --count "$RANGE")
+          if [ "$N" -eq 0 ]; then
+            echo "✅ $RANGE 无新提交，无需扫描"
+            exit 0
+          fi
+          echo "🔍 扫描将要合入 main 的 $N 个提交（$RANGE）"
+          gitleaks git . --log-opts="$RANGE" \
+            --config .gitleaks.toml --redact --no-banner \
+            --report-format json --report-path gitleaks-report.json
+
+      - name: 扫描（全历史）
+        if: ${{ (inputs.mode || 'full') != 'gate' }}
+        run: |
+          set -euo pipefail
+          echo "🔍 全历史扫描（咨询性质；已知基线为 learning-notes 文档示例）"
+          gitleaks git . \
+            --config .gitleaks.toml --redact --no-banner \
+            --report-format json --report-path gitleaks-report.json
+
+      - name: 上传报告
+        if: always() && hashFiles('gitleaks-report.json') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-report-${{ github.run_id }}
+          path: gitleaks-report.json
+          retention-days: 30

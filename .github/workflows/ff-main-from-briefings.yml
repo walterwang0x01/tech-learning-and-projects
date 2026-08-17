@@ -6,9 +6,10 @@ name: Fast-forward main from auto/briefings
 #
 # 设计约束：
 # 1. 用 API 更新 ref 且 force=false，非快进会返回 422 直接失败，绝不强推覆盖 main。
-# 2. ci-docs.yml 是快进的前置 gate：通过 workflow_call 复用（不复制其检查逻辑），
-#    检查跑在 auto/briefings 这个提交上、快进之前。不绿则 fast-forward 被跳过，
-#    main 停在原处，内容留在分支上等修——发布链路因此有真实门禁而非事后告警。
+# 2. 快进有两道前置 gate，都跑在 auto/briefings 这个提交上、快进之前：
+#    ci-docs.yml（文档质量）与 gitleaks.yml（凭据扫描）。任一不绿则
+#    fast-forward 被跳过，main 停在原处、内容留在分支上等修——发布链路
+#    因此有真实门禁而非事后告警。两者都用 workflow_call 复用，不复制其逻辑。
 # 3. GITHUB_TOKEN 推进 main 不会级联触发其它 workflow（GitHub 防递归），
 #    所以博客重建也要显式调用 trigger-portfolio-briefing.yml。
 # 4. 本仓库 default_workflow_permissions 是 read，故必须逐 job 显式声明 permissions。
@@ -23,15 +24,26 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Gate：先验后合。复用工作流沿用调用方的 event 上下文，
+  # Gate 1：文档检查。先验后合。复用工作流沿用调用方的 event 上下文，
   # 所以 ci-docs 里按 event_name 分流的逻辑会走 push 分支（取 event.before 整批 diff）。
   docs-checks:
     uses: ./.github/workflows/ci-docs.yml
     permissions:
       contents: read
 
+  # Gate 2：凭据扫描。mode 必须显式传——复用工作流里 event_name 是调用方的 push，
+  # 靠它判别会静默退化成不阻断的全量模式。
+  # 文件名是 gitleaks.yml 而非 secret-scan.yml：后者会被 .gitignore 的
+  # `*secret*` 宽匹配吞掉（提交时实际撞到过）。
+  secret-scan:
+    uses: ./.github/workflows/gitleaks.yml
+    with:
+      mode: gate
+    permissions:
+      contents: read
+
   fast-forward:
-    needs: docs-checks
+    needs: [docs-checks, secret-scan]
     runs-on: ubuntu-latest
     permissions:
       contents: write   # 更新 refs/heads/main
