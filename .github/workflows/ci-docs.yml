@@ -12,6 +12,10 @@ on:
   # 每周一早上 9 点（UTC+8）自动运行一次完整检查
   schedule:
     - cron: '0 1 * * 1'
+  # 供 ff-main-from-briefings.yml 在快进 main 后显式调用。
+  # 必需：main 由 GITHUB_TOKEN 更新，GitHub 防递归机制不会级联触发 push 事件，
+  # 简报内容因此拿不到任何 CI，只能靠这个入口补回来。
+  workflow_dispatch:
 
 jobs:
   # ============================================
