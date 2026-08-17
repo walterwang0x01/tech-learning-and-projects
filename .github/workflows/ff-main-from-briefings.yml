@@ -6,27 +6,36 @@ name: Fast-forward main from auto/briefings
 #
 # 设计约束：
 # 1. 用 API 更新 ref 且 force=false，非快进会返回 422 直接失败，绝不强推覆盖 main。
-# 2. GITHUB_TOKEN 推进 main 不会级联触发其它 workflow（GitHub 防递归），
-#    所以下游全部显式调用：ci-docs.yml 补回简报内容的快检查，
-#    trigger-portfolio-briefing.yml 重建博客——都不复制对方逻辑，各自实现保持单一来源。
-# 3. 本仓库 default_workflow_permissions 是 read，故必须显式声明 permissions。
+# 2. ci-docs.yml 是快进的前置 gate：通过 workflow_call 复用（不复制其检查逻辑），
+#    检查跑在 auto/briefings 这个提交上、快进之前。不绿则 fast-forward 被跳过，
+#    main 停在原处，内容留在分支上等修——发布链路因此有真实门禁而非事后告警。
+# 3. GITHUB_TOKEN 推进 main 不会级联触发其它 workflow（GitHub 防递归），
+#    所以博客重建也要显式调用 trigger-portfolio-briefing.yml。
+# 4. 本仓库 default_workflow_permissions 是 read，故必须逐 job 显式声明 permissions。
 
 on:
   push:
     branches: [auto/briefings]
   workflow_dispatch:
 
-permissions:
-  contents: write   # 更新 refs/heads/main
-  actions: write    # gh workflow run 触发下游
-
 concurrency:
   group: ff-main
   cancel-in-progress: false
 
 jobs:
+  # Gate：先验后合。复用工作流沿用调用方的 event 上下文，
+  # 所以 ci-docs 里按 event_name 分流的逻辑会走 push 分支（取 event.before 整批 diff）。
+  docs-checks:
+    uses: ./.github/workflows/ci-docs.yml
+    permissions:
+      contents: read
+
   fast-forward:
+    needs: docs-checks
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # 更新 refs/heads/main
+      actions: write    # gh workflow run 触发博客重建
     steps:
       - name: Fast-forward main to ${{ github.sha }}
         env:
@@ -38,18 +47,6 @@ jobs:
             -f sha="${GITHUB_SHA}" \
             -F force=false
           echo "main now at: $(gh api "repos/${GITHUB_REPOSITORY}/git/refs/heads/main" --jq .object.sha)"
-
-      - name: Run docs quality checks on main
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          # 补回被防递归机制吃掉的 CI。workflow_dispatch 下 ci-docs.yml 只跑快检查：
-          # markdown-lint（走 HEAD~1 差异，无变更时自动跳过）+ doc-quality（内部链接/标题/版本标记，约 16s）。
-          # link-check 与 doc-stats 都带 if: event_name == 'schedule'，不会在这里被唤醒。
-          gh workflow run ci-docs.yml \
-            --repo "${GITHUB_REPOSITORY}" --ref main
-          echo "Dispatched ci-docs.yml on main"
 
       - name: Trigger portfolio rebuild
         env:
