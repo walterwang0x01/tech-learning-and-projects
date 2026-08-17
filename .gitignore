@@ -11,6 +11,15 @@ private-notes/
 *secret*
 *password*
 *credential*
+# 但 markdown 笔记不是凭据载体，不该被上面的宽匹配吞掉。
+# 起因：macOS 的 core.ignorecase 让 `*secret*` 命中了
+# learning-notes/04-backend-infra/security/08-Secrets管理.md，
+# 这篇笔记因此从未进仓，而 03-密码学基础.md 里链向它 —— 线上一直是 404。
+# 只对 .md 开例外，secrets.yaml / secret-config.json / .env.credentials
+# 这类真正的凭据数据文件仍然被挡住。
+!*secret*.md
+!*password*.md
+!*credential*.md
 
 # 个人简历
 **/个人简历/
