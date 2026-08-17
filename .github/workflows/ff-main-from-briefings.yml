@@ -44,6 +44,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          # 复用既有 workflow，不复制其 dispatch 逻辑
-          gh workflow run trigger-portfolio-briefing.yml --ref main
+          # 复用既有 workflow，不复制其 dispatch 逻辑。
+          # 必须显式 --repo：本 job 没有 checkout，gh 无法从 git 推断仓库。
+          gh workflow run trigger-portfolio-briefing.yml \
+            --repo "${GITHUB_REPOSITORY}" --ref main
           echo "Dispatched trigger-portfolio-briefing.yml on main"
