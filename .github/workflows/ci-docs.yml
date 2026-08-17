@@ -21,64 +21,93 @@ on:
 
 jobs:
   # ============================================
-  # Job 1: Markdown 格式 Lint（仅检查本次变更的文件）
+  # Job 0: 解析本批推送涉及的变更文件
   # ============================================
-  markdown-lint:
-    name: Markdown Lint
+  # 单独成 job 是为了让 markdown-lint 与 doc-quality 共用同一份判定，
+  # 而不是各写一份 diff 逻辑（两份副本必然漂移）。
+  changes:
+    name: Resolve Changed Files
     runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.resolve.outputs.files }}
+      scope: ${{ steps.resolve.outputs.scope }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 获取变更的 Markdown 文件
-        id: changed
+      - name: 解析变更文件
+        id: resolve
         run: |
-          set -uo pipefail
+          set -u
           ZERO=0000000000000000000000000000000000000000
+
+          emit() {   # emit <scope> [file-list]
+            {
+              echo "scope=$1"
+              echo "files<<__FILES_EOF__"
+              [ "$#" -ge 2 ] && printf '%s' "$2"
+              echo ""
+              echo "__FILES_EOF__"
+            } >> "$GITHUB_OUTPUT"
+          }
 
           # 选 diff 基线。用 github.event.before 而非 HEAD~1，才能覆盖
           # 「一次 push 含多个 commit」的整批变更（HEAD~1 只看最后一个）。
           case "${{ github.event_name }}" in
             pull_request) BASE="${{ github.event.pull_request.base.sha }}" ;;
             schedule)     BASE="__ALL__" ;;
-            # push / workflow_call（复用工作流沿用调用方的 event 上下文）
+            # push / workflow_call（复用工作流沿用调用方的 event 上下文，
+            # 所以这里能拿到调用方那次 push 的 before）
             *)            BASE="${{ github.event.before }}" ;;
           esac
 
           if [ "$BASE" = "__ALL__" ]; then
-            echo "files=learning-notes/**/*.md" >> "$GITHUB_OUTPUT"
+            emit all "learning-notes/**/*.md"
             echo "基线：全量扫描（schedule）"
             exit 0
           fi
 
           # before 在新建分支时是全零；强推或 GC 后对象也可能不在本地。
           # 此时退回 HEAD~1，**绝不在阻断语境下退回全量扫描**——
-          # 全树有 11000+ 条历史遗留违规，那会把简报发布永久卡死。
+          # 全树有 11000+ 条历史遗留 lint 违规，那会把简报发布永久卡死。
           if [ -z "$BASE" ] || [ "$BASE" = "$ZERO" ] || ! git cat-file -e "${BASE}^{commit}" 2>/dev/null; then
             if git rev-parse HEAD~1 >/dev/null 2>&1; then
               BASE=$(git rev-parse HEAD~1)
               echo "before 不可用，基线回退到 HEAD~1: $BASE"
             else
-              echo "files=" >> "$GITHUB_OUTPUT"
+              emit none
               echo "无可用基线（初始提交），跳过"
               exit 0
             fi
           fi
 
-          # 用目录 pathspec + 后缀过滤，避免 'learning-notes/**/*.md' 这类
-          # glob 在 git pathspec 下对层级的歧义，确保任意深度的 .md 都被算进来。
-          FILES=$(git diff --name-only "$BASE" HEAD -- learning-notes/ \
-                    | grep -E '\.md$' | tr '\n' ' ' || true)
-          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          # 两个要点：
+          # 1. 用目录 pathspec + 后缀过滤，避免 'learning-notes/**/*.md' 这类 glob
+          #    在 git pathspec 下对层级的歧义，确保任意深度的 .md 都算进来。
+          # 2. 输出用换行分隔而非空格——仓库里有 69 个文件名带空格，
+          #    空格分隔会把 'a b.md' 拆成两个无效 glob，造成静默漏检。
+          FILES=$(git diff --name-only "$BASE" HEAD -- learning-notes/ | grep -E '\.md$' || true)
+          emit diff "$FILES"
           echo "基线 $BASE → HEAD"
-          echo "变更文件: ${FILES:-（无）}"
+          echo "变更 .md 文件 $(printf '%s' "$FILES" | grep -c . || true) 个:"
+          printf '%s\n' "$FILES" | sed 's/^/   /'
+
+  # ============================================
+  # Job 1: Markdown 格式 Lint（仅检查本次变更的文件）
+  # ============================================
+  markdown-lint:
+    name: Markdown Lint
+    needs: changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
       - name: markdownlint（变更文件）
-        if: steps.changed.outputs.files != ''
+        if: needs.changes.outputs.files != ''
         uses: DavidAnson/markdownlint-cli2-action@v19
         with:
-          globs: ${{ steps.changed.outputs.files }}
+          globs: ${{ needs.changes.outputs.files }}
           config: '.markdownlint.jsonc'
         # 变更文件语境下阻断（作为 ff gate 的一部分）；
         # schedule 是全量扫描，历史遗留违规不该每周把工作流刷红，故仅告警。
@@ -117,34 +146,63 @@ jobs:
   # ============================================
   doc-quality:
     name: Doc Quality
+    needs: changes
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: 检查内部链接引用
+        env:
+          SCOPE: ${{ needs.changes.outputs.scope }}
+          CHANGED: ${{ needs.changes.outputs.files }}
         run: |
-          set -uo pipefail
+          set -u
           echo "🔍 检查断裂的内部链接..."
-          # 注意：不能用计数器变量——`... | while read` 在子壳里跑，
-          # 自增会随子壳一起消失（原实现就是这个 bug，导致永远返回 0）。
-          # 改为把命中写进文件，靠文件非空判定退出码。
+          # 三个坑叠在这一段里：
+          # 1. `... | while read` 在子壳里跑，计数器自增会随子壳消失
+          #    （原实现就是这个 bug，导致检查永远返回 0）。改用进程替换喂 while，
+          #    循环体留在当前壳里。
+          # 2. GitHub 的 run 默认 shell 是 `bash -e`，所以**不能加 pipefail**：
+          #    grep 无匹配时返回 1，加了 pipefail 会让脚本在第一个
+          #    「不含 .md 链接」的文件上当场中止（本地不带 -e 跑测不出来）。
+          # 3. 全仓扫描，但只对**本批变更文件**阻断。否则任何一条历史断链
+          #    都会把每日简报发布永久卡死——无关欠债不该拦住新内容。
           BROKEN="$(mktemp)"
-          find learning-notes/ -name "*.md" -type f | sort | while read -r file; do
+          while IFS= read -r file; do
             dir=$(dirname "$file")
-            grep -oE '\([^)]+\.md\)' "$file" 2>/dev/null | sed 's/^(//;s/)$//' | while read -r link; do
+            while IFS= read -r link; do
+              [ -n "$link" ] || continue
               case "$link" in http*) continue ;; esac
-              decoded=$(echo "$link" | sed 's/%20/ /g')
-              if [ ! -f "$dir/$decoded" ]; then
-                echo "$file → $link" >> "$BROKEN"
-              fi
-            done
-          done
-          if [ -s "$BROKEN" ]; then
-            echo "❌ 断裂内部链接 $(wc -l < "$BROKEN" | tr -d ' ') 条："
-            sed 's/^/   /' "$BROKEN"
+              decoded="${link//%20/ }"
+              [ -f "$dir/$decoded" ] || printf '%s\t%s\n' "$file" "$link" >> "$BROKEN"
+            done < <(grep -oE '\([^)]+\.md\)' "$file" 2>/dev/null | sed 's/^(//;s/)$//')
+          done < <(find learning-notes/ -name "*.md" -type f | sort)
+
+          if [ ! -s "$BROKEN" ]; then
+            echo "✅ 内部链接全部可解析"
+            exit 0
+          fi
+
+          GATE="$(mktemp)"; WARN="$(mktemp)"
+          while IFS= read -r row; do
+            f="${row%%$'\t'*}"; l="${row#*$'\t'}"
+            if [ "$SCOPE" = "diff" ] && printf '%s\n' "$CHANGED" | grep -qxF "$f"; then
+              echo "$f → $l" >> "$GATE"
+            else
+              echo "$f → $l" >> "$WARN"
+            fi
+          done < "$BROKEN"
+
+          if [ -s "$WARN" ]; then
+            echo "⚠️  历史遗留断链 $(grep -c . "$WARN") 条（不阻断，但请排期修）："
+            sed 's/^/   /' "$WARN"
+          fi
+          if [ -s "$GATE" ]; then
+            echo "❌ 本批变更引入/涉及的断链 $(grep -c . "$GATE") 条，阻断发布："
+            sed 's/^/   /' "$GATE"
             exit 1
           fi
-          echo "✅ 内部链接全部可解析"
+          echo "✅ 本批变更未引入断链"
 
       - name: 检查文件头部规范
         run: |
