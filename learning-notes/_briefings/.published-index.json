@@ -13481,9 +13481,387 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-08-18"
+    },
+    "5464eb5ec555": {
+      "url": "https://www.oschina.net/news/501987/bluesky-screenshots",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "bc6c295a16ea": {
+      "url": "https://www.oschina.net/news/501995",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "75b51bca3c82": {
+      "url": "https://www.oschina.net/news/501988/block-ads-firefox-ios",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "4aeb93251204": {
+      "url": "https://www.tomshardware.com/pc-components/ram/memory-prices-climb-500-percent-in-12-months-up-to-10x-the-lowest-ever-tracked-prices-128gb-of-ddr5-now-usd3-399",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "4f6ebe5d9ccb": {
+      "url": "https://techcrunch.com/2026/08/18/etcheds-valuation-doubles-to-21b-in-a-month",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "fb1d9c246a9f": {
+      "url": "https://arxiv.org/abs/2608.13759",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "4de873d6c9c7": {
+      "url": "https://www.oschina.net/news/501982/duckdb-asynchronous-io",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "7c36f8b58781": {
+      "url": "https://github.com/therepanic/openleetcode",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "5bacbb4f2c30": {
+      "url": "https://techcrunch.com/2026/08/18/bluesky-says-its-recent-outage-was-caused-by-another-ddos-attack",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "83a56b9d84e3": {
+      "url": "https://techcrunch.com/2026/08/18/cursor-capitalizes-on-github-frustration-launches-rival-hosting-platform",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "b77b5357eb4f": {
+      "url": "https://github.com/biw/keychain-store",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "ac46d61b1b50": {
+      "url": "https://www.oschina.net/news/501977",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "d767d26401bb": {
+      "url": "https://www.apple.com/newsroom/2026/08/apple-announces-changes-for-apps-in-the-european-union",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "ae8abe8ab02f": {
+      "url": "https://techcrunch.com/2026/08/18/apple-overhauls-its-eu-app-store-fees-loosens-rules-for-alternative-app-stores",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "07545387c59c": {
+      "url": "https://news.ycombinator.com/item?id=49334209",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "a1ca609ce420": {
+      "url": "https://www.oschina.net/news/501984",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "f3276f9b5d0a": {
+      "url": "https://arstechnica.com/security/2026/08/microsoft-copilot-reveals-secret-input-that-allowed-it-to-be-hacked",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "28332ab28f1f": {
+      "url": "https://www.wired.com/story/zai-open-weight-ai-models-release-cybersecurity-hacking",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "ce57d7f0f38e": {
+      "url": "https://github.com/RyanCodrai/turbovec",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "0dae0e8411aa": {
+      "url": "https://www.infoq.cn/article/7QNfsJhpgskMtVllCpWJ",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "e62e989cb257": {
+      "url": "https://www.oschina.net/news/501989/canonical-wsl-growth",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "1f3e2dbb460c": {
+      "url": "https://cursor.com/changelog/origin-code-hosting",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "a018aec659da": {
+      "url": "https://news.ycombinator.com/item?id=49334960",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "d440b68be6fc": {
+      "url": "https://blog.cloudflare.com/rfc9234-bgp-role-model",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "4de1679aea47": {
+      "url": "https://www.techpowerup.com/351689/memory-prices-break-a-record-with-nearly-500-surge-in-the-last-12-months",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "44e80982aaf2": {
+      "url": "https://www.infoq.cn/article/t0bchRo0KBVZFRTPwPXt",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "0973141d0be2": {
+      "url": "https://github.com/pg83/solo",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-08-19"
+    },
+    "12ebdb958488": {
+      "url": "https://www.36kr.com/newsflashes/3945763461528961",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "dfacd72a6eae": {
+      "url": "https://www.odaily.news/en/hot/237",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "f3492990a0cd": {
+      "url": "https://www.qbitai.com/2026/08/474857.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "3ba4f149996c": {
+      "url": "https://www.leiphone.com/category/zaobao/dNBHoP0JtJIaed0b.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "7d6617a847a9": {
+      "url": "https://www.odaily.news/en/newsflash/510626",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "365b446f8bf3": {
+      "url": "https://www.infoq.cn/article/QekQuwv8UhxAcrOFgKM8",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "246b6a961b1a": {
+      "url": "https://agent.console.aliyun.com/",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "d3015e57900c": {
+      "url": "https://www.ithome.com/0/991/425.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "e99c21b02262": {
+      "url": "https://www.ithome.com/0/991/415.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "fb23d67133db": {
+      "url": "https://www.36kr.com/newsflashes/3945831010876801",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "d01a695e05ed": {
+      "url": "https://www.qbitai.com/2026/08/474838.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "da1b14853a60": {
+      "url": "https://www.leiphone.com/category/industrynews/16NsLacHFd1OjheK.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "f824f8cd5204": {
+      "url": "https://www.ithome.com/0/991/398.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "38ce15e2f4c9": {
+      "url": "https://www.oschina.net/news/501993",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "7fe89eee4df9": {
+      "url": "https://www.ithome.com/0/991/395.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-08-19"
+    },
+    "0a2bd0b7ee31": {
+      "url": "https://www.langchain.com/blog/introducing-langsmith-tuned-evaluators-starting-with-perceived-error",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "31f52eff1a9c": {
+      "url": "https://www.youtube.com/watch?v=gyllkZ0M04E",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "c50e569d8693": {
+      "url": "https://aws.amazon.com/blogs/machine-learning/accelerate-cyber-defense-with-openai-and-aws-daybreak-red-daybreak-blue-now-available-to-eligible-customers-on-amazon-bedrock",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "a64e6711bdf0": {
+      "url": "https://machine0.io",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "a21a93671cdf": {
+      "url": "https://huggingface.co/datasets/Anthropic/claude-protein-binder-design/tree/main",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "2ef611c64fb5": {
+      "url": "https://thehackernews.com/2026/08/how-mcp-servers-can-expose-enterprise.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "c8cbd2914968": {
+      "url": "https://news.ycombinator.com/item?id=49345320",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "e93fbe154c0a": {
+      "url": "https://www.anthropic.com/research/Claude-accelerates-protein-design",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "47ea3c6cd311": {
+      "url": "https://huggingface.co/blog/ibm-research/altk-evolve-hmm",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "113381769671": {
+      "url": "https://github.com/AgentToolkit/altk-evolve",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "f218831e4de1": {
+      "url": "https://www.leiphone.com/category/industrynews/UfFcOesIqU4Ku5OR.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "532e30762540": {
+      "url": "https://arxiv.org/abs/2608.14624",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "02f52b9ce444": {
+      "url": "https://www.oschina.net/news/501960/deepseek-harness-desktop",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "d0682fe009b6": {
+      "url": "https://openai.com/index/openai-on-aws",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "5f1f960676c6": {
+      "url": "https://arxiv.org/abs/2608.16402",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "db4b2a6d7d8e": {
+      "url": "https://github.com/pitiflautico/neobrowser",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "27908ef1e601": {
+      "url": "https://arxiv.org/abs/2608.14588",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "14fd5a38d63f": {
+      "url": "https://arxiv.org/abs/2608.16620",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "2205702cb9c5": {
+      "url": "https://www.oschina.net/news/501966",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "5791acbc399b": {
+      "url": "https://arxiv.org/abs/2603.10600",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
+    },
+    "25500006f6b3": {
+      "url": "https://www.oschina.net/news/501961",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-08-19"
     }
   },
-  "updated": "2026-08-18 14:11",
+  "updated": "2026-08-19 11:16",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -13799,6 +14177,9 @@
     "ai-agent/2026-08-17": "a00be1427db713c4",
     "china-tech/2026-08-18": "567db7bc14669d8f",
     "ai-agent/2026-08-18": "8c7c1e5277ad68b8",
-    "global-tech/2026-08-18": "ac5bdb16ea6f83c9"
+    "global-tech/2026-08-18": "ac5bdb16ea6f83c9",
+    "global-tech/2026-08-19": "6306aabeef5c90a9",
+    "china-tech/2026-08-19": "94eae7744f8273b1",
+    "ai-agent/2026-08-19": "fa080834d91b4485"
   }
 }
