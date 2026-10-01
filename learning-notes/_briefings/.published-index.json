@@ -16835,9 +16835,261 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-09-30"
+    },
+    "14f4e6e9bac2": {
+      "url": "https://www.politico.com/news/2026/09/29/advocates-sue-openai-over-hugging-face-hack-with-california-anti-hacking-law-01097532",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "f12054856095": {
+      "url": "https://www.securityweek.com/anthropic-flags-ai-agent-liability-risks-as-openai-faces-hacking-lawsuit",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "f46abcb21d4e": {
+      "url": "https://fortune.com/2026/09/29/robinhood-trading-agents-hood-openai-anthropic",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "a38b8ddae571": {
+      "url": "https://finance.yahoo.com/technology/ai/articles/ftc-coming-rogue-ai-agents-173856366.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "edd55ba398d9": {
+      "url": "https://arxiv.org/abs/2609.36576",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "5282575a6a90": {
+      "url": "https://arxiv.org/abs/2609.36887",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "f721f3b88ec6": {
+      "url": "https://arxiv.org/abs/2609.38147",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "8626fd2ea9cc": {
+      "url": "https://www.oschina.net/news/502831/openai-gpt-6-1-sol",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "236c88d0ee1b": {
+      "url": "https://www.infoq.cn/article/TLjNcyBg9Z72HV5kJ2kp",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "023c20915236": {
+      "url": "https://aws.amazon.com/blogs/aws/amazon-s3-vectors-now-supports-metadata-pre-filtering-for-higher-recall",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "ac3f85894d6d": {
+      "url": "https://techcrunch.com/2026/09/29/heres-why-openai-is-absent-from-nvidias-industry-wide-effort-to-end-rogue-ai-agents",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "b7cf2c53a643": {
+      "url": "https://www.cnbc.com/2026/09/30/openai-sued-cyberattack.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "1069f34eb05a": {
+      "url": "https://blog.cloudflare.com/monetization-gateway-beta",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "586e944efcdb": {
+      "url": "https://arxiv.org/abs/2609.36630",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "90b88ded5f2c": {
+      "url": "https://arxiv.org/abs/2609.35886",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "0394bcdf7c18": {
+      "url": "https://community.openai.com/t/devday-2026-announcements-and-developer-resources/1402006",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-01"
+    },
+    "f82f57bed49b": {
+      "url": "https://www.infoq.cn/article/07qzHLvyNXSW1SFNV5NV",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "2cb43131a16c": {
+      "url": "https://www.ithome.com/1/008/963.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "b9b467980b27": {
+      "url": "https://www.infoq.cn/article/YWXyACETW4aRchQbSJE0",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "8b7689e01c37": {
+      "url": "https://www.oschina.net/news/502832",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "08f5c3ae6aaf": {
+      "url": "https://www.leiphone.com/category/chips/6z6p5tEXgSyeu1lf.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "09424972eb1a": {
+      "url": "https://www.qbitai.com/2026/09/499263.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "10b383303daa": {
+      "url": "https://www.infoq.cn/article/bduvBdbgwxj6DMbNeKCC",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "04a459b2c45c": {
+      "url": "https://www.infoq.cn/article/fOuaRtwuySyZsS0iGg7N",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "3826ac8074c7": {
+      "url": "https://www.leiphone.com/category/yanxishe/LjT1ojuhnJ3pBvu4.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "d0a8d933e594": {
+      "url": "https://www.ithome.com/1/008/967.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "043171244b10": {
+      "url": "https://linux.do/t/topic/2921753",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-01"
+    },
+    "c79ae2ba8660": {
+      "url": "https://blog.cloudflare.com/real-time-issue-detection",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "f2700642059e": {
+      "url": "https://aws.amazon.com/blogs/aws/amazon-s3-tables-now-support-all-apache-iceberg-v3-data-types",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "14540ee281ad": {
+      "url": "https://www.theregister.com/a/5299674",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "b73bf10cc66c": {
+      "url": "https://aws.amazon.com/blogs/aws/amazon-aurora-postgresql-now-supports-direct-querying-of-apache-iceberg",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "c93de674c132": {
+      "url": "https://blog.cloudflare.com/post-quantum-visibility",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "9c45f7c8cab5": {
+      "url": "https://www.infoq.com/news/2026/09/google-ax-orchestrator",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "5ee3ca38d10b": {
+      "url": "https://www.theverge.com/tech/1003068/elon-musk-grokipedia-v-0-3-spacexai",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "4f7af19c30e2": {
+      "url": "https://blog.cloudflare.com/auto-router",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "d3fd237e4b4c": {
+      "url": "https://www.oschina.net/news/502816",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "2f500385cd8c": {
+      "url": "https://blog.cloudflare.com/ai-driven-cryptography-discovery",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "2554e7308bb2": {
+      "url": "https://github.blog/news-insights/policy-news-and-insights/developer-policy-update-transparency",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "875f4ef9b719": {
+      "url": "https://blog.cloudflare.com/faster-agent-sandboxes",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "1dd3e2e778f7": {
+      "url": "https://www.infoq.cn/article/M6BRTrsyJvUg8y0M0kyh",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "79f5b46ce4e5": {
+      "url": "https://blog.cloudflare.com/ipsec-downgrade-protection",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "3eb14c146e76": {
+      "url": "https://blog.cloudflare.com/adaptive-ai-waf-testing",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
     }
   },
-  "updated": "2026-09-30 12:02",
+  "updated": "2026-10-01 11:10",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -17282,6 +17534,9 @@
     "china-tech/2026-09-29": "3dd045dd904f3083",
     "ai-agent/2026-09-30": "ec6df543e9fb0c82",
     "china-tech/2026-09-30": "e0b32296b49fd15e",
-    "global-tech/2026-09-30": "aea9981acec21a14"
+    "global-tech/2026-09-30": "aea9981acec21a14",
+    "ai-agent/2026-10-01": "9c515e5d0f983c7a",
+    "china-tech/2026-10-01": "ec5cd964c3da029b",
+    "global-tech/2026-10-01": "3bd81b171ee3fce1"
   }
 }
