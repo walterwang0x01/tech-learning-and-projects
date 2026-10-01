@@ -17087,9 +17087,93 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-10-01"
+    },
+    "914e410ddc63": {
+      "url": "https://www.theregister.com/os-platforms/2026/09/29/google-ending-chromeos-support-two-years-early/5299674",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "cf0fd2a24dfc": {
+      "url": "https://techcrunch.com/2026/09/30/ai-voice-startup-elevenlabs-doubles-valuation-to-22b",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "eb2aed3a9000": {
+      "url": "https://edgcpp.org/",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "81a12543fb1b": {
+      "url": "https://www.netlify.com/blog/edge-functions-firecracker-microvms",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "43d4be3c7e38": {
+      "url": "https://time.com/article/2026/09/29/pentagon-department-defense-manpower-data-center-breach-personnel-information",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "dee2877c85ad": {
+      "url": "https://thehackernews.com/2026/09/attackers-exploit-zimbra-flaw-to-deploy.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "fa29e70675d8": {
+      "url": "https://github.blog/news-insights/policy-news-and-insights/developer-policy-update-transparency-state-policy-and-whats-ahead",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "cdcb2074cdd8": {
+      "url": "https://techcrunch.com/2026/09/30/hackers-stole-millions-of-us-military-personnel-records-during-months-long-data-breach",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "30cc2cae46f8": {
+      "url": "https://www.microsoft.com/en-us/security/blog/2026/09/30/unauthenticated-command-injection-on-internet-facing-mail-servers-tracking-cve-2026-73570",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "34f5373d02a3": {
+      "url": "https://aws.amazon.com/blogs/aws/amazon-aurora-postgresql-now-supports-direct-querying-of-apache-iceberg-and-parquet-data-in-your-data-lake",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "3756f15f75ba": {
+      "url": "https://techcrunch.com/2026/09/30/reddit-is-killing-rss-feeds-ending-public-api-access-because-of-ai-bots",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "3aaf06a2d978": {
+      "url": "https://federalnewsnetwork.com/defense-main/2026/09/more-than-3-million-people-affected-by-military-data-breach",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "547e572fb64c": {
+      "url": "https://arstechnica.com/security/2026/09/attackers-have-been-exploiting-critical-zimbra-flaw-to-steal-emails",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
+    },
+    "df06138d8596": {
+      "url": "https://9to5google.com/2026/09/28/google-details-chromebook-updates-through-2034-many-models-move-to-googlebook-os",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-01"
     }
   },
-  "updated": "2026-10-01 11:10",
+  "updated": "2026-10-01 14:46",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -17537,6 +17621,6 @@
     "global-tech/2026-09-30": "aea9981acec21a14",
     "ai-agent/2026-10-01": "9c515e5d0f983c7a",
     "china-tech/2026-10-01": "ec5cd964c3da029b",
-    "global-tech/2026-10-01": "3bd81b171ee3fce1"
+    "global-tech/2026-10-01": "2847b24dc1f1c8be"
   }
 }
