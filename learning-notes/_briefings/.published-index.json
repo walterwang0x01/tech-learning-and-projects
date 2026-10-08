@@ -17459,9 +17459,219 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-10-07"
+    },
+    "a4ad91ab5ba7": {
+      "url": "https://arxiv.org/abs/2610.06966",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "d4a4feb96788": {
+      "url": "https://arxiv.org/abs/2610.07289",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "ef1905ed3cc2": {
+      "url": "https://x.com/claudeai/status/2107522599530139767",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "6a91531d444c": {
+      "url": "https://blog.cloudflare.com/agentic-security-operations",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "f57e29eb4e2c": {
+      "url": "https://arxiv.org/abs/2610.08662",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "c17525343bce": {
+      "url": "https://www.langchain.com/blog/revamping-skills-in-deep-agents",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "8a78c30182ee": {
+      "url": "https://www.qbitai.com/2026/10/501834.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "ac07f6e3a016": {
+      "url": "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "8373609a4517": {
+      "url": "https://www.oschina.net/news/502867",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "16f084a197ed": {
+      "url": "https://www.langchain.com/blog/managed-deep-agents-schedules-per-run-configuration-slack",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "f1a789c2b589": {
+      "url": "https://x.com/claudeai/status/2107574195978641911",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "f8ccc61ba540": {
+      "url": "https://www.oschina.net/news/502851",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-08"
+    },
+    "b582750e0e2d": {
+      "url": "https://www.36kr.com/newsflashes/4016589120540801",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-08"
+    },
+    "81d2839e74f8": {
+      "url": "https://www.36kr.com/newsflashes/4016599686140041",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-08"
+    },
+    "e498b2bda62a": {
+      "url": "https://www.infoq.cn/article/akexM07HzNrRJzmjYNml",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-08"
+    },
+    "32d687a11509": {
+      "url": "https://www.ithome.com/1/010/376.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-08"
+    },
+    "97676034b9f5": {
+      "url": "https://www.ithome.com/1/010/378.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-08"
+    },
+    "af14c70e4f0f": {
+      "url": "https://www.36kr.com/newsflashes/4016594888478851",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-08"
+    },
+    "7900923661d4": {
+      "url": "https://www.ithome.com/1/010/391.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-08"
+    },
+    "e2ba92d3fbfc": {
+      "url": "https://www.ithome.com/1/010/387.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-08"
+    },
+    "e124b5a99513": {
+      "url": "https://cnevpost.com/2026/10/08/xpeng-unveils-yoyo-robotaxi-name",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-08"
+    },
+    "6ff31a765bc5": {
+      "url": "https://techcrunch.com/2026/10/07/googles-new-synthid-website-can-identify-ai-generated-media",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "2afd5e8efc9d": {
+      "url": "https://arstechnica.com/gadgets/2026/10/microsoft-event-debuts-new-ai-friendly-hardware-and-windows-changes",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "eacf40e611ab": {
+      "url": "https://arstechnica.com/ai/2026/10/software-is-over-bold-ai-developer-takes-aim-at-adobe-with-open-source-clones",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "2f457000ae48": {
+      "url": "https://aws.amazon.com/blogs/aws/all-the-numbers-amazon-prime-day-2026-powered-by-aws",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "948f4a0821a6": {
+      "url": "https://github.com/pingdotgg/ts-rust",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "f7ce188fe184": {
+      "url": "https://www.theverge.com/tech/1007147/microsoft-surface-laptop-ultra-windows-event-everything-announced",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "b768f5cf6d65": {
+      "url": "https://www.theverge.com/tech/1007113/microsoft-windows-copilot-ai-control-search-hybrid-intelligence",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "ce5fddaf60f3": {
+      "url": "https://github.blog/ai-and-ml/github-copilot/secret-protection-must-scale-with-software",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "fac53867113e": {
+      "url": "https://www.theverge.com/gadgets/1007040/nvidias-powerful-rtx-spark-laptops-can-cost-up-to-7000",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "c66ef438751b": {
+      "url": "https://news.ycombinator.com/item?id=49991227",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "975282e2b7fc": {
+      "url": "https://www.theverge.com/tech/1007132/icann-domains-2026-ai-agi",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "fa10d3127918": {
+      "url": "https://developer.chrome.com/blog/jpeg-xl-in-chrome",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "2f0796ed45ca": {
+      "url": "https://www.infoq.cn/article/4AMw7Bt3UHqw48qmQTpS",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
+    },
+    "ec03851e7d60": {
+      "url": "https://blog.cloudflare.com/root-ksk-2024-rollover",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-08"
     }
   },
-  "updated": "2026-10-07 11:13",
+  "updated": "2026-10-08 11:12",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -17927,6 +18137,9 @@
     "global-tech/2026-10-06": "9c3b216ed3aca52f",
     "ai-agent/2026-10-07": "5b4a894b2fb331d1",
     "china-tech/2026-10-07": "00e31b1bf0174005",
-    "global-tech/2026-10-07": "85d385d8a94800b2"
+    "global-tech/2026-10-07": "85d385d8a94800b2",
+    "ai-agent/2026-10-08": "46643bc1aae41a9b",
+    "china-tech/2026-10-08": "0ea714f2b9df2a41",
+    "global-tech/2026-10-08": "5be730e1f22e2302"
   }
 }
