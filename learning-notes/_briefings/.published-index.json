@@ -17669,9 +17669,303 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-10-08"
+    },
+    "b087bb90f474": {
+      "url": "https://www.oschina.net/news/502890/openai-gpt-6-for-everyone",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "62227a852c36": {
+      "url": "https://docs.stripe.com/payments/machine/mpp",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "9431d44978f1": {
+      "url": "https://github.com/docker/docker-agent",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "de7a464c3d14": {
+      "url": "https://github.com/edrisranjbar/lifeos",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "74a60dc6508f": {
+      "url": "https://www.oschina.net/news/502893/manus-raises-more-than-500-million-after-meta-exit",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "445e86ecdfd5": {
+      "url": "https://www.oschina.net/news/502872/mistral-large-4",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "fa79aa0e70fb": {
+      "url": "https://www.oschina.net/news/502889",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "645aec0dc233": {
+      "url": "https://arxiv.org/abs/2609.36322",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "7a810313657a": {
+      "url": "https://techcrunch.com/2026/10/08/google-brings-agentic-ai-to-gemini-starting-with-businesses",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "5bf8bb967c95": {
+      "url": "https://www.anthropic.com/news/anthropic-cyber-mission",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "cdca503375ab": {
+      "url": "https://arxiv.org/abs/2610.09021",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "622107d98aae": {
+      "url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "987ec540a16f": {
+      "url": "https://arxiv.org/abs/2610.08900",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "d50179bb6076": {
+      "url": "https://www.oschina.net/news/502894/anthropic-claude-haiku-5-5",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "acac2c2f52e1": {
+      "url": "https://www.langchain.com/blog/agents-that-can-pay-with-stripe-link",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "2af985739a3c": {
+      "url": "https://arxiv.org/abs/2610.09264",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "2979a65714e8": {
+      "url": "https://www.ithome.com/1/010/780.htm",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "e6b64c0eab5d": {
+      "url": "https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "7eedec0e1633": {
+      "url": "https://github.com/woodchen-ink/czlterm",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-09"
+    },
+    "c071d10eb3c1": {
+      "url": "https://www.ithome.com/1/010/783.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "92ed27634be9": {
+      "url": "https://www.qbitai.com/2026/10/502009.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "a1cc8385636f": {
+      "url": "https://www.politico.eu/article/germany-ecosia-search-engine-mistral-china-open-source-ai",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "d5a978aa17b3": {
+      "url": "https://www.ithome.com/1/010/799.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "98c0d75adc5a": {
+      "url": "https://www.oschina.net/news/502897/germany-ecosia-search-engine-mistral-china-open-source-ai",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "d05e4b369634": {
+      "url": "https://www.36kr.com/newsflashes/4018005880950661",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "bdb75456e582": {
+      "url": "https://www.binance.com/my-MM/square/post/375041976857055",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "af6355163a20": {
+      "url": "https://www.qbitai.com/2026/10/502083.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "ee7c4bc7d0d7": {
+      "url": "https://www.ithome.com/1/010/781.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "625008513748": {
+      "url": "https://www.leiphone.com/category/chips/JidbQuKCNUBEEV6Z.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "f25025c98106": {
+      "url": "https://www.qbitai.com/2026/10/502096.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "758b0f0a5a18": {
+      "url": "https://www.36kr.com/newsflashes/4018006913486720",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "72aadd209eb5": {
+      "url": "https://www.ithome.com/1/010/779.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-09"
+    },
+    "c1f7c9a7fde8": {
+      "url": "https://www.infoq.cn/article/LVsjSV4pIlh3Liz0KZZE",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "1110b2fa2bd0": {
+      "url": "https://blog.cloudflare.com/radar-redesign",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "37ea55151c79": {
+      "url": "https://arstechnica.com/tech-policy/2026/10/florida-sues-tp-link-claiming-it-hides-router-security-risks-and-links-to-china",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "1d01b86f0246": {
+      "url": "https://arstechnica.com/gadgets/2026/10/lets-encrypt-cuts-certificate-lifetimes-to-64-days-starting-february-2027",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "a1f51c8dbdf8": {
+      "url": "https://cactuscompute.com/blog/whistle",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "90022e11273b": {
+      "url": "https://www.cnbc.com/2026/10/08/spacex-spectrum-license-att-verizon-tmobile.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "8c70c50f6574": {
+      "url": "https://www.theverge.com/science/1008467/spacex-announces-plan-to-become-a-major-mobile-carrier",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "df571aa4eb17": {
+      "url": "https://bevy.org/news/bevy-0-20",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "2f18edc265d1": {
+      "url": "https://www.ithome.com/1/010/761.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "552fc81f8585": {
+      "url": "https://techcrunch.com/2026/10/08/waymo-locks-in-5b-loan-from-blackstone-pimco-to-fuel-robotaxi-expansion",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "67e9ba65da35": {
+      "url": "https://www.infoq.com/news/2026/09/c-rust-rewrite",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "333cefd32296": {
+      "url": "https://techcrunch.com/2026/10/08/asos-confirms-breach-of-customer-data-after-hackers-send-rogue-app-notification",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "58367a64e5b4": {
+      "url": "https://github.com/duckdb/ducklake",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "8ffe53f1e875": {
+      "url": "https://github.blog/security/how-one-bug-bounty-researcher-chooses-the-features-they-investigate",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "6937621787d9": {
+      "url": "https://www.infoq.com/news/2026/09/vercel-scriptc-node",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "df118568ff92": {
+      "url": "https://www.ithome.com/1/010/787.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
+    },
+    "ea3c60fbfed0": {
+      "url": "https://github.com/p10node/k10s",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-09"
     }
   },
-  "updated": "2026-10-08 11:12",
+  "updated": "2026-10-09 11:09",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -18140,6 +18434,9 @@
     "global-tech/2026-10-07": "85d385d8a94800b2",
     "ai-agent/2026-10-08": "46643bc1aae41a9b",
     "china-tech/2026-10-08": "0ea714f2b9df2a41",
-    "global-tech/2026-10-08": "5be730e1f22e2302"
+    "global-tech/2026-10-08": "5be730e1f22e2302",
+    "ai-agent/2026-10-09": "53c63eebe47c458e",
+    "china-tech/2026-10-09": "f47c5e5670610133",
+    "global-tech/2026-10-09": "fc0f3afddb600b16"
   }
 }
