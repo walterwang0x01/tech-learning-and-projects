@@ -1,317 +1,5 @@
 {
   "items": {
-    "765b465ab108": {
-      "url": "https://arxiv.org/abs/2608.24114",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "95ae6a32abc7": {
-      "url": "https://arxiv.org/abs/2608.24870",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "764ff1049b13": {
-      "url": "https://arxiv.org/abs/2608.23956",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "dfc32954082f": {
-      "url": "https://developers.googleblog.com/agent-plugins-package-your-skills-tools-and-more",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "d8e78635d92a": {
-      "url": "https://arxiv.org/abs/2608.23992",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "df31f0cf46b9": {
-      "url": "https://arxiv.org/abs/2608.24069",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "8fd57cc503ad": {
-      "url": "https://arxiv.org/abs/2608.24804",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "e46c1f75e463": {
-      "url": "https://qz.com/openai-anthropic-business-ai-spending-ramp-data-082126",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "ae4a8eab9e76": {
-      "url": "https://hackernoon.com/what-the-first-ai-plugin-standard-reveals-about-ais-future",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "5da77a222737": {
-      "url": "https://www.langchain.com/blog/august-2026-langchain-newsletter",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "08f18b626dd4": {
-      "url": "https://arxiv.org/abs/2608.24214",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "40930c8fe585": {
-      "url": "https://arxiv.org/abs/2608.23763",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "6c803ccdd7fa": {
-      "url": "https://agentplugins.codes/",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "4e71de297113": {
-      "url": "https://www.theinformation.com/articles/nvidia-agrees-buy-open-source-model-repository-hugging-face-12-9-billion",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "fcba6aaf0a7d": {
-      "url": "https://arxiv.org/abs/2608.23897",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "4e273219d1e2": {
-      "url": "https://srnnews.com/nvidia-in-talks-to-acquire-hugging-face-in-13-billion-deal-business-insider-reports",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "8a9f272d1e1b": {
-      "url": "https://vercel.com/blog/introducing-vercel-connect",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "1b9e602121cf": {
-      "url": "https://www.anthropic.com/research/enabling-independent-research",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-08-27"
-    },
-    "9e3ed805696f": {
-      "url": "https://linux.do/t/topic/2794045",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "aeedf0b5e7c2": {
-      "url": "https://www.ithome.com/0/994/803.htm",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "7ad784d327f7": {
-      "url": "https://www.leiphone.com/category/chips/pCFXrVFRVThCfSMl.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "eae2e6dee9eb": {
-      "url": "https://www.ithome.com/0/994/814.htm",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "63b4e4bc0fbb": {
-      "url": "https://www.leiphone.com/category/industrynews/bVlL8Bsgh6GURrf7.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "c6acc2793da7": {
-      "url": "https://siliconangle.com/2026/08/21/deepseek-debuts-multimodal-language-model-competitive-with-opus-4-8",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "e443c5082d3b": {
-      "url": "https://www.qbitai.com/2026/08/479634.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "45fcdec2d115": {
-      "url": "https://www.leiphone.com/category/industrynews/V1CAUxI7qST0x7pX.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "fab0bbcfa73e": {
-      "url": "https://www.cnblogs.com/gyc567/p/19921552",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "fb3f911b6e1b": {
-      "url": "https://www.okx.com/zh-hant/orbit/insight/85681997252352",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "b7b1ade39c3d": {
-      "url": "https://www.leiphone.com/category/zaobao/5ofNaBQ6uGCe1odA.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "7286678e04ba": {
-      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/deepseek-eyes-7-billion-dollar-fundraise-revenues-jump-tenfold",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "09ffebe9f1c4": {
-      "url": "https://www.leiphone.com/category/transportation/D7jJzjiKAFgoKr5U.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-08-27"
-    },
-    "4e39ab66b88f": {
-      "url": "https://www.clerky.com/blog/clerky-is-joining-stripe",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "b7930e814c4d": {
-      "url": "https://www.theverge.com/tech/985387/nvidia-hundred-billion-dollar-quarterly-revenue",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "40428ac94c0b": {
-      "url": "https://www.oschina.net/news/502128",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "ce30d7a8b0a6": {
-      "url": "https://www.phoronix.com/news/Firefox-JPEG-XL-2026-Plans",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "ceb5e8cd8350": {
-      "url": "https://www.theregister.com/databases/2026/08/26/aws-buys-ducklabs-the-people-behind-the-popular-in-process-olap-database/5292590",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "59c0b4464180": {
-      "url": "https://newsroom.ibm.com/2026-08-24-ibm-unveils-next-generation-dual-architecture-processor-for-ibm-z-and-linuxone",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "520afb9e6d5c": {
-      "url": "https://www.mturk.com/",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "46893d59bc66": {
-      "url": "https://www.cnbc.com/2026/08/25/amazon-service-that-jeff-bezos-called-artificial-ai-is-shutting-down.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "2e99c10b71a9": {
-      "url": "https://github.com/tailscale/tailcat",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "42d5f060b822": {
-      "url": "https://techcrunch.com/2026/08/26/cisa-confirms-hackers-targeted-over-100-us-water-systems-during-july",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "23845a3362a8": {
-      "url": "https://www.theverge.com/gadgets/984331/switch-2-price-increase-psa",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "24b3bd4e3f79": {
-      "url": "https://techcrunch.com/2026/08/26/apple-is-holding-its-iphone-launch-event-on-september-9",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "86d982eed03b": {
-      "url": "https://hacks.mozilla.org/2026/08/intent-to-ship-jpeg-xl",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "44af97ee10b6": {
-      "url": "https://asahilinux.org/2026/08/progress-report-7-2",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "1c5a55823b7a": {
-      "url": "https://www.nebulasans.com",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "7548973a4fac": {
-      "url": "https://www.aboutamazon.com/news/company-news/aws-ducklabs",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "e8e6c47e0313": {
-      "url": "https://ducklabs.com/news/2026/08/26/ducklabs-to-join-aws",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "64a2d1944863": {
-      "url": "https://kubernetes.io/blog/2026/08/26/kubernetes-v1-37-release",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "319d12bc9b02": {
-      "url": "https://techcrunch.com/2026/08/26/meta-settles-for-18-billion-in-lawsuit-brought-by-29-states-over-social-media-harms-to-children",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "3126a2079c08": {
-      "url": "https://arstechnica.com/tech-policy/2026/08/new-twitter-launches-says-musks-x-gave-up-the-name",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
-    "eaedfd54cde3": {
-      "url": "https://techcrunch.com/2026/08/26/medical-device-maker-boston-scientific-says-a-cyberattack-is-causing-a-global-disruption-to-its-operations",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-08-27"
-    },
     "72df38c594a9": {
       "url": "https://www.cnblogs.com/claw001/p/20729720",
       "title": "",
@@ -16313,9 +16001,285 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-10-26"
+    },
+    "c9a8ee6fa9fc": {
+      "url": "https://arxiv.org/abs/2610.32322",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "ee3cd2031373": {
+      "url": "https://github.com/FrigadeHQ/hob",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "2a2e955ed6a3": {
+      "url": "https://arxiv.org/abs/2610.32555",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "dec0b2135837": {
+      "url": "https://arxiv.org/abs/2610.31778",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "b65cbcf6f730": {
+      "url": "https://arxiv.org/abs/2610.32483",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "e0a2cd4030dd": {
+      "url": "https://www.anthropic.com/news/s1-sec",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "da296abeaba0": {
+      "url": "https://arxiv.org/abs/2604.27819",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "1ec2b7e0b266": {
+      "url": "https://www.leiphone.com/category/industrynews/IaMw7vRrTCadlbCY.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "2086762ecf04": {
+      "url": "https://arxiv.org/abs/2610.31974",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "3739e3b4af60": {
+      "url": "https://arxiv.org/abs/2610.32429",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "636dd8e40f57": {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1019143/openai-eth-kaseya-science-math-physics",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "328307fafa2c": {
+      "url": "https://blog.cloudflare.com/kv-cache-exposure-remediation",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "11d1ae9a31bb": {
+      "url": "https://www.oschina.net/news/503221",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "85c2dcf0be1b": {
+      "url": "https://www.oschina.net/news/503228",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "56cced60c921": {
+      "url": "https://www.oschina.net/news/503232/openai-gpt-6-1-terra",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "bc0dc2f20d86": {
+      "url": "https://www.oschina.net/news/503231",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-10-27"
+    },
+    "78e5fa64259a": {
+      "url": "https://www.36kr.com/newsflashes/4043469229479048",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-27"
+    },
+    "6dea31168720": {
+      "url": "https://www.leiphone.com/category/industrynews/x7VWhGaTdbidkwsa.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-27"
+    },
+    "fdea32a4d954": {
+      "url": "https://www.leiphone.com/category/zaobao/owgP45BwczuhdF3j.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-27"
+    },
+    "18972d21843f": {
+      "url": "https://www.tmtpost.com/8182111.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-27"
+    },
+    "44ef22ea7c5f": {
+      "url": "https://www.ithome.com/1/018/252.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-27"
+    },
+    "e5f2f06a6996": {
+      "url": "https://www.tmtpost.com/8182406.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-27"
+    },
+    "b14fbcd65d7a": {
+      "url": "https://www.infoq.cn/article/2svt5BbWUOHbADdo0UZo",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-27"
+    },
+    "04850d2a2793": {
+      "url": "https://www.leiphone.com/category/yanxishe/upPcOw2EaMaw2Otv.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-27"
+    },
+    "0ab655e036f2": {
+      "url": "https://www.tmtpost.com/8181692.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-27"
+    },
+    "0d68ac87d22a": {
+      "url": "https://www.leiphone.com/category/industrynews/c4JSGcwzPuRrggOC.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-27"
+    },
+    "d2e0e02e33c2": {
+      "url": "https://news.ycombinator.com/item?id=50251344",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "b8f1d92dc263": {
+      "url": "https://techcrunch.com/2026/10/25/ai-delivers-zero-financial-payoff-to-most-companies-according-to-apollo-economist",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "7b0dc1ba27dc": {
+      "url": "https://www.infoq.cn/article/TrI8l3CYeAJER9tgR5Jt",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "d23b91ea5205": {
+      "url": "https://github.com/microsoft/pylance-release/blob/main/docs/tsp/type-server-protocol.md",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "a4c94677c287": {
+      "url": "https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "dd3e64ee2488": {
+      "url": "https://www.theverge.com/tech/1018760/iphone-duo-crackgate-inside-screen-hinge-crack",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "9f2ea8333bba": {
+      "url": "https://techcrunch.com/2026/10/26/microsoft-offers-buyouts-to-around-60000-employees-reports-say",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "e5fa9c406d61": {
+      "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-discusses-usd2-000-per-gpu-annual-software-fee-for-running-agents-on-ai-infrastructure-firm-already-charges-more-than-twice-that-amount-for-its-ai-enterprise-software-platform",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "bb3156c12660": {
+      "url": "https://www.ithome.com/1/018/192.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "501d18f2bde1": {
+      "url": "https://www.infoq.cn/article/qJB2DapLThovtxzyOtKW",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "8d95d60b32cf": {
+      "url": "https://arstechnica.com/tech-policy/2026/10/highway-thieves-are-spoofing-gps-to-steal-millions-in-data-center-bound-cargo",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "1e4589c92309": {
+      "url": "https://arstechnica.com/gadgets/2026/10/some-iphone-duo-screens-are-already-failing",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "88851888764c": {
+      "url": "https://www.bbc.com/future/article/20261023-how-solar-became-bigger-than-nuclear",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "f0b479e8f9b6": {
+      "url": "https://techcrunch.com/2026/10/26/apple-unveils-new-ipad-mini-with-oled-display-and-faster-a20-pro-chip",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "dded43cc1f8c": {
+      "url": "https://www.seattletimes.com/business/microsoft/microsoft-offers-mass-buyouts-for-roughly-a-quarter-of-its-workforce",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "4692bfbc44fe": {
+      "url": "https://www.v2ex.com/t/1252084",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "3d30a9fb8917": {
+      "url": "https://www.infoq.cn/article/GG9rXsevpPV9SK3uPxpq",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "280ccb8578e8": {
+      "url": "https://techcrunch.com/2026/10/26/spacex-locks-in-40b-gpu-financing-deal-with-apollo",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "8a22cde039a7": {
+      "url": "https://www.apple.com/newsroom/2026/10/apple-gives-ipad-mini-its-biggest-update-ever",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
+    },
+    "6c9c252d70ad": {
+      "url": "https://www.ithome.com/1/018/221.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-27"
     }
   },
-  "updated": "2026-10-26 11:10",
+  "updated": "2026-10-27 11:15",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -16832,6 +16796,9 @@
     "china-tech/2026-10-25": "959a6eb430228fc5",
     "ai-agent/2026-10-26": "b6d34d0c911a9600",
     "china-tech/2026-10-26": "95395a6c3eaef933",
-    "global-tech/2026-10-26": "8ab36bace8a56afa"
+    "global-tech/2026-10-26": "8ab36bace8a56afa",
+    "ai-agent/2026-10-27": "48f3f37dcd73b0f2",
+    "china-tech/2026-10-27": "af6d0c49d3d17528",
+    "global-tech/2026-10-27": "7c8f6771cf4d802b"
   }
 }
