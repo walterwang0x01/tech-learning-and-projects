@@ -16211,9 +16211,129 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-10-29"
+    },
+    "27607b603567": {
+      "url": "https://www.36kr.com/newsflashes/4046361399399557",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-29"
+    },
+    "620721b4a363": {
+      "url": "https://www.ithome.com/1/019/303.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-29"
+    },
+    "82cd405a09e6": {
+      "url": "https://www.36kr.com/newsflashes/4046322294018945",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-29"
+    },
+    "2a2e06a27fcc": {
+      "url": "https://www.ithome.com/1/019/280.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-10-29"
+    },
+    "352e8f17935c": {
+      "url": "https://techcrunch.com/2026/10/28/microsoft-hits-10-quarters-of-record-breaking-revenue-in-a-row",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "f59627dac053": {
+      "url": "https://news.ycombinator.com/item?id=50273171",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "4e780df97f51": {
+      "url": "https://techcrunch.com/2026/10/28/apple-launches-its-new-touchscreen-macbook-pro",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "59ae7265d953": {
+      "url": "https://www.oschina.net/news/503264/discord-content-from-discoverable-servers-easier-to-discover",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "bc9975c8e519": {
+      "url": "https://techcrunch.com/2026/10/28/microsoft-just-shared-azures-actual-revenue-in-dollars-33-2-billion",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "cd20be6e39d9": {
+      "url": "https://news.ycombinator.com/item?id=50282454",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "4151196c4f98": {
+      "url": "https://arstechnica.com/apple/2026/10/touchscreen-macbook-pro-hands-on-oled-looks-great-on-a-mac",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "3197b7491d73": {
+      "url": "https://news.ycombinator.com/item?id=50282544",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "4bfc59df4e19": {
+      "url": "https://alpinelinux.org/posts/GitLab-security-incident-CVE-2026-97229.html",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "172898610f0c": {
+      "url": "https://www.technologyreview.com/2026/10/20/1145399/emacs-turns-50",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "80ac6764e491": {
+      "url": "https://techcrunch.com/2026/10/28/google-expands-ai-search-ads-globally-as-core-ad-growth-slows",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "8e03224f941d": {
+      "url": "https://techcrunch.com/2026/10/28/voice-ai-in-vogue-nvidia-releases-new-open-transcription-model",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "3d58ef26d30b": {
+      "url": "https://www.oschina.net/news/503253",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "c5ecbc1fecc3": {
+      "url": "https://techcrunch.com/2026/10/28/hacker-stole-personnel-data-about-thousands-of-homeland-security-employees-including-cbp-and-ice-agents",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "f705237c2dad": {
+      "url": "https://www.wired.com/story/massive-leak-exposes-41000-homeland-security-workers-including-undercover-ice-agents",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
+    },
+    "97a6cef8e4be": {
+      "url": "https://data.stackexchange.com/stackoverflow/query/1926661",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-10-29"
     }
   },
-  "updated": "2026-10-29 11:09",
+  "updated": "2026-10-29 11:13",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -16692,7 +16812,7 @@
     "ai-agent/2026-10-11": "fd4da5000fd91516",
     "china-tech/2026-10-11": "5464c57701de8c0f",
     "global-tech/2026-10-11": "2e01b6951a859ae6",
-    "ai-agent/2026-10-12": "260bd2982bd9bfb0",
+    "ai-agent/2026-10-12": "99f033f0a6ee46fb",
     "china-tech/2026-10-12": "7d2866556162489b",
     "global-tech/2026-10-12": "ad427a737c84b700",
     "china-tech/2026-10-13": "6293322906054f08",
@@ -16738,7 +16858,7 @@
     "china-tech/2026-10-28": "6a94c011dc19c3fb",
     "global-tech/2026-10-28": "508220bdc6fa6634",
     "ai-agent/2026-10-29": "db7ed0ce122121ad",
-    "china-tech/2026-10-29": "459d50b6a0faccb7",
-    "global-tech/2026-10-29": "c7db88eebe3747c9"
+    "china-tech/2026-10-29": "09217c3f50d7790a",
+    "global-tech/2026-10-29": "152cbe6a65a4fa49"
   }
 }
