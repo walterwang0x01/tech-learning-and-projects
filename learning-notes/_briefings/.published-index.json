@@ -15941,9 +15941,69 @@
       "title": "",
       "topic": "ai-agent",
       "date": "2026-11-06"
+    },
+    "85dce7518442": {
+      "url": "https://news.ycombinator.com/item?id=50383963",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-06"
+    },
+    "978759427dfc": {
+      "url": "https://www.caixinglobal.com/2026-11-05/tencent-launches-upgraded-hy4-ai-model-with-visual-understanding-102501068.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-06"
+    },
+    "cb7555666fa1": {
+      "url": "https://www.leiphone.com/category/transportation/rQrb2B1pDwOfnMlg.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-06"
+    },
+    "97764c899b96": {
+      "url": "https://www.infoq.cn/article/TeOb9MgqfeLOoNdxtMH2",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-06"
+    },
+    "835734922080": {
+      "url": "https://www.leiphone.com/category/industrynews/49uolfG855V4Zc9M.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-06"
+    },
+    "48b74be57108": {
+      "url": "https://www.qbitai.com/2026/11/507782.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-06"
+    },
+    "0adc69eae9fa": {
+      "url": "https://www.leiphone.com/category/industrynews/30nTa8g0yzQmZGys.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-06"
+    },
+    "b55e65f06b74": {
+      "url": "https://www.leiphone.com/category/industrynews/6igykQlGwvA6vyCV.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-06"
+    },
+    "2f9ace676299": {
+      "url": "https://www.tencent.com/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-06"
+    },
+    "f53c4292f22a": {
+      "url": "https://www.qbitai.com/2026/11/507647.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-06"
     }
   },
-  "updated": "2026-11-06 11:17",
+  "updated": "2026-11-06 11:19",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -16492,7 +16552,7 @@
     "china-tech/2026-11-05": "005eb442ebe32878",
     "global-tech/2026-11-05": "b8b7a4c6e1761f3c",
     "ai-agent/2026-11-06": "391b99c5f5b72b65",
-    "china-tech/2026-11-06": "80a47bc58a3ab7e2",
+    "china-tech/2026-11-06": "51720cdf11a889f6",
     "global-tech/2026-11-06": "b0be74b0d05548b9"
   }
 }
