@@ -15875,9 +15875,75 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-11-06"
+    },
+    "448caf20b907": {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1028302/perplexity-teammates-ai-agents-work",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
+    },
+    "169dd22f71d6": {
+      "url": "https://www.oschina.net/news/503432",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
+    },
+    "5aaae876d325": {
+      "url": "https://blog.cloudflare.com/trusted-agent-delegation",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
+    },
+    "9c31548a5bb4": {
+      "url": "https://www.langchain.com/blog/agents-are-going-async",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
+    },
+    "1a2e7b073314": {
+      "url": "https://mcp-explained.com/",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
+    },
+    "4ed8716a1405": {
+      "url": "https://arxiv.org/list/cs.AI/recent",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
+    },
+    "6572e7c4be8b": {
+      "url": "https://news.ycombinator.com/item?id=50379249",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
+    },
+    "73eb6c35f209": {
+      "url": "https://www.ithome.com/1/023/043.htm",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
+    },
+    "22aa2c65c4b4": {
+      "url": "https://github.com/rivet-dev/rivet",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
+    },
+    "d200bede9bf1": {
+      "url": "https://www.oschina.net/news/503406",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
+    },
+    "f60097bdc771": {
+      "url": "https://devblogs.microsoft.com/dotnet/announcing-v20-of-the-official-mcp-csharp-sdk",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-06"
     }
   },
-  "updated": "2026-11-06 11:10",
+  "updated": "2026-11-06 11:17",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -16425,7 +16491,7 @@
     "ai-agent/2026-11-05": "a4f504d2ee9a0e89",
     "china-tech/2026-11-05": "005eb442ebe32878",
     "global-tech/2026-11-05": "b8b7a4c6e1761f3c",
-    "ai-agent/2026-11-06": "2461b2545ac52b4a",
+    "ai-agent/2026-11-06": "391b99c5f5b72b65",
     "china-tech/2026-11-06": "80a47bc58a3ab7e2",
     "global-tech/2026-11-06": "b0be74b0d05548b9"
   }
