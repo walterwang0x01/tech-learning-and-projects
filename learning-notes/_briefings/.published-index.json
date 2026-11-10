@@ -1,215 +1,5 @@
 {
   "items": {
-    "3ef4b2b1e6b6": {
-      "url": "https://news.ycombinator.com/item?id=49626190",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "6904b5b08396": {
-      "url": "https://www.theverge.com",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "e7cefb42b5dd": {
-      "url": "https://techcrunch.com/2026/09/09/apple-launches-iphone-18-pro-with-upgraded-camera",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "94525a172b46": {
-      "url": "https://www.ithome.com",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "b00f42c133a0": {
-      "url": "https://sspai.com",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "60ded1b1d623": {
-      "url": "https://www.bajura.online/2026/09/i-rewrote-my-backend-in-go-in-72-hours.html",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "c83949ff8ab6": {
-      "url": "https://github.blog",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "9957c79ffef3": {
-      "url": "https://tailwindcss.com/blog/tailwind-is-joining-shopify",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "cbc580718eb3": {
-      "url": "https://news.ycombinator.com/",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "e4a99fcce7c2": {
-      "url": "https://blog.cloudflare.com/workers-module-registry-nodejs",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "d1a241117a92": {
-      "url": "https://news.ycombinator.com/item?id=49611641",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "14e1070544d3": {
-      "url": "https://www.infoq.cn/article/h4M6YGm3G7Zph5QEIV5R",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "fbf292449671": {
-      "url": "https://www.infoq.cn/article/klMJ7wvdgqiYK6BmBI5u",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "8d9334c368a2": {
-      "url": "https://kubernetes.io/blog/2026/09/09/kubernetes-v1-37-node-lifecycle-conditions",
-      "title": "",
-      "topic": "global-tech",
-      "date": "2026-09-10"
-    },
-    "e1c89211d652": {
-      "url": "https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "69f2efaec696": {
-      "url": "https://arxiv.org/abs/2609.06792",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "03160cf6dc59": {
-      "url": "https://x.com/bcherny/status/2097557079762624563",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "ee0f9c7f632a": {
-      "url": "https://x.com/sama/status/2097404861642137851",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "8ae3b49cb27b": {
-      "url": "https://x.com/levie/status/2097412556893852154",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "9b2c8cc9a35a": {
-      "url": "https://arxiv.org/abs/2609.09134",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "b4f493f39b03": {
-      "url": "https://www.leiphone.com/category/zaobao/bx7l7B6CyNAubHQg.html",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "00bf6e858482": {
-      "url": "https://www.langchain.com/blog/connections-managed-credentials-and-per-caller-identity-for-managed-deep-agents",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "4e8918f9180d": {
-      "url": "https://arxiv.org/abs/2609.06835",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "617408dfe6e1": {
-      "url": "https://arxiv.org/abs/2609.06124",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "845bcb280ff0": {
-      "url": "https://www.qbitai.com/2026/09/486350.html",
-      "title": "",
-      "topic": "ai-agent",
-      "date": "2026-09-10"
-    },
-    "2eff6143e608": {
-      "url": "https://www.qbitai.com/2026/09/486288.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-09-10"
-    },
-    "e641e88df68d": {
-      "url": "https://www.qbitai.com/2026/09/486436.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-09-10"
-    },
-    "3d25804e56c7": {
-      "url": "https://www.ithome.com/1/000/570.htm",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-09-10"
-    },
-    "1f20b2245799": {
-      "url": "https://www.36kr.com/newsflashes/3976998736507142",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-09-10"
-    },
-    "765b8a36069d": {
-      "url": "https://www.leiphone.com/category/industrynews/qYzjYFvO8ZwUF0yC.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-09-10"
-    },
-    "09b6eaf6626d": {
-      "url": "https://www.infoq.cn/article/B2trh9hRTevk90IxzLXx",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-09-10"
-    },
-    "d4a8e28f16b1": {
-      "url": "https://www.infoq.cn/article/UN2Gt8aKT40ed5z52WuL",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-09-10"
-    },
-    "b76385f0a67a": {
-      "url": "https://www.qbitai.com/2026/09/486450.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-09-10"
-    },
-    "729eceef2dee": {
-      "url": "https://www.leiphone.com/category/industrynews/SjYRQou3shWq9xXG.html",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-09-10"
-    },
-    "4452ada762d1": {
-      "url": "https://www.36kr.com/newsflashes/3976950141563143",
-      "title": "",
-      "topic": "china-tech",
-      "date": "2026-09-10"
-    },
     "4bd1cd276361": {
       "url": "https://www.langchain.com/blog/how-credit-genie-uses-openwiki-to-keep-codebase-knowledge-fresh-searchable-and-automated",
       "title": "",
@@ -15899,9 +15689,267 @@
       "title": "",
       "topic": "global-tech",
       "date": "2026-11-09"
+    },
+    "9f0150aaadc9": {
+      "url": "https://www.oschina.net/news/503488",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "d18eaf4e08da": {
+      "url": "https://arxiv.org/abs/2611.08865",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "b990324e6aa4": {
+      "url": "https://arxiv.org/abs/2611.08811",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "04b9cf413e44": {
+      "url": "https://arxiv.org/abs/2606.30317",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "bf419e57b3e9": {
+      "url": "https://www.langchain.com/blog/what-is-eval-driven-development",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "292fbfdb5f98": {
+      "url": "https://github.com/sshah03/recalc",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "561dc59b1a35": {
+      "url": "https://arxiv.org/abs/2611.08644",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "dd81d0be87e5": {
+      "url": "https://arxiv.org/abs/2611.08946",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "d33d862e3cd9": {
+      "url": "https://www.langchain.com/blog/how-stripe-built-their-knowledge-ai-platform-on-deep-agents",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "78d607b3512d": {
+      "url": "https://www.leiphone.com/category/industrynews/ljjfjnedPmwgYh6Q.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "cdabc66f1e28": {
+      "url": "https://arxiv.org/abs/2611.09792",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "689c135218c5": {
+      "url": "https://www.leiphone.com/category/industrynews/FO9Dx6HKj5Bvno5y.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "59ea7e94a927": {
+      "url": "https://www.qbitai.com/2026/11/508694.html",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "456a529aa2a3": {
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "c301a0197fe3": {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1030005/anthropic-claude-fable-mythos-5-2",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "55e30ef81bf3": {
+      "url": "https://www.anthropic.com/research/claude-electronics-design",
+      "title": "",
+      "topic": "ai-agent",
+      "date": "2026-11-10"
+    },
+    "c2e26e556809": {
+      "url": "https://www.leiphone.com/category/industrynews/n8tGHmir0aXabfKi.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "302be6c5639c": {
+      "url": "https://www.leiphone.com/category/industrynews/CoJod8Z9X1pDj1sv.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "885e4317eab4": {
+      "url": "https://www.leiphone.com/category/industrynews/tm7T5JBmm4u6YUQi.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "70f1c3cf8087": {
+      "url": "https://www.infoq.cn/article/1Mz0ADa02PxcDsVfpVEb",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "89029c740559": {
+      "url": "https://www.ithome.com/1/024/640.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "f14135cefef5": {
+      "url": "https://www.ithome.com/1/024/701.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "622d663d124c": {
+      "url": "https://www.ithome.com/1/024/618.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "a14e514e5db1": {
+      "url": "https://www.ithome.com/1/024/641.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "c178c7edf91e": {
+      "url": "https://www.leiphone.com/category/industrynews/tLk5dflVBL8euzAW.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "9170c1085e00": {
+      "url": "https://www.infoq.cn/article/W7VPoeNBPX4y2u72WAGM",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "04a4ef2ed103": {
+      "url": "https://www.leiphone.com/category/industrynews/EihvEi3hKb9icG62.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "fb72d3fd22ea": {
+      "url": "https://www.ithome.com/1/024/620.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "866b8d4eeb52": {
+      "url": "https://www.ithome.com/1/024/605.htm",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "6aac41a6f6ae": {
+      "url": "https://www.qbitai.com/2026/11/507843.html",
+      "title": "",
+      "topic": "china-tech",
+      "date": "2026-11-10"
+    },
+    "e6ad94a93b26": {
+      "url": "https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "5f34941f4f01": {
+      "url": "https://www.ithome.com/1/024/621.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "448e550ecc88": {
+      "url": "https://www.oschina.net/news/503470",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "d28189aa7c17": {
+      "url": "https://www.ithome.com/1/024/595.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "dc046793aab7": {
+      "url": "https://techcrunch.com/2026/11/09/uber-launches-parking-service-following-spothero-acquisition-with-an-eye-on-robotaxis",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "32b93452a6ee": {
+      "url": "https://blog.cloudflare.com/launching-vite-ecosystem-fund",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "c7e5c1883d3a": {
+      "url": "https://www.infineon.com/press-release/2026/infpr202611-028",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "415aac8794ae": {
+      "url": "https://aws.amazon.com/blogs/aws/aws-weekly-roundup-agentcore-runtime-v2-amazon-dynamodb-bulk-put-items-and-more-november-9-2026",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "e4e767c43dba": {
+      "url": "https://www.ithome.com/1/024/583.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "6568d2363801": {
+      "url": "https://www.oschina.net/news/503494",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "8fffd5ea4c7a": {
+      "url": "https://www.oschina.net/news/503479",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "33c097265617": {
+      "url": "https://www.oschina.net/news/503496",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
+    },
+    "b6a5e251b274": {
+      "url": "https://www.ithome.com/1/024/619.htm",
+      "title": "",
+      "topic": "global-tech",
+      "date": "2026-11-10"
     }
   },
-  "updated": "2026-11-09 11:37",
+  "updated": "2026-11-10 11:05",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -16460,6 +16508,9 @@
     "global-tech/2026-11-08": "1c69726e162ccc57",
     "ai-agent/2026-11-09": "4b41d5d17b8b82c4",
     "china-tech/2026-11-09": "50c969889fd94971",
-    "global-tech/2026-11-09": "5ef1f18643900c22"
+    "global-tech/2026-11-09": "5ef1f18643900c22",
+    "ai-agent/2026-11-10": "17f9c397241780e4",
+    "china-tech/2026-11-10": "cd4272a9e1836072",
+    "global-tech/2026-11-10": "4bf3f2d02ee54386"
   }
 }
