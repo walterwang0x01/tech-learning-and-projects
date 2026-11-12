@@ -16009,7 +16009,7 @@
       "date": "2026-11-12"
     }
   },
-  "updated": "2026-11-12 11:35",
+  "updated": "2026-11-12 11:37",
   "file_hashes": {
     "china-tech/2026-05-20": "32f8dcbd60de16ca",
     "global-tech/2026-05-20": "c26133bf7aa7c02a",
@@ -16577,6 +16577,6 @@
     "global-tech/2026-11-11": "f2cc23909deab83a",
     "ai-agent/2026-11-12": "ebd9a01a460365eb",
     "china-tech/2026-11-12": "390b6495470c505a",
-    "global-tech/2026-11-12": "49aea0d48cf4e9aa"
+    "global-tech/2026-11-12": "3cd86b4813672eca"
   }
 }
